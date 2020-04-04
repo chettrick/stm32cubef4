@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324xg_eval_lcd.c
   * @author  MCD Application Team
-  * @version V2.0.1
-  * @date    26-February-2014
+  * @version V2.0.2
+  * @date    19-June-2014
   * @brief   This file includes the driver for Liquid Crystal Display (LCD) module
   *          mounted on STM324xG-EVAL evaluation board.
   ******************************************************************************
@@ -56,7 +56,7 @@
        function or a complete string line using the BSP_LCD_DisplayStringAtLine() function.
      o Display a string line on the specified position (x,y in pixel) and align mode
        using the BSP_LCD_DisplayStringAtLine() function.          
-     o Draw and fill a basic shapes (dot, line, rectangle, circle, ellipse, .. bitmap, raw picture) 
+     o Draw and fill basic shapes (dot, line, rectangle, circle, ellipse, .. bitmap, raw picture) 
        on LCD using a set of functions.    
  
 ------------------------------------------------------------------------------*/
@@ -85,7 +85,6 @@
 /** @defgroup STM324xG_EVAL_LCD_Private_TypesDefinitions
   * @{
   */ 
-
 /**
   * @}
   */ 
@@ -95,7 +94,6 @@
   */
 #define POLY_X(Z)              ((int32_t)((Points + (Z))->X))
 #define POLY_Y(Z)              ((int32_t)((Points + (Z))->Y))
-
 /**
   * @}
   */ 
@@ -104,7 +102,6 @@
   * @{
   */
 #define ABS(X)  ((X) > 0 ? (X) : -(X)) 
-
 /**
   * @}
   */ 
@@ -113,7 +110,6 @@
   * @{
   */ 
 LCD_DrawPropTypeDef DrawProp;
-
 static LCD_DrvTypeDef  *lcd_drv; 
 /**
   * @}
@@ -128,7 +124,6 @@ static void FillTriangle(uint16_t x1, uint16_t x2, uint16_t x3, uint16_t y1, uin
 /**
   * @}
   */ 
-
 
 /** @defgroup STM324xG_EVAL_LCD_Private_Functions
   * @{
@@ -1054,6 +1049,7 @@ static void FillTriangle(uint16_t x1, uint16_t x2, uint16_t x3, uint16_t y1, uin
     y += yinc2;                 /* Change the y as appropriate */
   } 
 }
+
 /**
   * @}
   */  
@@ -1065,5 +1061,9 @@ static void FillTriangle(uint16_t x1, uint16_t x2, uint16_t x3, uint16_t y1, uin
 /**
   * @}
   */     
+
+/**
+  * @}
+  */  
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

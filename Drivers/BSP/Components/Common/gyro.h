@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    gyro.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.1.0
+  * @date    21-March-2014
   * @brief   This header file contains the functions prototypes for the gyroscope driver.
   ******************************************************************************
   * @attention
@@ -45,8 +45,23 @@
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include <stdint.h> 
+#include <stdint.h>
 
+/** @addtogroup BSP
+  * @{
+  */
+
+/** @addtogroup Components
+  * @{
+  */
+    
+/** @addtogroup GYRO
+  * @{
+  */
+
+/** @defgroup GYRO_Exported_Types
+  * @{
+  */
 /** 
   * @brief  Gyroscope driver structure definition  
   */ 
@@ -93,24 +108,24 @@ typedef struct
 
 /**
   * @}
-  */ 
+  */
+
+/**
+  * @}
+  */
+
+/**
+  * @}
+  */
+
+/**
+  * @}
+  */
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif /* __GYRO_H */
-/**
-  * @}
-  */
 
-/**
-  * @}
-  */
-
-/**
-  * @}
-  */ 
-
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/ 
+/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -2,10 +2,10 @@
   ******************************************************************************
   * @file    stm32f429i_discovery_sdram.c
   * @author  MCD Application Team
-  * @version V2.0.1
-  * @date    26-February-2014
+  * @version V2.1.0
+  * @date    19-June-2014
   * @brief   This file provides a set of functions needed to drive the
-  *          IS42S16400J SDRAM memory mounted on STM32F429I-DISCO Kit.    
+  *          IS42S16400J SDRAM memory mounted on STM32F429I-Discovery Kit.    
   ******************************************************************************
   * @attention
   *
@@ -47,63 +47,50 @@
   * @{
   */
   
-/** @defgroup STM32F429I_DISCOVERY_SDRAM STM32F429I_DISCOVERY_SDRAM
+/** @defgroup STM32F429I_DISCOVERY_SDRAM
   * @{
 */ 
-  
-/* Private typedef -----------------------------------------------------------*/
 
-/** @defgroup STM32F429I_DISCOVERY_SDRAM_Private_Types_Definitions STM32F429I_DISCOVERY_SDRAM_Private_Types_Definitions
+/** @defgroup STM32F429I_DISCOVERY_SDRAM_Private_Types_Definitions
   * @{
   */
 /**
   * @}
   */ 
-  
-/* Private define ------------------------------------------------------------*/
 
-/** @defgroup STM32F429I_DISCOVERY_SDRAM_Private_Defines STM32F429I_DISCOVERY_SDRAM_Private_Defines
+/** @defgroup STM32F429I_DISCOVERY_SDRAM_Private_Defines
   * @{
   */
 /**
   * @}
   */  
-/* Private macro -------------------------------------------------------------*/
 
-/** @defgroup STM32F429I_DISCOVERY_SDRAM_Private_Macros STM32F429I_DISCOVERY_SDRAM_Private_Macros
+/** @defgroup STM32F429I_DISCOVERY_SDRAM_Private_Macros
   * @{
   */ 
 /**
   * @}
   */  
-  
-/* Private variables ---------------------------------------------------------*/
 
-/** @defgroup STM32F429I_DISCOVERY_SDRAM_Private_Variables STM32F429I_DISCOVERY_SDRAM_Private_Variables
+/** @defgroup STM32F429I_DISCOVERY_SDRAM_Private_Variables
   * @{
   */
 static SDRAM_HandleTypeDef SdramHandle;
 static FMC_SDRAM_TimingTypeDef Timing;
 static FMC_SDRAM_CommandTypeDef Command;
-
 /**
   * @}
   */ 
 
-/* Private function prototypes -----------------------------------------------*/
-
-/** @defgroup STM32F429I_DISCOVERY_SDRAM_Private_Function_Prototypes STM32F429I_DISCOVERY_SDRAM_Private_Function_Prototypes
+/** @defgroup STM32F429I_DISCOVERY_SDRAM_Private_Function_Prototypes
   * @{
   */ 
-static void MspInit(void); 
-
+static void MspInit(void);
 /**
   * @}
   */
-   
-/* Private functions ---------------------------------------------------------*/
 
-    /** @defgroup STM32F429I_DISCOVERY_SDRAM_Private_Functions STM32F429I_DISCOVERY_SDRAM_Private_Functions
+/** @defgroup STM32F429I_DISCOVERY_SDRAM_Private_Functions
   * @{
   */
 
@@ -117,7 +104,7 @@ void BSP_SDRAM_Init(void)
   /* SDRAM device configuration */
   SdramHandle.Instance = FMC_SDRAM_DEVICE;
 
-  /* FMC Configuration ---------------------------------------------------------*/
+  /* FMC Configuration -------------------------------------------------------*/
   /* FMC SDRAM Bank configuration */
   /* Timing configuration for 90 Mhz of SD clock frequency (180Mhz/2) */
   /* TMRD: 2 Clock cycles */
@@ -217,7 +204,6 @@ void BSP_SDRAM_Initialization_sequence(uint32_t RefreshCount)
   HAL_SDRAM_ProgramRefreshRate(&SdramHandle, RefreshCount); 
 }
 
-
 /**
   * @brief  Reads an mount of data from the SDRAM memory in polling mode. 
   * @param  uwStartAddress : Read start address
@@ -225,7 +211,7 @@ void BSP_SDRAM_Initialization_sequence(uint32_t RefreshCount)
   * @param  uwDataSize: Size of read data from the memory
   * @retval None
   */
-void BSP_SDRAM_ReadData(uint32_t uwStartAddress, uint32_t* pData, uint32_t uwDataSize)
+void BSP_SDRAM_ReadData(uint32_t uwStartAddress, uint32_t *pData, uint32_t uwDataSize)
 {
   HAL_SDRAM_Read_32b(&SdramHandle, (uint32_t *)uwStartAddress, pData, uwDataSize); 
 }
@@ -237,7 +223,7 @@ void BSP_SDRAM_ReadData(uint32_t uwStartAddress, uint32_t* pData, uint32_t uwDat
   * @param  uwDataSize: Size of read data from the memory
   * @retval None
   */
-void BSP_SDRAM_ReadData_DMA(uint32_t uwStartAddress, uint32_t* pData, uint32_t uwDataSize)
+void BSP_SDRAM_ReadData_DMA(uint32_t uwStartAddress, uint32_t *pData, uint32_t uwDataSize)
 {
   HAL_SDRAM_Read_DMA(&SdramHandle, (uint32_t *)uwStartAddress, pData, uwDataSize);     
 }
@@ -249,9 +235,8 @@ void BSP_SDRAM_ReadData_DMA(uint32_t uwStartAddress, uint32_t* pData, uint32_t u
   * @param  uwDataSize: Size of written data from the memory
   * @retval None
   */
-void BSP_SDRAM_WriteData(uint32_t uwStartAddress, uint32_t* pData, uint32_t uwDataSize) 
+void BSP_SDRAM_WriteData(uint32_t uwStartAddress, uint32_t *pData, uint32_t uwDataSize) 
 {
-
   /* Disable write protection */
   HAL_SDRAM_WriteProtection_Disable(&SdramHandle);
   
@@ -266,7 +251,7 @@ void BSP_SDRAM_WriteData(uint32_t uwStartAddress, uint32_t* pData, uint32_t uwDa
   * @param  uwDataSize: Size of written data from the memory
   * @retval None
   */
-void BSP_SDRAM_WriteData_DMA(uint32_t uwStartAddress, uint32_t* pData, uint32_t uwDataSize) 
+void BSP_SDRAM_WriteData_DMA(uint32_t uwStartAddress, uint32_t *pData, uint32_t uwDataSize) 
 {
   HAL_SDRAM_Write_DMA(&SdramHandle, (uint32_t *)uwStartAddress, pData, uwDataSize); 
 }
@@ -423,6 +408,6 @@ static void MspInit(void)
 
 /**
   * @}
-*/
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

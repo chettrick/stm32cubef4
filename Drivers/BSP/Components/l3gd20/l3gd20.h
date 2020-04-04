@@ -1,11 +1,10 @@
 /**
   ******************************************************************************
-  * @file    l3gd20.c
+  * @file    l3gd20.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
-  * @brief   This file contains definitions l3gd20.c 
-  *          firmware driver.
+  * @version V1.1.0
+  * @date    10-June-2014
+  * @brief   This file contains all the functions prototypes for the l3gd20.c driver.
   ******************************************************************************
   * @attention
   *
@@ -96,6 +95,7 @@
 /******************************************************************************/
 
 #define I_AM_L3GD20                 ((uint8_t)0xD4)
+#define I_AM_L3GD20_TR              ((uint8_t)0xD5)
 
 /** @defgroup Power_Mode_selection 
   * @{

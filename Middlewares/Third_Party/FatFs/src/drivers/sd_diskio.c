@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    sd_diskio.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.1.0
+  * @date    22-April-2014
   * @brief   SD Disk I/O driver
   ******************************************************************************
   * @attention
@@ -92,7 +92,7 @@ DSTATUS SD_status(void)
 {
   Stat = STA_NOINIT;
 
-  if(BSP_SD_GetStatus() == 0)
+  if(BSP_SD_GetStatus() == MSD_OK)
   {
     Stat &= ~STA_NOINIT;
   }
@@ -109,44 +109,17 @@ DSTATUS SD_status(void)
   */
 DRESULT SD_read(BYTE *buff, DWORD sector, BYTE count)
 {
-  uint32_t timeout = 100000;
-  DWORD scratch [BLOCK_SIZE / 4];  /* Alignment ensured, need enough stack */
-  uint8_t SD_state = MSD_OK;
-    
-  if ((DWORD)buff & 3) /* DMA Alignment issue, do single up to aligned buffer */
+  DRESULT res = RES_OK;
+  
+  if(BSP_SD_ReadBlocks((uint32_t*)buff, 
+                       (uint64_t) (sector * BLOCK_SIZE), 
+                       BLOCK_SIZE, 
+                       count) != MSD_OK)
   {
-    while (count--)
-    {
-      SD_state = BSP_SD_ReadBlocks_DMA((uint32_t*)scratch, (uint64_t) ((sector + count) * BLOCK_SIZE), BLOCK_SIZE, 1);
-      
-      while(BSP_SD_GetStatus() != SD_TRANSFER_OK)
-      {
-        if (timeout-- == 0)
-        {
-          return RES_ERROR;
-        }
-      }
-      memcpy (&buff[count * BLOCK_SIZE] ,scratch, BLOCK_SIZE);
-    }
-  }
-  else
-  {
-    SD_state = BSP_SD_ReadBlocks_DMA((uint32_t*)buff, (uint64_t) (sector * BLOCK_SIZE), BLOCK_SIZE, count);
-    
-    while(BSP_SD_GetStatus() != SD_TRANSFER_OK)
-    {  
-      if (timeout-- == 0)
-      {
-        return RES_ERROR;
-      }
-    }
-  }
-  if (SD_state == MSD_OK)
-  {
-    return RES_OK;
+    res = RES_ERROR;
   }
   
-  return RES_ERROR;
+  return res;
 }
 
 /**
@@ -159,45 +132,16 @@ DRESULT SD_read(BYTE *buff, DWORD sector, BYTE count)
 #if _USE_WRITE == 1
 DRESULT SD_write(const BYTE *buff, DWORD sector, BYTE count)
 {
-  uint32_t timeout = 100000;
-  DWORD scratch [BLOCK_SIZE / 4];  /* Alignment ensured, need enough stack */
-  uint8_t SD_state = MSD_OK;
+  DRESULT res = RES_OK;
   
-  if ((DWORD)buff & 3) /* DMA Alignment issue, do single up to aligned buffer */
+  if(BSP_SD_WriteBlocks((uint32_t*)buff, 
+                        (uint64_t)(sector * BLOCK_SIZE), 
+                        BLOCK_SIZE, count) != MSD_OK)
   {
-    while (count--)
-    {
-      memcpy (scratch, &buff[count * BLOCK_SIZE], BLOCK_SIZE);  
-      
-      SD_state = BSP_SD_WriteBlocks_DMA((uint32_t*)scratch, (uint64_t)((sector + count) * BLOCK_SIZE), BLOCK_SIZE, 1);
-      
-      while(BSP_SD_GetStatus() != SD_TRANSFER_OK)
-      {
-        if (timeout-- == 0)
-        {
-          return RES_ERROR;
-        }
-      }
-    }
-  }
-  else
-  {
-    SD_state = BSP_SD_WriteBlocks_DMA((uint32_t*)buff, (uint64_t)(sector * BLOCK_SIZE), BLOCK_SIZE, count);
-    
-    while(BSP_SD_GetStatus() != SD_TRANSFER_OK)
-    {
-      if (timeout-- == 0)
-      {
-        return RES_ERROR;
-      }
-    }
-  }
-  if (SD_state == MSD_OK)
-  {
-    return RES_OK;
+    res = RES_ERROR;
   }
   
-  return RES_ERROR;
+  return res;
 }
 #endif /* _USE_WRITE == 1 */
 
@@ -211,7 +155,7 @@ DRESULT SD_write(const BYTE *buff, DWORD sector, BYTE count)
 DRESULT SD_ioctl(BYTE cmd, void *buff)
 {
   DRESULT res = RES_ERROR;
-  HAL_SD_CardInfoTypedef CardInfo;
+  SD_CardInfo CardInfo;
   
   if (Stat & STA_NOINIT) return RES_NOTRDY;
   

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324x9i_eval.c
   * @author  MCD Application Team
-  * @version V2.0.1
-  * @date    26-February-2014
+  * @version V2.0.2
+  * @date    19-June-2014
   * @brief   This file provides a set of firmware functions to manage LEDs, 
   *          push-buttons and COM ports available on STM324x9I-EVAL evaluation 
   *          board(MB1045) RevB from STMicroelectronics.
@@ -48,13 +48,9 @@
 #include "stm324x9i_eval.h"
 #include "stm324x9i_eval_io.h"
 
-/** @addtogroup Utilities
+/** @addtogroup BSP
   * @{
-  */
-
-/** @addtogroup STM32_EVAL
-  * @{
-  */
+  */ 
 
 /** @addtogroup STM324x9I_EVAL
   * @{
@@ -75,11 +71,11 @@
   * @{
   */
 /**
- * @brief STM324x9I EVAL BSP Driver version number V2.0.1
+ * @brief STM324x9I EVAL BSP Driver version number V2.0.2
    */
 #define __STM324x9I_EVAL_BSP_VERSION_MAIN   (0x02) /*!< [31:24] main version */
 #define __STM324x9I_EVAL_BSP_VERSION_SUB1   (0x00) /*!< [23:16] sub1 version */
-#define __STM324x9I_EVAL_BSP_VERSION_SUB2   (0x01) /*!< [15:8]  sub2 version */
+#define __STM324x9I_EVAL_BSP_VERSION_SUB2   (0x02) /*!< [15:8]  sub2 version */
 #define __STM324x9I_EVAL_BSP_VERSION_RC     (0x00) /*!< [7:0]  release candidate */ 
 #define __STM324x9I_EVAL_BSP_VERSION         ((__STM324x9I_EVAL_BSP_VERSION_MAIN << 24)\
                                              |(__STM324x9I_EVAL_BSP_VERSION_SUB1 << 16)\
@@ -180,7 +176,6 @@ void                EEPROM_IO_Init(void);
 HAL_StatusTypeDef   EEPROM_IO_WriteData(uint16_t DevAddress, uint16_t MemAddress, uint8_t* pBuffer, uint32_t BufferSize);
 HAL_StatusTypeDef   EEPROM_IO_ReadData(uint16_t DevAddress, uint16_t MemAddress, uint8_t* pBuffer, uint32_t BufferSize);
 HAL_StatusTypeDef   EEPROM_IO_IsDeviceReady(uint16_t DevAddress, uint32_t Trials);
-
 /**
   * @}
   */
@@ -192,7 +187,7 @@ HAL_StatusTypeDef   EEPROM_IO_IsDeviceReady(uint16_t DevAddress, uint32_t Trials
   /**
   * @brief  This method returns the STM324x9I EVAL BSP Driver revision
   * @param  None
-  * @retval version : 0xXYZR (8bits for each decimal, R for RC)
+  * @retval version: 0xXYZR (8bits for each decimal, R for RC)
   */
 uint32_t BSP_GetVersion(void)
 {
@@ -291,7 +286,6 @@ void BSP_PB_Init(Button_TypeDef Button, ButtonMode_TypeDef Button_Mode)
   
   /* Enable the BUTTON clock */
   BUTTONx_GPIO_CLK_ENABLE(Button);
-  __SYSCFG_CLK_ENABLE();
   
   if(Button_Mode == BUTTON_MODE_GPIO)
   {
@@ -461,7 +455,7 @@ JOYState_TypeDef BSP_JOY_GetState(void)
                             BUS OPERATIONS
 *******************************************************************************/
 
-/******************************* I2C Routines**********************************/
+/******************************* I2C Routines *********************************/
 /**
   * @brief  Initializes I2C MSP.
   * @param  None
@@ -497,11 +491,11 @@ static void I2Cx_MspInit(void)
   /* Release the I2C peripheral clock reset */  
   EVAL_I2Cx_RELEASE_RESET(); 
   
-  /* Enable and set I2Cx Interrupt to the highest priority */
+  /* Enable and set I2Cx Interrupt to a lower priority */
   HAL_NVIC_SetPriority(EVAL_I2Cx_EV_IRQn, 0x05, 0);
   HAL_NVIC_EnableIRQ(EVAL_I2Cx_EV_IRQn);
   
-  /* Enable and set I2Cx Interrupt to the highest priority */
+  /* Enable and set I2Cx Interrupt to a lower priority */
   HAL_NVIC_SetPriority(EVAL_I2Cx_ER_IRQn, 0x05, 0);
   HAL_NVIC_EnableIRQ(EVAL_I2Cx_ER_IRQn);
 }
@@ -600,7 +594,6 @@ static uint8_t I2Cx_Read(uint8_t Addr, uint8_t Reg)
     /* Execute user timeout callback */
     I2Cx_Error(Addr);
   }
-
   return Value;   
 }
 
@@ -628,7 +621,7 @@ static HAL_StatusTypeDef I2Cx_ReadMultiple(uint8_t Addr, uint16_t Reg, uint16_t 
 }
 
 /**
-  * @brief  Write a value in a register of the device through BUS in using DMA mode
+  * @brief  Writes a value in a register of the device through BUS in using DMA mode.
   * @param  Addr: Device address on BUS Bus.  
   * @param  Reg: The target register address to write
   * @param  pBuffer: The target register value to be written 
@@ -762,6 +755,7 @@ void IOE_Delay(uint32_t Delay)
 }
 
 /********************************* LINK AUDIO *********************************/
+
 /**
   * @brief  Initializes Audio low level.
   * @param  None
@@ -866,10 +860,11 @@ void CAMERA_Delay(uint32_t Delay)
   HAL_Delay(Delay);
 }
 
-/********************************* LINK I2C EEPROM *****************************/
+/******************************** LINK I2C EEPROM *****************************/
+
 /**
-  * @brief Initializes peripherals used by the I2C EEPROM driver.
-  * @param None
+  * @brief  Initializes peripherals used by the I2C EEPROM driver.
+  * @param  None
   * @retval None
   */
 void EEPROM_IO_Init(void)
@@ -878,11 +873,11 @@ void EEPROM_IO_Init(void)
 }
 
 /**
-  * @brief Write data to I2C EEPROM driver in using DMA channel
-  * @param DevAddress: Target device address
-  * @param MemAddress: Internal memory address
-  * @param pBuffer: Pointer to data buffer
-  * @param BufferSize: Amount of data to be sent
+  * @brief  Write data to I2C EEPROM driver in using DMA channel.
+  * @param  DevAddress: Target device address
+  * @param  MemAddress: Internal memory address
+  * @param  pBuffer: Pointer to data buffer
+  * @param  BufferSize: Amount of data to be sent
   * @retval HAL status
   */
 HAL_StatusTypeDef EEPROM_IO_WriteData(uint16_t DevAddress, uint16_t MemAddress, uint8_t* pBuffer, uint32_t BufferSize)
@@ -891,11 +886,11 @@ HAL_StatusTypeDef EEPROM_IO_WriteData(uint16_t DevAddress, uint16_t MemAddress, 
 }
 
 /**
-  * @brief Read data from I2C EEPROM driver in using DMA channel
-  * @param DevAddress: Target device address
-  * @param MemAddress: Internal memory address
-  * @param pBuffer: Pointer to data buffer
-  * @param BufferSize: Amount of data to be read
+  * @brief  Read data from I2C EEPROM driver in using DMA channel.
+  * @param  DevAddress: Target device address
+  * @param  MemAddress: Internal memory address
+  * @param  pBuffer: Pointer to data buffer
+  * @param  BufferSize: Amount of data to be read
   * @retval HAL status
   */
 HAL_StatusTypeDef EEPROM_IO_ReadData(uint16_t DevAddress, uint16_t MemAddress, uint8_t* pBuffer, uint32_t BufferSize)
@@ -904,10 +899,10 @@ HAL_StatusTypeDef EEPROM_IO_ReadData(uint16_t DevAddress, uint16_t MemAddress, u
 }
 
 /**
-  * @brief Checks if target device is ready for communication. 
-  * @note This function is used with Memory devices
-  * @param DevAddress: Target device address
-  * @param Trials: Number of trials
+  * @brief  Checks if target device is ready for communication. 
+  * @note   This function is used with Memory devices
+  * @param  DevAddress: Target device address
+  * @param  Trials: Number of trials
   * @retval HAL status
   */
 HAL_StatusTypeDef EEPROM_IO_IsDeviceReady(uint16_t DevAddress, uint32_t Trials)
@@ -930,9 +925,5 @@ HAL_StatusTypeDef EEPROM_IO_IsDeviceReady(uint16_t DevAddress, uint32_t Trials)
 /**
   * @}
   */    
-
-/**
-  * @}
-  */ 
     
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

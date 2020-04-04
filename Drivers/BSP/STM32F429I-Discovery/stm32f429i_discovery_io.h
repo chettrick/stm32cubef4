@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f429i_discovery_io.h
   * @author  MCD Application Team
-  * @version V2.0.1
-  * @date    26-February-2014
+  * @version V2.1.0
+  * @date    19-June-2014
   * @brief   This file contains all the functions prototypes for the
   *          stm32f429i_discovery_io.c driver.
   ******************************************************************************
@@ -57,13 +57,11 @@
   * @{
   */
 
-/** @defgroup STM32F429I_DISCOVERY_IO STM32F429I_DISCOVERY_IO
+/** @defgroup STM32F429I_DISCOVERY_IO
   * @{
   */
 
-/* Exported types ------------------------------------------------------------*/
-
-/** @defgroup STM32F429I_DISCOVERY_IO_Exported_Types STM32F429I_DISCOVERY_IO_Exported_Types
+/** @defgroup STM32F429I_DISCOVERY_IO_Exported_Types
   * @{
   */
 typedef enum 
@@ -71,15 +69,12 @@ typedef enum
   IO_OK       = 0,
   IO_ERROR    = 1,
   IO_TIMEOUT  = 2
-}
-IO_StatusTypeDef;
+}IO_StatusTypeDef;
 /**
   * @}
   */  
 
-/* Exported constants --------------------------------------------------------*/
-
-/** @defgroup STM32F429I_DISCOVERY_IO_Exported_Constants STM32F429I_DISCOVERY_IO_Exported_Constants
+/** @defgroup STM32F429I_DISCOVERY_IO_Exported_Constants
   * @{
   */
 #define IO_PIN_0                     0x01
@@ -91,25 +86,20 @@ IO_StatusTypeDef;
 #define IO_PIN_6                     0x40
 #define IO_PIN_7                     0x80
 #define IO_PIN_ALL                   0xFF
-
 /**
   * @}
   */  
-/* Exported macro ------------------------------------------------------------*/
 
-/** @defgroup STM32F429I_DISCOVERY_IO_Exported_Macros STM32F429I_DISCOVERY_IO_Exported_Macros
+/** @defgroup STM32F429I_DISCOVERY_IO_Exported_Macros
   * @{
   */
 /**
   * @}
   */  
 
-/* Exported functions --------------------------------------------------------*/
-
-/** @defgroup STM32F429I_DISCOVERY_IO_Exported_Functions STM32F429I_DISCOVERY_IO_Exported_Functions
+/** @defgroup STM32F429I_DISCOVERY_IO_Exported_Functions
   * @{
   */
-
 uint8_t  BSP_IO_Init(void);
 uint8_t  BSP_IO_ITGetStatus(uint16_t IoPin);
 void     BSP_IO_ITClear(void);
@@ -118,11 +108,6 @@ void     BSP_IO_WritePin(uint16_t IoPin, uint8_t PinState);
 uint16_t BSP_IO_ReadPin(uint16_t IoPin);
 void     BSP_IO_TogglePin(uint16_t IoPin);
   
-#ifdef __cplusplus
-}
-#endif
-#endif /* __STM32F429I_DISCOVERY_IO_H */
-
 /**
   * @}
   */ 
@@ -137,5 +122,12 @@ void     BSP_IO_TogglePin(uint16_t IoPin);
 
 /**
   * @}
-  */       
+  */
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* __STM32F429I_DISCOVERY_IO_H */
+
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

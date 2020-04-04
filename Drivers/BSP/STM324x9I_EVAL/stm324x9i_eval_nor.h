@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324x9i_eval_nor.h
   * @author  MCD Application Team
-  * @version V2.0.1
-  * @date    26-February-2014
+  * @version V2.0.2
+  * @date    19-June-2014
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm324x9i_eval_nor.c driver.
   ******************************************************************************
@@ -59,14 +59,13 @@
   * @{
   */    
 
-/* Exported types ------------------------------------------------------------*/
-
 /** @defgroup STM324x9I_EVAL_NOR_Exported_Types
   * @{
   */
-  
-
-/* Exported constants --------------------------------------------------------*/ 
+/**
+  * @}
+  */ 
+    
 /** 
   * @brief  NOR status structure definition  
   */     
@@ -100,15 +99,17 @@
 #define NOR_READY_BUSY_GPIO   GPIOD
 #define NOR_READY_STATE       GPIO_PIN_SET
 #define NOR_BUSY_STATE        GPIO_PIN_RESET 
-
-/* Exported macro ------------------------------------------------------------*/
-  
+/**
+  * @}
+  */ 
+    
 /** @defgroup STM324x9I_EVAL_NOR_Exported_Macro
   * @{
   */ 
-
-/* Exported functions --------------------------------------------------------*/
-
+/**
+  * @}
+  */ 
+    
 /** @defgroup STM324x9I_EVAL_NOR_Exported_Functions
   * @{
   */  
@@ -119,35 +120,28 @@ uint8_t BSP_NOR_ProgramData(uint32_t uwStartAddress, uint16_t *pData, uint32_t u
 uint8_t BSP_NOR_Erase_Block(uint32_t BlockAddress);
 uint8_t BSP_NOR_Erase_Chip(void);
 uint8_t BSP_NOR_Read_ID(NOR_IDTypeDef *pNOR_ID);
-void BSP_NOR_ReturnToReadMode(void);
+void BSP_NOR_ReturnToReadMode(void);  
 
 /**
   * @}
-  */
-  
+  */ 
+
 /**
   * @}
   */ 
-     
+
+/**
+  * @}
+  */ 
+
+/**
+  * @}
+  */ 
+
 #ifdef __cplusplus
 }
 #endif
 
 #endif /* __STM324x9I_EVAL_NOR_H */
-/**
-  * @}
-  */ 
-
-/**
-  * @}
-  */ 
-
-/**
-  * @}
-  */ 
-
-/**
-  * @}
-  */ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

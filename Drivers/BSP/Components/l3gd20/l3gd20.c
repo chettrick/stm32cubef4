@@ -2,10 +2,10 @@
   ******************************************************************************
   * @file    l3gd20.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
-  * @brief   This file provides a set of functions needed to manage the l3gd20
-  *          MEMS accelerometer available on STM32F401-Discovery Kit.
+  * @version V1.1.0
+  * @date    10-June-2014
+  * @brief   This file provides a set of functions needed to manage the L3GD20,
+  *          ST MEMS motion sensor, 3-axis digital output gyroscope.  
   ******************************************************************************
   * @attention
   *

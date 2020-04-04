@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    accelero.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.1.0
+  * @date    21-March-2014
   * @brief   This header file contains the functions prototypes for the Accelerometer driver.
   ******************************************************************************
   * @attention
@@ -34,7 +34,6 @@
   *
   ******************************************************************************
   */
-  
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __ACCELERO_H
@@ -45,11 +44,26 @@
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include <stdint.h> 
+#include <stdint.h>
 
+/** @addtogroup BSP
+  * @{
+  */
+
+/** @addtogroup Components
+  * @{
+  */
+    
+/** @addtogroup ACCELERO
+  * @{
+  */
+
+/** @defgroup ACCELERO_Exported_Types
+  * @{
+  */ 
 /** 
-* @brief  Accelerometer driver structure definition  
-*/ 
+  * @brief  Accelerometer driver structure definition  
+  */
 typedef struct
 {  
   void      (*Init)(uint16_t);
@@ -98,24 +112,24 @@ typedef struct
 
 /**
   * @}
-  */ 
+  */
+
+/**
+  * @}
+  */
+
+/**
+  * @}
+  */
+
+/**
+  * @}
+  */
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif /* __ACCELERO_H */
-/**
-  * @}
-  */
 
-/**
-  * @}
-  */
-
-/**
-  * @}
-  */ 
-
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/ 
+/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

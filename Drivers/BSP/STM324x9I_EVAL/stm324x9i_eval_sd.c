@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324x9i_eval_sd.c
   * @author  MCD Application Team
-  * @version V2.0.1
-  * @date    26-February-2014
+  * @version V2.0.2
+  * @date    19-June-2014
   * @brief   This file includes the uSD card driver mounted on STM324x9I-EVAL
   *          evaluation board.
   ******************************************************************************
@@ -120,7 +120,7 @@
   * @{
   */
 static SD_HandleTypeDef uSdHandle;
-static HAL_SD_CardInfoTypedef SD_CardInfo;
+static SD_CardInfo uSdCardInfo;
 /**
   * @}
   */ 
@@ -140,7 +140,7 @@ static void SD_MspInit(void);
 /**
   * @brief  Initializes the SD card device.
   * @param  None
-  * @retval SD status.
+  * @retval SD status
   */
 uint8_t BSP_SD_Init(void)
 { 
@@ -167,7 +167,7 @@ uint8_t BSP_SD_Init(void)
   
   /* HAL SD initialization */
   SD_MspInit();
-  if(HAL_SD_Init(&uSdHandle, &SD_CardInfo) != SD_OK)
+  if(HAL_SD_Init(&uSdHandle, &uSdCardInfo) != SD_OK)
   {
     SD_state = MSD_ERROR;
   }
@@ -210,7 +210,7 @@ uint8_t BSP_SD_ITConfig(void)
 uint8_t BSP_SD_IsDetected(void)
 {
   __IO uint8_t status = SD_PRESENT;
-
+  
   /* Check SD card detect pin */
   if(BSP_IO_ReadPin(SD_DETECT_PIN))
   {
@@ -220,7 +220,7 @@ uint8_t BSP_SD_IsDetected(void)
   return status;
 }
 
-/** @brief  SD detect IT treatment
+/** @brief  SD detect IT treatment.
   * @param  None
   * @retval None
   */
@@ -234,9 +234,7 @@ void BSP_SD_DetectIT(void)
   
   /* SD detect IT callback */
   BSP_SD_DetectCallback();
-  
 }
-
 
 /** @brief  SD detect IT detection callback
   * @param  None
@@ -245,9 +243,8 @@ void BSP_SD_DetectIT(void)
 __weak void BSP_SD_DetectCallback(void)
 {
   /* NOTE: This function Should not be modified, when the callback is needed,
-  the BSP_SD_DetectCallback could be implemented in the user file
+     the BSP_SD_DetectCallback could be implemented in the user file
   */ 
-  
 }
 
 /**

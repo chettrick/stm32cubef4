@@ -1,16 +1,16 @@
 /*********************************************************************
-*          Portions COPYRIGHT 2013 STMicroelectronics                *
+*          Portions COPYRIGHT 2014 STMicroelectronics                *
 *          Portions SEGGER Microcontroller GmbH & Co. KG             *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
 *                                                                    *
-*        (c) 1996 - 2013  SEGGER Microcontroller GmbH & Co. KG       *
+*        (c) 1996 - 2014  SEGGER Microcontroller GmbH & Co. KG       *
 *                                                                    *
 *        Internet: www.segger.com    Support:  support@segger.com    *
 *                                                                    *
 **********************************************************************
 
-** emWin V5.22 - Graphical user interface for embedded applications **
+** emWin V5.24 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -53,7 +53,7 @@ Purpose     : Debug macros
   *
   ******************************************************************************
   */
-
+  
 #ifndef GUI_DEBUG_H
 #define GUI_DEBUG_H
 
@@ -168,10 +168,10 @@ Purpose     : Debug macros
 
 #if GUI_DEBUG_LEVEL >= GUI_DEBUG_LEVEL_LOG_ALL
   #define GUI_DEBUG_LOG(s)              GUI_Log(s)
-  #define GUI_DEBUG_LOG1(s,p0)          GUI_Warn1(s,p0)
-  #define GUI_DEBUG_LOG2(s,p0,p1)       GUI_Warn2(s,p0,p1)
-  #define GUI_DEBUG_LOG3(s,p0,p1,p2)    GUI_Warn3(s,p0,p1,p2)
-  #define GUI_DEBUG_LOG4(s,p0,p1,p2,p3) GUI_Warn4(s,p0,p1,p2,p3)
+  #define GUI_DEBUG_LOG1(s,p0)          GUI_Log1(s,p0)
+  #define GUI_DEBUG_LOG2(s,p0,p1)       GUI_Log2(s,p0,p1)
+  #define GUI_DEBUG_LOG3(s,p0,p1,p2)    GUI_Log3(s,p0,p1,p2)
+  #define GUI_DEBUG_LOG4(s,p0,p1,p2,p3) GUI_Log4(s,p0,p1,p2,p3)
   #define GUI_DEBUG_LOG_IF(exp,s)                   { if (exp) GUI_DEBUG_LOG(s); }
   #define GUI_DEBUG_LOG1_IF(exp,s,p0)               { if (exp) GUI_DEBUG_LOG1(s,p0); }
   #define GUI_DEBUG_LOG2_IF(exp,s,p0,p1)            { if (exp) GUI_DEBUG_LOG2(s,p0,p1); }

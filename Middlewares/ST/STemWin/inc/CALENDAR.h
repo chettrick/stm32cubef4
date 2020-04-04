@@ -1,16 +1,16 @@
 /*********************************************************************
-*          Portions COPYRIGHT 2013 STMicroelectronics                *
+*          Portions COPYRIGHT 2014 STMicroelectronics                *
 *          Portions SEGGER Microcontroller GmbH & Co. KG             *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
 *                                                                    *
-*        (c) 1996 - 2013  SEGGER Microcontroller GmbH & Co. KG       *
+*        (c) 1996 - 2014  SEGGER Microcontroller GmbH & Co. KG       *
 *                                                                    *
 *        Internet: www.segger.com    Support:  support@segger.com    *
 *                                                                    *
 **********************************************************************
 
-** emWin V5.22 - Graphical user interface for embedded applications **
+** emWin V5.24 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -50,7 +50,7 @@ Purpose     : Message box interface
   *
   ******************************************************************************
   */
-
+  
 #ifndef CALENDAR_H
 #define CALENDAR_H
 
@@ -141,7 +141,7 @@ void    CALENDAR_ShowDate         (WM_HWIN hWin, CALENDAR_DATE * pDate);
 void    CALENDAR_SetDefaultBkColor(unsigned Index, GUI_COLOR Color);
 void    CALENDAR_SetDefaultColor  (unsigned Index, GUI_COLOR Color);
 void    CALENDAR_SetDefaultDays   (const char ** apDays);
-void    CALENDAR_SetDefaultFont   (unsigned Index, const GUI_FONT GUI_UNI_PTR * pFont);
+void    CALENDAR_SetDefaultFont   (unsigned Index, const GUI_FONT * pFont);
 void    CALENDAR_SetDefaultMonths (const char ** apMonths);
 void    CALENDAR_SetDefaultSize   (unsigned Index, unsigned Size);
 

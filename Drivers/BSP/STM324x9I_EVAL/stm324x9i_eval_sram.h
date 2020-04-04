@@ -2,10 +2,10 @@
   ******************************************************************************
   * @file    stm324x9i_eval_sram.h
   * @author  MCD Application Team
-  * @version V2.0.1
-  * @date    26-February-2014
+  * @version V2.0.2
+  * @date    19-June-2014
   * @brief   This file contains the common defines and functions prototypes for
-  *          the stm324xg_eval_sram.c driver.
+  *          the stm324x9i_eval_sram.c driver.
   ******************************************************************************
   * @attention
   *
@@ -59,23 +59,23 @@
   * @{
   */    
 
-/* Exported types ------------------------------------------------------------*/
-
 /** @defgroup STM324x9I_EVAL_SRAM_Exported_Types
   * @{
   */
-  
+/**
+  * @}
+  */
 
-/* Exported constants --------------------------------------------------------*/ 
+/** @defgroup STM324x9I_EVAL_SRAM_Exported_Constants
+  * @{
+  */ 
+
 /** 
   * @brief  SRAM status structure definition  
   */     
 #define   SRAM_OK         0x00
 #define   SRAM_ERROR      0x01
 
-/** @defgroup STM324x9I_EVAL_SRAM_Exported_Constants
-  * @{
-  */ 
 #define SRAM_DEVICE_ADDR  ((uint32_t)0x64000000)
 #define SRAM_DEVICE_SIZE  ((uint32_t)0x200000)  /* SRAM device size in MBytes */  
   
@@ -97,19 +97,17 @@
 #define SRAM_DMAx_STREAM                  DMA2_Stream0  
 #define SRAM_DMAx_IRQn                    DMA2_Stream0_IRQn
 #define SRAM_DMAx_IRQHandler              DMA2_Stream0_IRQHandler  
-  
 /**
   * @}
   */ 
   
-/* Exported macro ------------------------------------------------------------*/
-  
 /** @defgroup STM324x9I_EVAL_SRAM_Exported_Macro
   * @{
   */  
-
-/* Exported functions --------------------------------------------------------*/
-
+/**
+  * @}
+  */ 
+   
 /** @defgroup STM324x9I_EVAL_SRAM_Exported_Functions
   * @{
   */    
@@ -118,27 +116,29 @@ uint8_t BSP_SRAM_ReadData(uint32_t uwStartAddress, uint16_t *pData, uint32_t uwD
 uint8_t BSP_SRAM_ReadData_DMA(uint32_t uwStartAddress, uint16_t *pData, uint32_t uwDataSize);
 uint8_t BSP_SRAM_WriteData(uint32_t uwStartAddress, uint16_t *pData, uint32_t uwDataSize);
 uint8_t BSP_SRAM_WriteData_DMA(uint32_t uwStartAddress, uint16_t *pData, uint32_t uwDataSize);
-void BSP_SRAM_DMA_IRQHandler(void);
+void    BSP_SRAM_DMA_IRQHandler(void);
+
+/**
+  * @}
+  */ 
+
+/**
+  * @}
+  */ 
+
+/**
+  * @}
+  */ 
+
+/**
+  * @}
+  */ 
+
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif /* __STM324x9I_EVAL_SRAM_H */
-/**
-  * @}
-  */ 
-
-/**
-  * @}
-  */ 
-
-/**
-  * @}
-  */ 
-
-/**
-  * @}
-  */ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

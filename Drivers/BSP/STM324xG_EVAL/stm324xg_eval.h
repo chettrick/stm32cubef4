@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324xg_eval.h
   * @author  MCD Application Team
-  * @version V2.0.1
-  * @date    26-February-2014
+  * @version V2.0.2
+  * @date    19-June-2014
   * @brief   This file contains definitions for STM324xG_EVAL's LEDs, 
   *          push-buttons and COM ports hardware resources.
   ******************************************************************************
@@ -47,17 +47,13 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
    
-/** @addtogroup Utilities
+/** @addtogroup BSP
   * @{
-  */
-
-/** @addtogroup STM32_EVAL
-  * @{
-  */
+  */ 
 
 /** @addtogroup STM324xG_EVAL
   * @{
-  */
+  */ 
       
 /** @addtogroup STM324xG_EVAL_LOW_LEVEL
   * @{
@@ -72,52 +68,46 @@ typedef enum
   LED2 = 1,
   LED3 = 2,
   LED4 = 3
-
 }Led_TypeDef;
 
 typedef enum 
 {  
   BUTTON_WAKEUP = 0,
   BUTTON_TAMPER = 1,
-  BUTTON_KEY = 2,
-  BUTTON_RIGHT = 3,
-  BUTTON_LEFT = 4,
-  BUTTON_UP = 5,
-  BUTTON_DOWN = 6,
-  BUTTON_SEL = 7
-
+  BUTTON_KEY    = 2,
+  BUTTON_RIGHT  = 3,
+  BUTTON_LEFT   = 4,
+  BUTTON_UP     = 5,
+  BUTTON_DOWN   = 6,
+  BUTTON_SEL    = 7
 }Button_TypeDef;
 
 typedef enum 
 {  
   BUTTON_MODE_GPIO = 0,
   BUTTON_MODE_EXTI = 1
-
 }ButtonMode_TypeDef;
   
 typedef enum 
 {  
   JOY_MODE_GPIO = 0,
   JOY_MODE_EXTI = 1
-
 }JOYMode_TypeDef;
 
 typedef enum 
 { 
-  JOY_NONE = 0,
-  JOY_SEL = 1,
-  JOY_DOWN = 2,
-  JOY_LEFT = 3,
+  JOY_NONE  = 0,
+  JOY_SEL   = 1,
+  JOY_DOWN  = 2,
+  JOY_LEFT  = 3,
   JOY_RIGHT = 4,
-  JOY_UP = 5
-
+  JOY_UP    = 5
 }JOYState_TypeDef;
 
 typedef enum 
 {
   COM1 = 0,
   COM2 = 1
-
 }COM_TypeDef;
 /**
   * @}
@@ -176,17 +166,16 @@ typedef enum
   * @{
   */  
 /* Joystick pins are connected to IO Expander (accessible through I2C1 interface) */
-#define BUTTONn                            3
-
+#define BUTTONn                              3
 
 /**
   * @brief Wakeup push-button
   */
-#define WAKEUP_BUTTON_PIN                   GPIO_PIN_0
-#define WAKEUP_BUTTON_GPIO_PORT             GPIOA
-#define WAKEUP_BUTTON_GPIO_CLK_ENABLE()     __GPIOA_CLK_ENABLE()
-#define WAKEUP_BUTTON_GPIO_CLK_DISABLE()    __GPIOA_CLK_DISABLE()
-#define WAKEUP_BUTTON_EXTI_IRQn             EXTI0_IRQn
+#define WAKEUP_BUTTON_PIN                    GPIO_PIN_0
+#define WAKEUP_BUTTON_GPIO_PORT              GPIOA
+#define WAKEUP_BUTTON_GPIO_CLK_ENABLE()      __GPIOA_CLK_ENABLE()
+#define WAKEUP_BUTTON_GPIO_CLK_DISABLE()     __GPIOA_CLK_DISABLE()
+#define WAKEUP_BUTTON_EXTI_IRQn              EXTI0_IRQn
 
 /**
   * @brief Tamper push-button
@@ -218,28 +207,28 @@ typedef enum
 /** @addtogroup STM324xG_EVAL_LOW_LEVEL_COM
   * @{
   */
-#define COMn                               1
+#define COMn                                 1
 
 /**
  * @brief Definition for COM port1, connected to USART3
  */ 
-#define EVAL_COM1                          USART3
-#define EVAL_COM1_CLK_ENABLE()             __USART3_CLK_ENABLE()
-#define EVAL_COM1_CLK_DISABLE()            __USART3_CLK_DISABLE()
+#define EVAL_COM1                            USART3
+#define EVAL_COM1_CLK_ENABLE()               __USART3_CLK_ENABLE()
+#define EVAL_COM1_CLK_DISABLE()              __USART3_CLK_DISABLE()
 
-#define EVAL_COM1_TX_PIN                   GPIO_PIN_10
-#define EVAL_COM1_TX_GPIO_PORT             GPIOC
-#define EVAL_COM1_TX_GPIO_CLK_ENABLE()     __GPIOC_CLK_ENABLE()
-#define EVAL_COM1_TX_GPIO_CLK_DISABLE()    __GPIOC_CLK_DISABLE()
-#define EVAL_COM1_TX_AF                    GPIO_AF7_USART3
+#define EVAL_COM1_TX_PIN                     GPIO_PIN_10
+#define EVAL_COM1_TX_GPIO_PORT               GPIOC
+#define EVAL_COM1_TX_GPIO_CLK_ENABLE()       __GPIOC_CLK_ENABLE()
+#define EVAL_COM1_TX_GPIO_CLK_DISABLE()      __GPIOC_CLK_DISABLE()
+#define EVAL_COM1_TX_AF                      GPIO_AF7_USART3
 
-#define EVAL_COM1_RX_PIN                   GPIO_PIN_11
-#define EVAL_COM1_RX_GPIO_PORT             GPIOC
-#define EVAL_COM1_RX_GPIO_CLK_ENABLE()     __GPIOC_CLK_ENABLE()
-#define EVAL_COM1_RX_GPIO_CLK_DISABLE()    __GPIOC_CLK_DISABLE()
-#define EVAL_COM1_RX_AF                    GPIO_AF7_USART3
+#define EVAL_COM1_RX_PIN                     GPIO_PIN_11
+#define EVAL_COM1_RX_GPIO_PORT               GPIOC
+#define EVAL_COM1_RX_GPIO_CLK_ENABLE()       __GPIOC_CLK_ENABLE()
+#define EVAL_COM1_RX_GPIO_CLK_DISABLE()      __GPIOC_CLK_DISABLE()
+#define EVAL_COM1_RX_AF                      GPIO_AF7_USART3
 
-#define EVAL_COM1_IRQn                     USART3_IRQn
+#define EVAL_COM1_IRQn                       USART3_IRQn
 
 #define EVAL_COMx_CLK_ENABLE(__INDEX__)            (((__INDEX__) == 0) ? EVAL_COM1_CLK_ENABLE() : 0)
 #define EVAL_COMx_CLK_DISABLE(__INDEX__)           (((__INDEX__) == 0) ? EVAL_COM1_CLK_DISABLE() : 0)
@@ -282,24 +271,23 @@ typedef enum
 /* User can use this section to tailor I2Cx/I2Cx instance used and associated 
    resources */
 /* Definition for I2Cx clock resources */
-#define EVAL_I2Cx                             I2C1
-#define EVAL_I2Cx_CLK_ENABLE()                __I2C1_CLK_ENABLE()
-#define EVAL_DMAx_CLK_ENABLE()                __DMA1_CLK_ENABLE()
-#define EVAL_I2Cx_SCL_SDA_GPIO_CLK_ENABLE()   __GPIOB_CLK_ENABLE()
+#define EVAL_I2Cx                            I2C1
+#define EVAL_I2Cx_CLK_ENABLE()               __I2C1_CLK_ENABLE()
+#define EVAL_DMAx_CLK_ENABLE()               __DMA1_CLK_ENABLE()
+#define EVAL_I2Cx_SCL_SDA_GPIO_CLK_ENABLE()  __GPIOB_CLK_ENABLE()
 
-#define EVAL_I2Cx_FORCE_RESET()               __I2C1_FORCE_RESET()
-#define EVAL_I2Cx_RELEASE_RESET()             __I2C1_RELEASE_RESET()
+#define EVAL_I2Cx_FORCE_RESET()              __I2C1_FORCE_RESET()
+#define EVAL_I2Cx_RELEASE_RESET()            __I2C1_RELEASE_RESET()
 
 /* Definition for I2Cx Pins */
-#define EVAL_I2Cx_SCL_PIN                     GPIO_PIN_6
-#define EVAL_I2Cx_SCL_SDA_GPIO_PORT           GPIOB
-#define EVAL_I2Cx_SCL_SDA_AF                  GPIO_AF4_I2C1
-#define EVAL_I2Cx_SDA_PIN                     GPIO_PIN_9
+#define EVAL_I2Cx_SCL_PIN                    GPIO_PIN_6
+#define EVAL_I2Cx_SCL_SDA_GPIO_PORT          GPIOB
+#define EVAL_I2Cx_SCL_SDA_AF                 GPIO_AF4_I2C1
+#define EVAL_I2Cx_SDA_PIN                    GPIO_PIN_9
 
 /* I2C interrupt requests */                  
-#define EVAL_I2Cx_EV_IRQn                     I2C1_EV_IRQn
-#define EVAL_I2Cx_ER_IRQn                     I2C1_ER_IRQn
-
+#define EVAL_I2Cx_EV_IRQn                    I2C1_EV_IRQn
+#define EVAL_I2Cx_ER_IRQn                    I2C1_ER_IRQn
 
 /**
   * @}
@@ -347,15 +335,10 @@ JOYState_TypeDef BSP_JOY_GetState(void);
   * @}
   */
 
-/**
-  * @}
-  */ 
-    
 #ifdef __cplusplus
 }
 #endif
 
 #endif /* __STM324xG_EVAL_H */
  
-
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

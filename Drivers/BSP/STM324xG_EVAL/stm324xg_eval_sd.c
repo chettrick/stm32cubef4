@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324xg_eval_sd.c
   * @author  MCD Application Team
-  * @version V2.0.1
-  * @date    26-February-2014
+  * @version V2.0.2
+  * @date    19-June-2014
   * @brief   This file includes the uSD card driver mounted on STM324xG-EVAL
   *          evaluation board.
   ******************************************************************************
@@ -119,7 +119,7 @@
   * @{
   */       
 static SD_HandleTypeDef uSdHandle;
-static HAL_SD_CardInfoTypedef SD_CardInfo;
+static SD_CardInfo uSdCardInfo;
 /**
   * @}
   */ 
@@ -163,7 +163,7 @@ uint8_t BSP_SD_Init(void)
   
   /* HAL SD initialization */
   SD_MspInit();
-  if(HAL_SD_Init(&uSdHandle, &SD_CardInfo) != SD_OK)
+  if(HAL_SD_Init(&uSdHandle, &uSdCardInfo) != SD_OK)
   {
     SD_state = MSD_ERROR;
   }

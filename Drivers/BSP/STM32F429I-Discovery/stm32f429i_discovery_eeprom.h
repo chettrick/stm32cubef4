@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f429i_discovery_eeprom.h
   * @author  MCD Application Team
-  * @version V2.0.1
-  * @date    26-February-2014
+  * @version V2.1.0
+  * @date    19-June-2014
   * @brief   This file contains all the functions prototypes for 
   *          the stm32f429i_discovery_eeprom.c firmware driver.
   ******************************************************************************
@@ -50,10 +50,6 @@
 /** @addtogroup BSP
   * @{
   */
-  
-/** @addtogroup STM32F4_DISCOVERY
-  * @{
-  */ 
 
 /** @addtogroup STM32F429I_DISCOVERY
   * @{
@@ -63,15 +59,14 @@
   * @{
   */  
 
-/** @defgroup STM32F429I_DISCOVERY_EEPROM_Exported_Types EEPROM_Exported_Types
+/** @defgroup STM32F429I_DISCOVERY_EEPROM_Exported_Types
   * @{
   */ 
-
 /**
   * @}
   */
   
-/** @defgroup STM32F429I_DISCOVERY_EEPROM_Exported_Constants EEPROM_Exported_Constants
+/** @defgroup STM32F429I_DISCOVERY_EEPROM_Exported_Constants
   * @{
   */
 /* EEPROM hardware address and page size */ 
@@ -91,39 +86,38 @@ This timeout is based on systick set to 1ms*/
 #define EEPROM_OK                   0
 #define EEPROM_FAIL                 1
 #define EEPROM_TIMEOUT              2
- 
 /**
   * @}
   */ 
   
-/** @defgroup STM32F429I_DISCOVERY_EEPROM_Exported_Macros EEPROM_Exported_Macros
+/** @defgroup STM32F429I_DISCOVERY_EEPROM_Exported_Macros
   * @{
   */    
 /**
   * @}
   */ 
 
-/** @defgroup STM32F429I_DISCOVERY_EEPROM_Exported_Functions EEPROM_Exported_Functions
+/** @defgroup STM32F429I_DISCOVERY_EEPROM_Exported_Functions
   * @{
   */ 
-uint32_t          BSP_EEPROM_Init(void);
-uint32_t          BSP_EEPROM_ReadBuffer(uint8_t* pBuffer, uint16_t ReadAddr, uint16_t* NumByteToRead);
-uint32_t          BSP_EEPROM_WritePage(uint8_t* pBuffer, uint16_t WriteAddr, uint8_t* NumByteToWrite);
-uint32_t          BSP_EEPROM_WriteBuffer(uint8_t* pBuffer, uint16_t WriteAddr, uint16_t NumByteToWrite);
-uint32_t          BSP_EEPROM_WaitEepromStandbyState(void);
+uint32_t BSP_EEPROM_Init(void);
+uint32_t BSP_EEPROM_ReadBuffer(uint8_t *pBuffer, uint16_t ReadAddr, uint16_t *NumByteToRead);
+uint32_t BSP_EEPROM_WritePage(uint8_t *pBuffer, uint16_t WriteAddr, uint8_t *NumByteToWrite);
+uint32_t BSP_EEPROM_WriteBuffer(uint8_t *pBuffer, uint16_t WriteAddr, uint16_t NumByteToWrite);
+uint32_t BSP_EEPROM_WaitEepromStandbyState(void);
 
 /* USER Callbacks: This function is declared as __weak in EEPROM driver and 
    should be implemented into user application.  
    BSP_EEPROM_TIMEOUT_UserCallback() function is called whenever a timeout condition 
    occure during communication (waiting on an event that doesn't occur, bus 
    errors, busy devices ...). */
-void              BSP_EEPROM_TIMEOUT_UserCallback(void);
+void     BSP_EEPROM_TIMEOUT_UserCallback(void);
 
 
 /* Link function for I2C EEPROM peripheral */
 void              EEPROM_IO_Init(void);
-HAL_StatusTypeDef EEPROM_IO_WriteData(uint16_t DevAddress, uint16_t MemAddress, uint8_t* pBuffer, uint32_t BufferSize);
-HAL_StatusTypeDef EEPROM_IO_ReadData(uint16_t DevAddress, uint16_t MemAddress, uint8_t* pBuffer, uint32_t BufferSize);
+HAL_StatusTypeDef EEPROM_IO_WriteData(uint16_t DevAddress, uint16_t MemAddress, uint8_t *pBuffer, uint32_t BufferSize);
+HAL_StatusTypeDef EEPROM_IO_ReadData(uint16_t DevAddress, uint16_t MemAddress, uint8_t *pBuffer, uint32_t BufferSize);
 HAL_StatusTypeDef EEPROM_IO_IsDeviceReady(uint16_t DevAddress, uint32_t Trials);
 
 #ifdef __cplusplus
@@ -131,9 +125,6 @@ HAL_StatusTypeDef EEPROM_IO_IsDeviceReady(uint16_t DevAddress, uint32_t Trials);
 #endif
 
 #endif /* __STM32F429I_DISCOVERY_EEPROM_H */
-/**
-  * @}
-  */
 
 /**
   * @}

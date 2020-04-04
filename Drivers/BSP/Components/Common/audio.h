@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    audio.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.1.0
+  * @date    21-March-2014
   * @brief   This header file contains the common defines and functions prototypes
   *          for the Audio driver.  
   ******************************************************************************
@@ -34,7 +34,7 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */ 
+  */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __AUDIO_H
@@ -42,7 +42,7 @@
 
 #ifdef __cplusplus
  extern "C" {
-#endif 
+#endif
 
 /* Includes ------------------------------------------------------------------*/
 #include <stdint.h>
@@ -51,14 +51,13 @@
   * @{
   */
 
-/** @addtogroup Component
+/** @addtogroup Components
   * @{
-  */ 
+  */
     
 /** @addtogroup AUDIO
   * @{
-  */ 
-
+  */
 
 /** @defgroup AUDIO_Exported_Constants
   * @{
@@ -66,7 +65,7 @@
 
 /* Codec audio Standards */
 #define CODEC_STANDARD                0x04
-#define I2S_STANDARD                  I2S_STANDARD_PHILLIPS
+#define I2S_STANDARD                  I2S_STANDARD_PHILIPS
 
 /**
   * @}
@@ -74,14 +73,14 @@
 
 /** @defgroup AUDIO_Exported_Types
   * @{
-  */ 
+  */
 /** 
-  * @brief  AUDIO driver structure definition  
-  */ 
+  * @brief  AUDIO driver structure definition
+  */
 typedef struct
 {
   uint32_t  (*Init)(uint16_t, uint16_t, uint8_t, uint32_t);
-  uint32_t  (*ReadID)(uint16_t);  
+  uint32_t  (*ReadID)(uint16_t);
   uint32_t  (*Play)(uint16_t, uint16_t*, uint16_t);
   uint32_t  (*Pause)(uint16_t);
   uint32_t  (*Resume)(uint16_t);
@@ -96,23 +95,23 @@ typedef struct
 /**
   * @}
   */
-      
+
+/**
+  * @}
+  */
+
+/**
+  * @}
+  */
+
+/**
+  * @}
+  */
+
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* AUDIO_H */
-
-/**
-  * @}
-  */ 
-
-/**
-  * @}
-  */ 
-
-/**
-  * @}
-  */ 
+#endif /* __AUDIO_H */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

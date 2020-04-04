@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324xg_eval_camera.c
   * @author  MCD Application Team
-  * @version V2.0.1
-  * @date    26-February-2014
+  * @version V2.0.2
+  * @date    19-June-2014
   * @brief   This file includes the driver for Camera module mounted on
   *          STM324xG-EVAL evaluation board(MB786).
   ******************************************************************************
@@ -40,15 +40,15 @@
                                    User NOTES
 1. How to use this driver:
 --------------------------
-   - This driver is used to drive the camera.
+   - This driver is used to drive the Camera.
    - The OV2640 component driver MUST be included with this driver.          
 
 2. Driver description:
 ---------------------
   + Initialization steps:
-     o Initialise the camera using the BSP_CAMERA_Init() function.
-     o Start the camera capture or snapshot using CAMERA_Start() function.
-     o Suspend, resume or stop the camera capture using the following functions:
+     o Initialize the Camera using the BSP_CAMERA_Init() function.
+     o Start the Camera capture or snapshot using CAMERA_Start() function.
+     o Suspend, resume or stop the Camera capture using the following functions:
       - BSP_CAMERA_Suspend()
       - BSP_CAMERA_Resume()
       - BSP_CAMERA_Stop()
@@ -81,7 +81,6 @@
 /** @defgroup STM324xG_EVAL_CAMERA_Private_TypesDefinitions
   * @{
   */ 
-
 /**
   * @}
   */ 
@@ -89,15 +88,13 @@
 /** @defgroup STM324xG_EVAL_CAMERA_Private_Defines
   * @{
   */
-
 /**
   * @}
   */ 
   
 /** @defgroup STM324xG_EVAL_CAMERA_Private_Macros
   * @{
-  */
-    
+  */ 
 /**
   * @}
   */  
@@ -106,7 +103,6 @@
   * @{
   */ 
 static DCMI_HandleTypeDef hdcmi_eval;
-
 CAMERA_DrvTypeDef  *camera_drv;
 uint32_t current_resolution;
 /**
@@ -116,7 +112,7 @@ uint32_t current_resolution;
 /** @defgroup STM324xG_EVAL_CAMERA_Private_FunctionPrototypes
   * @{
   */
-static void     DCMI_MspInit(void);
+static void DCMI_MspInit(void);
 static uint32_t GetSize(uint32_t resolution);
 /**
   * @}
@@ -127,8 +123,8 @@ static uint32_t GetSize(uint32_t resolution);
   */ 
 
 /**
-  * @brief  Initializes the camera.
-  * @param  Camera: Pointer to the camera configuration structure
+  * @brief  Initializes the Camera.
+  * @param  Camera: Pointer to the Camera configuration structure
   * @retval Camera status
   */
 uint8_t BSP_CAMERA_Init(uint32_t Resolution)
@@ -139,7 +135,7 @@ uint8_t BSP_CAMERA_Init(uint32_t Resolution)
   /* Get the DCMI handle structure */
   phdcmi = &hdcmi_eval;
   
-  /*** Configures the DCMI to interface with the camera module ***/
+  /*** Configures the DCMI to interface with the Camera module ***/
   /* DCMI configuration */
   phdcmi->Init.CaptureRate      = DCMI_CR_ALL_FRAME;  
   phdcmi->Init.HSPolarity       = DCMI_HSPOLARITY_LOW;
@@ -155,7 +151,7 @@ uint8_t BSP_CAMERA_Init(uint32_t Resolution)
   
   if(ov2640_drv.ReadID(CAMERA_I2C_ADDRESS) == OV2640_ID)
   {
-    /* Initialize the camera driver structure */
+    /* Initialize the Camera driver structure */
     camera_drv = &ov2640_drv;     
     
     /* Camera Init */   
@@ -171,29 +167,29 @@ uint8_t BSP_CAMERA_Init(uint32_t Resolution)
 }
 
 /**
-  * @brief  Starts the camera capture in continuous mode.
-  * @param  buff: pointer to the camera output buffer
+  * @brief  Starts the Camera capture in continuous mode.
+  * @param  buff: pointer to the Camera output buffer
   * @retval None
   */
 void BSP_CAMERA_ContinuousStart(uint8_t *buff)
 {   
-  /* Start the camera capture */
+  /* Start the Camera capture */
   HAL_DCMI_Start_DMA(&hdcmi_eval, DCMI_MODE_CONTINUOUS, (uint32_t)buff, GetSize(current_resolution));  
 }
 
 /**
-  * @brief  Starts the camera capture in snapshot mode.
-  * @param  buff: pointer to the camera output buffer
+  * @brief  Starts the Camera capture in snapshot mode.
+  * @param  buff: pointer to the Camera output buffer
   * @retval None
   */
 void BSP_CAMERA_SnapshotStart(uint8_t *buff)
 {   
-  /* Start the camera capture */
+  /* Start the Camera capture */
   HAL_DCMI_Start_DMA(&hdcmi_eval, DCMI_MODE_SNAPSHOT, (uint32_t)buff, GetSize(current_resolution));  
 }
 
 /**
-  * @brief Suspend the CAMERA capture 
+  * @brief  Suspends the Camera capture. 
   * @param  None
   * @retval None
   */
@@ -202,12 +198,11 @@ void BSP_CAMERA_Suspend(void)
   /* Disable the DMA */
   __HAL_DMA_DISABLE(hdcmi_eval.DMA_Handle);
   /* Disable the DCMI */
-  __HAL_DCMI_DISABLE(&hdcmi_eval);
-  
+  __HAL_DCMI_DISABLE(&hdcmi_eval); 
 }
 
 /**
-  * @brief Resume the CAMERA capture 
+  * @brief  Resumes the Camera capture. 
   * @param  None
   * @retval None
   */
@@ -220,7 +215,7 @@ void BSP_CAMERA_Resume(void)
 }
 
 /**
-  * @brief  Stop the CAMERA capture 
+  * @brief  Stops the Camera capture. 
   * @param  None
   * @retval Camera status
   */
@@ -242,7 +237,7 @@ uint8_t BSP_CAMERA_Stop(void)
 }
 
 /**
-  * @brief  Configures the camera contrast and brightness.
+  * @brief  Configures the Camera contrast and brightness.
   * @param  contrast_level: Contrast level
   *          This parameter can be one of the following values:
   *            @arg  CAMERA_CONTRAST_LEVEL4: for contrast +2
@@ -268,7 +263,7 @@ void BSP_CAMERA_ContrastBrightnessConfig(uint32_t contrast_level, uint32_t brigh
 }
 
 /**
-  * @brief  Configures the camera white balance.
+  * @brief  Configures the Camera white balance.
   * @param  Mode: black_white mode
   *          This parameter can be one of the following values:
   *            @arg  CAMERA_BLACK_WHITE_BW
@@ -286,7 +281,7 @@ void BSP_CAMERA_BlackWhiteConfig(uint32_t Mode)
 }
 
 /**
-  * @brief  Configures the camera color effect.
+  * @brief  Configures the Camera color effect.
   * @param  Effect: Color effect
   *          This parameter can be one of the following values:
   *            @arg  CAMERA_COLOR_EFFECT_ANTIQUE               
@@ -326,7 +321,7 @@ void BSP_CAMERA_DMA_IRQHandler(void)
 /**
   * @brief  Get the capture size.
   * @param  current_resolution: the current resolution.
-  * @retval cpature size.
+  * @retval cpature size
   */
 static uint32_t GetSize(uint32_t resolution)
 { 

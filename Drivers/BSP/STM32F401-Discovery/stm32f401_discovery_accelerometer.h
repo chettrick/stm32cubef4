@@ -2,10 +2,10 @@
   ******************************************************************************
   * @file    stm32f401_discovery_accelerometer.h
   * @author  MCD Application Team
-  * @version V2.0.0
-  * @date    18-February-2014
-  * @brief   This file contains definitions for stm32f401_discovery_accelerometer.c 
-  *          firmware driver.
+  * @version V2.1.0
+  * @date    19-June-2014
+  * @brief   This file contains all the functions prototypes for the 
+  *          stm32f401_discovery_accelerometer.c firmware driver.
   ******************************************************************************
   * @attention
   *
@@ -38,8 +38,8 @@
   
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __STM32F401_DISCOVERY_ACCELERO_H
-#define __STM32F401_DISCOVERY_ACCELERO_H
+#ifndef __STM32F401_DISCOVERY_ACCELEROMETER_H
+#define __STM32F401_DISCOVERY_ACCELEROMETER_H
 
 #ifdef __cplusplus
  extern "C" {
@@ -47,7 +47,8 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f401_discovery.h"
-/* Include Gyroscope component driver */
+
+/* Include Accelerometer component driver */
 #include "..\Components\lsm303dlhc\lsm303dlhc.h"
    
 /** @addtogroup BSP
@@ -58,19 +59,11 @@
   * @{
   */ 
 
-/** @addtogroup STM32F401_DISCOVERY_ACCELERO
+/** @addtogroup STM32F401_DISCOVERY_ACCELEROMETER
   * @{
   */
   
-/** @defgroup STM32F401_DISCOVERY_ACCELERO_Exported_Types STM32F401_DISCOVERY_ACCELERO_Exported_Types
-  * @{
-  */
-
-/**
-  * @}
-  */
-
-/** @defgroup STM32F401_DISCOVERY_ACCELERO_Exported_Constants STM32F401_DISCOVERY_ACCELERO_Exported_Constants
+/** @defgroup STM32F401_DISCOVERY_ACCELEROMETER_Exported_Types
   * @{
   */
 typedef enum 
@@ -78,21 +71,27 @@ typedef enum
   ACCELERO_OK = 0,
   ACCELERO_ERROR = 1,
   ACCELERO_TIMEOUT = 2
-} 
-ACCELERO_StatusTypeDef;
+}ACCELERO_StatusTypeDef;
 
+/**
+  * @}
+  */
+
+/** @defgroup STM32F401_DISCOVERY_ACCELEROMETER_Exported_Constants
+  * @{
+  */
 /**
   * @}
   */
   
-/** @defgroup STM32F401_DISCOVERY_ACCELERO_Exported_Functions STM32F401_DISCOVERY_ACCELERO_Exported_Functions
+/** @defgroup STM32F401_DISCOVERY_ACCELEROMETER_Exported_Functions
   * @{
   */
-/* Acc functions */  
-uint8_t   BSP_ACCELERO_Init(void);
-void      BSP_ACCELERO_Reset(void);
-void      BSP_ACCELERO_Click_ITConfig(void);
-void      BSP_ACCELERO_GetXYZ(int16_t* pDataXYZ);
+/* Accelerometer functions */   
+uint8_t BSP_ACCELERO_Init(void);
+void    BSP_ACCELERO_Reset(void);
+void    BSP_ACCELERO_Click_ITConfig(void);
+void    BSP_ACCELERO_GetXYZ(int16_t *pDataXYZ);
 
 /**
   * @}
@@ -109,6 +108,11 @@ void      BSP_ACCELERO_GetXYZ(int16_t* pDataXYZ);
 /**
   * @}
   */ 
-#endif /* __STM32F401_DISCOVERY_ACCELERO_H */
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* __STM32F401_DISCOVERY_ACCELEROMETER_H */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/ 

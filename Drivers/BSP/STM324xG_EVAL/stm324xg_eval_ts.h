@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324xg_eval_ts.h
   * @author  MCD Application Team
-  * @version V2.0.1
-  * @date    26-February-2014
+  * @version V2.0.2
+  * @date    19-June-2014
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm324xg_eval_ts.c driver.
   ******************************************************************************
@@ -46,6 +46,7 @@
    
 /* Includes ------------------------------------------------------------------*/
 #include "stm324xg_eval.h"  
+/* Include IOExpander(STMPE811) component Driver */ 
 #include "..\Components\stmpe811\stmpe811.h" 
 
 /** @addtogroup BSP
@@ -60,8 +61,6 @@
   * @{
   */    
 
-/* Exported types ------------------------------------------------------------*/
-
 /** @defgroup STM324xG_EVAL_TS_Exported_Types
   * @{
   */
@@ -71,11 +70,10 @@ typedef struct
   uint16_t x;
   uint16_t y;
   uint16_t z;
-
 }TS_StateTypeDef; 
-
-/* Exported constants --------------------------------------------------------*/
-
+/**
+  * @}
+  */ 
 
 /** @defgroup STM324xG_EVAL_TS_Exported_Constants
   * @{
@@ -90,32 +88,27 @@ typedef enum
   TS_OK       = 0x00,
   TS_ERROR    = 0x01,
   TS_TIMEOUT  = 0x02
-
 }TS_StatusTypeDef;
+/**
+  * @}
+  */ 
 
-/* Exported macro ------------------------------------------------------------*/
-  
 /** @defgroup STM324xG_EVAL_TS_Exported_Macros
   * @{
   */ 
-
-/* Exported functions --------------------------------------------------------*/
+/**
+  * @}
+  */ 
 
 /** @defgroup STM324xG_EVAL_TS_Exported_Functions
   * @{
   */
-
 uint8_t BSP_TS_Init(uint16_t xSize, uint16_t ySize);
 uint8_t BSP_TS_GetState(TS_StateTypeDef *TS_State);
 uint8_t BSP_TS_ITConfig(void);
 uint8_t BSP_TS_ITGetStatus(void);
 void    BSP_TS_ITClear(void);
 
-#ifdef __cplusplus
-}
-#endif
-#endif /* __STM324xG_EVAL_TS_H */
-
 /**
   * @}
   */ 
@@ -130,5 +123,12 @@ void    BSP_TS_ITClear(void);
 
 /**
   * @}
-  */       
+  */
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* __STM324xG_EVAL_TS_H */
+
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

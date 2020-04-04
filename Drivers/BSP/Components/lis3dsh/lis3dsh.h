@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    lis3dsh.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    19-June-2014
   * @brief   This file contains all the functions prototypes for the lis3dsh.c
   *          firmware driver.
   ******************************************************************************
@@ -47,18 +47,17 @@
 /* Includes ------------------------------------------------------------------*/
 #include "..\Common\accelero.h"
 
-/** @addtogroup Utilities
-  * @{
-  */
-  
-/** @addtogroup STM32F4_DISCOVERY
+/** @addtogroup BSP
   * @{
   */ 
 
-/** @addtogroup LIS3DSH
+/** @addtogroup Components
+  * @{
+  */ 
+
+/** @addtogroup LIS302DL
   * @{
   */
-  
 
 /** @defgroup LIS3DSH_Exported_Types
   * @{
@@ -81,9 +80,9 @@ typedef struct
   uint8_t Interrupt_Selection_Enable;   /* Interrupt1/2 selection enable into CTRL_REG3 register */
   uint8_t Interrupt_Signal;             /* Interrupt signal active Low/High into CTRL_REG3 register */  
   uint8_t State_Machine1_Enable;        /* State Machine 1 enable/disable into CTRL_REG1 register */ 
-  uint8_t State_Machine1_Interrupt;      /* State Machine 1 routed Interrupt into CTRL_REG1 register */
+  uint8_t State_Machine1_Interrupt;     /* State Machine 1 routed Interrupt into CTRL_REG1 register */
   uint8_t State_Machine2_Enable;        /* State Machine 2 enable/disable into CTRL_REG2 register */  
-  uint8_t State_Machine2_Interrupt;      /* State Machine 2 routed Interrupt into CTRL_REG1 register */
+  uint8_t State_Machine2_Interrupt;     /* State Machine 2 routed Interrupt into CTRL_REG1 register */
 }LIS3DSH_InterruptConfigTypeDef;  
 /**
   * @}
@@ -1211,29 +1210,31 @@ typedef struct
 /** @defgroup LIS3DSH_Exported_Functions
   * @{
   */ 
-void        LIS3DSH_Init(uint16_t InitStruct);
-uint8_t     LIS3DSH_ReadID(void);
-void        LIS3DSH_InterruptConfig(LIS3DSH_InterruptConfigTypeDef *LIS3DSH_IntConfigStruct);
-void        LIS3DSH_Click_IntConfig(void);
-void        LIS3DSH_ODR_LowpowerCmd(uint8_t ODR_LowPowerMode);
-void        LIS3DSH_DataRateCmd(uint8_t DataRateValue);
-void        LIS3DSH_FullScaleCmd(uint8_t FS_value);
-void        LIS3DSH_RebootCmd(void);
-void        LIS3DSH_ReadACC(int16_t *pData);
+void    LIS3DSH_Init(uint16_t InitStruct);
+uint8_t LIS3DSH_ReadID(void);
+void    LIS3DSH_InterruptConfig(LIS3DSH_InterruptConfigTypeDef *LIS3DSH_IntConfigStruct);
+void    LIS3DSH_Click_IntConfig(void);
+void    LIS3DSH_ODR_LowpowerCmd(uint8_t ODR_LowPowerMode);
+void    LIS3DSH_DataRateCmd(uint8_t DataRateValue);
+void    LIS3DSH_FullScaleCmd(uint8_t FS_value);
+void    LIS3DSH_RebootCmd(void);
+void    LIS3DSH_ReadACC(int16_t *pData);
 
+/* Accelerometer driver structure */
 extern ACCELERO_DrvTypeDef Lis3dshDrv;
 
 /* Accelerometer IO functions */  
-void            ACCELERO_IO_Init(void);
-void            ACCELERO_IO_ITConfig(void);
-void            ACCELERO_IO_Write(uint8_t* pBuffer, uint8_t WriteAddr, uint16_t NumByteToWrite);
-void            ACCELERO_IO_Read(uint8_t* pBuffer, uint8_t ReadAddr, uint16_t NumByteToRead);
+void    ACCELERO_IO_Init(void);
+void    ACCELERO_IO_ITConfig(void);
+void    ACCELERO_IO_Write(uint8_t* pBuffer, uint8_t WriteAddr, uint16_t NumByteToWrite);
+void    ACCELERO_IO_Read(uint8_t* pBuffer, uint8_t ReadAddr, uint16_t NumByteToRead);
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif /* __LIS3DSH_H */
+
 /**
   * @}
   */
@@ -1250,5 +1251,4 @@ void            ACCELERO_IO_Read(uint8_t* pBuffer, uint8_t ReadAddr, uint16_t Nu
   * @}
   */ 
 
-
-/******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/
+/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

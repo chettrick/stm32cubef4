@@ -15,7 +15,7 @@ static unsigned portBASE_TYPE makeFreeRtosPriority (osPriority priority)
   return fpriority;
 }
 
-
+#if (INCLUDE_vTaskPriorityGet == 1)
 /* Convert from FreeRTOS priority number to CMSIS type osPriority */
 static osPriority makeCmsisPriority (unsigned portBASE_TYPE fpriority)
 {
@@ -27,6 +27,7 @@ static osPriority makeCmsisPriority (unsigned portBASE_TYPE fpriority)
   
   return priority;
 }
+#endif
 
 
 /* Determine whether we are in thread mode or handler mode. */
@@ -124,7 +125,11 @@ osThreadId osThreadCreate (osThreadDef_t *thread_def, void *argument)
 */
 osThreadId osThreadGetId (void)
 {
+#if ( ( INCLUDE_xTaskGetCurrentTaskHandle == 1 ) || ( configUSE_MUTEXES == 1 ) )
   return xTaskGetCurrentTaskHandle();
+#else
+	return NULL;
+#endif
 }
 
 /**
@@ -135,9 +140,12 @@ osThreadId osThreadGetId (void)
 */
 osStatus osThreadTerminate (osThreadId thread_id)
 {
+#if (INCLUDE_vTaskDelete == 1)
   vTaskDelete(thread_id);
-  
   return osOK;
+#else
+	return osErrorOS;
+#endif
 }
 
 /**
@@ -161,9 +169,12 @@ osStatus osThreadYield (void)
 */
 osStatus osThreadSetPriority (osThreadId thread_id, osPriority priority)
 {
+#if (INCLUDE_vTaskPrioritySet == 1)
   vTaskPrioritySet(thread_id, makeFreeRtosPriority(priority));
-  
   return osOK;
+#else
+	return osErrorOS;
+#endif
 }
 
 /**
@@ -174,7 +185,11 @@ osStatus osThreadSetPriority (osThreadId thread_id, osPriority priority)
 */
 osPriority osThreadGetPriority (osThreadId thread_id)
 {
+#if (INCLUDE_vTaskPriorityGet == 1)
   return makeCmsisPriority(uxTaskPriorityGet(thread_id));
+#else
+	return osPriorityError;
+#endif
 }
 
 /*********************** Generic Wait Functions *******************************/
@@ -372,7 +387,11 @@ osEvent osSignalWait (int32_t signals, uint32_t millisec);
 */
 osMutexId osMutexCreate (osMutexDef_t *mutex_def)
 {
+#if ( configUSE_MUTEXES == 1)
   return xSemaphoreCreateMutex(); 
+#else
+	return NULL;
+#endif
 }
 
 /**
@@ -467,8 +486,12 @@ osSemaphoreId osSemaphoreCreate (osSemaphoreDef_t *semaphore_def, int32_t count)
     vSemaphoreCreateBinary(sema);
     return sema;
   }
-  
+
+#if (configUSE_COUNTING_SEMAPHORES == 1 )	
   return xSemaphoreCreateCounting(count, count);
+#else
+	return NULL;
+#endif
 }
 
 /**
@@ -1192,7 +1215,11 @@ osEvent osMessagePeek (osMessageQId queue_id, uint32_t millisec)
 osMutexId osRecursiveMutexCreate (osMutexDef_t *mutex_def)
 {
   (void) mutex_def;
-  return xSemaphoreCreateRecursiveMutex(); 
+#if (configUSE_RECURSIVE_MUTEXES == 1)
+  return xSemaphoreCreateRecursiveMutex();
+#else
+  return NULL;
+#endif	
 }
 
 /**
@@ -1202,13 +1229,17 @@ osMutexId osRecursiveMutexCreate (osMutexDef_t *mutex_def)
 */
 osStatus osRecursiveMutexRelease (osMutexId mutex_id)
 {
+#if (configUSE_RECURSIVE_MUTEXES == 1)
   osStatus result = osOK;
-  
+ 
   if (xSemaphoreGiveRecursive(mutex_id) != pdTRUE) 
   {
     result = osErrorOS;
   }
   return result;
+#else
+	return osErrorResource;
+#endif
 }
 
 /**
@@ -1219,6 +1250,7 @@ osStatus osRecursiveMutexRelease (osMutexId mutex_id)
 */
 osStatus osRecursiveMutexWait (osMutexId mutex_id, uint32_t millisec)
 {
+#if (configUSE_RECURSIVE_MUTEXES == 1)
   portTickType ticks;
   
   if (mutex_id == NULL)
@@ -1245,5 +1277,8 @@ osStatus osRecursiveMutexWait (osMutexId mutex_id, uint32_t millisec)
     return osErrorOS;
   }
   return osOK;
+#else
+	return osErrorResource;
+#endif
 }
 

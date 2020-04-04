@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f4_discovery.h
   * @author  MCD Application Team
-  * @version V2.0.0
-  * @date    18-February-2014
+  * @version V2.0.1
+  * @date    19-June-2014
   * @brief   This file contains definitions for STM32F4-Discovery Kit's Leds and 
   *          push-button hardware resources.
   ******************************************************************************
@@ -47,13 +47,13 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
    
-/** @addtogroup Utilities
+/** @addtogroup BSP
   * @{
-  */
-  
+  */ 
+
 /** @addtogroup STM32F4_DISCOVERY
   * @{
-  */
+  */ 
       
 /** @addtogroup STM32F4_DISCOVERY_LOW_LEVEL
   * @{
@@ -105,24 +105,20 @@ typedef enum
 #define LED4_GPIO_CLK_ENABLE()           __GPIOD_CLK_ENABLE()  
 #define LED4_GPIO_CLK_DISABLE()          __GPIOD_CLK_DISABLE()  
 
-  
 #define LED3_PIN                         GPIO_PIN_13
 #define LED3_GPIO_PORT                   GPIOD
 #define LED3_GPIO_CLK_ENABLE()           __GPIOD_CLK_ENABLE()  
 #define LED3_GPIO_CLK_DISABLE()          __GPIOD_CLK_DISABLE()  
-
   
 #define LED5_PIN                         GPIO_PIN_14
 #define LED5_GPIO_PORT                   GPIOD
 #define LED5_GPIO_CLK_ENABLE()           __GPIOD_CLK_ENABLE()  
 #define LED5_GPIO_CLK_DISABLE()          __GPIOD_CLK_DISABLE()  
 
-  
 #define LED6_PIN                         GPIO_PIN_15
 #define LED6_GPIO_PORT                   GPIOD
 #define LED6_GPIO_CLK_ENABLE()           __GPIOD_CLK_ENABLE()  
 #define LED6_GPIO_CLK_DISABLE()          __GPIOD_CLK_DISABLE()  
-
 
 
 #define LEDx_GPIO_CLK_ENABLE(__INDEX__)   (((__INDEX__) == 0) ? LED4_GPIO_CLK_ENABLE() :\
@@ -162,7 +158,7 @@ typedef enum
   * @{
   */  
 
-/*##################### SPI1 ###################################*/
+/*############################### SPI1 #######################################*/
 #define DISCOVERY_SPIx                              SPI1
 #define DISCOVERY_SPIx_CLK_ENABLE()                 __SPI1_CLK_ENABLE()
 #define DISCOVERY_SPIx_GPIO_PORT                    GPIOA                      /* GPIOA */
@@ -181,7 +177,7 @@ typedef enum
 #define SPIx_TIMEOUT_MAX                            0x1000 /*<! The value of the maximal timeout for BUS waiting loops */
 
 
-/*##################### I2C1 ###################################*/
+/*############################# I2C1 #########################################*/
 /* I2C clock speed configuration (in Hz) */
 #ifndef I2C_SPEED
  #define I2C_SPEED                            100000
@@ -211,7 +207,7 @@ typedef enum
 #define I2Cx_TIMEOUT_MAX    0x1000 /*<! The value of the maximal timeout for BUS waiting loops */
 
 
-/*##################### ACCELEROMETER ##########################*/
+/*############################# ACCELEROMETER ################################*/
 /* Read/Write command */
 #define READWRITE_CMD                     ((uint8_t)0x80) 
 /* Multiple byte read/write command */ 
@@ -226,10 +222,10 @@ typedef enum
 /**
   * @brief  ACCELEROMETER Interface pins
   */
-#define ACCELERO_CS_PIN                    GPIO_PIN_3                 /* PE.03 */
-#define ACCELERO_CS_GPIO_PORT              GPIOE                      /* GPIOE */
-#define ACCELERO_CS_GPIO_CLK_ENABLE()      __GPIOE_CLK_ENABLE()
-#define ACCELERO_CS_GPIO_CLK_DISABLE()     __GPIOE_CLK_DISABLE()
+#define ACCELERO_CS_PIN                        GPIO_PIN_3                 /* PE.03 */
+#define ACCELERO_CS_GPIO_PORT                  GPIOE                      /* GPIOE */
+#define ACCELERO_CS_GPIO_CLK_ENABLE()          __GPIOE_CLK_ENABLE()
+#define ACCELERO_CS_GPIO_CLK_DISABLE()         __GPIOE_CLK_DISABLE()
 #define ACCELERO_INT_GPIO_PORT                 GPIOE                      /* GPIOE */
 #define ACCELERO_INT_GPIO_CLK_ENABLE()         __GPIOE_CLK_ENABLE()
 #define ACCELERO_INT_GPIO_CLK_DISABLE()        __GPIOE_CLK_DISABLE()
@@ -242,7 +238,7 @@ typedef enum
   */ 
 
 
-/*##################### AUDIO ##########################*/
+/*############################### AUDIO ######################################*/
 /**
   * @brief  AUDIO I2C Interface pins
   */
@@ -256,7 +252,6 @@ typedef enum
   * @}
   */ 
 
-
 /**
   * @}
   */ 
@@ -268,17 +263,29 @@ typedef enum
   * @}
   */ 
 
-
 /** @defgroup STM32F4_DISCOVERY_LOW_LEVEL_Exported_Functions
   * @{
   */
 uint32_t BSP_GetVersion(void);
-void            BSP_LED_Init(Led_TypeDef Led);
-void            BSP_LED_On(Led_TypeDef Led);
-void            BSP_LED_Off(Led_TypeDef Led);
-void            BSP_LED_Toggle(Led_TypeDef Led);
-void            BSP_PB_Init(Button_TypeDef Button, ButtonMode_TypeDef Mode);
-uint32_t        BSP_PB_GetState(Button_TypeDef Button);
+void     BSP_LED_Init(Led_TypeDef Led);
+void     BSP_LED_On(Led_TypeDef Led);
+void     BSP_LED_Off(Led_TypeDef Led);
+void     BSP_LED_Toggle(Led_TypeDef Led);
+void     BSP_PB_Init(Button_TypeDef Button, ButtonMode_TypeDef Mode);
+uint32_t BSP_PB_GetState(Button_TypeDef Button);
+
+/**
+  * @}
+  */
+
+/**
+  * @}
+  */ 
+
+/**
+  * @}
+  */ 
+
 /**
   * @}
   */
@@ -288,18 +295,5 @@ uint32_t        BSP_PB_GetState(Button_TypeDef Button);
 #endif
 
 #endif /* __STM32F4_DISCOVERY_H */
-/**
-  * @}
-  */ 
 
-/**
-  * @}
-  */ 
-
-/**
-  * @}
-  */
-
- 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
-

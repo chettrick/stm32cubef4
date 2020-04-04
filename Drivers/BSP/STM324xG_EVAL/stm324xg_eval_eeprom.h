@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324xg_eval_eeprom.h
   * @author  MCD Application Team
-  * @version V2.0.1
-  * @date    26-February-2014
+  * @version V2.0.2
+  * @date    19-June-2014
   * @brief   This file contains all the functions prototypes for 
   *          the stm32f4xg_eval_eeprom.c firmware driver.
   ******************************************************************************
@@ -63,7 +63,6 @@
 /** @defgroup STM324xG_EVAL_EEPROM_Exported_Types
   * @{
   */ 
-
 /**
   * @}
   */
@@ -87,7 +86,6 @@
 #define EEPROM_OK                   0
 #define EEPROM_FAIL                 1
 #define EEPROM_TIMEOUT              2
-
 /**
   * @}
   */ 
@@ -103,9 +101,9 @@
   * @{
   */ 
 uint32_t BSP_EEPROM_Init(void);
-uint32_t BSP_EEPROM_ReadBuffer(uint8_t* pBuffer, uint16_t ReadAddr, uint16_t* NumByteToRead);
-uint32_t BSP_EEPROM_WritePage(uint8_t* pBuffer, uint16_t WriteAddr, uint8_t* NumByteToWrite);
-uint32_t BSP_EEPROM_WriteBuffer(uint8_t* pBuffer, uint16_t WriteAddr, uint16_t NumByteToWrite);
+uint32_t BSP_EEPROM_ReadBuffer(uint8_t *pBuffer, uint16_t ReadAddr, uint16_t *NumByteToRead);
+uint32_t BSP_EEPROM_WritePage(uint8_t *pBuffer, uint16_t WriteAddr, uint8_t *NumByteToWrite);
+uint32_t BSP_EEPROM_WriteBuffer(uint8_t *pBuffer, uint16_t WriteAddr, uint16_t NumByteToWrite);
 uint32_t BSP_EEPROM_WaitEepromStandbyState(void);
 
 /* USER Callbacks: This function is declared as __weak in EEPROM driver and 
@@ -113,7 +111,7 @@ uint32_t BSP_EEPROM_WaitEepromStandbyState(void);
    BSP_EEPROM_TIMEOUT_UserCallback() function is called whenever a timeout condition 
    occure during communication (waiting on an event that doesn't occur, bus 
    errors, busy devices ...). */
-void BSP_EEPROM_TIMEOUT_UserCallback(void);
+void     BSP_EEPROM_TIMEOUT_UserCallback(void);
 
 /* Link function for I2C EEPROM peripheral */
 void                EEPROM_IO_Init(void);
@@ -121,11 +119,6 @@ HAL_StatusTypeDef   EEPROM_IO_WriteData(uint16_t DevAddress, uint16_t MemAddress
 HAL_StatusTypeDef   EEPROM_IO_ReadData(uint16_t DevAddress, uint16_t MemAddress, uint8_t* pBuffer, uint32_t BufferSize);
 HAL_StatusTypeDef   EEPROM_IO_IsDeviceReady(uint16_t DevAddress, uint32_t Trials);
 
-#ifdef __cplusplus
-}
-#endif
-
-#endif /* __STM32F4xG_EVAL_EEPROM_H */
 /**
   * @}
   */
@@ -142,4 +135,10 @@ HAL_StatusTypeDef   EEPROM_IO_IsDeviceReady(uint16_t DevAddress, uint32_t Trials
   * @}
   */ 
 
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* __STM32F4xG_EVAL_EEPROM_H */
+                                
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

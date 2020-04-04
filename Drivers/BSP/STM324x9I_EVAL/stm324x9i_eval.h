@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324x9i_eval.h
   * @author  MCD Application Team
-  * @version V2.0.1
-  * @date    26-February-2014
+  * @version V2.0.2
+  * @date    19-June-2014
   * @brief   This file contains definitions for STM324x9I_EVAL's LEDs, 
   *          push-buttons and COM ports hardware resources.
   ******************************************************************************
@@ -47,11 +47,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
    
-/** @addtogroup Utilities
-  * @{
-  */
-
-/** @addtogroup STM32_EVAL
+/** @addtogroup BSP
   * @{
   */
 
@@ -72,7 +68,6 @@ typedef enum
   LED2 = 1,
   LED3 = 2,
   LED4 = 3
-
 }Led_TypeDef;
 
 typedef enum 
@@ -80,21 +75,18 @@ typedef enum
   BUTTON_WAKEUP = 0,
   BUTTON_TAMPER = 1,
   BUTTON_KEY = 2
-
 }Button_TypeDef;
 
 typedef enum 
 {  
   BUTTON_MODE_GPIO = 0,
   BUTTON_MODE_EXTI = 1
-
 }ButtonMode_TypeDef;
 
 typedef enum 
 {  
   JOY_MODE_GPIO = 0,
   JOY_MODE_EXTI = 1
-
 }JOYMode_TypeDef;
 
 typedef enum 
@@ -105,14 +97,12 @@ typedef enum
   JOY_LEFT  = 3,
   JOY_RIGHT = 4,
   JOY_UP    = 5
-
 }JOYState_TypeDef;
 
 typedef enum 
 {
   COM1 = 0,
   COM2 = 1
-
 }COM_TypeDef;
 /**
   * @}
@@ -244,7 +234,6 @@ typedef enum
 #define EVAL_COMx_RX_GPIO_CLK_ENABLE(__INDEX__)    (((__INDEX__) == 0) ? EVAL_COM1_RX_GPIO_CLK_ENABLE() : 0)
 #define EVAL_COMx_RX_GPIO_CLK_DISABLE(__INDEX__)   (((__INDEX__) == 0) ? EVAL_COM1_RX_GPIO_CLK_DISABLE() : 0)
 
-
 /**
   * @brief Joystick Pins definition 
   */ 
@@ -323,7 +312,6 @@ typedef enum
   * @}
   */ 
 
-
 /** @defgroup STM324x9I_EVAL_LOW_LEVEL_Exported_Functions
   * @{
   */
@@ -354,15 +342,10 @@ JOYState_TypeDef BSP_JOY_GetState(void);
   * @}
   */
 
-/**
-  * @}
-  */
-    
 #ifdef __cplusplus
 }
 #endif
 
 #endif /* __STM324X9I_EVAL_H */
-  
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    ov2640.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    19-June-2014
   * @brief   This file contains all the functions prototypes for the ov2640.c
   *          driver.
   ******************************************************************************

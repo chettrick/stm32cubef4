@@ -2,10 +2,10 @@
   ******************************************************************************
   * @file    stm32f429i_discovery.h
   * @author  MCD Application Team
-  * @version V2.0.1
-  * @date    26-February-2014
-  * @brief   This file contains definitions for STM32F429I-DISCO Kit Leds, push-
-  *          buttons hardware resources.
+  * @version V2.1.0
+  * @date    19-June-2014
+  * @brief   This file contains definitions for STM32F429I-Discovery Kit LEDs,
+  *          push-buttons hardware resources.
   ******************************************************************************
   * @attention
   *
@@ -51,50 +51,50 @@
   * @{
   */
   
-/** @addtogroup STM32F4_DISCOVERY
+/** @addtogroup STM32F429I_DISCOVERY
   * @{
   */
    
-/** @addtogroup STM32F429I_DISCOVERY LOW_LEVEL
+/** @addtogroup STM32F429I_DISCOVERY_LOW_LEVEL
   * @{
   */
    
-/** @defgroup STM32F429I_DISCOVERY LOW_LEVEL_Exported_Types
+/** @defgroup STM32F429I_DISCOVERY_LOW_LEVEL_Exported_Types
   * @{
   */
 typedef enum 
 {
   LED3 = 0,
   LED4 = 1
-} Led_TypeDef;
+}Led_TypeDef;
 
 typedef enum 
 {  
   BUTTON_KEY = 0,
-} Button_TypeDef;
+}Button_TypeDef;
 
 typedef enum 
 {  
   BUTTON_MODE_GPIO = 0,
   BUTTON_MODE_EXTI = 1
-} ButtonMode_TypeDef;     
+}ButtonMode_TypeDef;     
 
 /**
   * @}
   */ 
 
-/** @defgroup STM32F429I_DISCOVERY LOW_LEVEL_Exported_Constants
+/** @defgroup STM32F429I_DISCOVERY_LOW_LEVEL_Exported_Constants
   * @{
   */ 
 
 /** 
-  * @brief  Define for STM32F429I_DISCO board  
+  * @brief Define for STM32F429I_DISCO board  
   */ 
 #if !defined (USE_STM32F429I_DISCO)
  #define USE_STM32F429I_DISCO
 #endif
 
-/** @addtogroup STM32F429I_DISCOVERY LOW_LEVEL_LED
+/** @addtogroup STM32F429I_DISCOVERY_LOW_LEVEL_LED
   * @{
   */
 #define LEDn                                    2
@@ -103,7 +103,6 @@ typedef enum
 #define LED3_GPIO_PORT                          GPIOG
 #define LED3_GPIO_CLK_ENABLE()                  __GPIOG_CLK_ENABLE()  
 #define LED3_GPIO_CLK_DISABLE()                 __GPIOG_CLK_DISABLE()  
-
 
 #define LED4_PIN                                GPIO_PIN_14
 #define LED4_GPIO_PORT                          GPIOG
@@ -116,10 +115,10 @@ typedef enum
   * @}
   */ 
   
-/** @addtogroup STM32F429I_DISCOVERY LOW_LEVEL_BUTTON
+/** @addtogroup STM32F429I_DISCOVERY_LOW_LEVEL_BUTTON
   * @{
   */  
-#define BUTTONn                                 1
+#define BUTTONn                                1
 
 /**
  * @brief Wakeup push-button
@@ -136,7 +135,7 @@ typedef enum
   * @}
   */
 
-/** @addtogroup STM32F429I_DISCOVERY LOW_LEVEL_BUS
+/** @addtogroup STM32F429I_DISCOVERY_LOW_LEVEL_BUS
   * @{
   */  
 /* Exported constanIO --------------------------------------------------------*/
@@ -148,8 +147,7 @@ typedef enum
 #define EEPROM_I2C_ADDRESS_A02              0xA6
 #endif /* EE_M24LR64 */ 
 
-
-/*##################### I2Cx ###################################*/
+/*############################### I2Cx #######################################*/
 /* User can use this section to tailor I2Cx instance used and associated 
    resources */
 #define DISCOVERY_I2Cx                          I2C3
@@ -173,15 +171,15 @@ typedef enum
 
 /* I2C clock speed configuration (in Hz) 
   WARNING: 
-   Make sure that this define is not already declared in other files (ie. 
-  stm324x9i_disco.h file). It can be used in parallel by other modules. */
+   Make sure that this define is not already declared in other files.
+   It can be used in parallel by other modules. */
 #ifndef I2C_SPEED
  #define I2C_SPEED                          100000
 #endif /* I2C_SPEED */
 
 #define I2Cx_TIMEOUT_MAX                    0x3000 /*<! The value of the maximal timeout for I2C waiting loops */
 
-/*##################### SPIx ###################################*/
+/*############################### SPIx #######################################*/
 #define DISCOVERY_SPIx                          SPI5
 #define DISCOVERY_SPIx_CLK_ENABLE()             __SPI5_CLK_ENABLE()
 #define DISCOVERY_SPIx_GPIO_PORT                GPIOF                      /* GPIOF */
@@ -199,7 +197,7 @@ typedef enum
 #define SPIx_TIMEOUT_MAX              ((uint32_t)0x1000)
 
 
-/*##################### IOE ###################################*/
+/*################################ IOE #######################################*/
 /** 
   * @brief  IOE Control pin  
   */ 
@@ -210,11 +208,8 @@ typedef enum
 #define STMPE811_INT_CLK_DISABLE()              __GPIOA_CLK_DISABLE()
 #define STMPE811_INT_EXTI                       EXTI15_10_IRQn
 #define STMPE811_INT_EXTIHandler                EXTI15_10_IRQHandler
-/**
-  * @}
-  */ 
 
-/*##################### LCD ###################################*/
+/*################################ LCD #######################################*/
 /* Chip Select macro definition */
 #define LCD_CS_LOW()       HAL_GPIO_WritePin(LCD_NCS_GPIO_PORT, LCD_NCS_PIN, GPIO_PIN_RESET)
 #define LCD_CS_HIGH()      HAL_GPIO_WritePin(LCD_NCS_GPIO_PORT, LCD_NCS_PIN, GPIO_PIN_SET)
@@ -230,31 +225,27 @@ typedef enum
 /** 
   * @brief  LCD Control pin  
   */ 
-#define LCD_NCS_PIN                GPIO_PIN_2
-#define LCD_NCS_GPIO_PORT          GPIOC
-#define LCD_NCS_GPIO_CLK_ENABLE()  __GPIOC_CLK_ENABLE()
-#define LCD_NCS_GPIO_CLK_DISABLE() __GPIOC_CLK_DISABLE()
-/**
+#define LCD_NCS_PIN                             GPIO_PIN_2
+#define LCD_NCS_GPIO_PORT                       GPIOC
+#define LCD_NCS_GPIO_CLK_ENABLE()               __GPIOC_CLK_ENABLE()
+#define LCD_NCS_GPIO_CLK_DISABLE()              __GPIOC_CLK_DISABLE()
+/**             
   * @}
   */ 
 /** 
   * @brief  LCD Command/data pin  
   */
-#define LCD_WRX_PIN                GPIO_PIN_13
-#define LCD_WRX_GPIO_PORT          GPIOD
-#define LCD_WRX_GPIO_CLK_ENABLE()  __GPIOD_CLK_ENABLE()
-#define LCD_WRX_GPIO_CLK_DISABLE() __GPIOD_CLK_DISABLE()
+#define LCD_WRX_PIN                             GPIO_PIN_13
+#define LCD_WRX_GPIO_PORT                       GPIOD
+#define LCD_WRX_GPIO_CLK_ENABLE()               __GPIOD_CLK_ENABLE()
+#define LCD_WRX_GPIO_CLK_DISABLE()              __GPIOD_CLK_DISABLE()
   
-#define LCD_RDX_PIN                GPIO_PIN_12
-#define LCD_RDX_GPIO_PORT          GPIOD
-#define LCD_RDX_GPIO_CLK_ENABLE()  __GPIOD_CLK_ENABLE()
-#define LCD_RDX_GPIO_CLK_DISABLE() __GPIOD_CLK_DISABLE()
-/**
-  * @}
-  */ 
+#define LCD_RDX_PIN                             GPIO_PIN_12
+#define LCD_RDX_GPIO_PORT                       GPIOD
+#define LCD_RDX_GPIO_CLK_ENABLE()               __GPIOD_CLK_ENABLE()
+#define LCD_RDX_GPIO_CLK_DISABLE()              __GPIOD_CLK_DISABLE()
 
-
-/*##################### GYRO ##########################*/
+/*################################ GYROSCOPE #################################*/
 /* Read/Write command */
 #define READWRITE_CMD              ((uint8_t)0x80) 
 /* Multiple byte read/write command */ 
@@ -267,27 +258,26 @@ typedef enum
 #define GYRO_CS_HIGH()      HAL_GPIO_WritePin(GYRO_CS_GPIO_PORT, GYRO_CS_PIN, GPIO_PIN_SET)
 
 /**
-  * @brief  GYRO SPI Interface pins
+  * @brief  GYROSCOPE SPI Interface pins
   */
-#define GYRO_CS_PIN                    GPIO_PIN_1                  /* PC.01 */
-#define GYRO_CS_GPIO_PORT              GPIOC                       /* GPIOC */
-#define GYRO_CS_GPIO_CLK_ENABLE()      __GPIOC_CLK_ENABLE()
-#define GYRO_CS_GPIO_CLK_DISABLE()     __GPIOC_CLK_DISABLE()
+#define GYRO_CS_PIN                             GPIO_PIN_1                  /* PC.01 */
+#define GYRO_CS_GPIO_PORT                       GPIOC                       /* GPIOC */
+#define GYRO_CS_GPIO_CLK_ENABLE()               __GPIOC_CLK_ENABLE()
+#define GYRO_CS_GPIO_CLK_DISABLE()              __GPIOC_CLK_DISABLE()
 
-#define GYRO_INT_GPIO_CLK_ENABLE()         __GPIOA_CLK_ENABLE()
-#define GYRO_INT_GPIO_CLK_DISABLE()        __GPIOA_CLK_DISABLE()
-#define GYRO_INT_GPIO_PORT                 GPIOA                       /* GPIOA */
-#define GYRO_INT1_PIN                      GPIO_PIN_1                  /* PA.01 */
-#define GYRO_INT1_EXTI_IRQn                EXTI1_IRQn 
-#define GYRO_INT2_PIN                      GPIO_PIN_2                  /* PA.02 */
-#define GYRO_INT2_EXTI_IRQn                EXTI2_IRQn 
+#define GYRO_INT_GPIO_CLK_ENABLE()              __GPIOA_CLK_ENABLE()
+#define GYRO_INT_GPIO_CLK_DISABLE()             __GPIOA_CLK_DISABLE()
+#define GYRO_INT_GPIO_PORT                      GPIOA                       /* GPIOA */
+#define GYRO_INT1_PIN                           GPIO_PIN_1                  /* PA.01 */
+#define GYRO_INT1_EXTI_IRQn                     EXTI1_IRQn 
+#define GYRO_INT2_PIN                           GPIO_PIN_2                  /* PA.02 */
+#define GYRO_INT2_EXTI_IRQn                     EXTI2_IRQn 
 /**
   * @}
   */ 
 
-
 #ifdef EE_M24LR64
-/** @addtogroup STM32F429I_DISCOVERY LOW_LEVEL_I2C_EE
+/** @addtogroup STM32F429I_DISCOVERY_LOW_LEVEL_I2C_EEPROM
   * @{
   */
 /**
@@ -308,52 +298,46 @@ typedef enum
   * @}
   */ 
 
-/**
-  * @}
-  */  
-#endif /*EE_M24LR64*/
-/**
-  * @}
-  */
+#endif /* EE_M24LR64 */
 
-/** @defgroup STM32F429I_DISCOVERY LOW_LEVEL_Exported_Macros
+/** @defgroup STM32F429I_DISCOVERY_LOW_LEVEL_Exported_Macros
   * @{
   */  
 /**
   * @}
   */ 
 
-
-/** @defgroup STM32F429I_DISCOVERY LOW_LEVEL_Exported_Functions
+/** @defgroup STM32F429I_DISCOVERY_LOW_LEVEL_Exported_Functions
   * @{
   */
-uint32_t  BSP_GetVersion(void);  
-void      BSP_LED_Init(Led_TypeDef Led);
-void      BSP_LED_On(Led_TypeDef Led);
-void      BSP_LED_Off(Led_TypeDef Led);
-void      BSP_LED_Toggle(Led_TypeDef Led);
-void      BSP_PB_Init(Button_TypeDef Button, ButtonMode_TypeDef ButtonMode);
-uint32_t  BSP_PB_GetState(Button_TypeDef Button);
+uint32_t BSP_GetVersion(void);  
+void     BSP_LED_Init(Led_TypeDef Led);
+void     BSP_LED_On(Led_TypeDef Led);
+void     BSP_LED_Off(Led_TypeDef Led);
+void     BSP_LED_Toggle(Led_TypeDef Led);
+void     BSP_PB_Init(Button_TypeDef Button, ButtonMode_TypeDef ButtonMode);
+uint32_t BSP_PB_GetState(Button_TypeDef Button);
+
+/**
+  * @}
+  */ 
+
+/**
+  * @}
+  */ 
+
 /**
   * @}
   */
-  
+
+/**
+  * @}
+  */
+
 #ifdef __cplusplus
 }
 #endif
 
 #endif /* __STM32F429I_DISCOVERY_H */
-/**
-  * @}
-  */ 
-
-/**
-  * @}
-  */ 
-
-/**
-  * @}
-  */
-
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

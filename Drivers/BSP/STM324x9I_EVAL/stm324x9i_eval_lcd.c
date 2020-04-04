@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324x9i_eval_lcd.c
   * @author  MCD Application Team
-  * @version V2.0.1
-  * @date    26-February-2014
+  * @version V2.0.2
+  * @date    19-June-2014
   * @brief   This file includes the driver for Liquid Crystal Display (LCD) module
   *          mounted on STM324x9I-EVAL evaluation board.
   ******************************************************************************
@@ -98,7 +98,6 @@
 /** @defgroup STM324x9I_EVAL_LCD_Private_TypesDefinitions
   * @{
   */ 
-
 /**
   * @}
   */ 
@@ -107,8 +106,7 @@
   * @{
   */
 #define POLY_X(Z)              ((int32_t)((Points + Z)->X))
-#define POLY_Y(Z)              ((int32_t)((Points + Z)->Y))
-        
+#define POLY_Y(Z)              ((int32_t)((Points + Z)->Y))      
 /**
   * @}
   */ 
@@ -116,8 +114,7 @@
 /** @defgroup STM324x9I_EVAL_LCD_Private_Macros
   * @{
   */
-#define ABS(X)  ((X) > 0 ? (X) : -(X))
-        
+#define ABS(X)  ((X) > 0 ? (X) : -(X))      
 /**
   * @}
   */ 
@@ -131,7 +128,6 @@ static DMA2D_HandleTypeDef hdma2d_eval;
 /* Default LCD configuration with LCD Layer 1 */
 static uint32_t            ActiveLayer = 0;
 static LCD_DrawPropTypeDef DrawProp[MAX_LAYER_NUMBER];
-
 /**
   * @}
   */ 
@@ -142,13 +138,11 @@ static LCD_DrawPropTypeDef DrawProp[MAX_LAYER_NUMBER];
 static void MspInit(void);
 static void DrawChar(uint16_t Xpos, uint16_t Ypos, const uint8_t *c);
 static void FillTriangle(uint16_t x1, uint16_t x2, uint16_t x3, uint16_t y1, uint16_t y2, uint16_t y3);
-static void LL_FillBuffer(uint32_t LayerIndex, void * pDst, uint32_t xSize, uint32_t ySize, uint32_t OffLine, uint32_t ColorIndex);
-static void LL_ConvertLineToARGB8888(void * pSrc, void * pDst, uint32_t xSize, uint32_t ColorMode);
-
+static void LL_FillBuffer(uint32_t LayerIndex, void *pDst, uint32_t xSize, uint32_t ySize, uint32_t OffLine, uint32_t ColorIndex);
+static void LL_ConvertLineToARGB8888(void * pSrc, void *pDst, uint32_t xSize, uint32_t ColorMode);
 /**
   * @}
   */ 
-
 
 /** @defgroup STM324x9I_EVAL_LCD_Private_Functions
   * @{
@@ -209,13 +203,13 @@ uint8_t BSP_LCD_Init(void)
     
     /* LCD clock configuration */
     /* PLLSAI_VCO Input = HSE_VALUE/PLL_M = 1 Mhz */
-    /* PLLSAI_VCO Output = PLLSAI_VCO Input * PLLSAIN = 192 Mhz */
-    /* PLLLCDCLK = PLLSAI_VCO Output/PLLSAIR = 192/3 = 64 Mhz */
-    /* LTDC clock frequency = PLLLCDCLK / LTDC_PLLSAI_DIVR_4 = 64/4 = 16 Mhz */
+    /* PLLSAI_VCO Output = PLLSAI_VCO Input * PLLSAIN = 108 Mhz */
+    /* PLLLCDCLK = PLLSAI_VCO Output/PLLSAIR = 108/3 = 36 Mhz */
+    /* LTDC clock frequency = PLLLCDCLK / LTDC_PLLSAI_DIVR_2 = 36/2 = 18 Mhz */
     PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_LTDC;
-    PeriphClkInitStruct.PLLSAI.PLLSAIN = 192;
+    PeriphClkInitStruct.PLLSAI.PLLSAIN = 108;
     PeriphClkInitStruct.PLLSAI.PLLSAIR = AMPIRE640480_FREQUENCY_DIVIDER;
-    PeriphClkInitStruct.PLLSAIDivR = RCC_PLLSAIDIVR_4;
+    PeriphClkInitStruct.PLLSAIDivR = RCC_PLLSAIDIVR_2;
     HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct); 
     
     /* Initialize the LCD pixel width and pixel height */
@@ -275,7 +269,7 @@ uint32_t BSP_LCD_GetYSize(void)
   */
 void BSP_LCD_LayerDefaultInit(uint16_t LayerIndex, uint32_t FB_Address)
 {     
-  LCD_LayerCfgTypeDef   Layercfg;
+  LCD_LayerCfgTypeDef  Layercfg;
 
   /* Layer Init */
   Layercfg.WindowX0 = 0;
@@ -308,7 +302,7 @@ void BSP_LCD_LayerDefaultInit(uint16_t LayerIndex, uint32_t FB_Address)
   */
 void BSP_LCD_SelectLayer(uint32_t LayerIndex)
 {
-    ActiveLayer = LayerIndex;
+  ActiveLayer = LayerIndex;
 } 
 
 /**
@@ -342,7 +336,7 @@ void BSP_LCD_SetLayerVisible(uint32_t LayerIndex, FunctionalState State)
   */
 void BSP_LCD_SetTransparency(uint32_t LayerIndex, uint8_t Transparency)
 {    
-    HAL_LTDC_SetAlpha(&hltdc_eval, Transparency, LayerIndex);
+  HAL_LTDC_SetAlpha(&hltdc_eval, Transparency, LayerIndex);
 }
 
 /**
@@ -353,7 +347,7 @@ void BSP_LCD_SetTransparency(uint32_t LayerIndex, uint8_t Transparency)
   */
 void BSP_LCD_SetLayerAddress(uint32_t LayerIndex, uint32_t Address)
 {
-    HAL_LTDC_SetAddress(&hltdc_eval, Address, LayerIndex);
+  HAL_LTDC_SetAddress(&hltdc_eval, Address, LayerIndex);
 }
 
 /**
@@ -369,7 +363,7 @@ void BSP_LCD_SetLayerWindow(uint16_t LayerIndex, uint16_t Xpos, uint16_t Ypos, u
 {
   /* Reconfigure the layer size */
   HAL_LTDC_SetWindowSize(&hltdc_eval, Width, Height, LayerIndex);
-    
+  
   /* Reconfigure the layer position */
   HAL_LTDC_SetWindowPosition(&hltdc_eval, Xpos, Ypos, LayerIndex); 
 }
@@ -382,9 +376,9 @@ void BSP_LCD_SetLayerWindow(uint16_t LayerIndex, uint16_t Xpos, uint16_t Ypos, u
   */
 void BSP_LCD_SetColorKeying(uint32_t LayerIndex, uint32_t RGBValue)
 {  
-    /* Configure and Enable the color Keying for LCD Layer */
-    HAL_LTDC_ConfigColorKeying(&hltdc_eval, RGBValue, LayerIndex);
-    HAL_LTDC_EnableColorKeying(&hltdc_eval, LayerIndex);
+  /* Configure and Enable the color Keying for LCD Layer */
+  HAL_LTDC_ConfigColorKeying(&hltdc_eval, RGBValue, LayerIndex);
+  HAL_LTDC_EnableColorKeying(&hltdc_eval, LayerIndex);
 }
 
 /**
@@ -394,8 +388,8 @@ void BSP_LCD_SetColorKeying(uint32_t LayerIndex, uint32_t RGBValue)
   */
 void BSP_LCD_ResetColorKeying(uint32_t LayerIndex)
 {   
-    /* Disable the color Keying for LCD Layer */
-    HAL_LTDC_DisableColorKeying(&hltdc_eval, LayerIndex);
+  /* Disable the color Keying for LCD Layer */
+  HAL_LTDC_DisableColorKeying(&hltdc_eval, LayerIndex);
 }
 
 /**
@@ -490,7 +484,7 @@ uint32_t BSP_LCD_ReadPixel(uint16_t Xpos, uint16_t Ypos)
     /* Read data value from SDRAM memory */
     ret = *(__IO uint8_t*) (hltdc_eval.LayerCfg[ActiveLayer].FBStartAdress + (2*(Ypos*BSP_LCD_GetXSize() + Xpos)));    
   }
-           
+  
   return ret;
 }
 
@@ -533,7 +527,7 @@ void BSP_LCD_ClearStringLine(uint32_t Line)
 void BSP_LCD_DisplayChar(uint16_t Xpos, uint16_t Ypos, uint8_t Ascii)
 {
   DrawChar(Xpos, Ypos, &DrawProp[ActiveLayer].pFont->table[(Ascii-' ') *\
-       DrawProp[ActiveLayer].pFont->Height * ((DrawProp[ActiveLayer].pFont->Width + 7) / 8)]);
+    DrawProp[ActiveLayer].pFont->Height * ((DrawProp[ActiveLayer].pFont->Width + 7) / 8)]);
 }
 
 /**
@@ -584,7 +578,7 @@ void BSP_LCD_DisplayStringAt(uint16_t Xpos, uint16_t Ypos, uint8_t *Text, Text_A
     }
   }
   
-  /* Send the string character by character on lCD */
+  /* Send the string character by character on LCD */
   while ((*Text != 0) & (((BSP_LCD_GetXSize() - (i*DrawProp[ActiveLayer].pFont->Width)) & 0xFFFF) >= DrawProp[ActiveLayer].pFont->Width))
   {
     /* Display one character on LCD */
@@ -621,7 +615,7 @@ void BSP_LCD_DrawHLine(uint16_t Xpos, uint16_t Ypos, uint16_t Length)
   
   /* Get the line address */
   Xaddress = (hltdc_eval.LayerCfg[ActiveLayer].FBStartAdress) + 4*(BSP_LCD_GetXSize()*Ypos + Xpos);
-
+  
   /* Write line */
   LL_FillBuffer(ActiveLayer, (uint32_t *)Xaddress, Length, 1, 0, DrawProp[ActiveLayer].TextColor);
 }
@@ -729,11 +723,11 @@ void BSP_LCD_DrawLine(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2)
   */
 void BSP_LCD_DrawRect(uint16_t Xpos, uint16_t Ypos, uint16_t Width, uint16_t Height)
 {
-  /* draw horizontal lines */
+  /* Draw horizontal lines */
   BSP_LCD_DrawHLine(Xpos, Ypos, Width);
   BSP_LCD_DrawHLine(Xpos, (Ypos+ Height), Width);
   
-  /* draw vertical lines */
+  /* Draw vertical lines */
   BSP_LCD_DrawVLine(Xpos, Ypos, Height);
   BSP_LCD_DrawVLine((Xpos + Width), Ypos, Height);
 }
@@ -747,7 +741,7 @@ void BSP_LCD_DrawRect(uint16_t Xpos, uint16_t Ypos, uint16_t Width, uint16_t Hei
   */
 void BSP_LCD_DrawCircle(uint16_t Xpos, uint16_t Ypos, uint16_t Radius)
 {
-  int32_t  D;     /* Decision Variable */ 
+  int32_t   D;    /* Decision Variable */ 
   uint32_t  CurX; /* Current X Value */
   uint32_t  CurY; /* Current Y Value */ 
   
@@ -985,13 +979,12 @@ void BSP_LCD_FillCircle(uint16_t Xpos, uint16_t Ypos, uint16_t Radius)
   */
 void BSP_LCD_FillPolygon(pPoint Points, uint16_t PointCount)
 {
-  
   int16_t X = 0, Y = 0, X2 = 0, Y2 = 0, X_center = 0, Y_center = 0, X_first = 0, Y_first = 0, pixelX = 0, pixelY = 0, counter = 0;
   uint16_t  IMAGE_LEFT = 0, IMAGE_RIGHT = 0, IMAGE_TOP = 0, IMAGE_BOTTOM = 0;  
-
+  
   IMAGE_LEFT = IMAGE_RIGHT = Points->X;
   IMAGE_TOP= IMAGE_BOTTOM = Points->Y;
-
+  
   for(counter = 1; counter < PointCount; counter++)
   {
     pixelX = POLY_X(counter);
@@ -1022,7 +1015,7 @@ void BSP_LCD_FillPolygon(pPoint Points, uint16_t PointCount)
   
   X_center = (IMAGE_LEFT + IMAGE_RIGHT)/2;
   Y_center = (IMAGE_BOTTOM + IMAGE_TOP)/2;
- 
+  
   X_first = Points->X;
   Y_first = Points->Y;
   
@@ -1033,7 +1026,7 @@ void BSP_LCD_FillPolygon(pPoint Points, uint16_t PointCount)
     Points++;
     X2 = Points->X;
     Y2 = Points->Y;    
-  
+    
     FillTriangle(X, X2, X_center, Y, Y2, Y_center);
     FillTriangle(X, X_center, X2, Y, Y_center, Y2);
     FillTriangle(X_center, X2, X, Y_center, Y2, Y);   
@@ -1059,23 +1052,23 @@ void BSP_LCD_FillEllipse(int Xpos, int Ypos, int XRadius, int YRadius)
   
   rad1 = XRadius;
   rad2 = YRadius;
-
+  
   K = (float)(rad2/rad1);
-      
-    do 
-    {       
-      BSP_LCD_DrawHLine((Xpos-(uint16_t)(x/K)), (Ypos+y), (2*(uint16_t)(x/K) + 1));
-      BSP_LCD_DrawHLine((Xpos-(uint16_t)(x/K)), (Ypos-y), (2*(uint16_t)(x/K) + 1));
-      
-      e2 = err;
-      if (e2 <= x) 
-      {
-        err += ++x*2+1;
-        if (-y == x && e2 <= y) e2 = 0;
-      }
-      if (e2 > y) err += ++y*2+1;
+  
+  do 
+  {       
+    BSP_LCD_DrawHLine((Xpos-(uint16_t)(x/K)), (Ypos+y), (2*(uint16_t)(x/K) + 1));
+    BSP_LCD_DrawHLine((Xpos-(uint16_t)(x/K)), (Ypos-y), (2*(uint16_t)(x/K) + 1));
+    
+    e2 = err;
+    if (e2 <= x) 
+    {
+      err += ++x*2+1;
+      if (-y == x && e2 <= y) e2 = 0;
     }
-    while (y <= 0);
+    if (e2 > y) err += ++y*2+1;
+  }
+  while (y <= 0);
 }
 
 /**
@@ -1103,6 +1096,7 @@ void BSP_LCD_DisplayOff(void)
 /*******************************************************************************
                        LTDC and DMA2D BSP Routines
 *******************************************************************************/
+
 /**
   * @brief  Initializes the LTDC MSP.
   * @param  None
@@ -1110,8 +1104,8 @@ void BSP_LCD_DisplayOff(void)
   */
 static void MspInit(void)
 {
- GPIO_InitTypeDef GPIO_Init_Structure;
-
+  GPIO_InitTypeDef GPIO_Init_Structure;
+  
   /* Enable the LTDC and DMA2D clocks */
   __LTDC_CLK_ENABLE();
   __DMA2D_CLK_ENABLE(); 
@@ -1151,8 +1145,8 @@ static void MspInit(void)
   HAL_GPIO_Init(GPIOK, &GPIO_Init_Structure);
 }
 
-/******************************************************************************
-                            Static Function
+/*******************************************************************************
+                            Static Functions
 *******************************************************************************/
 
 /**
@@ -1179,8 +1173,8 @@ static void DrawChar(uint16_t Xpos, uint16_t Ypos, const uint8_t *c)
 {
   uint32_t i = 0, j = 0;
   uint16_t height, width;
-  uint8_t offset;
-  uint8_t *pchar;
+  uint8_t  offset;
+  uint8_t  *pchar;
   uint32_t line;
   
   height = DrawProp[ActiveLayer].pFont->Height;
@@ -1306,11 +1300,11 @@ static void FillTriangle(uint16_t x1, uint16_t x2, uint16_t x3, uint16_t y1, uin
 /**
   * @brief  Fills a buffer.
   * @param  LayerIndex: Layer index
-  * @param  pSrc: Pointer to source buffer
-  * @param  pDst: Output color
+  * @param  pDst: Pointer to destination buffer
   * @param  xSize: Buffer width
   * @param  ySize: Buffer height
   * @param  OffLine: Offset
+  * @param  ColorIndex: Color index
   * @retval None
   */
 static void LL_FillBuffer(uint32_t LayerIndex, void *pDst, uint32_t xSize, uint32_t ySize, uint32_t OffLine, uint32_t ColorIndex) 
@@ -1320,7 +1314,7 @@ static void LL_FillBuffer(uint32_t LayerIndex, void *pDst, uint32_t xSize, uint3
   hdma2d_eval.Init.ColorMode    = DMA2D_ARGB8888;
   hdma2d_eval.Init.OutputOffset = OffLine;      
   
-  hdma2d_eval.Instance  = DMA2D;
+  hdma2d_eval.Instance = DMA2D;
   
   /* DMA2D Initialization */
   if(HAL_DMA2D_Init(&hdma2d_eval) == HAL_OK) 

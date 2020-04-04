@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324x9i_eval_sdram.c
   * @author  MCD Application Team
-  * @version V2.0.1
-  * @date    26-February-2014
+  * @version V2.0.2
+  * @date    19-June-2014
   * @brief   This file includes the SDRAM driver for the MT48LC4M32B2B5-7 memory 
   *          device mounted on STM324x9I-EVAL evaluation board.
   ******************************************************************************
@@ -91,26 +91,27 @@
 /** @defgroup STM324x9I_EVAL_SDRAM
   * @{
   */ 
-  
-/* Private typedef -----------------------------------------------------------*/
 
 /** @defgroup STM324x9I_EVAL_SDRAM_Private_Types_Definitions
   * @{
   */ 
-  
-/* Private define ------------------------------------------------------------*/
+/**
+  * @}
+  */
 
 /** @defgroup STM324x9I_EVAL_SDRAM_Private_Defines
   * @{
   */
-  
-/* Private macro -------------------------------------------------------------*/
+/**
+  * @}
+  */
 
 /** @defgroup STM324x9I_EVAL_SDRAM_Private_Macros
   * @{
   */  
-  
-/* Private variables ---------------------------------------------------------*/
+/**
+  * @}
+  */
 
 /** @defgroup STM324x9I_EVAL_SDRAM_Private_Variables
   * @{
@@ -118,23 +119,17 @@
 static SDRAM_HandleTypeDef sdramHandle;
 static FMC_SDRAM_TimingTypeDef Timing;
 static FMC_SDRAM_CommandTypeDef Command;
-
 /**
   * @}
   */ 
-
-/* Private function prototypes -----------------------------------------------*/
 
 /** @defgroup STM324x9I_EVAL_SDRAM_Private_Function_Prototypes
   * @{
   */ 
 static void SDRAM_MspInit(void); 
-
 /**
   * @}
   */
-   
-/* Private functions ---------------------------------------------------------*/
     
 /** @defgroup STM324x9I_EVAL_SDRAM_Private_Functions
   * @{
@@ -247,7 +242,6 @@ void BSP_SDRAM_Initialization_sequence(uint32_t RefreshCount)
   /* Set the device refresh rate */
   HAL_SDRAM_ProgramRefreshRate(&sdramHandle, RefreshCount); 
 }
-
 
 /**
   * @brief  Reads an mount of data from the SDRAM memory in polling mode. 

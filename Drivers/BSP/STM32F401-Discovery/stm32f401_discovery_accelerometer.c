@@ -2,10 +2,10 @@
   ******************************************************************************
   * @file    stm32f401_discovery_accelerometer.c
   * @author  MCD Application Team
-  * @version V2.0.0
-  * @date    18-February-2014
-  * @brief   This file provides a set of functions needed to manage the ACCELERO
-  *          MEMS available on STM32F401-Discovery Kit.
+  * @version V2.1.0
+  * @date    19-June-2014
+  * @brief   This file provides a set of functions needed to manage the
+  *          MEMS accelerometer available on STM32F401-Discovery Kit.
   ******************************************************************************
   * @attention
   *
@@ -47,58 +47,52 @@
   * @{
   */ 
 
-/** @addtogroup STM32F401_DISCOVERY_ACCELERO
+/** @addtogroup STM32F401_DISCOVERY_ACCELEROMETER
   * @{
   */
 
-
-/** @defgroup STM32F401_DISCOVERY_ACCELERO_Private_TypesDefinitions STM32F401_DISCOVERY_ACCELERO_Private_TypesDefinitions
+/** @defgroup STM32F401_DISCOVERY_ACCELEROMETER_Private_TypesDefinitions
   * @{
-  */
-  
+  */ 
 /**
   * @}
   */
 
-/** @defgroup STM32F401_DISCOVERY_ACCELERO_Private_Defines STM32F401_DISCOVERY_ACCELERO_Private_Defines
+/** @defgroup STM32F401_DISCOVERY_ACCELEROMETER_Private_Defines
   * @{
   */
-
 /**
   * @}
   */
 
-/** @defgroup STM32F401_DISCOVERY_ACCELERO_Private_Macros STM32F401_DISCOVERY_ACCELERO_Private_Macros
+/** @defgroup STM32F401_DISCOVERY_ACCELEROMETER_Private_Macros
   * @{
   */
-
 /**
   * @}
   */ 
   
-/** @defgroup STM32F401_DISCOVERY_ACCELERO_Private_Variables STM32F401_DISCOVERY_ACCELERO_Private_Variables
+/** @defgroup STM32F401_DISCOVERY_ACCELEROMETER_Private_Variables
   * @{
   */ 
 static ACCELERO_DrvTypeDef *AccelerometerDrv;
-
 /**
   * @}
   */
 
-/** @defgroup STM32F401_DISCOVERY_ACCELERO_Private_FunctionPrototypes STM32F401_DISCOVERY_ACCELERO_Private_FunctionPrototypes
+/** @defgroup STM32F401_DISCOVERY_ACCELEROMETER_Private_FunctionPrototypes
   * @{
   */
-
 /**
   * @}
   */
 
-/** @defgroup STM32F401_DISCOVERY_ACCELERO_Private_Functions STM32F401_DISCOVERY_ACCELERO_Private_Functions
+/** @defgroup STM32F401_DISCOVERY_ACCELEROMETER_Private_Functions
   * @{
   */
 
 /**
-  * @brief  Set ACCELERO Initialization.
+  * @brief  Set Accelerometer Initialization.
   * @param  None
   * @retval ACCELERO_OK if no problem during initialization
   */
@@ -106,23 +100,23 @@ uint8_t BSP_ACCELERO_Init(void)
 {
   uint8_t ret = ACCELERO_ERROR;
   uint16_t ctrl = 0x0000;
-  ACCELERO_InitTypeDef LSM303DLHC_InitStructure;
-  ACCELERO_FilterConfigTypeDef LSM303DLHC_FilterStructure={0,0,0,0};
+  ACCELERO_InitTypeDef         LSM303DLHC_InitStructure;
+  ACCELERO_FilterConfigTypeDef LSM303DLHC_FilterStructure = {0,0,0,0};
   
   if(Lsm303dlhcDrv.ReadID() == I_AM_LMS303DLHC)
   {
-    /* Initialize the gyroscope driver structure */
+    /* Initialize the Accelerometer driver structure */
     AccelerometerDrv = &Lsm303dlhcDrv;
 
-    /* MEMS configuration ------------------------------------------------------*/
-    /* Fill the accelerometer structure */
+    /* MEMS configuration ----------------------------------------------------*/
+    /* Fill the Accelerometer structure */
     LSM303DLHC_InitStructure.Power_Mode = LSM303DLHC_NORMAL_MODE;
     LSM303DLHC_InitStructure.AccOutput_DataRate = LSM303DLHC_ODR_50_HZ;
-    LSM303DLHC_InitStructure.Axes_Enable= LSM303DLHC_AXES_ENABLE;
+    LSM303DLHC_InitStructure.Axes_Enable = LSM303DLHC_AXES_ENABLE;
     LSM303DLHC_InitStructure.AccFull_Scale = LSM303DLHC_FULLSCALE_2G;
     LSM303DLHC_InitStructure.BlockData_Update = LSM303DLHC_BlockUpdate_Continous;
-    LSM303DLHC_InitStructure.Endianness=LSM303DLHC_BLE_LSB;
-    LSM303DLHC_InitStructure.High_Resolution=LSM303DLHC_HR_ENABLE;
+    LSM303DLHC_InitStructure.Endianness = LSM303DLHC_BLE_LSB;
+    LSM303DLHC_InitStructure.High_Resolution = LSM303DLHC_HR_ENABLE;
     
     /* Configure MEMS: data rate, power mode, full scale and axes */
     ctrl |= (LSM303DLHC_InitStructure.Power_Mode | LSM303DLHC_InitStructure.AccOutput_DataRate | \
@@ -131,10 +125,10 @@ uint8_t BSP_ACCELERO_Init(void)
     ctrl |= ((LSM303DLHC_InitStructure.BlockData_Update | LSM303DLHC_InitStructure.Endianness | \
                       LSM303DLHC_InitStructure.AccFull_Scale | LSM303DLHC_InitStructure.High_Resolution) << 8);
     
-    /* Configure the accelerometer main parameters */
+    /* Configure the Accelerometer main parameters */
     AccelerometerDrv->Init(ctrl);
     
-    /* Fill the accelerometer LPF structure */
+    /* Fill the Accelerometer LPF structure */
     LSM303DLHC_FilterStructure.HighPassFilter_Mode_Selection =LSM303DLHC_HPM_NORMAL_MODE;
     LSM303DLHC_FilterStructure.HighPassFilter_CutOff_Frequency = LSM303DLHC_HPFCF_16;
     LSM303DLHC_FilterStructure.HighPassFilter_AOI1 = LSM303DLHC_HPF_AOI1_DISABLE;
@@ -146,7 +140,7 @@ uint8_t BSP_ACCELERO_Init(void)
                       LSM303DLHC_FilterStructure.HighPassFilter_AOI1|\
                       LSM303DLHC_FilterStructure.HighPassFilter_AOI2);
 
-    /* Configure the accelerometer LPF main parameters */
+    /* Configure the Accelerometer LPF main parameters */
     AccelerometerDrv->FilterConfig(ctrl);
 
     ret = ACCELERO_OK;
@@ -160,7 +154,7 @@ uint8_t BSP_ACCELERO_Init(void)
 }
 
 /**
-  * @brief  Reboot memory content of ACCELERO
+  * @brief  Reboot memory content of Accelerometer.
   * @param  None
   * @retval None
   */
@@ -173,7 +167,7 @@ void BSP_ACCELERO_Reset(void)
 }
 
 /**
-  * @brief  Config Accelerometer click IT 
+  * @brief  Configure Accelerometer click IT. 
   * @param  None
   * @retval None
   */
@@ -186,30 +180,31 @@ void BSP_ACCELERO_Click_ITConfig(void)
 }
 
 /**
-  * @brief  Get XYZ acceleration
-  * @param pDataXYZ Pointeur on 3 angular accelerations 
-  *                 pDataXYZ[0] = X axis, pDataXYZ[1] = Y axis, pDataXYZ[2] = Z axis
+  * @brief  Get XYZ axes acceleration.
+  * @param  pDataXYZ: Pointer to 3 angular acceleration axes.  
+  *                   pDataXYZ[0] = X axis, pDataXYZ[1] = Y axis, pDataXYZ[2] = Z axis
   * @retval None
   */
-void BSP_ACCELERO_GetXYZ(int16_t* pDataXYZ)
+void BSP_ACCELERO_GetXYZ(int16_t *pDataXYZ)
 {
   int16_t SwitchXY = 0;
-
+  
   if(AccelerometerDrv->GetXYZ!= NULL)
   {
     AccelerometerDrv->GetXYZ(pDataXYZ);
-
+    
+    /* Switch X and Y Axes in case of LSM303DLHC MEMS */
     if(AccelerometerDrv == &Lsm303dlhcDrv)
     { 
       SwitchXY  = pDataXYZ[0];
       pDataXYZ[0] = pDataXYZ[1];
+      
       /* Invert Y Axis to be conpliant with LIS3DSH */
       pDataXYZ[1] = -SwitchXY;
     } 
   }
 }
 
-
 /**
   * @}
   */ 
@@ -226,5 +221,4 @@ void BSP_ACCELERO_GetXYZ(int16_t* pDataXYZ)
   * @}
   */ 
   
-
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/     

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324xg_eval_audio.c
   * @author  MCD Application Team
-  * @version V2.0.1
-  * @date    26-February-2014
+  * @version V2.0.2
+  * @date    19-June-2014
   * @brief   This file provides the Audio driver for the STM324xG-EVAL evaluation
   *          board.  
   ******************************************************************************
@@ -51,7 +51,7 @@ How To use this driver:
                                     )
       This function configures all the hardware required for the audio application (codec, I2C, I2S, 
       GPIOs, DMA and interrupt if needed). This function returns 0 if configuration is OK.
-      if the returned value is different from 0 or the function is stuck then the communication with
+      If the returned value is different from 0 or the function is stuck then the communication with
       the codec or the IOExpander has failed (try to un-plug the power or reset device in this case).
       - OUTPUT_DEVICE_SPEAKER: only speaker will be set as output for the audio stream.
       - OUTPUT_DEVICE_HEADPHONE: only headphones will be set as output for the audio stream.
@@ -81,10 +81,10 @@ How To use this driver:
 Driver architecture:
  -------------------
    + This driver provide the High Audio Layer: consists of the function API exported in the stm324xg_eval_audio.h file
-    (BSP_AUDIO_OUT_Init(), BSP_AUDIO_OUT_Play() ...)
+     (BSP_AUDIO_OUT_Init(), BSP_AUDIO_OUT_Play() ...)
    + This driver provide also the Media Access Layer (MAL): which consists of functions allowing to access the media containing/
      providing the audio file/stream. These functions are also included as local functions into
-   the stm324xg_eval_audio_codec.c file (I2Sx_MspInit() and I2Sx_Init())
+     the stm324xg_eval_audio_codec.c file (I2Sx_MspInit() and I2Sx_Init())
 
  Known Limitations:
 -------------------
@@ -99,9 +99,9 @@ Driver architecture:
       performed (BSP_AUDIO_OUT_SetVolume() or AUDIO_OUT_Mute() or BSP_AUDIO_OUT_SetOutputMode()).
       When the audio data is played, no communication is required with the audio codec.
    3- Parsing of audio file is not implemented (in order to determine audio file properties: Mono/Stereo, Data size, 
-     File size, Audio Frequency, Audio Data header size ...). The configuration is fixed for the given audio file.
-   4- Mono audio streaming is not supported (in order to play mono audio streams, each data should be sent twice 
-     on the I2S or should be duplicated on the source buffer. Or convert the stream in stereo before playing).
+      File size, Audio Frequency, Audio Data header size ...). The configuration is fixed for the given audio file.
+   4- Supports only Stereo audio streaming. To play mono audio streams, each data should be sent twice 
+      on the I2S or should be duplicated on the source buffer. Or convert the stream in stereo before playing.
    5- Supports only 16-bits audio data size.
 ==============================================================================*/
 
@@ -117,49 +117,47 @@ Driver architecture:
   * @{
   */ 
   
-/** @defgroup stm324xg_eval_audio
+/** @defgroup STM324xG_EVAL_AUDIO
   * @brief This file includes the low layer audio driver available on STM324xG-EVAL
-  * evaluation board.
+  *        evaluation board.
   * @{
   */ 
 
-/** @defgroup stm324xg_eval_audio_Private_Types
+/** @defgroup STM324xG_EVAL_AUDIO_Private_Types
   * @{
   */ 
 /**
   * @}
   */ 
   
-/** @defgroup stm324xg_eval_audio_Private_Defines
+/** @defgroup STM324xG_EVAL_AUDIO_Private_Defines
   * @{
   */
 /* These PLL parameters are valide when the f(VCO clock) = 1Mhz */
 const uint32_t I2SFreq[8] = {8000, 11025, 16000, 22050, 32000, 44100, 48000, 96000};
 const uint32_t I2SPLLN[8] = {256, 429, 213, 429, 426, 271, 258, 344};
 const uint32_t I2SPLLR[8] = {5, 4, 4, 4, 4, 6, 3, 1};
-
 /**
   * @}
   */ 
 
-/** @defgroup stm324xg_eval_audio_Private_Macros
+/** @defgroup STM324xG_EVAL_AUDIO_Private_Macros
   * @{
   */
 /**
   * @}
   */ 
   
-/** @defgroup stm324xg_eval_audio_Private_Variables
+/** @defgroup STM324xG_EVAL_AUDIO_Private_Variables
   * @{
   */
-AUDIO_DrvTypeDef *audio_drv;
+AUDIO_DrvTypeDef   *audio_drv;
 I2S_HandleTypeDef  haudio_i2s;
-
 /**
   * @}
   */ 
 
-/** @defgroup stm324xg_eval_audio_Private_Function_Prototypes
+/** @defgroup STM324xG_EVAL_AUDIO_Private_Function_Prototypes
   * @{
   */
 static void CODEC_Reset(void);
@@ -169,17 +167,17 @@ static void I2Sx_Init(uint32_t AudioFreq);
   * @}
   */ 
 
-/** @defgroup stm324xg_eval_audio_Private_Functions
+/** @defgroup STM324xG_EVAL_AUDIO_Private_Functions
   * @{
   */ 
 
 /**
-  * @brief  Configure the audio peripherals.
+  * @brief  Configures the audio peripherals.
   * @param  OutputDevice: OUTPUT_DEVICE_SPEAKER, OUTPUT_DEVICE_HEADPHONE,
   *                       OUTPUT_DEVICE_BOTH or OUTPUT_DEVICE_AUTO .
   * @param  Volume: Initial volume level (from 0 (Mute) to 100 (Max))
   * @param  AudioFreq: Audio frequency used to play the audio stream.
-  * @note This function configure also that the I2S PLL input clock.    
+  * @note   This function configure also that the I2S PLL input clock.    
   * @retval 0 if correct communication, else wrong communication
   */
 uint8_t BSP_AUDIO_OUT_Init(uint16_t OutputDevice, uint8_t Volume, uint32_t AudioFreq)
@@ -188,7 +186,7 @@ uint8_t BSP_AUDIO_OUT_Init(uint16_t OutputDevice, uint8_t Volume, uint32_t Audio
   uint32_t deviceid = 0x00;
   RCC_PeriphCLKInitTypeDef RCC_ExCLKInitStruct;
   uint8_t index = 0, freqindex = 0xFF;
-
+  
   for(index = 0; index < 8; index++)
   {
     if(I2SFreq[index] == AudioFreq)
@@ -196,7 +194,7 @@ uint8_t BSP_AUDIO_OUT_Init(uint16_t OutputDevice, uint8_t Volume, uint32_t Audio
       freqindex = index;
     }
   }
-	HAL_RCCEx_GetPeriphCLKConfig(&RCC_ExCLKInitStruct); 
+  HAL_RCCEx_GetPeriphCLKConfig(&RCC_ExCLKInitStruct); 
   if(freqindex != 0xFF)
   {
     /* I2S clock config 
@@ -207,7 +205,7 @@ uint8_t BSP_AUDIO_OUT_Init(uint16_t OutputDevice, uint8_t Volume, uint32_t Audio
     RCC_ExCLKInitStruct.PLLI2S.PLLI2SR = I2SPLLR[freqindex];
     HAL_RCCEx_PeriphCLKConfig(&RCC_ExCLKInitStruct);     
   } 
-  else /* default PLL I2S configuration */
+  else /* Default PLL I2S configuration */
   {
     /* I2S clock config 
     PLLI2S_VCO = f(VCO clock) = f(PLLI2S clock input) × (PLLI2SN/PLLM)
@@ -217,7 +215,7 @@ uint8_t BSP_AUDIO_OUT_Init(uint16_t OutputDevice, uint8_t Volume, uint32_t Audio
     RCC_ExCLKInitStruct.PLLI2S.PLLI2SR = 3;
     HAL_RCCEx_PeriphCLKConfig(&RCC_ExCLKInitStruct); 
   }
-
+  
   /* Reset the Codec Registers */
   CODEC_Reset();
   
@@ -269,23 +267,24 @@ uint8_t BSP_AUDIO_OUT_Play(uint16_t* pBuffer, uint32_t Size)
 }
 
 /**
-  * @brief Sends n-Bytes on the I2S interface.
-  * @param pData: pointer on data address 
-  * @param Size: number of data to be written
+  * @brief  Sends n-Bytes on the I2S interface.
+  * @param  pData: Pointer to data address 
+  * @param  Size: Number of data to be written
   * @retval None
   */
 void BSP_AUDIO_OUT_ChangeBuffer(uint16_t *pData, uint16_t Size)
 {
-   HAL_I2S_Transmit_DMA(&haudio_i2s, pData, Size); 
+  HAL_I2S_Transmit_DMA(&haudio_i2s, pData, Size); 
 }
 
 /**
-  * @brief  This function Pauses the audio file stream. In case
-  *         of using DMA, the DMA Pause feature is used.
+  * @brief   Pauses the audio file stream. 
+  *          In case of using DMA, the DMA Pause feature is used.
   * @WARNING When calling BSP_AUDIO_OUT_Pause() function for pause, only
   *          BSP_AUDIO_OUT_Resume() function should be called for resume (use of BSP_AUDIO_OUT_Play() 
   *          function for resume could lead to unexpected behavior).
-  * @retval AUDIO_OK if correct communication, else wrong communication
+  * @param   None
+  * @retval  AUDIO_OK if correct communication, else wrong communication
   */
 uint8_t BSP_AUDIO_OUT_Pause(void)
 {    
@@ -299,17 +298,18 @@ uint8_t BSP_AUDIO_OUT_Pause(void)
     /* Call the Media layer pause function */
     HAL_I2S_DMAPause(&haudio_i2s);
     
-    /* Return AUDIO_OK if all operations are OK */
+    /* Return AUDIO_OK when all operations are correctly done */
     return AUDIO_OK;
   }
 }
 
 /**
-  * @brief  This function  Resumes the audio file stream.  
+  * @brief   Resumes the audio file stream.  
   * @WARNING When calling BSP_AUDIO_OUT_Pause() function for pause, only
   *          BSP_AUDIO_OUT_Resume() function should be called for resume (use of BSP_AUDIO_OUT_Play() 
   *          function for resume could lead to unexpected behavior).
-  * @retval AUDIO_OK if correct communication, else wrong communication
+  * @param   None
+  * @retval  AUDIO_OK if correct communication, else wrong communication
   */
 uint8_t BSP_AUDIO_OUT_Resume(void)
 {    
@@ -322,7 +322,8 @@ uint8_t BSP_AUDIO_OUT_Resume(void)
   {
     /* Call the Media layer pause/resume function */
     HAL_I2S_DMAResume(&haudio_i2s);
-    /* Return AUDIO_OK if all operations are OK */
+    
+    /* Return AUDIO_OK when all operations are correctly done */
     return AUDIO_OK;
   }
 }
@@ -350,12 +351,13 @@ uint8_t BSP_AUDIO_OUT_Stop(uint32_t Option)
   {
     if(Option == CODEC_PDWN_HW)
     { 
-      /* Wait at least 100us */
+      /* Wait at least 1ms */
       HAL_Delay(1);
       
-      /* Reset The pin */
+      /* Reset the pin */
       BSP_IO_WritePin(AUDIO_RESET_PIN, RESET);
     }
+    
     /* Return AUDIO_OK when all operations are correctly done */
     return AUDIO_OK;
   }
@@ -376,14 +378,14 @@ uint8_t BSP_AUDIO_OUT_SetVolume(uint8_t Volume)
   }
   else
   {
-    /* Return AUDIO_OK if all operations are OK */
+    /* Return AUDIO_OK when all operations are correctly done */
     return AUDIO_OK;
   }
 }
 
 /**
   * @brief  Enables or disables the MUTE mode by software 
-  * @param  Command: could be AUDIO_MUTE_ON to mute sound or AUDIO_MUTE_OFF to 
+  * @param  Cmd: could be AUDIO_MUTE_ON to mute sound or AUDIO_MUTE_OFF to 
   *         unmute the codec and restore previous volume level.
   * @retval AUDIO_OK if correct communication, else wrong communication
   */
@@ -396,7 +398,7 @@ uint8_t BSP_AUDIO_OUT_SetMute(uint32_t Cmd)
   }
   else
   {
-    /* Return AUDIO_OK if all operations are OK */
+    /* Return AUDIO_OK when all operations are correctly done */
     return AUDIO_OK;
   }
 }
@@ -418,13 +420,13 @@ uint8_t BSP_AUDIO_OUT_SetOutputMode(uint8_t Output)
   }
   else
   {
-    /* Return AUDIO_OK if all operations are OK */
+    /* Return AUDIO_OK when all operations are correctly done */
     return AUDIO_OK;
   }
 }
 
 /**
-  * @brief  Update the audio frequency.
+  * @brief  Updates the audio frequency.
   * @param  AudioFreq: Audio frequency used to play the audio stream.
   * @retval AUDIO_OK if correct communication, else wrong communication
   */
@@ -451,7 +453,7 @@ void BSP_AUDIO_OUT_SetFrequency(uint32_t AudioFreq)
     RCC_ExCLKInitStruct.PLLI2S.PLLI2SR = I2SPLLR[freqindex];
     HAL_RCCEx_PeriphCLKConfig(&RCC_ExCLKInitStruct);     
   } 
-  else /* default PLL I2S configuration */
+  else /* Default PLL I2S configuration */
   {
     /* I2S clock config 
     PLLI2S_VCO = f(VCO clock) = f(PLLI2S clock input) × (PLLI2SN/PLLM)
@@ -473,7 +475,7 @@ void BSP_AUDIO_OUT_SetFrequency(uint32_t AudioFreq)
 void HAL_I2S_TxCpltCallback(I2S_HandleTypeDef *hi2s)
 {
   /* Manage the remaining file size and new address offset: This function 
-  should be coded by user (its prototype is already declared in stm32_eval_audio_codec.h) */  
+     should be coded by user (its prototype is already declared in stm324xg_eval_audio.h) */  
   BSP_AUDIO_OUT_TransferComplete_CallBack();       
 }
 
@@ -485,13 +487,13 @@ void HAL_I2S_TxCpltCallback(I2S_HandleTypeDef *hi2s)
 void HAL_I2S_TxHalfCpltCallback(I2S_HandleTypeDef *hi2s)
 {
   /* Manage the remaining file size and new address offset: This function 
-  should be coded by user (its prototype is already declared in stm32_eval_audio_codec.h) */  
+     should be coded by user (its prototype is already declared in stm324xg_eval_audio.h) */  
   BSP_AUDIO_OUT_HalfTransfer_CallBack();   
 }
 
 /**
-  * @brief I2S error callbacks
-  * @param hi2s: I2S handle
+  * @brief  I2S error callbacks.
+  * @param  hi2s: I2S handle
   * @retval None
   */
 void HAL_I2S_ErrorCallback(I2S_HandleTypeDef *hi2s) 
@@ -526,8 +528,8 @@ __weak void BSP_AUDIO_OUT_Error_CallBack(void)
 {
 }
 
-/******************************************************************************
-                            Static Function
+/*******************************************************************************
+                            Static Functions
 *******************************************************************************/
 
 /**
@@ -605,8 +607,9 @@ static void I2Sx_MspInit(void)
 }
 
 /**
-  * @brief Initializes the Audio Codec audio interface (I2S)
-  * @param AudioFreq: Audio frequency to be configured for the I2S peripheral. 
+  * @brief  Initializes the Audio Codec audio interface (I2S).
+  * @param  AudioFreq: Audio frequency to be configured for the I2S peripheral. 
+  * @retval None
   */
 static void I2Sx_Init(uint32_t AudioFreq)
 {
@@ -648,13 +651,13 @@ static void CODEC_Reset(void)
   /* Power Down the codec */
   BSP_IO_WritePin(AUDIO_RESET_PIN, RESET);
 
-  /* wait for a delay to insure registers erasing */
+  /* Wait for a delay to insure registers erasing */
   HAL_Delay(CODEC_RESET_DELAY); 
   
   /* Power on the codec */
   BSP_IO_WritePin(AUDIO_RESET_PIN, SET);
    
-  /* wait for a delay to insure registers erasing */
+  /* Wait for a delay to insure registers erasing */
   HAL_Delay(CODEC_RESET_DELAY); 
 }
 

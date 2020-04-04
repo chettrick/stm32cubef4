@@ -2,10 +2,10 @@
   ******************************************************************************
   * @file    stm32f429i_discovery_io.c
   * @author  MCD Application Team
-  * @version V2.0.1
-  * @date    26-February-2014
+  * @version V2.1.0
+  * @date    19-June-2014
   * @brief   This file provides a set of functions needed to manage the STMPE811
-  *          IO Expander device mounted on STM32F429I-DISCO Kit.
+  *          IO Expander device mounted on STM32F429I-Discovery Kit.
   ******************************************************************************
   * @attention
   *
@@ -47,43 +47,33 @@
   * @{
   */ 
   
-/** @defgroup STM32F429I_DISCOVERY_IO STM32F429I_DISCOVERY_IO
+/** @defgroup STM32F429I_DISCOVERY_IO
   * @{
   */ 
 
-/* Private typedef -----------------------------------------------------------*/
-
-/** @defgroup STM32F429I_DISCOVERY_IO_Private_Types_Definitions STM32F429I_DISCOVERY_IO_Private_Types_Definitions
+/** @defgroup STM32F429I_DISCOVERY_IO_Private_Types_Definitions
   * @{
   */ 
 /**
   * @}
   */ 
 
-/* Private define ------------------------------------------------------------*/
-
-/** @defgroup STM32F429I_DISCOVERY_IO_Private_Defines STM32F429I_DISCOVERY_IO_Private_Defines
+/** @defgroup STM32F429I_DISCOVERY_IO_Private_Defines
   * @{
   */ 
-
 /**
   * @}
   */ 
 
-
-/* Private macro -------------------------------------------------------------*/
-
-/** @defgroup STM32F429I_DISCOVERY_IO_Private_Macros STM32F429I_DISCOVERY_IO_Private_Macros
+/** @defgroup STM32F429I_DISCOVERY_IO_Private_Macros
   * @{
   */ 
-
 /**
   * @}
   */
 
-/* Private variables ---------------------------------------------------------*/
 
-/** @defgroup STM32F429I_DISCOVERY_IO_Private_Variables STM32F429I_DISCOVERY_IO_Private_Variables
+/** @defgroup STM32F429I_DISCOVERY_IO_Private_Variables
   * @{
   */
 static IO_DrvTypeDef *IoDrv;
@@ -93,19 +83,14 @@ static IO_DrvTypeDef *IoDrv;
   */
 
 
-/* Private function prototypes -----------------------------------------------*/
-
-/** @defgroup STM32F429I_DISCOVERY_io_Private_Function_Prototypes STM32F429I_DISCOVERY_io_Private_Function_Prototypes
+/** @defgroup STM32F429I_DISCOVERY_IO_Private_Function_Prototypes
   * @{
   */
-
 /**
   * @}
   */
-  
-/* Private functions ---------------------------------------------------------*/
 
-/** @defgroup STM32F429I_DISCOVERY_io_Private_Functions STM32F429I_DISCOVERY_io_Private_Functions
+/** @defgroup STM32F429I_DISCOVERY_IO_Private_Functions
   * @{
   */
 
@@ -142,8 +127,8 @@ uint8_t BSP_IO_Init(void)
 }
 
 /**
-  * @brief  Get the selected pins IT status.
-  * @param IoPin: The selected pins to check the status. 
+  * @brief  Gets the selected pins IT status.
+  * @param  IoPin: The selected pins to check the status. 
   *         This parameter could be any combination of the IO pins.   
   * @retval Status of IO Pin checked.
   */  
@@ -154,7 +139,7 @@ uint8_t BSP_IO_ITGetStatus(uint16_t IoPin)
 }
 
 /**
-  * @brief Clear all the IO IT pending bits
+  * @brief  Clears all the IO IT pending bits
   * @param  None
   * @retval None
   */  
@@ -163,7 +148,6 @@ void BSP_IO_ITClear(void)
   /* Clear all IO IT pending bits */
   IoDrv->ClearIT(IO_I2C_ADDRESS, IO_PIN_ALL);
 }
-
 
 /**
   * @brief  Configures the IO pin(s) according to IO mode structure value.
@@ -186,10 +170,10 @@ void BSP_IO_ConfigPin(uint16_t IoPin, IO_ModeTypedef IoMode)
 }
 
 /**
-  * @brief  Set the selected pins state.
-  * @param IoPin: The selected pins to write. 
+  * @brief  Sets the selected pins state.
+  * @param  IoPin: The selected pins to write. 
   *         This parameter could be any combination of the IO pins. 
-  * @param PinState: the new pins state to write  
+  * @param  PinState: the new pins state to write  
   * @retval None
   */
 void BSP_IO_WritePin(uint16_t IoPin, uint8_t PinState)
@@ -199,8 +183,8 @@ void BSP_IO_WritePin(uint16_t IoPin, uint8_t PinState)
 }
 
 /**
-  * @brief  Get the selected pins current state.
-  * @param IoPin: The selected pins to read. 
+  * @brief  Gets the selected pins current state.
+  * @param  IoPin: The selected pins to read. 
   *         This parameter could be any combination of the IO pins.  
   * @retval The current pins state 
   */
@@ -210,8 +194,8 @@ uint16_t BSP_IO_ReadPin(uint16_t IoPin)
 }
 
 /**
-  * @brief  Toggle the selected pins state
-  * @param IoPin: The selected pins to toggle. 
+  * @brief  Toggles the selected pins state.
+  * @param  IoPin: The selected pins to toggle. 
   *         This parameter could be any combination of the IO pins.   
   * @retval None
   */
@@ -227,7 +211,6 @@ void BSP_IO_TogglePin(uint16_t IoPin)
     IoDrv->WritePin(IO_I2C_ADDRESS, IoPin, 1 /* Set */);
   }
 }
- 
 
 /**
   * @}
@@ -243,5 +226,6 @@ void BSP_IO_TogglePin(uint16_t IoPin)
 
 /**
   * @}
-  */      
+  */ 
+
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

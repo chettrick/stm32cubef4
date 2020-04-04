@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    ov2640.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    19-June-2014
   * @brief   This file provides the OV2640 camera driver
   ******************************************************************************
   * @attention
@@ -46,7 +46,7 @@
   * @{
   */ 
   
-/** @addtogroup ov2640
+/** @addtogroup OV2640
   * @brief     This file provides a set of functions needed to drive the 
   *            OV2640 Camera module.
   * @{
@@ -95,9 +95,7 @@ CAMERA_DrvTypeDef   ov2640_drv =
   ov2640_Config,
 };
 
-static uint8_t Is_I2C_Initialized = 0;
-
-/* Initialisation sequence for 480x272 resolution */
+/* Initialization sequence for 480x272 resolution */
 const unsigned char OV2640_480x272[][2]=
 {
   {0xff, 0x00},  /* Device control register list Table 12 */
@@ -339,7 +337,7 @@ const unsigned char OV2640_480x272[][2]=
   {0xe0, 0x00},
 };
 
-/* Initialisation sequence for VGA resolution (640x480)*/
+/* Initialization sequence for VGA resolution (640x480)*/
 const unsigned char OV2640_VGA[][2]=
 {
   {0xff, 0x00},  /* Device control register list Table 12 */
@@ -581,7 +579,7 @@ const unsigned char OV2640_VGA[][2]=
   {0xe0, 0x00},
 };
 
-/* Initialisation sequence for QVGA resolution (320x240) */
+/* Initialization sequence for QVGA resolution (320x240) */
 const unsigned char OV2640_QVGA[][2]=
 {
   {0xff, 0x00},
@@ -806,7 +804,7 @@ const unsigned char OV2640_QVGA[][2]=
   {0x00, 0x00},
 };
 
-/* Initialisation sequence for QQVGA resolution (160x120) */
+/* Initialization sequence for QQVGA resolution (160x120) */
 const char OV2640_QQVGA[][2]=
 {
   {0xff, 0x00},
@@ -1042,20 +1040,15 @@ const char OV2640_QQVGA[][2]=
 /**
   * @brief  Initializes the OV2640 CAMERA component.
   * @param  DeviceAddr: Device address on communication Bus.
-  * @param  resolution: the Camera resolution
+  * @param  resolution: Camera resolution
   * @retval None
   */
 void ov2640_Init(uint16_t DeviceAddr, uint32_t resolution)
 {
   uint32_t index;
   
-  if(Is_I2C_Initialized == 0)
-  {
-    Is_I2C_Initialized = 1;  
-    
-    /* Initialize I2C */
-    CAMERA_IO_Init();    
-  }
+  /* Initialize I2C */
+  CAMERA_IO_Init();    
   
   /* Prepare the camera to be configured */
   CAMERA_IO_Write(DeviceAddr, OV2640_DSP_RA_DLMT, 0x01);
@@ -1110,10 +1103,10 @@ void ov2640_Init(uint16_t DeviceAddr, uint32_t resolution)
 
 /**
   * @brief  Configures the OV2640 camera feature.
-  * @param  DeviceAddr:       Device address on communication Bus.
-  * @param  feature:          the camera feature to be configured
-  * @param  value:            the value to be configured
-  * @param  brightness_value: the brightness value to be configured
+  * @param  DeviceAddr: Device address on communication Bus.
+  * @param  feature: Camera feature to be configured
+  * @param  value: Value to be configured
+  * @param  brightness_value: Brightness value to be configured
   * @retval None
   */
 void ov2640_Config(uint16_t DeviceAddr, uint32_t feature, uint32_t value, uint32_t brightness_value)
@@ -1178,13 +1171,8 @@ void ov2640_Config(uint16_t DeviceAddr, uint32_t feature, uint32_t value, uint32
   */
 uint16_t ov2640_ReadID(uint16_t DeviceAddr)
 {
-  if(Is_I2C_Initialized == 0)
-  {
-    /* Initialize I2C */
-    CAMERA_IO_Init();
-    
-    Is_I2C_Initialized = 1;    
-  }
+  /* Initialize I2C */
+  CAMERA_IO_Init();
   
   /* Prepare the sensor to read the Camera ID */
   CAMERA_IO_Write(DeviceAddr, OV2640_DSP_RA_DLMT, 0x01);
@@ -1194,13 +1182,13 @@ uint16_t ov2640_ReadID(uint16_t DeviceAddr)
 }
 
 /******************************************************************************
-                            Static Function
+                            Static Functions
 *******************************************************************************/
 /**
   * @brief  Convert input values into ov2640 parameters.
-  * @param  feature:    the camera feature to be configured
-  * @param  value:      the value to be configured
-  * @retval converted value
+  * @param  feature: Camera feature to be configured
+  * @param  value: Value to be configured
+  * @retval The converted value
   */
 static uint32_t ov2640_ConvertValue(uint32_t feature, uint32_t value)
 {

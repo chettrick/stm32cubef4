@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324xg_eval.c
   * @author  MCD Application Team
-  * @version V2.0.1
-  * @date    26-February-2014
+  * @version V2.0.2
+  * @date    19-June-2014
   * @brief   This file provides a set of firmware functions to manage LEDs, 
   *          push-buttons and COM ports available on STM324xG-EVAL evaluation 
   *          board(MB786) RevB from STMicroelectronics.
@@ -48,11 +48,7 @@
 #include "stm324xg_eval.h"
 #include "stm324xg_eval_io.h"
 
-/** @addtogroup Utilities
-  * @{
-  */ 
-
-/** @addtogroup STM32_EVAL
+/** @addtogroup BSP
   * @{
   */ 
 
@@ -71,7 +67,6 @@ typedef struct
 {
   __IO uint16_t REG;
   __IO uint16_t RAM;
-
 }LCD_CONTROLLER_TypeDef;
 /**
   * @}
@@ -82,11 +77,11 @@ typedef struct
   */
 
 /**
-  * @brief STM324xG EVAL BSP Driver version number V2.0.1
+  * @brief STM324xG EVAL BSP Driver version number V2.0.2
   */
 #define __STM324xG_EVAL_BSP_VERSION_MAIN   (0x02) /*!< [31:24] main version */
 #define __STM324xG_EVAL_BSP_VERSION_SUB1   (0x00) /*!< [23:16] sub1 version */
-#define __STM324xG_EVAL_BSP_VERSION_SUB2   (0x01) /*!< [15:8]  sub2 version */
+#define __STM324xG_EVAL_BSP_VERSION_SUB2   (0x02) /*!< [15:8]  sub2 version */
 #define __STM324xG_EVAL_BSP_VERSION_RC     (0x00) /*!< [7:0]  release candidate */ 
 #define __STM324xG_EVAL_BSP_VERSION         ((__STM324xG_EVAL_BSP_VERSION_MAIN << 24)\
                                              |(__STM324xG_EVAL_BSP_VERSION_SUB1 << 16)\
@@ -150,6 +145,8 @@ const uint16_t COM_TX_AF[COMn] = {EVAL_COM1_TX_AF};
 const uint16_t COM_RX_AF[COMn] = {EVAL_COM1_RX_AF};
 
 I2C_HandleTypeDef  heval_I2c;
+
+static uint8_t Is_LCD_IO_Initialized = 0;
 
 /**
   * @}
@@ -215,7 +212,7 @@ HAL_StatusTypeDef   EEPROM_IO_IsDeviceReady(uint16_t DevAddress, uint32_t Trials
 /**
   * @brief  This method returns the STM324xG EVAL BSP Driver revision
   * @param  None
-  * @retval version : 0xXYZR (8bits for each decimal, R for RC)
+  * @retval version: 0xXYZR (8bits for each decimal, R for RC)
   */
 uint32_t BSP_GetVersion(void)
 {
@@ -318,7 +315,6 @@ void BSP_PB_Init(Button_TypeDef Button, ButtonMode_TypeDef Button_Mode)
   
   /* Enable the BUTTON clock */
   BUTTONx_GPIO_CLK_ENABLE(Button);
-  __SYSCFG_CLK_ENABLE();
   
   if(Button_Mode == BUTTON_MODE_GPIO)
   {
@@ -619,10 +615,10 @@ static uint8_t I2Cx_Read(uint8_t Addr, uint8_t Reg)
 }
 
 /**
-  * @brief Writes a single data.
-  * @param Addr: I2C address
-  * @param Reg: Reg address 
-  * @param Value: Data to be written
+  * @brief  Writes a single data.
+  * @param  Addr: I2C address
+  * @param  Reg: Reg address 
+  * @param  Value: Data to be written
   * @retval None
   */
 static void I2Cx_Write(uint8_t Addr, uint8_t Reg, uint8_t Value)
@@ -805,7 +801,7 @@ static void FSMC_BANK3_Init(void)
 
 /**
   * @brief  Writes register value.
-  * @param  Data: 
+  * @param  Data: Data to be written 
   * @retval None
   */
 static void FSMC_BANK3_WriteData(uint16_t Data) 
@@ -816,7 +812,7 @@ static void FSMC_BANK3_WriteData(uint16_t Data)
 
 /**
   * @brief  Writes register address.
-  * @param  Reg: 
+  * @param  Reg: Register to be written
   * @retval None
   */
 static void FSMC_BANK3_WriteReg(uint8_t Reg) 
@@ -838,6 +834,7 @@ static uint16_t FSMC_BANK3_ReadData(void)
 /*******************************************************************************
                             LINK OPERATIONS
 *******************************************************************************/
+
 /***************************** LINK IOE ***************************************/
 
 /**
@@ -915,7 +912,11 @@ void IOE_Delay(uint32_t Delay)
   */
 void LCD_IO_Init(void) 
 {
-  FSMC_BANK3_Init();
+  if(Is_LCD_IO_Initialized == 0)
+  {
+    Is_LCD_IO_Initialized = 1; 
+    FSMC_BANK3_Init();
+  }
 }
 
 /**
@@ -1029,10 +1030,11 @@ void CAMERA_Delay(uint32_t Delay)
   HAL_Delay(Delay);
 }
 
-/********************************* LINK I2C EEPROM *****************************/
+/******************************** LINK I2C EEPROM *****************************/
+
 /**
-  * @brief Initializes peripherals used by the I2C EEPROM driver.
-  * @param None
+  * @brief  Initializes peripherals used by the I2C EEPROM driver.
+  * @param  None
   * @retval None
   */
 void EEPROM_IO_Init(void)
@@ -1054,11 +1056,11 @@ HAL_StatusTypeDef EEPROM_IO_WriteData(uint16_t DevAddress, uint16_t MemAddress, 
 }
 
 /**
-  * @brief Read data from I2C EEPROM driver in using DMA channel
-  * @param DevAddress: Target device address
-  * @param MemAddress: Internal memory address
-  * @param pBuffer: Pointer to data buffer
-  * @param BufferSize: Amount of data to be read
+  * @brief  Reads data from I2C EEPROM driver in using DMA channel.
+  * @param  DevAddress: Target device address
+  * @param  MemAddress: Internal memory address
+  * @param  pBuffer: Pointer to data buffer
+  * @param  BufferSize: Amount of data to be read
   * @retval HAL status
   */
 HAL_StatusTypeDef EEPROM_IO_ReadData(uint16_t DevAddress, uint16_t MemAddress, uint8_t* pBuffer, uint32_t BufferSize)
@@ -1067,10 +1069,10 @@ HAL_StatusTypeDef EEPROM_IO_ReadData(uint16_t DevAddress, uint16_t MemAddress, u
 }
 
 /**
-  * @brief Checks if target device is ready for communication. 
-  * @note This function is used with Memory devices
-  * @param DevAddress: Target device address
-  * @param Trials: Number of trials
+  * @brief  Checks if target device is ready for communication. 
+  * @note   This function is used with Memory devices
+  * @param  DevAddress: Target device address
+  * @param  Trials: Number of trials
   * @retval HAL status
   */
 HAL_StatusTypeDef EEPROM_IO_IsDeviceReady(uint16_t DevAddress, uint32_t Trials)

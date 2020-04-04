@@ -127,7 +127,13 @@ extern void vClearInterruptMaskFromISR( unsigned long ulMask );
 #define portENABLE_INTERRUPTS()					__enable_irq()
 #define portENTER_CRITICAL()					vPortEnterCritical()
 #define portEXIT_CRITICAL()						vPortExitCritical()
+/*-----------------------------------------------------------*/
 
+/* Tickless idle/low power functionality. */
+#ifndef portSUPPRESS_TICKS_AND_SLEEP
+	extern void vPortSuppressTicksAndSleep( portTickType xExpectedIdleTime );
+	#define portSUPPRESS_TICKS_AND_SLEEP( xExpectedIdleTime ) vPortSuppressTicksAndSleep( xExpectedIdleTime )
+#endif
 /*-----------------------------------------------------------*/
 
 /* Task function macros as described on the FreeRTOS.org WEB site. */

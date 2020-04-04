@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    ili9341.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    19-June-2014
   * @brief   This file contains all the functions prototypes for the ili9341.c
   *          driver.
   ******************************************************************************
@@ -51,18 +51,17 @@
   * @{
   */ 
 
-/** @addtogroup Component
+/** @addtogroup Components
   * @{
   */ 
   
-/** @addtogroup ili9341
+/** @addtogroup ILI9341
   * @{
   */
 
 /** @defgroup ILI9341_Exported_Types
   * @{
   */
-   
 /**
   * @}
   */ 
@@ -75,7 +74,6 @@
   * @brief ILI9341 chip IDs  
   */ 
 #define ILI9341_ID                  0x9341
-
 
 /** 
   * @brief  ILI9341 Size  
@@ -103,7 +101,6 @@
 #define  ILI9341_VSYNC            ((uint32_t)1)   /* Vertical synchronization   */
 #define  ILI9341_VBP              ((uint32_t)3)    /* Vertical back porch        */
 #define  ILI9341_VFP              ((uint32_t)2)    /* Vertical front porch       */
-
 
 /** 
   * @brief  ILI9341 Registers  
@@ -158,15 +155,14 @@
 #define LCD_READ_ID2            0xDB   /* Read ID2 */
 #define LCD_READ_ID3            0xDC   /* Read ID3 */
 
-
 /* Level 2 Commands */
 #define LCD_RGB_INTERFACE       0xB0   /* RGB Interface Signal Control */
 #define LCD_FRMCTR1             0xB1   /* Frame Rate Control (In Normal Mode) */
 #define LCD_FRMCTR2             0xB2   /* Frame Rate Control (In Idle Mode) */
 #define LCD_FRMCTR3             0xB3   /* Frame Rate Control (In Partial Mode) */
 #define LCD_INVTR               0xB4   /* Display Inversion Control */
-#define LCD_BPC                 0xB5   /* Blanking Porch Control register*/
-#define LCD_DFC                 0xB6   /* Display Function Control register*/
+#define LCD_BPC                 0xB5   /* Blanking Porch Control register */
+#define LCD_DFC                 0xB6   /* Display Function Control register */
 #define LCD_ETMOD               0xB7   /* Entry Mode Set */
 #define LCD_BACKLIGHT1          0xB8   /* Backlight Control 1 */
 #define LCD_BACKLIGHT2          0xB9   /* Backlight Control 2 */
@@ -183,8 +179,8 @@
 #define LCD_NVMPKEY             0xD1   /* NV Memory Protection Key */
 #define LCD_RDNVM               0xD2   /* NV Memory Status Read */
 #define LCD_READ_ID4            0xD3   /* Read ID4 */
-#define LCD_PGAMMA              0xE0   /* Positive Gamma Correction register*/
-#define LCD_NGAMMA              0xE1   /* Negative Gamma Correction register*/
+#define LCD_PGAMMA              0xE0   /* Positive Gamma Correction register */
+#define LCD_NGAMMA              0xE1   /* Negative Gamma Correction register */
 #define LCD_DGAMCTRL1           0xE2   /* Digital Gamma Control 1 */
 #define LCD_DGAMCTRL2           0xE3   /* Digital Gamma Control 2 */
 #define LCD_INTERFACE           0xF6   /* Interface control register */
@@ -198,7 +194,7 @@
 #define LCD_3GAMMA_EN            0xF2   /* 3 Gamma enable register */
 #define LCD_PRC                  0xF7   /* Pump ratio control register */
 
-/* Size of read registers*/
+/* Size of read registers */
 #define LCD_READ_ID4_SIZE        3      /* Size of Read ID4 */
 
 /**
@@ -227,16 +223,16 @@ void     LCD_IO_WriteData(uint16_t RegValue);
 void     LCD_IO_WriteReg(uint8_t Reg);
 uint32_t LCD_IO_ReadData(uint16_t RegValue, uint8_t ReadSize);
 void     LCD_Delay (uint32_t delay);
-
-/**
-  * @}
-  */ 
       
 #ifdef __cplusplus
 }
 #endif
 
 #endif /* __ILI9341_H */
+
+/**
+  * @}
+  */ 
 
 /**
   * @}

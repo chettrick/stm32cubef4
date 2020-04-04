@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    camera.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.1.0
+  * @date    21-March-2014
   * @brief   This header file contains the common defines and functions prototypes
   *          for the camera driver.   
   ******************************************************************************
@@ -53,11 +53,11 @@
 
 /** @addtogroup Components
   * @{
-  */ 
+  */
     
 /** @addtogroup CAMERA
   * @{
-  */ 
+  */
 
 
 /** @defgroup CAMERA_Exported_Types
@@ -72,7 +72,6 @@ typedef struct
   uint16_t (*ReadID)(uint16_t);  
   void     (*Config)(uint16_t, uint32_t, uint32_t, uint32_t);
 }CAMERA_DrvTypeDef;
-
 
 /**
   * @}
@@ -114,23 +113,23 @@ typedef struct
 /**
   * @}
   */
-      
+
+/**
+  * @}
+  */
+
+/**
+  * @}
+  */
+
+/**
+  * @}
+  */
+
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* CAMERA_H */
-
-/**
-  * @}
-  */ 
-
-/**
-  * @}
-  */ 
-
-/**
-  * @}
-  */ 
+#endif /* __CAMERA_H */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -370,7 +370,7 @@ void sys_mutex_free(sys_mutex_t *mutex)
 /* Lock a mutex*/
 void sys_mutex_lock(sys_mutex_t *mutex)
 {
-	sys_arch_sem_wait(*mutex, 0);
+	sys_arch_sem_wait(mutex, 0);
 }
 
 /*-----------------------------------------------------------------------------------*/

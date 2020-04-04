@@ -1,16 +1,16 @@
 /*********************************************************************
-*          Portions COPYRIGHT 2013 STMicroelectronics                *
+*          Portions COPYRIGHT 2014 STMicroelectronics                *
 *          Portions SEGGER Microcontroller GmbH & Co. KG             *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
 *                                                                    *
-*        (c) 1996 - 2013  SEGGER Microcontroller GmbH & Co. KG       *
+*        (c) 1996 - 2014  SEGGER Microcontroller GmbH & Co. KG       *
 *                                                                    *
 *        Internet: www.segger.com    Support:  support@segger.com    *
 *                                                                    *
 **********************************************************************
 
-** emWin V5.22 - Graphical user interface for embedded applications **
+** emWin V5.24 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -50,7 +50,7 @@ Purpose     : LCD level - To be used only internally by the GUI
   *
   ******************************************************************************
   */
-
+  
 #ifndef LCD_PROTECTED_H
 #define LCD_PROTECTED_H
 
@@ -98,7 +98,7 @@ void LCD_DrawBitmap(int x0,    int y0,
                     int xMul,  int yMul,
                     int BitsPerPixel,
                     int BytesPerLine,
-                    const U8 GUI_UNI_PTR * pPixel,
+                    const U8 * pPixel,
                     const LCD_PIXELINDEX * pTrans);
 
 void LCD__DrawBitmap_1bpp(int x0,    int y0,
@@ -106,7 +106,7 @@ void LCD__DrawBitmap_1bpp(int x0,    int y0,
                           int xMul,  int yMul,
                           int BitsPerPixel,
                           int BytesPerLine,
-                          const U8 GUI_UNI_PTR * pPixel,
+                          const U8 * pPixel,
                           const LCD_PIXELINDEX * pTrans,
                           int OffData);
 

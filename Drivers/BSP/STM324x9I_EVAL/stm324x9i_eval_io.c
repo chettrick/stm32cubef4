@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324x9i_eval_io.c
   * @author  MCD Application Team
-  * @version V2.0.1
-  * @date    26-February-2014
+  * @version V2.0.2
+  * @date    19-June-2014
   * @brief   This file provides a set of functions needed to manage the IO pins
   *          on STM324x9I-EVAL evaluation board.
   ******************************************************************************
@@ -83,47 +83,42 @@
 /** @defgroup STM324x9I_EVAL_IO
   * @{
   */   
-  
-/* Private typedef -----------------------------------------------------------*/
 
 /** @defgroup STM324x9I_EVAL_IO_Private_Types_Definitions
   * @{
   */ 
-  
-/* Private define ------------------------------------------------------------*/
-
-/** @defgroup STM324x9I_EVAL_IO_Private_Defines
-  * @{
-  */ 
-  
 /**
   * @}
   */ 
 
-/* Private macro -------------------------------------------------------------*/
+/** @defgroup STM324x9I_EVAL_IO_Private_Defines
+  * @{
+  */ 
+/**
+  * @}
+  */ 
 
 /** @defgroup STM324x9I_EVAL_IO_Private_Macros
   * @{
   */ 
-  
-/* Private variables ---------------------------------------------------------*/
+/**
+  * @}
+  */ 
 
 /** @defgroup STM324x9I_EVAL_IO_Private_Variables
   * @{
   */ 
 static IO_DrvTypeDef *io_driver;
-
 /**
   * @}
   */
 
-/* Private function prototypes -----------------------------------------------*/
-
 /** @defgroup STM324x9I_EVAL_IO_Private_Function_Prototypes
   * @{
   */ 
-    
-/* Private functions ---------------------------------------------------------*/
+/**
+  * @}
+  */
 
 /** @defgroup STM324x9I_EVAL_IO_Private_Functions
   * @{
@@ -139,7 +134,7 @@ static IO_DrvTypeDef *io_driver;
   *         then the SysTick interrupt must have higher priority (numerically lower)
   *         than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
   * @param  None
-  * @retval IO_OK: if all initializations are OK. Other value if error.
+  * @retval IO_OK if all initializations are OK. Other value if error.
   */
 uint8_t BSP_IO_Init(void)
 {
@@ -165,7 +160,7 @@ uint8_t BSP_IO_Init(void)
   * @brief  Gets the selected pins IT status.
   * @param  IO_Pin: Selected pins to check the status. 
   *          This parameter can be any combination of the IO pins.  
-  * @retval IO_OK: if read status OK. Other value if error.
+  * @retval IO_OK if read status OK. Other value if error.
   */
 uint8_t BSP_IO_ITGetStatus(uint16_t IO_Pin)
 {
@@ -195,7 +190,7 @@ void BSP_IO_ITClear(void)
   *            @arg  IO_MODE_OUTPUT
   *            @arg  IO_MODE_IT_RISING_EDGE
   *            @arg  IO_MODE_IT_FALLING_EDGE
-  * @retval IO_OK: if all initializations are OK. Other value if error.  
+  * @retval IO_OK if all initializations are OK. Other value if error.  
   */
 uint8_t BSP_IO_ConfigPin(uint16_t IO_Pin, IO_ModeTypedef IO_Mode)
 {
@@ -262,5 +257,6 @@ void BSP_IO_TogglePin(uint16_t IO_Pin)
 
 /**
   * @}
-  */      
+  */ 
+
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

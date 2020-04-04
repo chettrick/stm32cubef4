@@ -2,10 +2,10 @@
   ******************************************************************************
   * @file    lis302dl.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    19-June-2014
   * @brief   This file provides a set of functions needed to manage the LIS302DL
-  *          MEMS accelerometer available on STM32F4-Discovery Kit.
+  *          MEMS accelerometer.
   ******************************************************************************
   * @attention
   *
@@ -39,7 +39,11 @@
 /* Includes ------------------------------------------------------------------*/
 #include "lis302dl.h"
 
-/** @addtogroup Utilities
+/** @addtogroup BSP
+  * @{
+  */ 
+
+/** @addtogroup Components
   * @{
   */ 
 
@@ -109,7 +113,6 @@ ACCELERO_DrvTypeDef Lis302dlDrv =
   * @{
   */
 
-
 /**
   * @brief  Set LIS302DL Initialization.
   * @param  InitStruct: contains mask of different init parameters
@@ -119,25 +122,25 @@ void LIS302DL_Init(uint16_t InitStruct)
 {
   uint8_t ctrl = 0x00;
   
-  /* Configure the low level interface ---------------------------------------*/
+  /* Configure the low level interface */
   ACCELERO_IO_Init();
 
   ctrl = (uint8_t) InitStruct;
 
-  /* Write value to MEMS CTRL_REG1 regsister */
+  /* Write value to MEMS CTRL_REG1 register */
   ACCELERO_IO_Write(&ctrl, LIS302DL_CTRL_REG1_ADDR, 1);
 }
 
 /**
   * @brief  Read LIS302DL device ID.
-  * @param none
+  * @param  None
   * @retval The Device ID (two bytes).
   */
 uint8_t LIS302DL_ReadID(void)
 {
   uint8_t tmp = 0;
 
-  /* Configure the low level interface ---------------------------------------*/
+  /* Configure the low level interface */
   ACCELERO_IO_Init();
 
   /* Read WHO_AM_I register */
@@ -159,7 +162,7 @@ void LIS302DL_FilterConfig(uint8_t FilterStruct)
   /* Read CTRL_REG2 register */
   ACCELERO_IO_Read(&ctrl, LIS302DL_CTRL_REG2_ADDR, 1);
 
-  /* Clear high pass filter cut-off level, interrupt and data selection bits*/
+  /* Clear high pass filter cut-off level, interrupt and data selection bits */
   ctrl &= (uint8_t)~(LIS302DL_FILTEREDDATASELECTION_OUTPUTREGISTER | \
                      LIS302DL_HIGHPASSFILTER_LEVEL_3 | \
                      LIS302DL_HIGHPASSFILTERINTERRUPT_1_2);
@@ -171,7 +174,7 @@ void LIS302DL_FilterConfig(uint8_t FilterStruct)
 }
 
 /**
-  * @brief Set LIS302DL Interrupt configuration
+  * @brief  Set LIS302DL Interrupt configuration.
   * @param  LIS302DL_InterruptConfig_TypeDef: pointer to a LIS302DL_InterruptConfig_TypeDef 
   *         structure that contains the configuration setting for the LIS302DL Interrupt.
   * @retval None
@@ -193,9 +196,9 @@ void LIS302DL_InterruptConfig(LIS302DL_InterruptConfigTypeDef *LIS302DL_IntConfi
 }
 
 /**
-  * @brief     Set LIS302DL Interrupt configuration
+  * @brief  Set LIS302DL Interrupt configuration
   * @param  None
-  * @retval   None
+  * @retval None
   */
 void LIS302DL_Click_IntConfig(void)
 {
@@ -204,7 +207,7 @@ void LIS302DL_Click_IntConfig(void)
   
   ACCELERO_IO_ITConfig();
   
-  /* Set configuration of Internal High Pass Filter of LIS302DL*/
+  /* Set configuration of Internal High Pass Filter of LIS302DL */
   LIS302DL_InterruptStruct.Latch_Request = LIS302DL_INTERRUPTREQUEST_LATCHED;
   LIS302DL_InterruptStruct.SingleClick_Axes = LIS302DL_CLICKINTERRUPT_Z_ENABLE;
   LIS302DL_InterruptStruct.DoubleClick_Axes = LIS302DL_DOUBLECLICKINTERRUPT_Z_ENABLE;
@@ -245,9 +248,9 @@ void LIS302DL_Click_IntConfig(void)
 }
 
 /**
-  * @brief     Clear LIS302DL click Interrupt 
+  * @brief  Clear LIS302DL click Interrupt 
   * @param  None
-  * @retval   None
+  * @retval None
   */
 void LIS302DL_Click_IntClear(void)
 {
@@ -260,7 +263,7 @@ void LIS302DL_Click_IntClear(void)
 
 /**
   * @brief  Change the lowpower mode for LIS302DL
-  * @param  LowPowerMode: new state for the lowpower mode.
+  * @param  LowPowerMode: New state for the low power mode.
   *   This parameter can be one of the following values:
   *     @arg LIS302DL_LOWPOWERMODE_POWERDOWN: Power down mode
   *     @arg LIS302DL_LOWPOWERMODE_ACTIVE: Active mode  
@@ -277,7 +280,7 @@ void LIS302DL_LowpowerCmd(uint8_t LowPowerMode)
   tmpreg &= (uint8_t)~LIS302DL_LOWPOWERMODE_ACTIVE;
   tmpreg |= LowPowerMode;
   
-  /* Write value to MEMS CTRL_REG1 regsister */
+  /* Write value to MEMS CTRL_REG1 register */
   ACCELERO_IO_Write(&tmpreg, LIS302DL_CTRL_REG1_ADDR, 1);
 }
 
@@ -300,7 +303,7 @@ void LIS302DL_DataRateCmd(uint8_t DataRateValue)
   tmpreg &= (uint8_t)~LIS302DL_DATARATE_400;
   tmpreg |= DataRateValue;
   
-  /* Write value to MEMS CTRL_REG1 regsister */
+  /* Write value to MEMS CTRL_REG1 register */
   ACCELERO_IO_Write(&tmpreg, LIS302DL_CTRL_REG1_ADDR, 1);
 }
 
@@ -323,12 +326,12 @@ void LIS302DL_FullScaleCmd(uint8_t FS_value)
   tmpreg &= (uint8_t)~LIS302DL_FULLSCALE_9_2;
   tmpreg |= FS_value;
   
-  /* Write value to MEMS CTRL_REG1 regsister */
+  /* Write value to MEMS CTRL_REG1 register */
   ACCELERO_IO_Write(&tmpreg, LIS302DL_CTRL_REG1_ADDR, 1);
 }
 
 /**
-  * @brief  Reboot memory content of LIS302DL
+  * @brief  Reboot memory content of LIS302DL.
   * @param  None
   * @retval None
   */
@@ -341,14 +344,14 @@ void LIS302DL_RebootCmd(void)
   /* Enable or Disable the reboot memory */
   tmpreg |= LIS302DL_BOOT_REBOOTMEMORY;
   
-  /* Write value to MEMS CTRL_REG2 regsister */
+  /* Write value to MEMS CTRL_REG2 register */
   ACCELERO_IO_Write(&tmpreg, LIS302DL_CTRL_REG2_ADDR, 1);
 }
 
 /**
   * @brief  Read LIS302DL output register, and calculate the acceleration 
   *         ACC[mg]=SENSITIVITY* (out_h*256+out_l)/16 (12 bit rappresentation)
-* @param  pfData : Data out pointer
+  * @param  pfData: Data out pointer
   * @retval None
   */
 void LIS302DL_ReadACC(int16_t *pData)
@@ -372,10 +375,12 @@ void LIS302DL_ReadACC(int16_t *pData)
   case LIS302DL_FULLSCALE_2_3:
     sensitivity = LIS302DL_SENSITIVITY_2_3G;
     break;
+    
     /* FS bit = 1 ==> Sensitivity typical value = 72milligals/digit*/ 
   case LIS302DL_FULLSCALE_9_2:
     sensitivity = LIS302DL_SENSITIVITY_9_2G;
     break;
+    
   default:
     break;
   }
@@ -385,7 +390,6 @@ void LIS302DL_ReadACC(int16_t *pData)
   {
     pData[i]=(pnRawData[i] * sensitivity);
   }
-  
 }
 
 /**
@@ -404,5 +408,4 @@ void LIS302DL_ReadACC(int16_t *pData)
   * @}
   */ 
   
-
-/******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/
+/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -1,16 +1,16 @@
 /*********************************************************************
-*          Portions COPYRIGHT 2013 STMicroelectronics                *
+*          Portions COPYRIGHT 2014 STMicroelectronics                *
 *          Portions SEGGER Microcontroller GmbH & Co. KG             *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
 *                                                                    *
-*        (c) 1996 - 2013  SEGGER Microcontroller GmbH & Co. KG       *
+*        (c) 1996 - 2014  SEGGER Microcontroller GmbH & Co. KG       *
 *                                                                    *
 *        Internet: www.segger.com    Support:  support@segger.com    *
 *                                                                    *
 **********************************************************************
 
-** emWin V5.22 - Graphical user interface for embedded applications **
+** emWin V5.24 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -50,7 +50,7 @@ Purpose     : Private LISTBOX include
   *
   ******************************************************************************
   */
-
+  
 #ifndef LISTBOX_PRIVATE_H
 #define LISTBOX_PRIVATE_H
 
@@ -85,8 +85,8 @@ typedef struct {
 } LISTBOX_ITEM;
 
 typedef struct {
-  const GUI_FONT GUI_UNI_PTR* pFont;
-  U16                         ScrollStepH;
+  const GUI_FONT * pFont;
+  U16              ScrollStepH;
   GUI_COLOR aBackColor[4];
   GUI_COLOR aTextColor[4];
   GUI_COLOR aScrollbarColor[3];

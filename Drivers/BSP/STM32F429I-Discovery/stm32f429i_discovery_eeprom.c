@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f429i_discovery_eeprom.c
   * @author  MCD Application Team
-  * @version V2.0.1
-  * @date    26-February-2014
+  * @version V2.1.0
+  * @date    19-June-2014
   * @brief   This file provides a set of functions needed to manage an I2C M24LR64 
   *          EEPROM memory.
   *          To be able to use this driver, the switch EE_M24LR64 must be defined
@@ -89,13 +89,10 @@
 #include "stm32f429i_discovery_eeprom.h"
 
 #ifdef EE_M24LR64
+    
 /** @addtogroup BSP
   * @{
   */
-  
-/** @addtogroup STM32F4_DISCOVERY
-  * @{
-  */ 
 
 /** @addtogroup STM32F429I_DISCOVERY
   * @{
@@ -113,24 +110,21 @@
   * @}
   */ 
 
-
-/** @defgroup STM32F429I_DISCOVERY_EEPROM_Private_Defines EEPROM_Private_Defines
+/** @defgroup STM32F429I_DISCOVERY_EEPROM_Private_Defines
   * @{
   */  
 /**
   * @}
   */ 
 
-
-/** @defgroup STM32F429I_DISCOVERY_EEPROM_Private_Macros EEPROM_Private_Macros
+/** @defgroup STM32F429I_DISCOVERY_EEPROM_Private_Macros
   * @{
   */
 /**
   * @}
   */ 
   
-
-/** @defgroup STM32F429I_DISCOVERY_EEPROM_Private_Variables EEPROM_Private_Variables
+/** @defgroup STM32F429I_DISCOVERY_EEPROM_Private_Variables
   * @{
   */
 __IO uint16_t  EEPROMAddress = 0;
@@ -142,25 +136,23 @@ __IO uint8_t   EEPROMDataWrite;
   * @}
   */ 
 
-/** @defgroup STM32F429I_DISCOVERY_EEPROM_Private_Function_Prototypes EEPROM_Private_Function_Prototypes
+/** @defgroup STM32F429I_DISCOVERY_EEPROM_Private_Function_Prototypes
   * @{
   */ 
 /**
   * @}
   */ 
 
-
-/** @defgroup STM32F429I_DISCOVERY_EEPROM_Private_Functions EEPROM_Private_Functions
+/** @defgroup STM32F429I_DISCOVERY_EEPROM_Private_Functions
   * @{
   */ 
 
 /**
   * @brief  Initializes peripherals used by the I2C EEPROM driver.
   * @param  None
-  * 
-  * @note There are 2 different versions of M24LR64 (A01 & A02).
-  *             Then try to connect on 1st one (EEPROM_I2C_ADDRESS_A01) 
-  *             and if problem, check the 2nd one (EEPROM_I2C_ADDRESS_A02)
+  * @note   There are 2 different versions of M24LR64 (A01 & A02).
+  *         Then try to connect on 1st one (EEPROM_I2C_ADDRESS_A01) 
+  *         and if problem, check the 2nd one (EEPROM_I2C_ADDRESS_A02)
   * @retval EEPROM_OK (0) if operation is correctly performed, else return value 
   *         different from EEPROM_OK (0)
   */
@@ -168,7 +160,7 @@ uint32_t BSP_EEPROM_Init(void)
 { 
   /* I2C Initialization */
   EEPROM_IO_Init();
-
+  
   /*Select the EEPROM address for A01 and check if OK*/
   EEPROMAddress = EEPROM_I2C_ADDRESS_A01;
   if (EEPROM_IO_IsDeviceReady(EEPROMAddress, EEPROM_MAX_TRIALS) != HAL_OK) 
@@ -198,7 +190,7 @@ uint32_t BSP_EEPROM_Init(void)
   * @retval EEPROM_OK (0) if operation is correctly performed, else return value 
   *         different from EEPROM_OK (0) or the timeout user callback.
   */
-uint32_t BSP_EEPROM_ReadBuffer(uint8_t* pBuffer, uint16_t ReadAddr, uint16_t* NumByteToRead)
+uint32_t BSP_EEPROM_ReadBuffer(uint8_t *pBuffer, uint16_t ReadAddr, uint16_t *NumByteToRead)
 {  
   uint32_t buffersize = *NumByteToRead;
   
@@ -255,7 +247,7 @@ uint32_t BSP_EEPROM_ReadBuffer(uint8_t* pBuffer, uint16_t ReadAddr, uint16_t* Nu
   * @retval EEPROM_OK (0) if operation is correctly performed, else return value 
   *         different from EEPROM_OK (0) or the timeout user callback.
   */
-uint32_t BSP_EEPROM_WritePage(uint8_t* pBuffer, uint16_t WriteAddr, uint8_t* NumByteToWrite)
+uint32_t BSP_EEPROM_WritePage(uint8_t *pBuffer, uint16_t WriteAddr, uint8_t *NumByteToWrite)
 { 
   uint32_t buffersize = *NumByteToWrite;
   uint32_t status = EEPROM_OK;
@@ -299,7 +291,7 @@ uint32_t BSP_EEPROM_WritePage(uint8_t* pBuffer, uint16_t WriteAddr, uint8_t* Num
   * @retval EEPROM_OK (0) if operation is correctly performed, else return value 
   *         different from EEPROM_OK (0) or the timeout user callback.
   */
-uint32_t BSP_EEPROM_WriteBuffer(uint8_t* pBuffer, uint16_t WriteAddr, uint16_t NumByteToWrite)
+uint32_t BSP_EEPROM_WriteBuffer(uint8_t *pBuffer, uint16_t WriteAddr, uint16_t NumByteToWrite)
 {
   uint16_t numofpage = 0, numofsingle = 0, count = 0;
   uint16_t addr = 0;
@@ -311,10 +303,10 @@ uint32_t BSP_EEPROM_WriteBuffer(uint8_t* pBuffer, uint16_t WriteAddr, uint16_t N
   numofpage =  NumByteToWrite / EEPROM_PAGESIZE;
   numofsingle = NumByteToWrite % EEPROM_PAGESIZE;
  
-  /*!< If WriteAddr is EEPROM_PAGESIZE aligned  */
+  /* If WriteAddr is EEPROM_PAGESIZE aligned  */
   if(addr == 0) 
   {
-    /*!< If NumByteToWrite < EEPROM_PAGESIZE */
+    /* If NumByteToWrite < EEPROM_PAGESIZE */
     if(numofpage == 0) 
     {
       /* Store the number of data to be written */
@@ -326,7 +318,7 @@ uint32_t BSP_EEPROM_WriteBuffer(uint8_t* pBuffer, uint16_t WriteAddr, uint16_t N
         return status;
       }
     }
-    /*!< If NumByteToWrite > EEPROM_PAGESIZE */
+    /* If NumByteToWrite > EEPROM_PAGESIZE */
     else  
     {
       while(numofpage--)
@@ -355,19 +347,19 @@ uint32_t BSP_EEPROM_WriteBuffer(uint8_t* pBuffer, uint16_t WriteAddr, uint16_t N
       }
     }
   }
-  /*!< If WriteAddr is not EEPROM_PAGESIZE aligned  */
+  /* If WriteAddr is not EEPROM_PAGESIZE aligned */
   else 
   {
-    /*!< If NumByteToWrite < EEPROM_PAGESIZE */
+    /* If NumByteToWrite < EEPROM_PAGESIZE */
     if(numofpage== 0) 
     {
-      /*!< If the number of data to be written is more than the remaining space 
+      /* If the number of data to be written is more than the remaining space 
       in the current page: */
       if (NumByteToWrite > count)
       {
         /* Store the number of data to be written */
         dataindex = count;        
-        /*!< Write the data contained in same page */
+        /* Write the data contained in same page */
         status = BSP_EEPROM_WritePage(pBuffer, WriteAddr, (uint8_t*)(&dataindex));
         if (status != EEPROM_OK)
         {
@@ -376,7 +368,7 @@ uint32_t BSP_EEPROM_WriteBuffer(uint8_t* pBuffer, uint16_t WriteAddr, uint16_t N
         
         /* Store the number of data to be written */
         dataindex = (NumByteToWrite - count);          
-        /*!< Write the remaining data in the following page */
+        /* Write the remaining data in the following page */
         status = BSP_EEPROM_WritePage((uint8_t*)(pBuffer + count), (WriteAddr + count), (uint8_t*)(&dataindex));
         if (status != EEPROM_OK)
         {
@@ -394,7 +386,7 @@ uint32_t BSP_EEPROM_WriteBuffer(uint8_t* pBuffer, uint16_t WriteAddr, uint16_t N
         }
       }     
     }
-    /*!< If NumByteToWrite > EEPROM_PAGESIZE */
+    /* If NumByteToWrite > EEPROM_PAGESIZE */
     else
     {
       NumByteToWrite -= count;
@@ -498,9 +490,7 @@ __weak void BSP_EEPROM_TIMEOUT_UserCallback(void)
 {
 }
 
-/**
-  * @}
-  */
+#endif /* EE_M24LR64 */
 
 /**
   * @}
@@ -517,6 +507,5 @@ __weak void BSP_EEPROM_TIMEOUT_UserCallback(void)
 /**
   * @}
   */  
-#endif /*EE_M24LR64*/
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

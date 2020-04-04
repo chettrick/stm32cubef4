@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324xg_eval_audio.h
   * @author  MCD Application Team
-  * @version V2.0.1
-  * @date    26-February-2014
+  * @version V2.0.2
+  * @date    19-June-2014
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm324xg_eval_audio.c driver.
   ******************************************************************************
@@ -56,23 +56,20 @@
   * @{
   */
     
-/** @defgroup stm324xg_eval_audio
+/** @defgroup STM324xG_EVAL_AUDIO
   * @{
   */
 
-
-/** @defgroup stm324xg_eval_audio_Exported_Types
+/** @defgroup STM324xG_EVAL_AUDIO_Exported_Types
   * @{
   */
-
 /**
   * @}
   */ 
 
-/** @defgroup stm324xg_eval_audio_Exported_Constants
+/** @defgroup STM324xG_EVAL_AUDIO_Exported_Constants
   * @{
   */
- 
 /* Audio Reset Pin definition */
 #define AUDIO_RESET_PIN                     IO_PIN_2
     
@@ -119,12 +116,11 @@
 /* Delay for the Codec to be correctly reset */
 #define CODEC_RESET_DELAY               5
 
-
 /**
   * @}
   */ 
 
-/** @defgroup stm324xg_eval_audio_Exported_Macros
+/** @defgroup STM324xG_EVAL_AUDIO_Exported_Macros
   * @{
   */
 #define DMA_MAX(x)           (((x) <= DMA_MAX_SZE)? (x):DMA_MAX_SZE)
@@ -132,30 +128,30 @@
   * @}
   */ 
 
-/** @defgroup stm324xg_eval_audio_Exported_Functions
+/** @defgroup STM324xG_EVAL_AUDIO_Exported_Functions
   * @{
   */
 uint8_t BSP_AUDIO_OUT_Init(uint16_t OutputDevice, uint8_t Volume, uint32_t AudioFreq);
-uint8_t BSP_AUDIO_OUT_Play(uint16_t* pBuffer, uint32_t Size);
-void BSP_AUDIO_OUT_ChangeBuffer(uint16_t *pData, uint16_t Size);
+uint8_t BSP_AUDIO_OUT_Play(uint16_t *pBuffer, uint32_t Size);
+void    BSP_AUDIO_OUT_ChangeBuffer(uint16_t *pData, uint16_t Size);
 uint8_t BSP_AUDIO_OUT_Pause(void);
 uint8_t BSP_AUDIO_OUT_Resume(void);
 uint8_t BSP_AUDIO_OUT_Stop(uint32_t Option);
 uint8_t BSP_AUDIO_OUT_SetVolume(uint8_t Volume);
-void BSP_AUDIO_OUT_SetFrequency(uint32_t AudioFreq);
-uint8_t BSP_AUDIO_OUT_SetMute(uint32_t Command);
+void    BSP_AUDIO_OUT_SetFrequency(uint32_t AudioFreq);
+uint8_t BSP_AUDIO_OUT_SetMute(uint32_t Cmd);
 uint8_t BSP_AUDIO_OUT_SetOutputMode(uint8_t Output);
 
 /* User Callbacks: user has to implement these functions in his code if they are needed. */
 /* This function is called when the requested data has been completely transferred.*/
-void BSP_AUDIO_OUT_TransferComplete_CallBack(void);
+void    BSP_AUDIO_OUT_TransferComplete_CallBack(void);
 
 /* This function is called when half of the requested buffer has been transferred. */
-void BSP_AUDIO_OUT_HalfTransfer_CallBack(void);
+void    BSP_AUDIO_OUT_HalfTransfer_CallBack(void);
 
 /* This function is called when an Interrupt due to transfer error on or peripheral
    error occurs. */
-void BSP_AUDIO_OUT_Error_CallBack(void);
+void    BSP_AUDIO_OUT_Error_CallBack(void);
 
 /**
   * @}

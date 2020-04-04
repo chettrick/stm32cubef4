@@ -2,10 +2,10 @@
   ******************************************************************************
   * @file    stm32f429i_discovery_gyroscope.c
   * @author  MCD Application Team
-  * @version V2.0.1
-  * @date    26-February-2014
-  * @brief   This file provides a set of functions needed to manage the l3gd20
-  *          MEMS accelerometer available on STM32F429I-Discovery Kit.
+  * @version V2.1.0
+  * @date    19-June-2014
+  * @brief   This file provides a set of functions needed to manage the
+  *          MEMS gyroscope available on STM32F429I-Discovery Kit.
   ******************************************************************************
   * @attention
   *
@@ -46,36 +46,32 @@
   * @{
   */ 
 
-/** @defgroup STM32F429I_DISCOVERY_GYRO STM32F429I_DISCOVERY_GYRO
+/** @defgroup STM32F429I_DISCOVERY_GYROSCOPE
   * @{
   */
 
-
-/** @defgroup STM32F429I_DISCOVERY_GYRO_Private_TypesDefinitions STM32F429I_DISCOVERY_GYRO_Private_TypesDefinitions
+/** @defgroup STM32F429I_DISCOVERY_GYROSCOPE_Private_TypesDefinitions
   * @{
   */
-  
 /**
   * @}
   */
 
-/** @defgroup STM32F429I_DISCOVERY_GYRO_Private_Defines STM32F429I_DISCOVERY_GYRO_Private_Defines
+/** @defgroup STM32F429I_DISCOVERY_GYROSCOPE_Private_Defines
   * @{
   */
-
 /**
   * @}
   */
 
-/** @defgroup STM32F429I_DISCOVERY_GYRO_Private_Macros STM32F429I_DISCOVERY_GYRO_Private_Macros
+/** @defgroup STM32F429I_DISCOVERY_GYROSCOPE_Private_Macros
   * @{
   */
-
 /**
   * @}
   */ 
   
-/** @defgroup STM32F429I_DISCOVERY_GYRO_Private_Variables STM32F429I_DISCOVERY_GYRO_Private_Variables
+/** @defgroup STM32F429I_DISCOVERY_GYROSCOPE_Private_Variables
   * @{
   */ 
 static GYRO_DrvTypeDef *GyroscopeDrv;
@@ -84,23 +80,21 @@ static GYRO_DrvTypeDef *GyroscopeDrv;
   * @}
   */
 
-/** @defgroup STM32F429I_DISCOVERY_GYRO_Private_FunctionPrototypes STM32F429I_DISCOVERY_GYRO_Private_FunctionPrototypes
+/** @defgroup STM32F429I_DISCOVERY_GYROSCOPE_Private_FunctionPrototypes
   * @{
   */
-
 /**
   * @}
   */
 
-/** @defgroup STM32F429I_DISCOVERY_GYRO_Private_Functions STM32F429I_DISCOVERY_GYRO_Private_Functions
+/** @defgroup STM32F429I_DISCOVERY_GYROSCOPE_Private_Functions
   * @{
   */
-
   
 /**
-  * @brief  Set GYRO Initialization.
+  * @brief  Set Gyroscope Initialization.
   * @param  None
-  * @retval None
+  * @retval GYRO_OK if no problem during initialization
   */
 uint8_t BSP_GYRO_Init(void)
 {  
@@ -109,12 +103,13 @@ uint8_t BSP_GYRO_Init(void)
   GYRO_InitTypeDef L3GD20_InitStructure;
   GYRO_FilterConfigTypeDef L3GD20_FilterStructure={0,0};
 
-  if(L3gd20Drv.ReadID() == I_AM_L3GD20)
+  if((L3gd20Drv.ReadID() == I_AM_L3GD20) || (L3gd20Drv.ReadID() == I_AM_L3GD20_TR))
   {	
-    /* Initialize the gyroscope driver structure */
+    /* Initialize the Gyroscope driver structure */
     GyroscopeDrv = &L3gd20Drv;
 
-    /* Configure Mems : data rate, power mode, full scale and axes */
+    /* MEMS configuration ----------------------------------------------------*/
+    /* Fill the Gyroscope structure */
     L3GD20_InitStructure.Power_Mode = L3GD20_MODE_ACTIVE;
     L3GD20_InitStructure.Output_DataRate = L3GD20_OUTPUT_DATARATE_1;
     L3GD20_InitStructure.Axes_Enable = L3GD20_AXES_ENABLE;
@@ -129,8 +124,8 @@ uint8_t BSP_GYRO_Init(void)
 
     ctrl |= (uint16_t) ((L3GD20_InitStructure.BlockData_Update | L3GD20_InitStructure.Endianness | \
                          L3GD20_InitStructure.Full_Scale) << 8);
-
-    /* L3gd20 Init */	 
+    
+    /* Configure the Gyroscope main parameters */	 
     GyroscopeDrv->Init(ctrl);
 
     L3GD20_FilterStructure.HighPassFilter_Mode_Selection = L3GD20_HPM_NORMAL_MODE_RES;
@@ -139,6 +134,7 @@ uint8_t BSP_GYRO_Init(void)
     ctrl = (uint8_t) ((L3GD20_FilterStructure.HighPassFilter_Mode_Selection |\
                        L3GD20_FilterStructure.HighPassFilter_CutOff_Frequency));
 
+    /* Configure the Gyroscope main parameters */
     GyroscopeDrv->FilterConfig(ctrl) ;
 
     GyroscopeDrv->FilterCmd(L3GD20_HIGHPASSFILTER_ENABLE);
@@ -149,19 +145,18 @@ uint8_t BSP_GYRO_Init(void)
   {
     ret = GYRO_ERROR;
   }
-  
   return ret;
 }
 
 /**
-  * @brief  Read ID of Gyroscope component
+  * @brief  Read ID of Gyroscope component.
   * @param  None
   * @retval ID
   */
 uint8_t BSP_GYRO_ReadID(void)
 {
   uint8_t id = 0x00;
-
+  
   if(GyroscopeDrv->ReadID != NULL)
   {
     id = GyroscopeDrv->ReadID();
@@ -170,7 +165,7 @@ uint8_t BSP_GYRO_ReadID(void)
 }
 
 /**
-  * @brief  Reboot memory content of GYRO
+  * @brief  Reboot memory content of Gyroscope.
   * @param  None
   * @retval None
   */
@@ -182,9 +177,8 @@ void BSP_GYRO_Reset(void)
   }
 }
 
-
 /**
-  * @brief  Configure INT1 interrupt
+  * @brief  Configures INT1 interrupt.
   * @param  pIntConfig: pointer to a L3GD20_InterruptConfig_TypeDef 
   *         structure that contains the configuration setting for the L3GD20 Interrupt.
   * @retval None
@@ -192,21 +186,21 @@ void BSP_GYRO_Reset(void)
 void BSP_GYRO_ITConfig(GYRO_InterruptConfigTypeDef *pIntConfig)
 {  
   uint16_t interruptconfig = 0x0000;
-
+  
   if(GyroscopeDrv->ConfigIT != NULL)
   {
     /* Configure latch Interrupt request and axe interrupts */                   
     interruptconfig |= ((uint8_t)(pIntConfig->Latch_Request| \
                                   pIntConfig->Interrupt_Axes) << 8);
-                   
+    
     interruptconfig |= (uint8_t)(pIntConfig->Interrupt_ActiveEdge);
-  
-  GyroscopeDrv->ConfigIT(interruptconfig);
+    
+    GyroscopeDrv->ConfigIT(interruptconfig);
   }  
 }
 
 /**
-  * @brief  Enable INT1 or INT2 interrupt
+  * @brief  Enables INT1 or INT2 interrupt.
   * @param  IntPin: Interrupt pin 
   *      This parameter can be: 
   *        @arg L3GD20_INT1
@@ -222,7 +216,7 @@ void BSP_GYRO_EnableIT(uint8_t IntPin)
 }
 
 /**
-  * @brief  Disable INT1 or INT2 interrupt
+  * @brief  Disables INT1 or INT2 interrupt.
   * @param  IntPin: Interrupt pin 
   *      This parameter can be: 
   *        @arg L3GD20_INT1
@@ -238,11 +232,11 @@ void BSP_GYRO_DisableIT(uint8_t IntPin)
 }
 
 /**
-  * @brief  Get XYZ angular acceleration
-  * @param pfData: pointer on floating array         
+  * @brief  Gets XYZ angular acceleration/
+  * @param  pfData: pointer on floating array         
   * @retval None
   */
-void BSP_GYRO_GetXYZ(float* pfData)
+void BSP_GYRO_GetXYZ(float *pfData)
 {
   if(GyroscopeDrv->GetXYZ!= NULL)
   {
@@ -265,9 +259,5 @@ void BSP_GYRO_GetXYZ(float* pfData)
 /**
   * @}
   */ 
-  
-/**
-  * @}
-*/ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/     

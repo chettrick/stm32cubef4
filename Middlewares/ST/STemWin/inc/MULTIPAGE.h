@@ -1,16 +1,16 @@
 /*********************************************************************
-*          Portions COPYRIGHT 2013 STMicroelectronics                *
+*          Portions COPYRIGHT 2014 STMicroelectronics                *
 *          Portions SEGGER Microcontroller GmbH & Co. KG             *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
 *                                                                    *
-*        (c) 1996 - 2013  SEGGER Microcontroller GmbH & Co. KG       *
+*        (c) 1996 - 2014  SEGGER Microcontroller GmbH & Co. KG       *
 *                                                                    *
 *        Internet: www.segger.com    Support:  support@segger.com    *
 *                                                                    *
 **********************************************************************
 
-** emWin V5.22 - Graphical user interface for embedded applications **
+** emWin V5.24 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -50,7 +50,7 @@ Purpose     : MULTIPAGE include
   *
   ******************************************************************************
   */
-
+  
 #ifndef MULTIPAGE_H
 #define MULTIPAGE_H
 
@@ -116,7 +116,9 @@ typedef struct {
 } MULTIPAGE_SKIN_PROPS;
 
 typedef struct {
-  GUI_ROTATION * pRotation;
+  #if GUI_SUPPORT_ROTATION
+    GUI_ROTATION * pRotation;
+  #endif
   unsigned       Align;
   int            Sel;
   U16            State;
@@ -165,7 +167,7 @@ int              MULTIPAGE_IsPageEnabled (MULTIPAGE_Handle hObj, unsigned Index)
 void             MULTIPAGE_SelectPage    (MULTIPAGE_Handle hObj, unsigned Index);
 void             MULTIPAGE_SetAlign      (MULTIPAGE_Handle hObj, unsigned Align);
 void             MULTIPAGE_SetBkColor    (MULTIPAGE_Handle hObj, GUI_COLOR Color, unsigned Index);
-void             MULTIPAGE_SetFont       (MULTIPAGE_Handle hObj, const GUI_FONT GUI_UNI_PTR * pFont);
+void             MULTIPAGE_SetFont       (MULTIPAGE_Handle hObj, const GUI_FONT * pFont);
 void             MULTIPAGE_SetRotation   (MULTIPAGE_Handle hObj, unsigned Rotation);
 void             MULTIPAGE_SetText       (MULTIPAGE_Handle hObj, const char * pText, unsigned Index);
 void             MULTIPAGE_SetTextColor  (MULTIPAGE_Handle hObj, GUI_COLOR Color, unsigned Index);
@@ -177,19 +179,19 @@ int              MULTIPAGE_SetUserData   (MULTIPAGE_Handle hObj, const void * pS
 *
 **********************************************************************
 */
-unsigned                     MULTIPAGE_GetDefaultAlign    (void);
-GUI_COLOR                    MULTIPAGE_GetDefaultBkColor  (unsigned Index);
-const GUI_FONT GUI_UNI_PTR * MULTIPAGE_GetDefaultFont     (void);
-GUI_COLOR                    MULTIPAGE_GetDefaultTextColor(unsigned Index);
+unsigned         MULTIPAGE_GetDefaultAlign    (void);
+GUI_COLOR        MULTIPAGE_GetDefaultBkColor  (unsigned Index);
+const GUI_FONT * MULTIPAGE_GetDefaultFont     (void);
+GUI_COLOR        MULTIPAGE_GetDefaultTextColor(unsigned Index);
 
-void                         MULTIPAGE_SetDefaultAlign    (unsigned Align);
-void                         MULTIPAGE_SetDefaultBkColor  (GUI_COLOR Color, unsigned Index);
-void                         MULTIPAGE_SetDefaultFont     (const GUI_FONT GUI_UNI_PTR * pFont);
-void                         MULTIPAGE_SetDefaultTextColor(GUI_COLOR Color, unsigned Index);
+void             MULTIPAGE_SetDefaultAlign    (unsigned Align);
+void             MULTIPAGE_SetDefaultBkColor  (GUI_COLOR Color, unsigned Index);
+void             MULTIPAGE_SetDefaultFont     (const GUI_FONT * pFont);
+void             MULTIPAGE_SetDefaultTextColor(GUI_COLOR Color, unsigned Index);
 
-void                         MULTIPAGE_SetEffectColor     (unsigned Index, GUI_COLOR Color);
-GUI_COLOR                    MULTIPAGE_GetEffectColor     (unsigned Index);
-int                          MULTIPAGE_GetNumEffectColors (void);
+void             MULTIPAGE_SetEffectColor     (unsigned Index, GUI_COLOR Color);
+GUI_COLOR        MULTIPAGE_GetEffectColor     (unsigned Index);
+int              MULTIPAGE_GetNumEffectColors (void);
 
 /*********************************************************************
 *

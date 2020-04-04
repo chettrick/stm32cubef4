@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    lis302dl.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    19-June-2014
   * @brief   This file contains all the functions prototypes for the lis302dl.c
   *          firmware driver.
   ******************************************************************************
@@ -47,11 +47,11 @@
 /* Includes ------------------------------------------------------------------*/
 #include "..\Common\accelero.h"
 
-/** @addtogroup Utilities
+/** @addtogroup BSP
   * @{
-  */
-  
-/** @addtogroup STM32F4_DISCOVERY
+  */ 
+
+/** @addtogroup Components
   * @{
   */ 
 
@@ -136,7 +136,7 @@ typedef struct
 *  0 Xen: X axis enable.
 *         0 - X axis disabled
 *         1- X axis enabled
-********************************************************************************/
+*******************************************************************************/
 #define LIS302DL_CTRL_REG1_ADDR                 0x20
 
 /*******************************************************************************
@@ -633,7 +633,6 @@ typedef struct
   * @}
   */
 
-
 /** @defgroup latch_Interrupt_Request_selection 
   * @{
   */
@@ -666,39 +665,41 @@ typedef struct
 /**
   * @}
   */
+
 /**
   * @}
-  */ 
-  
+  */  
 
 /** @defgroup LIS302DL_Exported_Functions
   * @{
   */ 
-void        LIS302DL_Init(uint16_t InitStruct);
-uint8_t     LIS302DL_ReadID(void);
-void        LIS302DL_FilterConfig(uint8_t FilterStruct);
-void        LIS302DL_InterruptConfig(LIS302DL_InterruptConfigTypeDef *LIS302DL_IntConfigStruct);
-void        LIS302DL_Click_IntConfig(void);
-void        LIS302DL_Click_IntClear(void);
-void        LIS302DL_LowpowerCmd(uint8_t LowPowerMode);
-void        LIS302DL_FullScaleCmd(uint8_t FS_value);
-void        LIS302DL_DataRateCmd(uint8_t DataRateValue);
-void        LIS302DL_RebootCmd(void);
-void        LIS302DL_ReadACC(int16_t *pData);
+void    LIS302DL_Init(uint16_t InitStruct);
+uint8_t LIS302DL_ReadID(void);
+void    LIS302DL_FilterConfig(uint8_t FilterStruct);
+void    LIS302DL_InterruptConfig(LIS302DL_InterruptConfigTypeDef *LIS302DL_IntConfigStruct);
+void    LIS302DL_Click_IntConfig(void);
+void    LIS302DL_Click_IntClear(void);
+void    LIS302DL_LowpowerCmd(uint8_t LowPowerMode);
+void    LIS302DL_FullScaleCmd(uint8_t FS_value);
+void    LIS302DL_DataRateCmd(uint8_t DataRateValue);
+void    LIS302DL_RebootCmd(void);
+void    LIS302DL_ReadACC(int16_t *pData);
 
+/* Accelerometer driver structure */
 extern ACCELERO_DrvTypeDef Lis302dlDrv;
 
 /* Accelerometer IO functions */
-void            ACCELERO_IO_Init(void);
-void            ACCELERO_IO_ITConfig(void);
-void            ACCELERO_IO_Write(uint8_t* pBuffer, uint8_t WriteAddr, uint16_t NumByteToWrite);
-void            ACCELERO_IO_Read(uint8_t* pBuffer, uint8_t ReadAddr, uint16_t NumByteToRead);
+void    ACCELERO_IO_Init(void);
+void    ACCELERO_IO_ITConfig(void);
+void    ACCELERO_IO_Write(uint8_t* pBuffer, uint8_t WriteAddr, uint16_t NumByteToWrite);
+void    ACCELERO_IO_Read(uint8_t* pBuffer, uint8_t ReadAddr, uint16_t NumByteToRead);
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif /* __LIS302DL_H */
+
 /**
   * @}
   */
@@ -715,5 +716,4 @@ void            ACCELERO_IO_Read(uint8_t* pBuffer, uint8_t ReadAddr, uint16_t Nu
   * @}
   */ 
 
-
-/******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/
+/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

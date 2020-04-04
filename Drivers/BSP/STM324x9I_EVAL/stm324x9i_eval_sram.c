@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324x9i_eval_sram.c
   * @author  MCD Application Team
-  * @version V2.0.1
-  * @date    26-February-2014
+  * @version V2.0.2
+  * @date    19-June-2014
   * @brief   This file includes the SRAM driver for the IS61WV102416BLL-10M memory 
   *          device mounted on STM324x9I-EVAL evaluation board.
   ******************************************************************************
@@ -83,49 +83,44 @@
 /** @defgroup STM324x9I_EVAL_SRAM
   * @{
   */ 
-  
-/* Private typedef -----------------------------------------------------------*/
 
 /** @defgroup STM324x9I_EVAL_SRAM_Private_Types_Definitions
   * @{
   */ 
-  
-/* Private define ------------------------------------------------------------*/
+/**
+  * @}
+  */ 
 
 /** @defgroup STM324x9I_EVAL_SRAM_Private_Defines
   * @{
   */
-  
-/* Private macro -------------------------------------------------------------*/
+/**
+  * @}
+  */ 
 
 /** @defgroup STM324x9I_EVAL_SRAM_Private_Macros
   * @{
   */  
-  
-/* Private variables ---------------------------------------------------------*/
+/**
+  * @}
+  */ 
 
 /** @defgroup STM324x9I_EVAL_SRAM_Private_Variables
   * @{
   */       
 static SRAM_HandleTypeDef sramHandle;
 static FMC_NORSRAM_TimingTypeDef Timing;
-
 /**
   * @}
   */ 
-
-/* Private function prototypes -----------------------------------------------*/
 
 /** @defgroup STM324x9I_EVAL_SRAM_Private_Function_Prototypes
   * @{
   */ 
 static void SRAM_MspInit(void); 
-
 /**
   * @}
   */
-   
-/* Private functions ---------------------------------------------------------*/
     
 /** @defgroup STM324x9I_EVAL_SRAM_Private_Functions
   * @{
@@ -138,8 +133,8 @@ static void SRAM_MspInit(void);
   */
 uint8_t BSP_SRAM_Init(void)
 { 
-  sramHandle.Instance  = FMC_NORSRAM_DEVICE;
-  sramHandle.Extended  = FMC_NORSRAM_EXTENDED_DEVICE;
+  sramHandle.Instance = FMC_NORSRAM_DEVICE;
+  sramHandle.Extended = FMC_NORSRAM_EXTENDED_DEVICE;
   
   /* SRAM device configuration */  
   Timing.AddressSetupTime      = 2;

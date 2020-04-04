@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324x9i_eval_lcd.h
   * @author  MCD Application Team
-  * @version V2.0.1
-  * @date    26-February-2014
+  * @version V2.0.2
+  * @date    19-June-2014
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm324x9i_eval_lcd.c driver.
   ******************************************************************************
@@ -64,7 +64,6 @@
   * @{
   */
 
-
 /** @addtogroup STM324x9I_EVAL
   * @{
   */
@@ -73,25 +72,20 @@
   * @{
   */ 
 
-
 /** @defgroup STM324x9I_EVAL_LCD_Exported_Types
   * @{
-  */
-#define MAX_LAYER_NUMBER           2
-   
+  */  
 typedef struct 
 { 
   uint32_t TextColor; 
   uint32_t BackColor;  
   sFONT    *pFont;
-  
 }LCD_DrawPropTypeDef;   
    
 typedef struct 
 {
   int16_t X;
   int16_t Y;
-
 }Point, * pPoint; 
    
 /** 
@@ -99,10 +93,9 @@ typedef struct
   */ 
 typedef enum
 {
-  CENTER_MODE             = 0x01,    /*!< Center mode */
-  RIGHT_MODE              = 0x02,    /*!< Right mode  */
-  LEFT_MODE               = 0x03     /*!< Left mode   */
-
+  CENTER_MODE             = 0x01,    /* Center mode */
+  RIGHT_MODE              = 0x02,    /* Right mode  */
+  LEFT_MODE               = 0x03     /* Left mode   */
 }Text_AlignModeTypdef;
 
 /**
@@ -111,7 +104,9 @@ typedef enum
 
 /** @defgroup STM324x9I_EVAL_LCD_Exported_Constants
   * @{
-  */      
+  */ 
+#define MAX_LAYER_NUMBER       2
+
 #define LCD_LayerCfgTypeDef    LTDC_LayerCfgTypeDef
 
 /** 
@@ -121,13 +116,6 @@ typedef enum
 #define   LCD_ERROR      0x01
 #define   LCD_TIMEOUT    0x02
 
-/**
-  * @}
-  */ 
-
-/** @defgroup STM324x9I_EVAL_LCD_Exported_Constants
-  * @{
-  */
 /** 
   * @brief  LCD FB_StartAddress  
   */
@@ -163,12 +151,10 @@ typedef enum
 #define LCD_COLOR_ORANGE        0xFFFFA500
 #define LCD_COLOR_TRANSPARENT   0xFF000000
 
-
 /** 
   * @brief LCD default font 
   */ 
-#define LCD_DEFAULT_FONT         Font24
-     
+#define LCD_DEFAULT_FONT        Font24     
 /**
   * @}
   */ 
@@ -181,15 +167,15 @@ uint32_t BSP_LCD_GetXSize(void);
 uint32_t BSP_LCD_GetYSize(void);
 
 /* Functions using the LTDC controller */
-void    BSP_LCD_LayerDefaultInit(uint16_t LayerIndex, uint32_t FrameBuffer);
-void    BSP_LCD_SetTransparency(uint32_t LayerIndex, uint8_t Transparency);
-void    BSP_LCD_SetLayerAddress(uint32_t LayerIndex, uint32_t Address);
-void    BSP_LCD_SetColorKeying(uint32_t LayerIndex, uint32_t RGBValue);
-void    BSP_LCD_ResetColorKeying(uint32_t LayerIndex);
-void    BSP_LCD_SetLayerWindow(uint16_t LayerIndex, uint16_t Xpos, uint16_t Ypos, uint16_t Width, uint16_t Height);
+void     BSP_LCD_LayerDefaultInit(uint16_t LayerIndex, uint32_t FrameBuffer);
+void     BSP_LCD_SetTransparency(uint32_t LayerIndex, uint8_t Transparency);
+void     BSP_LCD_SetLayerAddress(uint32_t LayerIndex, uint32_t Address);
+void     BSP_LCD_SetColorKeying(uint32_t LayerIndex, uint32_t RGBValue);
+void     BSP_LCD_ResetColorKeying(uint32_t LayerIndex);
+void     BSP_LCD_SetLayerWindow(uint16_t LayerIndex, uint16_t Xpos, uint16_t Ypos, uint16_t Width, uint16_t Height);
 
-void    BSP_LCD_SelectLayer(uint32_t LayerIndex);
-void    BSP_LCD_SetLayerVisible(uint32_t LayerIndex, FunctionalState State);
+void     BSP_LCD_SelectLayer(uint32_t LayerIndex);
+void     BSP_LCD_SetLayerVisible(uint32_t LayerIndex, FunctionalState State);
 
 void     BSP_LCD_SetTextColor(uint32_t Color);
 uint32_t BSP_LCD_GetTextColor(void);
@@ -222,14 +208,7 @@ void     BSP_LCD_FillEllipse(int Xpos, int Ypos, int XRadius, int YRadius);
 
 void     BSP_LCD_DisplayOff(void);
 void     BSP_LCD_DisplayOn(void);
-/**
-  * @}
-  */    
-#ifdef __cplusplus
-}
-#endif
 
-#endif /* __STM324x9I_EVAL_LCD_H */
 /**
   * @}
   */ 
@@ -241,5 +220,15 @@ void     BSP_LCD_DisplayOn(void);
 /**
   * @}
   */
-   
-/*********************** (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+ 
+/**
+  * @}
+  */ 
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* __STM324x9I_EVAL_LCD_H */
+
+/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

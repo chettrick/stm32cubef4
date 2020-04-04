@@ -1,16 +1,16 @@
 /*********************************************************************
-*          Portions COPYRIGHT 2013 STMicroelectronics                *
+*          Portions COPYRIGHT 2014 STMicroelectronics                *
 *          Portions SEGGER Microcontroller GmbH & Co. KG             *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
 *                                                                    *
-*        (c) 1996 - 2013  SEGGER Microcontroller GmbH & Co. KG       *
+*        (c) 1996 - 2014  SEGGER Microcontroller GmbH & Co. KG       *
 *                                                                    *
 *        Internet: www.segger.com    Support:  support@segger.com    *
 *                                                                    *
 **********************************************************************
 
-** emWin V5.22 - Graphical user interface for embedded applications **
+** emWin V5.24 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -50,7 +50,7 @@ Purpose     : Private declarations for GUIDRV_FlexColor driver
   *
   ******************************************************************************
   */
-
+  
 #include "GUIDRV_FlexColor.h"
 
 #ifndef GUIDRV_FLEXCOLOR_PRIVATE_H
@@ -127,8 +127,9 @@ struct DRIVER_CONTEXT {
   U8  aPair_8 [3 + FLEXCOLOR_MAX_NUM_DUMMY_READS];
   U16 aPair_16[3 + FLEXCOLOR_MAX_NUM_DUMMY_READS];
   //
-  // Functions for writing single items (data, cmd) regardless of the interface
+  // Functions for writing single items (data, cmd) regardless of the interface and getting the status
   //
+  U16  (* pfReadReg)     (DRIVER_CONTEXT * _pContext);
   void (* pfSetReg)      (DRIVER_CONTEXT * _pContext, U16 _Data);
   void (* pfWritePara)   (DRIVER_CONTEXT * _pContext, U16 _Data);
   void (* pfSetInterface)(DRIVER_CONTEXT * _pContext, int _BusWidth);
@@ -166,7 +167,7 @@ struct DRIVER_CONTEXT {
   //
   // Mode dependent drawing functions
   //
-  void    (* pfDrawBitmap   )(GUI_DEVICE *  _pDevice, int _x0, int _y0, int _xsize, int _ysize, int _BitsPerPixel, int _BytesPerLine, const U8 GUI_UNI_PTR * _pData, int _Diff, const LCD_PIXELINDEX * _pTrans);
+  void    (* pfDrawBitmap   )(GUI_DEVICE *  _pDevice, int _x0, int _y0, int _xsize, int _ysize, int _BitsPerPixel, int _BytesPerLine, const U8 * _pData, int _Diff, const LCD_PIXELINDEX * _pTrans);
   void    (* pfFillRect     )(GUI_DEVICE *  _pDevice, int _x0, int _y0, int _x1, int _y1);
   unsigned(* pfGetPixelIndex)(GUI_DEVICE *  _pDevice, int _x, int _y);
   void    (* pfSetPixelIndex)(GUI_DEVICE *  _pDevice, int _x, int _y, int _ColorIndex);
@@ -241,6 +242,7 @@ void GUIDRV_FlexColor__SetFunc66712(GUI_DEVICE * pDevice, U16 AndMask_SetAddrRAM
   void SIM_FlexColor_SetFunc66719(GUI_DEVICE * pDevice);
   void SIM_FlexColor_SetFunc66720(GUI_DEVICE * pDevice);
   void SIM_FlexColor_SetFunc66721(GUI_DEVICE * pDevice);
+  void SIM_FlexColor_SetFunc66722(GUI_DEVICE * pDevice);
   void SIM_FlexColor_SetFunc66772(GUI_DEVICE * pDevice);
 
 #endif

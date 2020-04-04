@@ -14,8 +14,8 @@
   ******************************************************************************
   * @file    diskio.c 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.1.0
+  * @date    22-April-2014
   * @brief   FatFs low level disk I/O module.
   ******************************************************************************
   * @attention
@@ -54,9 +54,13 @@ extern Disk_drvTypeDef  disk;
   */
 DSTATUS disk_initialize(BYTE pdrv)
 {
-  DSTATUS stat;
+  DSTATUS stat = RES_OK;
   
-  stat = disk.drv[pdrv]->disk_initialize();
+  if(disk.is_initialized[pdrv] == 0)
+  { 
+    disk.is_initialized[pdrv] = 1;
+    stat = disk.drv[pdrv]->disk_initialize();
+  }
   return stat;
 }
 

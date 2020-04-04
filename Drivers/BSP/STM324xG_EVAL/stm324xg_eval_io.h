@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324xg_eval_io.h
   * @author  MCD Application Team
-  * @version V2.0.1
-  * @date    26-February-2014
+  * @version V2.0.2
+  * @date    19-June-2014
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm324xg_eval_io.c driver.
   ******************************************************************************
@@ -46,9 +46,8 @@
    
 /* Includes ------------------------------------------------------------------*/
 #include "stm324xg_eval.h"
+/* Include IO component driver */
 #include "..\Components\stmpe811\stmpe811.h"
-
-
    
 /** @addtogroup BSP
   * @{
@@ -62,8 +61,6 @@
   * @{
   */    
 
-/* Exported types ------------------------------------------------------------*/
-
 /** @defgroup STM324xG_EVAL_IO_Exported_Types
   * @{
   */
@@ -72,8 +69,10 @@ typedef enum
   IO_OK       = 0x00,
   IO_ERROR    = 0x01,
   IO_TIMEOUT  = 0x02
-
 }IO_StatusTypeDef;
+/**
+  * @}
+  */ 
 
 /** @defgroup STM324xG_EVAL_IO_Exported_Constants
   * @{
@@ -87,19 +86,20 @@ typedef enum
 #define IO_PIN_6                     0x40
 #define IO_PIN_7                     0x80
 #define IO_PIN_ALL                   0xFF
+/**
+  * @}
+  */ 
 
-/* Exported macro ------------------------------------------------------------*/
-  
 /** @defgroup STM324xG_EVAL_IO_Exported_Macros
   * @{
   */
-
-/* Exported functions --------------------------------------------------------*/
+/**
+  * @}
+  */ 
 
 /** @defgroup STM324xG_EVAL_IO_Exported_Functions
   * @{
   */
-
 uint8_t  BSP_IO_Init(void);
 void     BSP_IO_ITClear(uint16_t IO_Pin);
 uint8_t  BSP_IO_ITGetStatus(uint16_t IO_Pin);
@@ -108,11 +108,6 @@ void     BSP_IO_WritePin(uint16_t IO_Pin, uint8_t PinState);
 uint16_t BSP_IO_ReadPin(uint16_t IO_Pin);
 void     BSP_IO_TogglePin(uint16_t IO_Pin);
 
-#ifdef __cplusplus
-}
-#endif
-#endif /* __STM324xG_EVAL_IO_H */
-
 /**
   * @}
   */ 
@@ -127,5 +122,12 @@ void     BSP_IO_TogglePin(uint16_t IO_Pin);
 
 /**
   * @}
-  */       
+  */
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* __STM324xG_EVAL_IO_H */
+
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

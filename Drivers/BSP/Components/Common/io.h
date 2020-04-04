@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    io.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.1.0
+  * @date    21-March-2014
   * @brief   This file contains all the functions prototypes for the IO driver.
   ******************************************************************************
   * @attention
@@ -41,50 +41,54 @@
 
 #ifdef __cplusplus
  extern "C" {
-#endif   
-   
-/* Includes ------------------------------------------------------------------*/
-#include <stdint.h> 
+#endif
 
+/* Includes ------------------------------------------------------------------*/
+#include <stdint.h>
+
+/** @addtogroup BSP
+  * @{
+  */
+
+/** @addtogroup Components
+  * @{
+  */
     
+/** @addtogroup IO
+  * @{
+  */
+
+/** @defgroup IO_Exported_Types
+  * @{
+  */
 typedef enum
 {
-   IO_MODE_INPUT = 0,                
-   IO_MODE_OUTPUT,              
-   IO_MODE_IT_RISING_EDGE,         
-   IO_MODE_IT_FALLING_EDGE,        
-   IO_MODE_IT_LOW_LEVEL,           
-   IO_MODE_IT_HIGH_LEVEL,          
+   IO_MODE_INPUT = 0,
+   IO_MODE_OUTPUT,
+   IO_MODE_IT_RISING_EDGE,
+   IO_MODE_IT_FALLING_EDGE,
+   IO_MODE_IT_LOW_LEVEL,
+   IO_MODE_IT_HIGH_LEVEL
    
-} IO_ModeTypedef;
+}IO_ModeTypedef;
 
 typedef struct
 {  
   void       (*Init)(uint16_t);
-  uint16_t   (*ReadID)(uint16_t); 
+  uint16_t   (*ReadID)(uint16_t);
   void       (*Reset)(uint16_t);
   
-  void       (*Start)(uint16_t, uint16_t); 
-  void       (*Config)(uint16_t, uint16_t, IO_ModeTypedef); 
+  void       (*Start)(uint16_t, uint16_t);
+  void       (*Config)(uint16_t, uint16_t, IO_ModeTypedef);
   void       (*WritePin)(uint16_t, uint16_t, uint8_t);
   uint16_t   (*ReadPin)(uint16_t, uint16_t);
   
   void       (*EnableIT)(uint16_t);
-  void       (*DisableIT)(uint16_t);  
-  uint8_t    (*ITStatus)(uint16_t, uint16_t);   
-  void       (*ClearIT)(uint16_t, uint16_t); 
+  void       (*DisableIT)(uint16_t);
+  uint8_t    (*ITStatus)(uint16_t, uint16_t);
+  void       (*ClearIT)(uint16_t, uint16_t);
     
-} IO_DrvTypeDef;
-
-
-#ifdef __cplusplus
-}
-#endif
-#endif /* __IO_H */
-
-/**
-  * @}
-  */ 
+}IO_DrvTypeDef;
 
 /**
   * @}
@@ -92,9 +96,20 @@ typedef struct
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}
-  */       
+  */
+
+/**
+  * @}
+  */
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* __IO_H */
+
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

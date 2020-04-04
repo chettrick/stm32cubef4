@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324xg_eval_sram.h
   * @author  MCD Application Team
-  * @version V2.0.1
-  * @date    26-February-2014
+  * @version V2.0.2
+  * @date    19-June-2014
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm324xg_eval_sram.c driver.
   ******************************************************************************
@@ -55,36 +55,35 @@
   * @{
   */
     
-/** @defgroup stm324xg_eval_sram
+/** @defgroup STM324xG_EVAL_SRAM
   * @{
   */    
 
-/* Exported types ------------------------------------------------------------*/
-
-/** @defgroup stm324xg_eval_sram_Exported_Types
+/** @defgroup STM324xG_EVAL_SRAM_Exported_Types
   * @{
   */
-  
-
-/* Exported constants --------------------------------------------------------*/ 
-
+/**
+  * @}
+  */ 
+   
+/** @defgroup STM324xG_EVAL_SRAM_Exported_Constants
+  * @{
+  */
+   
 /** 
   * @brief  SD status structure definition  
   */     
 #define SRAM_OK         0x00
 #define SRAM_ERROR      0x01
    
-/** @defgroup stm324xg_eval_sram_Exported_Constants
-  * @{
-  */  
 #define SRAM_DEVICE_ADDR  ((uint32_t)0x64000000)
 #define SRAM_DEVICE_SIZE  ((uint32_t)0x200000)  /* SRAM device size in MBytes */  
   
-/* #define SRAM_MEMORY_WIDTH    FSMC_NORSRAM_MEM_BUS_WIDTH_8  */
+/* #define SRAM_MEMORY_WIDTH    FSMC_NORSRAM_MEM_BUS_WIDTH_8 */
 #define SRAM_MEMORY_WIDTH    FSMC_NORSRAM_MEM_BUS_WIDTH_16
 
 #define SRAM_BURSTACCESS    FSMC_BURST_ACCESS_MODE_DISABLE  
-/* #define SRAM_BURSTACCESS    FSMC_BURST_ACCESS_MODE_ENABLE*/
+/* #define SRAM_BURSTACCESS    FSMC_BURST_ACCESS_MODE_ENABLE */
   
 #define SRAM_WRITEBURST    FSMC_WRITE_BURST_DISABLE  
 /* #define SRAM_WRITEBURST   FSMC_WRITE_BURST_ENABLE */
@@ -95,20 +94,18 @@
 #define SRAM_DMAx_STREAM                  DMA2_Stream0  
 #define SRAM_DMAx_IRQn                    DMA2_Stream0_IRQn
 #define SRAM_DMAx_IRQHandler              DMA2_Stream0_IRQHandler
-
 /**
   * @}
   */ 
   
-/* Exported macro ------------------------------------------------------------*/
-  
-/** @defgroup stm324xg_eval_sram_Exported_Macro
+/** @defgroup STM324xG_EVAL_SRAM_Exported_Macro
   * @{
   */  
+/**
+  * @}
+  */ 
 
-/* Exported functions --------------------------------------------------------*/
-
-/** @defgroup stm324xg_eval_sram_Exported_Functions
+/** @defgroup STM324xG_EVAL_SRAM_Exported_Functions
   * @{
   */     
 uint8_t BSP_SRAM_Init(void);
@@ -116,28 +113,28 @@ uint8_t BSP_SRAM_ReadData(uint32_t uwStartAddress, uint16_t *pData, uint32_t uwD
 uint8_t BSP_SRAM_ReadData_DMA(uint32_t uwStartAddress, uint16_t *pData, uint32_t uwDataSize);
 uint8_t BSP_SRAM_WriteData(uint32_t uwStartAddress, uint16_t *pData, uint32_t uwDataSize);
 uint8_t BSP_SRAM_WriteData_DMA(uint32_t uwStartAddress, uint16_t *pData, uint32_t uwDataSize);
-void BSP_SRAM_DMA_IRQHandler(void);
+void    BSP_SRAM_DMA_IRQHandler(void);
+
+/**
+  * @}
+  */ 
+
+/**
+  * @}
+  */ 
+
+/**
+  * @}
+  */ 
+
+/**
+  * @}
+  */ 
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif /* __STM324xG_EVAL_SRAM_H */
-
-/**
-  * @}
-  */ 
-
-/**
-  * @}
-  */ 
-
-/**
-  * @}
-  */ 
-
-/**
-  * @}
-  */ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -2,10 +2,10 @@
   ******************************************************************************
   * @file    stm32f4_discovery_accelerometer.h
   * @author  MCD Application Team
-  * @version V2.0.0
-  * @date    18-February-2014
-  * @brief   This file contains all the functions prototypes for the stm32f4_discovery_accelerometer.c
-  *          firmware driver.
+  * @version V2.0.1
+  * @date    19-June-2014
+  * @brief   This file contains all the functions prototypes for the 
+  *          stm32f4_discovery_accelerometer.c firmware driver.
   ******************************************************************************
   * @attention
   *
@@ -46,11 +46,12 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4_discovery.h"
-/* Include Accelerometer component driver */
+   
+/* Include Accelerometer component drivers */
 #include "..\Components\lis302dl\lis302dl.h"   
 #include "..\Components\lis3dsh\lis3dsh.h"   
 
-   /** @addtogroup Utilities
+/** @addtogroup BSP
   * @{
   */
   
@@ -61,7 +62,6 @@
 /** @addtogroup STM32F4_DISCOVERY_ACCELEROMETER
   * @{
   */
-  
 
 /** @defgroup STM32F4_DISCOVERY_ACCELEROMETER_Exported_Types
   * @{
@@ -71,9 +71,7 @@ typedef enum
   ACCELERO_OK = 0,
   ACCELERO_ERROR = 1,
   ACCELERO_TIMEOUT = 2
-} 
-ACCELERO_StatusTypeDef;
-
+}ACCELERO_StatusTypeDef;
 /**
   * @}
   */
@@ -81,15 +79,14 @@ ACCELERO_StatusTypeDef;
 /** @defgroup STM32F4_DISCOVERY_ACCELEROMETER_Exported_Functions
   * @{
   */
-/* Acc functions */  
-uint8_t   BSP_ACCELERO_Init(void);
-uint8_t   BSP_ACCELERO_ReadID(void);
-void      BSP_ACCELERO_Reset(void);
-void      BSP_ACCELERO_Click_ITConfig(void);
-void      BSP_ACCELERO_Click_ITClear(void);
-void      BSP_ACCELERO_GetXYZ(int16_t *pDataXYZ);
+/* Accelerometer functions */  
+uint8_t BSP_ACCELERO_Init(void);
+uint8_t BSP_ACCELERO_ReadID(void);
+void    BSP_ACCELERO_Reset(void);
+void    BSP_ACCELERO_Click_ITConfig(void);
+void    BSP_ACCELERO_Click_ITClear(void);
+void    BSP_ACCELERO_GetXYZ(int16_t *pDataXYZ);
 
-#endif /* __STM32F4_DISCOVERY_ACCELEROMETER_H */
 /**
   * @}
   */
@@ -106,5 +103,10 @@ void      BSP_ACCELERO_GetXYZ(int16_t *pDataXYZ);
   * @}
   */ 
 
+#ifdef __cplusplus
+}
+#endif
 
-/******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/
+#endif /* __STM32F4_DISCOVERY_ACCELEROMETER_H */
+
+/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

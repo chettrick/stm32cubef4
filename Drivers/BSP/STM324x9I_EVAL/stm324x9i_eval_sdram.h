@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324x9i_eval_sdram.h
   * @author  MCD Application Team
-  * @version V2.0.1
-  * @date    26-February-2014
+  * @version V2.0.2
+  * @date    19-June-2014
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm324x9i_eval_sdram.c driver.
   ******************************************************************************
@@ -59,14 +59,9 @@
   * @{
   */    
 
-/* Exported types ------------------------------------------------------------*/
-
 /** @defgroup STM324x9I_EVAL_SDRAM_Exported_Types
   * @{
   */
-  
-
-/* Exported constants --------------------------------------------------------*/ 
 
 /** 
   * @brief  SDRAM status structure definition  
@@ -115,50 +110,49 @@
 #define SDRAM_MODEREG_OPERATING_MODE_STANDARD    ((uint16_t)0x0000)
 #define SDRAM_MODEREG_WRITEBURST_MODE_PROGRAMMED ((uint16_t)0x0000) 
 #define SDRAM_MODEREG_WRITEBURST_MODE_SINGLE     ((uint16_t)0x0200) 
-
 /**
   * @}
   */ 
   
-/* Exported macro ------------------------------------------------------------*/
-  
 /** @defgroup STM324x9I_EVAL_SDRAM_Exported_Macro
   * @{
   */  
-
-/* Exported functions --------------------------------------------------------*/
-
+/**
+  * @}
+  */ 
+   
 /** @defgroup STM324x9I_EVAL_SDRAM_Exported_Functions
   * @{
   */  
 uint8_t BSP_SDRAM_Init(void);
-void BSP_SDRAM_Initialization_sequence(uint32_t RefreshCount);
+void    BSP_SDRAM_Initialization_sequence(uint32_t RefreshCount);
 uint8_t BSP_SDRAM_ReadData(uint32_t uwStartAddress, uint32_t *pData, uint32_t uwDataSize);
 uint8_t BSP_SDRAM_ReadData_DMA(uint32_t uwStartAddress, uint32_t *pData, uint32_t uwDataSize);
 uint8_t BSP_SDRAM_WriteData(uint32_t uwStartAddress, uint32_t *pData, uint32_t uwDataSize);
 uint8_t BSP_SDRAM_WriteData_DMA(uint32_t uwStartAddress, uint32_t *pData, uint32_t uwDataSize);
 uint8_t BSP_SDRAM_Sendcmd(FMC_SDRAM_CommandTypeDef *SdramCmd);
-void BSP_SDRAM_DMA_IRQHandler(void);  
+void    BSP_SDRAM_DMA_IRQHandler(void);  
    
+/**
+  * @}
+  */ 
+
+/**
+  * @}
+  */ 
+
+/**
+  * @}
+  */ 
+
+/**
+  * @}
+  */ 
+
 #ifdef __cplusplus
 }
 #endif
 
 #endif /* __STM324x9I_EVAL_SDRAM_H */
-/**
-  * @}
-  */ 
-
-/**
-  * @}
-  */ 
-
-/**
-  * @}
-  */ 
-
-/**
-  * @}
-  */ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

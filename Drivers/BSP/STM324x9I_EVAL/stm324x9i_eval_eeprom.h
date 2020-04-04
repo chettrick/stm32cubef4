@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324x9i_eval_eeprom.h
   * @author  MCD Application Team
-  * @version V2.0.1
-  * @date    26-February-2014
+  * @version V2.0.2
+  * @date    19-June-2014
   * @brief   This file contains all the functions prototypes for 
   *          the stm324x9i_eval_eeprom.c firmware driver.
   ******************************************************************************
@@ -37,8 +37,8 @@
   */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __STM32F4xG_EVAL_EEPROM_H
-#define __STM32F4xG_EVAL_EEPROM_H
+#ifndef __STM32F4x9I_EVAL_EEPROM_H
+#define __STM32F4x9I_EVAL_EEPROM_H
 
 #ifdef __cplusplus
  extern "C" {
@@ -63,7 +63,6 @@
 /** @defgroup STM324x9I_EVAL_EEPROM_Exported_Types
   * @{
   */ 
-
 /**
   * @}
   */
@@ -73,13 +72,13 @@
   */
 /* EEPROM hardware address and page size */ 
 #define EEPROM_PAGESIZE             4
-#define EEPROM_MAX_SIZE             0x2000 /* 64Kbit*/
+#define EEPROM_MAX_SIZE             0x2000 /* 64Kbit */
                                 
 /* Maximum Timeout values for flags and events waiting loops. 
 This timeout is based on systick set to 1ms*/   
-/* Timeout for read based if read all the EEPROM : EEPROM_MAX_SIZE * I2C_SPEED (640ms)*/
+/* Timeout for read based if read all the EEPROM : EEPROM_MAX_SIZE * I2C_SPEED (640ms) */
 #define EEPROM_READ_TIMEOUT         ((uint32_t)(1000))
-/* Timeout for write based on max write which is EEPROM_PAGESIZE bytes: EEPROM_PAGESIZE * I2C_SPEED (320us)*/
+/* Timeout for write based on max write which is EEPROM_PAGESIZE bytes: EEPROM_PAGESIZE * I2C_SPEED (320us) */
 #define EEPROM_WRITE_TIMEOUT         ((uint32_t)(10))
 
 /* Maximum number of trials for EEPROM_WaitEepromStandbyState() function */
@@ -88,7 +87,6 @@ This timeout is based on systick set to 1ms*/
 #define EEPROM_OK                   0
 #define EEPROM_FAIL                 1
 #define EEPROM_TIMEOUT              2
-
 /**
   * @}
   */ 
@@ -114,19 +112,14 @@ uint32_t BSP_EEPROM_WaitEepromStandbyState(void);
    BSP_EEPROM_TIMEOUT_UserCallback() function is called whenever a timeout condition 
    occure during communication (waiting on an event that doesn't occur, bus 
    errors, busy devices ...). */
-void BSP_EEPROM_TIMEOUT_UserCallback(void);
+void     BSP_EEPROM_TIMEOUT_UserCallback(void);
 
 /* Link function for I2C EEPROM peripheral */
-void EEPROM_IO_Init(void);
-HAL_StatusTypeDef EEPROM_IO_WriteData(uint16_t DevAddress, uint16_t MemAddress, uint8_t* pBuffer, uint32_t BufferSize);
-HAL_StatusTypeDef EEPROM_IO_ReadData(uint16_t DevAddress, uint16_t MemAddress, uint8_t* pBuffer, uint32_t BufferSize);
+void              EEPROM_IO_Init(void);
+HAL_StatusTypeDef EEPROM_IO_WriteData(uint16_t DevAddress, uint16_t MemAddress, uint8_t *pBuffer, uint32_t BufferSize);
+HAL_StatusTypeDef EEPROM_IO_ReadData(uint16_t DevAddress, uint16_t MemAddress, uint8_t *pBuffer, uint32_t BufferSize);
 HAL_StatusTypeDef EEPROM_IO_IsDeviceReady(uint16_t DevAddress, uint32_t Trials);
 
-#ifdef __cplusplus
-}
-#endif
-
-#endif /* __STM324x9I_EVAL_EEPROM_H */
 /**
   * @}
   */
@@ -142,5 +135,11 @@ HAL_StatusTypeDef EEPROM_IO_IsDeviceReady(uint16_t DevAddress, uint32_t Trials);
 /**
   * @}
   */ 
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* __STM324x9I_EVAL_EEPROM_H */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -8,6 +8,7 @@
 
 
 
+
   
   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
@@ -109,6 +110,59 @@ Copyright © 2014 STMicroelectronics
         <tbody>
           <tr style="">
             <td style="padding: 0cm;" valign="top"><h2 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;"><a name="History"></a><span style="font-size: 12pt; color: white;">Update History</span></h2>
+            <h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; margin-right: 500pt; width: 180px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V2.0.1 / 26-February-2014 <o:p></o:p></span></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">Main
+Changes</span></u></b></p>
+
+            
+            <ul style="list-style-type: square;">
+<li><span style="font-size: 10pt; font-family: Verdana;">stm32f429i_discovery.c/.h</span></li>
+              <ul>
+                <li><span style="font-size: 10pt; font-family: Verdana;">Add protection for double initialization of IO_Init within LCD_IO_Init()</span></li>
+              </ul>
+              <ul>
+                <li><span style="font-size: 10pt; font-family: Verdana;">Enhance BSP_PB_Init() function by removing the call of __SYSCFG_CLK_ENABLE() already enabled in the HAL_GPIO_Init()</span></li>
+              </ul>
+              <li><span style="font-size: 10pt; font-family: Verdana;">stm32f429i_discovery_gyroscope.c/.h</span></li>
+              <ul>
+                <li><span style="font-size: 10pt; font-family: Verdana;">Update BSP_GYRO_Init() to support new L3GD20 device ID (I_AM_L3GD20_TR)</span></li>
+              </ul>
+              <li><span style="font-size: 10pt; font-family: Verdana;">stm32f429i_discovery_ts.c/.h</span></li>
+              <ul>
+                <li><span style="font-size: 10pt; font-family: Verdana;">Correct
+wrong TS configuration BSP_TS_ITConfig() and TS IT implementation,
+BSP_TS_ITClear() related to the use of IO expander STMPE1600 device not
+available on stm32f429i discovery board</span></li>
+                <li><span style="font-size: 10pt; font-family: Verdana;">Comments clean up and typo corrections</span></li>
+              </ul>
+              <li><span style="font-size: 10pt; font-family: Verdana;">stm32f429i_discovery_eeprom.c/.h</span></li>
+<ul><li><span style="font-size: 10pt; font-family: Verdana;">Update usage of BSP_EEPROM_TIMEOUT_UserCallback() function</span></li></ul>
+            </ul>
+
             <h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; margin-right: 500pt; width: 180px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V2.0.1 / 26-February-2014 <o:p></o:p></span></h3>
 
 

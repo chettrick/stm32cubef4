@@ -2,10 +2,11 @@
   ******************************************************************************
   * @file    stm32f429i_discovery_ts.c
   * @author  MCD Application Team
-  * @version V2.0.1
-  * @date    26-February-2014
+  * @version V2.1.0
+  * @date    19-June-2014
   * @brief   This file provides a set of functions needed to manage Touch 
-  * screen available with STMPE811 IO Expander device mounted on STM32F429I-DISCO Kit.
+  *          screen available with STMPE811 IO Expander device mounted on 
+  *          STM32F429I-Discovery Kit.
   ******************************************************************************
   * @attention
   *
@@ -48,63 +49,48 @@
   * @{
   */ 
   
-/** @defgroup STM32F429I_DISCOVERY_TS STM32F429I_DISCOVERY_TS
+/** @defgroup STM32F429I_DISCOVERY_TS
   * @{
   */ 
 
-/* Private typedef -----------------------------------------------------------*/
-
-/** @defgroup STM32F429I_DISCOVERY_ts_Private_Types_Definitions STM32F429I_DISCOVERY_ts_Private_Types_Definitions
-  * @{
-  */ 
-/**
-  * @}
-  */ 
-
-/* Private define ------------------------------------------------------------*/
-
-/** @defgroup STM32F429I_DISCOVERY_ts_Private_Defines STM32F429I_DISCOVERY_ts_Private_Defines
-  * @{
-  */ 
-
-/**
-  * @}
-  */ 
-
-/* Private macro -------------------------------------------------------------*/
-
-/** @defgroup STM32F429I_DISCOVERY_ts_Private_Macros STM32F429I_DISCOVERY_ts_Private_Macros
+/** @defgroup STM32F429I_DISCOVERY_TS_Private_Types_Definitions
   * @{
   */ 
 /**
   * @}
   */ 
 
-/* Private variables ---------------------------------------------------------*/
+/** @defgroup STM32F429I_DISCOVERY_TS_Private_Defines
+  * @{
+  */ 
+/**
+  * @}
+  */ 
 
-/** @defgroup STM32F429I_DISCOVERY_ts_Private_Variables STM32F429I_DISCOVERY_ts_Private_Variables
+/** @defgroup STM32F429I_DISCOVERY_TS_Private_Macros
+  * @{
+  */ 
+/**
+  * @}
+  */ 
+
+/** @defgroup STM32F429I_DISCOVERY_TS_Private_Variables
   * @{
   */
 static TS_DrvTypeDef     *TsDrv;
 static uint16_t          TsXBoundary, TsYBoundary; 
-
 /**
   * @}
   */
 
-/* Private function prototypes -----------------------------------------------*/
-
-/** @defgroup STM32F429I_DISCOVERY_ts_Private_Function_Prototypes STM32F429I_DISCOVERY_ts_Private_Function_Prototypes
+/** @defgroup STM32F429I_DISCOVERY_TS_Private_Function_Prototypes
   * @{
   */
-
 /**
   * @}
   */
-  
-/* Private functions ---------------------------------------------------------*/
 
-/** @defgroup STM32F429I_DISCOVERY_ts_Private_Functions STM32F429I_DISCOVERY_ts_Private_Functions
+/** @defgroup STM32F429I_DISCOVERY_TS_Private_Functions
   * @{
   */
 
@@ -142,7 +128,6 @@ uint8_t BSP_TS_Init(uint16_t XSize, uint16_t YSize)
   return ret;
 }
 
-
 /**
   * @brief  Configures and enables the touch screen interrupts.
   * @param  None
@@ -150,18 +135,10 @@ uint8_t BSP_TS_Init(uint16_t XSize, uint16_t YSize)
   */
 uint8_t BSP_TS_ITConfig(void)
 {
-  uint8_t ret = TS_ERROR;
-
-  /* Initialize the IO */
-  ret = BSP_IO_Init();
-  
-  /* Configure TS IT line IO */
-  BSP_IO_ConfigPin(TS_INT_PIN, IO_MODE_IT_FALLING_EDGE);
-  
   /* Enable the TS ITs */
   TsDrv->EnableIT(TS_I2C_ADDRESS);
 
-  return ret;  
+  return TS_OK;
 }
 
 /**
@@ -191,13 +168,13 @@ void BSP_TS_GetState(TS_StateTypeDef* TsState)
   {
     TsDrv->GetXY(TS_I2C_ADDRESS, &x, &y);
     
-    /* y value first correction */
+    /* Y value first correction */
     y -= 360;  
     
-    /* y value second correction */
+    /* Y value second correction */
     yr = y / 11;
     
-    /* return y position value */
+    /* Return y position value */
     if(yr <= 0)
     {
       yr = 0;
@@ -209,21 +186,21 @@ void BSP_TS_GetState(TS_StateTypeDef* TsState)
     else
     {}
     y = yr;
-
-    /* x value first correction */
+    
+    /* X value first correction */
     if(x <= 3000)
     {
-    x = 3870 - x;
+      x = 3870 - x;
     }
     else
     {
-     x = 3800 - x;
+      x = 3800 - x;
     }
-
-    /* x value second correction */  
+    
+    /* X value second correction */  
     xr = x / 15;
-
-    /* return x position value */
+    
+    /* Return X position value */
     if(xr <= 0)
     {
       xr = 0;
@@ -234,11 +211,11 @@ void BSP_TS_GetState(TS_StateTypeDef* TsState)
     }
     else 
     {}
-
+    
     x = xr;
     xDiff = x > _x? (x - _x): (_x - x);
     yDiff = y > _y? (y - _y): (_y - y); 
-
+    
     if (xDiff + yDiff > 5)
     {
       _x = x;
@@ -250,7 +227,7 @@ void BSP_TS_GetState(TS_StateTypeDef* TsState)
     
     /* Update the Y position */  
     TsState->Y = _y;
-    }
+  }
 }
 
 /**
@@ -260,9 +237,6 @@ void BSP_TS_GetState(TS_StateTypeDef* TsState)
   */  
 void BSP_TS_ITClear(void)
 {
-  /* Clear all IO IT pin */
-  BSP_IO_ITClear();
-  
   /* Clear TS IT pending bits */
   TsDrv->ClearIT(TS_I2C_ADDRESS); 
 }
@@ -281,5 +255,6 @@ void BSP_TS_ITClear(void)
 
 /**
   * @}
-  */      
+  */ 
+
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

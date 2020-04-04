@@ -2,10 +2,10 @@
   ******************************************************************************
   * @file    lis3dsh.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    19-June-2014
   * @brief   This file provides a set of functions needed to manage the LIS3DSH
-  *          MEMS Accelerometer available on STM32F4-Discovery Kit.
+  *          MEMS Accelerometer.
   ******************************************************************************
   * @attention
   *
@@ -39,18 +39,19 @@
 /* Includes ------------------------------------------------------------------*/
 #include "lis3dsh.h"
 
-/** @addtogroup Utilities
+/** @addtogroup BSP
   * @{
   */ 
 
-/** @addtogroup STM32F4_DISCOVERY
+/** @addtogroup Components
   * @{
   */ 
 
-/** @addtogroup STM32F4_DISCOVERY_LIS3DSH
+/** @addtogroup LIS3DSH
+  * @brief  This file includes the motion sensor driver for LIS3DSH motion sensor 
+  *         devices.
   * @{
   */
-
 
 /** @defgroup LIS3DSH_Private_TypesDefinitions
   * @{
@@ -110,7 +111,6 @@ ACCELERO_DrvTypeDef Lis3dshDrv =
   * @{
   */
 
-
 /**
   * @brief  Set LIS3DSH Initialization.
   * @param  InitStruct: contains mask of different init parameters
@@ -120,7 +120,7 @@ void LIS3DSH_Init(uint16_t InitStruct)
 {
   uint8_t ctrl = 0x00;
   
-  /* Configure the low level interface ---------------------------------------*/
+  /* Configure the low level interface */
   ACCELERO_IO_Init();
 
   /* Configure MEMS: power mode(ODR) and axes enable */
@@ -138,14 +138,14 @@ void LIS3DSH_Init(uint16_t InitStruct)
 
 /**
   * @brief  Read LIS3DSH device ID.
-  * @param none
+  * @param  None
   * @retval The Device ID (two bytes).
   */
 uint8_t LIS3DSH_ReadID(void)
 {
   uint8_t tmp = 0;
 
-  /* Configure the low level interface ---------------------------------------*/
+  /* Configure the low level interface */
   ACCELERO_IO_Init();
 
   /* Read WHO_AM_I register */
@@ -189,9 +189,9 @@ void LIS3DSH_InterruptConfig(LIS3DSH_InterruptConfigTypeDef *LIS3DSH_IntConfigSt
 }
 
 /**
-  * @brief     Set LIS3DSH for click detection
+  * @brief  Set LIS3DSH for click detection
   * @param  None
-  * @retval   None
+  * @retval None
   */
 void LIS3DSH_Click_IntConfig(void)
 {
@@ -352,7 +352,7 @@ void LIS3DSH_ReadACC(int16_t *pData)
   uint8_t crtl, i = 0x00;
   float sensitivity = LIS3DSH_SENSITIVITY_0_06G;
   float valueinfloat = 0;
-   
+  
   ACCELERO_IO_Read(&crtl, LIS3DSH_CTRL_REG5_ADDR, 1);  
   ACCELERO_IO_Read((uint8_t*)&buffer[0], LIS3DSH_OUT_X_L_ADDR, 1);
   ACCELERO_IO_Read((uint8_t*)&buffer[1], LIS3DSH_OUT_X_H_ADDR, 1);
@@ -362,31 +362,35 @@ void LIS3DSH_ReadACC(int16_t *pData)
   ACCELERO_IO_Read((uint8_t*)&buffer[5], LIS3DSH_OUT_Z_H_ADDR, 1);
   
   switch(crtl & LIS3DSH__FULLSCALE_SELECTION) 
-    {
-    /* FS bit = 000 ==> Sensitivity typical value = 0.06milligals/digit*/ 
-    case LIS3DSH_FULLSCALE_2:
-      sensitivity = LIS3DSH_SENSITIVITY_0_06G;
-      break;
-    /* FS bit = 001 ==> Sensitivity typical value = 0.12milligals/digit*/ 
-    case LIS3DSH_FULLSCALE_4:
-      sensitivity = LIS3DSH_SENSITIVITY_0_12G;
-      break;
-    /* FS bit = 010 ==> Sensitivity typical value = 0.18milligals/digit*/ 
-    case LIS3DSH_FULLSCALE_6:
-      sensitivity = LIS3DSH_SENSITIVITY_0_18G;
-      break;
-    /* FS bit = 011 ==> Sensitivity typical value = 0.24milligals/digit*/ 
-    case LIS3DSH_FULLSCALE_8:
-      sensitivity = LIS3DSH_SENSITIVITY_0_24G;
-      break;
-    /* FS bit = 100 ==> Sensitivity typical value = 0.73milligals/digit*/ 
-    case LIS3DSH_FULLSCALE_16:
-      sensitivity = LIS3DSH_SENSITIVITY_0_73G;
-      break;
-    default:
-      break;
-    }
-
+  {
+    /* FS bit = 000 ==> Sensitivity typical value = 0.06milligals/digit */ 
+  case LIS3DSH_FULLSCALE_2:
+    sensitivity = LIS3DSH_SENSITIVITY_0_06G;
+    break;
+    
+    /* FS bit = 001 ==> Sensitivity typical value = 0.12milligals/digit */ 
+  case LIS3DSH_FULLSCALE_4:
+    sensitivity = LIS3DSH_SENSITIVITY_0_12G;
+    break;
+    
+    /* FS bit = 010 ==> Sensitivity typical value = 0.18milligals/digit */ 
+  case LIS3DSH_FULLSCALE_6:
+    sensitivity = LIS3DSH_SENSITIVITY_0_18G;
+    break;
+    
+    /* FS bit = 011 ==> Sensitivity typical value = 0.24milligals/digit */ 
+  case LIS3DSH_FULLSCALE_8:
+    sensitivity = LIS3DSH_SENSITIVITY_0_24G;
+    break;
+    
+    /* FS bit = 100 ==> Sensitivity typical value = 0.73milligals/digit */ 
+  case LIS3DSH_FULLSCALE_16:
+    sensitivity = LIS3DSH_SENSITIVITY_0_73G;
+    break;
+    
+  default:
+    break;
+  }
   
   /* Obtain the mg value for the three axis */
   for(i=0; i<3; i++)
@@ -411,6 +415,5 @@ void LIS3DSH_ReadACC(int16_t *pData)
 /**
   * @}
   */ 
-  
 
-/******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/
+/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

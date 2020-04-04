@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    sram_diskio.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.1.0
+  * @date    22-April-2014
   * @brief   SRAM Disk I/O driver
   ******************************************************************************
   * @attention

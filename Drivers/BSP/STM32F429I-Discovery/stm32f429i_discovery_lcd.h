@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f429i_discovery_lcd.h
   * @author  MCD Application Team
-  * @version V2.0.1
-  * @date    26-February-2014
+  * @version V2.1.0
+  * @date    19-June-2014
   * @brief   This file contains all the functions prototypes for the 
   *          stm32f429i_discovery_lcd.c driver.
   ******************************************************************************
@@ -60,12 +60,11 @@
   * @{
   */ 
     
-/** @defgroup STM32F429I_DISCOVERY_LCD STM32F429I_DISCOVERY_LCD
+/** @defgroup STM32F429I_DISCOVERY_LCD
   * @{
   */ 
 
-
-/** @defgroup STM32F429I_DISCOVERY_LCD_Exported_Types STM32F429I_DISCOVERY_LCD_Exported_Types
+/** @defgroup STM32F429I_DISCOVERY_LCD_Exported_Types
   * @{
   */
 typedef enum 
@@ -73,15 +72,13 @@ typedef enum
   LCD_OK = 0,
   LCD_ERROR = 1,
   LCD_TIMEOUT = 2
-} 
-LCD_StatusTypeDef;
+}LCD_StatusTypeDef;
 
 typedef struct 
 { 
   uint32_t  TextColor; 
   uint32_t  BackColor;  
   sFONT     *pFont;
-  
 }LCD_DrawPropTypeDef;
    
 typedef struct 
@@ -95,16 +92,15 @@ typedef struct
   */ 
 typedef enum
 {
-  CENTER_MODE             = 0x01,    /*!< center mode    */
-  RIGHT_MODE              = 0x02,    /*!< right mode     */     
-  LEFT_MODE               = 0x03,    /*!< left mode      */                                                                               
+  CENTER_MODE             = 0x01,    /* center mode */
+  RIGHT_MODE              = 0x02,    /* right mode  */     
+  LEFT_MODE               = 0x03,    /* left mode   */                                                                               
 }Text_AlignModeTypdef;
-
 /**
   * @}
   */ 
 
-/** @defgroup STM32F429I_DISCOVERY_LCD_Exported_Constants STM32F429I_DISCOVERY_LCD_Exported_Constants
+/** @defgroup STM32F429I_DISCOVERY_LCD_Exported_Constants
   * @{
   */ 
 #define LCD_LayerCfgTypeDef    LTDC_LayerCfgTypeDef
@@ -112,7 +108,7 @@ typedef enum
 /** 
   * @brief  LCD status structure definition  
   */     
-#define MAX_LAYER_NUMBER           2
+#define MAX_LAYER_NUMBER       2
 #define LCD_FRAME_BUFFER       ((uint32_t)0xD0000000)
 #define BUFFER_OFFSET          ((uint32_t)0x50000) 
 
@@ -160,7 +156,7 @@ typedef enum
   * @}
   */ 
 
-/** @defgroup STM32F429I_DISCOVERY_LCD_Exported_Macros STM32F429I_DISCOVERY_LCD_Exported_Macros
+/** @defgroup STM32F429I_DISCOVERY_LCD_Exported_Macros
   * @{
   */ 
 /** 
@@ -174,12 +170,11 @@ typedef enum
 #define LCD_PIXEL_FORMAT_L8               LTDC_PIXEL_FORMAT_L8        
 #define LCD_PIXEL_FORMAT_AL44             LTDC_PIXEL_FORMAT_AL44        
 #define LCD_PIXEL_FORMAT_AL88             LTDC_PIXEL_FORMAT_AL88
-
 /**
   * @}
   */ 
 
-/** @defgroup STM32F429I_DISCOVERY_LCD_Exported_Functions STM32F429I_DISCOVERY_LCD_Exported_Functions
+/** @defgroup STM32F429I_DISCOVERY_LCD_Exported_Functions
   * @{
   */ 
 uint8_t  BSP_LCD_Init(void);
@@ -226,17 +221,8 @@ void     BSP_LCD_FillTriangle(uint16_t X1, uint16_t X2, uint16_t X3, uint16_t Y1
 void     BSP_LCD_FillPolygon(pPoint Points, uint16_t PointCount);
 void     BSP_LCD_FillEllipse(int Xpos, int Ypos, int XRadius, int YRadius);
 
-
 void     BSP_LCD_DisplayOff(void);
 void     BSP_LCD_DisplayOn(void);
-/**
-  * @}
-  */    
-#ifdef __cplusplus
-}
-#endif
-
-#endif /* __STM32F429I_DISCOVERY_LCD_H */
 
 /**
   * @}
@@ -254,4 +240,10 @@ void     BSP_LCD_DisplayOn(void);
   * @}
   */
   
-/*********************** (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* __STM32F429I_DISCOVERY_LCD_H */
+
+/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

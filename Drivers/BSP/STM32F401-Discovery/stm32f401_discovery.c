@@ -2,9 +2,9 @@
   ******************************************************************************
   * @file    stm32f401_discovery.c
   * @author  MCD Application Team
-  * @version V2.0.0
-  * @date    18-February-2014
-  * @brief   This file provides set of firmware functions to manage Leds and
+  * @version V2.1.0
+  * @date    19-June-2014
+  * @brief   This file provides set of firmware functions to manage LEDs and
   *          push-button available on STM32F401-Discovery Kit from STMicroelectronics.
   ******************************************************************************
   * @attention
@@ -53,55 +53,51 @@
   * @{
   */ 
 
-/** @defgroup STM32F401_DISCOVERY_LOW_LEVEL_Private_TypesDefinitions STM32F401_DISCOVERY_LOW_LEVEL_Private_TypesDefinitions
+/** @defgroup STM32F401_DISCOVERY_LOW_LEVEL_Private_TypesDefinitions
   * @{
   */ 
 /**
   * @}
   */ 
 
-
-/** @defgroup STM32F401_DISCOVERY_LOW_LEVEL_Private_Defines STM32F401_DISCOVERY_LOW_LEVEL_Private_Defines
+/** @defgroup STM32F401_DISCOVERY_LOW_LEVEL_Private_Defines
   * @{
   */ 
   
 /**
-  * @brief STM32F401 DISCO BSP Driver version number V2.0.0
+  * @brief STM32F401 DISCO BSP Driver version number V2.1.0
   */
 #define __STM32F401_DISCO_BSP_VERSION_MAIN   (0x02) /*!< [31:24] main version */
-#define __STM32F401_DISCO_BSP_VERSION_SUB1   (0x00) /*!< [23:16] sub1 version */
+#define __STM32F401_DISCO_BSP_VERSION_SUB1   (0x01) /*!< [23:16] sub1 version */
 #define __STM32F401_DISCO_BSP_VERSION_SUB2   (0x00) /*!< [15:8]  sub2 version */
 #define __STM32F401_DISCO_BSP_VERSION_RC     (0x00) /*!< [7:0]  release candidate */ 
 #define __STM32F401_DISCO_BSP_VERSION         ((__STM32F401_DISCO_BSP_VERSION_MAIN << 24)\
                                              |(__STM32F401_DISCO_BSP_VERSION_SUB1 << 16)\
                                              |(__STM32F401_DISCO_BSP_VERSION_SUB2 << 8 )\
-                                             |(__STM32F401_DISCO_BSP_VERSION_RC))  
-  
+                                             |(__STM32F401_DISCO_BSP_VERSION_RC))
 /**
   * @}
   */ 
 
-
-/** @defgroup STM32F401_DISCOVERY_LOW_LEVEL_Private_Macros STM32F401_DISCOVERY_LOW_LEVEL_Private_Macros
+/** @defgroup STM32F401_DISCOVERY_LOW_LEVEL_Private_Macros
   * @{
   */ 
 /**
   * @}
   */ 
 
-
-/** @defgroup STM32F401_DISCOVERY_LOW_LEVEL_Private_Variables STM32F401_DISCOVERY_LOW_LEVEL_Private_Variables
+/** @defgroup STM32F401_DISCOVERY_LOW_LEVEL_Private_Variables
   * @{
   */ 
 GPIO_TypeDef* GPIO_PORT[LEDn] = {LED4_GPIO_PORT, 
                                  LED3_GPIO_PORT, 
                                  LED5_GPIO_PORT,
                                  LED6_GPIO_PORT};
+
 const uint16_t GPIO_PIN[LEDn] = {LED4_PIN, 
                                  LED3_PIN, 
                                  LED5_PIN,
                                  LED6_PIN};
-
 
 GPIO_TypeDef* BUTTON_PORT[BUTTONn] = {KEY_BUTTON_GPIO_PORT}; 
 const uint16_t BUTTON_PIN[BUTTONn] = {KEY_BUTTON_PIN};
@@ -116,57 +112,54 @@ static SPI_HandleTypeDef SpiHandle;
   * @}
   */ 
 
-
-/** @defgroup STM32F401_DISCOVERY_LOW_LEVEL_Private_FunctionPrototypes STM32F401_DISCOVERY_LOW_LEVEL_Private_FunctionPrototypes
+/** @defgroup STM32F401_DISCOVERY_LOW_LEVEL_Private_FunctionPrototypes
   * @{
   */
 /* I2Cx bus function */
-static void     I2Cx_Init(void);
-static void     I2Cx_WriteData(uint16_t Addr, uint8_t Reg, uint8_t Value);
-static uint8_t  I2Cx_ReadData(uint16_t Addr, uint8_t Reg);
-static void     I2Cx_Error (void);
-static void     I2Cx_MspInit(I2C_HandleTypeDef *hi2c);
+static void    I2Cx_Init(void);
+static void    I2Cx_WriteData(uint16_t Addr, uint8_t Reg, uint8_t Value);
+static uint8_t I2Cx_ReadData(uint16_t Addr, uint8_t Reg);
+static void    I2Cx_Error (void);
+static void    I2Cx_MspInit(I2C_HandleTypeDef *hi2c);
 
 /* SPIx bus function */
-static void     SPIx_Init(void);
-static uint8_t  SPIx_WriteRead(uint8_t byte);
-static void     SPIx_Error (void);
-static void     SPIx_MspInit(SPI_HandleTypeDef *hspi);
+static void    SPIx_Init(void);
+static uint8_t SPIx_WriteRead(uint8_t byte);
+static void    SPIx_Error (void);
+static void    SPIx_MspInit(SPI_HandleTypeDef *hspi);
 
 /* Link function for GYRO peripheral */
-void      GYRO_IO_Init(void);
-void      GYRO_IO_Write(uint8_t* pBuffer, uint8_t WriteAddr, uint16_t NumByteToWrite);
-void      GYRO_IO_Read(uint8_t* pBuffer, uint8_t ReadAddr, uint16_t NumByteToRead);
+void GYRO_IO_Init(void);
+void GYRO_IO_Write(uint8_t* pBuffer, uint8_t WriteAddr, uint16_t NumByteToWrite);
+void GYRO_IO_Read(uint8_t* pBuffer, uint8_t ReadAddr, uint16_t NumByteToRead);
 
 /* Link functions for AUDIO */
-void      AUDIO_IO_Init(void);
-void      AUDIO_IO_Write(uint8_t Addr, uint8_t Reg, uint8_t Value);
-uint8_t   AUDIO_IO_Read(uint8_t Addr, uint8_t Reg);
+void    AUDIO_IO_Init(void);
+void    AUDIO_IO_Write(uint8_t Addr, uint8_t Reg, uint8_t Value);
+uint8_t AUDIO_IO_Read(uint8_t Addr, uint8_t Reg);
 
 /* Link function for COMPASS / ACCELERO peripheral */
-void      COMPASSACCELERO_IO_Init(void);
-void      COMPASSACCELERO_IO_ITConfig(void);
-void      COMPASSACCELERO_IO_Write(uint16_t DeviceAddr, uint8_t RegisterAddr, uint8_t Value);
-uint8_t   COMPASSACCELERO_IO_Read(uint16_t DeviceAddr, uint8_t RegisterAddr);
-
+void    COMPASSACCELERO_IO_Init(void);
+void    COMPASSACCELERO_IO_ITConfig(void);
+void    COMPASSACCELERO_IO_Write(uint16_t DeviceAddr, uint8_t RegisterAddr, uint8_t Value);
+uint8_t COMPASSACCELERO_IO_Read(uint16_t DeviceAddr, uint8_t RegisterAddr);
 /**
   * @}
   */ 
 
-/** @defgroup STM32F401_DISCOVERY_LOW_LEVEL_Private_Functions STM32F401_DISCOVERY_LOW_LEVEL_Private_Functions
+/** @defgroup STM32F401_DISCOVERY_LOW_LEVEL_Private_Functions
   * @{
   */ 
   
 /**
   * @brief  This method returns the STM32F401 DISCO BSP Driver revision
   * @param  None
-  * @retval version : 0xXYZR (8bits for each decimal, R for RC)
+  * @retval version: 0xXYZR (8bits for each decimal, R for RC)
   */
 uint32_t BSP_GetVersion(void)
 {
   return __STM32F401_DISCO_BSP_VERSION;
 }
-  
 
 /**
   * @brief  Configures LED GPIO.
@@ -255,29 +248,28 @@ void BSP_LED_Toggle(Led_TypeDef Led)
 void BSP_PB_Init(Button_TypeDef Button, ButtonMode_TypeDef ButtonMode)
 {
   GPIO_InitTypeDef GPIO_InitStruct;
-
+  
   /* Enable the BUTTON Clock */
   BUTTONx_GPIO_CLK_ENABLE(Button);
-  __SYSCFG_CLK_ENABLE();
-
+  
   if(ButtonMode == BUTTON_MODE_GPIO)
   {
-  /* Configure Button pin as input */
+    /* Configure Button pin as input */
     GPIO_InitStruct.Pin = BUTTON_PIN[Button];
     GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
     GPIO_InitStruct.Pull = GPIO_PULLDOWN;
     GPIO_InitStruct.Speed = GPIO_SPEED_FAST;
     HAL_GPIO_Init(BUTTON_PORT[Button], &GPIO_InitStruct);
   }
- 
+  
   if(ButtonMode == BUTTON_MODE_EXTI)
   {
-     /* Configure Button pin as input with External interrupt */
+    /* Configure Button pin as input with External interrupt */
     GPIO_InitStruct.Pin = BUTTON_PIN[Button];
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING; 
     HAL_GPIO_Init(BUTTON_PORT[Button], &GPIO_InitStruct);
-
+    
     /* Enable and set Button EXTI Interrupt to the lowest priority */
     HAL_NVIC_SetPriority((IRQn_Type)(BUTTON_IRQn[Button]), 0x0F, 0x00);
     HAL_NVIC_EnableIRQ((IRQn_Type)(BUTTON_IRQn[Button]));
@@ -295,16 +287,15 @@ uint32_t BSP_PB_GetState(Button_TypeDef Button)
   return HAL_GPIO_ReadPin(BUTTON_PORT[Button], BUTTON_PIN[Button]);
 }
 
-
-/******************************************************************************
+/*******************************************************************************
                             BUS OPERATIONS
 *******************************************************************************/
 
-/******************************* I2C Routines**********************************/
+/******************************* I2C Routines *********************************/
 
 /**
-  * @brief I2Cx Bus initialization
-  * @param None
+  * @brief  I2Cx Bus initialization.
+  * @param  None
   * @retval None
   */
 static void I2Cx_Init(void)
@@ -328,11 +319,11 @@ static void I2Cx_Init(void)
 }
 
 /**
-  * @brief  Write a value in a register of the device through BUS.
+  * @brief  Writes a value in a register of the device through BUS.
   * @param  Addr: Device address on BUS Bus.  
   * @param  Reg: The target register address to write
   * @param  Value: The target register value to be written 
-  * @retval  None
+  * @retval None
   */
 static void I2Cx_WriteData(uint16_t Addr, uint8_t Reg, uint8_t Value)
 {
@@ -349,10 +340,10 @@ static void I2Cx_WriteData(uint16_t Addr, uint8_t Reg, uint8_t Value)
 }
 
 /**
-  * @brief  Read a value in a register of the device through BUS.
+  * @brief  Reads a register of the device through BUS.
   * @param  Addr: Device address on BUS Bus.  
   * @param  Reg: The target register address to write
-  * @retval Data read at register @
+  * @retval Data read at register address
   */
 static uint8_t I2Cx_ReadData(uint16_t Addr, uint8_t Reg)
 {
@@ -360,23 +351,22 @@ static uint8_t I2Cx_ReadData(uint16_t Addr, uint8_t Reg)
   uint8_t value = 0;
   
   status = HAL_I2C_Mem_Read(&I2cHandle, Addr, Reg, I2C_MEMADD_SIZE_8BIT, &value, 1, I2cxTimeout);
- 
+  
   /* Check the communication status */
   if(status != HAL_OK)
   {
     /* Execute user timeout callback */
     I2Cx_Error();
-  
   }
   return value;
 }
 
 /**
-  * @brief I2Cx error treatment function
-  * @param None
+  * @brief  I2Cx error treatment function.
+  * @param  None
   * @retval None
   */
-static void I2Cx_Error (void)
+static void I2Cx_Error(void)
 {
   /* De-initialize the I2C comunication BUS */
   HAL_I2C_DeInit(&I2cHandle);
@@ -386,15 +376,15 @@ static void I2Cx_Error (void)
 }
 
 /**
-  * @brief I2Cx MSP Init
-  * @param hi2c I2C handle
+  * @brief  I2Cx MSP Init.
+  * @param  hi2c: I2C handle
   * @retval None
   */
 static void I2Cx_MspInit(I2C_HandleTypeDef *hi2c)
 {
   GPIO_InitTypeDef GPIO_InitStructure;
   
-  /* Enable the I2C periph */
+  /* Enable the I2C peripheral */
   DISCOVERY_I2Cx_CLOCK_ENABLE();
 
   /* Enable SCK and SDA GPIO clocks */
@@ -424,24 +414,24 @@ static void I2Cx_MspInit(I2C_HandleTypeDef *hi2c)
   HAL_NVIC_EnableIRQ(DISCOVERY_I2Cx_ER_IRQn); 
 }
 
-
 /******************************* SPI Routines**********************************/
+
 /**
-  * @brief SPI1 Bus initialization
-  * @param None
+  * @brief  SPIx Bus initialization.
+  * @param  None
   * @retval None
   */
 static void SPIx_Init(void)
 {
   if(HAL_SPI_GetState(&SpiHandle) == HAL_SPI_STATE_RESET)
   {
-    /* SPI Config */
+    /* SPI Configuration */
     SpiHandle.Instance = DISCOVERY_SPIx;
     /* SPI baudrate is set to 5.6 MHz (PCLK2/SPI_BaudRatePrescaler = 90/16 = 5.625 MHz) 
-      to verify these constraints:
-      ILI9341 LCD SPI interface max baudrate is 10MHz for write and 6.66MHz for read
-      l3gd20 SPI interface max baudrate is 10MHz for write/read
-      PCLK2 frequency is set to 90 MHz 
+       to verify these constraints:
+       ILI9341 LCD SPI interface max baudrate is 10MHz for write and 6.66MHz for read
+       L3GD20 SPI interface max baudrate is 10MHz for write/read
+       PCLK2 frequency is set to 90 MHz 
       */
     SpiHandle.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_8;
     SpiHandle.Init.Direction = SPI_DIRECTION_2LINES;
@@ -454,7 +444,7 @@ static void SPIx_Init(void)
     SpiHandle.Init.NSS = SPI_NSS_SOFT;
     SpiHandle.Init.TIMode = SPI_TIMODE_DISABLED;
     SpiHandle.Init.Mode = SPI_MODE_MASTER;
-
+    
     SPIx_MspInit(&SpiHandle);
     HAL_SPI_Init(&SpiHandle);
   }
@@ -463,12 +453,11 @@ static void SPIx_Init(void)
 /**
   * @brief  Sends a Byte through the SPI interface and return the Byte received 
   *         from the SPI bus.
-  * @param  Byte : Byte send.
+  * @param  Byte: Byte send.
   * @retval The received byte value
   */
 static uint8_t SPIx_WriteRead(uint8_t Byte)
 {
-
   uint8_t receivedbyte = 0;
   
   /* Send a Byte through the SPI peripheral */
@@ -481,10 +470,9 @@ static uint8_t SPIx_WriteRead(uint8_t Byte)
   return receivedbyte;
 }
 
-
 /**
-  * @brief SPI1 error treatment function
-  * @param None
+  * @brief  SPIx error treatment function.
+  * @param  None
   * @retval None
   */
 static void SPIx_Error (void)
@@ -492,27 +480,26 @@ static void SPIx_Error (void)
   /* De-initialize the SPI comunication BUS */
   HAL_SPI_DeInit(&SpiHandle);
   
-  /* Re- Initiaize the SPI comunication BUS */
+  /* Re-Initiaize the SPI comunication BUS */
   SPIx_Init();
 }
 
-
 /**
-  * @brief SPI MSP Init
-  * @param hspi: SPI handle
+  * @brief  SPI MSP Init.
+  * @param  hspi: SPI handle
   * @retval None
   */
 static void SPIx_MspInit(SPI_HandleTypeDef *hspi)
 {
   GPIO_InitTypeDef   GPIO_InitStructure;
-
-  /* Enable SPI1 clock  */
+  
+  /* Enable SPIx clock  */
   DISCOVERY_SPIx_CLOCK_ENABLE();
-
-  /* enable SPI1 gpio clock */
+  
+  /* Enable SPIx GPIO clock */
   DISCOVERY_SPIx_GPIO_CLK_ENABLE();
-
-  /* configure SPI5 SCK, MOSI and MISO */
+  
+  /* Configure SPIx SCK, MOSI and MISO */
   GPIO_InitStructure.Pin = (DISCOVERY_SPIx_SCK_PIN | DISCOVERY_SPIx_MOSI_PIN | DISCOVERY_SPIx_MISO_PIN);
   GPIO_InitStructure.Mode = GPIO_MODE_AF_PP;
   GPIO_InitStructure.Pull  = GPIO_PULLDOWN;
@@ -521,11 +508,11 @@ static void SPIx_MspInit(SPI_HandleTypeDef *hspi)
   HAL_GPIO_Init(DISCOVERY_SPIx_GPIO_PORT, &GPIO_InitStructure);
 }
 
-/******************************************************************************
+/*******************************************************************************
                             LINK OPERATIONS
 *******************************************************************************/
 
-/********************************* LINK GYRO *****************************/
+/********************************* LINK GYROSCOPE *****************************/
 /**
   * @brief  Configures the GYRO SPI interface.
   * @param  None
@@ -535,7 +522,7 @@ void GYRO_IO_Init(void)
 {
   GPIO_InitTypeDef GPIO_InitStructure;
   
-  /* Configure the Gyroscope Control pins ------------------------------------------*/
+  /* Configure the Gyroscope Control pins ------------------------------------*/
   /* Enable CS GPIO clock and  Configure GPIO PIN for Gyroscope Chip select */  
   GYRO_CS_GPIO_CLK_ENABLE();  
   GPIO_InitStructure.Pin = GYRO_CS_PIN;
@@ -560,7 +547,7 @@ void GYRO_IO_Init(void)
 
 /**
   * @brief  Writes one byte to the GYRO.
-  * @param  pBuffer : pointer to the buffer  containing the data to be written to the GYRO.
+  * @param  pBuffer: pointer to the buffer  containing the data to be written to the GYRO.
   * @param  WriteAddr : GYRO's internal address to write to.
   * @param  NumByteToWrite: Number of bytes to write.
   * @retval None
@@ -568,8 +555,8 @@ void GYRO_IO_Init(void)
 void GYRO_IO_Write(uint8_t* pBuffer, uint8_t WriteAddr, uint16_t NumByteToWrite)
 {
   /* Configure the MS bit: 
-       - When 0, the address will remain unchanged in multiple read/write commands.
-       - When 1, the address will be auto incremented in multiple read/write commands.
+     - When 0, the address will remain unchanged in multiple read/write commands.
+     - When 1, the address will be auto incremented in multiple read/write commands.
   */
   if(NumByteToWrite > 0x01)
   {
@@ -595,9 +582,9 @@ void GYRO_IO_Write(uint8_t* pBuffer, uint8_t WriteAddr, uint16_t NumByteToWrite)
 
 /**
   * @brief  Reads a block of data from the GYRO.
-  * @param  pBuffer : pointer to the buffer that receives the data read from the GYRO.
-  * @param  ReadAddr : GYRO's internal address to read from.
-  * @param  NumByteToRead : number of bytes to read from the GYRO.
+  * @param  pBuffer: pointer to the buffer that receives the data read from the GYRO.
+  * @param  ReadAddr: GYRO's internal address to read from.
+  * @param  NumByteToRead: Number of bytes to read from the GYRO.
   * @retval None
   */
 void GYRO_IO_Read(uint8_t* pBuffer, uint8_t ReadAddr, uint16_t NumByteToRead)
@@ -610,6 +597,7 @@ void GYRO_IO_Read(uint8_t* pBuffer, uint8_t ReadAddr, uint16_t NumByteToRead)
   {
     ReadAddr |= (uint8_t)READWRITE_CMD;
   }
+  
   /* Set chip select Low at the start of the transmission */
   GYRO_CS_LOW();
   
@@ -629,21 +617,21 @@ void GYRO_IO_Read(uint8_t* pBuffer, uint8_t ReadAddr, uint16_t NumByteToRead)
   GYRO_CS_HIGH();
 }  
 
+/********************************* LINK AUDIO *********************************/
 
-/********************************* LINK AUDIO ***********************************/
 /**
   * @brief  Initializes Audio low level.
   * @param  None
   * @retval None
   */
-void AUDIO_IO_Init (void) 
+void AUDIO_IO_Init(void) 
 {
   GPIO_InitTypeDef  GPIO_InitStruct;
   
   /* Enable Reset GPIO Clock */
   AUDIO_RESET_GPIO_CLK_ENABLE();
   
-  /* Audio reset pin configuration -------------------------------------------------*/
+  /* Audio reset pin configuration -------------------------------------------*/
   GPIO_InitStruct.Pin = AUDIO_RESET_PIN; 
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Speed = GPIO_SPEED_FAST;
@@ -651,17 +639,17 @@ void AUDIO_IO_Init (void)
   HAL_GPIO_Init(AUDIO_RESET_GPIO, &GPIO_InitStruct);
   
   I2Cx_Init();
-
+  
   /* Power Down the codec */
   CODEC_AUDIO_POWER_OFF();
-
-  /* wait for a delay to insure registers erasing */
+  
+  /* Wait for a delay to insure registers erasing */
   HAL_Delay(5); 
-
+  
   /* Power on the codec */
   CODEC_AUDIO_POWER_ON();
-   
-  /* wait for a delay to insure registers erasing */
+  
+  /* Wait for a delay to insure registers erasing */
   HAL_Delay(5); 
 }
 
@@ -688,8 +676,8 @@ uint8_t AUDIO_IO_Read (uint8_t Addr, uint8_t Reg)
   return I2Cx_ReadData(Addr, Reg);
 }
 
+/****************************** LINK ACCELEROMETER ****************************/
 
-/********************************* LINK ACCELERO *****************************/
 /**
   * @brief  Configures COMPASS / ACCELERO I2C interface.
   * @param  None
@@ -702,7 +690,7 @@ void COMPASSACCELERO_IO_Init(void)
   /* Enable DRDY clock */
   ACCELERO_DRDY_GPIO_CLK_ENABLE();
   
-  /* Mems DRDY pin configuration */
+  /* MEMS DRDY pin configuration */
   GPIO_InitStructure.Pin = ACCELERO_DRDY_PIN;
   GPIO_InitStructure.Mode = GPIO_MODE_INPUT;
   GPIO_InitStructure.Pull  = GPIO_NOPULL;
@@ -713,7 +701,7 @@ void COMPASSACCELERO_IO_Init(void)
 }
 
 /**
-  * @brief  Configures COMPASS / ACCELERO click IT
+  * @brief  Configures COMPASS / ACCELERO click IT.
   * @param  None
   * @retval None
   */
@@ -721,7 +709,7 @@ void COMPASSACCELERO_IO_ITConfig(void)
 {
   GPIO_InitTypeDef GPIO_InitStructure;
   
-  /* Enable INT1 & INT2 GPIO clock */
+  /* Enable INT1 and INT2 GPIO clock */
   ACCELERO_INT_GPIO_CLK_ENABLE();
   
   /* Configure GPIO PINs to detect Interrupts */
@@ -731,38 +719,35 @@ void COMPASSACCELERO_IO_ITConfig(void)
   GPIO_InitStructure.Pull  = GPIO_NOPULL;
   HAL_GPIO_Init(ACCELERO_INT_GPIO_PORT, &GPIO_InitStructure);
   
-  /* Enable and set Button EXTI Interrupt to the lowest priority */
+  /* Enable and set COMPASS / ACCELERO Interrupt to the highest priority */
   HAL_NVIC_SetPriority(ACCELERO_INT1_EXTI_IRQn, 0x00, 0x00);
   HAL_NVIC_EnableIRQ(ACCELERO_INT1_EXTI_IRQn);
-  
 }
 
 /**
   * @brief  Writes one byte to the COMPASS / ACCELERO.
-  * @param  DeviceAddr : specifies the slave address to be programmed.
-  * @param  RegisterAddr specifies the COMPASS / ACCELERO register to be written.
-  * @param  Value : Data to be written
-  * @retval   None
+  * @param  DeviceAddr: the slave address to be programmed
+  * @param  RegisterAddr: the COMPASS / ACCELERO register to be written
+  * @param  Value: Data to be written
+  * @retval None
  */
 void COMPASSACCELERO_IO_Write(uint16_t DeviceAddr, uint8_t RegisterAddr, uint8_t Value)
 {
-  /* call I2Cx Read data bus function */
+  /* Call I2Cx Read data bus function */
   I2Cx_WriteData(DeviceAddr, RegisterAddr, Value);
 }
 
 /**
   * @brief  Reads a block of data from the COMPASS / ACCELERO.
-  * @param  DeviceAddr : specifies the slave address to be programmed(ACC_I2C_ADDRESS or MAG_I2C_ADDRESS).
-  * @param  RegisterAddr : specifies the COMPASS / ACCELERO internal address register to read from
-  * @retval ACCELERO register value
+  * @param  DeviceAddr: the slave address to be programmed(ACC_I2C_ADDRESS or MAG_I2C_ADDRESS).
+  * @param  RegisterAddr: the COMPASS / ACCELERO internal address register to read from
+  * @retval COMPASS / ACCELERO register value
   */
 uint8_t COMPASSACCELERO_IO_Read(uint16_t DeviceAddr, uint8_t RegisterAddr)
 {
-  /* call I2Cx Read data bus function */   
+  /* Call I2Cx Read data bus function */   
   return I2Cx_ReadData(DeviceAddr, RegisterAddr);
 }
-
-
 
 /**
   * @}
@@ -780,4 +765,4 @@ uint8_t COMPASSACCELERO_IO_Read(uint16_t DeviceAddr, uint8_t RegisterAddr)
   * @}
   */   
 
-/******************* (C) COPYRIGHT 2013 STMicroelectronics *****END OF FILE****/
+/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

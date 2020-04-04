@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    lcd.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.1.0
+  * @date    21-March-2014
   * @brief   This file contains all the functions prototypes for the LCD driver.   
   ******************************************************************************
   * @attention
@@ -52,28 +52,27 @@
 
 /** @addtogroup Components
   * @{
-  */ 
+  */
 
 /** @addtogroup LCD
   * @{
   */
-    
  
 /** @defgroup LCD_Exported_Types
   * @{
   */
 /** 
   * @brief  LCD driver structure definition  
-  */       
+  */
 typedef struct
 {
-  void     (*Init)(void);   
-  uint16_t (*ReadID)(void); 
+  void     (*Init)(void);
+  uint16_t (*ReadID)(void);
   void     (*DisplayOn)(void);
-  void     (*DisplayOff)(void);  
-  void     (*SetCursor)(uint16_t, uint16_t);  
-  void     (*WritePixel)(uint16_t, uint16_t, uint16_t);  
-  uint16_t (*ReadPixel)(uint16_t, uint16_t); 
+  void     (*DisplayOff)(void);
+  void     (*SetCursor)(uint16_t, uint16_t);
+  void     (*WritePixel)(uint16_t, uint16_t, uint16_t);
+  uint16_t (*ReadPixel)(uint16_t, uint16_t);
   
    /* Optimized operation */
   void     (*SetDisplayWindow)(uint16_t, uint16_t, uint16_t, uint16_t);
@@ -81,49 +80,31 @@ typedef struct
   void     (*DrawVLine)(uint16_t, uint16_t, uint16_t, uint16_t);
   
   uint16_t (*GetLcdPixelWidth)(void);
-  uint16_t (*GetLcdPixelHeight)(void);   
+  uint16_t (*GetLcdPixelHeight)(void);
   void     (*DrawBitmap)(uint16_t, uint16_t, uint8_t*);
   void     (*DrawRGBImage)(uint16_t, uint16_t, uint16_t, uint16_t, uint8_t*);
-}
-LCD_DrvTypeDef;    
-      
+}LCD_DrvTypeDef;    
+
 /**
   * @}
-  */ 
+  */
 
-/** @defgroup LCD_Exported_Constants
-  * @{
+/**
+  * @}
   */
 
 /**
   * @}
   */
-  
-/** @defgroup LCD_Exported_Functions
-  * @{
-  */ 
 
 /**
   * @}
-  */ 
+  */
 
-   
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* LCD_H */
-
-/**
-  * @}
-  */ 
-
-/**
-  * @}
-  */ 
-
-/**
-  * @}
-  */ 
+#endif /* __LCD_H */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

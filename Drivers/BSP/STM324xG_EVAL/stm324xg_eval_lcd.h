@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324xg_eval_lcd.h
   * @author  MCD Application Team
-  * @version V2.0.1
-  * @date    26-February-2014
+  * @version V2.0.2
+  * @date    19-June-2014
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm324xg_eval_lcd.c driver.
   ******************************************************************************
@@ -48,6 +48,7 @@
 #include "stm324xg_eval.h" 
 #include "..\Components\ili9325\ili9325.h"
 #include "..\..\..\Utilities\Fonts\fonts.h"
+
 /** @addtogroup BSP
   * @{
   */
@@ -60,7 +61,6 @@
   * @{
   */ 
 
-
 /** @defgroup STM324xG_EVAL_LCD_Exported_Types
   * @{
   */
@@ -69,7 +69,6 @@ typedef struct
   uint32_t TextColor;
   uint32_t BackColor;
   sFONT    *pFont; 
-
 }LCD_DrawPropTypeDef;
 /**
   * @}
@@ -89,7 +88,6 @@ typedef struct
 {
   int16_t X;
   int16_t Y;
-
 }Point, * pPoint; 
 
 /** 
@@ -97,10 +95,9 @@ typedef struct
   */ 
 typedef enum
 {
-  CENTER_MODE             = 0x01,    /*!< Center mode */
-  RIGHT_MODE              = 0x02,    /*!< Right mode  */
-  LEFT_MODE               = 0x03     /*!< Left mode   */
-
+  CENTER_MODE          = 0x01,    /* Center mode */
+  RIGHT_MODE           = 0x02,    /* Right mode  */
+  LEFT_MODE            = 0x03     /* Left mode   */
 }Line_ModeTypdef;
 
 /** 
@@ -179,26 +176,27 @@ void     BSP_LCD_FillEllipse(int Xpos, int Ypos, int XRadius, int YRadius);
 
 void     BSP_LCD_DisplayOff(void);
 void     BSP_LCD_DisplayOn(void);
-
+ 
 /**
   * @}
   */
-  
+
+/**
+  * @}
+  */ 
+
+/**
+  * @}
+  */ 
+
+/**
+  * @}
+  */ 
+
 #ifdef __cplusplus
 }
 #endif
 
 #endif /* __STM324XG_EVAL_LCD_H */
-/**
-  * @}
-  */ 
-
-/**
-  * @}
-  */ 
-
-/**
-  * @}
-  */ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

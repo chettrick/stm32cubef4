@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324xg_eval_io.c
   * @author  MCD Application Team
-  * @version V2.0.1
-  * @date    26-February-2014
+  * @version V2.0.2
+  * @date    19-June-2014
   * @brief   This file provides a set of functions needed to manage the IO pins
   *          on STM324xG-EVAL evaluation board.
   ******************************************************************************
@@ -83,51 +83,42 @@
 /** @defgroup STM324xG_EVAL_IO
   * @{
   */   
-  
-/* Private typedef -----------------------------------------------------------*/
 
 /** @defgroup STM324xG_EVAL_IO_Private_Types_Definitions
   * @{
   */ 
-  
-/* Private define ------------------------------------------------------------*/
-
-/** @defgroup STM324xG_EVAL_IO_Private_Defines
-  * @{
-  */ 
-  
-/**
-  * @}
-  */ 
-
-/* Private macro -------------------------------------------------------------*/
-
-/** @defgroup STM324xG_EVAL_IO_Private_Macros
-  * @{
-  */ 
-  
-/* Private variables ---------------------------------------------------------*/
-
-/** @defgroup STM324xG_EVAL_IO_Private_Variables
-  * @{
-  */ 
-static IO_DrvTypeDef *io_driver;
-
-/**
-  * @}
-  */ 
-
-/* Private function prototypes -----------------------------------------------*/
-
-/** @defgroup STM324xG_EVAL_IO_Private_Function_Prototypes
-  * @{
-  */ 
-
 /**
   * @}
   */ 
     
-/* Private functions ---------------------------------------------------------*/
+/** @defgroup STM324xG_EVAL_IO_Private_Defines
+  * @{
+  */ 
+/**
+  * @}
+  */ 
+
+/** @defgroup STM324xG_EVAL_IO_Private_Macros
+  * @{
+  */ 
+/**
+  * @}
+  */ 
+    
+/** @defgroup STM324xG_EVAL_IO_Private_Variables
+  * @{
+  */ 
+static IO_DrvTypeDef *io_driver;
+/**
+  * @}
+  */ 
+
+/** @defgroup STM324xG_EVAL_IO_Private_Function_Prototypes
+  * @{
+  */ 
+/**
+  * @}
+  */ 
 
 /** @defgroup STM324xG_EVAL_IO_Private_Functions
   * @{
@@ -153,10 +144,10 @@ uint8_t BSP_IO_Init(void)
   {  
     /* Initialize the IO driver structure */
     io_driver = &stmpe811_io_drv;
-
+    
     io_driver->Init(IO_I2C_ADDRESS);
     io_driver->Start(IO_I2C_ADDRESS, IO_PIN_ALL);
-
+    
     ret = IO_OK;
   }
   
@@ -264,5 +255,6 @@ void BSP_IO_TogglePin(uint16_t IO_Pin)
 
 /**
   * @}
-  */      
+  */
+
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
