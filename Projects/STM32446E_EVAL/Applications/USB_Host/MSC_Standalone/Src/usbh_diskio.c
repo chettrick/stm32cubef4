@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Host/MSC_Standalone/Src/usbh_diskio.c
   * @author  MCD Application Team
-  * @version V1.2.4
-  * @date    06-May-2016
+  * @version V1.2.5
+  * @date    03-June-2016
   * @brief   USB diskio interface
   ******************************************************************************
   * @attention

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Audio/Audio_playback_and_record/Src/waveplayer.c 
   * @author  MCD Application Team
-  * @version V1.2.4
-  * @date    06-May-2016
+  * @version V1.2.5
+  * @date    03-June-2016
   * @brief   This file provides the Audio Out (playback) interface API
   ******************************************************************************
   * @attention

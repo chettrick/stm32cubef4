@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Host/DynamicSwitch_Standalone/Src/usbh_diskio.c 
   * @author  MCD Application Team
-  * @version V1.4.4
-  * @date    06-May-2016
+  * @version V1.4.5
+  * @date    03-June-2016
   * @brief   USB Key Disk I/O driver.
   ******************************************************************************
   * @attention

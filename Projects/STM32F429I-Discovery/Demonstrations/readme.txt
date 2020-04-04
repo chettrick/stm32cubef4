@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    Demonstrations/readme.txt 
   * @author  MCD Application Team
-  * @version V1.4.4
-  * @date    06-May-2016   
+  * @version V1.4.5
+  * @date    03-June-2016   
   * @brief   Description of STM32F429I-Discovery Demonstration
   ******************************************************************************
   * @attention
@@ -126,6 +126,11 @@ Below you find an overview of the diffrent offred module in the demonstration:
     and development board.
 
 @par How to use it ? 
+     - Copy the picture and video files provided under "Utilities/Media/" in the USB key
+       USB key must contain the files listed below:
+         - .jpg and .bmp files available within the "BMP_240x320" and "BMP_320x240" folder under "Utilities/Media/Pictures" 
+         - .emf files available "Utilities/Media/Video" 
+     - Plug the USB key into the STM32F429I-DISCO board through 'USB micro A-Male to A-Female' cable.
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain 

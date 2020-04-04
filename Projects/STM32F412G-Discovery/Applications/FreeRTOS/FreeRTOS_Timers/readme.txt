@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    FreeRTOS/FreeRTOS_Timers/readme.txt
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    06-May-2016 
+  * @version V1.0.1
+  * @date    03-June-2016 
   * @brief   Description of the FreeRTOS timers example.
   ******************************************************************************
   * @attention

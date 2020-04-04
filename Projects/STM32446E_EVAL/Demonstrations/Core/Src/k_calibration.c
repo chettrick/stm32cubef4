@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    k_calibration.c
   * @author  MCD Application Team
-  * @version V1.2.4
-  * @date    06-May-2016
+  * @version V1.2.5
+  * @date    03-June-2016
   * @brief   This file provides the kernel calibration functions   
   ******************************************************************************
   * @attention
@@ -174,9 +174,9 @@ static void _GetPhysValues(int LogX, int LogY, int * pPhysX, int * pPhysY, const
   GUI_DispStringInRect(acText, &Rect, Align | GUI_TA_TOP);
   GUI_DispStringInRect(pString, &Rect, Align | GUI_TA_BOTTOM);
   /* Draw the ring */
-  GUI_FillCircle(LogX, LogY, 8);
+  GUI_FillCircle(LogX - 5, LogY - 5, 5);
   GUI_SetColor(GUI_WHITE);
-  GUI_FillCircle(LogX, LogY, 4);
+  GUI_FillCircle(LogX + 5, LogY + 5, 2);
   GUI_SetColor(GUI_BLACK);
   /* Wait until touch is pressed */
   _WaitForPressedState(1);
@@ -275,7 +275,7 @@ uint8_t k_CalibrationIsDone(void)
 
 uint16_t k_CalibrationGetX(uint16_t x)
 {
-  return ((((A1 * x) + B1)/1000) - 65);
+  return ((((A1 * x) + B1)/1000));
 }
 
 uint16_t k_CalibrationGetY(uint16_t y)

@@ -36,8 +36,8 @@ Purpose     : Display controller configuration (single layer)
   ******************************************************************************
   * @file    LCDConf_stm32469i_discovery.c
   * @author  MCD Application Team
-  * @version V1.0.4
-  * @date    06-May-2016
+  * @version V1.0.5
+  * @date    03-June-2016
   * @brief   Driver for STM32469I-Discovery board LCD
   ******************************************************************************
   * @attention

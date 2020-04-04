@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f4xx_it.c
   * @author  MCD Application Team
-  * @version V1.4.4
-  * @date    06-May-2016   
+  * @version V1.4.5
+  * @date    03-June-2016 
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
@@ -63,7 +63,7 @@ extern __IO uint32_t uwCaptureNumber;
 extern __IO uint32_t uwMeasurementDone;
 uint16_t tmpCC4[2] = {0, 0};
 /* Private function prototypes -----------------------------------------------*/
-#if defined (STM32F439xx)
+#if defined (STM32F429xx)
 extern void LTDC_ISR_Handler(void);
 #endif
 
@@ -174,7 +174,7 @@ void OTG_HS_IRQHandler(void)
   HAL_HCD_IRQHandler(&hhcd);
 }
 
-#if defined (STM32F439xx)
+#if defined (STM32F429xx)
 /**
   * @brief  This function handles LTDC global interrupt request.
   * @param  None

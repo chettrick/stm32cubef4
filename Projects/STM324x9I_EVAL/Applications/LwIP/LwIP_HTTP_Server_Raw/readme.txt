@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    LwIP/LwIP_HTTP_Server_Socket_RTOS/readme.txt 
   * @author  MCD Application Team
-  * @version V1.4.4
-  * @date    06-May-2016
+  * @version V1.4.5
+  * @date    03-June-2016
   * @brief   Description of the LwIP http server Raw API.
   ******************************************************************************
   * @attention

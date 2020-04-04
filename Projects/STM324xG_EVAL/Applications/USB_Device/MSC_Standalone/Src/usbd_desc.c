@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Device/MSC_Standalone/Src/usbd_desc.c
   * @author  MCD Application Team
-  * @version V1.3.4
-  * @date    06-May-2016
+  * @version V1.3.5
+  * @date    03-June-2016
   * @brief   This file provides the USBD descriptors and string formating method.
   ******************************************************************************
   * @attention

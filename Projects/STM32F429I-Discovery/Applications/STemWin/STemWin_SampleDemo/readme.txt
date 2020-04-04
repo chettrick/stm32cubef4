@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    STemWin/STemWin_SampleDemo/readme.txt 
   * @author  MCD Application Team
-  * @version V1.3.4
-  * @date    06-May-2016    
+  * @version V1.3.5
+  * @date    03-June-2016    
   * @brief   Description of STemWin Sample Demo application.   
   ******************************************************************************
   * @attention
@@ -81,6 +81,7 @@ Note that the following user files may need to be updated:
   - STemWin/STemWin_SampleDemo/Inc/main.h                           Main program header file
   - STemWin/STemWin_SampleDemo/Inc/stm32f4xx_hal_conf.h             Library Configuration file
   - STemWin/STemWin_SampleDemo/Inc/stm32f4xx_it.h                   Interrupt handlers header file
+  - STemWin/SampleDemo/Demo/GUIDEMO.h                               DEMO modules configuration file
   - STemWin/STemWin_SampleDemo/Src/rtc.c                            Main file to configure RTC clock
   - STemWin/STemWin_SampleDemo/Src/calibration.c                    Main file to calibrate TS
   - STemWin/STemWin_SampleDemo/Src/GUIConf.c                        Display controller initialization file
@@ -88,7 +89,7 @@ Note that the following user files may need to be updated:
   - STemWin/STemWin_SampleDemo/Src/main.c                           Main program file
   - STemWin/STemWin_SampleDemo/Src/stm32f4xx_it.c                   STM32F4xx Interrupt handlers
   - STemWin/STemWin_SampleDemo/Src/system_stm32f4xx.c               STM32F4xx system file
-  - STemWin/STemWin_SampleDemo/Demo/GUIDEMO_*.c                     All the sources files provided for SEGGER DEMO
+  - STemWin/STemWin_SampleDemo/Demo/GUIDEMO.c                       All the sources files provided for SEGGER DEMO
 
 @par Hardware and Software environment  
 

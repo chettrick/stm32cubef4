@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    Demonstrations/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.3
-  * @date    06-May-2016
+  * @version V1.1.4
+  * @date    03-June-2016
   * @brief   Description of STM32469I-DISCO Demonstration
   ******************************************************************************
   * @attention
@@ -64,7 +64,6 @@ of usage based on the STM3Cube HAL, BSP and several Middleware components.
 @par Demo Description
 
 The STM32 F4 demonstration is running on STM32469I-DISCOVERY boards RevB. 
-
   
 Below you find an overview of the different offered module in the demonstration:
 
@@ -131,7 +130,7 @@ Below you find an overview of the different offered module in the demonstration:
 @par How to use it ? 
 
 The QSPI external flash loader is not integrated with supported toolchains, it’s only supported with
-STM32 ST-Link Utility V3.7.
+STM32 ST-Link Utility V3.7 or later.
 To load the demonstration, use STM32 ST-Link Utility to program both internal Flash and external QSPI memory.
 To edit and debug the demonstration you need first to program the external QSPI memory using STLink utility
 and then use your preferred toolchain to update and debug the internal flash content.
@@ -139,10 +138,10 @@ and then use your preferred toolchain to update and debug the internal flash con
 Below the detailed steps:
 
 In order to program the demonstration you must do the following
-1- Open STM32 ST-Link Utility V3.7, click on "External Loader" from the bar menu then check 
+1- Open STM32 ST-Link Utility , click on "External Loader" from the bar menu then check 
    "N25Q128A_STM32469I-DISCO" box 
 2- Connect the STM32F469I-DISCO board to PC with USB cable through CN1
-3- Use "STM32CubeDemo_STM32F469I-Disco_1.1.0.hex" file provided under “Binary” with STM32 ST-Link Utility 
+3- Use "STM32CubeDemo_STM32F469I-Disco_1.1.4.hex" file provided under “Binary” with STM32 ST-Link Utility 
    to program both internal Flash and external QSPI memory
 4- copy the audio and video files provided under "Utilities/Media/" in the USB key
 5- Plug a USB micro A-Male to A-Female cable on CN13 connector

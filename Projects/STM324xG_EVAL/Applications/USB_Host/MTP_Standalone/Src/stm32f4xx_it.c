@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Host/MTP_Standalone/Src/stm32f4xx_it.c
   * @author  MCD Application Team
-  * @version V1.3.4
-  * @date    06-May-2016
+  * @version V1.3.5
+  * @date    03-June-2016
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.

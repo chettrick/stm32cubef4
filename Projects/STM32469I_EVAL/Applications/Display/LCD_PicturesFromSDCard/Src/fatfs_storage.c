@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Display/LTDC_PicturesFromSDCard/Src/fatfs_storage.c
   * @author  MCD Application Team
-  * @version V1.0.4
-  * @date    06-May-2016
+  * @version V1.0.5
+  * @date    03-June-2016
   * @brief   This file includes the Storage (FatFs) driver for the STM32756G-EVAL
   *          application.
   ******************************************************************************

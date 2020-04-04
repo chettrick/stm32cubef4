@@ -36,8 +36,8 @@ Purpose     : Display controller configuration (single layer)
   ******************************************************************************
   * @file    LCDConf_stm32469i_eval.c
   * @author  MCD Application Team
-  * @version V1.1.3
-  * @date    06-May-2016
+  * @version V1.1.4
+  * @date    03-June-2016
   * @brief   Driver for STM32469I-EVAL board LCD
   ******************************************************************************
   * @attention
@@ -387,7 +387,7 @@ static void LCD_LL_Init(void)
   /* PLLSAI_VCO Input = HSE_VALUE/PLL_M = 1 Mhz */
   /* PLLSAI_VCO Output = PLLSAI_VCO Input * PLLSAIN = 384 Mhz */
   /* PLLLCDCLK = PLLSAI_VCO Output/PLLSAIR = 384 MHz / 5 = 76.8 MHz */
-  /* LTDC clock frequency = PLLLCDCLK / LTDC_PLLSAI_DIVR_2 = 76.8 MHz / 4 = 19.2 MHz */
+  /* LTDC clock frequency = PLLLCDCLK / LTDC_PLLSAI_DIVR_4 = 76.8 MHz / 4 = 19.2 MHz */
   PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_LTDC;
   PeriphClkInitStruct.PLLSAI.PLLSAIN = 384;
   PeriphClkInitStruct.PLLSAI.PLLSAIR = 5;

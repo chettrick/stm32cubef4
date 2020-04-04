@@ -5,8 +5,8 @@
   ******************************************************************************
   * @file    Display/LCD_AnimatedPictureFromSDCard/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.4
-  * @date    06-May-2016
+  * @version V1.0.5
+  * @date    03-June-2016
   * @brief   Description of the LCD animated picture from SD card application.
   ******************************************************************************
   * @attention

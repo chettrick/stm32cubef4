@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Host/FWupgrade_Standalone/Src/flash_if.c
   * @author  MCD Application Team
-  * @version V1.2.4
-  * @date    06-May-2016
+  * @version V1.2.5
+  * @date    03-June-2016
   * @brief   This file provides all the flash layer functions.
   ******************************************************************************
   * @attention

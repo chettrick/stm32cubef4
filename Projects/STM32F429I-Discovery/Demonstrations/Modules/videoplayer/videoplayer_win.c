@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    videoplayer_win.c
   * @author  MCD Application Team
-  * @version V1.4.4
-  * @date    06-May-2016   
+  * @version V1.4.5
+  * @date    03-June-2016 
   * @brief   Video player functions
   ******************************************************************************
   * @attention
@@ -163,7 +163,7 @@ static uint8_t              playlist_select = 0;
 uint8_t VideoPlayer_State = VIDEO_IDLE;
 static uint8_t                    FullScreen = 0;
 static uint32_t                   Video_file_pos = 0;
-static GUI_MOVIE_HANDLE hMovie = NULL;
+static GUI_MOVIE_HANDLE hMovie = 0;
 static WM_HTIMER hPlaylistTimer;
 FIL Video_File;
 GUI_MOVIE_INFO             Video_Info;

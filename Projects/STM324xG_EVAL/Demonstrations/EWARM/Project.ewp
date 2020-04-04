@@ -99,7 +99,7 @@
         </option>
         <option>
           <name>OGChipSelectEditMenu</name>
-          <state>STM32F417ZG	ST STM32F417ZG</state>
+          <state>STM32F407IG	ST STM32F407IG</state>
         </option>
         <option>
           <name>GenLowLevelInterface</name>
@@ -173,7 +173,7 @@
         <option>
           <name>CCDefines</name>
           <state>USE_HAL_DRIVER</state>
-          <state>STM32F417xx</state>
+          <state>STM32F407xx</state>
           <state>USE_STM324xG_EVAL</state>
           <state>USE_USB_HS</state>
         </option>
@@ -306,7 +306,6 @@
           <name>CCIncludePath2</name>
           <state>$PROJ_DIR$\..\Core\inc</state>
           <state>$PROJ_DIR$\..\Config</state>
-          <state>$PROJ_DIR$\..\Modules\vncserver</state>
           <state>$PROJ_DIR$\..\..\..\..\Utilities\CPU</state>
           <state>$PROJ_DIR$\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include</state>
           <state>$PROJ_DIR$\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc</state>
@@ -614,7 +613,7 @@
         </option>
         <option>
           <name>OOCOutputFile</name>
-          <state>STM32CubeDemo_STM324xG-EVAL_1.4.0.hex</state>
+          <state>STM32CubeDemo_STM324xG-EVAL_1.3.5.hex</state>
         </option>
         <option>
           <name>OOCCommandLineProducer</name>
@@ -1101,6 +1100,12 @@
     </group>
   </group>
   <group>
+    <name>Doc</name>
+    <file>
+      <name>$PROJ_DIR$\..\readme.txt</name>
+    </file>
+  </group>
+  <group>
     <name>Drivers</name>
     <group>
       <name>BSP</name>
@@ -1416,7 +1421,7 @@
       <group>
         <name>Library</name>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\Middlewares\ST\STemWin\Lib\STemWin528_CM4_OS_IAR.a</name>
+          <name>$PROJ_DIR$\..\..\..\..\Middlewares\ST\STemWin\Lib\STemWin532_CM4_OS_IAR.a</name>
         </file>
       </group>
       <group>

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    k_storage.h
   * @author  MCD Application Team
-  * @version V1.1.3
-  * @date    06-May-2016
+  * @version V1.1.4
+  * @date    03-June-2016
   * @brief   Header for k_storage.c file
   ******************************************************************************
   * @attention
@@ -59,7 +59,7 @@
 #define FILEMGR_LIST_DEPDTH                      24
 #define FILEMGR_FILE_NAME_SIZE                  256
 #define FILEMGR_MAX_LEVEL                        3  
-#define FILEMGR_MAX_EXT_SIZE                     3
+#define FILEMGR_MAX_EXT_SIZE                     5
    
 #define FILETYPE_DIR                             0
 #define FILETYPE_FILE                            1

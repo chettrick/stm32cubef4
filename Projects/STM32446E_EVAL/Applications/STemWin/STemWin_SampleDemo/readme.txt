@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    STemWin_SampleDemo/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.4
-  * @date    06-May-2016
+  * @version V1.2.5
+  * @date    03-June-2016
   * @brief   
   ******************************************************************************
   * @attention
@@ -93,12 +93,12 @@ LEDs 1  continuously toggling to indicate that the Demo runs properly.
   - STemWin/SampleDemo/Src/main.c                           Main program file
   - STemWin/SampleDemo/Src/stm32f4xx_it.c                   STM32F4xx Interrupt handlers
   - STemWin/SampleDemo/Src/system_stm32f4xx.c               STM32F4xx system file
-  - STemWin/SampleDemo/Demo/GUIDEMO_*.c                     All the sources files provided for SEGGER DEMO
+  - STemWin/SampleDemo/Demo/GUIDEMO.c                       All the sources files provided for SEGGER DEMO
   - STemWin/SampleDemo/Demo/GUIDEMO.h                       DEMO modules configuration file
 
 @par Hardware and Software environment 
 
-  - This example runs on STM32F42xxx/STM32F43xxx devices.
+  - This example runs on STM32F446xx devices.
     
   - This example has been tested with STM32446E_EVAL evaluation board and can be
     easily tailored to any other supported device and development board.

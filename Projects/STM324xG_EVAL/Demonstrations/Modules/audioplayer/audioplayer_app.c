@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    audioplayer_app.c
   * @author  MCD Application Team
-  * @version V1.3.4
-  * @date    06-May-2016   
+  * @version V1.3.5
+  * @date    03-June-2016
   * @brief   Audio player application functions
   ******************************************************************************
   * @attention
@@ -221,9 +221,9 @@ AUDIOPLAYER_ErrorTypdef  AUDIOPLAYER_Stop(void)
   
   AUDIOPLAYER_Mute(1);
   HAL_Delay(20);
-  BSP_AUDIO_OUT_Stop(CODEC_PDWN_SW);  
+  BSP_AUDIO_OUT_Stop(CODEC_PDWN_SW); 
   haudio.state = AUDIOPLAYER_STOP;      
-
+  
   return AUDIOPLAYER_ERROR_NONE;
 }
 

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Host/HID_Standalone/Src/usbh_conf.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    06-May-2016
+  * @version V1.0.1
+  * @date    03-June-2016
   * @brief   USB Host configuration file.
   ******************************************************************************
   * @attention

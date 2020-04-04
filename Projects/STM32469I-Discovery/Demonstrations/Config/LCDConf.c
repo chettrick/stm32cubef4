@@ -389,7 +389,7 @@ static void LCD_LL_Init(void)
   /* PLLSAI_VCO Input = HSE_VALUE/PLL_M = 1 Mhz */
   /* PLLSAI_VCO Output = PLLSAI_VCO Input * PLLSAIN = 384 Mhz */
   /* PLLLCDCLK = PLLSAI_VCO Output/PLLSAIR = 384 MHz / 5 = 76.8 MHz */
-  /* LTDC clock frequency = PLLLCDCLK / LTDC_PLLSAI_DIVR_2 = 76.8 MHz / 2 = 38.4 MHz */
+  /* LTDC clock frequency = PLLLCDCLK / LTDC_PLLSAI_DIVR_4 = 76.8 MHz / 2 = 38.4 MHz */
   PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_LTDC;
   PeriphClkInitStruct.PLLSAI.PLLSAIN = 384;
   PeriphClkInitStruct.PLLSAI.PLLSAIR = 5;

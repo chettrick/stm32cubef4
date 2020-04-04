@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    STemWin_HelloWorld/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.4
-  * @date    06-May-2016
+  * @version V1.0.5
+  * @date    03-June-2016
   * @brief   
   ******************************************************************************
   * @attention
@@ -77,6 +77,9 @@ Note that the following user files may need to be updated:
       
 @note The application need to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
+
+@note If the application is not running normally as mentionned above , you can accordingly modify either
+      the Heap and Stack of the application or the GUI_NUMBYTES define in the GUIConf.c file
 
 @par Directory contents 
 

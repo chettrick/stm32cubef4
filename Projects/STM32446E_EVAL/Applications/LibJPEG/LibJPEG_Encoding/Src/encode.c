@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LibJPEG/LibJPEG_Encoding/Src/encode.c 
   * @author  MCD Application Team
-  * @version V1.2.4
-  * @date    06-May-2016
+  * @version V1.2.5
+  * @date    03-June-2016
   * @brief   This file contain the compress method.
   ******************************************************************************
   * @attention

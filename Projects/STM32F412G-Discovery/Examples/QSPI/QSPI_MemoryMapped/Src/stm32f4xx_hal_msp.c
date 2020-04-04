@@ -132,8 +132,8 @@ void HAL_QSPI_MspInit(QSPI_HandleTypeDef *hqspi)
   /*##-4- Configure the DMA channel ###########################################*/
   /* QSPI DMA channel configuration */
   hdma.Init.Channel             = QSPI_DMA_CHANNEL;                     
-  hdma.Init.PeriphInc           = DMA_PINC_DISABLE;
-  hdma.Init.MemInc              = DMA_MINC_ENABLE;
+  hdma.Init.PeriphInc           = DMA_PINC_ENABLE;
+  hdma.Init.MemInc              = DMA_MINC_DISABLE;
   hdma.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
   hdma.Init.MemDataAlignment    = DMA_MDATAALIGN_BYTE;
   hdma.Init.Mode                = DMA_NORMAL;

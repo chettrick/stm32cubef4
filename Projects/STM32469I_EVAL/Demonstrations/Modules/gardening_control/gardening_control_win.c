@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    gardening_control_win.c
   * @author  MCD Application Team
-  * @version V1.1.3
-  * @date    06-May-2016
+  * @version V1.1.4
+  * @date    03-June-2016
   * @brief   gardening control functions
   ******************************************************************************
   * @attention
@@ -276,7 +276,7 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
     hItem = BUTTON_CreateEx(700, 0, 100,100, pMsg->hWin, WM_CF_SHOW, 0, ID_BUTTON_EXIT);
     WM_SetCallback(hItem, _cbButton_exit);
 
-    hItem = BUTTON_CreateEx(50,  150, 180, 180, pMsg->hWin, WM_CF_SHOW, 0, ID_BUTTON_CONTROL);
+    hItem = BUTTON_CreateEx(50,  140, 180, 180, pMsg->hWin, WM_CF_SHOW, 0, ID_BUTTON_CONTROL);
     WM_SetCallback(hItem, _cbButton_control);     
       
     hItem = BUTTON_CreateEx(310, 140, 180, 180, pMsg->hWin, WM_CF_SHOW, 0, ID_BUTTON_SPRINKLERS);

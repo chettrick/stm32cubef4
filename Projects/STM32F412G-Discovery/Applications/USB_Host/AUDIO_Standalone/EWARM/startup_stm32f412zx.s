@@ -1,8 +1,8 @@
 ;/******************** (C) COPYRIGHT 2016 STMicroelectronics ********************
 ;* File Name          : startup_stm32f412zx.s
 ;* Author             : MCD Application Team
-;* Version            : V1.0.0
-;* Date               : 06-May-2016
+;* Version            : V1.0.1
+;* Date               : 03-June-2016
 ;* Description        : STM32F412Zx devices vector table for EWARM toolchain.
 ;*                      This module performs:
 ;*                      - Set the initial SP

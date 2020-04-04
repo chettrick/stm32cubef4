@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    Demonstrations/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.3
-  * @date    06-May-2016
+  * @version V1.1.4
+  * @date    03-June-2016
   * @brief   Description of STM32469I-EVAL Demonstration
   ******************************************************************************
   * @attention
@@ -64,7 +64,6 @@ scope of usage based on the STM32Cube HAL BSP and several middleware components.
 @par Demo Description
 
 The STM32 F4 demonstration is running on STM32469I-EVAL boards RevB. 
-
   
 Below you find an overview of the different offered module in the demonstration:
 
@@ -89,6 +88,9 @@ Below you find an overview of the different offered module in the demonstration:
  The VNC server module allows to control the demo from a remote machine. It is based on
  the TCP/IP LwIP stacks. The background mode is supported.
  
+ @note Launch any VNC Client or the emVNC software located under "Middlewares\ST\STemWin\Software" to run the module.
+ @note Cannot run both video player and vnc server in the same time
+
  + Audio Recorder
  ----------------
  The Audio record module allows to record an audio file. The audio format supported is 
@@ -133,8 +135,8 @@ Below you find an overview of the different offered module in the demonstration:
 
   - Jumpers configuration:
 	 - JP2	  Fitted (Power on MCU)  
-     - JP5    <2-3> (PB3 (I2S Clock) is connected to Timer input PC6 used as microphone clock divider )
-     - JP6	  <2-3> (PD6 is connected to digital microphone as I2S data signal)
+         - JP5    <2-3> (PB3 (I2S Clock) is connected to Timer input PC6 used as microphone clock divider )
+         - JP6	  <2-3> (PD6 is connected to digital microphone as I2S data signal)
 	 - JP7	  <1-2> (25MHz clock is provided by external crystal X4 (used for VNC server demonstration))
 	 - JP11   must be not fitted ==> NOR write protection is disabled
 	 - JP17	  <2-3> (Data signal on digital microphone is connected to I2S port)
@@ -143,7 +145,7 @@ Below you find an overview of the different offered module in the demonstration:
 @par How to use it ? 
 
 The NOR external flash loader is not integrated with supported toolchains, it’s only supported with STM32
-ST-Link Utility V3.7.
+ST-Link Utility V3.7 or later.
 To load the demonstration, use STM32 ST-Link Utility to program both internal Flash and external NOR memory.
 To edit and debug the demonstration you need first to program the external NOR memory using STLink utility
 and then use your preferred toolchain to update and debug the internal flash content.
@@ -154,7 +156,7 @@ In order to program the demonstration you must do the following:
 1- Open STM32 ST-Link Utility V3.7, click on "External Loader" from the bar menu then check 
    "MT25QL512A_STM32469I-EVAL" box 
 2- Connect the STM32469I-EVAL board to PC with USB cable through CN22
-3- Use "STM32469I_EVAL_Demo_V1.1.0.hex" file provided under “Binary” with STM32 ST-Link Utility
+3- Use "STM32469I_EVAL_Demo_V1.1.4.hex" file provided under “Binary” with STM32 ST-Link Utility
    to program both internal Flash and external NOR memory
 4- copy the audio and video files provided under "Utilities/Media/" in the USB key
 5- Plug a USB micro A-Male to A-Female cable on CN8 connector

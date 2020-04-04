@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    AUDIO_RECORDER_app.h
   * @author  MCD Application Team
-  * @version V1.1.3
-  * @date    06-May-2016
+  * @version V1.1.4
+  * @date    03-June-2016
   * @brief   header of audio player application file
   ******************************************************************************
   * @attention

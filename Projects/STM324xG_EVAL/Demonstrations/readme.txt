@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    Demonstrations/readme.txt 
   * @author  MCD Application Team
-  * @version V1.3.4
-  * @date    06-May-2016
+  * @version V1.3.5
+  * @date    03-June-2016
   * @brief   Description of STM324xG-EVAL Demonstration
   ******************************************************************************
   * @attention
@@ -104,7 +104,7 @@ Below you find an overview of the different offered module in the demonstration:
  -------
  The video player module provides a video solution based on the STM32F4xx and STemWin
  movie API. It supports playing movie in emf format.
- You can use the *.emf video file provided under "Utilities/Media/Video".
+ You can use the *.emf video file( 320x240 ) provided under "Utilities/Media/Video
  
  + USB Mass storage Device
  -------------------------
@@ -145,6 +145,14 @@ Below you find an overview of the different offered module in the demonstration:
 @par Hardware and Software environment
 
   - This demonstration runs on STM32F407xx/417xx devices.
+  
+  - Copy the audio and video files with 320 x 240 dimensions provided under "Utilities/Media/" in the Mass storage Devices
+  
+  - Plug a USB key on CN9 connector
+  
+  - Make sure that JP31 is fitted to use OTG_HS
+
+  -Plug a uSD card on CN6 connector
     
   - This demonstration has been tested with STM324xG-EVAL RevC evaluation board and can be
     easily tailored to any other supported device and development board. 

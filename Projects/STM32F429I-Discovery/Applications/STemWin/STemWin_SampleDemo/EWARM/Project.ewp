@@ -99,7 +99,7 @@
         </option>
         <option>
           <name>OGChipSelectEditMenu</name>
-          <state>STM32F429NI	ST STM32F429NI</state>
+          <state>STM32F429ZI	ST STM32F429ZI</state>
         </option>
         <option>
           <name>GenLowLevelInterface</name>
@@ -1192,7 +1192,7 @@
       <group>
         <name>Lib</name>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STemWin\Lib\STemWin528_CM4_IAR.a</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STemWin\Lib\STemWin532_CM4_IAR.a</name>
         </file>
       </group>
     </group>

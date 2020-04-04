@@ -2002,7 +2002,7 @@ static void _RadialMenu(void) {
   //
   // Turn left (motion)
   //
-#ifdef __ICCARM__
+
   WM_MOTION_SetMotion(hMotion, GUI_COORD_X, 200, 200);
   if (_Delay(2000)) {
     WM_DeleteWindow(hMotion);
@@ -2016,7 +2016,7 @@ static void _RadialMenu(void) {
     return;
   }
   WM_MOTION_SetMotion(hMotion, GUI_COORD_X, 2000, 2000);
-#endif
+
   if (_Delay(2000)) {
     WM_DeleteWindow(hMotion);
     WM_DeleteWindow(hDraw);

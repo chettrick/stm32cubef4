@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    main.c
   * @author  MCD Application Team
-  * @version V1.0.4
-  * @date    06-May-2016
+  * @version V1.0.5
+  * @date    03-June-2016
   * @brief   This file provides main program functions
   ******************************************************************************
   * @attention
@@ -130,7 +130,7 @@ int main(void)
 
   GUI_SetFont(&GUI_Font32_ASCII);
   
-  GUI_DispStringAt("Starting...", 0, 0);
+  GUI_DispStringAt("Starting...", 70, 0);
   
   /* Initialize LCD and LEDs */
   GUI_DispStringAt("Initializing lcd...", 0, 32);

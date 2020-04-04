@@ -10,14 +10,14 @@
       <TargetName>STM32469I-Eval_Demo</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060061::V5.06 update 1 (build 61)::ARMCC</pCCUsed>
+      <pCCUsed>5060183::V5.06 update 2 (build 183)::ARMCC</pCCUsed>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F469NIHx</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32F4xx_DFP.2.8.0</PackID>
+          <PackID>Keil.STM32F4xx_DFP.2.9.0</PackID>
           <PackURL>http://www.keil.com/pack</PackURL>
-          <Cpu>IRAM(0x20000000-0x2004FFFF) IRAM2(0x10000000-0x2000FFFF) IROM(0x8000000-0x81FFFFF) CLOCK(25000000) CPUTYPE("Cortex-M4") FPU2</Cpu>
+          <Cpu>IRAM(0x20000000-0x2004FFFF) IRAM2(0x10000000-0x1000FFFF) IROM(0x8000000-0x81FFFFF) CLOCK(25000000) FPU2 CPUTYPE("Cortex-M4")</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
           <FlashDriverDll></FlashDriverDll>
@@ -125,47 +125,6 @@
             <HexOffset>0</HexOffset>
             <Oh166RecLen>16</Oh166RecLen>
           </OPTHX>
-          <Simulator>
-            <UseSimulator>0</UseSimulator>
-            <LoadApplicationAtStartup>1</LoadApplicationAtStartup>
-            <RunToMain>1</RunToMain>
-            <RestoreBreakpoints>1</RestoreBreakpoints>
-            <RestoreWatchpoints>1</RestoreWatchpoints>
-            <RestoreMemoryDisplay>1</RestoreMemoryDisplay>
-            <RestoreFunctions>1</RestoreFunctions>
-            <RestoreToolbox>1</RestoreToolbox>
-            <LimitSpeedToRealTime>0</LimitSpeedToRealTime>
-            <RestoreSysVw>1</RestoreSysVw>
-          </Simulator>
-          <Target>
-            <UseTarget>1</UseTarget>
-            <LoadApplicationAtStartup>1</LoadApplicationAtStartup>
-            <RunToMain>1</RunToMain>
-            <RestoreBreakpoints>1</RestoreBreakpoints>
-            <RestoreWatchpoints>1</RestoreWatchpoints>
-            <RestoreMemoryDisplay>1</RestoreMemoryDisplay>
-            <RestoreFunctions>1</RestoreFunctions>
-            <RestoreToolbox>1</RestoreToolbox>
-            <RestoreTracepoints>1</RestoreTracepoints>
-            <RestoreSysVw>1</RestoreSysVw>
-          </Target>
-          <RunDebugAfterBuild>0</RunDebugAfterBuild>
-          <TargetSelection>11</TargetSelection>
-          <SimDlls>
-            <CpuDll></CpuDll>
-            <CpuDllArguments></CpuDllArguments>
-            <PeripheralDll></PeripheralDll>
-            <PeripheralDllArguments></PeripheralDllArguments>
-            <InitializationFile></InitializationFile>
-          </SimDlls>
-          <TargetDlls>
-            <CpuDll></CpuDll>
-            <CpuDllArguments></CpuDllArguments>
-            <PeripheralDll></PeripheralDll>
-            <PeripheralDllArguments></PeripheralDllArguments>
-            <InitializationFile></InitializationFile>
-            <Driver>STLink\ST-LINKIII-KEIL_SWO.dll</Driver>
-          </TargetDlls>
         </DebugOption>
         <Utilities>
           <Flash1>
@@ -343,8 +302,8 @@
               </OCR_RVCT9>
               <OCR_RVCT10>
                 <Type>0</Type>
-                <StartAddress>0x0</StartAddress>
-                <Size>0x0</Size>
+                <StartAddress>0x10000000</StartAddress>
+                <Size>0x10000</Size>
               </OCR_RVCT10>
             </OnChipMemories>
             <RvctStartVector></RvctStartVector>
@@ -365,15 +324,17 @@
             <uSurpInc>0</uSurpInc>
             <uC99>0</uC99>
             <useXO>0</useXO>
-            <v6Lang>0</v6Lang>
-            <v6LangP>0</v6LangP>
-            <vShortEn>0</vShortEn>
-            <vShortWch>0</vShortWch>
+            <v6Lang>1</v6Lang>
+            <v6LangP>1</v6LangP>
+            <vShortEn>1</vShortEn>
+            <vShortWch>1</vShortWch>
+            <v6Lto>0</v6Lto>
+            <v6WtE>0</v6WtE>
             <VariousControls>
               <MiscControls>--C99</MiscControls>
               <Define>STM32F469xx,USE_HAL_DRIVER,USE_STM32469I_EVAL,USE_USB_HS,USE_IOEXPANDER</Define>
               <Undefine></Undefine>
-              <IncludePath>../inc;../STemWin_Addons;../Config;../Core/inc;../Modules/vncserver;../../../../Utilities/CPU;../../../../Drivers/CMSIS/Include;../../../../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../../../../Drivers/STM32F4xx_HAL_Driver/Inc;../../../../Drivers/BSP/STM32469I_EVAL;../../../../Drivers/BSP/Components;../../../../Drivers/BSP/Components/Common;../../../../Middlewares/Third_Party/LwIP/src/include/;../../../../Middlewares/Third_Party/LwIP/src/include/ipv4;../../../../Middlewares/Third_Party/LwIP/system;../../../../Middlewares/Third_Party/LwIP/system/OS;../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Inc;../../../../Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc;../../../../Middlewares/ST/STemWin/inc;../../../../Middlewares/Third_Party/FatFs/src;../../../../Middlewares/Third_Party/FatFs/src/drivers;../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../../../../Middlewares/Third_Party/FreeRTOS/Source/include;../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../Modules/audio_player/Addons/SpiritDSP_Equalizer;../Modules/audio_player/Addons/SpiritDSP_LoudnessControl</IncludePath>
+              <IncludePath>../STemWin_Addons;../Config;../Core/inc;../Modules/vnc_server;../../../../Utilities/CPU;../../../../Drivers/CMSIS/Include;../../../../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../../../../Drivers/STM32F4xx_HAL_Driver/Inc;../../../../Drivers/BSP/STM32469I_EVAL;../../../../Drivers/BSP/Components;../../../../Drivers/BSP/Components/Common;../../../../Middlewares/Third_Party/LwIP/src/include/;../../../../Middlewares/Third_Party/LwIP/system;../../../../Middlewares/Third_Party/LwIP/system/OS;../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Inc;../../../../Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc;../../../../Middlewares/ST/STemWin/inc;../../../../Middlewares/Third_Party/FatFs/src;../../../../Middlewares/Third_Party/FatFs/src/drivers;../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../../../../Middlewares/Third_Party/FreeRTOS/Source/include;../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../Modules/audio_player/Addons/SpiritDSP_Equalizer;../Modules/audio_player/Addons/SpiritDSP_LoudnessControl</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -422,9 +383,6 @@
               <FilePath>../../../../Middlewares/Third_Party/FatFs/src/drivers/usbh_diskio.c</FilePath>
             </File>
           </Files>
-        </Group>
-        <Group>
-          <GroupName>::CMSIS</GroupName>
         </Group>
         <Group>
           <GroupName>Application/User/Modules/home_alarm</GroupName>
@@ -479,8 +437,10 @@
                     <useXO>2</useXO>
                     <v6Lang>0</v6Lang>
                     <v6LangP>0</v6LangP>
-                    <vShortEn>0</vShortEn>
-                    <vShortWch>0</vShortWch>
+                    <vShortEn>2</vShortEn>
+                    <vShortWch>2</vShortWch>
+                    <v6Lto>0</v6Lto>
+                    <v6WtE>0</v6WtE>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -906,8 +866,10 @@
                 <useXO>2</useXO>
                 <v6Lang>0</v6Lang>
                 <v6LangP>0</v6LangP>
-                <vShortEn>0</vShortEn>
-                <vShortWch>0</vShortWch>
+                <vShortEn>2</vShortEn>
+                <vShortWch>2</vShortWch>
+                <v6Lto>0</v6Lto>
+                <v6WtE>0</v6WtE>
                 <VariousControls>
                   <MiscControls></MiscControls>
                   <Define></Define>
@@ -1391,11 +1353,6 @@
           <GroupName>Middlewares/FreeRTOS/Portable</GroupName>
           <Files>
             <File>
-              <FileName>port.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1/port.c</FilePath>
-            </File>
-            <File>
               <FileName>heap_4.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c</FilePath>
@@ -1404,6 +1361,11 @@
               <FileName>cmsis_os.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c</FilePath>
+            </File>
+            <File>
+              <FileName>port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F\port.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1531,11 +1493,24 @@
           <GroupName>Middlewares/STemWin/Library</GroupName>
           <Files>
             <File>
-              <FileName>STemWin528_CM4_OS_Keil_ot.lib</FileName>
+              <FileName>STemWin532_CM4_OS_IAR_ot.a</FileName>
               <FileType>4</FileType>
-              <FilePath>../../../../Middlewares/ST/STemWin/Lib/STemWin528_CM4_OS_Keil_ot.lib</FilePath>
+              <FilePath>../../../../Middlewares/ST/STemWin/Lib/STemWin532_CM4_OS_IAR_ot.a</FilePath>
             </File>
           </Files>
+        </Group>
+        <Group>
+          <GroupName>Doc</GroupName>
+          <Files>
+            <File>
+              <FileName>readme.txt</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\readme.txt</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>::CMSIS</GroupName>
         </Group>
       </Groups>
     </Target>

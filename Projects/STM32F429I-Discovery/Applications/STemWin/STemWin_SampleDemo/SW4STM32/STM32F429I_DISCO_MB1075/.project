@@ -26,11 +26,6 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>syscalls.c</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/syscalls.c</locationURI>
-		</link>
-		<link>
 			<name>Doc/readme.txt</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/readme.txt</locationURI>
@@ -164,6 +159,11 @@
 			<name>Application/SW4STM32/startup_stm32f429xx.s</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/startup_stm32f429xx.s</locationURI>
+		</link>
+		<link>
+			<name>Application/SW4STM32/syscalls.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/syscalls.c</locationURI>
 		</link>
 		<link>
 			<name>Application/User/calibration.c</name>

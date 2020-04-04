@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    Demonstrations/MB1046/readme.txt 
   * @author  MCD Application Team
-  * @version V1.4.4
-  * @date    06-May-2016  
+  * @version V1.4.5
+  * @date    03-June-2016
   * @brief   Description of MB1046 Demonstration
   ******************************************************************************
   * @attention
@@ -129,7 +129,8 @@ Below you find an overview of the different offered module in the demonstration:
  created, navigation between pictures can be done either via Next and previous buttons or by
  enabling the slide show mode. The slide show timer can be changed on the fly (there is no
  need to restart the module).
- You can use the *.jpg image files provided under "Utilities/Media/Pictures/JPG" or any other ones.
+ User can use .jpg and .bmp files available within the "BMP 240*240"(24bits), "BMP 240*320",
+ "BMP 320*240", "BMP 480*272" folder under "Utilities/Media/Pictures".
   
  For more details about the demonstration modules please refers to  STM32CubeF4 demonstration (UM1743)
 
@@ -145,7 +146,14 @@ Below you find an overview of the different offered module in the demonstration:
 @par Hardware and Software environment
 
   - This demonstration runs on STM32F429xx device.
-    
+
+  - STM324x9I-EVAL RevB Set-up
+
+	- Copy the video, picture  and audio files provided under "Utilities/Media/" in the USB key.
+	- Copy the picture files provided under "Utilities/Media/" in the µSD card
+	- Plug the USB key into the STM32F4x9I-EVAL board through 'USB micro A-Male to A-Female' cable to the connector CN9 
+	- Connect a uSD Card to the MSD connector (CN17).
+  
   - This demonstration has been tested with STM32429I-EVAL RevB evaluation board and can be
     easily tailored to any other supported device and development board. 
 

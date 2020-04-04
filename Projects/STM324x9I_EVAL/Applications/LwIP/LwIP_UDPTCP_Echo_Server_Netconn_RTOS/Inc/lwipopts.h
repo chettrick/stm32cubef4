@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LwIP/LwIP_UDPTCP_Echo_Server_Netconn_RTOS/Inc/lwipopts.h
   * @author  MCD Application Team
-  * @version V1.4.4
-  * @date    06-May-2016
+  * @version V1.4.5
+  * @date    03-June-2016
   * @brief   lwIP Options Configuration.
   ******************************************************************************
   * @attention

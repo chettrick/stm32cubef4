@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    system_win.c
   * @author  MCD Application Team
-  * @version V1.4.4
-  * @date    06-May-2016   
+  * @version V1.4.5
+  * @date    03-June-2016 
   * @brief   System information functions
   ******************************************************************************
   * @attention
@@ -94,7 +94,6 @@ SystemSettingsTypeDef settings;
 #define ID_IMAGE_LOGO           (GUI_ID_USER + 0x0B)    
 
 #define ID_CHECKBOX_SPRITES         (GUI_ID_USER + 0x12)
-#define ID_CHECKBOX_BACKGROUND      (GUI_ID_USER + 0x13)
 #define ID_CHECKBOX_CPU180          (GUI_ID_USER + 0x14)
 #define ID_CHECKBOX_FLEXSKIN        (GUI_ID_USER + 0x16)
 
@@ -162,9 +161,8 @@ static const GUI_WIDGET_CREATE_INFO _aDialogSystemInformation[] = {
 static const GUI_WIDGET_CREATE_INFO _aDialogGeneralSettings[] = {
   { WINDOW_CreateIndirect, "General Settings", 0, 0,   0, 329, 202, FRAMEWIN_CF_MOVEABLE },
   { CHECKBOX_CreateIndirect, "Checkbox", ID_CHECKBOX_SPRITES, 26, 30, 147, 20, 0, 0x0, 0 },
-  { CHECKBOX_CreateIndirect, "Checkbox", ID_CHECKBOX_BACKGROUND, 26, 60, 227, 20, 0, 0x0, 0 },
-  { CHECKBOX_CreateIndirect, "Checkbox", ID_CHECKBOX_CPU180, 26, 90, 215, 20, 0, 0x0, 0 },
-  { CHECKBOX_CreateIndirect, "Checkbox", ID_CHECKBOX_FLEXSKIN, 26, 120, 147, 20, 0, 0x0, 0 },
+  { CHECKBOX_CreateIndirect, "Checkbox", ID_CHECKBOX_CPU180, 26, 60, 215, 20, 0, 0x0, 0 },
+  { CHECKBOX_CreateIndirect, "Checkbox", ID_CHECKBOX_FLEXSKIN, 26, 90, 147, 20, 0, 0x0, 0 },
   { TEXT_CreateIndirect, "[!! Restart the demonstration to apply the new settings !!]", ID_TEXT_WARNING, 6, 160, 300, 20, 0, 0x0, 0 },  
 };
 
@@ -291,7 +289,7 @@ static void _cbSystemInformation(WM_MESSAGE * pMsg)
     hItem = WM_GetDialogItem(pMsg->hWin, ID_TEXT_VERSION);
     TEXT_SetFont(hItem, GUI_FONT_13HB_ASCII);
     TEXT_SetTextColor(hItem, GUI_DARKGRAY);
-    strcpy(str, "Demo rev: 1.4.0");
+    strcpy(str, "Demo rev: 1.4.5");
     TEXT_SetText(hItem, str); 
 
     /* ST Copyright */
@@ -332,11 +330,6 @@ static void _cbGeneralSettings(WM_MESSAGE * pMsg) {
     CHECKBOX_SetText(hItem, "Enable Sprites");
     CHECKBOX_SetState(hItem, settings.b.enable_sprite);
     
-    /* Initialization of 'Checkbox' (Background field) */
-    hItem = WM_GetDialogItem(pMsg->hWin, ID_CHECKBOX_BACKGROUND);
-    CHECKBOX_SetText(hItem, "Enable background mode");
-    CHECKBOX_SetState(hItem, settings.b.enable_background);
-    WM_DisableWindow(hItem); 
     /* Initialization of 'Checkbox' (CPU field) */
     hItem = WM_GetDialogItem(pMsg->hWin, ID_CHECKBOX_CPU180);
     CHECKBOX_SetText(hItem, "Run CPU at 180 MHz");
@@ -354,9 +347,6 @@ static void _cbGeneralSettings(WM_MESSAGE * pMsg) {
     /* Save Setting before delete settings frame */
     hItem = WM_GetDialogItem(pMsg->hWin, ID_CHECKBOX_SPRITES);
     settings.b.enable_sprite = CHECKBOX_IsChecked(hItem);
-    
-    hItem = WM_GetDialogItem(pMsg->hWin, ID_CHECKBOX_BACKGROUND);
-    settings.b.enable_background = CHECKBOX_IsChecked(hItem);
     
     hItem = WM_GetDialogItem(pMsg->hWin, ID_CHECKBOX_CPU180);
     settings.b.use_180Mhz = CHECKBOX_IsChecked(hItem);

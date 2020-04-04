@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    STemWin_HelloWorld/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.4
-  * @date    06-May-2016
+  * @version V1.2.5
+  * @date    03-June-2016
   * @brief   
   ******************************************************************************
   * @attention
@@ -60,7 +60,6 @@ To do this, user has only to replace the file "Basic_HelloWorld.c" into the
 project workspace by the downloaded one.
 As example, two sample source files are provided (but not linked to the project):
 	STemWin/HelloWorld/Src/MEMDEV_WM_Ticker.c
-	STemWin/HelloWorld/Src/MOVIE_ShowFeatures.c
 
 Note that the following user files may need to be updated:
   LCDConf_stm32446e_eval.c
@@ -75,6 +74,9 @@ Note that the following user files may need to be updated:
       
 @note The application need to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
+	  
+@note If the application is not running normally as mentionned above , you can accordingly modify either
+      the Heap and Stack of the application or the GUI_NUMBYTES define in the GUIConf.c file
 
 @par Directory contents 
 

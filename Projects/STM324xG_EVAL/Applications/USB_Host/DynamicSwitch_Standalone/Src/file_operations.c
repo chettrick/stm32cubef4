@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Host/DynamicSwitch_Standalone/Src/file_operations.c 
   * @author  MCD Application Team
-  * @version V1.3.4
-  * @date    06-May-2016
+  * @version V1.3.5
+  * @date    03-June-2016
   * @brief   Write/read file on the disk.
   ******************************************************************************
   * @attention

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    k_modules_res.h
   * @author  MCD Application Team
-  * @version V1.4.4
-  * @date    06-May-2016  
+  * @version V1.4.5
+  * @date    03-June-2016
   * @brief   Header for k_modules_res.c file
   ******************************************************************************
   * @attention

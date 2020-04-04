@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LCD_Paint/Src/ts_calibration.c
   * @author  MCD Application Team
-  * @version V1.0.4
-  * @date    06-May-2016
+  * @version V1.0.5
+  * @date    03-June-2016
   * @brief   This example code shows how to calibrate the touchscreen.
   ******************************************************************************
   * @attention
