@@ -197,11 +197,11 @@ static void RTC_CalendarConfig(void)
   RTC_TimeTypeDef stimestructure;
 
   /*##-1- Configure the Date #################################################*/
-  /* Set Date: Monday April 14th 2014 */
-  sdatestructure.Year = 0x14;
-  sdatestructure.Month = RTC_MONTH_APRIL;
-  sdatestructure.Date = 0x14;
-  sdatestructure.WeekDay = RTC_WEEKDAY_MONDAY;
+  /* Set Date: Friday March 13th 2015 */
+  sdatestructure.Year = 0x15;
+  sdatestructure.Month = RTC_MONTH_MARCH;
+  sdatestructure.Date = 0x13;
+  sdatestructure.WeekDay = RTC_WEEKDAY_FRIDAY;
   
   if(HAL_RTC_SetDate(&RtcHandle,&sdatestructure,RTC_FORMAT_BCD) != HAL_OK)
   {

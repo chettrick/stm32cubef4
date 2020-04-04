@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    ADC/ADC_TripleModeInterleaved/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014
+  * @version V1.2.1
+  * @date    13-March-2015
   * @brief   This example provides a short description of how to use the ADC 
   *          peripheral to convert a regular channel in Triple interleaved mode.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -235,7 +235,7 @@ static void ADC_Config(void)
   /*##-2- Configure ADC3 regular channel #####################################*/  
   sConfig.Channel = ADCxyz_CHANNEL;
   sConfig.Rank = 1;
-  sConfig.SamplingTime = ADC_SAMPLETIME_3CYCLES;
+  sConfig.SamplingTime = ADC_SAMPLETIME_15CYCLES;
   sConfig.Offset = 0;
   
   if(HAL_ADC_ConfigChannel(&AdcHandle3, &sConfig) != HAL_OK)

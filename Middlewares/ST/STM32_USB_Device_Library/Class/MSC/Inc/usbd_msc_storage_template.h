@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    usbd_msc_storage.h
   * @author  MCD Application Team
-  * @version V2.3.0
-  * @date    04-November-2014
+  * @version V2.4.0
+  * @date    28-February-2015
   * @brief   Header file for the usbd_msc_storage.c file
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.

@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    LTDC/LTDC_ColorKeying/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014
+  * @version V1.2.1
+  * @date    13-March-2015
   * @brief   This example describes how to enable and use 
   *          the color keying functionality.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -38,7 +38,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "ARGB4444_480x272.h"
+#include "RGB565_480x272.h"
 
 /** @addtogroup STM32F4xx_HAL_Examples
   * @{
@@ -92,7 +92,7 @@ int main(void)
   LCD_Config();
 
   /*##-3- Configure Color Keying  ############################################*/
-  HAL_LTDC_ConfigColorKeying(&LtdcHandle, 0xFFFF, 1);  
+  HAL_LTDC_ConfigColorKeying(&LtdcHandle, 0xFFFFFF, 1);  
 
   /* Infinite loop */
   while (1)
@@ -190,10 +190,10 @@ static void LCD_Config(void)
   pLayerCfg.WindowY1 = 272;
   
   /* Pixel Format configuration*/ 
-  pLayerCfg.PixelFormat = LTDC_PIXEL_FORMAT_ARGB4444;
+  pLayerCfg.PixelFormat = LTDC_PIXEL_FORMAT_RGB565;
   
   /* Start Address configuration : frame buffer is located at FLASH memory */
-  pLayerCfg.FBStartAdress = (uint32_t)&ARGB4444_480x272;
+  pLayerCfg.FBStartAdress = (uint32_t)&RGB565_480x272;
   
   /* Alpha constant (255 totally opaque) */
   pLayerCfg.Alpha = 255;

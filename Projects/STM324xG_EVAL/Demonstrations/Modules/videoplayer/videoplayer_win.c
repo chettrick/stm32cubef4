@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    videoplayer_win.c
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014   
+  * @version V1.2.1
+  * @date    13-March-2015   
   * @brief   Video player functions
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -125,12 +125,12 @@ static uint8_t _ShowFullScreen(void);
 static uint8_t _CloseFullScreen(void);
 /* _aDialogCreate */
 static const GUI_WIDGET_CREATE_INFO _aDialogCreate[] = {
-  { WINDOW_CreateIndirect,   "Video Player", ID_FRAMEWIN_INFO,     0,   0,   320, 214, 0, 0x64, 0 },
+  { WINDOW_CreateIndirect,   "Video Player", ID_FRAMEWIN_INFO,     0,   0,   320, 215, 0, 0x64, 0 },
   { LISTVIEW_CreateIndirect, "Listview",     ID_VIDEO_LIST,        217, 05, 100, 130, 0, 0x0,  0 },   
   { SLIDER_CreateIndirect,   "Slider",      ID_PROGRESS_SLIDER,   9, 139, 170, 20,  0, 0x0,  0 },
 };
 
-static WM_HWIN VIDEOPLAYER_hWin, chooser_openfile, chooser_add2playlist, chooser_addfolder, hFrame; 
+static WM_HWIN VIDEOPLAYER_hWin, hFrame; 
 static char const                *apDrives[2] = {"0:", "1:"};
 static const char                acMask_video[] = ".video";
 static const char                acMask_dir[] = ".dir";
@@ -1029,6 +1029,7 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
   WM_HWIN  hItem, hClient;
   int      NCode;
   int      Id, Index, newpos;
+  int      result;
   GUI_RECT r;
   int  ItemNbr;
   static char tmp[FILEMGR_FILE_NAME_SIZE];  
@@ -1106,81 +1107,7 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
     
 case WM_NOTIFY_PARENT:
     Id    = WM_GetId(pMsg->hWinSrc);
-    NCode = pMsg->Data.v;
-    
-    if (NCode == WM_NOTIFICATION_CHILD_DELETED)
-    {
-      if(pMsg->hWinSrc == chooser_openfile)
-      {    
-
-        if((strstr(pFileInfo->pRoot, ".emf")) || (strstr(pFileInfo->pRoot, ".EMF")))
-        {                   
-          
-          pVideoList->ptr = 0;
-          
-          strcpy((char *)pVideoList->file[pVideoList->ptr].name, pFileInfo->pRoot);
-          FILEMGR_GetFileOnly (tmp, pFileInfo->pRoot);
-          hItem = WM_GetDialogItem(pMsg->hWin, ID_VIDEO_LIST);
-          
-          /* Update Play list */
-          strcpy((char *)pVideoList->file[pVideoList->ptr].name, pFileInfo->pRoot);
-          
-          ItemNbr = LISTVIEW_GetNumRows(hItem);
-          while(ItemNbr--)
-          {
-            LISTVIEW_DeleteRow(hItem, ItemNbr);
-          }
-          
-          LISTVIEW_AddRow(hItem, NULL);         
-          LISTVIEW_SetItemText(hItem, 0, pVideoList->ptr, tmp);
-          pVideoList->ptr++;  
-          file_pos = 0;
-          LISTVIEW_SetSel(hItem, 0);
-          _StartPlay((char *)pVideoList->file[file_pos].name);
-          hItem = WM_GetDialogItem(VIDEOPLAYER_hWin, ID_PLAY_BUTTON);
-          WM_InvalidateWindow(hItem);
-          WM_Update(hItem); 
-          WM_InvalidateWindow(hFrame);
-        }
-        chooser_openfile = 0;
-      }
-      
-      if(pMsg->hWinSrc == chooser_addfolder)
-      {
-        if(VideoPlayer_State == VIDEO_PLAY)
-        {
-          GUI_MOVIE_Play(hMovie);
-        }
-        _AddEntireFolder(pFileInfo->pRoot);
-
-        WM_InvalidateWindow(hFrame);
-        chooser_addfolder = 0;
-      }    
-      
-      if(pMsg->hWinSrc == chooser_add2playlist)
-      {
-        if(VideoPlayer_State == VIDEO_PLAY)
-        {
-           GUI_MOVIE_Play(hMovie);  
-        }     
-        if((strstr(pFileInfo->pRoot, ".emf")) || (strstr(pFileInfo->pRoot, ".EMF")))
-        {
-          if(pVideoList->ptr < FILEMGR_LIST_DEPDTH)
-          {
-            strcpy((char *)pVideoList->file[pVideoList->ptr].name, pFileInfo->pRoot);
-            FILEMGR_GetFileOnly ((char *)tmp, (char *)pFileInfo->pRoot);
-            hItem = WM_GetDialogItem(pMsg->hWin, ID_VIDEO_LIST);
-            
-            LISTVIEW_AddRow(hItem, NULL);         
-            LISTVIEW_SetItemText(hItem, 0, pVideoList->ptr, tmp);
-            pVideoList->ptr++;
-          }
-        }
-        
-        WM_InvalidateWindow(hFrame);
-        chooser_add2playlist = 0;
-      } 
-    }    
+    NCode = pMsg->Data.v; 
 
     switch(Id) {
       
@@ -1200,18 +1127,39 @@ case WM_NOTIFY_PARENT:
     case ID_ADD_BUTTON: 
       switch(NCode) {
       case WM_NOTIFICATION_RELEASED:
-        if((chooser_openfile == 0) && (chooser_addfolder == 0) && (chooser_add2playlist == 0))
-        {
-          pFileInfo->pfGetData = k_GetData;
-          pFileInfo->pMask = acMask_video;     
-          chooser_add2playlist = CHOOSEFILE_Create(pMsg->hWin,  20, 20, 200, 150, apDrives, GUI_COUNTOF(apDrives), 0, "Add video file to playlist", 0, pFileInfo);        
-          if(VideoPlayer_State == VIDEO_PLAY)
-          {
-            GUI_MOVIE_Pause(hMovie);
-          }
-        }
-        break;
         
+        pFileInfo->pfGetData = k_GetData;
+        pFileInfo->pMask = acMask_video;     
+        hItem = CHOOSEFILE_Create(pMsg->hWin,  20, 20, 200, 150, apDrives, GUI_COUNTOF(apDrives), 0, "Add video file to playlist", 0, pFileInfo);        
+        
+        if(VideoPlayer_State == VIDEO_PLAY)
+        {
+          GUI_MOVIE_Pause(hMovie);
+        }
+        WM_MakeModal(hItem);
+        result = GUI_ExecCreatedDialog(hItem);
+        if (result == 0) 
+        {
+          if((strstr(pFileInfo->pRoot, ".emf")) || (strstr(pFileInfo->pRoot, ".EMF")))
+          {
+            if(pVideoList->ptr < FILEMGR_LIST_DEPDTH)
+            {
+              strcpy((char *)pVideoList->file[pVideoList->ptr].name, pFileInfo->pRoot);
+              FILEMGR_GetFileOnly ((char *)tmp, (char *)pFileInfo->pRoot);
+              hItem = WM_GetDialogItem(pMsg->hWin, ID_VIDEO_LIST);
+              
+              LISTVIEW_AddRow(hItem, NULL);         
+              LISTVIEW_SetItemText(hItem, 0, pVideoList->ptr, tmp);
+              pVideoList->ptr++;
+            }
+          }
+          WM_InvalidateWindow(hFrame);
+        }
+        if(VideoPlayer_State == VIDEO_PLAY)
+        {
+          GUI_MOVIE_Play(hMovie);  
+        } 
+        break;        
       }
       break;       
       
@@ -1219,16 +1167,27 @@ case WM_NOTIFY_PARENT:
     case ID_OPEN_BUTTON: 
       switch(NCode) {
       case WM_NOTIFICATION_RELEASED:
-        if((chooser_openfile == 0) && (chooser_addfolder == 0) && (chooser_add2playlist == 0))
-        {
+        
           pFileInfo->pfGetData = k_GetData;
           pFileInfo->pMask = acMask_dir;     
-          chooser_addfolder = CHOOSEFILE_Create(pMsg->hWin,  20, 20, 200, 150, apDrives, GUI_COUNTOF(apDrives), 0, "Add a folder", 0, pFileInfo);        
+          hItem = CHOOSEFILE_Create(pMsg->hWin,  20, 20, 200, 150, apDrives, GUI_COUNTOF(apDrives), 0, "Add a folder", 0, pFileInfo);
+          
           if(VideoPlayer_State == VIDEO_PLAY)
           {
             GUI_MOVIE_Pause(hMovie);
           }
-        }
+          WM_MakeModal(hItem);
+          result = GUI_ExecCreatedDialog(hItem);
+          if (result == 0) 
+          {          
+            _AddEntireFolder(pFileInfo->pRoot);
+            
+            WM_InvalidateWindow(hFrame);       
+          }
+          if(VideoPlayer_State == VIDEO_PLAY)
+          {
+            GUI_MOVIE_Play(hMovie);
+          }
         break;
       }
       break;      
@@ -1262,7 +1221,41 @@ case WM_NOTIFY_PARENT:
           {
             pFileInfo->pfGetData = k_GetData;
             pFileInfo->pMask = acMask_video;     
-            chooser_openfile = CHOOSEFILE_Create(pMsg->hWin,  20, 20, 200, 150, apDrives, GUI_COUNTOF(apDrives), 0, "Open a video file", 0, pFileInfo);         
+            hItem = CHOOSEFILE_Create(pMsg->hWin,  20, 20, 200, 150, apDrives, GUI_COUNTOF(apDrives), 0, "Open a video file", 0, pFileInfo);  
+            WM_MakeModal(hItem);
+            result = GUI_ExecCreatedDialog(hItem);
+            if (result == 0) 
+            { 
+              if((strstr(pFileInfo->pRoot, ".emf")) || (strstr(pFileInfo->pRoot, ".EMF")))
+              {                   
+                
+                pVideoList->ptr = 0;
+                
+                strcpy((char *)pVideoList->file[pVideoList->ptr].name, pFileInfo->pRoot);
+                FILEMGR_GetFileOnly (tmp, pFileInfo->pRoot);
+                hItem = WM_GetDialogItem(pMsg->hWin, ID_VIDEO_LIST);
+                
+                /* Update Play list */
+                strcpy((char *)pVideoList->file[pVideoList->ptr].name, pFileInfo->pRoot);
+                
+                ItemNbr = LISTVIEW_GetNumRows(hItem);
+                while(ItemNbr--)
+                {
+                  LISTVIEW_DeleteRow(hItem, ItemNbr);
+                }
+                
+                LISTVIEW_AddRow(hItem, NULL);         
+                LISTVIEW_SetItemText(hItem, 0, pVideoList->ptr, tmp);
+                pVideoList->ptr++;  
+                file_pos = 0;
+                LISTVIEW_SetSel(hItem, 0);
+                _StartPlay((char *)pVideoList->file[file_pos].name);
+                hItem = WM_GetDialogItem(VIDEOPLAYER_hWin, ID_PLAY_BUTTON);
+                WM_InvalidateWindow(hItem);
+                WM_Update(hItem); 
+                WM_InvalidateWindow(hFrame);
+              }             
+            }            
           }        
           
         }
@@ -1437,8 +1430,6 @@ static void Startup(WM_HWIN hWin, uint16_t xpos, uint16_t ypos)
   file_pos = 0;
   pVideoList->ptr = 0;
   VideoPlayer_State = VIDEO_IDLE;
-  chooser_openfile = (WM_HWIN)NULL; 
-  chooser_add2playlist = (WM_HWIN)NULL;
   VIDEOPLAYER_hWin = GUI_CreateDialogBox(_aDialogCreate, GUI_COUNTOF(_aDialogCreate), _cbDialog, hWin, xpos, ypos);
   
 }

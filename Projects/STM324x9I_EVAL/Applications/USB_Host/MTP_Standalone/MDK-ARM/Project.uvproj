@@ -639,6 +639,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_usb.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32f4xx_hal_sai_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_sai_ex.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1336,6 +1341,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_usb.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32f4xx_hal_sai_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_sai_ex.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1755,7 +1765,7 @@
               <MiscControls>--C99</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F429xx,USE_STM324x9I_EVAL,USE_USB_HS,USE_USB_HS_IN_FS,</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Inc;..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Core\Inc;..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Class\MTP\Inc;..\..\..\..\..\..\Drivers\BSP\STM324x9I_EVAL;..\..\..\..\..\..\Utilities\Log;</IncludePath>
+              <IncludePath>..\Inc;..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Core\Inc;..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Class\MTP\Inc;..\..\..\..\..\..\Drivers\BSP\STM324x9I_EVAL;..\..\..\..\..\..\Utilities\Log</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -2032,6 +2042,11 @@
               <FileName>stm32f4xx_ll_usb.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_usb.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_sai_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_sai_ex.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -114,7 +114,7 @@
 					</fileInfo>
 					<fileInfo id="com.atollic.truestudio.exe.debug.1518366166.976348920" name="stm32f4xx_hal_spi.c" rcbsApplicability="disable" resourcePath="Drivers/STM32F4xx_HAL_Drivers/stm32f4xx_hal_spi.c" toolsToInvoke="com.atollic.truestudio.exe.debug.toolchain.gcc.1836874447.245000278">
 						<tool id="com.atollic.truestudio.exe.debug.toolchain.gcc.1836874447.245000278" name="C Compiler" superClass="com.atollic.truestudio.exe.debug.toolchain.gcc.1836874447">
-							<option id="com.atollic.truestudio.gcc.misc.otherflags.1537589389" superClass="com.atollic.truestudio.gcc.misc.otherflags" value="-Wno-unused-but-set-variable" valueType="string"/>
+							<option id="com.atollic.truestudio.gcc.misc.otherflags.1537589389" superClass="com.atollic.truestudio.gcc.misc.otherflags" value="-Wno-unused-but-set-variable -Wno-unused-variable" valueType="string"/>
 							<inputType id="com.atollic.truestudio.gcc.input.318081339" superClass="com.atollic.truestudio.gcc.input"/>
 						</tool>
 						<tool customBuildStep="true" id="org.eclipse.cdt.managedbuilder.ui.rcbs.2144547496" name="Resource Custom Build Step">

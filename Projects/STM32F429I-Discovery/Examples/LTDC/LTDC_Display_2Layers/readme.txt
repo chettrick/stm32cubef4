@@ -2,16 +2,16 @@
   @page LTDC_Display_2Layers LTDC Display 2 Layers example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    LTDC/LTDC_Display_2Layers/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014
+  * @version V1.2.1
+  * @date    13-March-2015
   * @brief   Description of the LTDC Display 2 Layers example.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -63,6 +63,12 @@
  
  The images change unlike their positions on LCD in an infinite loop.
 
+ @note : 
+ The C files of the images used in this example are generated with 
+ STemWin bitmap converter released with this package.
+ \Middlewares\ST\STemWin\Software\BmpCvtST.exe
+ Use the bitmap files under resources repository
+       
 STM32 Discovery board's LED can be used to monitor the transfer status:
  - LED3 is ON when there is an error in Init process.
 

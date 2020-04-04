@@ -731,6 +731,7 @@ int des3_crypt_ecb( des3_context *ctx,
   if( ctx->mode == DES_ENCRYPT ) /* 3DES encryption */
   {  
     /* Set the CRYP parameters */
+    hcryp_tdes.Instance = CRYP;  
     hcryp_tdes.Init.DataType = CRYP_DATATYPE_8B;
     hcryp_tdes.Init.KeySize  = CRYP_KEYSIZE_128B;
     hcryp_tdes.Init.pKey = ctx->tdes_enc_key;
@@ -745,6 +746,7 @@ int des3_crypt_ecb( des3_context *ctx,
   {
     
     /* Set the CRYP parameters */
+    hcryp_tdes.Instance = CRYP; 
     hcryp_tdes.Init.DataType = CRYP_DATATYPE_8B;
     hcryp_tdes.Init.KeySize  = CRYP_KEYSIZE_192B;
     hcryp_tdes.Init.pKey = ctx->tdes_dec_key;
@@ -818,6 +820,7 @@ int des3_crypt_cbc( des3_context *ctx,
     tdeskey = ctx->tdes_enc_key;
     
     /* Set the CRYP parameters */
+    hcryp_tdes.Instance = CRYP; 
     hcryp_tdes.Init.DataType = CRYP_DATATYPE_8B;
     hcryp_tdes.Init.KeySize = CRYP_KEYSIZE_128B;
     hcryp_tdes.Init.pKey = tdeskey;
@@ -846,6 +849,7 @@ int des3_crypt_cbc( des3_context *ctx,
     tdeskey = ctx->tdes_dec_key;
     
     /* Set the CRYP parameters */
+    hcryp_tdes.Instance = CRYP; 
     hcryp_tdes.Init.DataType = CRYP_DATATYPE_8B;
     hcryp_tdes.Init.KeySize = CRYP_KEYSIZE_128B;
     hcryp_tdes.Init.pKey = tdeskey;

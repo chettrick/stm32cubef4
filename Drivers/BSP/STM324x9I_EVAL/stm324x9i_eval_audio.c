@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    stm324x9i_eval_audio.c
   * @author  MCD Application Team
-  * @version V2.0.3
-  * @date    10-December-2014
+  * @version V2.0.4
+  * @date    02-March-2015
   * @brief   This file provides the Audio driver for the STM324x9I-EVAL evaluation board.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -271,7 +271,7 @@ uint8_t BSP_AUDIO_OUT_Play(uint16_t* pBuffer, uint32_t Size)
   else
   {
     /* Update the Media layer and enable it for play */  
-    HAL_SAI_Transmit_DMA(&haudio_out_sai, pBuffer, DMA_MAX(Size / AUDIODATA_SIZE));
+    HAL_SAI_Transmit_DMA(&haudio_out_sai, (uint8_t*)pBuffer, DMA_MAX(Size / AUDIODATA_SIZE));
     
     return AUDIO_OK;
   }
@@ -285,7 +285,7 @@ uint8_t BSP_AUDIO_OUT_Play(uint16_t* pBuffer, uint32_t Size)
   */
 void BSP_AUDIO_OUT_ChangeBuffer(uint16_t *pData, uint16_t Size)
 {
-   HAL_SAI_Transmit_DMA(&haudio_out_sai, pData, Size);
+   HAL_SAI_Transmit_DMA(&haudio_out_sai, (uint8_t*)pData, Size);
 }
 
 /**

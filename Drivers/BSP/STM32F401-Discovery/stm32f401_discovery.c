@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm32f401_discovery.c
   * @author  MCD Application Team
-  * @version V2.1.2
-  * @date    10-December-2014
+  * @version V2.1.3
+  * @date    02-March-2015
   * @brief   This file provides set of firmware functions to manage LEDs and
   *          push-button available on STM32F401-Discovery Kit from STMicroelectronics.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -69,7 +69,7 @@
   */
 #define __STM32F401_DISCO_BSP_VERSION_MAIN   (0x02) /*!< [31:24] main version */
 #define __STM32F401_DISCO_BSP_VERSION_SUB1   (0x01) /*!< [23:16] sub1 version */
-#define __STM32F401_DISCO_BSP_VERSION_SUB2   (0x01) /*!< [15:8]  sub2 version */
+#define __STM32F401_DISCO_BSP_VERSION_SUB2   (0x03) /*!< [15:8]  sub2 version */
 #define __STM32F401_DISCO_BSP_VERSION_RC     (0x00) /*!< [7:0]  release candidate */ 
 #define __STM32F401_DISCO_BSP_VERSION         ((__STM32F401_DISCO_BSP_VERSION_MAIN << 24)\
                                              |(__STM32F401_DISCO_BSP_VERSION_SUB1 << 16)\

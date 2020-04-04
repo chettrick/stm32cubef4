@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm324x9i_eval.h
   * @author  MCD Application Team
-  * @version V2.0.3
-  * @date    10-December-2014
+  * @version V2.0.4
+  * @date    02-March-2015
   * @brief   This file contains definitions for STM324x9I_EVAL's LEDs, 
   *          push-buttons and COM ports hardware resources.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -145,13 +145,17 @@ typedef enum
 #define LED4_GPIO_CLK_ENABLE()           __GPIOG_CLK_ENABLE()   
 #define LED4_GPIO_CLK_DISABLE()          __GPIOG_CLK_DISABLE()  
     
-#define LEDx_GPIO_CLK_ENABLE(__INDEX__)   (((__INDEX__) == 0) ? LED1_GPIO_CLK_ENABLE() :\
-                                           ((__INDEX__) == 1) ? LED2_GPIO_CLK_ENABLE() :\
-                                           ((__INDEX__) == 2) ? LED3_GPIO_CLK_ENABLE() : LED4_GPIO_CLK_ENABLE())
+#define LEDx_GPIO_CLK_ENABLE(__INDEX__)  do{if((__INDEX__) == 0) LED1_GPIO_CLK_ENABLE(); else \
+                                            if((__INDEX__) == 1) LED2_GPIO_CLK_ENABLE(); else \
+                                            if((__INDEX__) == 2) LED3_GPIO_CLK_ENABLE(); else \
+                                            if((__INDEX__) == 3) LED4_GPIO_CLK_ENABLE(); \
+                                            }while(0)
 
-#define LEDx_GPIO_CLK_DISABLE(__INDEX__)  (((__INDEX__) == 0) ? LED1_GPIO_CLK_DISABLE() :\
-                                           ((__INDEX__) == 1) ? LED2_GPIO_CLK_DISABLE() :\
-                                           ((__INDEX__) == 2) ? LED3_GPIO_CLK_DISABLE() : LED4_GPIO_CLK_DISABLE())
+#define LEDx_GPIO_CLK_DISABLE(__INDEX__)  do{if((__INDEX__) == 0) LED1_GPIO_CLK_DISABLE(); else \
+                                             if((__INDEX__) == 1) LED2_GPIO_CLK_DISABLE(); else \
+                                             if((__INDEX__) == 2) LED3_GPIO_CLK_DISABLE(); else \
+                                             if((__INDEX__) == 3) LED4_GPIO_CLK_DISABLE(); \
+                                             }while(0)
 
 /**
   * @}
@@ -190,11 +194,14 @@ typedef enum
 #define KEY_BUTTON_GPIO_CLK_DISABLE()        __GPIOC_CLK_DISABLE()
 #define KEY_BUTTON_EXTI_IRQn                 EXTI15_10_IRQn
 
-#define BUTTONx_GPIO_CLK_ENABLE(__INDEX__)    (((__INDEX__) == 0) ? WAKEUP_BUTTON_GPIO_CLK_ENABLE() :\
-                                               ((__INDEX__) == 1) ? TAMPER_BUTTON_GPIO_CLK_ENABLE() : KEY_BUTTON_GPIO_CLK_ENABLE())
-
-#define BUTTONx_GPIO_CLK_DISABLE(__INDEX__)    (((__INDEX__) == 0) ? WAKEUP_BUTTON_GPIO_CLK_DISABLE() :\
-                                                ((__INDEX__) == 1) ? TAMPER_BUTTON_GPIO_CLK_DISABLE() : KEY_BUTTON_GPIO_CLK_DISABLE())
+#define BUTTONx_GPIO_CLK_ENABLE(__INDEX__)  do{if((__INDEX__) == 0) WAKEUP_BUTTON_GPIO_CLK_ENABLE(); else \
+                                               if((__INDEX__) == 1) TAMPER_BUTTON_GPIO_CLK_ENABLE(); else \
+                                               if ((__INDEX__) == 2) KEY_BUTTON_GPIO_CLK_ENABLE(); \
+                                               }while(0)
+#define BUTTONx_GPIO_CLK_DISABLE(__INDEX__) do{if((__INDEX__) == 0) WAKEUP_BUTTON_GPIO_CLK_DISABLE(); else \
+                                               if((__INDEX__) == 1) TAMPER_BUTTON_GPIO_CLK_DISABLE(); else \
+                                               if ((__INDEX__) == 2) KEY_BUTTON_GPIO_CLK_DISABLE(); \
+                                               }while(0)
 /**
   * @}
   */ 
@@ -225,14 +232,20 @@ typedef enum
 
 #define EVAL_COM1_IRQn                     USART1_IRQn
 
-#define EVAL_COMx_CLK_ENABLE(__INDEX__)            (((__INDEX__) == 0) ? EVAL_COM1_CLK_ENABLE() : 0)
-#define EVAL_COMx_CLK_DISABLE(__INDEX__)           (((__INDEX__) == 0) ? EVAL_COM1_CLK_DISABLE() : 0)
+#define EVAL_COMx_CLK_ENABLE(__INDEX__)              do{if((__INDEX__) == 0) EVAL_COM1_CLK_ENABLE(); \
+                                                       }while(0)
+#define EVAL_COMx_CLK_DISABLE(__INDEX__)             do{if((__INDEX__) == 0) EVAL_COM1_CLK_DISABLE(); \
+                                                       }while(0)
 
-#define EVAL_COMx_TX_GPIO_CLK_ENABLE(__INDEX__)    (((__INDEX__) == 0) ? EVAL_COM1_TX_GPIO_CLK_ENABLE() : 0)
-#define EVAL_COMx_TX_GPIO_CLK_DISABLE(__INDEX__)   (((__INDEX__) == 0) ? EVAL_COM1_TX_GPIO_CLK_DISABLE() : 0)
+#define EVAL_COMx_TX_GPIO_CLK_ENABLE(__INDEX__)      do{if((__INDEX__) == 0) EVAL_COM1_TX_GPIO_CLK_ENABLE(); \
+                                                     }while(0)
+#define EVAL_COMx_TX_GPIO_CLK_DISABLE(__INDEX__)     do{if((__INDEX__) == 0) EVAL_COM1_TX_GPIO_CLK_DISABLE(); \
+                                                     }while(0)
 
-#define EVAL_COMx_RX_GPIO_CLK_ENABLE(__INDEX__)    (((__INDEX__) == 0) ? EVAL_COM1_RX_GPIO_CLK_ENABLE() : 0)
-#define EVAL_COMx_RX_GPIO_CLK_DISABLE(__INDEX__)   (((__INDEX__) == 0) ? EVAL_COM1_RX_GPIO_CLK_DISABLE() : 0)
+#define EVAL_COMx_RX_GPIO_CLK_ENABLE(__INDEX__)      do{if((__INDEX__) == 0) EVAL_COM1_RX_GPIO_CLK_ENABLE(); \
+                                                       }while(0)
+#define EVAL_COMx_RX_GPIO_CLK_DISABLE(__INDEX__)     do{if((__INDEX__) == 0) EVAL_COM1_RX_GPIO_CLK_DISABLE(); \
+                                                       }while(0)
 
 /**
   * @brief Joystick Pins definition 

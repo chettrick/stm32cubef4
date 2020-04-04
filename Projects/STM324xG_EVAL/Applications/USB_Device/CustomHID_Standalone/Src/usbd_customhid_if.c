@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    USB_Device/CustomHID_Standalone/Src/usbd_customhid_if.c
   * @author  MCD Application Team
-  * @version $VERSION$
-  * @date    $DATE$
+  * @version V1.0.0
+  * @date    13-March-2015
   * @brief   USB Device Custom HID interface file.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.

@@ -2,11 +2,11 @@
   @page FLASH_DualBoot  FLASH Dual Boot example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    FLASH/FLASH_DualBoot/readme.txt
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014
+  * @version V1.2.1
+  * @date    13-March-2015
   * @brief   Description of the FLASH Dual boot example.
   ******************************************************************************
   *

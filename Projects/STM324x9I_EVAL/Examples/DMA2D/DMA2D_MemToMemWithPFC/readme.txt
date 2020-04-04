@@ -2,16 +2,16 @@
   @page DMA2D_MemToMemWithPFC DMA2D Memory to Memory with PFC example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    DMA2D/DMA2D_MemToMemWithPFC/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014
+  * @version V1.2.1
+  * @date    13-March-2015
   * @brief   Description of the DMA2D Memory to Memory with PFC example.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -53,17 +53,22 @@
   and the difference between pixel coded on 32bits and coded on 16bits.
  
   An image is transferred from flash memory to internal RAM and during the transfer,
-  a pixel format conversion is applied from ARGB8888 to ARGB4444. 
+  a pixel format conversion is applied from RGB565 to ARGB8888. 
   The original image and the transferred image are displayed on the LCD to see 
   the difference between an image coded on 16 bits and an image coded on 32 bits.
  
  In this example two LTDC layers are used to display the original and the converted
  images as following :
-  - Layer 1 is configured to display the original image with ARGB8888 as 
+  - Layer 1 is configured to display the original image with RGB565 as 
     pixel format and 320x120 size.
-  - Layer 2 is configured to display the converted image with ARGB4444 as 
+  - Layer 2 is configured to display the converted image with ARGB8888 as 
     pixel format and 320x120 size.
 
+ @note : 
+ The C file of the image used in this example are generated with 
+ STemWin bitmap converter released with this package.
+ \Middlewares\ST\STemWin\Software\BmpCvtST.exe
+ Use the bitmap file under resources repository
  
   @note :
   how to calculate the size of the transferred data ? 

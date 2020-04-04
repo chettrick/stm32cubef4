@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    usbd_hid.h
   * @author  MCD Application Team
-  * @version V2.3.0
-  * @date    04-November-2014
+  * @version V2.4.0
+  * @date    28-February-2015
   * @brief   Header file for the usbd_hid_core.c file.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -58,7 +58,10 @@
 
 #define HID_DESCRIPTOR_TYPE           0x21
 #define HID_REPORT_DESC               0x22
-#define HID_POLLING_INTERVAL          0x0A
+
+#define HID_HS_BINTERVAL               0x07
+#define HID_FS_BINTERVAL               0x0A
+#define HID_POLLING_INTERVAL           0x0A
 
 #define HID_REQ_SET_PROTOCOL          0x0B
 #define HID_REQ_GET_PROTOCOL          0x03
@@ -123,7 +126,7 @@ uint8_t USBD_HID_SendReport (USBD_HandleTypeDef *pdev,
                                  uint8_t *report,
                                  uint16_t len);
 
-uint8_t USBD_HID_GetPollingInterval (USBD_HandleTypeDef *pdev);
+uint32_t USBD_HID_GetPollingInterval (USBD_HandleTypeDef *pdev);
 
 /**
   * @}

@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm324x9i_eval_lcd.c
   * @author  MCD Application Team
-  * @version V2.0.3
-  * @date    10-December-2014
+  * @version V2.0.4
+  * @date    02-March-2015
   * @brief   This file includes the driver for Liquid Crystal Display (LCD) module
   *          mounted on STM324x9I-EVAL evaluation board.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -232,9 +232,11 @@ uint8_t BSP_LCD_Init(void)
   MspInit();
   HAL_LTDC_Init(&hltdc_eval);
   
+#if !defined(DATA_IN_ExtSDRAM)
   /* Initialize the SDRAM */
   BSP_SDRAM_Init();
-    
+#endif /* DATA_IN_ExtSDRAM */
+
   /* Initialize the font */
   BSP_LCD_SetFont(&LCD_DEFAULT_FONT);
   

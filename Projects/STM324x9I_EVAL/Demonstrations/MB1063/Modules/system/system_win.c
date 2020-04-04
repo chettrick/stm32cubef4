@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    system_win.c
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014   
+  * @version V1.2.1
+  * @date    13-March-2015   
   * @brief   System information functions
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -135,7 +135,7 @@ static const GUI_WIDGET_CREATE_INFO _aDialogSystemInformation[] = {
   { TEXT_CreateIndirect, "CPU Speed : up to 180MHz", ID_TEXT_CPU, 160, 84, 300, 20, 0, 0x0, 0 },
   { TEXT_CreateIndirect, "Firmware Version : 1.0", ID_TEXT_VERSION, 160, 114, 300, 20, 0, 0x0, 0 },
   { IMAGE_CreateIndirect, "Image", ID_IMAGE_LOGO, 280, 200, 50, 40, 0, 0, 0 },  
-  { TEXT_CreateIndirect, "Copyright (c) STMicroelectronics 2014", ID_TEXT_COPYRIGHT, 160, 250, 320, 20, 0, 0x0, 0 },  
+  { TEXT_CreateIndirect, "Copyright (c) STMicroelectronics 2015", ID_TEXT_COPYRIGHT, 160, 250, 320, 20, 0, 0x0, 0 },  
 };
 
 static const GUI_WIDGET_CREATE_INFO _aDialogGeneralSettings[] = {
@@ -270,7 +270,7 @@ static void _cbSystemInformation(WM_MESSAGE * pMsg)
     hItem = WM_GetDialogItem(pMsg->hWin, ID_TEXT_VERSION);
     TEXT_SetFont(hItem, GUI_FONT_20_ASCII);
     TEXT_SetTextColor(hItem, GUI_DARKGRAY);
-    strcpy(str, "Demo rev: 1.2.0");
+    strcpy(str, "Demo rev: 1.2.1");
     TEXT_SetText(hItem, str); 
 
     /* ST Copyright */
@@ -396,7 +396,7 @@ static void _cbClockSettings(WM_MESSAGE * pMsg) {
     k_GetDate(&Date);  
     
     hTimerTime = WM_CreateTimer(pMsg->hWin, 0, 1000, 0); 
-    CALENDAR_Create(pMsg->hWin,12, 12, 2014 + Date.Year, Date.Month, Date.Date, 2, ID_CALENDAR, WM_CF_SHOW);
+    CALENDAR_Create(pMsg->hWin,12, 12, 2015 + Date.Year, Date.Month, Date.Date, 2, ID_CALENDAR, WM_CF_SHOW);
     CALENDAR_SetDefaultFont(CALENDAR_FI_CONTENT,GUI_FONT_13_1 );
     CALENDAR_SetDefaultFont(CALENDAR_FI_HEADER, GUI_FONT_13_1);
     
@@ -404,19 +404,16 @@ static void _cbClockSettings(WM_MESSAGE * pMsg) {
     SPINBOX_SetRange(hItem, 0, 23);
     SPINBOX_SetEdge(hItem, SPINBOX_EDGE_CENTER);
     SPINBOX_SetFont(hItem, GUI_FONT_20_ASCII); 
-    SPINBOX_SetEditMode(hItem, SPINBOX_EM_EDIT);    
-    
+        
     hItem = WM_GetDialogItem(pMsg->hWin, ID_SPINBOX_MINUTE);
     SPINBOX_SetRange(hItem, 0, 59);
     SPINBOX_SetEdge(hItem, SPINBOX_EDGE_CENTER);
-    SPINBOX_SetFont(hItem, GUI_FONT_20_ASCII);
-    SPINBOX_SetEditMode(hItem, SPINBOX_EM_EDIT);    
+    SPINBOX_SetFont(hItem, GUI_FONT_20_ASCII);   
 
     hItem = WM_GetDialogItem(pMsg->hWin, ID_SPINBOX_SEC);
     SPINBOX_SetRange(hItem, 0, 59);
     SPINBOX_SetEdge(hItem, SPINBOX_EDGE_CENTER);
     SPINBOX_SetFont(hItem, GUI_FONT_20_ASCII);
-    SPINBOX_SetEditMode(hItem, SPINBOX_EM_EDIT);
     
     break;
     
@@ -494,7 +491,7 @@ static void _cbClockSettings(WM_MESSAGE * pMsg) {
         {
           Date.Date = hDate.Day;
           Date.Month = hDate.Month;
-          Date.Year = hDate.Year - 2014;
+          Date.Year = hDate.Year - 2015;
           Date.WeekDay = 0;
           k_SetDate(&Date);
         }

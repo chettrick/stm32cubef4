@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    PWR/PWR_STANDBY/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014
+  * @version V1.2.1
+  * @date    13-March-2015
   * @brief   This sample code shows how to use STM32F4xx PWR HAL API to enter
   *          and exit the Standby mode.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -73,43 +73,42 @@ static void RTC_Config(void);
 */
 int main(void)
 {    
-  /* STM32F4xx HAL library initialization:
+   /* STM32F4xx HAL library initialization:
        - Configure the Flash prefetch, instruction and Data caches
        - Configure the Systick to generate an interrupt each 1 msec
        - Set NVIC Group Priority to 4
        - Global MSP (MCU Support Package) initialization
      */
-  HAL_Init();  
+   HAL_Init();
 
-  /* Configure LED1 and LED2 */
+  /* Configure LED1, LED2 */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED2);
 
   /* Configure the system clock to 168 MHz */
   SystemClock_Config();
-  
-  /* Configure Key Button */
+
+  /* Enable Power Clock */
+  __HAL_RCC_PWR_CLK_ENABLE();
+
+  /* Check and Clear the Wakeup flag */
+  if (__HAL_PWR_GET_FLAG(PWR_FLAG_WU) != RESET)
+  {
+    __HAL_PWR_CLEAR_FLAG(PWR_FLAG_WU);
+  }
+
+  /* Initialize the Key push-button to generate external interrupts */
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_EXTI);
 
-  /* The configuration of the RTC instance parameter within the RTCHandler is 
-     mandatory after wake up from standby mode even if the RTC was already configured.
-     The RTC instance is used by the HAL RTC driver to access to the RTC peripheral registers. */
-  RTCHandle.Instance = RTC;
-  
-  /* The RTC configuration will not be lost when the system was resumed from StandBy mode */ 
-  if(__HAL_PWR_GET_FLAG(PWR_FLAG_SB) == RESET)
-  {
-    /* RTC configuration */
-    RTC_Config();
-  }
+  /* RTC configuration */
+  RTC_Config();
 
   /* Turn on LED1 */
   BSP_LED_On(LED1);
 
-  /* Enable WKUP pin */
+  /* Enable WakeUp Pin PWR_WAKEUP_PIN1 connected to PA.00 */
   HAL_PWR_EnableWakeUpPin(PWR_WAKEUP_PIN1);
 
-  /* Infinite loop */
   while (1)
   {
   }
@@ -188,47 +187,28 @@ static void SystemClock_Config(void)
   */
 static void RTC_Config(void)
 { 
+  /* Enable Power Clock*/
+  __HAL_RCC_PWR_CLK_ENABLE();
+  
+  /* Allow Access to RTC Backup domaine */
+  HAL_PWR_EnableBkUpAccess();
+  
   RTCHandle.Instance = RTC;
-  /* Set the RTC time base to 1s */  
-  /* Configure RTC prescaler and RTC data registers as follow:
-  - Hour Format = Format 24
-  - Asynch Prediv = Value according to source clock
-  - Synch Prediv = Value according to source clock
-  - OutPut = Output Disable
-  - OutPutPolarity = High Polarity
-  - OutPutType = Open Drain */ 
-  RTCHandle.Init.HourFormat = RTC_HOURFORMAT_24;
-  RTCHandle.Init.AsynchPrediv = RTC_ASYNCH_PREDIV;
-  RTCHandle.Init.SynchPrediv = RTC_SYNCH_PREDIV;
-  RTCHandle.Init.OutPut = RTC_OUTPUT_DISABLE;
-  RTCHandle.Init.OutPutPolarity = RTC_OUTPUT_POLARITY_HIGH;
-  RTCHandle.Init.OutPutType = RTC_OUTPUT_TYPE_OPENDRAIN;    
-  if(HAL_RTC_Init(&RTCHandle) != HAL_OK)
-  {
-    /* Initialization Error */
-    Error_Handler(); 
-  }
-  
-  /* Check and Clear the Wakeup flag */
-  if(__HAL_PWR_GET_FLAG(PWR_FLAG_WU) != RESET)
-  {
-    __HAL_PWR_CLEAR_FLAG(PWR_FLAG_WU);
-  }  
-  
+
   /* Check if the system was resumed from StandBy mode */
   if(__HAL_PWR_GET_FLAG(PWR_FLAG_SB) != RESET)
   {
     /* Clear StandBy flag */
     __HAL_PWR_CLEAR_FLAG(PWR_FLAG_SB);
-    
+
     /* Disable the write protection for RTC registers */
     __HAL_RTC_WRITEPROTECTION_DISABLE(&RTCHandle);
-    
+
     /* Wait for RTC APB registers synchronisation (needed after start-up from Reset)*/
-    if(HAL_RTC_WaitForSynchro(&RTCHandle) != HAL_OK)
-    {      
+    if (HAL_RTC_WaitForSynchro(&RTCHandle) != HAL_OK)
+    {
       /* Initialization Error */
-      Error_Handler();      
+      Error_Handler();
     }
 
     /* Enable the write protection for RTC registers */
@@ -238,15 +218,39 @@ static void RTC_Config(void)
   }
   else
   {
+    /* Reset Backup Domaine */
+    __HAL_RCC_BACKUPRESET_FORCE();
+    __HAL_RCC_BACKUPRESET_RELEASE();
+
+    /* Set the RTC time base to 1s */
+    /* Configure RTC prescaler and RTC data registers as follows:
+    - Hour Format = Format 24
+    - Asynch Prediv = Value according to source clock
+    - Synch Prediv = Value according to source clock
+    - OutPut = Output Disable
+    - OutPutPolarity = High Polarity
+    - OutPutType = Open Drain */
+    RTCHandle.Init.HourFormat = RTC_HOURFORMAT_24;
+    RTCHandle.Init.AsynchPrediv = RTC_ASYNCH_PREDIV;
+    RTCHandle.Init.SynchPrediv = RTC_SYNCH_PREDIV;
+    RTCHandle.Init.OutPut = RTC_OUTPUT_DISABLE;
+    RTCHandle.Init.OutPutPolarity = RTC_OUTPUT_POLARITY_HIGH;
+    RTCHandle.Init.OutPutType = RTC_OUTPUT_TYPE_OPENDRAIN;
+    if (HAL_RTC_Init(&RTCHandle) != HAL_OK)
+    {
+      /* Initialization Error */
+      Error_Handler();
+    }
+
     /* Set the time to 01h 00mn 00s AM */
     RTC_TimeStructure.TimeFormat = RTC_HOURFORMAT12_AM;
     RTC_TimeStructure.Hours = 0x01;
     RTC_TimeStructure.Minutes = 0x00;
-    RTC_TimeStructure.Seconds = 0x00;    
-    if(HAL_RTC_SetTime(&RTCHandle, &RTC_TimeStructure, RTC_FORMAT_BCD) == HAL_ERROR)
+    RTC_TimeStructure.Seconds = 0x00;
+    if (HAL_RTC_SetTime(&RTCHandle, &RTC_TimeStructure, RTC_FORMAT_BCD) == HAL_ERROR)
     {
       /* Initialization Error */
-      Error_Handler(); 
+      Error_Handler();
     }
   }
 }

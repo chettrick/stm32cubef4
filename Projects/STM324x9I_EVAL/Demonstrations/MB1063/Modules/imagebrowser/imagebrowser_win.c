@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    imagebrowser_win.c
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014
+  * @version V1.2.1
+  * @date    13-March-2015
   * @brief   Image Browser functions
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -113,7 +113,6 @@ static uint8_t _acBuffer[1536];
 FIL Image_File;
 
 static WM_HWIN IMAGE_hWin, imFrame;
-static WM_HWIN chooser_addfile, chooser_addfolder;
 
 static WM_HTIMER hTimerTime;
 
@@ -776,10 +775,6 @@ static void _cbImageWindow(WM_MESSAGE * pMsg)
 
         }        
       }
-      else
-      {
-        f_close(&Image_File);
-      }
     }
     break;
     
@@ -847,6 +842,7 @@ static void _cbDialog(WM_MESSAGE * pMsg)
 {
   WM_HWIN  hItem;
   GUI_RECT r;
+  int      result;  
   int      Id, NCode, Index;
   char tmp[FILEMGR_FILE_NAME_SIZE];
   
@@ -922,65 +918,6 @@ static void _cbDialog(WM_MESSAGE * pMsg)
     Id = WM_GetId(pMsg->hWinSrc);
     NCode = pMsg->Data.v;
     
-    if (NCode == WM_NOTIFICATION_CHILD_DELETED)
-    {
-      f_open(&Image_File, (char const *)pImageList->file[file_pos].name, FA_OPEN_EXISTING | FA_READ);
-      if(pMsg->hWinSrc == chooser_addfile)
-      {
-        if((strstr(pFileInfo->pRoot, ".jpg")) || (strstr(pFileInfo->pRoot, ".bmp")) || (strstr(pFileInfo->pRoot, ".JPG")) || (strstr(pFileInfo->pRoot, ".BMP")))
-        {
-          strcpy((char *)pImageList->file[pImageList->ptr].name, pFileInfo->pRoot);
-          FILEMGR_GetFileOnly(tmp, (char *)pFileInfo->pRoot);
-          hItem = WM_GetDialogItem(IMAGE_hWin, ID_IMAGE_LIST);
-          LISTBOX_AddString(hItem, tmp);
-          LISTBOX_SetSel(hItem, pImageList->ptr);
-          pImageList->ptr++;
-          file_pos = pImageList->ptr - 1;
-          f_close(&Image_File);
-          
-          if((strstr((char *)pImageList->file[file_pos].name, ".bmp")) || (strstr((char *)pImageList->file[file_pos].name, ".BMP")))
-          {
-            IMAGE_Type = IMAGE_TYPE_BMP;
-          }
-          else if((strstr((char *)pImageList->file[file_pos].name, ".jpg")) || (strstr((char *)pImageList->file[file_pos].name, ".JPG")))
-          {
-            IMAGE_Type = IMAGE_TYPE_JPG;
-          }
-          
-          f_open(&Image_File, (char *)pImageList->file[file_pos].name, FA_OPEN_EXISTING | FA_READ);
-          WM_InvalidateWindow(imFrame);
-        }
-        chooser_addfile = 0;
-      }
- 
-      if(pMsg->hWinSrc == chooser_addfolder)
-      {
-        if(pImageList->ptr == 0)
-        {
-          _AddEntireFolder(pFileInfo->pRoot);
-          file_pos = 0;
-          if((strstr((char *)pImageList->file[file_pos].name, ".bmp")) || (strstr((char *)pImageList->file[file_pos].name, ".BMP")))
-          {
-            IMAGE_Type = IMAGE_TYPE_BMP;
-          }
-          else if((strstr((char *)pImageList->file[file_pos].name, ".jpg")) || (strstr((char *)pImageList->file[file_pos].name, ".JPG")))
-          {
-            IMAGE_Type = IMAGE_TYPE_JPG;
-          }
-          
-          f_open(&Image_File, (char *)pImageList->file[file_pos].name, FA_OPEN_EXISTING | FA_READ);
-          WM_InvalidateWindow(imFrame);
-        }
-        else
-        {
-          _AddEntireFolder(pFileInfo->pRoot);
-        }
-        
-        chooser_addfolder = 0;
-      }
-      break;
-    }
-    
     switch (Id) {
     /* Notification sent by "Button_Settings" */   
     case ID_SETTINGS_BUTTON:
@@ -1040,6 +977,7 @@ static void _cbDialog(WM_MESSAGE * pMsg)
       case WM_NOTIFICATION_CLICKED:
         break;
       case WM_NOTIFICATION_RELEASED:
+        f_close(&Image_File);
         k_free(pImageList); 
         k_free(pFileInfo);        
         GUI_EndDialog(pMsg->hWin, 0);
@@ -1053,11 +991,34 @@ static void _cbDialog(WM_MESSAGE * pMsg)
       case WM_NOTIFICATION_CLICKED:
         break;
       case WM_NOTIFICATION_RELEASED:
-        if((chooser_addfolder == 0) && (chooser_addfile == 0))
-        {
-          pFileInfo->pfGetData = k_GetData;
-          pFileInfo->pMask = acMask_dir;
-          chooser_addfolder = CHOOSEFILE_Create(pMsg->hWin, 47, 10, 385, 215, apDrives, GUI_COUNTOF(apDrives), 0, "add a folder", 0, pFileInfo);    
+
+        pFileInfo->pfGetData = k_GetData;
+        pFileInfo->pMask = acMask_dir;
+        hItem = CHOOSEFILE_Create(pMsg->hWin, 47, 10, 385, 215, apDrives, GUI_COUNTOF(apDrives), 0, "add a folder", 0, pFileInfo);
+        WM_MakeModal(hItem);
+        result = GUI_ExecCreatedDialog(hItem);
+        if (result == 0) 
+        {          
+          if(pImageList->ptr == 0)
+          {
+            _AddEntireFolder(pFileInfo->pRoot);
+            file_pos = 0;
+            if((strstr((char *)pImageList->file[file_pos].name, ".bmp")) || (strstr((char *)pImageList->file[file_pos].name, ".BMP")))
+            {
+              IMAGE_Type = IMAGE_TYPE_BMP;
+            }
+            else if((strstr((char *)pImageList->file[file_pos].name, ".jpg")) || (strstr((char *)pImageList->file[file_pos].name, ".JPG")))
+            {
+              IMAGE_Type = IMAGE_TYPE_JPG;
+            }
+            
+            f_open(&Image_File, (char *)pImageList->file[file_pos].name, FA_OPEN_EXISTING | FA_READ);
+            WM_InvalidateWindow(imFrame);
+          }
+          else
+          {
+            _AddEntireFolder(pFileInfo->pRoot);
+          }
         }
         break;
       }
@@ -1070,11 +1031,36 @@ static void _cbDialog(WM_MESSAGE * pMsg)
         break;
       case WM_NOTIFICATION_RELEASED:
         
-        if((chooser_addfolder == 0) && (chooser_addfile == 0))
+        pFileInfo->pfGetData = k_GetData;
+        pFileInfo->pMask = acMask_img;
+        hItem = CHOOSEFILE_Create(pMsg->hWin, 47, 10, 385, 215, apDrives, GUI_COUNTOF(apDrives), 0, "Add an image to playlist", 0, pFileInfo);  
+        WM_MakeModal(hItem);
+        result = GUI_ExecCreatedDialog(hItem);
+        if (result == 0) 
         {
-          pFileInfo->pfGetData = k_GetData;
-          pFileInfo->pMask = acMask_img;
-          chooser_addfile = CHOOSEFILE_Create(pMsg->hWin, 47, 10, 385, 215, apDrives, GUI_COUNTOF(apDrives), 0, "Add an image to playlist", 0, pFileInfo);    
+          if((strstr(pFileInfo->pRoot, ".jpg")) || (strstr(pFileInfo->pRoot, ".bmp")) || (strstr(pFileInfo->pRoot, ".JPG")) || (strstr(pFileInfo->pRoot, ".BMP")))
+          {
+            strcpy((char *)pImageList->file[pImageList->ptr].name, pFileInfo->pRoot);
+            FILEMGR_GetFileOnly(tmp, (char *)pFileInfo->pRoot);
+            hItem = WM_GetDialogItem(IMAGE_hWin, ID_IMAGE_LIST);
+            LISTBOX_AddString(hItem, tmp);
+            LISTBOX_SetSel(hItem, pImageList->ptr);
+            pImageList->ptr++;
+            file_pos = pImageList->ptr - 1;
+            f_close(&Image_File);
+            
+            if((strstr((char *)pImageList->file[file_pos].name, ".bmp")) || (strstr((char *)pImageList->file[file_pos].name, ".BMP")))
+            {
+              IMAGE_Type = IMAGE_TYPE_BMP;
+            }
+            else if((strstr((char *)pImageList->file[file_pos].name, ".jpg")) || (strstr((char *)pImageList->file[file_pos].name, ".JPG")))
+            {
+              IMAGE_Type = IMAGE_TYPE_JPG;
+            }
+            
+            f_open(&Image_File, (char *)pImageList->file[file_pos].name, FA_OPEN_EXISTING | FA_READ);
+            WM_InvalidateWindow(imFrame);
+          }          
         }
         break;
       }
@@ -1130,6 +1116,12 @@ static void _cbDialog(WM_MESSAGE * pMsg)
           {
             file_pos++;
             f_close(&Image_File);
+          }
+          else
+          {
+            file_pos = 0; 
+            f_close(&Image_File);            
+          }
             
             if((strstr((char *)pImageList->file[file_pos].name, ".bmp")) || (strstr((char *)pImageList->file[file_pos].name, ".BMP")))
             {
@@ -1144,7 +1136,6 @@ static void _cbDialog(WM_MESSAGE * pMsg)
             WM_InvalidateWindow(imFrame);
             hItem = WM_GetDialogItem(IMAGE_hWin, ID_IMAGE_LIST);
             LISTBOX_SetSel(hItem, file_pos);
-          }
         }
         
         break;
@@ -1164,6 +1155,12 @@ static void _cbDialog(WM_MESSAGE * pMsg)
           {
             file_pos--;
             f_close(&Image_File);
+          }
+          else
+          {
+            file_pos = (pImageList->ptr - 1);
+            f_close(&Image_File);
+          }
             
             if((strstr((char *)pImageList->file[file_pos].name, ".bmp")) || (strstr((char *)pImageList->file[file_pos].name, ".BMP")))
             {
@@ -1178,7 +1175,6 @@ static void _cbDialog(WM_MESSAGE * pMsg)
             WM_InvalidateWindow(imFrame);
             hItem = WM_GetDialogItem(IMAGE_hWin, ID_IMAGE_LIST);
             LISTBOX_SetSel(hItem, file_pos);
-          }
         }
         
         break;

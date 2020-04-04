@@ -2,15 +2,15 @@
   ******************************************************************************
   * @file    usbd_customhid_if_template.c
   * @author  MCD Application Team
-  * @version V2.3.0
-  * @date    04-November-2014
+  * @version V2.4.0
+  * @date    28-February-2015
   * @brief   USB Device Custom HID interface file.
   *		     This template should be copied to the user folder, renamed and customized
   *          following user needs.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.

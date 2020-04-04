@@ -2,11 +2,11 @@
   @page ADC_DualModeInterleaved  ADC1 and ADC2 in Dual interleaved mode and DMA mode3 example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    ADC/ADC_DualModeInterleaved/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014
+  * @version V1.2.1
+  * @date    13-March-2015
   * @brief   Description of the Dual interleaved mode and DMA mode3 example.
   ******************************************************************************
   *

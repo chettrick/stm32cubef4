@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    k_menu.c
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014   
+  * @version V1.2.1
+  * @date    13-March-2015   
   * @brief   This file provides the kernel menu functions 
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -86,6 +86,7 @@ static GRAPH_SCALE_Handle hScale = 0;
 static WM_HWIN  hPerformance = 0;
 static WM_HWIN  hProcess = 0;
 static WM_HWIN  hLog = 0;
+static WM_HWIN  hStatusWin = 0;
 
 xTaskStatusType  ProcessStatus[16] ={{0}};
 static SystemSettingsTypeDef    settings;
@@ -622,7 +623,7 @@ static void _cbBk(WM_MESSAGE * pMsg) {
         
         if(sel < k_ModuleGetNumber())
         { 
-          module_prop[sel].module->startup(pMsg->hWin, 0, 26);
+          module_prop[sel].module->startup(pMsg->hWin, 0, 25);
           sel = 0;
         }
       }
@@ -673,7 +674,7 @@ static void _cbStatus(WM_MESSAGE * pMsg) {
   case WM_TIMER:
     if( WM_GetTimerId(pMsg->Data.v) == ID_TIMER_TIME)
     {
-      WM_InvalidateWindow(hWin);
+      WM_InvalidateWindow(hStatusWin);
       WM_RestartTimer(pMsg->Data.v, 1000);
     }
 
@@ -706,7 +707,7 @@ static void _cbStatus(WM_MESSAGE * pMsg) {
     sprintf((char *)TempStr, "%02d:%02d:%02d", hour , min, sec);
     GUI_DispStringAt((char *)TempStr, xSize - 50, 4);
     
-    year =  RTC_DateStructure.Year + 2014;
+    year =  RTC_DateStructure.Year + 2015;
     month =  RTC_DateStructure.Month;
     day =  RTC_DateStructure.Date;
     
@@ -718,7 +719,7 @@ static void _cbStatus(WM_MESSAGE * pMsg) {
     }
     else
     {
-      sprintf((char *)TempStr, "01, Jan, 2014");
+      sprintf((char *)TempStr, "01, Jan, 2015");
     }
 
     GUI_DispStringHCenterAt((char *)TempStr, (xSize / 2), 4);
@@ -881,21 +882,21 @@ void k_InitMenu(void)
 
   WM_SetCallback(WM_HBKWIN, _cbBk);
   
-  WM_CreateWindowAsChild(0,
-                         0,
-                         LCD_GetXSize(),
-                         25,
-                         WM_HBKWIN, 
-                         WM_CF_SHOW | WM_CF_HASTRANS , 
-                         _cbStatus, 
-                         0);
+  hStatusWin = WM_CreateWindowAsChild(0,
+                                      0,
+                                      LCD_GetXSize(),
+                                      25,
+                                      WM_HBKWIN, 
+                                      WM_CF_SHOW | WM_CF_LATE_CLIP , 
+                                      _cbStatus, 
+                                      0);
      
   hIcon = ICONVIEW_CreateEx(0, 
                             20, 
                             LCD_GetXSize(), 
                             LCD_GetYSize()- 26, 
                             WM_HBKWIN, 
-                            WM_CF_SHOW | WM_CF_HASTRANS | WM_CF_BGND ,
+                            WM_CF_SHOW | WM_CF_HASTRANS,
                             ICONVIEW_CF_AUTOSCROLLBAR_V,
                             ID_ICONVIEW_MENU, 
                             92, 

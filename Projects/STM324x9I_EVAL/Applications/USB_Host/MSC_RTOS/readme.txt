@@ -2,11 +2,11 @@
   @page MSC_RTOS USB Host Mass Storage (MSC) RTOS application
   
   @verbatim
-  ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    USB_Host/MSC_RTOS/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014
+  * @version V1.2.1
+  * @date    13-March-2015
   * @brief   Description of the USB Host MSC RTOS application.
   ******************************************************************************
   *

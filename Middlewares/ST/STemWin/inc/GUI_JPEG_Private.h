@@ -1,6 +1,5 @@
 /*********************************************************************
-*          Portions COPYRIGHT 2014 STMicroelectronics                *
-*          Portions SEGGER Microcontroller GmbH & Co. KG             *
+*                SEGGER Microcontroller GmbH & Co. KG                *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
 *                                                                    *
@@ -44,25 +43,6 @@ Explanation of terms:
 ---------------------------END-OF-HEADER------------------------------
 */
 
-/**
-  ******************************************************************************
-  * @attention
-  *
-  * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
-  * You may not use this file except in compliance with the License.
-  * You may obtain a copy of the License at:
-  *
-  *        http://www.st.com/software_license_agreement_liberty_v2
-  *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
-  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  * See the License for the specific language governing permissions and
-  * limitations under the License.
-  *
-  ******************************************************************************
-  */
-  
 #ifndef GUI_JPEG_PRIVATE_H
 #define GUI_JPEG_PRIVATE_H
 
@@ -269,6 +249,7 @@ struct GUI_JPEG_DCONTEXT {
   int NumBlocksPerBand; /* Number of vertical blocks per band */
   int FirstBlockOfBand;
   int aFirstBlockOfBand[MAX_COMPONENTS];
+  int InvertColor;
 };
 
 /*********************************************************************

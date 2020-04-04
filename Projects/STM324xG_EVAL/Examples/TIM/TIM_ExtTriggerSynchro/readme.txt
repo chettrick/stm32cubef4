@@ -2,11 +2,11 @@
   @page TIM_ExtTriggerSynchro TIM External Trigger Synchro example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    TIM/TIM_ExtTriggerSynchro/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014
+  * @version V1.2.1
+  * @date    13-March-2015
   * @brief   Description of the TIM External Trigger Synchro example.        
   ******************************************************************************
   *

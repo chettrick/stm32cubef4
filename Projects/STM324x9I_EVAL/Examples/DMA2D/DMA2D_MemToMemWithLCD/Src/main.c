@@ -2,15 +2,15 @@
   ******************************************************************************
   * @file    DMA2D/DMA2D_MemToMemWithLCD/Src/main.c
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014
+  * @version V1.2.1
+  * @date    13-March-2015
   * @brief   This example provides a description of how to configure 
   *          DMA2D peripheral in Memory to Memory transfer mode 
   *          and display the result on LCD.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -39,7 +39,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "ARGB4444_150x150.h"
+#include "RGB565_150x150.h"
 
 /** @addtogroup STM32F4xx_HAL_Examples
   * @{
@@ -98,7 +98,7 @@ int main(void)
   DMA2D_Config();
   
   /*##-3- Start DMA2D transfer ###############################################*/  
-  if(HAL_DMA2D_Start_IT(&Dma2dHandle, (uint32_t)&ARGB4444_150x150, (uint32_t)&aBufferResult, 150, 150) != HAL_OK)
+  if(HAL_DMA2D_Start_IT(&Dma2dHandle, (uint32_t)&RGB565_150x150, (uint32_t)&aBufferResult, 150, 150) != HAL_OK)
   {
     /* Initialization Error */
     Error_Handler(); 
@@ -114,7 +114,7 @@ int main(void)
   * @brief DMA2D configuration.
   * @note  This function Configure tha DMA2D peripheral :
   *        1) Configure the transfer mode : memory to memory
-  *        2) Configure the output color mode as ARGB4444
+  *        2) Configure the output color mode as RGB565
   *        3) Configure the transfer from FLASH to SRAM   
   *        4) Configure the data size : 150x150 (pixels)  
   * @retval
@@ -125,7 +125,7 @@ static void DMA2D_Config(void)
 {
   /* Configure the DMA2D Mode, Color Mode and output offset */  
   Dma2dHandle.Init.Mode         = DMA2D_M2M;
-  Dma2dHandle.Init.ColorMode    = DMA2D_ARGB4444;
+  Dma2dHandle.Init.ColorMode    = DMA2D_RGB565;
   Dma2dHandle.Init.OutputOffset = 0x0;     
 
   /* DMA2D Callbacks Configuration */
@@ -135,7 +135,7 @@ static void DMA2D_Config(void)
   /* Foreground Configuration */
   Dma2dHandle.LayerCfg[1].AlphaMode = DMA2D_NO_MODIF_ALPHA;
   Dma2dHandle.LayerCfg[1].InputAlpha = 0xFF;
-  Dma2dHandle.LayerCfg[1].InputColorMode = CM_ARGB4444;
+  Dma2dHandle.LayerCfg[1].InputColorMode = CM_RGB565;
   Dma2dHandle.LayerCfg[1].InputOffset = 0x0;
 
   Dma2dHandle.Instance          = DMA2D; 
@@ -160,7 +160,7 @@ static void DMA2D_Config(void)
   *        1) Configure the Pixel Clock for the LCD
   *        2) Configure the LTDC Timing and Polarity
   *        3) Configure the LTDC Layer 2 :
-  *           - ARGB4444 as pixel format  
+  *           - RGB565 as pixel format  
   *           - The frame buffer is located at internal RAM : The output of DMA2D transfer
   *           - The Layer size configuration : 150x150  
   * @retval
@@ -235,7 +235,7 @@ static void LCD_Config(void)
   pLayerCfg.WindowY1 = 211;
   
   /* Pixel Format configuration*/ 
-  pLayerCfg.PixelFormat = LTDC_PIXEL_FORMAT_ARGB4444;
+  pLayerCfg.PixelFormat = LTDC_PIXEL_FORMAT_RGB565;
   
   /* Start Address configuration : frame buffer is located at FLASH memory */
   pLayerCfg.FBStartAdress = (uint32_t)&aBufferResult;

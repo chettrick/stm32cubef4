@@ -2,15 +2,15 @@
   ******************************************************************************
   * @file    RTC/RTC_Tamper/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014
+  * @version V1.2.1
+  * @date    13-March-2015
   * @brief   This sample code shows how to use STM32F4xx RTC HAL API to write/read 
   *          data to/from RTC Backup data registers and demonstrates the Tamper  
   *          detection feature.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:

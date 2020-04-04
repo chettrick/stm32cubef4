@@ -2,15 +2,15 @@
   ******************************************************************************
   * @file    CRYP/CRYP_DESTDESmodes/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014
+  * @version V1.2.1
+  * @date    13-March-2015
   * @brief   This example provides a short description of how to use the CRYPTO
   *          peripheral to encrypt and decrypt data using DES and TDES in all
   *          modes (ECB, CBC) Algorithm.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -133,6 +133,8 @@ int main(void)
   
   /*##-1- Configure the CRYP peripheral ######################################*/
   /* Set the common CRYP parameters */
+  CrypHandle.Instance = CRYP;
+  
   CrypHandle.Init.DataType = CRYP_DATATYPE_8B;
   CrypHandle.Init.KeySize  = CRYP_KEYSIZE_128B;
   CrypHandle.Init.pKey     = aDESKey;

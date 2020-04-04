@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    benchmark_win.c
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014   
+  * @version V1.2.1
+  * @date    13-March-2015   
   * @brief   CPU benchmark functions
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -69,7 +69,7 @@ K_ModuleItem_Typedef  cpu_bench =
 
 static const GUI_WIDGET_CREATE_INFO _aDialog[] = 
 {
-  { FRAMEWIN_CreateIndirect, "Benchmark", ID_FRAMEWIN_INFO,       0,  0,   320, 214, 0, 0x64, 0 },
+  { FRAMEWIN_CreateIndirect, "Benchmark", ID_FRAMEWIN_INFO,       0,  0,   320, 215, 0, 0x64, 0 },
   { TEXT_CreateIndirect, "  00000000 Pixels/s ", ID_BENCH_CPU,    85, 120, 300, 25,  0, 0, 0 }, 
   { BUTTON_CreateIndirect, "Start Speed Benchmark", ID_BENCH_CPU, 70, 150, 160, 34,  0, 0, 0 },
 };

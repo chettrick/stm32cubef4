@@ -207,9 +207,8 @@ static void TFT_DisplayMenu(void)
  
   /* Wait for JOY_DOWN is pressed */
   while (BSP_JOY_GetState() != JOY_DOWN)
-  {
-  }
-  
+  {}
+
   /* Set Text color */
   BSP_LCD_SetTextColor(LCD_COLOR_BLACK);  
   /* Display message */ 
@@ -223,6 +222,10 @@ static void TFT_DisplayMenu(void)
   BSP_LCD_DisplayStringAtLine(9,  (uint8_t*)"  Manual Mode      ");
   BSP_LCD_DisplayStringAtLine(11, (uint8_t*)"  DOWN for:        ");
   BSP_LCD_DisplayStringAtLine(12, (uint8_t*)"  Automatic Mode   ");
+
+  /* Wait until Joystick is released */
+  while (BSP_JOY_GetState() == JOY_DOWN)
+  {}
 
   /* Wait for JOY_DOWN or JOY_UP is pressed */
   tmp = JOY_RIGHT;
@@ -260,7 +263,6 @@ static void TFT_DisplayMenu(void)
     /* Display message */ 
     BSP_LCD_DisplayStringAtLine(3,  (uint8_t*)"  Automatic Mode  ");
     BSP_LCD_DisplayStringAtLine(5,  (uint8_t*)"     Selected     ");
-  
 
     JoystickValue = 1;  
     HAL_Delay(200);

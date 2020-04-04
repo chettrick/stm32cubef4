@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f4xx_nucleo.h
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014
+  * @version V1.2.1
+  * @date    02-March-2015
   * @brief   This file contains definitions for:
   *          - LEDs and push-button available on STM32F4XX-Nucleo Kit 
   *            from STMicroelectronics
@@ -12,7 +12,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -116,8 +116,10 @@ typedef enum
 #define LED2_GPIO_CLK_ENABLE()                  __GPIOA_CLK_ENABLE()
 #define LED2_GPIO_CLK_DISABLE()                 __GPIOA_CLK_DISABLE()  
 
-#define LEDx_GPIO_CLK_ENABLE(__INDEX__)   (((__INDEX__) == 0) ? LED2_GPIO_CLK_ENABLE() : 0)
-#define LEDx_GPIO_CLK_DISABLE(__INDEX__)  (((__INDEX__) == 0) ? LED2_GPIO_CLK_DISABLE() : 0)
+#define LEDx_GPIO_CLK_ENABLE(__INDEX__)    do{if((__INDEX__) == 0) LED2_GPIO_CLK_ENABLE(); \
+                                             }while(0)
+#define LEDx_GPIO_CLK_DISABLE(__INDEX__)    do{if((__INDEX__) == 0) LED2_GPIO_CLK_DISABLE(); \
+                                              }while(0)
 /**
   * @}
   */ 
@@ -136,8 +138,10 @@ typedef enum
 #define KEY_BUTTON_GPIO_CLK_DISABLE()           __GPIOC_CLK_DISABLE()
 #define KEY_BUTTON_EXTI_IRQn                    EXTI15_10_IRQn
 
-#define BUTTONx_GPIO_CLK_ENABLE(__INDEX__)   (((__INDEX__) == 0) ? KEY_BUTTON_GPIO_CLK_ENABLE() : 0)
-#define BUTTONx_GPIO_CLK_DISABLE(__INDEX__)  (((__INDEX__) == 0) ? KEY_BUTTON_GPIO_CLK_DISABLE() : 0)
+#define BUTTONx_GPIO_CLK_ENABLE(__INDEX__)    do{if((__INDEX__) == 0) KEY_BUTTON_GPIO_CLK_ENABLE(); \
+                                                }while(0)
+#define BUTTONx_GPIO_CLK_DISABLE(__INDEX__)    do{if((__INDEX__) == 0) KEY_BUTTON_GPIO_CLK_DISABLE(); \
+                                                 }while(0)
 /**
   * @}
   */ 

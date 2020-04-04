@@ -2,11 +2,11 @@
   @page FatFs_USBDisk_RTOS   FatFs with USB disk drive in RTOS mode application
  
   @verbatim
-  ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    FatFs/FatFs_USBDisk_RTOS/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014
+  * @version V1.2.1
+  * @date    13-March-2015
   * @brief   Description of the FatFs with USB disk drive in RTOS mode application
   ******************************************************************************
   *

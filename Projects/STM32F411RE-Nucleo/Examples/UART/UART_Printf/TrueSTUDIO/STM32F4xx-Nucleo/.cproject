@@ -95,17 +95,12 @@
 								<option id="com.atollic.truestudio.common_options.target.fpu.829683864" name="Floating point" superClass="com.atollic.truestudio.common_options.target.fpu" value="com.atollic.truestudio.common_options.target.fpu.soft" valueType="enumerated"/>
 							</tool>
 							<tool id="com.atollic.truestudio.exe.debug.toolchain.secoutput.839033486" name="Other" superClass="com.atollic.truestudio.exe.debug.toolchain.secoutput"/>
+							<tool id="com.atollic.truestudio.ar.base.1408904758" name="Archiver" superClass="com.atollic.truestudio.ar.base"/>
 						</toolChain>
 					</folderInfo>
 					<fileInfo id="com.atollic.truestudio.exe.debug.311825581.983937533" name="" rcbsApplicability="disable" resourcePath="nofile" toolsToInvoke="com.atollic.truestudio.exe.debug.toolchain.gcc.1836874447.1976695455">
 						<tool id="com.atollic.truestudio.exe.debug.toolchain.gcc.1836874447.1976695455" name="C Compiler" superClass="com.atollic.truestudio.exe.debug.toolchain.gcc.1836874447">
 							<inputType id="com.atollic.truestudio.gcc.input.1274347818" superClass="com.atollic.truestudio.gcc.input"/>
-						</tool>
-					</fileInfo>
-					<fileInfo id="com.atollic.truestudio.exe.debug.1518366166.626570731" name="stm32f4xx_hal_spi.c" rcbsApplicability="disable" resourcePath="Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_spi.c" toolsToInvoke="com.atollic.truestudio.exe.debug.toolchain.gcc.1836874447.1472923219">
-						<tool id="com.atollic.truestudio.exe.debug.toolchain.gcc.1836874447.1472923219" name="C Compiler" superClass="com.atollic.truestudio.exe.debug.toolchain.gcc.1836874447">
-							<option id="com.atollic.truestudio.gcc.misc.otherflags.2072853329" name="Other options" superClass="com.atollic.truestudio.gcc.misc.otherflags" value="-Wno-unused-but-set-variable" valueType="string"/>
-							<inputType id="com.atollic.truestudio.gcc.input.627500390" superClass="com.atollic.truestudio.gcc.input"/>
 						</tool>
 					</fileInfo>
 					<fileInfo id="com.atollic.truestudio.exe.debug.1518366166.108206102" name="stm32l0xx_hal_spi.c" rcbsApplicability="disable" resourcePath="Drivers/STM32L0xx_HAL_Driver/stm32l0xx_hal_spi.c" toolsToInvoke="com.atollic.truestudio.exe.debug.toolchain.gcc.1836874447.471298814">
@@ -120,6 +115,12 @@
 								<additionalInput kind="additionalinputdependency" paths=""/>
 							</inputType>
 							<outputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.outputtype.2135980898" name="Resource Custom Build Step Output Type" outputNames=""/>
+						</tool>
+					</fileInfo>
+					<fileInfo id="com.atollic.truestudio.exe.debug.1518366166.626570731" name="stm32f4xx_hal_spi.c" rcbsApplicability="disable" resourcePath="Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_spi.c" toolsToInvoke="com.atollic.truestudio.exe.debug.toolchain.gcc.1836874447.1472923219">
+						<tool id="com.atollic.truestudio.exe.debug.toolchain.gcc.1836874447.1472923219" name="C Compiler" superClass="com.atollic.truestudio.exe.debug.toolchain.gcc.1836874447">
+							<option id="com.atollic.truestudio.gcc.misc.otherflags.2072853329" name="Other options" superClass="com.atollic.truestudio.gcc.misc.otherflags" value="-Wno-unused-but-set-variable -Wno-unused-variable" valueType="string"/>
+							<inputType id="com.atollic.truestudio.gcc.input.627500390" superClass="com.atollic.truestudio.gcc.input"/>
 						</tool>
 					</fileInfo>
 					<sourceEntries>

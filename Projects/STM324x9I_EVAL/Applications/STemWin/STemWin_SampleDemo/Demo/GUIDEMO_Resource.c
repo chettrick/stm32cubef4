@@ -1,5 +1,5 @@
 /*********************************************************************
-*          Portions COPYRIGHT 2014 STMicroelectronics                *
+*          Portions COPYRIGHT 2015 STMicroelectronics                *
 *          Portions SEGGER Microcontroller GmbH & Co. KG             *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
@@ -36,8 +36,8 @@ Purpose     : Contains fonts and bitmaps used in the demo.
   ******************************************************************************
   * @file    GUIDEMO_Resource.c
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014
+  * @version V1.2.1
+  * @date    13-March-2015
   * @brief   Contains fonts and bitmaps used in the demo.
   ******************************************************************************
   * @attention

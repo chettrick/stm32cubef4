@@ -73,7 +73,6 @@ The program behaves as follows:
       and date are displayed on Debugger.
 
 2. When power on reset occurs:
-LED2 is turned ON when the RTC configuration is done correctly.
 The current time and date are updated and displayed on the debugger in aShowTime 
 and aShowDate variables.
 

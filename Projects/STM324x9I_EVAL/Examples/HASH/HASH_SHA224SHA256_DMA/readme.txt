@@ -2,11 +2,11 @@
   @page HASH_SHA224SHA256_DMA  HASH digest calculation using SHA224 and SHA256 example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    HASH/HASH_SHA224SHA256_DMA/readme.txt
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014
+  * @version V1.2.1
+  * @date    13-March-2015
   * @brief   Description of the digest calculation using SHA224 and SHA256 Example.
   ******************************************************************************
   *

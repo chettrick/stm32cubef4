@@ -2,11 +2,11 @@
   @page DMA2D_MemToMemWithPFC DMA2D Memory to Memory with PFC example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    DMA2D/DMA2D_MemToMemWithPFC/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014
+  * @version V1.2.1
+  * @date    13-March-2015
   * @brief   Description of the DMA2D Memory to Memory with PFC example.
   ******************************************************************************
   *
@@ -47,20 +47,25 @@
  
   In this basic example the goal is to explain the different fields of the DMA2D 
   structure in the case of Memory_to_Memory with pixel format conversion transfer mode
-  and the difference between pixel coded on 16bits(RGB565) and coded on 16bits(ARGB4444).
+  and the difference between pixel coded on 16bits(RGB565) and coded on 32bits(ARGB8888).
  
   An image is transferred from flash memory to internal RAM and during the transfer,
-  a pixel format conversion is applied from RGB565 to ARGB4444. 
+  a pixel format conversion is applied from RGB565 to ARGB8888. 
   The original image and the transferred image are displayed on the LCD to see 
-  the difference between an image coded on 16bits(RGB565) and an image coded on 16bits(ARGB4444).
+  the difference between an image coded on 16bits(RGB565) and an image coded on 32bits(ARGB8888).
  
  In this example two LTDC layers are used to display the original and the converted
  images as following :
   - Layer 1 is configured to display the original image with RGB565 as 
     pixel format and 240x150 size.
-  - Layer 2 is configured to display the converted image with ARGB4444 as 
+  - Layer 2 is configured to display the converted image with ARGB8888 as 
     pixel format and 240x150 size.
 
+ @note : 
+ The C files of the images used in this example are generated with 
+ STemWin bitmap converter released with this package.
+ \Middlewares\ST\STemWin\Software\BmpCvtST.exe
+ Use the bitmap files under resources repository
  
   @note :
   how to calculate the size of the transferred data ? 
@@ -68,14 +73,7 @@
     the number of pixel per line and the number of line, therefore :
     
     data_size = (bits per pixel) X (pixel per line) X (number of line)
-    
- How to convert pixel format from RGB565 to ARGB4444 ?
- => only the four MSB are taken into account for RGB components and 0xF is added 
-    for alfa (A) component.  
- eg : 0x CD  12  34 --> 0xF   C   1   3    
-         |_| |_| |_|     |_| |_| |_| |_|
-          R   G   B       A   R   G   B
-         
+             
  In general, 
  => if the number of bits per pixel in source data is more then the number of 
     bits per pixel in destination data, only the MSB are taken into account

@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    camera_win.c
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014
+  * @version V1.2.1
+  * @date    13-March-2015
   * @brief   Camera functions source file
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -363,6 +363,7 @@ static void _cbFileControl(WM_MESSAGE * pMsg)
   WM_HWIN hItem;
   int     NCode;
   int     Id;
+  int     result;
   
   switch (pMsg->MsgId)
   {
@@ -387,6 +388,21 @@ static void _cbFileControl(WM_MESSAGE * pMsg)
         pFileInfo->pfGetData = k_GetData;
         pFileInfo->pMask = acMask_folder;
         chooser_select_folder = CHOOSEFILE_Create(CAMERA_hWin, 70, 40, 450, 250, apDrives, GUI_COUNTOF(apDrives), 0, "Select a folder", 0, pFileInfo);
+
+        result = GUI_ExecCreatedDialog(chooser_select_folder);
+        if (result == 0) 
+        {
+          if(((pFileInfo->pRoot[0] == '0' ) || (pFileInfo->pRoot[0] == '1' )))
+          {
+            hItem = WM_GetDialogItem(hDialogFileControl, ID_FOLDER);
+            EDIT_SetText(hItem, (char *)pFileInfo->pRoot);
+            chooser_select_folder = 0;
+            WM_InvalidateWindow(hDialogFileControl);
+            WM_Paint(hDialogFileControl);
+            strncpy((char *)(CAMERA_SAVE_PATH),pFileInfo->pRoot , FILEMGR_FULL_PATH_SIZE);
+            strncpy((char *)capture_folder,pFileInfo->pRoot , FILEMGR_FULL_PATH_SIZE);
+          }
+        }
         break;
       }
       break;
@@ -446,6 +462,11 @@ static void _cbSettingsDialog(WM_MESSAGE * pMsg)
   case WM_DELETE:    
     camera_disabled = 0;   
     hSettings = 0;
+    
+    /* Delete choosfile window */
+    WM_DeleteWindow(chooser_select_folder); 
+    
+    
     break;
     
   case WM_NOTIFY_PARENT:
@@ -508,6 +529,10 @@ static void _cbCameraWindow(WM_MESSAGE * pMsg)
     break;
     
   case WM_PAINT:
+    
+    WM_GetInsideRect(&r); 
+    GUI_ClearRectEx(&r);
+    
     if(IsFrameAvailable() > 0)
     {
       GUI_DrawBitmap(&frame0, 85, 8);
@@ -634,24 +659,7 @@ static void _cbDialog(WM_MESSAGE * pMsg)
   case WM_NOTIFY_PARENT:
     Id    = WM_GetId(pMsg->hWinSrc);
     NCode = pMsg->Data.v;
-    
-    if (NCode == WM_NOTIFICATION_CHILD_DELETED)
-    {
-      FrameAvailable = 0; 
-      CAMERA_Resume();
-      if((pMsg->hWinSrc == chooser_select_folder) && ((pFileInfo->pRoot[0] == '0' ) 
-                                                      || (pFileInfo->pRoot[0] == '1' )))
-      {
-        hItem = WM_GetDialogItem(hDialogFileControl, ID_FOLDER);
-        EDIT_SetText(hItem, (char *)pFileInfo->pRoot);
-        chooser_select_folder = 0;
-        WM_InvalidateWindow(hDialogFileControl);
-        WM_Paint(hDialogFileControl);
-        strncpy((char *)(CAMERA_SAVE_PATH),pFileInfo->pRoot , FILEMGR_FULL_PATH_SIZE);
-        strncpy((char *)capture_folder,pFileInfo->pRoot , FILEMGR_FULL_PATH_SIZE);
-      }
-    }
-    
+        
     if(hSettings == 0)
     {
       switch(Id)

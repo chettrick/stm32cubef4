@@ -2,16 +2,16 @@
   @page LTDC_ColorKeying LTDC Color Keying example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    LTDC/LTDC_ColorKeying/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014
+  * @version V1.2.1
+  * @date    13-March-2015
   * @brief   Description of the LTDC Color Keying example.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -50,7 +50,13 @@
  After LCD initialization, LCD layer 1 and color keying configuration, an image 
  is displayed on LCD.
  Color keying is enabled/disabled on the image when the tamper button is pressed.
-      
+ 
+ @note : 
+ The C file of the image used in this example are generated with 
+ STemWin bitmap converter released with this package.
+ \Middlewares\ST\STemWin\Software\BmpCvtST.exe
+ Use the bitmap file under resources repository
+             
  Color Keying :
  --------------
  If the Color Keying is enabled, all pixels are compared to the color key. 
@@ -75,7 +81,7 @@ STM32 Eval board's LED can be used to monitor the transfer status:
     - LTDC/LTDC_ColorKeying/Inc/main.h                   Main program header file
     - LTDC/LTDC_ColorKeying/Inc/stm32f4xx_it.h           Interrupt handlers header file
     - LTDC/LTDC_ColorKeying/Inc/stm32f4xx_hal_conf.h     HAL Configuration file 
-    - LTDC/LTDC_ColorKeying/Inc/ARGB4444_480x272.h       Image used for LTDC Validation
+    - LTDC/LTDC_ColorKeying/Inc/RGB565_480x272.h         Image used for LTDC Validation
     - LTDC/LTDC_ColorKeying/Src/main.c                   Main program  
     - LTDC/LTDC_ColorKeying/Src/stm32f4xx_it.c           Interrupt handlers
     - LTDC/LTDC_ColorKeying/Src/stm32f4xx_hal_msp.c      HAL MSP module    

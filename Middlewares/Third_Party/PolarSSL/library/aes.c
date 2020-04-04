@@ -770,7 +770,8 @@ int aes_crypt_ecb( aes_context *ctx,
   
  /*------------------ AES Decryption ------------------*/       
   if(mode == AES_DECRYPT) /* AES decryption */
-  {   
+  { 
+    hcryp_aes.Instance = CRYP;  
     hcryp_aes.Init.pKey = ctx->aes_dec_key;
   
     HAL_CRYP_Init(&hcryp_aes);
@@ -780,7 +781,8 @@ int aes_crypt_ecb( aes_context *ctx,
   }
   /*------------------ AES Encryption ------------------*/
   else /* AES encryption */
-  {       
+  { 
+    hcryp_aes.Instance = CRYP;  
     hcryp_aes.Init.pKey = ctx->aes_enc_key;
   
     HAL_CRYP_Init(&hcryp_aes);

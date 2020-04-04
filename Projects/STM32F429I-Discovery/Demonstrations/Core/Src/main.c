@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    main.c 
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014
+  * @version V1.2.1
+  * @date    13-March-2015
   * @brief   This file provides main program functions
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -78,7 +78,6 @@
   * @{
   */ 
 static void SystemClock_Config(void);
-static void StartThread(void const * argument);
 static void GUIThread(void const * argument);
 static void TimerCallback(void const *n);
 
@@ -89,6 +88,9 @@ extern K_ModuleItem_Typedef  image_browser;
 extern K_ModuleItem_Typedef  cpu_bench;
 extern K_ModuleItem_Typedef  file_browser;
 
+uint32_t GUI_FreeMem = 0;
+
+  
 /**
   * @}
   */ 
@@ -104,6 +106,12 @@ extern K_ModuleItem_Typedef  file_browser;
   */
 int main(void)
 {
+  RCC_ClkInitTypeDef RCC_ClkInitStruct;
+  RCC_OscInitTypeDef RCC_OscInitStruct;
+  uint32_t FLatency;
+  SystemSettingsTypeDef setting;
+  osTimerId lcd_timer;
+
   /* STM32F4xx HAL library initialization:
        - Configure the Flash prefetch, instruction and Data caches
        - Configure the Systick to generate an interrupt each 1 msec
@@ -115,46 +123,48 @@ int main(void)
   /* Configure the system clock to 168 MHz */
   SystemClock_Config();
   
-  /* Create Start task */
-  osThreadDef(Kernel_Thread, StartThread, osPriorityNormal, 0, 2 * configMINIMAL_STACK_SIZE);
-  osThreadCreate (osThread(Kernel_Thread), NULL);
-  
-  /* Start scheduler */
-  osKernelStart();
-
-  /* We should never get here as control is now taken by the scheduler */
-  for( ;; );
-}
-
-/**
-  * @brief  Start task
-  * @param  argument: pointer that is passed to the thread function as start argument.
-  * @retval None
-  */
-static void StartThread(void const * argument)
-{
-  RCC_ClkInitTypeDef RCC_ClkInitStruct;
-  RCC_OscInitTypeDef RCC_OscInitStruct;
-  uint32_t FLatency;
-  SystemSettingsTypeDef settings;
-  osTimerId lcd_timer;
-       
   /* Initialize Joystick, Touch screen and LEDs */
   k_BspInit();
-  k_LogInit();
+  k_LogInit();  
+  
+  /* Initialize RTC */
+  k_CalendarBkupInit();   
+  
+  /* Create GUI task */
+  osThreadDef(GUI_Thread, GUIThread, osPriorityHigh, 0, 30 * configMINIMAL_STACK_SIZE);
+  osThreadCreate (osThread(GUI_Thread), NULL);     
+  
+  /* Add Modules*/
+  k_ModuleInit();    
+  
+  /*Initialize memory pools */
+  k_MemInit();
+  
+  k_ModuleAdd(&video_player);
+  k_ModuleOpenLink(&video_player, "emf");
+  k_ModuleOpenLink(&video_player, "EMF");
+  k_ModuleAdd(&image_browser);  
+  k_ModuleOpenLink(&image_browser, "jpg"); 
+  k_ModuleOpenLink(&image_browser, "JPG");
+  k_ModuleOpenLink(&image_browser, "bmp"); 
+  k_ModuleOpenLink(&image_browser, "BMP");
+  k_ModuleAdd(&system_info);
+  k_ModuleAdd(&file_browser);
+  k_ModuleAdd(&cpu_bench);
+  k_ModuleAdd(&game_board);
   
   /* Initialize GUI */
   GUI_Init();
   WM_MULTIBUF_Enable(1);
-  GUI_SelectLayer(1);
+  GUI_SelectLayer(1);    
   
-  /* Initialize RTC */
-  k_CalendarBkupInit();
+  /* Set General Graphical proprieties */
+  k_SetGuiProfile();     
   
   /* Get General settings */
-  settings.d32 = k_BkupRestoreParameter(CALIBRATION_GENERAL_SETTINGS_BKP);
+  setting.d32 = k_BkupRestoreParameter(CALIBRATION_GENERAL_SETTINGS_BKP);
     
-  if(settings.b.use_180Mhz)
+  if(setting.b.use_180Mhz)
   {
     HAL_RCC_GetClockConfig(&RCC_ClkInitStruct, &FLatency);
     /* Select HSE as system clock source */
@@ -175,50 +185,20 @@ static void StartThread(void const * argument)
     RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK);
     RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
     HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
-  }
-  
-  k_StartUp();
-  
-  /* Initialize Storage Units */
-  k_StorageInit();
-  
-  /*Initialize memory pools */
-  k_MemInit();
-  
-  /* Add Modules*/
-  k_ModuleInit();
-  
-  k_ModuleAdd(&video_player);
-  k_ModuleOpenLink(&video_player, "emf");
-  k_ModuleOpenLink(&video_player, "EMF");
-  k_ModuleAdd(&image_browser);  
-  k_ModuleOpenLink(&image_browser, "jpg"); 
-  k_ModuleOpenLink(&image_browser, "JPG");
-  k_ModuleOpenLink(&image_browser, "bmp"); 
-  k_ModuleOpenLink(&image_browser, "BMP");
-  k_ModuleAdd(&system_info);
-  k_ModuleAdd(&file_browser);
-  k_ModuleAdd(&cpu_bench);
-  k_ModuleAdd(&game_board);
-  
-  /* Create GUI task */
-  osThreadDef(GUI_Thread, GUIThread, osPriorityHigh, 0, 15 * configMINIMAL_STACK_SIZE);
-  osThreadCreate (osThread(GUI_Thread), NULL); 
-
+  }  
+    
   /* Create Touch screen Timer */
   osTimerDef(TS_Timer, TimerCallback);
   lcd_timer =  osTimerCreate(osTimer(TS_Timer), osTimerPeriodic, (void *)0);
 
   /* Start the TS Timer */
-  osTimerStart(lcd_timer, 100);
+  osTimerStart(lcd_timer, 100);  
   
-  for( ;; )
-  {
-        /* Toggle LED3 and LED4 */
-        BSP_LED_Toggle(LED3);
-        BSP_LED_Toggle(LED4);    
-        osDelay(250);
-  }
+  /* Start scheduler */
+  osKernelStart();
+
+  /* We should never get here as control is now taken by the scheduler */
+  for( ;; );
 }
 
 /**
@@ -227,16 +207,20 @@ static void StartThread(void const * argument)
   * @retval None
   */
 static void GUIThread(void const * argument)
-{
-  /* Set General Graphical proprieties */
-  k_SetGuiProfile();
-    
+{    
+  /* Initialize Storage Units */
+  k_StorageInit();  
+
   if(k_CalibrationIsDone() == 0)
   {
     GUI_SelectLayer(1);
     k_CalibrationInit();
-    GUI_SelectLayer(0);
   }
+  
+  /* Demo Startup */
+  k_StartUp();
+  
+  GUI_SelectLayer(0);
   
   /* Show the main menu */
   k_InitMenu();
@@ -244,8 +228,32 @@ static void GUIThread(void const * argument)
   /* Gui background Task */
   while(1)
   {
-    GUI_Exec();       
-    osDelay(30); 
+    GUI_Exec();  
+    /* Toggle LED3 and LED4 */
+    BSP_LED_Toggle(LED3);
+    BSP_LED_Toggle(LED4);     
+    osDelay(250); 
+    GUI_FreeMem = GUI_ALLOC_GetNumFreeBytes();
+  }
+}
+
+/**
+  * @brief This function provides accurate delay (in milliseconds) based 
+  *        on SysTick counter flag.
+  * @note This function is declared as __weak to be overwritten in case of other
+  *       implementations in user file.
+  * @param Delay: specifies the delay time length, in milliseconds.
+  * @retval None
+  */
+
+void HAL_Delay (__IO uint32_t Delay)
+{
+  while(Delay) 
+  {
+    if (SysTick->CTRL & SysTick_CTRL_COUNTFLAG_Msk) 
+    {
+      Delay--;
+    }
   }
 }
 

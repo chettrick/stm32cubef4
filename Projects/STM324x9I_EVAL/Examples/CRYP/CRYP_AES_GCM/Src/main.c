@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    CRYP/CRYP_AES_GCM/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014
+  * @version V1.2.1
+  * @date    13-March-2015
   * @brief   Description of the CRYP AES Algorithm using GCM chaining mode
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -144,6 +144,8 @@ int main(void)
   
   /*##-1- Configure the CRYP peripheral ######################################*/
   /* Set the CRYP parameters */
+  CrypHandle.Instance = CRYP;
+  
   CrypHandle.Init.DataType   = CRYP_DATATYPE_8B;
   CrypHandle.Init.KeySize    = CRYP_KEYSIZE_128B;
   CrypHandle.Init.pKey       = aAES128Key;

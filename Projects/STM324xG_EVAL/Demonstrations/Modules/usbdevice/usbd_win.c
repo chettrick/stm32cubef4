@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    usbd_win.c
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014   
+  * @version V1.2.1
+  * @date    13-March-2015   
   * @brief   USB Device functions
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -85,7 +85,7 @@ USBDSettingsTypeDef;
 /* Dialog resource using a WINDOW widget */
 static const GUI_WIDGET_CREATE_INFO _aDialog[] = 
 {
-  { FRAMEWIN_CreateIndirect, "USB Mass Storage Device [mSD]",   ID_FRAMEWIN_INFO,     0,   0,   320, 214, 0, 0x64, 0 },
+  { FRAMEWIN_CreateIndirect, "USB Mass Storage Device [mSD]",   ID_FRAMEWIN_INFO,     0,   0,   320, 215, 0, 0x64, 0 },
   { IMAGE_CreateIndirect,    "Image",        ID_USB_NOT_CONNECTED, 35,  16,  100, 100, 0, 0,    0 },
   { IMAGE_CreateIndirect,    "Image",        ID_MSD_NOT_CONNECTED, 160, 16,  100, 100, 0, 0,    0 },
   { BUTTON_CreateIndirect,   "Connect USB ", ID_BUTTON_USB,        35,  145, 225, 35,  0, 0,    0 }, 

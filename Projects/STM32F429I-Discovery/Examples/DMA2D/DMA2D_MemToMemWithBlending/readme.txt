@@ -2,11 +2,11 @@
   @page DMA2D_MemToMemWithBlending DMA2D Memory to Memory with blending example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    DMA2D/DMA2D_MemToMemWithBlending/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014
+  * @version V1.2.1
+  * @date    13-March-2015
   * @brief   Description of the DMA2D Memory to Memory with blending example.
   ******************************************************************************
   *
@@ -60,6 +60,12 @@
   In this example, the LCD layer 1 is configured to display the DMA2D output buffer. 
   (the result of the blending of the foreground and background)      
 
+ @note : 
+ The C files of the images used in this example are generated with 
+ STemWin bitmap converter released with this package.
+ \Middlewares\ST\STemWin\Software\BmpCvtST.exe
+ Use the bitmap files under resources repository
+       
 STM32 Discovery board's LEDs can be used to monitor the transfer status:
  - LED3 is ON when the transfer is complete.
  - LED4 is ON when there is a transfer error.

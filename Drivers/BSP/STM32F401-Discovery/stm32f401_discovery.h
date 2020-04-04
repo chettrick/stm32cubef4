@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm32f401_discovery.h
   * @author  MCD Application Team
-  * @version V2.1.2
-  * @date    10-December-2014
+  * @version V2.1.3
+  * @date    02-March-2015
   * @brief   This file contains definitions for STM32F401-Discovery Kit's Leds and 
   *          push-button hardware resources.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -123,13 +123,17 @@ typedef enum
 #define LED6_GPIO_CLK_ENABLE()                  __GPIOD_CLK_ENABLE()  
 #define LED6_GPIO_CLK_DISABLE()                 __GPIOD_CLK_DISABLE()  
 
-#define LEDx_GPIO_CLK_ENABLE(__INDEX__)   (((__INDEX__) == 0) ? LED4_GPIO_CLK_ENABLE() :\
-                                           ((__INDEX__) == 1) ? LED3_GPIO_CLK_ENABLE() :\
-                                           ((__INDEX__) == 2) ? LED5_GPIO_CLK_ENABLE() : LED6_GPIO_CLK_ENABLE())
+#define LEDx_GPIO_CLK_ENABLE(__INDEX__) do{if((__INDEX__) == 0) LED4_GPIO_CLK_ENABLE(); else \
+                                           if((__INDEX__) == 1) LED3_GPIO_CLK_ENABLE(); else \
+                                           if((__INDEX__) == 2) LED5_GPIO_CLK_ENABLE(); else \
+                                           if((__INDEX__) == 3) LED6_GPIO_CLK_ENABLE(); \
+                                           }while(0)
 
-#define LEDx_GPIO_CLK_DISABLE(__INDEX__)  (((__INDEX__) == 0) ? LED4_GPIO_CLK_DISABLE() :\
-                                           ((__INDEX__) == 1) ? LED3_GPIO_CLK_DISABLE() :\
-                                           ((__INDEX__) == 2) ? LED5_GPIO_CLK_DISABLE() : LED6_GPIO_CLK_DISABLE())
+#define LEDx_GPIO_CLK_DISABLE(__INDEX__) do{if((__INDEX__) == 0) LED4_GPIO_CLK_DISABLE(); else \
+                                            if((__INDEX__) == 1) LED3_GPIO_CLK_DISABLE(); else \
+                                            if((__INDEX__) == 2) LED5_GPIO_CLK_DISABLE(); else \
+                                            if((__INDEX__) == 3) LED6_GPIO_CLK_DISABLE(); \
+                                            }while(0)
 /**
   * @}
   */ 
@@ -148,8 +152,10 @@ typedef enum
 #define KEY_BUTTON_GPIO_CLK_DISABLE()           __GPIOA_CLK_DISABLE()
 #define KEY_BUTTON_EXTI_IRQn                    EXTI0_IRQn
 
-#define BUTTONx_GPIO_CLK_ENABLE(__INDEX__)    (KEY_BUTTON_GPIO_CLK_ENABLE())
-#define BUTTONx_GPIO_CLK_DISABLE(__INDEX__)   (KEY_BUTTON_GPIO_CLK_DISABLE())
+#define BUTTONx_GPIO_CLK_ENABLE(__INDEX__)     do{if((__INDEX__) == 0) KEY_BUTTON_GPIO_CLK_ENABLE(); \
+                                                 }while(0)
+#define BUTTONx_GPIO_CLK_DISABLE(__INDEX__)    do{if((__INDEX__) == 0) KEY_BUTTON_GPIO_CLK_DISABLE(); \
+                                                 }while(0)
 /**
   * @}
   */ 

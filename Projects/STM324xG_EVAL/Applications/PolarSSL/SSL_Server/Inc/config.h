@@ -35,9 +35,9 @@
 #define _CRT_SECURE_NO_DEPRECATE 1
 #endif
 
-/* Uncommunt this macro to support the hardware Cryptographic and Hash 
+/* Uncomment this macro to support the hardware Cryptographic and Hash 
    processors embedded in STM32F415xx/17xx/437xx/39xx devices.
-   !!! This line should be left uncommented !!! */
+ */
 #define USE_STM32F4XX_HW_CRYPTO 
 
 #ifdef USE_STM32F4XX_HW_CRYPTO

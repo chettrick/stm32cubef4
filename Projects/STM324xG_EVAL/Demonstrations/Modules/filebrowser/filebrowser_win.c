@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    filebrowser_win.c
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014
+  * @version V1.2.1
+  * @date    13-March-2015
   * @brief   File browser functions
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -101,7 +101,7 @@ WM_HWIN  hBrowser = 0;
 /* Dialog resource using WINDOW widget */
 static const GUI_WIDGET_CREATE_INFO _aDialog[] = 
 {
-  { FRAMEWIN_CreateIndirect, "File Browser", ID_FRAMEWIN, 0, 0, 320, 214, 0, 0x64, 0 },
+  { FRAMEWIN_CreateIndirect, "File Browser", ID_FRAMEWIN, 0, 0, 320, 215, 0, 0x64, 0 },
   { BUTTON_CreateIndirect, "Refresh", ID_BUTTON_REFRESH, 220, 160, 90, 25, 0, 0x0, 0 },
   { TREEVIEW_CreateIndirect, "Treeview", ID_TREEVIEW, 7, 6, 210, 180, 0, 0x0, 0 }, 
   { PROGBAR_CreateIndirect, "Progbar", ID_PROGBAR_MSD, 220, 47, 90, 15, 0, 0x0, 0 },

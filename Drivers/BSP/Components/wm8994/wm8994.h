@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    wm8994.h
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    28-November-2014
+  * @version V1.0.2
+  * @date    12-February-2015
   * @brief   This file contains all the functions prototypes for the 
   *          wm8994.c driver.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:

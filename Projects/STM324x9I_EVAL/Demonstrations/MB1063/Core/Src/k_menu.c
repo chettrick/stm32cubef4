@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    k_menu.c
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014   
+  * @version V1.2.1
+  * @date    13-March-2015   
   * @brief   This file provides the kernel menu functions 
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -783,7 +783,7 @@ static void _cbStatus(WM_MESSAGE * pMsg) {
     sprintf((char *)TempStr, "%02d:%02d:%02d", hour , min, sec);
     GUI_DispStringAt((char *)TempStr, xSize - 80, 8);
     
-    year =  RTC_DateStructure.Year + 2014;
+    year =  RTC_DateStructure.Year + 2015;
     month =  RTC_DateStructure.Month;
     day =  RTC_DateStructure.Date;
     
@@ -795,7 +795,7 @@ static void _cbStatus(WM_MESSAGE * pMsg) {
     }
     else
     {
-      sprintf((char *)TempStr, "01, January, 2014");
+      sprintf((char *)TempStr, "01, January, 2015");
     }
 
     GUI_DispStringHCenterAt((char *)TempStr, xSize / 2, 8);

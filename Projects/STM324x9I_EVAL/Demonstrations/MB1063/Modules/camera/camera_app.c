@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    camera_app.c
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014
+  * @version V1.2.1
+  * @date    13-March-2015
   * @brief   Camera application functions source file
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -277,7 +277,7 @@ uint8_t  CAMERA_SaveToFile(uint8_t *path)
   sprintf((char *)filename, "/Camera_%02d%02d%04d_%02d%02d%02d.bmp", 
           Date.Date,
           Date.Month,
-          Date.Year + 2014,
+          Date.Year + 2015,
           Time.Hours,
           Time.Minutes,
           Time.Seconds);

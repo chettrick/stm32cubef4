@@ -66,24 +66,6 @@ Purpose     : Display controller initialization
 
 U32 aMemory[GUI_NUMBYTES / 4];
 
-
-//#define GUI_NUMBYTES  (2048) *  1024
-//#pragma location=0xC0000000
-// static __no_init U32 aMemory[GUI_NUMBYTES / 4];
-
-//#define GUI_NUMBYTES  (1024) *  1024 
-//
-//#if defined ( __CC_ARM   )
-//static U32 aMemory[GUI_NUMBYTES / 4]  __attribute__((section("GUISection"), zero_init));
-//
-//#elif defined ( __ICCARM__ )
-// #pragma location=0xC00A0000
-// static __no_init U32 aMemory[GUI_NUMBYTES / 4];
-//
-//#elif defined   (  __GNUC__  )
-// static U32 aMemory[GUI_NUMBYTES / 4] __attribute__((section(".GUISection")));
-//#endif
-
 /*********************************************************************
 *
 *       Public code

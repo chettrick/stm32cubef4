@@ -2,15 +2,15 @@
   ******************************************************************************
   * @file    stm324xg_eval.c
   * @author  MCD Application Team
-  * @version V2.0.4
-  * @date    10-December-2014
+  * @version V2.0.5
+  * @date    02-March-2015
   * @brief   This file provides a set of firmware functions to manage LEDs, 
   *          push-buttons and COM ports available on STM324xG-EVAL evaluation 
   *          board(MB786) RevB from STMicroelectronics.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -81,7 +81,7 @@ typedef struct
   */
 #define __STM324xG_EVAL_BSP_VERSION_MAIN   (0x02) /*!< [31:24] main version */
 #define __STM324xG_EVAL_BSP_VERSION_SUB1   (0x00) /*!< [23:16] sub1 version */
-#define __STM324xG_EVAL_BSP_VERSION_SUB2   (0x03) /*!< [15:8]  sub2 version */
+#define __STM324xG_EVAL_BSP_VERSION_SUB2   (0x05) /*!< [15:8]  sub2 version */
 #define __STM324xG_EVAL_BSP_VERSION_RC     (0x00) /*!< [7:0]  release candidate */ 
 #define __STM324xG_EVAL_BSP_VERSION         ((__STM324xG_EVAL_BSP_VERSION_MAIN << 24)\
                                              |(__STM324xG_EVAL_BSP_VERSION_SUB1 << 16)\

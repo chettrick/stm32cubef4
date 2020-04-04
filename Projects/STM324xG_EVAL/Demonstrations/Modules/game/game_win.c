@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    game_win.c
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014   
+  * @version V1.2.1
+  * @date    13-March-2015   
   * @brief   game functions
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -843,7 +843,7 @@ static void _cbReversiWin(WM_MESSAGE* pMsg) {
 static void Startup(WM_HWIN hWin, uint16_t xpos, uint16_t ypos)
 {
   _pPlayerAI[1] = _PlayerAI_SmartGecko;
-  _hFrame = FRAMEWIN_CreateEx(xpos, ypos, 320, 214, hWin, WM_CF_SHOW, FRAMEWIN_CF_ACTIVE, 0, NULL, &_cbReversiWin);
+  _hFrame = FRAMEWIN_CreateEx(xpos, ypos, 320, 215, hWin, WM_CF_SHOW, FRAMEWIN_CF_ACTIVE, 0, NULL, &_cbReversiWin);
  
   FRAMEWIN_SetClientColor(_hFrame, GUI_INVALID_COLOR);
   FRAMEWIN_SetFont       (_hFrame, GUI_FONT_13B_1);

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    usbd_cdc.c
   * @author  MCD Application Team
-  * @version V2.3.0
-  * @date    04-November-2014
+  * @version V2.4.0
+  * @date    28-February-2015
   * @brief   This file provides the high layer firmware functions to manage the 
   *          following functionalities of the USB CDC Class:
   *           - Initialization and Configuration of high and low layer
@@ -41,7 +41,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -600,7 +600,8 @@ static uint8_t  USBD_CDC_Setup (USBD_HandleTypeDef *pdev,
                                 USBD_SetupReqTypedef *req)
 {
   USBD_CDC_HandleTypeDef   *hcdc = (USBD_CDC_HandleTypeDef*) pdev->pClassData;
-  
+  static uint8_t ifalt = 0;
+    
   switch (req->bmRequest & USB_REQ_TYPE_MASK)
   {
   case USB_REQ_TYPE_CLASS :
@@ -628,11 +629,24 @@ static uint8_t  USBD_CDC_Setup (USBD_HandleTypeDef *pdev,
     }
     else
     {
-        ((USBD_CDC_ItfTypeDef *)pdev->pUserData)->Control(req->bRequest,
-                                                          NULL,
-                                                          0);
+      ((USBD_CDC_ItfTypeDef *)pdev->pUserData)->Control(req->bRequest,
+                                                        (uint8_t*)req,
+                                                        0);
     }
     break;
+
+  case USB_REQ_TYPE_STANDARD:
+    switch (req->bRequest)
+    {      
+    case USB_REQ_GET_INTERFACE :
+      USBD_CtlSendData (pdev,
+                        &ifalt,
+                        1);
+      break;
+      
+    case USB_REQ_SET_INTERFACE :
+      break;
+    }
  
   default: 
     break;

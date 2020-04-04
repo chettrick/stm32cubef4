@@ -1,5 +1,5 @@
 /*********************************************************************
-*          Portions COPYRIGHT 2014 STMicroelectronics                *
+*          Portions COPYRIGHT 2015 STMicroelectronics                *
 *          Portions SEGGER Microcontroller GmbH & Co. KG             *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************

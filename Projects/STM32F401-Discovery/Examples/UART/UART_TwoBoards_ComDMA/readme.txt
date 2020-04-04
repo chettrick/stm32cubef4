@@ -2,11 +2,11 @@
   @page UART_TwoBoards_ComDMA UART Two Boards Communication DMA example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    UART/UART_TwoBoards_ComDMA/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014
+  * @version V1.2.1
+  * @date    13-March-2015
   * @brief   Description of the UART Two Boards Communication DMA example.
   ******************************************************************************
   *
@@ -62,7 +62,8 @@ STM32 discovery board's LEDs can be used to monitor the transfer status:
  - LED3 (Orange) is blinking on master side waiting for user to press button
  - LED6 (blue) is ON when the transmission process is complete.
  - LED4 (green) is ON when the reception process is complete.
- - LED3 (Orange) is ON when there's UART error callback.   
+ - LED3 (Orange) is ON when there's UART error callback, otherwise the Led is blinking
+   waiting for button press to start transmission.
  - LED5 (red) is ON when there is an error in transmission/reception process.  
 
 The UART is configured as follows:

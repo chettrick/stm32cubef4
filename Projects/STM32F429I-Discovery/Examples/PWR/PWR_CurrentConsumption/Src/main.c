@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    PWR/PWR_CurrentConsumption/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014
+  * @version V1.2.1
+  * @date    13-March-2015
   * @brief   This sample code shows how to use STM32F4xx PWR HAL API to enter
   * and exit the stop mode.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -87,15 +87,13 @@ int main(void)
   {
     __HAL_PWR_CLEAR_FLAG(PWR_FLAG_SB);
   }
-
+  /* Configure USER Button */
+  BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_EXTI);
   /* Infinite loop */
   while(1)
   {
     UserButtonStatus = 0;
-    
-    /* Configure USER Button */
-    BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_EXTI);
-    
+
     /* Wait until USER button is pressed to enter the Low Power mode */
     while(UserButtonStatus == 0x00)
     {
@@ -113,7 +111,7 @@ int main(void)
     
 #if defined (SLEEP_MODE)
     /* Sleep Mode Entry 
-    - System Running at PLL (168MHz)
+    - System Running at PLL (180MHz)
     - Flash 5 wait state
     - Instruction and Data caches ON
     - Prefetch ON

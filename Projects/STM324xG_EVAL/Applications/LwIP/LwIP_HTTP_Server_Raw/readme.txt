@@ -2,11 +2,11 @@
   @page LwIP_HTTP_Server_Raw LwIP HTTP Server Raw application
   
   @verbatim
-  ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    LwIP/LwIP_HTTP_Server_Raw/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014
+  * @version V1.2.1
+  * @date    13-March-2015
   * @brief   Description of the LwIP http Server Raw application.
   ******************************************************************************
   *

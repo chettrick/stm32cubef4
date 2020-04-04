@@ -2,15 +2,15 @@
   ******************************************************************************
   * @file    CAN/CAN_Networking/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014
+  * @version V1.2.1
+  * @date    13-March-2015
   * @brief   This example shows how to configure the CAN peripheral 
   *          to send and receive CAN frames in normal mode. The sent frames 
   *          are used to control LEDs by pressing Key push button.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:

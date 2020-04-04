@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    ADC/ADC_TriggerMode/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014
+  * @version V1.2.1
+  * @date    13-March-2015
   * @brief   This example describes how to use Timer to convert continuously data.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -204,7 +204,7 @@ static void ADC_Config(void)
   AdcHandle.Init.DataAlign = ADC_DATAALIGN_RIGHT;
   AdcHandle.Init.NbrOfConversion = 1;
   AdcHandle.Init.DMAContinuousRequests = ENABLE;
-  AdcHandle.Init.EOCSelection = ENABLE;
+  AdcHandle.Init.EOCSelection = ADC_EOC_SEQ_CONV;
       
   if(HAL_ADC_Init(&AdcHandle) != HAL_OK)
   {

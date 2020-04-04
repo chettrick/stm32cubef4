@@ -2,15 +2,15 @@
   ******************************************************************************
   * @file    stm32f4xx_it.c
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014
+  * @version V1.2.1
+  * @date    13-March-2015
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -55,7 +55,13 @@
 /* Private variables ---------------------------------------------------------*/
 extern HCD_HandleTypeDef  hhcd;
 extern LTDC_HandleTypeDef hltdc;
+/* TIM handler declared in "k_rtc.c" file */
+extern TIM_HandleTypeDef TimInputCaptureHandle;
 
+extern __IO uint32_t uwPeriodValue;
+extern __IO uint32_t uwCaptureNumber;
+extern __IO uint32_t uwMeasurementDone;
+uint16_t tmpCC4[2] = {0, 0};
 /* Private function prototypes -----------------------------------------------*/
 #if defined (STM32F439xx)
 extern void LTDC_ISR_Handler(void);
@@ -180,6 +186,28 @@ void LTDC_IRQHandler(void)
 }
 #endif /* STM32F439xx */
 
+
+/**
+  * @brief  This function handles TIM5 global interrupt request.
+  * @param  None
+  * @retval None
+  */
+void TIM5_IRQHandler(void)
+{ 
+  HAL_TIM_IRQHandler(&TimInputCaptureHandle);
+  {    
+    /* Get the Input Capture value */
+    tmpCC4[uwCaptureNumber++] = HAL_TIM_ReadCapturedValue(&TimInputCaptureHandle, TIM_CHANNEL_4);
+    
+    if (uwCaptureNumber >= 2)
+    {
+      /* Compute the period length */
+      uwPeriodValue = (uint16_t)(0xFFFF - tmpCC4[0] + tmpCC4[1] + 1);
+      uwMeasurementDone = 1;
+      uwCaptureNumber = 0;
+    }
+  }
+}
 /**
   * @brief  This function handles PPP interrupt request.
   * @param  None

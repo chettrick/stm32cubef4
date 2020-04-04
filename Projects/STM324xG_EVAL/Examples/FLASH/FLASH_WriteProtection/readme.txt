@@ -2,11 +2,11 @@
   @page FLASH_WriteProtection FLASH write protection example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    FLASH/FLASH_WriteProtection/readme.txt
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014
+  * @version V1.2.1
+  * @date    13-March-2015
   * @brief   Description of the FLASH write protection example.
   ******************************************************************************
   *

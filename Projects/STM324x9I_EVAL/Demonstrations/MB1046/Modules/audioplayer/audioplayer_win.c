@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    audioplayer_win.c
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014   
+  * @version V1.2.1
+  * @date    13-March-2015   
   * @brief   Audio player functions
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -142,10 +142,7 @@ static const GUI_WIDGET_CREATE_INFO _aDialogCreate[] = {
   { TEXT_CreateIndirect,      "Time",         ID_TOTAL_TIME,        20,  55,  50,  30,  0, 0x0,  0 },
 };
 
-static WM_HWIN AUDIOPLAYER_hWin; 
-static WM_HWIN chooser_openfile;    
-static WM_HWIN chooser_add2playlist;   
-static WM_HWIN chooser_addfolder;   
+static WM_HWIN AUDIOPLAYER_hWin;  
 static WM_HTIMER hProcessTimer;
 static WM_HTIMER hPlaylistTimer;
 static WM_HWIN  hTimerWin;
@@ -937,6 +934,7 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
   WM_HWIN hItem;
   int     NCode;
   int     Id, ItemNbr;
+  int      result;  
   int duration, volume, index;
   static char tmp[FILEMGR_FILE_NAME_SIZE];  
   
@@ -1103,81 +1101,6 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
     Id    = WM_GetId(pMsg->hWinSrc);
     NCode = pMsg->Data.v;
 
-    if (NCode == WM_NOTIFICATION_CHILD_DELETED)
-    {
-      if(pMsg->hWinSrc == chooser_openfile)
-      {    
-        if((strstr(pFileInfo->pRoot, ".wav")) || (strstr(pFileInfo->pRoot, ".WAV")))
-        {         
-          if(AUDIOPLAYER_GetFileInfo(pFileInfo->pRoot, &WavInfo) == 0)
-          {
-            if(AUDIOPLAYER_GetState() == AUDIOPLAYER_PLAY)
-            {
-              /* Stop current audio sample */
-              AUDIOPLAYER_Stop();   
-            }
-            
-            pWavList->ptr = 0;
-            file_pos = 0;
-            
-            strcpy((char *)pWavList->file[pWavList->ptr].name, pFileInfo->pRoot);
-            FILEMGR_GetFileOnly (tmp, pFileInfo->pRoot);
-            hItem = WM_GetDialogItem(pMsg->hWin, ID_WAVFILE_LIST);
-            
-            /* Update Play list */
-            strcpy((char *)pWavList->file[pWavList->ptr].name, pFileInfo->pRoot);
-            
-            ItemNbr = LISTVIEW_GetNumRows(hItem);
-            while(ItemNbr--)
-            {
-              LISTVIEW_DeleteRow(hItem, ItemNbr);
-            }
-            
-            LISTVIEW_AddRow(hItem, NULL);         
-            LISTVIEW_SetItemText(hItem, 0, pWavList->ptr, tmp);
-            duration = WavInfo.FileSize / WavInfo.ByteRate; 
-            sprintf((char *)tmp , "%02d:%02d", duration/60, duration%60 );
-            LISTVIEW_SetItemText(hItem, 1, pWavList->ptr, tmp);
-            pWavList->ptr++;  
-            
-            LISTVIEW_SetSel(hItem, 0);
-            _PlayFile(pFileInfo->pRoot);              
-          }
-        }
-        chooser_openfile = 0;
-      }
-      
-      if(pMsg->hWinSrc == chooser_addfolder)
-      {
-        _AddEntireFolder(pFileInfo->pRoot);
-        chooser_addfolder = 0;
-      }    
-      
-      if(pMsg->hWinSrc == chooser_add2playlist)
-      {
-        if((strstr(pFileInfo->pRoot, ".wav")) || (strstr(pFileInfo->pRoot, ".WAV")))
-        {
-          if(pWavList->ptr < FILEMGR_LIST_DEPDTH)
-          {
-            strcpy((char *)pWavList->file[pWavList->ptr].name, pFileInfo->pRoot);
-            FILEMGR_GetFileOnly (tmp, pFileInfo->pRoot);
-            hItem = WM_GetDialogItem(pMsg->hWin, ID_WAVFILE_LIST);
-            
-            if(AUDIOPLAYER_GetFileInfo(pFileInfo->pRoot, &WavInfo) == 0)
-            {
-              LISTVIEW_AddRow(hItem, NULL);         
-              LISTVIEW_SetItemText(hItem, 0, pWavList->ptr, tmp);
-              duration = WavInfo.FileSize / WavInfo.ByteRate; 
-              sprintf((char *)tmp , "%02d:%02d", duration/60, duration%60 );
-              LISTVIEW_SetItemText(hItem, 1, pWavList->ptr, tmp);
-              pWavList->ptr++;      
-            }
-          }
-        }
-        chooser_add2playlist = 0;
-      } 
-    }
-
     switch(Id) {
       
     /* Notification sent by "Button_Close" */  
@@ -1319,7 +1242,49 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
           {
             pFileInfo->pfGetData = k_GetData;
             pFileInfo->pMask = acMask_audio;     
-            chooser_openfile = CHOOSEFILE_Create(pMsg->hWin,  47, 10, 385, 215, apDrives, GUI_COUNTOF(apDrives), 0, "Open an audio file", 0, pFileInfo);        
+            hItem = CHOOSEFILE_Create(pMsg->hWin,  47, 10, 385, 215, apDrives, GUI_COUNTOF(apDrives), 0, "Open an audio file", 0, pFileInfo); 
+            WM_MakeModal(hItem);
+            result = GUI_ExecCreatedDialog(hItem);
+            if (result == 0) 
+            { 
+              if((strstr(pFileInfo->pRoot, ".wav")) || (strstr(pFileInfo->pRoot, ".WAV")))
+              {         
+                if(AUDIOPLAYER_GetFileInfo(pFileInfo->pRoot, &WavInfo) == 0)
+                {
+                  if(AUDIOPLAYER_GetState() == AUDIOPLAYER_PLAY)
+                  {
+                    /* Stop current audio sample */
+                    AUDIOPLAYER_Stop();   
+                  }
+                  
+                  pWavList->ptr = 0;
+                  file_pos = 0;
+                  
+                  strcpy((char *)pWavList->file[pWavList->ptr].name, pFileInfo->pRoot);
+                  FILEMGR_GetFileOnly (tmp, pFileInfo->pRoot);
+                  hItem = WM_GetDialogItem(pMsg->hWin, ID_WAVFILE_LIST);
+                  
+                  /* Update Play list */
+                  strcpy((char *)pWavList->file[pWavList->ptr].name, pFileInfo->pRoot);
+                  
+                  ItemNbr = LISTVIEW_GetNumRows(hItem);
+                  while(ItemNbr--)
+                  {
+                    LISTVIEW_DeleteRow(hItem, ItemNbr);
+                  }
+                  
+                  LISTVIEW_AddRow(hItem, NULL);         
+                  LISTVIEW_SetItemText(hItem, 0, pWavList->ptr, tmp);
+                  duration = WavInfo.FileSize / WavInfo.ByteRate; 
+                  sprintf((char *)tmp , "%02d:%02d", duration/60, duration%60 );
+                  LISTVIEW_SetItemText(hItem, 1, pWavList->ptr, tmp);
+                  pWavList->ptr++;  
+                  
+                  LISTVIEW_SetSel(hItem, 0);
+                  _PlayFile(pFileInfo->pRoot);              
+                }
+              }
+            }
           }
         }
         else if(AUDIOPLAYER_GetState() == AUDIOPLAYER_PLAY)
@@ -1436,14 +1401,17 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
         
         break;
       case WM_NOTIFICATION_RELEASED:
-        if((chooser_openfile == 0) && (chooser_addfolder == 0) && (chooser_add2playlist == 0))
-        {
-          pFileInfo->pfGetData = k_GetData;
-          pFileInfo->pMask = acMask_dir;     
-          chooser_addfolder = CHOOSEFILE_Create(pMsg->hWin,  47, 10, 385, 215, apDrives, GUI_COUNTOF(apDrives), 0, "Add a folder", 0, pFileInfo);        
+        
+        pFileInfo->pfGetData = k_GetData;
+        pFileInfo->pMask = acMask_dir;     
+        hItem = CHOOSEFILE_Create(pMsg->hWin,  47, 10, 385, 215, apDrives, GUI_COUNTOF(apDrives), 0, "Add a folder", 0, pFileInfo);        
+        WM_MakeModal(hItem);
+        result = GUI_ExecCreatedDialog(hItem);
+        if (result == 0) 
+        { 
+          _AddEntireFolder(pFileInfo->pRoot);
         }
         break;
-        
       }
       break;
             
@@ -1451,17 +1419,36 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
     case ID_ADD_BUTTON: 
       switch(NCode) {
       case WM_NOTIFICATION_RELEASED:
-        if((chooser_openfile == 0) && (chooser_addfolder == 0) && (chooser_add2playlist == 0))
-        {
-          pFileInfo->pfGetData = k_GetData;
-          pFileInfo->pMask = acMask_audio;     
-          chooser_add2playlist = CHOOSEFILE_Create(pMsg->hWin,  47, 10, 385, 215, apDrives, GUI_COUNTOF(apDrives), 0, "Add to playlist", 0, pFileInfo);
-        }
-        break;
         
+        pFileInfo->pfGetData = k_GetData;
+        pFileInfo->pMask = acMask_audio;     
+        hItem = CHOOSEFILE_Create(pMsg->hWin,  47, 10, 385, 215, apDrives, GUI_COUNTOF(apDrives), 0, "Add to playlist", 0, pFileInfo);
+        WM_MakeModal(hItem);
+        result = GUI_ExecCreatedDialog(hItem);
+        if (result == 0) 
+        { 
+          if((strstr(pFileInfo->pRoot, ".wav")) || (strstr(pFileInfo->pRoot, ".WAV")))
+          {
+            if(pWavList->ptr < FILEMGR_LIST_DEPDTH)
+            {
+              strcpy((char *)pWavList->file[pWavList->ptr].name, pFileInfo->pRoot);
+              FILEMGR_GetFileOnly (tmp, pFileInfo->pRoot);
+              hItem = WM_GetDialogItem(pMsg->hWin, ID_WAVFILE_LIST);
+              
+              if(AUDIOPLAYER_GetFileInfo(pFileInfo->pRoot, &WavInfo) == 0)
+              {
+                LISTVIEW_AddRow(hItem, NULL);         
+                LISTVIEW_SetItemText(hItem, 0, pWavList->ptr, tmp);
+                duration = WavInfo.FileSize / WavInfo.ByteRate; 
+                sprintf((char *)tmp , "%02d:%02d", duration/60, duration%60 );
+                LISTVIEW_SetItemText(hItem, 1, pWavList->ptr, tmp);
+                pWavList->ptr++;      
+              }
+            }
+          }
+        }  
       }
-      break;
-      
+      break;      
     }
     break;
     
@@ -1481,8 +1468,6 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
 static void Startup(WM_HWIN hWin, uint16_t xpos, uint16_t ypos)
 {
   AUDIOPLAYER_Init();  
-  chooser_openfile = (WM_HWIN)NULL; 
-  chooser_add2playlist = (WM_HWIN)NULL;
   AUDIOPLAYER_hWin = GUI_CreateDialogBox(_aDialogCreate, GUI_COUNTOF(_aDialogCreate), _cbDialog, hWin, xpos, ypos);
 }
 
@@ -1498,9 +1483,7 @@ static void AudioDirectOpen(char *filename)
   pWavList->ptr = 0;
   uint32_t duration;
   
-  AUDIOPLAYER_Init();  
-  chooser_openfile = 0;
-  chooser_add2playlist = 0;
+  AUDIOPLAYER_Init();
   AUDIOPLAYER_hWin = GUI_CreateDialogBox(_aDialogCreate, GUI_COUNTOF(_aDialogCreate), _cbDialog, WM_GetDesktopWindowEx(1), 0, 26);
   
   if(AUDIOPLAYER_hWin != 0)

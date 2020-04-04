@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    Audio/Audio_playback_and_record/Src/menu.c 
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014
+  * @version V1.2.1
+  * @date    13-March-2015
   * @brief   This file implements Menu Functions
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -342,15 +342,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
         return;
       }
       
-      /* Change the selection type */
-      if(AudioSelectMode == AUDIO_SELECT_MENU)
-      {
-        AUDIO_ChangeSelectMode(AUDIO_PLAYBACK_CONTROL); 
-      }
-      else if(AudioSelectMode == AUDIO_PLAYBACK_CONTROL)
-      {       
-        AUDIO_PLAYER_Stop();
-      }
+      AudioState = AUDIO_STATE_STOP;
     }
   }
 }

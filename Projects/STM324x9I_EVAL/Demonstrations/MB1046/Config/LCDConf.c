@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    lcdconf.c
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014
+  * @version V1.2.1
+  * @date    13-March-2015
   * @brief   This file implements the configuration for the GUI library
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -111,15 +111,6 @@
 /** @defgroup LCD CONFIGURATION_Private_Macros
 * @{
 */ 
-/* Redirect bulk conversion to DMA2D routines */
-#define DEFINEDMA2D_COLORCONVERSION(PFIX, PIXELFORMAT)                                                             \
-static void Color2IndexBulk_##PFIX##DMA2D(LCD_COLOR * pColor, void * pIndex, U32 NumItems, U8 SizeOfIndex) { \
-  DMA2D_Color2IndexBulk(pColor, pIndex, NumItems, SizeOfIndex, PIXELFORMAT);                                         \
-}                                                                                                                   \
-static void _Index2ColorBulk_##PFIX##DMA2D(void * pIndex, LCD_COLOR * pColor, U32 NumItems, U8 SizeOfIndex) { \
-  DMA2D_Index2ColorBulk(pIndex, pColor, NumItems, SizeOfIndex, PIXELFORMAT);  \
-}
-  
 /**
 * @}
 */ 
@@ -147,8 +138,7 @@ static const LCD_API_COLOR_CONV * apColorConvAPI[] =
 /** @defgroup LCD CONFIGURATION_Private_FunctionPrototypes
 * @{
 */ 
-static U32 LCD_LL_GetPixelformat(U32 LayerIndex);
-static void     DMA2D_CopyBuffer(U32 LayerIndex, void * pSrc, void * pDst, U32 xSize, U32 ySize, U32 OffLineSrc, U32 OffLineDst);
+static void     DMA2D_CopyBuffer         (U32 LayerIndex, void * pSrc, void * pDst, U32 xSize, U32 ySize, U32 OffLineSrc, U32 OffLineDst);
 static void     DMA2D_FillBuffer(U32 LayerIndex, void * pDst, U32 xSize, U32 ySize, U32 OffLine, U32 ColorIndex);
 static void     LCD_LL_Init(void); 
 static void     LCD_LL_LayerInit(U32 LayerIndex); 
@@ -156,10 +146,8 @@ static void     LCD_LL_LayerInit(U32 LayerIndex);
 static void     CUSTOM_CopyBuffer(int LayerIndex, int IndexSrc, int IndexDst);
 static void     CUSTOM_CopyRect(int LayerIndex, int x0, int y0, int x1, int y1, int xSize, int ySize);
 static void     CUSTOM_FillRect(int LayerIndex, int x0, int y0, int x1, int y1, U32 PixelIndex);
-
-static void LCD_DrawBitmap8bpp(int LayerIndex, int x, int y, U8 const * p, int xSize, int ySize, int BytesPerLine);
-static void LCD_DrawBitmap16bpp(int LayerIndex, int x, int y, U16 const * p, int xSize, int ySize, int BytesPerLine);
-static U32 GetBufferSize(U32 LayerIndex);
+static void     CUSTOM_DrawBitmap32bpp(int LayerIndex, int x, int y, U8 const * p,  int xSize, int ySize, int BytesPerLine);
+static U32      GetBufferSize(U32 LayerIndex);
 /**
 * @}
 */ 
@@ -167,7 +155,22 @@ static U32 GetBufferSize(U32 LayerIndex);
 /** @defgroup LCD CONFIGURATION_Private_Functions
 * @{
 */ 
-
+/**
+  * @brief  Return Pixel format for a given layer
+  * @param  LayerIndex : Layer Index 
+  * @retval Status ( 0 : 0k , 1: error)
+  */
+static inline U32 LCD_LL_GetPixelformat(U32 LayerIndex)
+{
+  if (LayerIndex == 0)
+  { 
+    return LTDC_PIXEL_FORMAT_RGB565;
+  } 
+  else
+  {
+    return LTDC_PIXEL_FORMAT_ARGB8888;
+  } 
+}
 /*******************************************************************************
                        LTDC and DMA2D BSP Routines
 *******************************************************************************/
@@ -295,8 +298,8 @@ void HAL_LTDC_LineEvenCallback(LTDC_HandleTypeDef *hltdc)
       Addr = layer_prop[layer].address + \
              layer_prop[layer].xSize * layer_prop[layer].ySize * layer_prop[layer].pending_buffer * layer_prop[layer].BytesPerPixel;
       
-      HAL_LTDC_SetAddress(hltdc, Addr, layer);
-      
+      __HAL_LTDC_LAYER(hltdc, layer)->CFBAR = Addr;
+     
       __HAL_LTDC_RELOAD_CONFIG(hltdc);
       
       /* Notify STemWin that buffer is used */
@@ -384,18 +387,12 @@ void LCD_X_Config(void)
     /* Set custom functions for several operations */
     LCD_SetDevFunc(i, LCD_DEVFUNC_COPYBUFFER, (void(*)(void))CUSTOM_CopyBuffer);
     LCD_SetDevFunc(i, LCD_DEVFUNC_COPYRECT,   (void(*)(void))CUSTOM_CopyRect);
-    
-    /* Filling via DMA2D does only work with 16bpp or more */
-    if (LCD_LL_GetPixelformat(i) <= LTDC_PIXEL_FORMAT_ARGB4444) 
-    {
-      LCD_SetDevFunc(i, LCD_DEVFUNC_FILLRECT, (void(*)(void))CUSTOM_FillRect);
-      LCD_SetDevFunc(i, LCD_DEVFUNC_DRAWBMP_8BPP, (void(*)(void))LCD_DrawBitmap8bpp);
-    }
-	
-	/* Set up drawing routine for 16bpp bitmap using DMA2D */
-    if (LCD_LL_GetPixelformat(i) == LTDC_PIXEL_FORMAT_RGB565) {
-     LCD_SetDevFunc(i, LCD_DEVFUNC_DRAWBMP_16BPP, (void(*)(void))LCD_DrawBitmap16bpp);     /* Set up drawing routine for 16bpp bitmap using DMA2D. Makes only sense with RGB565 */
-    }
+    LCD_SetDevFunc(i, LCD_DEVFUNC_FILLRECT, (void(*)(void))CUSTOM_FillRect);
+
+    /* Set up drawing routine for 32bpp bitmap using DMA2D */
+    if (LCD_LL_GetPixelformat(i) == LTDC_PIXEL_FORMAT_ARGB8888) {
+     LCD_SetDevFunc(i, LCD_DEVFUNC_DRAWBMP_32BPP, (void(*)(void))CUSTOM_DrawBitmap32bpp);     /* Set up drawing routine for 32bpp bitmap using DMA2D. Makes only sense with ARGB8888 */
+    }    
   }
 }
 
@@ -524,7 +521,7 @@ static void LCD_LL_LayerInit(U32 LayerIndex)
     layer_cfg.Backcolor.Green = 0;
     layer_cfg.Backcolor.Red = 0;
     layer_cfg.BlendingFactor1 = LTDC_BLENDING_FACTOR1_PAxCA;
-    layer_cfg.BlendingFactor2 = LTDC_BLENDING_FACTOR1_PAxCA;
+    layer_cfg.BlendingFactor2 = LTDC_BLENDING_FACTOR2_PAxCA;
     layer_cfg.ImageWidth = XSIZE_PHYS;
     layer_cfg.ImageHeight = YSIZE_PHYS;
     HAL_LTDC_ConfigLayer(&hltdc, &layer_cfg, LayerIndex);  
@@ -535,7 +532,7 @@ static void LCD_LL_LayerInit(U32 LayerIndex)
       /* Enable usage of LUT for all modes with <= 8bpp*/
       HAL_LTDC_EnableCLUT(&hltdc, LayerIndex);
     } 
-  }
+  } 
 }
 
 /**
@@ -597,55 +594,6 @@ static void LCD_LL_Init(void)
   {
     while (1);
   }
-}
-/**
-  * @brief  Return Pixel format for a given layer
-  * @param  LayerIndex : Layer Index 
-  * @retval Status ( 0 : 0k , 1: error)
-  */
-static U32 LCD_LL_GetPixelformat(U32 LayerIndex)
-{
-  const LCD_API_COLOR_CONV * pColorConvAPI;
-
-  if (LayerIndex >= GUI_NUM_LAYERS) 
-  {
-    return 0;
-  }
-  pColorConvAPI = layer_prop[LayerIndex].pColorConvAPI;
-  
-  if (pColorConvAPI == GUICC_M8888I) 
-  {
-    return LTDC_PIXEL_FORMAT_ARGB8888;
-  } 
-  else if (pColorConvAPI == GUICC_M888) 
-  {
-    return LTDC_PIXEL_FORMAT_RGB888;
-  } 
-  else if (pColorConvAPI == GUICC_M565) 
-  {
-    return LTDC_PIXEL_FORMAT_RGB565;
-  } 
-  else if (pColorConvAPI == GUICC_M1555I) 
-  {
-    return LTDC_PIXEL_FORMAT_ARGB1555;
-  } 
-  else if (pColorConvAPI == GUICC_M4444I) 
-  {
-    return LTDC_PIXEL_FORMAT_ARGB4444;
-  } 
-  else if (pColorConvAPI == GUICC_8666) 
-  {
-    return LTDC_PIXEL_FORMAT_L8;
-  } 
-  else if (pColorConvAPI == GUICC_1616I) 
-  {
-    return LTDC_PIXEL_FORMAT_AL44;
-  } 
-  else if (pColorConvAPI == GUICC_88666I) 
-  {
-    return LTDC_PIXEL_FORMAT_AL88;
-  }
-  while (1);
 }
 
 /**
@@ -815,91 +763,16 @@ static void CUSTOM_FillRect(int LayerIndex, int x0, int y0, int x1, int y1, U32 
   * @param  ySize: Y size
   * @retval None
   */
-static void DMA2D_DrawBitmapL8(void * pSrc, void * pDst,  U32 OffSrc, U32 OffDst, U32 PixelFormatDst, U32 xSize, U32 ySize)
-{
-  /* Set up mode */
-  DMA2D->CR      = 0x00010000UL | (1 << 9);         /* Control Register (Memory to memory with pixel format conversion and TCIE) */
-  
-  /* Set up pointers */
-  DMA2D->FGMAR   = (U32)pSrc;                       /* Foreground Memory Address Register (Source address) */
-  DMA2D->OMAR    = (U32)pDst;                       /* Output Memory Address Register (Destination address) */
-  
-  /* Set up offsets */
-  DMA2D->FGOR    = OffSrc;                          /* Foreground Offset Register (Source line offset) */
-  DMA2D->OOR     = OffDst;                          /* Output Offset Register (Destination line offset) */
-  
-  /* Set up pixel format */
-  DMA2D->FGPFCCR = LTDC_PIXEL_FORMAT_L8;             /* Foreground PFC Control Register (Defines the input pixel format) */
-  DMA2D->OPFCCR  = PixelFormatDst;                  /* Output PFC Control Register (Defines the output pixel format) */
-  
-  /* Set up size */
-  DMA2D->NLR     = (U32)(xSize << 16) | ySize;      /* Number of Line Register (Size configuration of area to be transfered) */
-  
-  /* Execute operation */
-  DMA2D->CR     |= DMA2D_CR_START;                               /* Start operation */
-  
-  /* Wait until transfer is done */
-  while (DMA2D->CR & DMA2D_CR_START)
-  {
-  }
-}
-
-/**
-  * @brief  Draw 16bpp bitmap file
-  * @param  LayerIndex: Layer Index
-  * @param  x:          X position
-  * @param  y:          Y position
-  * @param  p:          pointer to destination address
-  * @param  xSize:      X size
-  * @param  ySize:      Y size
-  * @param  BytesPerLine
-  * @retval None
-  */
-static void LCD_DrawBitmap16bpp(int LayerIndex, int x, int y, U16 const * p, int xSize, int ySize, int BytesPerLine)
+static void CUSTOM_DrawBitmap32bpp(int LayerIndex, int x, int y, U8 const * p, int xSize, int ySize, int BytesPerLine)
 {
   U32 BufferSize, AddrDst;
   int OffLineSrc, OffLineDst;
 
   BufferSize = GetBufferSize(LayerIndex);
   AddrDst = layer_prop[LayerIndex].address + BufferSize * layer_prop[LayerIndex].buffer_index + (y * layer_prop[LayerIndex].xSize + x) * layer_prop[LayerIndex].BytesPerPixel;
-  OffLineSrc = (BytesPerLine / 2) - xSize;
+  OffLineSrc = (BytesPerLine / 4) - xSize;
   OffLineDst = layer_prop[LayerIndex].xSize - xSize;
   DMA2D_CopyBuffer(LayerIndex, (void *)p, (void *)AddrDst, xSize, ySize, OffLineSrc, OffLineDst);
-}
-
-/**
-  * @brief  Draw 8bpp bitmap file
-  * @param  LayerIndex: Layer Index
-  * @param  x:          X position
-  * @param  y:          Y position
-  * @param  p:          pointer to destination address 
-  * @param  xSize:      X size
-  * @param  ySize:      Y size
-  * @param  BytesPerLine
-  * @retval None
-  */
-static void LCD_DrawBitmap8bpp(int LayerIndex, int x, int y, U8 const * p, int xSize, int ySize, int BytesPerLine)
-{
-  U32 BufferSize, AddrDst;
-  int OffLineSrc, OffLineDst;
-  U32 PixelFormat;
-
-  BufferSize = GetBufferSize(LayerIndex);
-  AddrDst = layer_prop[LayerIndex].address + BufferSize * layer_prop[LayerIndex].buffer_index + (y * layer_prop[LayerIndex].xSize + x) * layer_prop[LayerIndex].BytesPerPixel;
-  OffLineSrc = BytesPerLine - xSize;
-  OffLineDst = layer_prop[LayerIndex].xSize - xSize;
-  PixelFormat = LCD_LL_GetPixelformat(LayerIndex);
-  DMA2D_DrawBitmapL8((void *)p, (void *)AddrDst, OffLineSrc, OffLineDst, PixelFormat, xSize, ySize);
-}
-
-/**
-  * @brief  Restore default fill process
-  * @param  None
-  * @retval None
-  */
-void RestoreDefaultFillProcess(void) 
-{
-  LCD_SetDevFunc(1, LCD_DEVFUNC_FILLRECT, (void(*)(void))CUSTOM_FillRect);
 }
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
 

@@ -2,11 +2,11 @@
   @page FMC_SDRAM_LowPower SDRAM memory low power mode use example
   
   @verbatim
-  ******************* (C) COPYRIGHT 2014 STMicroelectronics ********************
+  ******************* (C) COPYRIGHT 2015 STMicroelectronics ********************
   * @file    FMC/FMC_SDRAM_LowPower/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014
+  * @version V1.2.1
+  * @date    13-March-2015
   * @brief   Description of the FMC SDRAM Low power example.
   ******************************************************************************
   *
@@ -66,7 +66,6 @@ The data written to SDRAM is read back and checked.
 LEDs are used to indicate the system state as following:
   - LED3/LED4 Off  : Wait for entering in STOP mode in pushing USER button
   - LED3/LED4 on  : CPU enters STOP mode.
-  - LED3/LED4 Off : the CPU is in RUN mode.
   - LED3 on  : correct data transfer (PASS). 
   - LED4 on  : incorrect data transfer (FAIL).
 

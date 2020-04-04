@@ -102,7 +102,7 @@
 					</fileInfo>
 					<fileInfo id="com.atollic.truestudio.exe.debug.1518366166.2065507817" name="stm32f4xx_hal_spi.c" rcbsApplicability="disable" resourcePath="Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_spi.c" toolsToInvoke="com.atollic.truestudio.exe.debug.toolchain.gcc.1836874447.69908579">
 						<tool id="com.atollic.truestudio.exe.debug.toolchain.gcc.1836874447.69908579" name="C Compiler" superClass="com.atollic.truestudio.exe.debug.toolchain.gcc.1836874447">
-							<option id="com.atollic.truestudio.gcc.misc.otherflags.1486331345" superClass="com.atollic.truestudio.gcc.misc.otherflags" value="-Wno-unused-but-set-variable" valueType="string"/>
+							<option id="com.atollic.truestudio.gcc.misc.otherflags.1486331345" superClass="com.atollic.truestudio.gcc.misc.otherflags" value="-Wno-unused-but-set-variable -Wno-unused-variable" valueType="string"/>
 							<inputType id="com.atollic.truestudio.gcc.input.1930993898" superClass="com.atollic.truestudio.gcc.input"/>
 						</tool>
 					</fileInfo>

@@ -2,16 +2,16 @@
   @page LTDC_Display_2Layers LTDC Display 2 layers example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    LTDC/LTDC_Display_2Layers/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014
+  * @version V1.2.1
+  * @date    13-March-2015
   * @brief   Description of the LTDC Display 2 layers example.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -58,6 +58,12 @@
     To display an image with an indirect color as pixel format a color lookup table (CLUT) 
     is loaded, then every byte from image data (L8_320x240) is considered as 
     a position in color lookup table (CLUT).(see example below)  
+
+ @note : 
+ The C files of the images used in this example are generated with 
+ STemWin bitmap converter released with this package.
+ \Middlewares\ST\STemWin\Software\BmpCvtST.exe
+ Use the bitmap files under resources repository
 
   The blending is always active and the two layers can be blended following 
   the configured blending factors and the constant alpha.
