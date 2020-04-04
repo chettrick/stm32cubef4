@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Host/DualCore_Standalone/Inc/stm32f4xx_it.h
   * @author  MCD Application Team
-  * @version V1.3.1
-  * @date    09-October-2015
+  * @version V1.3.2
+  * @date    13-November-2015
   * @brief   This file contains the headers of the interrupt handlers.
   ******************************************************************************
   * @attention

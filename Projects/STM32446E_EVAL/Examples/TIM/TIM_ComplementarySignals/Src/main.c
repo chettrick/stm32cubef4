@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    TIM/TIM_ComplementarySignals/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    09-October-2015
+  * @version V1.1.2
+  * @date    13-November-2015
   * @brief   This sample code shows how to use STM32F4xx TIM HAL API to generate
   *          3 signals in PWM with its complementaries.
   ******************************************************************************

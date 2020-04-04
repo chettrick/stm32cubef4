@@ -2,8 +2,8 @@
  ******************************************************************************
  * @file    LCD_DSI/LCD_DSI_ULPM_DataClock/Src/main.c
  * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    09-October-2015
+  * @version V1.0.2
+  * @date    13-November-2015
  * @brief   This example describes how to operate the DSI ULPM (Ultra Low Power Mode)
  *          on data lanes and clock lane in a use case with display in WVGA Landscape
  *          of size (800x480) using the STM32F4xx HAL API and BSP.

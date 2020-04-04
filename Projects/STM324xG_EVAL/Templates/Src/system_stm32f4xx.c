@@ -100,9 +100,7 @@
 /* #define DATA_IN_ExtSDRAM */
 #endif /* STM32F427xx || STM32F437xx || STM32F429xx || STM32F439xx */
 
-#if defined(DATA_IN_ExtSRAM) && defined(DATA_IN_ExtSDRAM)
- #error "Please select DATA_IN_ExtSRAM or DATA_IN_ExtSDRAM " 
-#endif /* DATA_IN_ExtSRAM && DATA_IN_ExtSDRAM */
+
 
 /*!< Uncomment the following line if you need to relocate your vector Table in
      Internal SRAM. */

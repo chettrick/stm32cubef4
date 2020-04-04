@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    DMA2D/DMA2D_MemToMemWithLCD/Inc/RGB565_150x150.h 
   * @author  MCD Application Team
-  * @version V1.3.1
-  * @date    09-October-2015
+  * @version V1.3.2
+  * @date    13-November-2015
   * @brief   This file contains image used for LTDC Validation.     
   ******************************************************************************
   * @attention

@@ -11,7 +11,7 @@
                      ##### How to use this driver #####
  ===============================================================================
     [..]
-    This file is generated automatically by MicroXplorer and eventually modified 
+    This file is generated automatically by STM32CubeMX and eventually modified 
     by the user
 
   @endverbatim
@@ -75,7 +75,7 @@
   */
 void HAL_MspInit(void)
 {
-  /* NOTE : This function is generated automatically by MicroXplorer and eventually  
+  /* NOTE : This function is generated automatically by STM32CubeMX and eventually  
             modified by the user
    */ 
 }
@@ -87,7 +87,7 @@ void HAL_MspInit(void)
   */
 void HAL_MspDeInit(void)
 {
-  /* NOTE : This function is generated automatically by MicroXplorer and eventually  
+  /* NOTE : This function is generated automatically by STM32CubeMX and eventually  
             modified by the user
    */
 }

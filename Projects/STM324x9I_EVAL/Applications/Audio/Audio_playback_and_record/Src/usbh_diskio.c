@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Audio/Audio_playback_and_record/Src/usbh_diskio.c
   * @author  MCD Application Team
-  * @version V1.4.1
-  * @date    09-October-2015
+  * @version V1.4.2
+  * @date    13-November-2015
   * @brief   USB diskio interface
   ******************************************************************************
   * @attention

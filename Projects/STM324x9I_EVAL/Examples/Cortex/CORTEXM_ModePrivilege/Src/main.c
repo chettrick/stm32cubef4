@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Cortex/CORTEXM_ModePrivilege/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.3.1
-  * @date    09-October-2015
+  * @version V1.3.2
+  * @date    13-November-2015
   * @brief   Description of the CortexM4 Mode Privilege example.
   ******************************************************************************
   * @attention
@@ -68,8 +68,6 @@ static __INLINE  void __SVC(void);
  static __INLINE  void __SVC()                     { __ASM ("svc 0x01");}
 #elif defined   (  __GNUC__  )
  static __INLINE void __SVC()                      { __ASM volatile ("svc 0x01");}
- #elif defined ( __TASKING__ )
- static __INLINE  void __SVC()                     { __ASM ("svc 0x01");}
 #endif
  
 /* Private variables ---------------------------------------------------------*/

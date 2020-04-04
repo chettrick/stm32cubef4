@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LTDC/LTDC_Display_2Layers/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.2.3
-  * @date    09-October-2015 
+  * @version V1.2.4
+  * @date    13-November-2015 
   * @brief   HAL MSP module.       
   ******************************************************************************
   * @attention
@@ -139,6 +139,12 @@ void HAL_LTDC_MspInit(LTDC_HandleTypeDef *hltdc)
   /* LTDC pins configuraiton: PG10 -- 12 */  
   GPIO_Init_Structure.Pin = GPIO_PIN_10 | GPIO_PIN_12;
   HAL_GPIO_Init(GPIOG, &GPIO_Init_Structure);
+  
+  /* Set LTDC Interrupt to the lowest priority */
+  HAL_NVIC_SetPriority(LTDC_IRQn, 0xE, 0);   
+
+  /* Enable LTDC Interrupt */
+  HAL_NVIC_EnableIRQ(LTDC_IRQn);   
 }
 
 /**

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    DMA2D_MemToMemWithPFC/rgb565_240x150.h 
   * @author  MCD Application Team
-  * @version V1.2.3
-  * @date    09-October-2015 
+  * @version V1.2.4
+  * @date    13-November-2015 
   * @brief   This file contains image used for DMA2D Validation.
   ******************************************************************************
   * @attention

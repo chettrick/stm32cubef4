@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    k_sd_diskio.h 
   * @author  MCD Application Team
-  * @version V1.3.1
-  * @date    18-August-2015
+  * @version V1.3.2
+  * @date    13-November-2015
   * @brief   Header for k_sd_diskio.c module
   ******************************************************************************
   * @attention

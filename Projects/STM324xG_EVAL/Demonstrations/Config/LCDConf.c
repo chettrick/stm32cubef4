@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    lcdconf.c
   * @author  MCD Application Team
-  * @version V1.3.1
-  * @date    18-August-2015
+  * @version V1.3.2
+  * @date    13-November-2015
   * @brief   This file implements the configuration for the GUI library
   ******************************************************************************
   * @attention
@@ -38,7 +38,7 @@
 #include "GUI.h"
 #include "GUIDRV_FlexColor.h"
 #include "main.h"
-#include "ili9325\ili9325.h"
+#include "ili9325/ili9325.h"
 
 /** @addtogroup LCD CONFIGURATION
 * @{

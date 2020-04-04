@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BSP/Inc/drop_29x35.h
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    09-October-2015
+  * @version V1.0.2
+  * @date    13-November-2015
   * @brief   This file contains icon definition for animation control.
   ******************************************************************************
   * @attention

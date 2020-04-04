@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    ADC/ADC_RegularConversion_DMA/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.2.3
-  * @date    09-October-2015
+  * @version V1.2.4
+  * @date    13-November-2015
   * @brief   This example describes how to use the DMA to transfer 
   *          continuously converted data.
   ******************************************************************************
@@ -122,7 +122,11 @@ int main(void)
     Error_Handler(); 
   }
 
-  /*##-3- Start the conversion process and enable interrupt ##################*/  
+  /*##-3- Start the conversion process and enable interrupt ##################*/
+  /* Note: Considering IT occurring after each number of ADC conversions      */
+  /*       (IT by DMA end of transfer), select sampling time and ADC clock    */
+  /*       with sufficient duration to not create an overhead situation in    */
+  /*        IRQHandler. */ 
   if(HAL_ADC_Start_DMA(&AdcHandle, (uint32_t*)&uhADCxConvertedValue, 1) != HAL_OK)
   {
     /* Start Conversation Error */
@@ -143,7 +147,7 @@ int main(void)
   *            HCLK(Hz)                       = 84000000
   *            AHB Prescaler                  = 1
   *            APB1 Prescaler                 = 2
-  *            APB2 Prescaler                 = 1
+  *            APB2 Prescaler                 = 2
   *            HSE Frequency(Hz)              = 8000000
   *            PLL_M                          = 8
   *            PLL_N                          = 336
@@ -185,7 +189,7 @@ static void SystemClock_Config(void)
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;  
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;  
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2);
 }
 

@@ -36,8 +36,8 @@ Purpose     : Draws bitmaps with and without compression
   ******************************************************************************
   * @file    GUIDEMO_Bitmap.c
   * @author  MCD Application Team
-  * @version V1.3.1
-  * @date    09-October-2015
+  * @version V1.3.2
+  * @date    13-November-2015
   * @brief   Draws bitmaps with and without compression
   ******************************************************************************
   * @attention

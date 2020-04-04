@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    UART/UART_TwoBoards_ComPolling/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    09-October-2015
+  * @version V1.0.2
+  * @date    13-November-2015
   * @brief   This sample code shows how to use UART HAL API to transmit
   *          and receive a data buffer with a communication process based on
   *          polling transfer. 

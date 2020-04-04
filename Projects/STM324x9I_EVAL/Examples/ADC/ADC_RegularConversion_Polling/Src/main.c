@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    ADC/ADC_RegularConversion_Polling/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.3.1
-  * @date    09-October-2015
+  * @version V1.3.2
+  * @date    13-November-2015
   * @brief   This example describes how to use Polling mode to convert data.
   ******************************************************************************
   * @attention
@@ -137,8 +137,8 @@ int main(void)
         operation is ongoing. */
   HAL_ADC_PollForConversion(&AdcHandle, 10);
   
-  /* Check if the continous conversion of regular channel is finished */
-  if(HAL_ADC_GetState(&AdcHandle) == HAL_ADC_STATE_EOC_REG)
+  /* Check if the continuous conversion of regular channel is finished */
+  if((HAL_ADC_GetState(&AdcHandle) & HAL_ADC_STATE_EOC_REG) == HAL_ADC_STATE_EOC_REG)
   {
     /*##-5- Get the converted value of regular channel  ######################*/
     uhADCxConvertedValue = HAL_ADC_GetValue(&AdcHandle);

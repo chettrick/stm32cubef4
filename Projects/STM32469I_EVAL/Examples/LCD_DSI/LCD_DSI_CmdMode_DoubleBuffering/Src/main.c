@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LCD_DSI/LCD_DSI_CmdMode_DoubleBuffering/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    09-October-2015
+  * @version V1.0.2
+  * @date    13-November-2015
   * @brief   This example describes how to configure and use LCD DSI to display an image
   *          of size WVGA in mode landscape (800x480) using the STM32F4xx HAL API and BSP.
   ******************************************************************************

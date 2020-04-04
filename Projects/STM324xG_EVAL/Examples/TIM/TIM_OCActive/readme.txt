@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    TIM/TIM_OCActive/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.3
-  * @date    09-October-2015
+  * @version V1.2.4
+  * @date    13-November-2015
   * @brief   This example shows how to configure the Timer to generate four 
   *          delayed signals.
   ******************************************************************************

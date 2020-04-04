@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    TIM/TIM_CascadeSynchro/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
-  * @version V1.2.3
-  * @date    09-October-2015
+  * @version V1.2.4
+  * @date    13-November-2015
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.

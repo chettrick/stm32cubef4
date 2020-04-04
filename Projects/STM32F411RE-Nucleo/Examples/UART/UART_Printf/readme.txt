@@ -6,7 +6,7 @@
   * @file    UART/UART_Printf/readme.txt 
   * @author  MCD Application Team
   * @version V1.1.3
-  * @date    09-October-2015
+  * @date    13-November-2015
   * @brief   Description of the UART Printf example.
   ******************************************************************************
   *

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LTDC/LTDC_Display_2Layers/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.3.1
-  * @date    09-October-2015
+  * @version V1.3.2
+  * @date    13-November-2015
   * @brief   HAL MSP module.       
   ******************************************************************************
   * @attention
@@ -107,6 +107,12 @@ void HAL_LTDC_MspInit(LTDC_HandleTypeDef *hltdc)
   GPIO_Init_Structure.Speed     = GPIO_SPEED_FAST;
   GPIO_Init_Structure.Alternate = GPIO_AF14_LTDC;  
   HAL_GPIO_Init(GPIOK, &GPIO_Init_Structure);  
+  
+  /* Set LTDC Interrupt to the lowest priority */
+  HAL_NVIC_SetPriority(LTDC_IRQn, 0xE, 0);   
+
+  /* Enable LTDC Interrupt */
+  HAL_NVIC_EnableIRQ(LTDC_IRQn);    
 }
 
 /**

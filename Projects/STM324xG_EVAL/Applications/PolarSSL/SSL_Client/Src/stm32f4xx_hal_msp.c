@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    PolarSSL/SSL_Client/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.3.1
-  * @date    09-October-2015
+  * @version V1.3.2
+  * @date    13-November-2015
   * @brief   HAL MSP module.
   *         
   @verbatim
@@ -11,7 +11,7 @@
   ##### How to use this driver #####
   ===============================================================================
   [..]
-  This file is generated automatically by MicroXplorer and eventually modified 
+  This file is generated automatically by STM32CubeMX and eventually modified 
   by the user
   
   @endverbatim
@@ -66,7 +66,7 @@
   */
 void HAL_MspInit(void)
 {
-  /* NOTE : This function is generated automatically by MicroXplorer and eventually  
+  /* NOTE : This function is generated automatically by STM32CubeMX and eventually  
   modified by the user
   */
   /* Enable UART 4 clock  */

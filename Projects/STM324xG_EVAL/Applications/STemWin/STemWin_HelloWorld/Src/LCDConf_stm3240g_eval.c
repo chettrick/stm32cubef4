@@ -36,8 +36,8 @@ Purpose     : Display controller configuration (single layer)
   ******************************************************************************
   * @file    LCDConf_stm3240g_eval.c
   * @author  MCD Application Team
-  * @version V1.3.1
-  * @date    09-October-2015
+  * @version V1.3.2
+  * @date    13-November-2015
   * @brief   Driver for STM3240G-EVAL board LCD
   ******************************************************************************
   * @attention
@@ -60,7 +60,7 @@ Purpose     : Display controller configuration (single layer)
 #include "GUI.h"
 #include "GUIDRV_FlexColor.h"
 #include "main.h"
-#include "ili9325\ili9325.h"
+#include "ili9325/ili9325.h"
 
 /*********************************************************************
 *

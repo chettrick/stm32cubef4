@@ -36,8 +36,8 @@ Purpose     : Shows text with different antialiasing qualities
   ******************************************************************************
   * @file    AA_Text.c
   * @author  MCD Application Team
-  * @version V1.3.1
-  * @date    09-October-2015
+  * @version V1.3.2
+  * @date    13-November-2015
   * @brief   Shows text with different antialiasing qualities
   ******************************************************************************
   * @attention

@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    FreeRTOS/FreeRTOS_SemaphoreFromISR/readme.txt
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    09-October-2015 
+  * @version V1.2.2
+  * @date    13-November-2015 
   * @brief   Description of the FreeRTOS Semaphore From ISR example.
   ******************************************************************************
   *

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    usbh_conf.c
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    09-October-2015
+  * @version V1.2.2
+  * @date    13-November-2015
   * @brief   USB Host configuration file.
   ******************************************************************************
   * @attention

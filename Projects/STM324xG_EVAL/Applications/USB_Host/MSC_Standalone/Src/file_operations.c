@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Host/MSC_Standalone/Src/file_operations.c 
   * @author  MCD Application Team
-  * @version V1.3.1
-  * @date    09-October-2015
+  * @version V1.3.2
+  * @date    13-November-2015
   * @brief   Write/read file on the disk.
   ******************************************************************************
   * @attention

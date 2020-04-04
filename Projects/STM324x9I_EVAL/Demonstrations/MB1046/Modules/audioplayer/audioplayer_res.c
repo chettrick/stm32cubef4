@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    audioplayer_res.c
   * @author  MCD Application Team
-  * @version V1.4.1
-  * @date    09-October-2015   
+  * @version V1.4.2
+  * @date    13-November-2015   
   * @brief   resources define for audio player module
   ******************************************************************************
   * @attention

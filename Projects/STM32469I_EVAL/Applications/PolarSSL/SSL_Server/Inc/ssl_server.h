@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    PolarSSL/SSL_Server/Inc/ssl_server.h 
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    09-October-2015
+  * @version V1.0.2
+  * @date    13-November-2015
   * @brief   This file contains all the functions prototypes for the ssl_server.c 
   *          file.
   ******************************************************************************

@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    FatFs/FatFs_USBDisk_MultipleAccess_RTOS/readme.txt 
   * @author  MCD Application Team
-  * @version V1.3.1
-  * @date    09-October-2015
+  * @version V1.3.2
+  * @date    13-November-2015
   * @brief   Description of the FatFs with USB disk drive multiple access in 
   *          RTOS mode application
   ******************************************************************************

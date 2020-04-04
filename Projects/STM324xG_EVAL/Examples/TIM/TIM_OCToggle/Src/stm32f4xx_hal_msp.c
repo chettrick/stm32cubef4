@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    TIM/TIM_OCToggle/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.2.3
-  * @date    09-October-2015
+  * @version V1.2.4
+  * @date    13-November-2015
   * @brief   HAL MSP module.
   *          This file template is located in the HAL folder and should be copied 
   *          to the user folder.

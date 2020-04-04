@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    k_log.c
   * @author  MCD Application Team
-  * @version V1.3.1
-  * @date    18-August-2015   
+  * @version V1.3.2
+  * @date    13-November-2015   
   * @brief   This file provides the kernel log functions    
   ******************************************************************************
   * @attention

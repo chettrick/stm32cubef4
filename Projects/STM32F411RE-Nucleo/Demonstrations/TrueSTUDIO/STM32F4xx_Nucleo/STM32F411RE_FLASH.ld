@@ -1,6 +1,7 @@
 /*
 *****************************************************************************
 **
+
 **  File        : stm32_flash.ld
 **
 **  Abstract    : Linker script for STM32F411RE Device with
@@ -15,7 +16,7 @@
 **
 **  Environment : Atollic TrueSTUDIO(R)
 **
-**  Distribution: The file is distributed “as is,” without any warranty
+**  Distribution: The file is distributed as is, without any warranty
 **                of any kind.
 **
 **  (c)Copyright Atollic AB.
@@ -31,11 +32,10 @@
 ENTRY(Reset_Handler)
 
 /* Highest address of the user mode stack */
-_estack = 0x2001FFFF;    /* end of RAM */
-
+_estack = 0x20020000;    /* end of RAM */
 /* Generate a link error if heap and stack don't fit into RAM */
-_Min_Heap_Size = 0x200;      /* required amount of heap  */
-_Min_Stack_Size = 0x900; /* required amount of stack */
+_Min_Heap_Size = 0x400;;      /* required amount of heap  */
+_Min_Stack_Size = 0x900;; /* required amount of stack */
 
 /* Specify the memory areas */
 MEMORY
@@ -164,3 +164,5 @@ SECTIONS
 
   .ARM.attributes 0 : { *(.ARM.attributes) }
 }
+
+

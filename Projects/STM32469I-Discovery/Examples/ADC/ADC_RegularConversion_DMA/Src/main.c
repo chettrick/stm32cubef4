@@ -129,6 +129,10 @@ int main(void)
 
 
   /*##-3- Start the conversion process #######################################*/
+  /* Note: Considering IT occurring after each number of ADC conversions      */
+  /*       (IT by DMA end of transfer), select sampling time and ADC clock    */
+  /*       with sufficient duration to not create an overhead situation in    */
+  /*        IRQHandler. */ 
   if(HAL_ADC_Start_DMA(&AdcHandle, (uint32_t*)&uhADCxConvertedValue, 1) != HAL_OK)
   {
     /* Start Conversation Error */

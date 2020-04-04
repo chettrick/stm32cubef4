@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    AUDIO_RECORDER_app.h
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    09-October-2015  
+  * @version V1.1.1
+  * @date    13-November-2015  
   * @brief   header of audio player application file
   ******************************************************************************
   * @attention
@@ -35,7 +35,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "..\Common\audio_if.h"   
+#include "../Common/audio_if.h"   
 /* Exported constants --------------------------------------------------------*/
 #define DEFAULT_REC_AUDIO_VOLUME                   70
 /* Exported types ------------------------------------------------------------*/

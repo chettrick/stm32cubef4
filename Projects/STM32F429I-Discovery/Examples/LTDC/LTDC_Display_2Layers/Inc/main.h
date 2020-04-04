@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LTDC/LTDC_Display_2Layers/Inc/main.h 
   * @author  MCD Application Team
-  * @version V1.2.3
-  * @date    09-October-2015 
+  * @version V1.2.4
+  * @date    13-November-2015 
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
@@ -41,7 +41,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f429i_discovery.h"
-#include "..\Components\ili9341\ili9341.h" 
+#include "../Components/ili9341/ili9341.h" 
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/

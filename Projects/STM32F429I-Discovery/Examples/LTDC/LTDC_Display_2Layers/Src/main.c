@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LTDC/LTDC_Display_2Layers/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.2.3
-  * @date    09-October-2015 
+  * @version V1.2.4
+  * @date    13-November-2015 
   * @brief   This example describes how to configure the LTDC peripheral 
   *          to display two Layers at the same time.
   ******************************************************************************
@@ -55,11 +55,23 @@
 /* Private variables ---------------------------------------------------------*/
 LTDC_HandleTypeDef LtdcHandle;
 
+__IO uint32_t Pending = 0;
+
+/* Pictures position */
+uint32_t Xpos1 = 0;
+uint32_t Xpos2 = 0;
+uint32_t Ypos1 = 0;
+uint32_t Ypos2 = 160;
+
 /* Private function prototypes -----------------------------------------------*/
 static void LCD_Config(void); 
 static void SystemClock_Config(void);
 static void Error_Handler(void);
-
+static void PicturesPosition(uint32_t* x1, 
+                         uint32_t* y1, 
+                         uint32_t* x2, 
+                         uint32_t* y2, 
+                         uint32_t index);
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -69,8 +81,7 @@ static void Error_Handler(void);
   */
 int main(void)
 {
-  uint32_t tobuttom = 0;
-  uint32_t totop = 0;
+  uint32_t index = 0;
 
   /* STM32F4xx HAL library initialization:
        - Configure the Flash prefetch, instruction and Data caches
@@ -90,30 +101,72 @@ int main(void)
   /* Configure 2 layers w/ Blending */
   LCD_Config(); 
 
+  
+  /*##-2- Configure line event ###############################################*/
+  HAL_LTDC_ProgramLineEvent(&LtdcHandle, 0);  
+  
   /* Infinite loop */
   while (1)
-  {
-    for (tobuttom = 1; tobuttom < 41; tobuttom++)
+  { 
+    for (index = 0; index < 41; index++)
     {
-      /* move the picture */
-      /* reconfigure the layer1 position */
-      HAL_LTDC_SetWindowPosition(&LtdcHandle, 0, (tobuttom*4), 0); 
-      /* reconfigure the layer2 position */
-      HAL_LTDC_SetWindowPosition(&LtdcHandle, 0, (160 - (tobuttom*4)), 1); 
+      /* calculate new picture position */
+      PicturesPosition(&Xpos1, &Ypos1, &Xpos2, &Ypos2, (index+1));
       HAL_Delay(50);
     }
     HAL_Delay(500);
-    for (totop = 1; totop < 41; totop++)
+    
+    for (index = 0; index < 41; index++)
     {
-      /* move the picture */
-      /* reconfigure the layer1 position */
-      HAL_LTDC_SetWindowPosition(&LtdcHandle, 0, (160 - (totop*4)), 0); 
-      /* reconfigure the layer2 position */
-      HAL_LTDC_SetWindowPosition(&LtdcHandle, 0, (totop*4), 1); 
+      /* calculate new picture position */
+      PicturesPosition(&Xpos2, &Ypos2, &Xpos1, &Ypos1, (index+1));
       HAL_Delay(50);
     }
     HAL_Delay(500);
   }
+}
+
+/**
+  * @brief  calculate pictures position.
+  * @param  x1:    picture1 x position
+  * @param  y1:    picture1 y position
+  * @param  x2:    picture2 x position
+  * @param  y2:    picture2 y position
+  * @param  index: 
+  * @retval None
+  */
+static void PicturesPosition(uint32_t* x1, uint32_t* y1, uint32_t* x2, uint32_t* y2, uint32_t index)
+{
+  /* picture1 position */
+  *x1 = 0;
+  *y1 = index*4; 
+  
+  /* picture2 position */
+  *x2 = 0;
+  *y2 = 160 - index*4;       
+  
+  Pending = 1;
+}
+
+/**
+  * @brief  Line Event callback.
+  * @param  hltdc: pointer to a LTDC_HandleTypeDef structure that contains
+  *                the configuration information for the specified LTDC.
+  * @retval None
+  */
+void HAL_LTDC_LineEvenCallback(LTDC_HandleTypeDef *hltdc) 
+{
+  if(Pending == 1)
+  {
+    /* reconfigure the layer1 position */
+    HAL_LTDC_SetWindowPosition(&LtdcHandle, Xpos1, Ypos1, 0);
+    /* reconfigure the layer2 position */
+    HAL_LTDC_SetWindowPosition(&LtdcHandle, Xpos2, Ypos2, 1);
+    
+    Pending = 0;
+  }
+  /* Reconfigure line event */
+  HAL_LTDC_ProgramLineEvent(hltdc, 0);   
 }
 
 /**

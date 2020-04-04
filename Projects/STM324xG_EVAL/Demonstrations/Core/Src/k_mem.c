@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    k_mem.c
   * @author  MCD Application Team
-  * @version V1.3.1
-  * @date    18-August-2015   
+  * @version V1.3.2
+  * @date    13-November-2015   
   * @brief   Utilities for file handling
   ******************************************************************************
   * @attention
@@ -49,9 +49,7 @@ mem_TypeDef memory_pool __attribute__((at(MEM_BASE)));
 #pragma location = MEM_BASE
 __no_init mem_TypeDef memory_pool;
 #elif defined   (  __GNUC__  )
-mem_TypeDef memory_pool __attribute__((section(".ExtRAMData")));
-#elif defined ( __TASKING__ )
-mem_TypeDef memory_pool __at(MEM_BASE);  
+mem_TypeDef memory_pool __attribute__((section(".ExtRAMData")));  
 #endif
 
 /* Private functions ---------------------------------------------------------*/

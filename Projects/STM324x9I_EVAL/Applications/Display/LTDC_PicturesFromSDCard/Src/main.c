@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Display/LTDC_PicturesFromSDCard/Src/main.c
   * @author  MCD Application Team
-  * @version V1.4.1
-  * @date    09-October-2015
+  * @version V1.4.2
+  * @date    13-November-2015
   * @brief   This file provides main program functions
   ******************************************************************************
   * @attention

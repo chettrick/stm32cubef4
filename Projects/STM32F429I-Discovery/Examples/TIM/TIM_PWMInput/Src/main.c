@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    TIM/TIM_PWMInput/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.2.3
-  * @date    09-October-2015 
+  * @version V1.2.4
+  * @date    13-November-2015 
   * @brief   This example shows how to use the TIM peripheral to measure the
   *          frequency and duty cycle of an external signal.
   ******************************************************************************

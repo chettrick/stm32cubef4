@@ -98,7 +98,11 @@ int main(void)
     Error_Handler(); 
   }
   
-  /*##-3- Start ADC1 and ADC2 multimode conversion process and enable DMA ####*/  
+  /*##-3- Start ADC1 and ADC2 multimode conversion process and enable DMA ####*/
+  /* Note: Considering IT occurring after each number of ADC conversions      */
+  /*       (IT by DMA end of transfer), select sampling time and ADC clock    */
+  /*       with sufficient duration to not create an overhead situation in    */
+  /*        IRQHandler. */
   if(HAL_ADCEx_MultiModeStart_DMA(&AdcHandle1, (uint32_t*)&uhADCDualConvertedValue, 1) != HAL_OK)
   {
     /* Start Error */

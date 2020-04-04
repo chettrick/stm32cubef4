@@ -38,8 +38,8 @@ Purpose     : Introduction for emWin generic demo
   ******************************************************************************
   * @file    GUIDEMO_Intro.c
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    09-October-2015
+  * @version V1.2.2
+  * @date    13-November-2015
   * @brief   Introduction for emWin generic demo
   ******************************************************************************
   * @attention

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    ADC/ADC_DualModeInterleaved/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    09-October-2015
+  * @version V1.1.2
+  * @date    13-November-2015
   * @brief   This example provides a short description of how to use the ADC 
   *          peripheral to convert a regular channel in Dual interleaved mode.
   ******************************************************************************
@@ -102,7 +102,11 @@ int main(void)
     Error_Handler(); 
   }
   
-  /*##-3- Start ADC1 and ADC2 multimode conversion process and enable DMA ####*/  
+  /*##-3- Start ADC1 and ADC2 multimode conversion process and enable DMA ####*/
+  /* Note: Considering IT occurring after each number of ADC conversions      */
+  /*       (IT by DMA end of transfer), select sampling time and ADC clock    */
+  /*       with sufficient duration to not create an overhead situation in    */
+  /*        IRQHandler. */
   if(HAL_ADCEx_MultiModeStart_DMA(&AdcHandle1, (uint32_t*)&uhADCDualConvertedValue, 1) != HAL_OK)
   {
     /* Start Error */

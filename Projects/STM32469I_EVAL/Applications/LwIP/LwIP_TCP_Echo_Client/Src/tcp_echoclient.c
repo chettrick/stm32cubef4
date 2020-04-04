@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LwIP/LwIP_TCP_Echo_Client/Src/tcp_echoclient.c
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    09-October-2015 
+  * @version V1.0.2
+  * @date    13-November-2015 
   * @brief   tcp echoclient application using LwIP RAW API
   ******************************************************************************
   * @attention

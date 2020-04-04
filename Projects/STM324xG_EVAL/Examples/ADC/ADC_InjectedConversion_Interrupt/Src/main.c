@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    ADC/ADC_InjectedConversion_Interrupt/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.2.3
-  * @date    09-October-2015
+  * @version V1.2.4
+  * @date    13-November-2015
   * @brief   This example describes how to use injected conversion
   ******************************************************************************
   * @attention

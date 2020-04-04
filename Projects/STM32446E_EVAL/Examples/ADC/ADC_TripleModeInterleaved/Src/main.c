@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    ADC/ADC_TripleModeInterleaved/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    09-October-2015
+  * @version V1.1.2
+  * @date    13-November-2015
   * @brief   This example provides a short description of how to use the ADC
   *          peripheral to convert a regular channel in Triple interleaved mode.
   ******************************************************************************
@@ -110,6 +110,10 @@ int main(void)
   }
 
   /*##-4- Start ADC1 and ADC2 multimode conversion process and enable DMA ####*/
+  /* Note: Considering IT occurring after each number of ADC conversions      */
+  /*       (IT by DMA end of transfer), select sampling time and ADC clock    */
+  /*       with sufficient duration to not create an overhead situation in    */
+  /*        IRQHandler. */
   if (HAL_ADCEx_MultiModeStart_DMA(&AdcHandle1, (uint32_t *)aADCTripleConvertedValue, 3) != HAL_OK)
   {
     /* Start Error */
@@ -126,18 +130,18 @@ int main(void)
   * @brief  System Clock Configuration
   *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
-  *            SYSCLK(Hz)                     = 180000000
-  *            HCLK(Hz)                       = 180000000
+  *            SYSCLK(Hz)                     = 144000000
+  *            HCLK(Hz)                       = 144000000
   *            AHB Prescaler                  = 1
   *            APB1 Prescaler                 = 4
   *            APB2 Prescaler                 = 2
   *            HSE Frequency(Hz)              = 8000000
   *            PLL_M                          = 8
-  *            PLL_N                          = 360
+  *            PLL_N                          = 288
   *            PLL_P                          = 2
   *            PLL_Q                          = 7
   *            VDD(V)                         = 3.3
-  *            Main regulator output voltage  = Scale1 mode
+  *            Main regulator output voltage  = Scale2 mode
   *            Flash Latency(WS)              = 5
   * @param  None
   * @retval None
@@ -154,7 +158,7 @@ static void SystemClock_Config(void)
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
-  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
+  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE2);
 
   /* Enable HSE Oscillator and activate PLL with HSE as source */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
@@ -162,19 +166,12 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
   RCC_OscInitStruct.PLL.PLLM = 8;
-  RCC_OscInitStruct.PLL.PLLN = 360;
+  RCC_OscInitStruct.PLL.PLLN = 288;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   RCC_OscInitStruct.PLL.PLLR = 2;
   
   ret = HAL_RCC_OscConfig(&RCC_OscInitStruct);
-  if(ret != HAL_OK)
-  {
-    while(1) { ; }
-  }
-  
-  /* Activate the OverDrive to reach the 180 MHz Frequency */  
-  ret = HAL_PWREx_EnableOverDrive();
   if(ret != HAL_OK)
   {
     while(1) { ; }
@@ -227,7 +224,7 @@ static void ADC_Config(void)
   /*##-1- Configure the ADC2 peripheral ######################################*/
   AdcHandle3.Instance          = ADCz;
 
-  AdcHandle3.Init.ClockPrescaler = ADC_CLOCKPRESCALER_PCLK_DIV4;
+  AdcHandle3.Init.ClockPrescaler = ADC_CLOCKPRESCALER_PCLK_DIV2;
   AdcHandle3.Init.Resolution = ADC_RESOLUTION12b;
   AdcHandle3.Init.ScanConvMode = DISABLE;
   AdcHandle3.Init.ContinuousConvMode = ENABLE;
@@ -261,7 +258,7 @@ static void ADC_Config(void)
   /*##-3- Configure the ADC2 peripheral ######################################*/
   AdcHandle2.Instance          = ADCy;
 
-  AdcHandle2.Init.ClockPrescaler = ADC_CLOCKPRESCALER_PCLK_DIV4;
+  AdcHandle2.Init.ClockPrescaler = ADC_CLOCKPRESCALER_PCLK_DIV2;
   AdcHandle2.Init.Resolution = ADC_RESOLUTION12b;
   AdcHandle2.Init.ScanConvMode = DISABLE;
   AdcHandle2.Init.ContinuousConvMode = ENABLE;
@@ -295,7 +292,7 @@ static void ADC_Config(void)
   /*##-5- Configure the ADC1 peripheral ######################################*/
   AdcHandle1.Instance          = ADCx;
 
-  AdcHandle1.Init.ClockPrescaler = ADC_CLOCKPRESCALER_PCLK_DIV4;
+  AdcHandle1.Init.ClockPrescaler = ADC_CLOCKPRESCALER_PCLK_DIV2;
   AdcHandle1.Init.Resolution = ADC_RESOLUTION12b;
   AdcHandle1.Init.ScanConvMode = DISABLE;
   AdcHandle1.Init.ContinuousConvMode = ENABLE;
@@ -322,7 +319,7 @@ static void ADC_Config(void)
   }
 
   /*##-7- Configure Multimode ################################################*/
-  mode.Mode = ADC_DUALMODE_INTERL;
+  mode.Mode = ADC_TRIPLEMODE_INTERL;
   mode.DMAAccessMode = ADC_DMAACCESSMODE_2;
   mode.TwoSamplingDelay = ADC_TWOSAMPLINGDELAY_5CYCLES;
   if (HAL_ADCEx_MultiModeConfigChannel(&AdcHandle1, &mode) != HAL_OK)

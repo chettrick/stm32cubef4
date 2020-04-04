@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    TIM/TIM_DMABurst/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    09-October-2015
+  * @version V1.1.2
+  * @date    13-November-2015
   * @brief   This sample code shows how to use DMA with TIM2 Update request to
   *          transfer Data from memory to TIM2 Capture Compare Register 3
   *          (CCR3), through the STM32F4xx HAL API.

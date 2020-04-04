@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    ADC/ADC_TripleModeInterleaved/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    09-October-2015
+  * @version V1.1.2
+  * @date    13-November-2015
   * @brief   Description of the Triple interleaved mode and DMA mode2 Example
   ******************************************************************************
   *
@@ -64,9 +64,9 @@ A DMA request is generated each time 2 data items are available :
 
 The ADC1, ADC2 and ADC3 are configured to convert ADC Channel 12.
 
-In this example, the system clock is 180MHz, APB2 = 90MHz and ADC clock = APB2/4. 
-Since ADCCLK = 22.5 MHz and Conversion rate = 5 cycles
-==> Conversion Time = 22.5M/5cyc = 4.5Msps.
+In this example, the system clock is 144MHz, APB2 = 72MHz and ADC clock = APB2/2. 
+Since ADCCLK = 36 MHz and Conversion rate = 5 cycles
+==> Conversion Time = 36M/5cyc = 7.2Msps.
 
 The ADC measure is realized on PC.02, so you need to connect this pin to a power supply (do not forget to connect the power supply 
 GND to the EVAL board GND).

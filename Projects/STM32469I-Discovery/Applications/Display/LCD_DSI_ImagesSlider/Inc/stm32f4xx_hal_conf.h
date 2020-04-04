@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f4xx_hal_conf.h
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    09-October-2015
+  * @version V1.0.2
+  * @date    13-November-2015
   * @brief   HAL configuration file. 
   ******************************************************************************
   * @attention
@@ -93,7 +93,6 @@
 /* #define HAL_HCD_MODULE_ENABLED */
 /* #define HAL_FMPI2C_MODULE_ENABLED */
 /* #define HAL_SPDIFRX_MODULE_ENABLED */
-/* #define HAL_DFSDM_MODULE_ENABLED */
 
 /* ########################## HSE/HSI Values adaptation ##################### */
 /**
@@ -405,10 +404,6 @@
 #ifdef HAL_SPDIFRX_MODULE_ENABLED
  #include "stm32f4xx_hal_spdifrx.h"
 #endif /* HAL_SPDIFRX_MODULE_ENABLED */
-
-#ifdef HAL_DFSDM_MODULE_ENABLED
- #include "stm32f4xx_hal_dfsdm.h"
-#endif /* HAL_DFSDM_MODULE_ENABLED */
 
 /* Exported macro ------------------------------------------------------------*/
 #ifdef  USE_FULL_ASSERT

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    ADC/ADC_TripleModeInterleaved/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.3.1
-  * @date    09-October-2015
+  * @version V1.3.2
+  * @date    13-November-2015
   * @brief   This example provides a short description of how to use the ADC 
   *          peripheral to convert a regular channel in Triple interleaved mode.
   ******************************************************************************
@@ -105,7 +105,11 @@ int main(void)
     Error_Handler();
   }
   
-  /*##-4- Start ADC1 conversion process and enable DMA #######################*/  
+  /*##-4- Start ADC1 conversion process and enable DMA #######################*/
+  /* Note: Considering IT occurring after each number of ADC conversions      */
+  /*       (IT by DMA end of transfer), select sampling time and ADC clock    */
+  /*       with sufficient duration to not create an overhead situation in    */
+  /*        IRQHandler. */
   if(HAL_ADCEx_MultiModeStart_DMA(&AdcHandle1, (uint32_t*)aADCTripleConvertedValue, 3) != HAL_OK)
   {
     /* Start Error */
@@ -296,7 +300,7 @@ static void ADC_Config(void)
   }
   
   /*##-7- Configure Multimode ################################################*/
-  mode.Mode = ADC_DUALMODE_INTERL;
+  mode.Mode = ADC_TRIPLEMODE_INTERL;
   mode.DMAAccessMode = ADC_DMAACCESSMODE_2;
   mode.TwoSamplingDelay = ADC_TWOSAMPLINGDELAY_5CYCLES; 
   

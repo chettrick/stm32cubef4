@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    lcdconf.c
   * @author  MCD Application Team
-  * @version V1.4.1
-  * @date    09-October-2015
+  * @version V1.4.2
+  * @date    13-November-2015
   * @brief   This file implements the configuration for the GUI library
   ******************************************************************************
   * @attention
@@ -792,14 +792,24 @@ static void CUSTOM_CopyBuffer(int32_t LayerIndex, int32_t IndexSrc, int32_t Inde
 *
 *       CUSTOM_CopyRect
 */
-static void CUSTOM_CopyRect(int32_t LayerIndex, int32_t x0, int32_t y0, int32_t x1, int32_t y1, int32_t xSize, int32_t ySize) 
+/**
+  * @brief  Copy rectangle
+  * @param  LayerIndex : Layer Index
+  * @param  x0:          X0 position
+  * @param  y0:          Y0 position
+  * @param  x1:          X1 position
+  * @param  y1:          Y1 position
+  * @param  xSize:       X size. 
+  * @param  ySize:       Y size.            
+  * @retval None
+  */
+static void CUSTOM_CopyRect(int32_t LayerIndex, int32_t x0, int32_t y0, int32_t x1, int32_t y1, int32_t xSize, int32_t ySize)
 {
-  uint32_t BufferSize, AddrSrc, AddrDst;
+  U32 AddrSrc, AddrDst;  
 
-  BufferSize = GetBufferSize(LayerIndex);
-  AddrSrc = layer_prop[LayerIndex].address + BufferSize * layer_prop[LayerIndex].pending_buffer + (y0 * layer_prop[LayerIndex].xSize + x0) * layer_prop[LayerIndex].BytesPerPixel;
-  AddrDst = layer_prop[LayerIndex].address + BufferSize * layer_prop[LayerIndex].pending_buffer + (y1 * layer_prop[LayerIndex].xSize + x1) * layer_prop[LayerIndex].BytesPerPixel;
-  DMA2D_CopyBuffer(LayerIndex, (void *)AddrSrc, (void *)AddrDst, xSize, ySize, layer_prop[LayerIndex].xSize - xSize, 0);
+  AddrSrc = layer_prop[LayerIndex].address + (y0 * layer_prop[LayerIndex].xSize + x0) * layer_prop[LayerIndex].BytesPerPixel;
+  AddrDst = layer_prop[LayerIndex].address + (y1 * layer_prop[LayerIndex].xSize + x1) * layer_prop[LayerIndex].BytesPerPixel;
+  DMA2D_CopyBuffer(LayerIndex, (void *)AddrSrc, (void *)AddrDst, xSize, ySize, layer_prop[LayerIndex].xSize - xSize, layer_prop[LayerIndex].xSize - xSize);
 }
 
 /*********************************************************************

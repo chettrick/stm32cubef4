@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    DCMI/DCMI_SnapshotMode/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.2.3
-  * @date    09-October-2015
+  * @version V1.2.4
+  * @date    13-November-2015
   * @brief   This example describes how to configure the camera in snapshot mode
   *          and QVGA resolution.
   ******************************************************************************

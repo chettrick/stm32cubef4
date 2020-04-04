@@ -175,6 +175,7 @@
           <state>USE_HAL_DRIVER</state>
           <state>STM32F429xx</state>
           <state>USE_STM324x9I_EVAL</state>
+          <state>DATA_IN_ExtSDRAM</state>
         </option>
         <option>
           <name>CCPreprocFile</name>

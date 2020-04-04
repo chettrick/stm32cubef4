@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Host/DynamicSwitch_Standalone/Src/audio_menu.c 
   * @author  MCD Application Team
-  * @version V1.4.1
-  * @date    09-October-2015
+  * @version V1.4.2
+  * @date    13-November-2015
   * @brief   This file implements Audio Menu Functions
   ******************************************************************************
   * @attention

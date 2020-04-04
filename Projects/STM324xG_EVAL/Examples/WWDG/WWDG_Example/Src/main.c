@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    WWDG/WWDG_Example/Src/main.c  
   * @author  MCD Application Team
-  * @version V1.2.3
-  * @date    09-October-2015
+  * @version V1.2.4
+  * @date    13-November-2015
   * @brief   This sample code shows how to use the STM32F4xx WWDG HAL API 
   *          to update at regular period the WWDG counter and how to simulate 
   *          a software fault generating an MCU WWDG reset on expiry of a 

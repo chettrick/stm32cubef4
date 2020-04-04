@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Host/MSC_RTOS/Inc/main.h 
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    09-October-2015
+  * @version V1.2.2
+  * @date    13-November-2015
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention

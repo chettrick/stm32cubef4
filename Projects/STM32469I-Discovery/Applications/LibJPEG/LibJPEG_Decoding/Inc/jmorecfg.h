@@ -339,9 +339,6 @@ typedef int boolean;
 
 #elif defined ( __GNUC__ )
   #define INLINE         inline     /*!< inline keyword for GNU Compiler       */
-
-#elif defined ( __TASKING__ )
-  #define INLINE         inline     /*!< inline keyword for TASKING Compiler   */
 #endif
 #ifndef INLINE
 #define INLINE                      /* default is to define it as empty */

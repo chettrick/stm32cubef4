@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    imagebrowser_win.c
   * @author  MCD Application Team
-  * @version V1.3.1
-  * @date    18-August-2015
+  * @version V1.3.2
+  * @date    13-November-2015
   * @brief   Image Browser functions
   ******************************************************************************
   * @attention
@@ -33,7 +33,7 @@
 #include "k_modules_res.h"
 #include "k_storage.h"
 #include "k_mem.h"   
-#include "..\Modules\filebrowser\filebrowser_app.h"
+#include "../Modules/filebrowser/filebrowser_app.h"
 
 /** @addtogroup IMAGE_BROWSER_MODULE
   * @{

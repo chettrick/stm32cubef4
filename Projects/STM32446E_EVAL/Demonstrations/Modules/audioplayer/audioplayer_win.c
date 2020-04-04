@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    audioplayer_win.c
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    09-October-2015
+  * @version V1.2.2
+  * @date    13-November-2015
   * @brief   Audio player functions
   ******************************************************************************
   * @attention
@@ -34,7 +34,7 @@
 #include "k_storage.h"
 #include "k_rtc.h"    
 #include "k_mem.h"    
-#include "..\Modules\filebrowser\filebrowser_app.h"
+#include "../Modules/filebrowser/filebrowser_app.h"
 
 /** @addtogroup AUDIO_PLAYER_MODULE
   * @{

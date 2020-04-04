@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    HASH/HASH_SHA224SHA256_DMA/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    09-October-2015
+  * @version V1.0.2
+  * @date    13-November-2015
   * @brief   This example provides a short description of HASH digest calculation
   *          using SHA224 and SHA256 example.
   ******************************************************************************

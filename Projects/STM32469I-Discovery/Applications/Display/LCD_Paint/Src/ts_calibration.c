@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BSP/Src/ts_calibration.c
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    09-October-2015
+  * @version V1.0.2
+  * @date    13-November-2015
   * @brief   This example code shows how to calibrate the touchscreen.
   ******************************************************************************
   * @attention

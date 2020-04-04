@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    main.h 
   * @author  MCD Application Team
-  * @version V1.3.1
-  * @date    09-October-2015
+  * @version V1.3.2
+  * @date    13-November-2015
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
@@ -36,7 +36,7 @@
 #include "stm32f429i_discovery.h"
 #include "stm32f429i_discovery_ts.h"
 #include "stm32f429i_discovery_sdram.h"
-#include "..\Components\ili9341\ili9341.h" 
+#include "../Components/ili9341/ili9341.h" 
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/

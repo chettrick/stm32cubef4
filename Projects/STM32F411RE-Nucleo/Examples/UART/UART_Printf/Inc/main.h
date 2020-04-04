@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    UART/UART_Printf/Inc/main.h 
   * @author  MCD Application Team
-  * @version V1.1.2
-  * @date    09-October-2015
+  * @version V1.1.3
+  * @date    13-November-2015
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention

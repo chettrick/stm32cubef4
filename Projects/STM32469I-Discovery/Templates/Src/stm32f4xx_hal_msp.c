@@ -11,7 +11,7 @@
                      ##### How to use this driver #####
  ===============================================================================
     [..]
-    This file is generated automatically by MicroXplorer and eventually modified 
+    This file is generated automatically by STM32CubeMX and eventually modified 
     by the user
 
   @endverbatim

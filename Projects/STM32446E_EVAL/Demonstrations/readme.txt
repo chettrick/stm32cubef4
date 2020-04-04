@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    Demonstrations/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    09-October-2015
+  * @version V1.2.2
+  * @date    13-November-2015
   * @brief   Description of STM32446E-EVAL Demonstration
   ******************************************************************************
   *
@@ -122,15 +122,28 @@ Below you find an overview of the different offered modules in the demonstration
 
 @par How to use it ? 
 
+Below the detailed steps:
+
 In order to make the program work, you must do the following :
- - Open your preferred toolchain 
- - Rebuild all files
- - Open STM32 ST-Link Utility V3.6, click on "External Loader" from the bar menu then check "N25Q256A_STM32446E-EVAL" box 
- - Connect the STM32446E-EVAL board to PC with USB cable through CN16
- - Set BOOT0 pin (SW1) to 1 to select RAM Boot
- - Use "STM32CubeDemo_STM32446E-EVAL_V1.0.0.hex" file with STM32 ST-Link Utility to program both internal Flash and external QSPI memory
- - Change BOOT0 pin (SW1) to 0, and reset the Board 
- - Run the demonstration
+ 1 - Open your preferred toolchain 
+ 2 - Rebuild all files
+ 3 - Open STM32 ST-Link Utility V3.6, click on "External Loader" from the bar menu then check "N25Q256A_STM32446E-EVAL" box 
+ 4 - Connect the STM32446E-EVAL board to PC with USB cable through CN16
+ 5 - Set BOOT0 pin (SW1) to 1 to select RAM Boot
+ 6 - Use "STM32CubeDemo_STM32446E-EVAL_V1.0.0.hex" file with STM32 ST-Link Utility to program both internal Flash and external QSPI memory
+ 7 - Change BOOT0 pin (SW1) to 0, and reset the Board 
+ 8 - copy the pictures and audio files provided under "Utilities/Media/" in the USB key
+ 9 - Plug a USB micro A-Male to A-Female cable on CN9 connector
+10 - Run the demonstration
+-> The internal Flash and the external QSPI memory are now programmed and the demonstration is shown on the board.
+
+In order to Edit and debug the program, you must do the following
+- if not done, perform step 1, 2, 3, 4 , 5 and 6 described above,
+- Open your preferred toolchain,
+- Use the IDE to update and load the internal flash content, 
+- Run the demonstration.
+
+
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LCD_DSI/LCD_DSI_CmdMode_TearingEffect_ExtPin/Inc/image_320x240_argb8888.h
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    09-October-2015
+  * @version V1.0.2
+  * @date    13-November-2015
   * @brief   This file contains ARGB8888 image 320x240.
   ******************************************************************************
   * @attention
