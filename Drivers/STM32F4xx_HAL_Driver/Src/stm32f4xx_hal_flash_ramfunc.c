@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f4xx_hal_flash_ramfunc.c
   * @author  MCD Application Team
-  * @version V1.4.2
-  * @date    10-November-2015
+  * @version V1.4.3
+  * @date    11-December-2015
   * @brief   FLASH RAMFUNC module driver.
   *          This file provides a FLASH firmware functions which should be 
   *          executed from internal SRAM

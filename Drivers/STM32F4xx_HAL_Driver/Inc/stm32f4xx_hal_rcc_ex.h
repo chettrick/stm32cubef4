@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
   * @file    stm32f4xx_hal_rcc_ex.h
-  * @author  MCD Application Team
-  * @version V1.4.2
-  * @date    10-November-2015
+  * @author  MCD Application Team                                                                                                                        f
+  * @version V1.4.3
+  * @date    11-December-2015
   * @brief   Header file of RCC HAL Extension module.
   ******************************************************************************
   * @attention
@@ -132,6 +132,7 @@ typedef struct
                             This parameter must be a number between Min_Data = 2 and Max_Data = 15.
                             This parameter will be used only when PLLSAI is selected as Clock Source SAI */
 }RCC_PLLSAIInitTypeDef;
+
 /** 
   * @brief  RCC extended clocks structure definition  
   */
@@ -199,7 +200,7 @@ typedef struct
                                       This parameter can be a value of @ref RCCEx_Periph_Clock_Selection */
 
   uint32_t I2SClockSelection;      /*!< Specifies RTC Clock Source Selection. 
-                                      This parameter can be a value of @ref RCC_I2S_Clock_Source */
+                                      This parameter can be a value of @ref RCCEx_I2S_APB_Clock_Source */
                                       
   uint32_t RTCClockSelection;      /*!< Specifies RTC Clock Source Selection. 
                                       This parameter can be a value of @ref RCC_RTC_Clock_Source */
@@ -215,7 +216,6 @@ typedef struct
 #endif /* STM32F410Tx || STM32F410Cx || STM32F410Rx */
 
 #if defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F429xx) || defined(STM32F439xx) || defined(STM32F469xx) || defined(STM32F479xx)
-
 /** 
   * @brief  PLLI2S Clock structure definition  
   */
@@ -257,6 +257,7 @@ typedef struct
                             This parameter will be used only when PLLSAI is selected as Clock Source LTDC */
 
 }RCC_PLLSAIInitTypeDef;
+
 /** 
   * @brief  RCC extended clocks structure definition  
   */
@@ -295,6 +296,7 @@ typedef struct
                                       This parameter can be a value of @ref RCCEx_SDIO_Clock_Source */  
 #endif /* STM32F469xx || STM32F479xx */  
 }RCC_PeriphCLKInitTypeDef;
+
 #endif /* STM32F427xx || STM32F437xx || STM32F429xx || STM32F439xx || STM32F469xx || STM32F479xx */
 
 #if defined(STM32F405xx) || defined(STM32F415xx) || defined(STM32F407xx) || defined(STM32F417xx) ||\
@@ -319,7 +321,6 @@ typedef struct
                             This parameter will be used only when PLLI2S is selected as Clock Source I2S or SAI */
 
 }RCC_PLLI2SInitTypeDef;
-
  
 /** 
   * @brief  RCC extended clocks structure definition  
@@ -609,11 +610,9 @@ typedef struct
 /**
   * @}
   */
-
 #endif /* STM32F446xx */
 
 #if defined(STM32F410Tx) || defined(STM32F410Cx) || defined(STM32F410Rx)
-
 /** @defgroup RCCEx_I2S_APB_Clock_Source  RCC I2S APB Clock Source
   * @{
   */
@@ -681,7 +680,6 @@ typedef struct
   */
 #endif /* STM32F410xx || STM32F411xE || STM32F446xx || STM32F469xx || STM32F479xx */
 
-      
 #if defined(STM32F405xx) || defined(STM32F415xx) || defined(STM32F407xx) || defined(STM32F417xx) || \
     defined(STM32F427xx) || defined(STM32F437xx) || defined(STM32F429xx) || defined(STM32F439xx) || \
     defined(STM32F401xC) || defined(STM32F401xE) || defined(STM32F411xE) || defined(STM32F446xx) || \
@@ -727,6 +725,7 @@ typedef struct
   * @note   After reset, the peripheral clock (used for registers read/write access)
   *         is disabled and the application software has to enable this clock before 
   *         using it.
+  * @{
   */
 #define __HAL_RCC_BKPSRAM_CLK_ENABLE() do { \
                                         __IO uint32_t tmpreg = 0x00; \
@@ -755,14 +754,14 @@ typedef struct
                                         /* Delay after an RCC peripheral clock enabling */ \
                                         tmpreg = READ_BIT(RCC->AHB1ENR, RCC_AHB1ENR_GPIODEN);\
                                         UNUSED(tmpreg); \
-					} while(0)
+                                        } while(0)
 #define __HAL_RCC_GPIOE_CLK_ENABLE()	do { \
                                         __IO uint32_t tmpreg = 0x00; \
                                         SET_BIT(RCC->AHB1ENR, RCC_AHB1ENR_GPIOEEN);\
                                         /* Delay after an RCC peripheral clock enabling */ \
                                         tmpreg = READ_BIT(RCC->AHB1ENR, RCC_AHB1ENR_GPIOEEN);\
                                         UNUSED(tmpreg); \
-					} while(0)
+                                        } while(0)
 #define __HAL_RCC_GPIOI_CLK_ENABLE()    do { \
                                         __IO uint32_t tmpreg = 0x00; \
                                         SET_BIT(RCC->AHB1ENR, RCC_AHB1ENR_GPIOIEN);\
@@ -942,6 +941,7 @@ typedef struct
   * @note   After reset, the peripheral clock (used for registers read/write access)
   *         is disabled and the application software has to enable this clock before 
   *         using it.
+  * @{
   */
  #define __HAL_RCC_DCMI_CLK_ENABLE()   do { \
                                       __IO uint32_t tmpreg = 0x00; \
@@ -971,17 +971,7 @@ typedef struct
 #define __HAL_RCC_CRYP_CLK_DISABLE()  (RCC->AHB2ENR &= ~(RCC_AHB2ENR_CRYPEN))
 #define __HAL_RCC_HASH_CLK_DISABLE()  (RCC->AHB2ENR &= ~(RCC_AHB2ENR_HASHEN))
 #endif /* STM32F437xx || STM32F439xx || STM32F479xx */
-/**
-  * @}
-  */
 
-/** @defgroup RCCEX_AHB2_Clock_Enable_Disable AHB2 Peripheral Clock Enable Disable
-  * @brief  Enable or disable the AHB2 peripheral clock.
-  * @note   After reset, the peripheral clock (used for registers read/write access)
-  *         is disabled and the application software has to enable this clock before 
-  *         using it.
-  * @{
-  */
 #define __HAL_RCC_USB_OTG_FS_CLK_ENABLE()  do {(RCC->AHB2ENR |= (RCC_AHB2ENR_OTGFSEN));\
                                                __HAL_RCC_SYSCFG_CLK_ENABLE();\
                                               }while(0)
@@ -1031,7 +1021,8 @@ typedef struct
   * @brief  Enables or disables the AHB3 peripheral clock.
   * @note   After reset, the peripheral clock (used for registers read/write access)
   *         is disabled and the application software has to enable this clock before 
-  *         using it. 
+  *         using it.
+  * @{  
   */
 #define __HAL_RCC_FMC_CLK_ENABLE()    do { \
                                       __IO uint32_t tmpreg = 0x00; \
@@ -1077,7 +1068,8 @@ typedef struct
   * @brief  Enable or disable the Low Speed APB (APB1) peripheral clock.
   * @note   After reset, the peripheral clock (used for registers read/write access)
   *         is disabled and the application software has to enable this clock before 
-  *         using it. 
+  *         using it.
+  * @{
   */
 #define __HAL_RCC_TIM6_CLK_ENABLE()   do { \
                                       __IO uint32_t tmpreg = 0x00; \
@@ -1183,35 +1175,35 @@ typedef struct
                                         /* Delay after an RCC peripheral clock enabling */ \
                                         tmpreg = READ_BIT(RCC->APB1ENR, RCC_APB1ENR_TIM2EN);\
                                         UNUSED(tmpreg); \
-					} while(0)
+                                      } while(0)
 #define __HAL_RCC_TIM3_CLK_ENABLE()     do { \
                                         __IO uint32_t tmpreg = 0x00; \
                                         SET_BIT(RCC->APB1ENR, RCC_APB1ENR_TIM3EN);\
                                         /* Delay after an RCC peripheral clock enabling */ \
                                         tmpreg = READ_BIT(RCC->APB1ENR, RCC_APB1ENR_TIM3EN);\
                                         UNUSED(tmpreg); \
-					} while(0)
+                                      } while(0)
 #define __HAL_RCC_TIM4_CLK_ENABLE()     do { \
                                         __IO uint32_t tmpreg = 0x00; \
                                         SET_BIT(RCC->APB1ENR, RCC_APB1ENR_TIM4EN);\
                                         /* Delay after an RCC peripheral clock enabling */ \
                                         tmpreg = READ_BIT(RCC->APB1ENR, RCC_APB1ENR_TIM4EN);\
                                         UNUSED(tmpreg); \
-					} while(0)
+                                      } while(0)
 #define __HAL_RCC_SPI3_CLK_ENABLE()     do { \
                                         __IO uint32_t tmpreg = 0x00; \
                                         SET_BIT(RCC->APB1ENR, RCC_APB1ENR_SPI3EN);\
                                         /* Delay after an RCC peripheral clock enabling */ \
                                         tmpreg = READ_BIT(RCC->APB1ENR, RCC_APB1ENR_SPI3EN);\
                                         UNUSED(tmpreg); \
-					} while(0)
+                                      } while(0)
 #define __HAL_RCC_I2C3_CLK_ENABLE()     do { \
                                         __IO uint32_t tmpreg = 0x00; \
                                         SET_BIT(RCC->APB1ENR, RCC_APB1ENR_I2C3EN);\
                                         /* Delay after an RCC peripheral clock enabling */ \
                                         tmpreg = READ_BIT(RCC->APB1ENR, RCC_APB1ENR_I2C3EN);\
                                         UNUSED(tmpreg); \
-					} while(0)
+                                      } while(0)
 #define __HAL_RCC_TIM2_CLK_DISABLE()   (RCC->APB1ENR &= ~(RCC_APB1ENR_TIM2EN))
 #define __HAL_RCC_TIM3_CLK_DISABLE()   (RCC->APB1ENR &= ~(RCC_APB1ENR_TIM3EN))
 #define __HAL_RCC_TIM4_CLK_DISABLE()   (RCC->APB1ENR &= ~(RCC_APB1ENR_TIM4EN))
@@ -1287,6 +1279,7 @@ typedef struct
   * @note   After reset, the peripheral clock (used for registers read/write access)
   *         is disabled and the application software has to enable this clock before 
   *         using it.
+  * @{
   */
 #define __HAL_RCC_TIM8_CLK_ENABLE()   do { \
                                       __IO uint32_t tmpreg = 0x00; \
@@ -1336,21 +1329,21 @@ typedef struct
                                         /* Delay after an RCC peripheral clock enabling */ \
                                         tmpreg = READ_BIT(RCC->APB2ENR, RCC_APB2ENR_SDIOEN);\
                                         UNUSED(tmpreg); \
-					} while(0)
+                                      } while(0)
 #define __HAL_RCC_SPI4_CLK_ENABLE()     do { \
                                         __IO uint32_t tmpreg = 0x00; \
                                         SET_BIT(RCC->APB2ENR, RCC_APB2ENR_SPI4EN);\
                                         /* Delay after an RCC peripheral clock enabling */ \
                                         tmpreg = READ_BIT(RCC->APB2ENR, RCC_APB2ENR_SPI4EN);\
                                         UNUSED(tmpreg); \
-					} while(0)
+                                      } while(0)
 #define __HAL_RCC_TIM10_CLK_ENABLE()    do { \
                                         __IO uint32_t tmpreg = 0x00; \
                                         SET_BIT(RCC->APB2ENR, RCC_APB2ENR_TIM10EN);\
                                         /* Delay after an RCC peripheral clock enabling */ \
                                         tmpreg = READ_BIT(RCC->APB2ENR, RCC_APB2ENR_TIM10EN);\
                                         UNUSED(tmpreg); \
-					} while(0)
+                                      } while(0)
 #define __HAL_RCC_SDIO_CLK_DISABLE()   (RCC->APB2ENR &= ~(RCC_APB2ENR_SDIOEN))
 #define __HAL_RCC_SPI4_CLK_DISABLE()   (RCC->APB2ENR &= ~(RCC_APB2ENR_SPI4EN))
 #define __HAL_RCC_TIM10_CLK_DISABLE()  (RCC->APB2ENR &= ~(RCC_APB2ENR_TIM10EN))
@@ -1427,8 +1420,10 @@ typedef struct
 /**
   * @}
   */
+
 /** @defgroup RCCEx_AHB1_Force_Release_Reset AHB1 Force Release Reset 
   * @brief  Force or release AHB1 peripheral reset.
+  * @{
   */
 #define __HAL_RCC_GPIOD_FORCE_RESET()    (RCC->AHB1RSTR |= (RCC_AHB1RSTR_GPIODRST))
 #define __HAL_RCC_GPIOE_FORCE_RESET()    (RCC->AHB1RSTR |= (RCC_AHB1RSTR_GPIOERST))
@@ -1501,6 +1496,7 @@ typedef struct
 
 /** @defgroup RCCEx_APB1_Force_Release_Reset APB1 Force Release Reset 
   * @brief  Force or release APB1 peripheral reset.
+  * @{
   */ 
 #define __HAL_RCC_TIM6_FORCE_RESET()     (RCC->APB1RSTR |= (RCC_APB1RSTR_TIM6RST))
 #define __HAL_RCC_TIM7_FORCE_RESET()     (RCC->APB1RSTR |= (RCC_APB1RSTR_TIM7RST))
@@ -1545,6 +1541,7 @@ typedef struct
 
 /** @defgroup RCCEx_APB2_Force_Release_Reset APB2 Force Release Reset 
   * @brief  Force or release APB2 peripheral reset.
+  * @{
   */
 #define __HAL_RCC_TIM8_FORCE_RESET()   (RCC->APB2RSTR |= (RCC_APB2RSTR_TIM8RST))
 #define __HAL_RCC_SPI5_FORCE_RESET()   (RCC->APB2RSTR |= (RCC_APB2RSTR_SPI5RST))
@@ -1581,6 +1578,7 @@ typedef struct
   *         power consumption.
   * @note   After wakeup from SLEEP mode, the peripheral clock is enabled again.
   * @note   By default, all peripheral clocks are enabled during SLEEP mode.
+  * @{
   */
 #define __HAL_RCC_GPIOD_CLK_SLEEP_ENABLE()      (RCC->AHB1LPENR |= (RCC_AHB1LPENR_GPIODLPEN))
 #define __HAL_RCC_GPIOE_CLK_SLEEP_ENABLE()      (RCC->AHB1LPENR |= (RCC_AHB1LPENR_GPIOELPEN))
@@ -1660,6 +1658,7 @@ typedef struct
   *         power consumption.
   * @note   After wakeup from SLEEP mode, the peripheral clock is enabled again.
   * @note   By default, all peripheral clocks are enabled during SLEEP mode.
+  * @{
   */
 #define __HAL_RCC_FMC_CLK_SLEEP_ENABLE()  (RCC->AHB3LPENR |= (RCC_AHB3LPENR_FMCLPEN))
 #define __HAL_RCC_FMC_CLK_SLEEP_DISABLE() (RCC->AHB3LPENR &= ~(RCC_AHB3LPENR_FMCLPEN))
@@ -1678,6 +1677,7 @@ typedef struct
   *         power consumption.
   * @note   After wakeup from SLEEP mode, the peripheral clock is enabled again.
   * @note   By default, all peripheral clocks are enabled during SLEEP mode.
+  * @{
   */  
 #define __HAL_RCC_TIM6_CLK_SLEEP_ENABLE()    (RCC->APB1LPENR |= (RCC_APB1LPENR_TIM6LPEN))
 #define __HAL_RCC_TIM7_CLK_SLEEP_ENABLE()    (RCC->APB1LPENR |= (RCC_APB1LPENR_TIM7LPEN))
@@ -1726,6 +1726,7 @@ typedef struct
   *         power consumption.
   * @note   After wakeup from SLEEP mode, the peripheral clock is enabled again.
   * @note   By default, all peripheral clocks are enabled during SLEEP mode.
+  * @{
   */ 
 #define __HAL_RCC_TIM8_CLK_SLEEP_ENABLE() (RCC->APB2LPENR |= (RCC_APB2LPENR_TIM8LPEN))
 #define __HAL_RCC_ADC2_CLK_SLEEP_ENABLE() (RCC->APB2LPENR |= (RCC_APB2LPENR_ADC2LPEN))
@@ -1770,6 +1771,7 @@ typedef struct
   * @note   After reset, the peripheral clock (used for registers read/write access)
   *         is disabled and the application software has to enable this clock before 
   *         using it.
+  * @{
   */
 #define __HAL_RCC_BKPSRAM_CLK_ENABLE() do { \
                                         __IO uint32_t tmpreg = 0x00; \
@@ -1965,6 +1967,7 @@ typedef struct
   * @note   After reset, the peripheral clock (used for registers read/write access)
   *         is disabled and the application software has to enable this clock before 
   *         using it.
+  * @{
   */
 #define __HAL_RCC_USB_OTG_FS_CLK_ENABLE()  do {(RCC->AHB2ENR |= (RCC_AHB2ENR_OTGFSEN));\
                                                __HAL_RCC_SYSCFG_CLK_ENABLE();\
@@ -2048,7 +2051,8 @@ typedef struct
   * @brief  Enables or disables the AHB3 peripheral clock.
   * @note   After reset, the peripheral clock (used for registers read/write access)
   *         is disabled and the application software has to enable this clock before 
-  *         using it. 
+  *         using it.
+  * @{  
   */
 #define __HAL_RCC_FSMC_CLK_ENABLE()   do { \
                                       __IO uint32_t tmpreg = 0x00; \
@@ -2079,7 +2083,8 @@ typedef struct
   * @brief  Enable or disable the Low Speed APB (APB1) peripheral clock.
   * @note   After reset, the peripheral clock (used for registers read/write access)
   *         is disabled and the application software has to enable this clock before 
-  *         using it. 
+  *         using it.
+  * @{  
   */
 #define __HAL_RCC_TIM6_CLK_ENABLE()   do { \
                                       __IO uint32_t tmpreg = 0x00; \
@@ -2164,35 +2169,35 @@ typedef struct
                                         /* Delay after an RCC peripheral clock enabling */ \
                                         tmpreg = READ_BIT(RCC->APB1ENR, RCC_APB1ENR_TIM2EN);\
                                         UNUSED(tmpreg); \
-					} while(0)
+                                      } while(0)
 #define __HAL_RCC_TIM3_CLK_ENABLE()     do { \
                                         __IO uint32_t tmpreg = 0x00; \
                                         SET_BIT(RCC->APB1ENR, RCC_APB1ENR_TIM3EN);\
                                         /* Delay after an RCC peripheral clock enabling */ \
                                         tmpreg = READ_BIT(RCC->APB1ENR, RCC_APB1ENR_TIM3EN);\
                                         UNUSED(tmpreg); \
-					} while(0)
+                                      } while(0)
 #define __HAL_RCC_TIM4_CLK_ENABLE()     do { \
                                         __IO uint32_t tmpreg = 0x00; \
                                         SET_BIT(RCC->APB1ENR, RCC_APB1ENR_TIM4EN);\
                                         /* Delay after an RCC peripheral clock enabling */ \
                                         tmpreg = READ_BIT(RCC->APB1ENR, RCC_APB1ENR_TIM4EN);\
                                         UNUSED(tmpreg); \
-					} while(0)
+                                      } while(0)
 #define __HAL_RCC_SPI3_CLK_ENABLE()     do { \
                                         __IO uint32_t tmpreg = 0x00; \
                                         SET_BIT(RCC->APB1ENR, RCC_APB1ENR_SPI3EN);\
                                         /* Delay after an RCC peripheral clock enabling */ \
                                         tmpreg = READ_BIT(RCC->APB1ENR, RCC_APB1ENR_SPI3EN);\
                                         UNUSED(tmpreg); \
-					} while(0)
+                                      } while(0)
 #define __HAL_RCC_I2C3_CLK_ENABLE()     do { \
                                         __IO uint32_t tmpreg = 0x00; \
                                         SET_BIT(RCC->APB1ENR, RCC_APB1ENR_I2C3EN);\
                                         /* Delay after an RCC peripheral clock enabling */ \
                                         tmpreg = READ_BIT(RCC->APB1ENR, RCC_APB1ENR_I2C3EN);\
                                         UNUSED(tmpreg); \
-					} while(0)
+                                      } while(0)
 #define __HAL_RCC_TIM2_CLK_DISABLE()   (RCC->APB1ENR &= ~(RCC_APB1ENR_TIM2EN))
 #define __HAL_RCC_TIM3_CLK_DISABLE()   (RCC->APB1ENR &= ~(RCC_APB1ENR_TIM3EN))
 #define __HAL_RCC_TIM4_CLK_DISABLE()   (RCC->APB1ENR &= ~(RCC_APB1ENR_TIM4EN))
@@ -2262,7 +2267,8 @@ typedef struct
   * @note   After reset, the peripheral clock (used for registers read/write access)
   *         is disabled and the application software has to enable this clock before 
   *         using it.
-  */
+  * @{
+  */ 
 #define __HAL_RCC_TIM8_CLK_ENABLE()   do { \
                                       __IO uint32_t tmpreg = 0x00; \
                                       SET_BIT(RCC->APB2ENR, RCC_APB2ENR_TIM8EN);\
@@ -2290,21 +2296,21 @@ typedef struct
                                         /* Delay after an RCC peripheral clock enabling */ \
                                         tmpreg = READ_BIT(RCC->APB2ENR, RCC_APB2ENR_SDIOEN);\
                                         UNUSED(tmpreg); \
-					} while(0)
+                                      } while(0)
 #define __HAL_RCC_SPI4_CLK_ENABLE()     do { \
                                         __IO uint32_t tmpreg = 0x00; \
                                         SET_BIT(RCC->APB2ENR, RCC_APB2ENR_SPI4EN);\
                                         /* Delay after an RCC peripheral clock enabling */ \
                                         tmpreg = READ_BIT(RCC->APB2ENR, RCC_APB2ENR_SPI4EN);\
                                         UNUSED(tmpreg); \
-					} while(0)
+                                      } while(0)
 #define __HAL_RCC_TIM10_CLK_ENABLE()    do { \
                                         __IO uint32_t tmpreg = 0x00; \
                                         SET_BIT(RCC->APB2ENR, RCC_APB2ENR_TIM10EN);\
                                         /* Delay after an RCC peripheral clock enabling */ \
                                         tmpreg = READ_BIT(RCC->APB2ENR, RCC_APB2ENR_TIM10EN);\
                                         UNUSED(tmpreg); \
-					} while(0)
+                                      } while(0)
 
 #define __HAL_RCC_SDIO_CLK_DISABLE()   (RCC->APB2ENR &= ~(RCC_APB2ENR_SDIOEN))
 #define __HAL_RCC_SPI4_CLK_DISABLE()   (RCC->APB2ENR &= ~(RCC_APB2ENR_SPI4EN))
@@ -2316,7 +2322,7 @@ typedef struct
   * @}
   */
 
-  /** @defgroup RCCEx_APB2_Peripheral_Clock_Enable_Disable_Status APB2 Peripheral Clock Enable Disable Status
+/** @defgroup RCCEx_APB2_Peripheral_Clock_Enable_Disable_Status APB2 Peripheral Clock Enable Disable Status
   * @brief  Get the enable or disable status of the APB2 peripheral clock.
   * @note   After reset, the peripheral clock (used for registers read/write access)
   *         is disabled and the application software has to enable this clock before
@@ -2342,6 +2348,7 @@ typedef struct
     
 /** @defgroup RCCEx_AHB1_Force_Release_Reset AHB1 Force Release Reset 
   * @brief  Force or release AHB1 peripheral reset.
+  * @{
   */
 #define __HAL_RCC_GPIOD_FORCE_RESET()    (RCC->AHB1RSTR |= (RCC_AHB1RSTR_GPIODRST))
 #define __HAL_RCC_GPIOE_FORCE_RESET()    (RCC->AHB1RSTR |= (RCC_AHB1RSTR_GPIOERST))
@@ -2366,6 +2373,7 @@ typedef struct
 
 /** @defgroup RCCEx_AHB2_Force_Release_Reset AHB2 Force Release Reset 
   * @brief  Force or release AHB2 peripheral reset.
+  * @{
   */
 #define __HAL_RCC_AHB2_FORCE_RESET()         (RCC->AHB2RSTR = 0xFFFFFFFF) 
 #define __HAL_RCC_AHB2_RELEASE_RESET()       (RCC->AHB2RSTR = 0x00)
@@ -2407,7 +2415,8 @@ typedef struct
 
 /** @defgroup RCCEx_APB1_Force_Release_Reset APB1 Force Release Reset 
   * @brief  Force or release APB1 peripheral reset.
-  */ 
+  * @{
+  */
 #define __HAL_RCC_TIM6_FORCE_RESET()     (RCC->APB1RSTR |= (RCC_APB1RSTR_TIM6RST))
 #define __HAL_RCC_TIM7_FORCE_RESET()     (RCC->APB1RSTR |= (RCC_APB1RSTR_TIM7RST))
 #define __HAL_RCC_TIM12_FORCE_RESET()    (RCC->APB1RSTR |= (RCC_APB1RSTR_TIM12RST))
@@ -2447,6 +2456,7 @@ typedef struct
 
 /** @defgroup RCCEx_APB2_Force_Release_Reset APB2 Force Release Reset 
   * @brief  Force or release APB2 peripheral reset.
+  * @{
   */
 #define __HAL_RCC_TIM8_FORCE_RESET()   (RCC->APB2RSTR |= (RCC_APB2RSTR_TIM8RST))
 #define __HAL_RCC_SDIO_FORCE_RESET()   (RCC->APB2RSTR |= (RCC_APB2RSTR_SDIORST))
@@ -2467,6 +2477,7 @@ typedef struct
   *         power consumption.
   * @note   After wakeup from SLEEP mode, the peripheral clock is enabled again.
   * @note   By default, all peripheral clocks are enabled during SLEEP mode.
+  * @{
   */
 #define __HAL_RCC_GPIOD_CLK_SLEEP_ENABLE()      (RCC->AHB1LPENR |= (RCC_AHB1LPENR_GPIODLPEN))
 #define __HAL_RCC_GPIOE_CLK_SLEEP_ENABLE()      (RCC->AHB1LPENR |= (RCC_AHB1LPENR_GPIOELPEN))
@@ -2541,6 +2552,7 @@ typedef struct
   *         power consumption.
   * @note   After wakeup from SLEEP mode, the peripheral clock is enabled again.
   * @note   By default, all peripheral clocks are enabled during SLEEP mode.
+  * @{
   */
 #define __HAL_RCC_FSMC_CLK_SLEEP_ENABLE()  (RCC->AHB3LPENR |= (RCC_AHB3LPENR_FSMCLPEN))
 #define __HAL_RCC_FSMC_CLK_SLEEP_DISABLE() (RCC->AHB3LPENR &= ~(RCC_AHB3LPENR_FSMCLPEN))
@@ -2554,6 +2566,7 @@ typedef struct
   *         power consumption.
   * @note   After wakeup from SLEEP mode, the peripheral clock is enabled again.
   * @note   By default, all peripheral clocks are enabled during SLEEP mode.
+  * @{
   */
 #define __HAL_RCC_TIM6_CLK_SLEEP_ENABLE()    (RCC->APB1LPENR |= (RCC_APB1LPENR_TIM6LPEN))
 #define __HAL_RCC_TIM7_CLK_SLEEP_ENABLE()    (RCC->APB1LPENR |= (RCC_APB1LPENR_TIM7LPEN))
@@ -2598,7 +2611,8 @@ typedef struct
   *         power consumption.
   * @note   After wakeup from SLEEP mode, the peripheral clock is enabled again.
   * @note   By default, all peripheral clocks are enabled during SLEEP mode.
-  */ 
+  * @{
+  */
 #define __HAL_RCC_TIM8_CLK_SLEEP_ENABLE() (RCC->APB2LPENR |= (RCC_APB2LPENR_TIM8LPEN))
 #define __HAL_RCC_ADC2_CLK_SLEEP_ENABLE() (RCC->APB2LPENR |= (RCC_APB2LPENR_ADC2LPEN))
 #define __HAL_RCC_ADC3_CLK_SLEEP_ENABLE() (RCC->APB2LPENR |= (RCC_APB2LPENR_ADC3LPEN))
@@ -2633,28 +2647,28 @@ typedef struct
                                         /* Delay after an RCC peripheral clock enabling */ \
                                         tmpreg = READ_BIT(RCC->AHB1ENR, RCC_AHB1ENR_GPIODEN);\
                                         UNUSED(tmpreg); \
-					} while(0)
+                                      } while(0)
 #define __HAL_RCC_GPIOE_CLK_ENABLE()	do { \
                                         __IO uint32_t tmpreg = 0x00; \
                                         SET_BIT(RCC->AHB1ENR, RCC_AHB1ENR_GPIOEEN);\
                                         /* Delay after an RCC peripheral clock enabling */ \
                                         tmpreg = READ_BIT(RCC->AHB1ENR, RCC_AHB1ENR_GPIOEEN);\
                                         UNUSED(tmpreg); \
-					} while(0)
+                                      } while(0)
 #define __HAL_RCC_CRC_CLK_ENABLE()  	do { \
                                         __IO uint32_t tmpreg = 0x00; \
                                         SET_BIT(RCC->AHB1ENR, RCC_AHB1ENR_CRCEN);\
                                         /* Delay after an RCC peripheral clock enabling */ \
                                         tmpreg = READ_BIT(RCC->AHB1ENR, RCC_AHB1ENR_CRCEN);\
                                         UNUSED(tmpreg); \
-					} while(0)
+                                      } while(0)
 #define __HAL_RCC_BKPSRAM_CLK_ENABLE()	do { \
                                         __IO uint32_t tmpreg = 0x00; \
                                         SET_BIT(RCC->AHB1ENR, RCC_AHB1ENR_BKPSRAMEN);\
                                         /* Delay after an RCC peripheral clock enabling */ \
                                         tmpreg = READ_BIT(RCC->AHB1ENR, RCC_AHB1ENR_BKPSRAMEN);\
                                         UNUSED(tmpreg); \
-					} while(0)
+                                      } while(0)
 #define __HAL_RCC_CCMDATARAMEN_CLK_ENABLE()  do { \
                                         __IO uint32_t tmpreg = 0x00; \
                                         SET_BIT(RCC->AHB1ENR, RCC_AHB1ENR_CCMDATARAMEN);\
@@ -2736,35 +2750,35 @@ typedef struct
                                         /* Delay after an RCC peripheral clock enabling */ \
                                         tmpreg = READ_BIT(RCC->APB1ENR, RCC_APB1ENR_TIM2EN);\
                                         UNUSED(tmpreg); \
-					} while(0)
+                                      } while(0)
 #define __HAL_RCC_TIM3_CLK_ENABLE()     do { \
                                         __IO uint32_t tmpreg = 0x00; \
                                         SET_BIT(RCC->APB1ENR, RCC_APB1ENR_TIM3EN);\
                                         /* Delay after an RCC peripheral clock enabling */ \
                                         tmpreg = READ_BIT(RCC->APB1ENR, RCC_APB1ENR_TIM3EN);\
                                         UNUSED(tmpreg); \
-					} while(0)
+                                      } while(0)
 #define __HAL_RCC_TIM4_CLK_ENABLE()     do { \
                                         __IO uint32_t tmpreg = 0x00; \
                                         SET_BIT(RCC->APB1ENR, RCC_APB1ENR_TIM4EN);\
                                         /* Delay after an RCC peripheral clock enabling */ \
                                         tmpreg = READ_BIT(RCC->APB1ENR, RCC_APB1ENR_TIM4EN);\
                                         UNUSED(tmpreg); \
-					} while(0)
+                                      } while(0)
 #define __HAL_RCC_SPI3_CLK_ENABLE()     do { \
                                         __IO uint32_t tmpreg = 0x00; \
                                         SET_BIT(RCC->APB1ENR, RCC_APB1ENR_SPI3EN);\
                                         /* Delay after an RCC peripheral clock enabling */ \
                                         tmpreg = READ_BIT(RCC->APB1ENR, RCC_APB1ENR_SPI3EN);\
                                         UNUSED(tmpreg); \
-					} while(0)
+                                      } while(0)
 #define __HAL_RCC_I2C3_CLK_ENABLE()     do { \
                                         __IO uint32_t tmpreg = 0x00; \
                                         SET_BIT(RCC->APB1ENR, RCC_APB1ENR_I2C3EN);\
                                         /* Delay after an RCC peripheral clock enabling */ \
                                         tmpreg = READ_BIT(RCC->APB1ENR, RCC_APB1ENR_I2C3EN);\
                                         UNUSED(tmpreg); \
-					} while(0)
+                                      } while(0)
 #define __HAL_RCC_TIM2_CLK_DISABLE()   (RCC->APB1ENR &= ~(RCC_APB1ENR_TIM2EN))
 #define __HAL_RCC_TIM3_CLK_DISABLE()   (RCC->APB1ENR &= ~(RCC_APB1ENR_TIM3EN))
 #define __HAL_RCC_TIM4_CLK_DISABLE()   (RCC->APB1ENR &= ~(RCC_APB1ENR_TIM4EN))
@@ -2794,7 +2808,8 @@ typedef struct
 #define __HAL_RCC_I2C3_IS_CLK_DISABLED()   ((RCC->APB1ENR & (RCC_APB1ENR_I2C3EN)) == RESET)
 /**
   * @}
-  */  
+  */ 
+  
 /** @defgroup RCCEx_APB2_Clock_Enable_Disable APB2 Peripheral Clock Enable Disable                                      
   * @brief  Enable or disable the High Speed APB (APB2) peripheral clock.
   * @note   After reset, the peripheral clock (used for registers read/write access)
@@ -2808,21 +2823,21 @@ typedef struct
                                         /* Delay after an RCC peripheral clock enabling */ \
                                         tmpreg = READ_BIT(RCC->APB2ENR, RCC_APB2ENR_SDIOEN);\
                                         UNUSED(tmpreg); \
-					} while(0)
+                                      } while(0)
 #define __HAL_RCC_SPI4_CLK_ENABLE()     do { \
                                         __IO uint32_t tmpreg = 0x00; \
                                         SET_BIT(RCC->APB2ENR, RCC_APB2ENR_SPI4EN);\
                                         /* Delay after an RCC peripheral clock enabling */ \
                                         tmpreg = READ_BIT(RCC->APB2ENR, RCC_APB2ENR_SPI4EN);\
                                         UNUSED(tmpreg); \
-					} while(0)
+                                      } while(0)
 #define __HAL_RCC_TIM10_CLK_ENABLE()    do { \
                                         __IO uint32_t tmpreg = 0x00; \
                                         SET_BIT(RCC->APB2ENR, RCC_APB2ENR_TIM10EN);\
                                         /* Delay after an RCC peripheral clock enabling */ \
                                         tmpreg = READ_BIT(RCC->APB2ENR, RCC_APB2ENR_TIM10EN);\
                                         UNUSED(tmpreg); \
-					} while(0)
+                                      } while(0)
 
 #define __HAL_RCC_SDIO_CLK_DISABLE()   (RCC->APB2ENR &= ~(RCC_APB2ENR_SDIOEN))
 #define __HAL_RCC_SPI4_CLK_DISABLE()   (RCC->APB2ENR &= ~(RCC_APB2ENR_SPI4EN))
@@ -3013,6 +3028,7 @@ typedef struct
   * @note   After reset, the peripheral clock (used for registers read/write access)
   *         is disabled and the application software has to enable this clock before 
   *         using it.
+  * @{
   */
 #define __HAL_RCC_CRC_CLK_ENABLE()     do { \
                                         __IO uint32_t tmpreg = 0x00; \
@@ -3049,6 +3065,7 @@ typedef struct
   
 /** @defgroup RCCEx_APB1_Clock_Enable_Disable APB1 Peripheral Clock Enable Disable  
   * @brief  Enable or disable the High Speed APB (APB1) peripheral clock.
+  * @{
   */
 #define __HAL_RCC_TIM6_CLK_ENABLE()   do { \
                                       __IO uint32_t tmpreg = 0x00; \
@@ -3119,7 +3136,8 @@ typedef struct
   
 /** @defgroup RCCEx_APB2_Clock_Enable_Disable APB2 Peripheral Clock Enable Disable  
   * @brief  Enable or disable the High Speed APB (APB2) peripheral clock.
-  */
+  * @{
+  */  
 #define __HAL_RCC_SPI5_CLK_ENABLE()   do { \
                                       __IO uint32_t tmpreg = 0x00; \
                                       SET_BIT(RCC->APB2ENR, RCC_APB2ENR_SPI5EN);\
@@ -3154,10 +3172,12 @@ typedef struct
 #define __HAL_RCC_EXTIT_IS_CLK_DISABLED()   ((RCC->APB2ENR & (RCC_APB2ENR_EXTITEN)) == RESET)  
 /**
   * @}
-  */  
+  */
+  
 /** @defgroup RCCEx_AHB1_Force_Release_Reset AHB1 Force Release Reset 
   * @brief  Force or release AHB1 peripheral reset.
-  */  
+  * @{
+  */
 #define __HAL_RCC_CRC_FORCE_RESET()     (RCC->AHB1RSTR |= (RCC_AHB1RSTR_CRCRST))
 #define __HAL_RCC_RNG_FORCE_RESET()     (RCC->AHB1RSTR |= (RCC_AHB1RSTR_RNGRST))
 #define __HAL_RCC_CRC_RELEASE_RESET()   (RCC->AHB1RSTR &= ~(RCC_AHB1RSTR_CRCRST))
@@ -3188,6 +3208,7 @@ typedef struct
 
 /** @defgroup RCCEx_APB1_Force_Release_Reset APB1 Force Release Reset 
   * @brief  Force or release APB1 peripheral reset.
+  * @{
   */
 #define __HAL_RCC_TIM6_FORCE_RESET()      (RCC->APB1RSTR |= (RCC_APB1RSTR_TIM6RST))
 #define __HAL_RCC_LPTIM1_FORCE_RESET()    (RCC->APB1RSTR |= (RCC_APB1RSTR_LPTIM1RST))
@@ -3204,6 +3225,7 @@ typedef struct
 
 /** @defgroup RCCEx_APB2_Force_Release_Reset APB2 Force Release Reset 
   * @brief  Force or release APB2 peripheral reset.
+  * @{
   */
 #define __HAL_RCC_SPI5_FORCE_RESET()      (RCC->APB2RSTR |= (RCC_APB2RSTR_SPI5RST))
 #define __HAL_RCC_SPI5_RELEASE_RESET()    (RCC->APB2RSTR &= ~(RCC_APB2RSTR_SPI5RST))                                        
@@ -3217,6 +3239,7 @@ typedef struct
   *         power consumption.
   * @note   After wakeup from SLEEP mode, the peripheral clock is enabled again.
   * @note   By default, all peripheral clocks are enabled during SLEEP mode.
+  * @{
   */
 #define __HAL_RCC_RNG_CLK_SLEEP_ENABLE()      (RCC->AHB1LPENR |= (RCC_AHB1LPENR_RNGLPEN))
 #define __HAL_RCC_CRC_CLK_SLEEP_ENABLE()      (RCC->AHB1LPENR |= (RCC_AHB1LPENR_CRCLPEN))
@@ -3233,7 +3256,8 @@ typedef struct
 
 /** @defgroup RCCEx_APB1_LowPower_Enable_Disable APB1 Peripheral Low Power Enable Disable                                         
   * @brief  Enable or disable the APB1 peripheral clock during Low Power (Sleep) mode.
-  */ 
+  * @{
+  */
 #define __HAL_RCC_TIM6_CLK_SLEEP_ENABLE()    (RCC->APB1LPENR |= (RCC_APB1LPENR_TIM6LPEN))
 #define __HAL_RCC_LPTIM1_CLK_SLEEP_ENABLE()  (RCC->APB1LPENR |= (RCC_APB1LPENR_LPTIM1LPEN))
 #define __HAL_RCC_RTCAPB_CLK_SLEEP_ENABLE()  (RCC->APB1LPENR |= (RCC_APB1LPENR_RTCAPBLPEN))
@@ -3251,7 +3275,8 @@ typedef struct
 
 /** @defgroup RCCEx_APB2_LowPower_Enable_Disable APB2 Peripheral Low Power Enable Disable                                         
   * @brief  Enable or disable the APB2 peripheral clock during Low Power (Sleep) mode.
-  */ 
+  * @{
+  */
 #define __HAL_RCC_SPI5_CLK_SLEEP_ENABLE()     (RCC->APB2LPENR |= (RCC_APB2LPENR_SPI5LPEN))
 #define __HAL_RCC_EXTIT_CLK_SLEEP_ENABLE()    (RCC->APB2LPENR |= (RCC_APB2LPENR_EXTITLPEN))                                
 #define __HAL_RCC_SPI5_CLK_SLEEP_DISABLE()    (RCC->APB2LPENR &= ~(RCC_APB2LPENR_SPI5LPEN))                                        
@@ -3270,6 +3295,7 @@ typedef struct
   * @note   After reset, the peripheral clock (used for registers read/write access)
   *         is disabled and the application software has to enable this clock before 
   *         using it.
+  * @{
   */
 #define __HAL_RCC_BKPSRAM_CLK_ENABLE() do { \
                                         __IO uint32_t tmpreg = 0x00; \
@@ -3291,14 +3317,14 @@ typedef struct
                                         /* Delay after an RCC peripheral clock enabling */ \
                                         tmpreg = READ_BIT(RCC->AHB1ENR, RCC_AHB1ENR_GPIODEN);\
                                         UNUSED(tmpreg); \
-					} while(0)
+                                        } while(0)
 #define __HAL_RCC_GPIOE_CLK_ENABLE()	do { \
                                         __IO uint32_t tmpreg = 0x00; \
                                         SET_BIT(RCC->AHB1ENR, RCC_AHB1ENR_GPIOEEN);\
                                         /* Delay after an RCC peripheral clock enabling */ \
                                         tmpreg = READ_BIT(RCC->AHB1ENR, RCC_AHB1ENR_GPIOEEN);\
                                         UNUSED(tmpreg); \
-					} while(0)
+                                        } while(0)
 #define __HAL_RCC_CRC_CLK_ENABLE()     do { \
                                         __IO uint32_t tmpreg = 0x00; \
                                         SET_BIT(RCC->AHB1ENR, RCC_AHB1ENR_CRCEN);\
@@ -3371,6 +3397,7 @@ typedef struct
   * @note   After reset, the peripheral clock (used for registers read/write access)
   *         is disabled and the application software has to enable this clock before 
   *         using it. 
+  * @{
   */
 #define __HAL_RCC_TIM2_CLK_ENABLE()     do { \
                                         __IO uint32_t tmpreg = 0x00; \
@@ -3378,35 +3405,35 @@ typedef struct
                                         /* Delay after an RCC peripheral clock enabling */ \
                                         tmpreg = READ_BIT(RCC->APB1ENR, RCC_APB1ENR_TIM2EN);\
                                         UNUSED(tmpreg); \
-					} while(0)
+                                        } while(0)
 #define __HAL_RCC_TIM3_CLK_ENABLE()     do { \
                                         __IO uint32_t tmpreg = 0x00; \
                                         SET_BIT(RCC->APB1ENR, RCC_APB1ENR_TIM3EN);\
                                         /* Delay after an RCC peripheral clock enabling */ \
                                         tmpreg = READ_BIT(RCC->APB1ENR, RCC_APB1ENR_TIM3EN);\
                                         UNUSED(tmpreg); \
-					} while(0)
+                                        } while(0)
 #define __HAL_RCC_TIM4_CLK_ENABLE()     do { \
                                         __IO uint32_t tmpreg = 0x00; \
                                         SET_BIT(RCC->APB1ENR, RCC_APB1ENR_TIM4EN);\
                                         /* Delay after an RCC peripheral clock enabling */ \
                                         tmpreg = READ_BIT(RCC->APB1ENR, RCC_APB1ENR_TIM4EN);\
                                         UNUSED(tmpreg); \
-					} while(0)
+                                        } while(0)
 #define __HAL_RCC_SPI3_CLK_ENABLE()     do { \
                                         __IO uint32_t tmpreg = 0x00; \
                                         SET_BIT(RCC->APB1ENR, RCC_APB1ENR_SPI3EN);\
                                         /* Delay after an RCC peripheral clock enabling */ \
                                         tmpreg = READ_BIT(RCC->APB1ENR, RCC_APB1ENR_SPI3EN);\
                                         UNUSED(tmpreg); \
-					} while(0)
+                                        } while(0)
 #define __HAL_RCC_I2C3_CLK_ENABLE()     do { \
                                         __IO uint32_t tmpreg = 0x00; \
                                         SET_BIT(RCC->APB1ENR, RCC_APB1ENR_I2C3EN);\
                                         /* Delay after an RCC peripheral clock enabling */ \
                                         tmpreg = READ_BIT(RCC->APB1ENR, RCC_APB1ENR_I2C3EN);\
                                         UNUSED(tmpreg); \
-					} while(0)
+                                        } while(0)
 #define __HAL_RCC_TIM2_CLK_DISABLE()   (RCC->APB1ENR &= ~(RCC_APB1ENR_TIM2EN))
 #define __HAL_RCC_TIM3_CLK_DISABLE()   (RCC->APB1ENR &= ~(RCC_APB1ENR_TIM3EN))
 #define __HAL_RCC_TIM4_CLK_DISABLE()   (RCC->APB1ENR &= ~(RCC_APB1ENR_TIM4EN))
@@ -3440,6 +3467,7 @@ typedef struct
   
 /** @defgroup RCCEx_APB2_Clock_Enable_Disable APB2 Peripheral Clock Enable Disable
   * @brief  Enable or disable the High Speed APB (APB2) peripheral clock.
+  * @{
   */
 #define __HAL_RCC_SPI5_CLK_ENABLE()   do { \
                                       __IO uint32_t tmpreg = 0x00; \
@@ -3499,7 +3527,8 @@ typedef struct
   
 /** @defgroup RCCEx_AHB1_Force_Release_Reset AHB1 Force Release Reset 
   * @brief  Force or release AHB1 peripheral reset.
-  */
+  * @{
+  */ 
 #define __HAL_RCC_GPIOD_FORCE_RESET()   (RCC->AHB1RSTR |= (RCC_AHB1RSTR_GPIODRST))
 #define __HAL_RCC_GPIOE_FORCE_RESET()   (RCC->AHB1RSTR |= (RCC_AHB1RSTR_GPIOERST))
 #define __HAL_RCC_CRC_FORCE_RESET()     (RCC->AHB1RSTR |= (RCC_AHB1RSTR_CRCRST))
@@ -3536,6 +3565,7 @@ typedef struct
 
 /** @defgroup RCCEx_APB1_Force_Release_Reset APB1 Force Release Reset 
   * @brief  Force or release APB1 peripheral reset.
+  * @{
   */
 #define __HAL_RCC_TIM2_FORCE_RESET()     (RCC->APB1RSTR |= (RCC_APB1RSTR_TIM2RST))
 #define __HAL_RCC_TIM3_FORCE_RESET()     (RCC->APB1RSTR |= (RCC_APB1RSTR_TIM3RST))
@@ -3554,6 +3584,7 @@ typedef struct
 
 /** @defgroup RCCEx_APB2_Force_Release_Reset APB2 Force Release Reset 
   * @brief  Force or release APB2 peripheral reset.
+  * @{
   */
 #define __HAL_RCC_SPI5_FORCE_RESET()     (RCC->APB2RSTR |= (RCC_APB2RSTR_SPI5RST))
 #define __HAL_RCC_SDIO_FORCE_RESET()     (RCC->APB2RSTR |= (RCC_APB2RSTR_SDIORST))
@@ -3574,6 +3605,7 @@ typedef struct
   *         power consumption.
   * @note   After wakeup from SLEEP mode, the peripheral clock is enabled again.
   * @note   By default, all peripheral clocks are enabled during SLEEP mode.
+  * @{
   */
 #define __HAL_RCC_GPIOD_CLK_SLEEP_ENABLE()    (RCC->AHB1LPENR |= (RCC_AHB1LPENR_GPIODLPEN))
 #define __HAL_RCC_GPIOE_CLK_SLEEP_ENABLE()    (RCC->AHB1LPENR |= (RCC_AHB1LPENR_GPIOELPEN))
@@ -3606,7 +3638,8 @@ typedef struct
 
 /** @defgroup RCCEx_APB1_LowPower_Enable_Disable APB1 Peripheral Low Power Enable Disable 
   * @brief  Enable or disable the APB1 peripheral clock during Low Power (Sleep) mode.
-  */ 
+  * @{
+  */
 #define __HAL_RCC_TIM2_CLK_SLEEP_ENABLE()    (RCC->APB1LPENR |= (RCC_APB1LPENR_TIM2LPEN))
 #define __HAL_RCC_TIM3_CLK_SLEEP_ENABLE()    (RCC->APB1LPENR |= (RCC_APB1LPENR_TIM3LPEN))
 #define __HAL_RCC_TIM4_CLK_SLEEP_ENABLE()    (RCC->APB1LPENR |= (RCC_APB1LPENR_TIM4LPEN))
@@ -3624,7 +3657,8 @@ typedef struct
 
 /** @defgroup RCCEx_APB2_LowPower_Enable_Disable APB2 Peripheral Low Power Enable Disable 
   * @brief  Enable or disable the APB2 peripheral clock during Low Power (Sleep) mode.
-  */ 
+  * @{
+  */
 #define __HAL_RCC_SPI5_CLK_SLEEP_ENABLE()    (RCC->APB2LPENR |= (RCC_APB2LPENR_SPI5LPEN))
 #define __HAL_RCC_SDIO_CLK_SLEEP_ENABLE()    (RCC->APB2LPENR |= (RCC_APB2LPENR_SDIOLPEN))
 #define __HAL_RCC_SPI4_CLK_SLEEP_ENABLE()    (RCC->APB2LPENR |= (RCC_APB2LPENR_SPI4LPEN))
@@ -3647,6 +3681,7 @@ typedef struct
   * @note   After reset, the peripheral clock (used for registers read/write access)
   *         is disabled and the application software has to enable this clock before 
   *         using it.
+  * @{
   */
 #define __HAL_RCC_BKPSRAM_CLK_ENABLE() do { \
                                         __IO uint32_t tmpreg = 0x00; \
@@ -3759,6 +3794,7 @@ typedef struct
   * @note   After reset, the peripheral clock (used for registers read/write access)
   *         is disabled and the application software has to enable this clock before 
   *         using it.
+  * @{
   */
 #define __HAL_RCC_DCMI_CLK_ENABLE()   do { \
                                       __IO uint32_t tmpreg = 0x00; \
@@ -3810,6 +3846,7 @@ typedef struct
   * @note   After reset, the peripheral clock (used for registers read/write access)
   *         is disabled and the application software has to enable this clock before 
   *         using it. 
+  * @{
   */
 #define __HAL_RCC_FMC_CLK_ENABLE()    do { \
                                       __IO uint32_t tmpreg = 0x00; \
@@ -3853,6 +3890,7 @@ typedef struct
   * @note   After reset, the peripheral clock (used for registers read/write access)
   *         is disabled and the application software has to enable this clock before 
   *         using it. 
+  * @{
   */
 #define __HAL_RCC_TIM6_CLK_ENABLE()   do { \
                                       __IO uint32_t tmpreg = 0x00; \
@@ -4065,6 +4103,7 @@ typedef struct
   * @note   After reset, the peripheral clock (used for registers read/write access)
   *         is disabled and the application software has to enable this clock before 
   *         using it.
+  * @{
   */
 #define __HAL_RCC_TIM8_CLK_ENABLE()   do { \
                                       __IO uint32_t tmpreg = 0x00; \
@@ -4164,6 +4203,7 @@ typedef struct
   
 /** @defgroup RCCEx_AHB1_Force_Release_Reset AHB1 Force Release Reset 
   * @brief  Force or release AHB1 peripheral reset.
+  * @{
   */
 #define __HAL_RCC_GPIOD_FORCE_RESET()    (RCC->AHB1RSTR |= (RCC_AHB1RSTR_GPIODRST))
 #define __HAL_RCC_GPIOE_FORCE_RESET()    (RCC->AHB1RSTR |= (RCC_AHB1RSTR_GPIOERST))
@@ -4217,7 +4257,8 @@ typedef struct
 
 /** @defgroup RCCEx_APB1_Force_Release_Reset APB1 Force Release Reset 
   * @brief  Force or release APB1 peripheral reset.
-  */ 
+  * @{
+  */
 #define __HAL_RCC_TIM6_FORCE_RESET()     (RCC->APB1RSTR |= (RCC_APB1RSTR_TIM6RST))
 #define __HAL_RCC_TIM7_FORCE_RESET()     (RCC->APB1RSTR |= (RCC_APB1RSTR_TIM7RST))
 #define __HAL_RCC_TIM12_FORCE_RESET()    (RCC->APB1RSTR |= (RCC_APB1RSTR_TIM12RST))
@@ -4263,6 +4304,7 @@ typedef struct
 
 /** @defgroup RCCEx_APB2_Force_Release_Reset APB2 Force Release Reset 
   * @brief  Force or release APB2 peripheral reset.
+  * @{
   */
 #define __HAL_RCC_TIM8_FORCE_RESET()     (RCC->APB2RSTR |= (RCC_APB2RSTR_TIM8RST))
 #define __HAL_RCC_SAI1_FORCE_RESET()     (RCC->APB2RSTR |= (RCC_APB2RSTR_SAI1RST)) 
@@ -4287,6 +4329,7 @@ typedef struct
   *         power consumption.
   * @note   After wakeup from SLEEP mode, the peripheral clock is enabled again.
   * @note   By default, all peripheral clocks are enabled during SLEEP mode.
+  * @{
   */
 #define __HAL_RCC_GPIOD_CLK_SLEEP_ENABLE()      (RCC->AHB1LPENR |= (RCC_AHB1LPENR_GPIODLPEN))
 #define __HAL_RCC_GPIOE_CLK_SLEEP_ENABLE()      (RCC->AHB1LPENR |= (RCC_AHB1LPENR_GPIOELPEN))
@@ -4341,6 +4384,7 @@ typedef struct
   *         power consumption.
   * @note   After wakeup from SLEEP mode, the peripheral clock is enabled again.
   * @note   By default, all peripheral clocks are enabled during SLEEP mode.
+  * @{
   */
 #define __HAL_RCC_FMC_CLK_SLEEP_ENABLE()   (RCC->AHB3LPENR |= (RCC_AHB3LPENR_FMCLPEN))
 #define __HAL_RCC_QSPI_CLK_SLEEP_ENABLE()  (RCC->AHB3LPENR |= (RCC_AHB3LPENR_QSPILPEN))
@@ -4357,7 +4401,8 @@ typedef struct
   *         power consumption.
   * @note   After wakeup from SLEEP mode, the peripheral clock is enabled again.
   * @note   By default, all peripheral clocks are enabled during SLEEP mode.
-  */  
+  * @{
+  */ 
 #define __HAL_RCC_TIM6_CLK_SLEEP_ENABLE()    (RCC->APB1LPENR |= (RCC_APB1LPENR_TIM6LPEN))
 #define __HAL_RCC_TIM7_CLK_SLEEP_ENABLE()    (RCC->APB1LPENR |= (RCC_APB1LPENR_TIM7LPEN))
 #define __HAL_RCC_TIM12_CLK_SLEEP_ENABLE()   (RCC->APB1LPENR |= (RCC_APB1LPENR_TIM12LPEN))
@@ -4407,7 +4452,8 @@ typedef struct
   *         power consumption.
   * @note   After wakeup from SLEEP mode, the peripheral clock is enabled again.
   * @note   By default, all peripheral clocks are enabled during SLEEP mode.
-  */ 
+  * @{
+  */
 #define __HAL_RCC_TIM8_CLK_SLEEP_ENABLE() (RCC->APB2LPENR |= (RCC_APB2LPENR_TIM8LPEN))
 #define __HAL_RCC_ADC2_CLK_SLEEP_ENABLE() (RCC->APB2LPENR |= (RCC_APB2LPENR_ADC2LPEN))
 #define __HAL_RCC_ADC3_CLK_SLEEP_ENABLE() (RCC->APB2LPENR |= (RCC_APB2LPENR_ADC3LPEN))
@@ -5121,23 +5167,16 @@ typedef struct
 #endif /* STM32F427xx || STM32F437xx || STM32F429xx || STM32F439xx || STM32F446xx || STM32F469xx || STM32F479xx */
 
 #if defined(STM32F410Tx) || defined(STM32F410Cx) || defined(STM32F410Rx)
-/** @defgroup RCCEx_MCO1_Enable MCO1 Enable
-  * @brief  Macros to enable or disable the RCC MCO1 feature.
+/** @brief  Macros to enable or disable the RCC MCO1 feature.
   */
 #define __HAL_RCC_MCO1_ENABLE() (*(__IO uint32_t *) RCC_CFGR_MCO1EN_BB = ENABLE)
 #define __HAL_RCC_MCO1_DISABLE() (*(__IO uint32_t *) RCC_CFGR_MCO1EN_BB = DISABLE)
-/**
-  * @}
-  */
 
-/** @defgroup RCCEx_MCO2_Enable MCO2 Enable
-  * @brief  Macros to enable or disable the RCC MCO2 feature.
+/** @brief  Macros to enable or disable the RCC MCO2 feature.
   */
 #define __HAL_RCC_MCO2_ENABLE() (*(__IO uint32_t *) RCC_CFGR_MCO2EN_BB = ENABLE)
 #define __HAL_RCC_MCO2_DISABLE() (*(__IO uint32_t *) RCC_CFGR_MCO2EN_BB = DISABLE)
-/**
-  * @}
-  */
+
 #endif /* STM32F410Tx || STM32F410Cx || STM32F410Rx */
 
 /**
@@ -5245,7 +5284,7 @@ void HAL_RCCEx_SelectLSEMode(uint8_t Mode);
   */
 
 /* Private macros ------------------------------------------------------------*/
-/** @addtogroup RCCEx_Private_Macros RCCEx Private Macros
+/** @defgroup RCCEx_Private_Macros RCCEx Private Macros
   * @{
   */
 /** @defgroup RCCEx_IS_RCC_Definitions RCC Private macros to check input parameters

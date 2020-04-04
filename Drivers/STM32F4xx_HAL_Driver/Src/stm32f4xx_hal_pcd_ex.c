@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f4xx_hal_pcd_ex.c
   * @author  MCD Application Team
-  * @version V1.4.2
-  * @date    10-November-2015
+  * @version V1.4.3
+  * @date    11-December-2015
   * @brief   PCD HAL module driver.
   *          This file provides firmware functions to manage the following 
   *          functionalities of the USB Peripheral Controller:
@@ -180,6 +180,7 @@ __weak void HAL_PCDEx_LPM_Callback(PCD_HandleTypeDef *hpcd, PCD_LPM_MsgTypeDef m
 {
   /* Prevent unused argument(s) compilation warning */
   UNUSED(hpcd);
+  UNUSED(msg);
 }
 #endif /* STM32F446xx || STM32F469xx || STM32F479xx */
 

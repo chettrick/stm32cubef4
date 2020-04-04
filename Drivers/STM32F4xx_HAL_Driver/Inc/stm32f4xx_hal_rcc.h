@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f4xx_hal_rcc.h
   * @author  MCD Application Team
-  * @version V1.4.2
-  * @date    10-November-2015
+  * @version V1.4.3
+  * @date    11-December-2015
   * @brief   Header file of RCC HAL module.
   ******************************************************************************
   * @attention
@@ -1309,7 +1309,7 @@ void HAL_RCC_CSSCallback(void);
   */
 
 /* Private macros ------------------------------------------------------------*/
-/** @addtogroup RCC_Private_Macros RCC Private Macros
+/** @defgroup RCC_Private_Macros RCC Private Macros
   * @{
   */
     

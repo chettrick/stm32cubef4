@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f4xx_hal_qspi.c
   * @author  MCD Application Team
-  * @version V1.4.2
-  * @date    10-November-2015
+  * @version V1.4.3
+  * @date    11-December-2015
   * @brief   QSPI HAL module driver.
   *          This file provides firmware functions to manage the following 
   *          functionalities of the QuadSPI interface (QSPI).
@@ -348,7 +348,7 @@ HAL_StatusTypeDef HAL_QSPI_DeInit(QSPI_HandleTypeDef *hqspi)
   * @param hqspi: QSPI handle
   * @retval None
   */
- __weak void HAL_QSPI_MspInit(QSPI_HandleTypeDef *hqspi)
+__weak void HAL_QSPI_MspInit(QSPI_HandleTypeDef *hqspi)
 {
   /* Prevent unused argument(s) compilation warning */
   UNUSED(hqspi);
@@ -362,7 +362,7 @@ HAL_StatusTypeDef HAL_QSPI_DeInit(QSPI_HandleTypeDef *hqspi)
   * @param hqspi: QSPI handle
   * @retval None
   */
- __weak void HAL_QSPI_MspDeInit(QSPI_HandleTypeDef *hqspi)
+__weak void HAL_QSPI_MspDeInit(QSPI_HandleTypeDef *hqspi)
 {
   /* Prevent unused argument(s) compilation warning */
   UNUSED(hqspi);
@@ -1486,7 +1486,7 @@ __weak void HAL_QSPI_RxCpltCallback(QSPI_HandleTypeDef *hqspi)
   * @param  hqspi: QSPI handle
   * @retval None
   */
- __weak void HAL_QSPI_TxCpltCallback(QSPI_HandleTypeDef *hqspi)
+__weak void HAL_QSPI_TxCpltCallback(QSPI_HandleTypeDef *hqspi)
 {
   /* Prevent unused argument(s) compilation warning */
   UNUSED(hqspi);
@@ -1514,7 +1514,7 @@ __weak void HAL_QSPI_RxHalfCpltCallback(QSPI_HandleTypeDef *hqspi)
   * @param  hqspi: QSPI handle
   * @retval None
   */
- __weak void HAL_QSPI_TxHalfCpltCallback(QSPI_HandleTypeDef *hqspi)
+__weak void HAL_QSPI_TxHalfCpltCallback(QSPI_HandleTypeDef *hqspi)
 {
   /* Prevent unused argument(s) compilation warning */
   UNUSED(hqspi);

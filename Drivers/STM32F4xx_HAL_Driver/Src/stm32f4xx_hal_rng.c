@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f4xx_hal_rng.c
   * @author  MCD Application Team
-  * @version V1.4.2
-  * @date    10-November-2015
+  * @version V1.4.3
+  * @date    11-December-2015
   * @brief   RNG HAL module driver.
   *          This file provides firmware functions to manage the following 
   *          functionalities of the Random Number Generator (RNG) peripheral:
@@ -452,6 +452,7 @@ __weak void HAL_RNG_ReadyDataCallback(RNG_HandleTypeDef *hrng, uint32_t random32
 {
   /* Prevent unused argument(s) compilation warning */
   UNUSED(hrng);
+  UNUSED(random32bit);
   /* NOTE : This function should not be modified. When the callback is needed,
             function HAL_RNG_ReadyDataCallback must be implemented in the user file.
    */
