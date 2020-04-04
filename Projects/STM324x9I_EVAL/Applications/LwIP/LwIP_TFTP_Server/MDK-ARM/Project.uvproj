@@ -72,6 +72,8 @@
             <UserProg2Name></UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
+            <nStopB1X>0</nStopB1X>
+            <nStopB2X>0</nStopB2X>
           </BeforeMake>
           <AfterMake>
             <RunUserProg1>0</RunUserProg1>
@@ -128,6 +130,7 @@
             <RestoreFunctions>1</RestoreFunctions>
             <RestoreToolbox>1</RestoreToolbox>
             <LimitSpeedToRealTime>0</LimitSpeedToRealTime>
+            <RestoreSysVw>1</RestoreSysVw>
           </Simulator>
           <Target>
             <UseTarget>1</UseTarget>
@@ -139,8 +142,7 @@
             <RestoreFunctions>1</RestoreFunctions>
             <RestoreToolbox>1</RestoreToolbox>
             <RestoreTracepoints>0</RestoreTracepoints>
-            <RestoreTracepoints>1</RestoreTracepoints>
-            <RestoreTracepoints>1</RestoreTracepoints>
+            <RestoreSysVw>1</RestoreSysVw>
           </Target>
           <RunDebugAfterBuild>0</RunDebugAfterBuild>
           <TargetSelection>11</TargetSelection>
@@ -361,7 +363,7 @@
               <MiscControls>--C99</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F429xx,USE_STM324x9I_EVAL,</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Inc;..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\..\..\..\..\Drivers\BSP\STM324x9I_EVAL;..\..\..\..\..\..\Drivers\BSP\Components\Common;..\..\..\..\..\..\Drivers\BSP\Components;..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\include;..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\include\lwip                                   ;..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\include\netif;..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\include\ipv4;..\..\..\..\..\..\Middlewares\Third_Party\LwIP\system;..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src;..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src\Drivers;..\..\..\..\..\..\Utilities;..\..\..\..\..\..\Utilities\Log</IncludePath>
+              <IncludePath>..\Inc;..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\..\..\..\..\Drivers\BSP\STM324x9I_EVAL;..\..\..\..\..\..\Drivers\BSP\Components\Common;..\..\..\..\..\..\Drivers\BSP\Components;..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\include;..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\include\lwip;..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\include\netif;..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\include\ipv4;..\..\..\..\..\..\Middlewares\Third_Party\LwIP\system;..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src;..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src\Drivers;..\..\..\..\..\..\Utilities;..\..\..\..\..\..\Utilities\Log;..\..\..\..\..\..\Drivers\CMSIS\Include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>

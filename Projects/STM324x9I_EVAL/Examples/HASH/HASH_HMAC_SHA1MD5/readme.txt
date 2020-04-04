@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    HASH/HASH_HMAC_SHA1MD5/readme.txt
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    13-March-2015
+  * @version V1.2.2
+  * @date    25-May-2015
   * @brief   Description of the digest calculation using SHA1 and MD5 Example.
   ******************************************************************************
   *
@@ -74,10 +74,11 @@ In case the MD5 digest is computed correctly the blue LED (LED4) is turned ON.
 
 @par Hardware and Software environment
 
-  - This example runs on STM32F43xxx devices.
-    
-  - This example has been tested with STM324x9I-EVAL RevB evaluation board and can be
-    easily tailored to any other supported device and development board.      
+  - This example runs on STM32F439xx devices.
+  
+  - This example has been tested with STMicroelectronics STM32439I-EVAL RevB 
+    evaluation boards and can be easily tailored to any other supported device 
+    and development board.     
 
 
 @par How to use it ? 

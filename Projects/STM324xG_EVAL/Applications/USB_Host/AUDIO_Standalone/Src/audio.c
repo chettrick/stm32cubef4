@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Host/AUDIO_Standalone/Src/audio.c 
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    13-March-2015
+  * @version V1.2.2
+  * @date    25-May-2015
   * @brief   This file provides the Audio Out (playback) interface API
   ******************************************************************************
   * @attention

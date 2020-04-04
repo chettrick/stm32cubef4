@@ -149,7 +149,7 @@
 		<link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_dcmi_ex.c</name>
 			<type>1</type>
-			<location>C:/SVN/STM32Cube_FW_F4/V1.5.0/Firmware/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dcmi_ex.c</location>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dcmi_ex.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_dma.c</name>
@@ -219,7 +219,7 @@
 		<link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_sai_ex.c</name>
 			<type>1</type>
-			<location>C:/SVN/STM32Cube_FW_F4/V1.5.0/Firmware/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sai_ex.c</location>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sai_ex.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_sdram.c</name>

@@ -74,9 +74,9 @@ In case the MD5 digest is computed correctly the blue LED (LED4) is turned ON.
 
 @par Hardware and Software environment
 
-  - This example runs on STM32F407xx/417xx devices.
-  
-  - This example has been tested with STMicroelectronics STM324xG-EVAL RevC 
+  - This example runs on STM32F417xx devices.  
+    
+  - This example has been tested with STMicroelectronics STM32417G-EVAL RevC 
     evaluation boards and can be easily tailored to any other supported device 
     and development board.
 

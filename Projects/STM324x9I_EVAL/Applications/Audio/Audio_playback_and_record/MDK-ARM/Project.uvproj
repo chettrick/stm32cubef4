@@ -677,7 +677,7 @@
             <File>
               <FileName>libPDMFilter_CM4_Keil.lib</FileName>
               <FileType>4</FileType>
-              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_Audio\Addons\PDM\libPDMFilter_CM4_IAR.a</FilePath>
+              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_Audio\Addons\PDM\libPDMFilter_CM4_Keil.lib</FilePath>
             </File>
           </Files>
         </Group>

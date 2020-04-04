@@ -5,8 +5,8 @@
   ******************************************************************************
   * @file    Display/LTDC_PicturesFromSDCard/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    13-March-2015
+  * @version V1.2.2
+  * @date    25-May-2015
   * @brief   Description of the LTDC pictures from SD card application.
   ******************************************************************************
   * @attention

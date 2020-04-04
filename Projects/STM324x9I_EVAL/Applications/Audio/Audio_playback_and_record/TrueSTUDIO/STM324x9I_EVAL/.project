@@ -92,6 +92,11 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
+			<name>Utilities</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
 			<name>Application/TrueSTUDIO</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
@@ -137,14 +142,34 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
+			<name>Utilities/lcd_log.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Utilities/Log/lcd_log.c</locationURI>
+		</link>
+		<link>
 			<name>Application/TrueSTUDIO/startup_stm32f429xx.s</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/startup_stm32f429xx.s</locationURI>
 		</link>
 		<link>
+			<name>Application/TrueSTUDIO/syscalls.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/syscalls.c</locationURI>
+		</link>
+		<link>
+			<name>Application/User/explorer.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Src/explorer.c</locationURI>
+		</link>
+		<link>
 			<name>Application/User/main.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/Src/main.c</locationURI>
+		</link>
+		<link>
+			<name>Application/User/menu.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Src/menu.c</locationURI>
 		</link>
 		<link>
 			<name>Application/User/stm32f4xx_it.c</name>
@@ -155,6 +180,21 @@
 			<name>Application/User/usbh_conf.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/Src/usbh_conf.c</locationURI>
+		</link>
+		<link>
+			<name>Application/User/usbh_diskio.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Src/usbh_diskio.c</locationURI>
+		</link>
+		<link>
+			<name>Application/User/waveplayer.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Src/waveplayer.c</locationURI>
+		</link>
+		<link>
+			<name>Application/User/waverecorder.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Src/waverecorder.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/BSP/Components</name>
@@ -180,16 +220,6 @@
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_cortex.c</name>
 			<type>1</type>
 			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c</locationURI>
-		</link>
-		<link>
-			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_dcmi.c</name>
-			<type>1</type>
-			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dcmi.c</locationURI>
-		</link>
-		<link>
-			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_dcmi_ex.c</name>
-			<type>1</type>
-			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dcmi_ex.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_dma.c</name>
@@ -230,11 +260,6 @@
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_i2c.c</name>
 			<type>1</type>
 			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c</locationURI>
-		</link>
-		<link>
-			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_i2c_ex.c</name>
-			<type>1</type>
-			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_i2s.c</name>
@@ -312,14 +337,9 @@
 			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c</locationURI>
 		</link>
 		<link>
-			<name>Middlewares/FatFs/Core</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>Middlewares/FatFs/Drivers</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
+			<name>Middlewares/FatFs/ff.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FatFs/src/ff.c</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/STM32_USBH_Library/Class</name>
@@ -332,11 +352,6 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>Drivers/BSP/Components/ov2640.c</name>
-			<type>1</type>
-			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/ov2640/ov2640.c</locationURI>
-		</link>
-		<link>
 			<name>Drivers/BSP/Components/stmpe1600.c</name>
 			<type>1</type>
 			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/stmpe1600/stmpe1600.c</locationURI>
@@ -345,6 +360,11 @@
 			<name>Drivers/BSP/Components/stmpe811.c</name>
 			<type>1</type>
 			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/stmpe811/stmpe811.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/BSP/Components/ts3510.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/ts3510/ts3510.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/BSP/Components/wm8994.c</name>
@@ -362,11 +382,6 @@
 			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/STM324x9I_EVAL/stm324x9i_eval_audio.c</locationURI>
 		</link>
 		<link>
-			<name>Drivers/BSP/STM324x9I_EVAL/stm324x9i_eval_camera.c</name>
-			<type>1</type>
-			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/STM324x9I_EVAL/stm324x9i_eval_camera.c</locationURI>
-		</link>
-		<link>
 			<name>Drivers/BSP/STM324x9I_EVAL/stm324x9i_eval_io.c</name>
 			<type>1</type>
 			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/STM324x9I_EVAL/stm324x9i_eval_io.c</locationURI>
@@ -382,24 +397,9 @@
 			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/STM324x9I_EVAL/stm324x9i_eval_sdram.c</locationURI>
 		</link>
 		<link>
-			<name>Middlewares/FatFs/Core/diskio.c</name>
+			<name>Drivers/BSP/STM324x9I_EVAL/stm324x9i_eval_ts.c</name>
 			<type>1</type>
-			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FatFs/src/diskio.c</locationURI>
-		</link>
-		<link>
-			<name>Middlewares/FatFs/Core/ff.c</name>
-			<type>1</type>
-			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FatFs/src/ff.c</locationURI>
-		</link>
-		<link>
-			<name>Middlewares/FatFs/Core/ff_gen_drv.c</name>
-			<type>1</type>
-			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FatFs/src/ff_gen_drv.c</locationURI>
-		</link>
-		<link>
-			<name>Middlewares/FatFs/Drivers/usbh_diskio.c</name>
-			<type>1</type>
-			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FatFs/src/drivers/usbh_diskio.c</locationURI>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/STM324x9I_EVAL/stm324x9i_eval_ts.c</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/STM32_USBH_Library/Class/MSC</name>

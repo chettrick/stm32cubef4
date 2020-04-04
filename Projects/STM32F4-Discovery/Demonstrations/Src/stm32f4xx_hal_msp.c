@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    Demonstrations/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014
+  * @version V1.2.1
+  * @date    25-May-2015
   * @brief   HAL MSP module.    
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -83,6 +83,17 @@ void HAL_TIM_PWM_MspInit(TIM_HandleTypeDef *htim)
   HAL_GPIO_Init(GPIOD, &GPIO_InitStructure);
 }
 
+/**
+  * @brief  DeInitializes the TIM PWM MSP.
+  * @param  htim: TIM handle
+  * @retval None
+  */
+void HAL_TIM_PWM_MspDeInit(TIM_HandleTypeDef *htim)
+{
+  /* TIM4 clock reset */
+  __HAL_RCC_TIM4_FORCE_RESET();  
+  __HAL_RCC_TIM4_RELEASE_RESET();
+}
 
 /**
   * @}

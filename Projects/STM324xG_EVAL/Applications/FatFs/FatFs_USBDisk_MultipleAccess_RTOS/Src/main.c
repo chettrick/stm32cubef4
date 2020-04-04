@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    FatFs/FatFs_USBDisk_MultipleAccess_RTOS/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    13-March-2015
+  * @version V1.2.2
+  * @date    25-May-2015
   * @brief   Main program body
   *          This sample code shows how to use FatFs with USB disk drive with 
   *          multiple access in RTOS mode.

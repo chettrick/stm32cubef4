@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LwIP/LwIP_UDPTCP_Echo_Server_Netconn_RTOS/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    13-March-2015
+  * @version V1.2.2
+  * @date    25-May-2015
   * @brief   This sample code implements a UDP and TCP Echo Client application 
   *          based on Netconn API of LwIP stack and FreeRTOS. 
   *          This application uses STM32F4xx the ETH HAL API to transmit and 

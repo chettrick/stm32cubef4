@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Device/DualCore_Standalone/Src/usbd_storage.c
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    13-March-2015
+  * @version V1.2.2
+  * @date    25-May-2015
   * @brief   Memory management layer
   ******************************************************************************
   * @attention

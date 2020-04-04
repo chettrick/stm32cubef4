@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    DMA2D/DMA2D_MemToMemWithBlending/Inc/RGB565_240x130_1.h 
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    13-March-2015
+  * @version V1.2.2
+  * @date    25-May-2015
   * @brief   This file contains image used for DMA2D Validation.   
   ******************************************************************************
   * @attention

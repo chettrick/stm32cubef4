@@ -36,8 +36,8 @@ Purpose     : Image flow demo
   ******************************************************************************
   * @file    GUIDEMO_ImageFlow.c
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    13-March-2015
+  * @version V1.2.2
+  * @date    25-May-2015
   * @brief   Image flow demo
   ******************************************************************************
   * @attention

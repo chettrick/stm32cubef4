@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    PWR/PWR_CurrentConsumption/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    13-March-2015
+  * @version V1.2.2
+  * @date    25-May-2015
   * @brief   This sample code shows how to use STM32F4xx PWR HAL API to measure 
   *          different Low Power modes current consumption.
   ******************************************************************************

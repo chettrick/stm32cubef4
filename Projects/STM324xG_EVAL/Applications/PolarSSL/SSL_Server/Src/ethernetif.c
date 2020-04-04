@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    PolarSSL/SSL_Server/Src/ethernetif.c
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    13-March-2015
+  * @version V1.2.2
+  * @date    25-May-2015
   * @brief   This file implements Ethernet network interface drivers for lwIP
   ******************************************************************************
   * @attention
@@ -421,21 +421,22 @@ static struct pbuf * low_level_input(struct netif *netif)
       /* Copy remaining data in pbuf */
       memcpy( (u8_t*)((u8_t*)q->payload + payloadoffset), (u8_t*)((u8_t*)buffer + bufferoffset), byteslefttocopy);
       bufferoffset = bufferoffset + byteslefttocopy;
-  }
-
-   /* Release descriptors to DMA */
-   dmarxdesc = EthHandle.RxFrameInfos.FSRxDesc;
-
-    /* Set Own bit in Rx descriptors: gives the buffers back to DMA */
-    for (i=0; i< EthHandle.RxFrameInfos.SegCount; i++)
-    {  
-      dmarxdesc->Status |= ETH_DMARXDESC_OWN;
-      dmarxdesc = (ETH_DMADescTypeDef *)(dmarxdesc->Buffer2NextDescAddr);
     }
-  
-    /* Clear Segment_Count */
-    EthHandle.RxFrameInfos.SegCount =0;
   }
+
+  /* Release descriptors to DMA */
+  dmarxdesc = EthHandle.RxFrameInfos.FSRxDesc;
+
+  /* Set Own bit in Rx descriptors: gives the buffers back to DMA */
+  for (i=0; i< EthHandle.RxFrameInfos.SegCount; i++)
+  {  
+    dmarxdesc->Status |= ETH_DMARXDESC_OWN;
+    dmarxdesc = (ETH_DMADescTypeDef *)(dmarxdesc->Buffer2NextDescAddr);
+  }
+  
+  /* Clear Segment_Count */
+  EthHandle.RxFrameInfos.SegCount =0;
+
   
   /* When Rx Buffer unavailable flag is set: clear it and resume reception */
   if ((EthHandle.Instance->DMASR & ETH_DMASR_RBUS) != (uint32_t)RESET)  
