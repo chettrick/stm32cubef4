@@ -2,16 +2,16 @@
   @page DMA2D_MemToMemWithPFC DMA2D Memory to Memory with PFC example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    DMA2D/DMA2D_MemToMemWithPFC/readme.txt 
   * @author  MCD Application Team
-  * @version V1.3.2
-  * @date    13-November-2015
+  * @version V1.3.3
+  * @date    29-January-2016
   * @brief   Description of the DMA2D Memory to Memory with PFC example.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:

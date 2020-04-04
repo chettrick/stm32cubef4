@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32469i_eval_qspi.c
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    29-September-2015
+  * @version V1.0.2
+  * @date    12-January-2016
   * @brief   This file includes a standard driver for the N25Q256A QSPI 
   *          memory mounted on STM32469I-EVAL board.
   @verbatim
@@ -37,7 +37,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -75,7 +75,7 @@
   * @{
   */ 
   
-/** @defgroup STM32469I_EVAL_QSPI STM32469I_EVAL QSPI
+/** @defgroup STM32469I_EVAL_QSPI STM32469I EVAL QSPI
   * @{
   */ 
 
@@ -83,7 +83,7 @@
 /* Private variables ---------------------------------------------------------*/
 #define JEDEC_MANUF_ID_MICRON   ((uint8_t) 0x20)
 #define JEDEC_MANUF_ID_SPANSION ((uint8_t) 0x01)
-/** @defgroup STM32469I_EVAL_QSPI_Private_Variables Private Variables
+/** @defgroup STM32469I_EVAL_QSPI_Private_Variables STM32469I EVAL QSPI Private Variables
   * @{
   */       
 QSPI_HandleTypeDef QSPIHandle;
@@ -97,7 +97,7 @@ QSPI_InfoTypeDef QspiInfo;
 
 /* Private functions ---------------------------------------------------------*/
     
-/** @defgroup STM32469I_EVAL_QSPI_Private_Functions QSPI Private Functions
+/** @defgroup STM32469I_EVAL_QSPI_Private_Functions STM32469I EVAL QSPI Private Functions
   * @{
   */ 
 static uint8_t QSPI_ResetMemory          (QSPI_HandleTypeDef *hqspi);
@@ -111,7 +111,7 @@ static uint8_t QSPI_ReadID               (QSPI_InfoTypeDef *pqspi_info);
   * @}
   */
     
-/** @defgroup STM32469I_EVAL_QSPI_Exported_Functions QSPI Exported Functions
+/** @defgroup STM32469I_EVAL_QSPI_Exported_Functions STM32469I EVAL QSPI Exported Functions
   * @{
   */ 
 
@@ -546,11 +546,10 @@ uint8_t BSP_QSPI_GetInfo(QSPI_InfoTypeDef* pInfo)
 }
 
 /**
-* @brief Configure the QSPI in memory-mapped mode
-* @param None 
+* @brief Configure the QSPI in memory-mapped mode 
 * @retval QSPI memory status
 */
-uint8_t BSP_QSPI_MemoryMappedMode(void)
+uint8_t BSP_QSPI_EnableMemoryMappedMode(void)
 {
   QSPI_CommandTypeDef s_command;
   QSPI_MemoryMappedTypeDef s_mem_mapped_cfg;
@@ -569,7 +568,6 @@ uint8_t BSP_QSPI_MemoryMappedMode(void)
 
   /* Configure the memory mapped mode */
   s_mem_mapped_cfg.TimeOutActivation = QSPI_TIMEOUT_COUNTER_DISABLE;
-  s_mem_mapped_cfg.TimeOutPeriod = 0; //1;
 
   if (HAL_QSPI_MemoryMapped(&QSPIHandle, &s_command, &s_mem_mapped_cfg) != HAL_OK)
   {
@@ -583,7 +581,7 @@ uint8_t BSP_QSPI_MemoryMappedMode(void)
   * @}
   */
 
-/** @addtogroup STM32446E_EVAL_QSPI_Private_Functions 
+/** @addtogroup STM32469I_EVAL_QSPI_Private_Functions 
   * @{
   */ 
 
@@ -593,7 +591,6 @@ uint8_t BSP_QSPI_MemoryMappedMode(void)
   *           - Peripheral's clock enable
   *           - Peripheral's GPIO Configuration
   *           - NVIC configuration for QSPI interrupt
-  * @retval None
   */
 __weak void BSP_QSPI_MspInit(QSPI_HandleTypeDef *hqspi, void *Params)
 {
@@ -646,7 +643,6 @@ __weak void BSP_QSPI_MspInit(QSPI_HandleTypeDef *hqspi, void *Params)
   *        This function frees the hardware resources used in this example:
   *          - Disable the Peripheral's clock
   *          - Revert GPIO and NVIC configuration to their default state
-  * @retval None
   */
 __weak void BSP_QSPI_MspDeInit(QSPI_HandleTypeDef *hqspi, void *Params)
 {
@@ -674,7 +670,6 @@ __weak void BSP_QSPI_MspDeInit(QSPI_HandleTypeDef *hqspi, void *Params)
 /**
   * @brief  This function reset the QSPI memory.
   * @param  hqspi: QSPI handle
-  * @retval None
   */
 static uint8_t QSPI_ResetMemory(QSPI_HandleTypeDef *hqspi)
 {
@@ -728,7 +723,6 @@ static uint8_t QSPI_ResetMemory(QSPI_HandleTypeDef *hqspi)
 /**
   * @brief  This function set the QSPI memory in 4-byte address mode
   * @param  hqspi: QSPI handle
-  * @retval None
   */
 static uint8_t QSPI_EnterFourBytesAddress(QSPI_HandleTypeDef *hqspi)
 {
@@ -823,7 +817,6 @@ static uint8_t QSPI_EnterFourBytesAddress(QSPI_HandleTypeDef *hqspi)
 /**
   * @brief  This function configure the dummy cycles on memory side.
   * @param  hqspi: QSPI handle
-  * @retval None
   */
 static uint8_t QSPI_DummyCyclesCfg(QSPI_HandleTypeDef *hqspi)
 {
@@ -957,7 +950,6 @@ static uint8_t QSPI_DummyCyclesCfg(QSPI_HandleTypeDef *hqspi)
 /**
   * @brief  This function send a Write Enable and wait it is effective.
   * @param  hqspi: QSPI handle
-  * @retval None
   */
 static uint8_t QSPI_WriteEnable(QSPI_HandleTypeDef *hqspi)
 {
@@ -1003,7 +995,6 @@ static uint8_t QSPI_WriteEnable(QSPI_HandleTypeDef *hqspi)
   * @brief  This function read the SR of the memory and wait the EOP.
   * @param  hqspi: QSPI handle
   * @param  Timeout: timeout value before returning an error
-  * @retval None
   */
 static uint8_t QSPI_AutoPollingMemReady(QSPI_HandleTypeDef *hqspi, uint32_t Timeout)
 {
@@ -1039,7 +1030,6 @@ static uint8_t QSPI_AutoPollingMemReady(QSPI_HandleTypeDef *hqspi, uint32_t Time
 /**
   * @brief  This function reads the ID of the QSPI Memory and fills the info struct
   * @param  pqspi_info: pointer to the Info Typedef strcture
-  * @retval None
   */
 static uint8_t QSPI_ReadID(QSPI_InfoTypeDef *pqspi_info)
 {

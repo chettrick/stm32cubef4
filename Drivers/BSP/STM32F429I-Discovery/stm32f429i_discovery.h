@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm32f429i_discovery.h
   * @author  MCD Application Team
-  * @version V2.1.2
-  * @date    02-March-2015
+  * @version V2.1.3
+  * @date    13-January-2016
   * @brief   This file contains definitions for STM32F429I-Discovery Kit LEDs,
   *          push-buttons hardware resources.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -59,7 +59,7 @@
   * @{
   */
    
-/** @defgroup STM32F429I_DISCOVERY_LOW_LEVEL_Exported_Types
+/** @addtogroup STM32F429I_DISCOVERY_LOW_LEVEL_Exported_Types STM32F429I DISCOVERY LOW LEVEL Exported Types
   * @{
   */
 typedef enum 
@@ -83,7 +83,7 @@ typedef enum
   * @}
   */ 
 
-/** @defgroup STM32F429I_DISCOVERY_LOW_LEVEL_Exported_Constants
+/** @defgroup STM32F429I_DISCOVERY_LOW_LEVEL_Exported_Constants STM32F429I DISCOVERY LOW LEVEL Exported Constants
   * @{
   */ 
 
@@ -94,7 +94,7 @@ typedef enum
  #define USE_STM32F429I_DISCO
 #endif
 
-/** @addtogroup STM32F429I_DISCOVERY_LOW_LEVEL_LED
+/** @defgroup STM32F429I_DISCOVERY_LOW_LEVEL_LED STM32F429I DISCOVERY LOW LEVEL LED
   * @{
   */
 #define LEDn                                    2
@@ -119,7 +119,7 @@ typedef enum
   * @}
   */ 
   
-/** @addtogroup STM32F429I_DISCOVERY_LOW_LEVEL_BUTTON
+/** @defgroup STM32F429I_DISCOVERY_LOW_LEVEL_BUTTON STM32F429I DISCOVERY LOW LEVEL BUTTON
   * @{
   */  
 #define BUTTONn                                1
@@ -141,7 +141,7 @@ typedef enum
   * @}
   */
 
-/** @addtogroup STM32F429I_DISCOVERY_LOW_LEVEL_BUS
+/** @defgroup STM32F429I_DISCOVERY_LOW_LEVEL_BUS STM32F429I DISCOVERY LOW LEVEL BUS
   * @{
   */  
 /* Exported constanIO --------------------------------------------------------*/
@@ -283,7 +283,7 @@ typedef enum
   */ 
 
 #ifdef EE_M24LR64
-/** @addtogroup STM32F429I_DISCOVERY_LOW_LEVEL_I2C_EEPROM
+/** @defgroup STM32F429I_DISCOVERY_LOW_LEVEL_I2C_EEPROM STM32F429I DISCOVERY LOW LEVEL I2C EEPROM
   * @{
   */
 /**
@@ -306,14 +306,14 @@ typedef enum
 
 #endif /* EE_M24LR64 */
 
-/** @defgroup STM32F429I_DISCOVERY_LOW_LEVEL_Exported_Macros
+/** @defgroup STM32F429I_DISCOVERY_LOW_LEVEL_Exported_Macros STM32F429I DISCOVERY LOW LEVEL Exported Macros
   * @{
   */  
 /**
   * @}
   */ 
 
-/** @defgroup STM32F429I_DISCOVERY_LOW_LEVEL_Exported_Functions
+/** @defgroup STM32F429I_DISCOVERY_LOW_LEVEL_Exported_Functions STM32F429I DISCOVERY LOW LEVEL Exported Functions
   * @{
   */
 uint32_t BSP_GetVersion(void);  

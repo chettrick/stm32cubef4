@@ -1,5 +1,5 @@
 /*********************************************************************
-*          Portions COPYRIGHT 2015 STMicroelectronics                *
+*          Portions COPYRIGHT(c) 2016 STMicroelectronics                *
 *          Portions SEGGER Microcontroller GmbH & Co. KG             *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
@@ -36,8 +36,8 @@ Purpose     : Several GUIDEMO routines
   ******************************************************************************
   * @file    GUIDEMO.c
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    13-March-2015
+  * @version V1.0.2
+  * @date    29-January-2016
   * @brief   Several GUIDEMO routines
   ******************************************************************************
   * @attention
@@ -68,10 +68,10 @@ Purpose     : Several GUIDEMO routines
 */
 static const GUI_WIDGET_CREATE_INFO _aFrameWinControl[] = {
   { FRAMEWIN_CreateIndirect, "Control", 0,                0,  0, CONTROL_SIZE_X, CONTROL_SIZE_Y, 0,          0 },
-  { BUTTON_CreateIndirect,   "Halt",    GUI_ID_HALT,      2, 24, BUTTON_SIZE_X,  BUTTON_SIZE_Y,  0,          0 },
-  { BUTTON_CreateIndirect,   "Next",    GUI_ID_NEXT,     36, 24, BUTTON_SIZE_X,  BUTTON_SIZE_Y,  0,          0 },
-  { PROGBAR_CreateIndirect,  0,         GUI_ID_PROGBAR0,  2, 11, PROGBAR_SIZE_X, PROGBAR_SIZE_Y, WM_CF_HIDE, 0 },
-  { TEXT_CreateIndirect,     0,         GUI_ID_TEXT0,     2,  2, TEXT_SIZE_X,    TEXT_SIZE_Y,    0,          0 }
+  { BUTTON_CreateIndirect,   "Halt",    GUI_ID_HALT,      6, 55, BUTTON_SIZE_X,  BUTTON_SIZE_Y,  0,          0 },
+  { BUTTON_CreateIndirect,   "Next",    GUI_ID_NEXT,     80, 55, BUTTON_SIZE_X,  BUTTON_SIZE_Y,  0,          0 },
+  { PROGBAR_CreateIndirect,  0,         GUI_ID_PROGBAR0,  6, 23, PROGBAR_SIZE_X, PROGBAR_SIZE_Y, WM_CF_HIDE, 0 },
+  { TEXT_CreateIndirect,     0,         GUI_ID_TEXT0,     6,  4, TEXT_SIZE_X,    TEXT_SIZE_Y,    0,          0 }
 };
 
 static const GUI_WIDGET_CREATE_INFO _aFrameWinInfo[] = {

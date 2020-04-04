@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    k_bsp.c
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    13-November-2015
+  * @version V1.1.2
+  * @date    29-January-2016
   * @brief   This file provides the kernel bsp functions
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -55,7 +55,7 @@ void k_BspInit(void)
 {
   /* Initialize the NOR */
   BSP_QSPI_Init();
-  BSP_QSPI_MemoryMappedMode();  
+  BSP_QSPI_EnableMemoryMappedMode();  
   
   
   /* Initialize the SDRAM */

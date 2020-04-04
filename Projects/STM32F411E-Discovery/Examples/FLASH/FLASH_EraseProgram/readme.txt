@@ -2,11 +2,11 @@
   @page FLASH_EraseProgram FLASH Erase and Program
 
   @verbatim
-  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    FLASH/FLASH_EraseProgram/readme.txt
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    13-November-2015
+  * @version V1.0.1
+  * @date    29-January-2016
   * @brief   Description of the FLASH Erase and Program example.
   ******************************************************************************
   *

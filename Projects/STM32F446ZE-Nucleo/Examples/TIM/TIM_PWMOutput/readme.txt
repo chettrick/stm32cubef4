@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    TIM/TIM_PWMOutput/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    13-November-2015
+  * @version V1.0.1
+  * @date    29-January-2016
   * @brief   Description of the PWM signals generation using TIM3
   ******************************************************************************
   *

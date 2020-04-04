@@ -2,11 +2,11 @@
   @page BSP Example on how to use the BSP drivers
   
   @verbatim
-  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    Demonstration/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    13-November-2015
+  * @version V1.0.1
+  * @date    29-January-2016
   * @brief   Description STM32F4xx_Nucleo_144 Demo description.
   ******************************************************************************
   *
@@ -76,12 +76,12 @@ to the beginning (first examples).
 
  - This Demo runs on STM32F4xx Devices 
   
- - This example has been tested with STMicroelectronics STM32F4xx_Nucleo_144 rev B (MB1137) 
+ - This example has been tested with STMicroelectronics NUCLEO-F429ZI  Rev.B boards
    and can be easily tailored to any other supported device and development board.
 
  - STM32F4xx_Nucleo_144 Set-up
    - Connect the Adafruit 1.8" TFT shield (https://www.adafruit.com/products/802)
-   - Make sure the SB165 is closed and the SB146 is opened on the STM32F4xx_Nucleo_144 board rev B
+   - Make sure the SB165 is closed and the SB146 is opened on the NUCLEO-F429ZI  Rev.B board
    
 @par How to use it ? 
 

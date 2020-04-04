@@ -2,11 +2,11 @@
   @page HASH_HMAC_SHA1MD5  HMAC digest calculation using HMAC SHA1 and HMAC MD5 example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    HASH/HASH_HMAC_SHA1MD5/readme.txt
   * @author  MCD Application Team
-  * @version V1.2.4
-  * @date    13-November-2015
+  * @version V1.2.5
+  * @date    29-January-2016
   * @brief   Description of the digest calculation using SHA1 and MD5 example.
   ******************************************************************************
   *

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    RTC.h
   * @author  MCD Application Team
-  * @version V1.4.2
-  * @date    13-November-2015
+  * @version V1.4.3
+  * @date    29-January-2016
   * @brief   Header for RTC.c module
   ******************************************************************************
   * @attention

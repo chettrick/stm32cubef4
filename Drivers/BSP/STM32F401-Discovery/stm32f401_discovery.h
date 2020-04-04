@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm32f401_discovery.h
   * @author  MCD Application Team
-  * @version V2.2.0
-  * @date    14-August-2015
+  * @version V2.2.1
+  * @date    12-January-2016
   * @brief   This file contains definitions for STM32F401-Discovery Kit's Leds and 
   *          push-button hardware resources.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -59,7 +59,7 @@
   * @{
   */ 
 
-/** @defgroup STM32F401_DISCOVERY_LOW_LEVEL_Exported_Types
+/** @defgroup STM32F401_DISCOVERY_LOW_LEVEL_Exported_Types STM32F401 DISCOVERY LOW LEVEL Exported Types
   * @{
   */
 typedef enum 
@@ -84,7 +84,7 @@ typedef enum
   * @}
   */ 
 
-/** @defgroup STM32F401_DISCOVERY_LOW_LEVEL_Exported_Constants
+/** @defgroup STM32F401_DISCOVERY_LOW_LEVEL_Exported_Constants STM32F401 DISCOVERY LOW LEVEL Exported Constants
   * @{
   */ 
 
@@ -95,7 +95,7 @@ typedef enum
  #define USE_STM32F401_DISCO
 #endif
 
-/** @addtogroup STM32F401_DISCOVERY_LOW_LEVEL_LED
+/** @defgroup STM32F401_DISCOVERY_LOW_LEVEL_LED STM32F401 DISCOVERY LOW LEVEL LED
   * @{
   */
 #define LEDn                                    4
@@ -138,7 +138,7 @@ typedef enum
   * @}
   */ 
   
-/** @addtogroup STM32F401_DISCOVERY_LOW_LEVEL_BUTTON
+/** @defgroup STM32F401_DISCOVERY_LOW_LEVEL_BUTTON STM32F401 DISCOVERY LOW LEVEL BUTTON
   * @{
   */  
 #define BUTTONn                                 1  
@@ -160,7 +160,7 @@ typedef enum
   * @}
   */ 
 
-/** @addtogroup STM32F401_DISCOVERY_LOW_LEVEL_BUS
+/** @defgroup STM32F401_DISCOVERY_LOW_LEVEL_BUS STM32F401 DISCOVERY LOW LEVEL BUS
   * @{
   */  
 
@@ -270,14 +270,14 @@ typedef enum
   * @}
   */ 
 
-/** @defgroup STM32F401_DISCOVERY_LOW_LEVEL_Exported_Macros
+/** @defgroup STM32F401_DISCOVERY_LOW_LEVEL_Exported_Macros STM32F401 DISCOVERY LOW LEVEL Exported Macros
   * @{
   */  
 /**
   * @}
   */ 
 
-/** @defgroup STM32F401_DISCOVERY_LOW_LEVEL_Exported_Functions
+/** @defgroup STM32F401_DISCOVERY_LOW_LEVEL_Exported_Functions STM32F401 DISCOVERY LOW LEVEL Exported Functions
   * @{
   */
 uint32_t BSP_GetVersion(void);  

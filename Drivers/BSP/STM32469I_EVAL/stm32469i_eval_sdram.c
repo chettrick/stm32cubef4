@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm32469i_eval_sdram.c
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    29-September-2015
+  * @version V1.0.2
+  * @date    12-January-2016
   * @brief   This file includes the SDRAM driver for the MT48LC4M32B2B5-7 memory
   *          device mounted on STM32469I-EVAL evaluation board.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -84,36 +84,36 @@
   * @{
   */
 
-/** @addtogroup STM32469I-EVAL
+/** @addtogroup STM32469I_EVAL
   * @{
   */
 
-/** @defgroup STM32469I-EVAL_SDRAM SDRAM
+/** @defgroup STM32469I-EVAL_SDRAM STM32469I EVAL SDRAM
   * @{
   */
 
-/** @defgroup STM32469I-EVAL_SDRAM_Private_Types_Definitions STM32469I Eval SDRAM Private TypesDef
-  * @{
-  */
-/**
-  * @}
-  */
-
-/** @defgroup STM32469I-EVAL_SDRAM_Private_Defines STM32469I Eval SDRAM Private Defines
+/** @defgroup STM32469I-EVAL_SDRAM_Private_Types_Definitions STM32469I EVAL SDRAM Private TypesDef
   * @{
   */
 /**
   * @}
   */
 
-/** @defgroup STM32469I-EVAL_SDRAM_Private_Macros STM32469I Eval SDRAM Private Macros
+/** @defgroup STM32469I-EVAL_SDRAM_Private_Defines STM32469I EVAL SDRAM Private Defines
   * @{
   */
 /**
   * @}
   */
 
-/** @defgroup STM32469I-EVAL_SDRAM_Private_Variables STM32469I Eval SDRAM Private Variables
+/** @defgroup STM32469I-EVAL_SDRAM_Private_Macros STM32469I EVAL SDRAM Private Macros
+  * @{
+  */
+/**
+  * @}
+  */
+
+/** @defgroup STM32469I-EVAL_SDRAM_Private_Variables STM32469I EVAL SDRAM Private Variables
   * @{
   */
 static SDRAM_HandleTypeDef sdramHandle;
@@ -123,7 +123,7 @@ static FMC_SDRAM_CommandTypeDef Command;
   * @}
   */
 
-/** @defgroup STM32469I-EVAL_SDRAM_Private_Function_Prototypes STM32469I Eval SDRAM Private Prototypes
+/** @defgroup STM32469I-EVAL_SDRAM_Private_Function_Prototypes STM32469I EVAL SDRAM Private Prototypes
   * @{
   */
 
@@ -131,7 +131,7 @@ static FMC_SDRAM_CommandTypeDef Command;
   * @}
   */
 
-/** @defgroup STM32469I-EVAL_SDRAM_Private_Functions STM32469I Eval SDRAM Private Functions
+/** @defgroup STM32469I-EVAL_SDRAM_Private_Functions STM32469I EVAL SDRAM Private Functions
   * @{
   */
 

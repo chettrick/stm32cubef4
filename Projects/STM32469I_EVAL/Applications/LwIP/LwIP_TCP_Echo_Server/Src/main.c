@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LwIP/LwIP_TCP_Echo_Server/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    13-November-2015
+  * @version V1.0.3
+  * @date    29-January-2016
   * @brief   This sample code implements a TCP Echo Server application based on 
   *          Raw API of LwIP stack. This application uses STM32F4xx the 
   *          ETH HAL API to transmit and receive data. 
@@ -11,7 +11,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.

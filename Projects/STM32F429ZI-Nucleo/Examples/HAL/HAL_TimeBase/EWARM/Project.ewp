@@ -1028,6 +1028,9 @@
         <name>$PROJ_DIR$\..\Src\main.c</name>
       </file>
       <file>
+        <name>$PROJ_DIR$\..\Src\stm32f4xx_hal_timebase_tim.c</name>
+      </file>
+      <file>
         <name>$PROJ_DIR$\..\Src\stm32f4xx_it.c</name>
       </file>
     </group>

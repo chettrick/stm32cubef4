@@ -2,11 +2,11 @@
   @page I2C_TwoBoards_AdvComIT I2C Two Boards Advanced Communication IT example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    I2C/I2C_TwoBoards_AdvComIT/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    13-November-2015
+  * @version V1.0.1
+  * @date    29-January-2016
   * @brief   Description of the I2C Two Boards Advanced Communication with 
   *          Interrupt example.
   ******************************************************************************

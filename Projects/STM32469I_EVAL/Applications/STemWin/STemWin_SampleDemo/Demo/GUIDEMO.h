@@ -1,5 +1,5 @@
 /*********************************************************************
-*          Portions COPYRIGHT  2015 STMicroelectronics                *
+*          Portions COPYRIGHT  2016 STMicroelectronics                *
 *          Portions SEGGER Microcontroller GmbH & Co. KG             *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
@@ -36,8 +36,8 @@ Purpose     : Configuration file of GUIDemo
   ******************************************************************************
   * @file    GUIDEMO.c
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    13-March-2015
+  * @version V1.0.3
+  * @date    29-January-2016
   * @brief   Configuration file of GUIDemo
   ******************************************************************************
   * @attention
@@ -89,15 +89,15 @@ extern "C" {     /* Make sure we have C-declarations in C++ programs */
 *
 **********************************************************************
 */
-#define CONTROL_SIZE_X    80
-#define CONTROL_SIZE_Y    61
+#define CONTROL_SIZE_X    160
+#define CONTROL_SIZE_Y    120
 #define INFO_SIZE_Y       65
-#define BUTTON_SIZE_X     32
-#define BUTTON_SIZE_Y     20
-#define PROGBAR_SIZE_X    66
-#define PROGBAR_SIZE_Y    12
-#define TEXT_SIZE_X       69
-#define TEXT_SIZE_Y       7
+#define BUTTON_SIZE_X     68
+#define BUTTON_SIZE_Y     40
+#define PROGBAR_SIZE_X    142
+#define PROGBAR_SIZE_Y    24
+#define TEXT_SIZE_X       138
+#define TEXT_SIZE_Y       14
 #define SHOW_PROGBAR_AT   100
 #define GUI_ID_HALT       (GUI_ID_USER + 0)
 #define GUI_ID_NEXT       (GUI_ID_USER + 1)

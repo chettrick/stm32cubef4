@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    Cortex/CORTEXM_MPU/Inc/stm32_mpu.h 
   * @author  MCD Application Team
-  * @version V1.2.4
-  * @date    13-November-2015
+  * @version V1.2.5
+  * @date    29-January-2016
   * @brief   Header for stm32_mpu.c module
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:

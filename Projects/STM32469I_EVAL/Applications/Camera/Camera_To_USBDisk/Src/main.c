@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    Camera/Camera_To_USBDisk/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    13-November-2015
+  * @version V1.0.3
+  * @date    29-January-2016
   * @brief   This application describes how to configure the camera in continuous mode
              and save picture under USBDisk.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -122,7 +122,19 @@ int main(void)
 
   /* Configure the system clock to 180 MHz */
   SystemClock_Config();
+  
+    /*##-1- LCD DSI initialization in mode Video Burst  with one LTDC layer of size 800x480 */
+  lcd_status = BSP_LCD_Init();
+  if(lcd_status != LCD_OK)
+  {
+	  Error_Handler();
+  }
+  
+  BSP_LCD_LayerDefaultInit(LTDC_ACTIVE_LAYER_BACKGROUND, LCD_BG_LAYER_ADDRESS);
 
+  /* Select Background Layer */
+  BSP_LCD_SelectLayer(LTDC_ACTIVE_LAYER_BACKGROUND);
+  
   BSP_IO_Init();
 
   /* Reset and power down camera to be sure camera is Off prior start testing BSP */
@@ -133,27 +145,7 @@ int main(void)
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED3);
 
-  /*##-1- LCD DSI initialization in mode Video Burst  with two LTDC layers of size 800x480 */
-  lcd_status = BSP_LCD_Init();
-  if(lcd_status != LCD_OK)
-  {
-	  Error_Handler();
-  }
-  
-  BSP_LCD_LayerDefaultInit(LTDC_ACTIVE_LAYER_BACKGROUND, LCD_BG_LAYER_ADDRESS);
-  BSP_LCD_LayerDefaultInit(LTDC_ACTIVE_LAYER_FOREGROUND, LCD_FB_START_ADDRESS);
-
-  /* Select Foreground Layer */
-  BSP_LCD_SelectLayer(LTDC_ACTIVE_LAYER_FOREGROUND);
-
-  /* Clear the LCD Foreground layer */
-  BSP_LCD_Clear(LCD_COLOR_WHITE);
-
-  /* Disable the LTDC Foreground layer */
-  BSP_LCD_SetLayerVisible(LTDC_ACTIVE_LAYER_FOREGROUND, DISABLE);
-
-  /* Select the LCD Background layer */
-  BSP_LCD_SelectLayer(LTDC_ACTIVE_LAYER_BACKGROUND);
+  /* Clear the LCD Background layer */
   BSP_LCD_Clear(LCD_COLOR_WHITE);
 
   /*##-2- Init Host Library ##################################################*/
@@ -236,10 +228,6 @@ static void SavePicture(void)
   HAL_Delay(1000);
   BSP_LCD_DisplayStringAt(20, (BSP_LCD_GetYSize() - 24), (uint8_t *)"                                 ", RIGHT_MODE);
 
-  /* Set foreground Layer as visible */
-  BSP_LCD_SetLayerVisible(LTDC_ACTIVE_LAYER_FOREGROUND, ENABLE);
-  BSP_LCD_SetColorKeying(LTDC_ACTIVE_LAYER_FOREGROUND, LCD_COLOR_WHITE);
-  BSP_LCD_SelectLayer(LTDC_ACTIVE_LAYER_FOREGROUND);
   BSP_LCD_SetTextColor(LCD_COLOR_DARKRED);
   BSP_LCD_SetFont(&Font24);
 
@@ -288,11 +276,6 @@ static void SavePicture(void)
       HAL_Delay(2000);
       BSP_LCD_DisplayStringAt(20, (BSP_LCD_GetYSize() - 24), (uint8_t *)"                                          ", RIGHT_MODE);
 
-      /* Disable the Layer Foreground */
-      BSP_LCD_SetLayerVisible(LTDC_ACTIVE_LAYER_FOREGROUND, DISABLE);
-
-      /* Select Layer Background */
-      BSP_LCD_SelectLayer(LTDC_ACTIVE_LAYER_BACKGROUND);
       counter++;
       BSP_LED_Off(LED1);
 
@@ -481,7 +464,6 @@ static void Error_Handler(void)
 {
   /* Turn LED3 on */
   BSP_LED_On(LED3);
-  BSP_LCD_SelectLayer(0);
   while(1)
   {
   }

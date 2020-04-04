@@ -2,11 +2,11 @@
   @page TIM_7PWMOutput TIM 7 PWM Output example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    TIM/TIM_7PWMOutput/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.4
-  * @date    13-November-2015
+  * @version V1.2.5
+  * @date    29-January-2016
   * @brief   Description of the PWM signals generation using Timer3 example.
   ******************************************************************************
   *

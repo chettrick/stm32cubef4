@@ -1,5 +1,5 @@
 /*********************************************************************
-*          Portions COPYRIGHT 2015 STMicroelectronics                *
+*          Portions COPYRIGHT(c) 2016 STMicroelectronics                *
 *          Portions SEGGER Microcontroller GmbH & Co. KG             *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
@@ -36,8 +36,8 @@ Purpose     : Shows how to use memory devices for rotation.
   ******************************************************************************
   * @file    MEMDEV_Speedometer.c
   * @author  MCD Application Team
-  * @version V1.4.2
-  * @date    13-November-2015
+  * @version V1.4.3
+  * @date    29-January-2016
   * @brief   Shows how to use memory devices for rotation.
   ******************************************************************************
   * @attention

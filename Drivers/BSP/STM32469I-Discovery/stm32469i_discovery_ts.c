@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm32469i_discovery_ts.c
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    29-September-2015
+  * @version V1.0.2
+  * @date    13-January-2016
   * @brief   This file provides a set of functions needed to manage the Touch
   *          Screen on STM32469I-Discovery board.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -78,43 +78,43 @@
   * @{
   */
 
-/** @addtogroup STM32469I-Discovery
+/** @addtogroup STM32469I_Discovery
   * @{
   */
 
-/** @defgroup STM32469I-Discovery_TS STM32469I-Discovery TS
+/** @defgroup STM32469I-Discovery_TS STM32469I Discovery TS
   * @{
   */
 
-/** @defgroup STM32469I-Discovery_TS_Private_Types_Definitions TS Private Types Definitions
-  * @{
-  */
-/**
-  * @}
-  */
-
-/** @defgroup STM32469I-Discovery_TS_Private_Defines TS Private Types Defines
+/** @defgroup STM32469I-Discovery_TS_Private_Types_Definitions STM32469I Discovery TS Private Types Definitions
   * @{
   */
 /**
   * @}
   */
 
-/** @defgroup STM32469I-Discovery_TS_Private_Macros TS Private Macros
+/** @defgroup STM32469I-Discovery_TS_Private_Defines STM32469I Discovery TS Private Types Defines
   * @{
   */
 /**
   * @}
   */
 
-/** @defgroup STM32469I-Discovery_TS_Imported_Variables TS Imported Variables
+/** @defgroup STM32469I-Discovery_TS_Private_Macros STM32469I Discovery TS Private Macros
+  * @{
+  */
+/**
+  * @}
+  */
+
+/** @defgroup STM32469I-Discovery_TS_Imported_Variables STM32469I Discovery TS Imported Variables
   * @{
   */
   /**
     * @}
     */
 
-/** @defgroup STM32469I-Discovery_TS_Private_Variables TS Private Variables
+/** @defgroup STM32469I-Discovery_TS_Private_Variables STM32469I Discovery TS Private Variables
   * @{
   */
 static TS_DrvTypeDef *ts_driver;
@@ -142,7 +142,7 @@ char * ts_gesture_id_string_tab[GEST_ID_NB_MAX] = { "None",
   * @}
   */
 
-/** @defgroup STM32469I-Discovery_TS_Private_Function_Prototypes TS Private Function Prototypes
+/** @defgroup STM32469I-Discovery_TS_Private_Function_Prototypes STM32469I Discovery TS Private Function Prototypes
   * @{
   */
 
@@ -150,7 +150,7 @@ char * ts_gesture_id_string_tab[GEST_ID_NB_MAX] = { "None",
   * @}
   */
 
-/** @defgroup STM32469I-Discovery_TS_Public_Functions TS Public Functions
+/** @defgroup STM32469I-Discovery_TS_Public_Functions STM32469I Discovery TS Public Functions
   * @{
   */
 
@@ -394,7 +394,7 @@ uint8_t BSP_TS_Get_GestureId(TS_StateTypeDef *TS_State)
 }
 
 
-/** @defgroup STM32469I-Discovery_TS_Private_Functions TS Private Functions
+/** @defgroup STM32469I-Discovery_TS_Private_Functions STM32469I Discovery TS Private Functions
   * @{
   */
 
@@ -433,8 +433,6 @@ uint8_t BSP_TS_ResetTouchData(TS_StateTypeDef *TS_State)
 #endif /* TS_MULTI_TOUCH_SUPPORTED == 1 */
 /**
   * @brief  Initializes the TS_INT pin MSP.
-  * @param  None
-  * @retval None
   */
 __weak void BSP_TS_INT_MspInit(void)
 {

@@ -1,5 +1,5 @@
 /*********************************************************************
-*          Portions COPYRIGHT 2015 STMicroelectronics                *
+*          Portions COPYRIGHT(c) 2016 STMicroelectronics                *
 *          Portions SEGGER Microcontroller GmbH & Co. KG             *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
@@ -36,8 +36,8 @@ Purpose     : Automotive samples
   ******************************************************************************
   * @file    GUIDEMO_Automotive.c
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    13-March-2015
+  * @version V1.0.2
+  * @date    29-January-2016
   * @brief   Automotive samples
   ******************************************************************************
   * @attention

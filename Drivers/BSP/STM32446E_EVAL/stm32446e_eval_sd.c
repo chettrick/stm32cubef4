@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm32446e_eval_sd.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    14-August-2015
+  * @version V1.1.1
+  * @date    13-January-2016
   * @brief   This file includes the uSD card driver mounted on STM32446E-EVAL
   *          evaluation board.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -90,33 +90,33 @@
   * @{
   */ 
   
-/** @defgroup STM32446E_EVAL_SD STM32446E-EVAL SD
+/** @defgroup STM32446E_EVAL_SD STM32446E EVAL SD
   * @{
   */ 
 
 
-/** @defgroup STM32446E_EVAL_SD_Private_TypesDefinitions STM32446E Eval Sd Private TypesDef
+/** @defgroup STM32446E_EVAL_SD_Private_TypesDefinitions STM32446E EVAL SD Private TypesDefinitions
   * @{
   */
 /**
   * @}
   */ 
 
-/** @defgroup STM32446E_EVAL_SD_Private_Defines STM32446E Eval Sd Private Defines
+/** @defgroup STM32446E_EVAL_SD_Private_Defines STM32446E EVAL SD Private Defines
   * @{
   */
 /**
   * @}
   */ 
   
-/** @defgroup STM32446E_EVAL_SD_Private_Macros STM32446E Eval Sd Private Macro
+/** @defgroup STM32446E_EVAL_SD_Private_Macros STM32446E EVAL SD Private Macros
   * @{
   */    
 /**
   * @}
   */  
 
-/** @defgroup STM32446E_EVAL_SD_Private_Variables STM32446E Eval Sd Private Variables
+/** @defgroup STM32446E_EVAL_SD_Private_Variables STM32446E EVAL SD Private Variables
   * @{
   */
 static SD_HandleTypeDef uSdHandle;
@@ -127,20 +127,19 @@ static uint8_t UseExtiModeDetection = 0;
   * @}
   */ 
   
-/** @defgroup STM32446E_EVAL_SD_Private_FunctionPrototypes STM32446E Eval Sd Private Prototypes
+/** @defgroup STM32446E_EVAL_SD_Private_FunctionPrototypes STM32446E EVAL SD Private FunctionPrototypes
   * @{
   */
 /**
   * @}
   */ 
   
-/** @defgroup STM32446E_EVAL_SD_Private_Functions STM32446E Eval Sd Private Functions
+/** @defgroup STM32446E_EVAL_SD_Private_Functions STM32446E EVAL SD Private Functions
   * @{
   */
 
 /**
   * @brief  Initializes the SD card device.
-  * @param  None
   * @retval SD status
   */
 uint8_t BSP_SD_Init(void)
@@ -195,7 +194,6 @@ uint8_t BSP_SD_Init(void)
 
 /**
   * @brief  DeInitializes the SD card device.
-  * @param  None
   * @retval SD status
   */
 uint8_t BSP_SD_DeInit(void)
@@ -223,7 +221,6 @@ uint8_t BSP_SD_DeInit(void)
 
 /**
   * @brief  Configures Interrupt mode for SD detection pin.
-  * @param  None
   * @retval Returns 0
   */
 uint8_t BSP_SD_ITConfig(void)
@@ -238,7 +235,6 @@ uint8_t BSP_SD_ITConfig(void)
 
 /**
  * @brief  Detects if SD card is correctly plugged in the memory slot or not.
- * @param  None
  * @retval Returns if SD is detected or not
  */
 uint8_t BSP_SD_IsDetected(void)
@@ -397,7 +393,7 @@ uint8_t BSP_SD_Erase(uint64_t StartAddr, uint64_t EndAddr)
 /**
   * @brief  Initializes the SD MSP.
   * @param  hsd: SD handle
-  * @retval None
+  * @param  Params: pointer on additional configuration parameters, can be NULL.
   */
 __weak void BSP_SD_MspInit(SD_HandleTypeDef *hsd, void *Params)
 {
@@ -506,7 +502,7 @@ __weak void BSP_SD_MspInit(SD_HandleTypeDef *hsd, void *Params)
 /**
   * @brief  DeInitializes the SD MSP.
   * @param  hsd: SD handle
-  * @retval None
+  * @param  Params: pointer on additional configuration parameters, can be NULL.
   */
 __weak void BSP_SD_MspDeInit(SD_HandleTypeDef *hsd, void *Params)
 {
@@ -540,8 +536,6 @@ __weak void BSP_SD_MspDeInit(SD_HandleTypeDef *hsd, void *Params)
 
 /**
   * @brief  Handles SD card interrupt request.
-  * @param  None
-  * @retval None
   */
 void BSP_SD_IRQHandler(void)
 {
@@ -550,8 +544,6 @@ void BSP_SD_IRQHandler(void)
 
 /**
   * @brief  Handles SD DMA Tx transfer interrupt request.
-  * @param  None
-  * @retval None
   */
 void BSP_SD_DMA_Tx_IRQHandler(void)
 {
@@ -560,8 +552,6 @@ void BSP_SD_DMA_Tx_IRQHandler(void)
 
 /**
   * @brief  Handles SD DMA Rx transfer interrupt request.
-  * @param  None
-  * @retval None
   */
 void BSP_SD_DMA_Rx_IRQHandler(void)
 {
@@ -570,7 +560,6 @@ void BSP_SD_DMA_Rx_IRQHandler(void)
 
 /**
   * @brief  Gets the current SD card data status.
-  * @param  None
   * @retval Data transfer state.
   *          This value can be one of the following values:
   *            @arg  SD_TRANSFER_OK: No data transfer is acting
@@ -585,7 +574,6 @@ HAL_SD_TransferStateTypedef BSP_SD_GetStatus(void)
 /**
   * @brief  Get SD information about specific SD card.
   * @param  CardInfo: Pointer to HAL_SD_CardInfoTypedef structure
-  * @retval None 
   */
 void BSP_SD_GetCardInfo(HAL_SD_CardInfoTypedef *CardInfo)
 {

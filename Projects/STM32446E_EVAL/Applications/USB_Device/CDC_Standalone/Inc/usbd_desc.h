@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    USB_Device/CDC_Standalone/Inc/usbd_desc.h
   * @author  MCD Application Team
-  * @version V1.2.2
-  * @date    13-November-2015
+  * @version V1.2.3
+  * @date    29-January-2016
   * @brief   Header for usbd_desc.c module
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics </center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.

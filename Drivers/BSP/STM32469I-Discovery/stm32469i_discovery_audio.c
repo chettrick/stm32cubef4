@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    stm32469i_discovery_audio.c
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    29-September-2015
+  * @version V1.0.2
+  * @date    13-January-2016
   * @brief   This file provides the Audio driver for the STM32469I-Discovery board.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -103,24 +103,24 @@ Known Limitations:
   * @{
   */
 
-/** @addtogroup STM32469I-Discovery
+/** @addtogroup STM32469I_Discovery
   * @{
   */
 
-/** @defgroup STM32469I-Discovery_AUDIO STM32469I-Discovery AUDIO
+/** @defgroup STM32469I-Discovery_AUDIO STM32469I Discovery AUDIO
   * @brief This file includes the low layer driver for CS43L22 Audio Codec
   *        available on STM32469I-Discovery board(MB1189).
   * @{
   */
 
-/** @defgroup STM32469I-Discovery_AUDIO_Private_Types STM32469I Discovery Audio Private Types
+/** @defgroup STM32469I-Discovery_AUDIO_Private_Types STM32469I Discovery AUDIO Private Types
   * @{
   */
 /**
   * @}
   */
 
-/** @defgroup STM32469I-Discovery_AUDIO_Private_Defines STM32469I Discovery Audio Private Defines
+/** @defgroup STM32469I-Discovery_AUDIO_Private_Defines STM32469I Discovery AUDIO Private Defines
  *  @brief Headphone1 (CN27 of STM32469I-Discovery board) is connected to the
  *         HEADPHONE output of CS43L22 Audio Codec.
  *         Headphone2 (CN26 of STM32469I-Discovery board) is connected to the
@@ -135,7 +135,7 @@ Known Limitations:
   * @}
   */
 
-/** @defgroup STM32469I-Discovery_AUDIO_Private_Macros STM32469I Discovery Audio Private macros
+/** @defgroup STM32469I-Discovery_AUDIO_Private_Macros STM32469I Discovery AUDIO Private macros
   * @{
   */
 
@@ -154,7 +154,7 @@ Known Limitations:
   * @}
   */
 
-/** @defgroup STM32469I-Discovery_AUDIO_Private_Variables STM32469I Discovery Audio Private Variables
+/** @defgroup STM32469I-Discovery_AUDIO_Private_Variables STM32469I Discovery AUDIO Private Variables
   * @{
   */
   
@@ -197,7 +197,7 @@ uint16_t __IO AudioInVolume = DEFAULT_AUDIO_IN_VOLUME;
   * @}
   */
 
-/** @defgroup STM32469I-Discovery_AUDIO_Private_Function_Prototypes STM32469I Discovery Audio Private Prototypes
+/** @defgroup STM32469I-Discovery_AUDIO_Private_Function_Prototypes STM32469I Discovery AUDIO Private Prototypes
   * @{
   */
 static void AUDIO_CODEC_Reset(void);
@@ -217,7 +217,7 @@ void BSP_AUDIO_OUT_ChangeAudioConfig(uint32_t AudioOutOption);
   * @}
   */
 
-/** @defgroup STM32469I-Discovery_AUDIO_out_Private_Functions STM32469I Discovery AudioOut Private Functions
+/** @defgroup STM32469I-Discovery_AUDIO_out_Private_Functions STM32469I Discovery AUDIO OUT Private Functions
   * @{
   */
 
@@ -358,7 +358,7 @@ uint8_t BSP_AUDIO_OUT_Pause(void)
 
 /**
   * @brief  This function  Resumes the audio file stream.
-  * @WARNING When calling BSP_AUDIO_OUT_Pause() function for pause, only
+  * WARNING: When calling BSP_AUDIO_OUT_Pause() function for pause, only
   *          BSP_AUDIO_OUT_Resume() function should be called for resume
   *          (use of BSP_AUDIO_OUT_Play() function for resume could lead to 
   *           unexpected behavior).
@@ -513,7 +513,6 @@ void BSP_AUDIO_OUT_SetFrequency(uint32_t AudioFreq)
   *         This parameter can be any value of @ref BSP_Audio_Out_Option
   * @note   This API should be called after the BSP_AUDIO_OUT_Init() to adjust the
   *         audio out configuration.
-  * @retval None
   */
 void BSP_AUDIO_OUT_ChangeAudioConfig(uint32_t AudioOutOption)
 { 
@@ -847,7 +846,7 @@ static uint8_t SAIx_Init(uint32_t AudioFreq)
   haudio_out_sai.Init.Protocol = SAI_FREE_PROTOCOL;
   haudio_out_sai.Init.DataSize = SAI_DATASIZE_16;
   haudio_out_sai.Init.FirstBit = SAI_FIRSTBIT_MSB;
-  haudio_out_sai.Init.ClockStrobing = SAI_CLOCKSTROBING_RISINGEDGE;
+  haudio_out_sai.Init.ClockStrobing = SAI_CLOCKSTROBING_FALLINGEDGE;
   haudio_out_sai.Init.Synchro = SAI_ASYNCHRONOUS;
   haudio_out_sai.Init.OutputDrive = SAI_OUTPUTDRIVE_ENABLE;
   haudio_out_sai.Init.FIFOThreshold = SAI_FIFOTHRESHOLD_1QF;
@@ -930,7 +929,7 @@ static void AUDIO_CODEC_Reset(void)
   * @}
   */
 
-/** @defgroup STM32469I-Discovery_AUDIO_in_Private_Functions STM32469I Discovery AudioIn Private functions
+/** @defgroup STM32469I-Discovery_AUDIO_in_Private_Functions STM32469I Discovery AUDIO IN Private functions
   * @{
   */
 

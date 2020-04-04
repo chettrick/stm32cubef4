@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm324x9i_eval_audio.h
   * @author  MCD Application Team
-  * @version V2.2.1
-  * @date    07-October-2015
+  * @version V2.2.2
+  * @date    13-January-2016
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm324x9i_eval_audio.c driver.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -58,25 +58,25 @@
   * @{
   */
     
-/** @defgroup STM324x9I_EVAL_AUDIO
+/** @addtogroup STM324x9I_EVAL_AUDIO
   * @{
   */
 
-/** @defgroup STM324x9I_EVAL_AUDIO_Exported_Types
+/** @defgroup STM324x9I_EVAL_AUDIO_Exported_Types STM324x9I EVAL AUDIO Exported Types
   * @{
   */
 /**
   * @}
   */ 
 
-/** @defgroup STM324x9I_EVAL_AUDIO_Exported_Constants
+/** @defgroup STM324x9I_EVAL_AUDIO_Exported_Constants STM324x9I EVAL AUDIO Exported Constants
   * @{
   */
  
 /*------------------------------------------------------------------------------
                           USER SAI defines parameters
  -----------------------------------------------------------------------------*/
-/** @defgroup CODEC_AudioFrame_SLOT_TDMMode 
+/** @defgroup CODEC_AudioFrame_SLOT_TDMMode CODEC AudioFrame SLOT TDMMode 
   * @brief In W8994 codec the Audio frame contains 4 slots : TDM Mode
   * TDM format :
   * +------------------|------------------|--------------------|-------------------+ 
@@ -201,7 +201,7 @@
   * @}
   */
  
-/** @defgroup STM324x9I_EVAL_AUDIO_Exported_Variables
+/** @defgroup STM324x9I_EVAL_AUDIO_Exported_Variables STM324x9I EVAL AUDIO Exported Variables
   * @{
   */
 extern __IO uint16_t AudioInVolume;
@@ -209,7 +209,7 @@ extern __IO uint16_t AudioInVolume;
   * @}
   */
    
-/** @defgroup STM324x9I_EVAL_AUDIO_Exported_Macros
+/** @defgroup STM324x9I_EVAL_AUDIO_Exported_Macros STM324x9I EVAL AUDIO Exported Macros
   * @{
   */
 #define DMA_MAX(x)           (((x) <= DMA_MAX_SZE)? (x):DMA_MAX_SZE)
@@ -217,7 +217,7 @@ extern __IO uint16_t AudioInVolume;
   * @}
   */ 
 
-/** @defgroup STM324x9I_EVAL_AUDIO_OUT_Exported_Functions
+/** @defgroup STM324x9I_EVAL_AUDIO_OUT_Exported_Functions STM324x9I EVAL AUDIO OUT Exported Functions
   * @{
   */
 uint8_t BSP_AUDIO_OUT_Init(uint16_t OutputDevice, uint8_t Volume, uint32_t AudioFreq);
@@ -247,7 +247,7 @@ void    BSP_AUDIO_OUT_Error_CallBack(void);
   * @}
   */ 
 
-/** @defgroup STM324x9I_EVAL_AUDIO_IN_Exported_Functions
+/** @defgroup STM324x9I_EVAL_AUDIO_IN_Exported_Functions STM324x9I EVAL AUDIO IN Exported Functions
   * @{
   */
 uint8_t BSP_AUDIO_IN_Init(uint32_t AudioFreq, uint32_t BitRes, uint32_t ChnlNbr);

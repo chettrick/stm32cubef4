@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    IAP/IAP_Main/Src/common.c 
   * @author  MCD Application Team
-  * @version V1.4.2
-  * @date    13-November-2015
+  * @version V1.4.3
+  * @date    29-January-2016
   * @brief   This file provides all the common functions.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -177,9 +177,9 @@ void Serial_PutString(uint8_t *p_string)
 HAL_StatusTypeDef Serial_PutByte( uint8_t param )
 {
   /* May be timeouted... */
-  if ( UartHandle.State == HAL_UART_STATE_TIMEOUT )
+  if ( UartHandle.gState == HAL_UART_STATE_TIMEOUT )
   {
-    UartHandle.State = HAL_UART_STATE_READY;
+    UartHandle.gState = HAL_UART_STATE_READY;
   }
   return HAL_UART_Transmit(&UartHandle, &param, 1, TX_TIMEOUT);
 }

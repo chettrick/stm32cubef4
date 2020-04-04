@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm32f429i_discovery_sdram.h
   * @author  MCD Application Team
-  * @version V2.1.2
-  * @date    02-March-2015
+  * @version V2.1.3
+  * @date    13-January-2016
   * @brief   This file contains all the functions prototypes for the 
   *          stm32f429i_discovery_sdram.c driver.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -55,18 +55,18 @@
   * @{
   */
  
-/** @defgroup STM32F429I_DISCOVERY_SDRAM
+/** @addtogroup STM32F429I_DISCOVERY_SDRAM
   * @{
   */
   
-/** @defgroup STM32F429I_DISCOVERY_SDRAM_Exported_Types
+/** @defgroup STM32F429I_DISCOVERY_SDRAM_Exported_Types STM32F429I DISCOVERY SDRAM Exported Types
   * @{
   */
 /**
   * @}
   */
 
-/** @defgroup STM32F429I_DISCOVERY_SDRAM_Exported_Constants
+/** @defgroup STM32F429I_DISCOVERY_SDRAM_Exported_Constants STM32F429I DISCOVERY SDRAM Exported Constants
   * @{
   */ 
 /**
@@ -134,14 +134,14 @@
   * @}
   */
   
-/** @defgroup STM32F429I_DISCOVERY_SDRAM_Exported_Macro
+/** @defgroup STM32F429I_DISCOVERY_SDRAM_Exported_Macro STM32F429I DISCOVERY SDRAM Exported Macro
   * @{
   */
 /**
   * @}
   */ 
 
-/** @defgroup STM32F429I_DISCOVERY_SDRAM_Exported_Functions
+/** @defgroup STM32F429I_DISCOVERY_SDRAM_Exported_Functions STM32F429I DISCOVERY SDRAM Exported Functions
   * @{
   */
 void              BSP_SDRAM_Init(void);

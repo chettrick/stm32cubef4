@@ -2,11 +2,11 @@
   @page PWR_CurrentConsumption PWR Current Consumption example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    PWR/PWR_CurrentConsumption/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    13-November-2015
+  * @version V1.0.1
+  * @date    29-January-2016
   * @brief   Description of the PWR Current Consumption example.
   ******************************************************************************
   *
@@ -150,7 +150,7 @@ Here below a detailed description of the example code:
 
   - This example runs on STM32F429ZI devices.
     
-  - This example has been tested with STMicroelectronics NUCLEO-429ZI  Rev.B
+  - This example has been tested with STMicroelectronics NUCLEO-F429ZI  Rev.B
     board and can be easily tailored to any other supported device 
     and development board.
 

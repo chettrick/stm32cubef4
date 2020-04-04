@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324xg_eval_eeprom.c
   * @author  MCD Application Team
-  * @version V2.1.0
-  * @date    14-August-2015
+  * @version V2.2.1
+  * @date    15-January-2016
   * @brief   This file provides a set of functions needed to manage an I2C M24C64 
   *          EEPROM memory.
   *          
@@ -45,7 +45,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -82,33 +82,33 @@
   * @{
   */ 
   
-/** @addtogroup STM324xG_EVAL_EEPROM
+/** @defgroup STM324xG_EVAL_EEPROM STM324xG EVAL EEPROM
   * @brief This file includes the I2C EEPROM driver of STM32F4xG-EVAL evaluation board.
   * @{
   */ 
 
-/** @defgroup STM32F4xG_EVAL_EEPROM_Private_Types
+/** @defgroup STM324xG_EVAL_EEPROM_Private_Types STM324xG EVAL EEPROM Private Types
   * @{
   */ 
 /**
   * @}
   */ 
 
-/** @defgroup STM32F4xG_EVAL_EEPROM_Private_Defines
+/** @defgroup STM324xG_EVAL_EEPROM_Private_Defines STM324xG EVAL EEPROM Private Defines
   * @{
   */  
 /**
   * @}
   */ 
 
-/** @defgroup STM32F4xG_EVAL_EEPROM_Private_Macros
+/** @defgroup STM324xG_EVAL_EEPROM_Private_Macros STM324xG EVAL EEPROM Private Macros
   * @{
   */
 /**
   * @}
   */ 
 
-/** @defgroup STM32F4xG_EVAL_EEPROM_Private_Variables
+/** @defgroup STM324xG_EVAL_EEPROM_Private_Variables STM324xG EVAL EEPROM Private Variables
   * @{
   */
 __IO uint32_t  EEPROMTimeout = EEPROM_READ_TIMEOUT;
@@ -118,7 +118,7 @@ __IO uint8_t   EEPROMDataWrite;
   * @}
   */ 
 
-/** @defgroup STM32F4xG_EVAL_EEPROM_Private_Function_Prototypes
+/** @defgroup STM324xG_EVAL_EEPROM_Private_Function_Prototypes STM324xG EVAL EEPROM Private Function Prototypes
   * @{
   */ 
 static uint32_t EEPROM_WritePage(uint8_t* pBuffer, uint16_t WriteAddr, uint8_t* NumByteToWrite);
@@ -127,13 +127,12 @@ static uint32_t EEPROM_WaitEepromStandbyState(void);
   * @}
   */ 
 
-/** @defgroup STM32F4xG_EVAL_EEPROM_Private_Functions
+/** @defgroup STM324xG_EVAL_EEPROM_Private_Functions STM324xG EVAL EEPROM Private Functions
   * @{
   */ 
 
 /**
   * @brief  Initializes peripherals used by the I2C EEPROM driver.
-  * @param  None
   * @retval EEPROM_OK (0) if operation is correctly performed, else return value 
   *         different from EEPROM_OK (0)
   */
@@ -390,7 +389,6 @@ static uint32_t EEPROM_WritePage(uint8_t* pBuffer, uint16_t WriteAddr, uint8_t* 
   *        I2C packets addressed to it. Once the write operation is complete
   *        the EEPROM responds to its address.
   * 
-  * @param  None
   * @retval EEPROM_OK (0) if operation is correctly performed, else return value 
   *         different from EEPROM_OK (0) or the timeout user callback.
   */
@@ -408,8 +406,6 @@ static uint32_t EEPROM_WaitEepromStandbyState(void)
 
 /**
   * @brief  Basic management of the timeout situation.
-  * @param  None
-  * @retval None
   */
 __weak void BSP_EEPROM_TIMEOUT_UserCallback(void)
 {

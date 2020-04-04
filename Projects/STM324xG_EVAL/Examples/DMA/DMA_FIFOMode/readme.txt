@@ -2,11 +2,11 @@
   @page DMA_FIFOMode DMA FIFO mode example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    DMA/DMA_FIFOMode/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.4
-  * @date    13-November-2015
+  * @version V1.2.5
+  * @date    29-January-2016
   * @brief   Description of the DMA FIFO mode example.
   ******************************************************************************
   *

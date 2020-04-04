@@ -2,11 +2,11 @@
   @page HID_Standalone USB Device Human Interface (HID) application
   
   @verbatim
-  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    USB_Device/HID_Standalone/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    13-November-2015
+  * @version V1.0.1
+  * @date    29-January-2016
   * @brief   Description of the USB HID application.
   ******************************************************************************
   *
@@ -31,7 +31,7 @@ This application is a part of the USB Device Library package using STM32Cube fir
 use USB device application based on the Human Interface (HID) on the \STM32F429ZI- devices.
 
 This is a typical application on how to use the STM32F429ZI USB OTG Device peripheral where the STM32 MCU is
-enumerated as a HID device using the native PC Host HID driver to which the NUCLEO-429ZI 
+enumerated as a HID device using the native PC Host HID driver to which the NUCLEO-F429ZI 
 board is connected, in order to emulate the joystick by moving the host mouse pointer horizontally.
  
 This application supports remote wakeup (which is the ability of a USB device to bring a suspended bus back
@@ -86,11 +86,11 @@ For more details about the STM32Cube USB Device library, please refer to UM1734
 
   - This application runs on STM32F429ZI devices.
     
-  - This application has been tested with STMicroelectronics NUCLEO-429ZI  boards 
+  - This application has been tested with STMicroelectronics NUCLEO-F429ZI  boards 
     and can be easily tailored to any other supported device and development board.
 
-  - NUCLEO-429ZI  Set-up
-    - Connect the NUCLEO-429ZI  board to the PC through 'USB micro A-Male 
+  - NUCLEO-F429ZI  Set-up
+    - Connect the NUCLEO-F429ZI  board to the PC through 'USB micro A-Male 
       to A-Male' cable to the connector: 
     - CN13: to use USB Full Speed (FS)
 

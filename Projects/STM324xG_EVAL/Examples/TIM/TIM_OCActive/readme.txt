@@ -2,11 +2,11 @@
   @page TIM_OCActive Output Compare Active example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    TIM/TIM_OCActive/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.4
-  * @date    13-November-2015
+  * @version V1.2.5
+  * @date    29-January-2016
   * @brief   This example shows how to configure the Timer to generate four 
   *          delayed signals.
   ******************************************************************************

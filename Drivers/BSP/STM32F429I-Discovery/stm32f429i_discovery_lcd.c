@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm32f429i_discovery_lcd.c
   * @author  MCD Application Team
-  * @version V2.1.2
-  * @date    02-March-2015
+  * @version V2.1.3
+  * @date    13-January-2016
   * @brief   This file includes the LCD driver for ILI9341 Liquid Crystal 
   *          Display Modules of STM32F429I-Discovery kit (MB1075).
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -90,19 +90,19 @@
   * @{
   */
     
-/** @defgroup STM32F429I_DISCOVERY_LCD
+/** @defgroup STM32F429I_DISCOVERY_LCD STM32F429I DISCOVERY LCD
   * @brief This file includes the LCD driver for (ILI9341) 
   * @{
   */ 
 
-/** @defgroup STM32F429I_DISCOVERY_LCD_Private_TypesDefinitions
+/** @defgroup STM32F429I_DISCOVERY_LCD_Private_TypesDefinitions STM32F429I DISCOVERY LCD Private TypesDefinitions
   * @{
   */ 
 /**
   * @}
   */ 
 
-/** @defgroup STM32F429I_DISCOVERY_LCD_Private_Defines
+/** @defgroup STM32F429I_DISCOVERY_LCD_Private_Defines STM32F429I DISCOVERY LCD Private Defines
   * @{
   */
 #define POLY_X(Z)              ((int32_t)((Points + Z)->X))
@@ -111,7 +111,7 @@
   * @}
   */ 
 
-/** @defgroup STM32F429I_DISCOVERY_LCD_Private_Macros
+/** @defgroup STM32F429I_DISCOVERY_LCD_Private_Macros STM32F429I DISCOVERY LCD Private Macros
   * @{
   */
 #define ABS(X)  ((X) > 0 ? (X) : -(X))
@@ -119,7 +119,7 @@
   * @}
   */ 
   
-/** @defgroup STM32F429I_DISCOVERY_LCD_Private_Variables
+/** @defgroup STM32F429I_DISCOVERY_LCD_Private_Variables STM32F429I DISCOVERY LCD Private Variables
   * @{
   */ 
 static LTDC_HandleTypeDef  LtdcHandler;
@@ -134,7 +134,7 @@ LCD_DrvTypeDef  *LcdDrv;
   * @}
   */ 
 
-/** @defgroup STM32F429I_DISCOVERY_LCD_Private_FunctionPrototypes
+/** @defgroup STM32F429I_DISCOVERY_LCD_Private_FunctionPrototypes STM32F429I DISCOVERY LCD Private FunctionPrototypes
   * @{
   */ 
 static void MspInit(void);
@@ -145,13 +145,12 @@ static void ConvertLineToARGB8888(void *pSrc, void *pDst, uint32_t xSize, uint32
   * @}
   */ 
 
-/** @defgroup STM32F429I_DISCOVERY_LCD_Private_Functions
+/** @defgroup STM32F429I_DISCOVERY_LCD_Private_Functions STM32F429I DISCOVERY LCD Private Functions
   * @{
   */ 
 
 /**
   * @brief  Initializes the LCD.
-  * @param  None
   * @retval LCD state
   */
 uint8_t BSP_LCD_Init(void)
@@ -234,8 +233,7 @@ uint8_t BSP_LCD_Init(void)
 }  
 
 /**
-  * @brief  Gets the LCD X size.
-  * @param  None    
+  * @brief  Gets the LCD X size.  
   * @retval The used LCD X size
   */
 uint32_t BSP_LCD_GetXSize(void)
@@ -244,8 +242,7 @@ uint32_t BSP_LCD_GetXSize(void)
 }
 
 /**
-  * @brief  Gets the LCD Y size.
-  * @param  None    
+  * @brief  Gets the LCD Y size.  
   * @retval The used LCD Y size
   */
 uint32_t BSP_LCD_GetYSize(void)
@@ -257,7 +254,6 @@ uint32_t BSP_LCD_GetYSize(void)
   * @brief  Initializes the LCD layers.
   * @param  LayerIndex: the layer foreground or background. 
   * @param  FB_Address: the layer frame buffer.
-  * @retval None
   */
 void BSP_LCD_LayerDefaultInit(uint16_t LayerIndex, uint32_t FB_Address)
 {     
@@ -293,7 +289,6 @@ void BSP_LCD_LayerDefaultInit(uint16_t LayerIndex, uint32_t FB_Address)
 /**
   * @brief  Selects the LCD Layer.
   * @param  LayerIndex: the Layer foreground or background.
-  * @retval None
   */
 void BSP_LCD_SelectLayer(uint32_t LayerIndex)
 {
@@ -305,7 +300,6 @@ void BSP_LCD_SelectLayer(uint32_t LayerIndex)
   * @param  LayerIndex: the visible Layer.
   * @param  state: new state of the specified layer.
   *    This parameter can be: ENABLE or DISABLE.  
-  * @retval None
   */
 void BSP_LCD_SetLayerVisible(uint32_t LayerIndex, FunctionalState state)
 {
@@ -325,7 +319,6 @@ void BSP_LCD_SetLayerVisible(uint32_t LayerIndex, FunctionalState state)
   * @param  LayerIndex: the Layer foreground or background.
   * @param  Transparency: the Transparency, 
   *    This parameter must range from 0x00 to 0xFF.
-  * @retval None
   */
 void BSP_LCD_SetTransparency(uint32_t LayerIndex, uint8_t Transparency)
 {     
@@ -336,7 +329,6 @@ void BSP_LCD_SetTransparency(uint32_t LayerIndex, uint8_t Transparency)
   * @brief  Sets a LCD layer frame buffer address.
   * @param  LayerIndex: specifies the Layer foreground or background
   * @param  Address: new LCD frame buffer value      
-  * @retval None
   */
 void BSP_LCD_SetLayerAddress(uint32_t LayerIndex, uint32_t Address)
 {     
@@ -350,7 +342,6 @@ void BSP_LCD_SetLayerAddress(uint32_t LayerIndex, uint32_t Address)
   * @param  Ypos: LCD Y position
   * @param  Width: LCD window width
   * @param  Height: LCD window height  
-  * @retval None
   */
 void BSP_LCD_SetLayerWindow(uint16_t LayerIndex, uint16_t Xpos, uint16_t Ypos, uint16_t Width, uint16_t Height)
 {
@@ -365,7 +356,6 @@ void BSP_LCD_SetLayerWindow(uint16_t LayerIndex, uint16_t Xpos, uint16_t Ypos, u
   * @brief  Configures and sets the color Keying.
   * @param  LayerIndex: the Layer foreground or background
   * @param  RGBValue: the Color reference
-  * @retval None
   */
 void BSP_LCD_SetColorKeying(uint32_t LayerIndex, uint32_t RGBValue)
 {  
@@ -377,7 +367,6 @@ void BSP_LCD_SetColorKeying(uint32_t LayerIndex, uint32_t RGBValue)
 /**
   * @brief  Disables the color Keying.
   * @param  LayerIndex: the Layer foreground or background
-  * @retval None
   */
 void BSP_LCD_ResetColorKeying(uint32_t LayerIndex)
 {
@@ -387,7 +376,6 @@ void BSP_LCD_ResetColorKeying(uint32_t LayerIndex)
 
 /**
   * @brief  Gets the LCD Text color.
-  * @param  None 
   * @retval Text color
   */
 uint32_t BSP_LCD_GetTextColor(void)
@@ -396,8 +384,7 @@ uint32_t BSP_LCD_GetTextColor(void)
 }
 
 /**
-  * @brief  Gets the LCD Background color.
-  * @param  None  
+  * @brief  Gets the LCD Background color. 
   * @retval Background color  
   */
 uint32_t BSP_LCD_GetBackColor(void)
@@ -408,7 +395,6 @@ uint32_t BSP_LCD_GetBackColor(void)
 /**
   * @brief  Sets the Text color.
   * @param  Color: the Text color code ARGB(8-8-8-8)
-  * @retval None
   */
 void BSP_LCD_SetTextColor(uint32_t Color)
 {
@@ -418,7 +404,6 @@ void BSP_LCD_SetTextColor(uint32_t Color)
 /**
   * @brief  Sets the Background color.
   * @param  Color: the layer Background color code ARGB(8-8-8-8)
-  * @retval None
   */
 void BSP_LCD_SetBackColor(uint32_t Color)
 {
@@ -428,7 +413,6 @@ void BSP_LCD_SetBackColor(uint32_t Color)
 /**
   * @brief  Sets the Text Font.
   * @param  pFonts: the layer font to be used
-  * @retval None
   */
 void BSP_LCD_SetFont(sFONT *pFonts)
 {
@@ -437,7 +421,6 @@ void BSP_LCD_SetFont(sFONT *pFonts)
 
 /**
   * @brief  Gets the Text Font.
-  * @param  None
   * @retval Layer font
   */
 sFONT *BSP_LCD_GetFont(void)
@@ -484,7 +467,6 @@ uint32_t BSP_LCD_ReadPixel(uint16_t Xpos, uint16_t Ypos)
 /**
   * @brief  Clears the hole LCD.
   * @param  Color: the color of the background
-  * @retval None
   */
 void BSP_LCD_Clear(uint32_t Color)
 { 
@@ -495,7 +477,6 @@ void BSP_LCD_Clear(uint32_t Color)
 /**
   * @brief  Clears the selected line.
   * @param  Line: the line to be cleared
-  * @retval None
   */
 void BSP_LCD_ClearStringLine(uint32_t Line)
 {
@@ -514,7 +495,6 @@ void BSP_LCD_ClearStringLine(uint32_t Line)
   * @param  Xpos: start column address
   * @param  Ypos: the Line where to display the character shape
   * @param  Ascii: character ascii code, must be between 0x20 and 0x7E
-  * @retval None
   */
 void BSP_LCD_DisplayChar(uint16_t Xpos, uint16_t Ypos, uint8_t Ascii)
 {
@@ -532,7 +512,6 @@ void BSP_LCD_DisplayChar(uint16_t Xpos, uint16_t Ypos, uint8_t Ascii)
   *                @arg CENTER_MODE 
   *                @arg RIGHT_MODE
   *                @arg LEFT_MODE   
-  * @retval None
   */
 void BSP_LCD_DisplayStringAt(uint16_t X, uint16_t Y, uint8_t *pText, Text_AlignModeTypdef mode)
 {
@@ -587,7 +566,6 @@ void BSP_LCD_DisplayStringAt(uint16_t X, uint16_t Y, uint8_t *pText, Text_AlignM
   * @brief  Displays a maximum of 20 char on the LCD.
   * @param  Line: the Line where to display the character shape
   * @param  ptr: pointer to string to display on LCD
-  * @retval None
   */
 void BSP_LCD_DisplayStringAtLine(uint16_t Line, uint8_t *ptr)
 {
@@ -599,7 +577,6 @@ void BSP_LCD_DisplayStringAtLine(uint16_t Line, uint8_t *ptr)
   * @param  Xpos: the X position
   * @param  Ypos: the Y position
   * @param  Length: line length
-  * @retval None
   */
 void BSP_LCD_DrawHLine(uint16_t Xpos, uint16_t Ypos, uint16_t Length)
 {
@@ -617,7 +594,6 @@ void BSP_LCD_DrawHLine(uint16_t Xpos, uint16_t Ypos, uint16_t Length)
   * @param  Xpos: the X position
   * @param  Ypos: the Y position
   * @param  Length: line length
-  * @retval None
   */
 void BSP_LCD_DrawVLine(uint16_t Xpos, uint16_t Ypos, uint16_t Length)
 {
@@ -636,7 +612,6 @@ void BSP_LCD_DrawVLine(uint16_t Xpos, uint16_t Ypos, uint16_t Length)
   * @param  Y1: the point 1 Y position
   * @param  X2: the point 2 X position
   * @param  Y2: the point 2 Y position
-  * @retval None
   */
 void BSP_LCD_DrawLine(uint16_t X1, uint16_t Y1, uint16_t X2, uint16_t Y2)
 {
@@ -711,7 +686,6 @@ void BSP_LCD_DrawLine(uint16_t X1, uint16_t Y1, uint16_t X2, uint16_t Y2)
   * @param  Ypos: the Y position
   * @param  Height: display rectangle height
   * @param  Width: display rectangle width
-  * @retval None
   */
 void BSP_LCD_DrawRect(uint16_t Xpos, uint16_t Ypos, uint16_t Width, uint16_t Height)
 {
@@ -729,7 +703,6 @@ void BSP_LCD_DrawRect(uint16_t Xpos, uint16_t Ypos, uint16_t Width, uint16_t Hei
   * @param  Xpos: the X position
   * @param  Ypos: the Y position
   * @param  Radius: the circle radius
-  * @retval None
   */
 void BSP_LCD_DrawCircle(uint16_t Xpos, uint16_t Ypos, uint16_t Radius)
 {
@@ -769,7 +742,6 @@ void BSP_LCD_DrawCircle(uint16_t Xpos, uint16_t Ypos, uint16_t Radius)
   * @brief  Displays an poly-line (between many points).
   * @param  Points: pointer to the points array
   * @param  PointCount: Number of points
-  * @retval None
   */
 void BSP_LCD_DrawPolygon(pPoint Points, uint16_t PointCount)
 {
@@ -797,7 +769,6 @@ void BSP_LCD_DrawPolygon(pPoint Points, uint16_t PointCount)
   * @param  Ypos: the Y position
   * @param  XRadius: the X radius of ellipse
   * @param  YRadius: the Y radius of ellipse
-  * @retval None
   */
 void BSP_LCD_DrawEllipse(int Xpos, int Ypos, int XRadius, int YRadius)
 {
@@ -830,7 +801,6 @@ void BSP_LCD_DrawEllipse(int Xpos, int Ypos, int XRadius, int YRadius)
   * @param  X: the bmp x position in the LCD
   * @param  Y: the bmp Y position in the LCD
   * @param  pBmp: Bmp picture address in the internal Flash
-  * @retval None
   */
 void BSP_LCD_DrawBitmap(uint32_t X, uint32_t Y, uint8_t *pBmp)
 {
@@ -891,7 +861,6 @@ void BSP_LCD_DrawBitmap(uint32_t X, uint32_t Y, uint8_t *pBmp)
   * @param  Ypos: the Y position
   * @param  Height: rectangle height
   * @param  Width: rectangle width
-  * @retval None
   */
 void BSP_LCD_FillRect(uint16_t Xpos, uint16_t Ypos, uint16_t Width, uint16_t Height)
 {
@@ -912,7 +881,6 @@ void BSP_LCD_FillRect(uint16_t Xpos, uint16_t Ypos, uint16_t Width, uint16_t Hei
   * @param  Xpos: the X position
   * @param  Ypos: the Y position
   * @param  Radius: the circle radius
-  * @retval None
   */
 void BSP_LCD_FillCircle(uint16_t Xpos, uint16_t Ypos, uint16_t Radius)
 {
@@ -964,7 +932,6 @@ void BSP_LCD_FillCircle(uint16_t Xpos, uint16_t Ypos, uint16_t Radius)
   * @param  Y2: the point 2 y position
   * @param  X3: the point 3 x position
   * @param  Y3: the point 3 y position
-  * @retval None
   */
 void BSP_LCD_FillTriangle(uint16_t X1, uint16_t X2, uint16_t X3, uint16_t Y1, uint16_t Y2, uint16_t Y3)
 { 
@@ -1038,7 +1005,6 @@ void BSP_LCD_FillTriangle(uint16_t X1, uint16_t X2, uint16_t X3, uint16_t Y1, ui
   * @brief  Displays a full poly-line (between many points).
   * @param  Points: pointer to the points array
   * @param  PointCount: Number of points
-  * @retval None
   */
 void BSP_LCD_FillPolygon(pPoint Points, uint16_t PointCount)
 {
@@ -1107,7 +1073,6 @@ void BSP_LCD_FillPolygon(pPoint Points, uint16_t PointCount)
   * @param  Ypos: the Y position
   * @param  XRadius: X radius of ellipse
   * @param  YRadius: Y radius of ellipse. 
-  * @retval None
   */
 void BSP_LCD_FillEllipse(int Xpos, int Ypos, int XRadius, int YRadius)
 {
@@ -1136,8 +1101,6 @@ void BSP_LCD_FillEllipse(int Xpos, int Ypos, int XRadius, int YRadius)
 
 /**
   * @brief  Enables the Display.
-  * @param  None
-  * @retval None
   */
 void BSP_LCD_DisplayOn(void)
 {
@@ -1149,8 +1112,6 @@ void BSP_LCD_DisplayOn(void)
 
 /**
   * @brief  Disables the Display.
-  * @param  None
-  * @retval None
   */
 void BSP_LCD_DisplayOff(void)
 {
@@ -1166,8 +1127,6 @@ void BSP_LCD_DisplayOff(void)
 
 /**
   * @brief  Initializes the LTDC MSP.
-  * @param  None
-  * @retval None
   */
 static void MspInit(void)
 {
@@ -1252,7 +1211,6 @@ static void MspInit(void)
   * @param  Xpos: the X position
   * @param  Ypos: the Y position
   * @param  RGB_Code: the pixel color in ARGB mode (8-8-8-8)  
-  * @retval None
   */
 void BSP_LCD_DrawPixel(uint16_t Xpos, uint16_t Ypos, uint32_t RGB_Code)
 {
@@ -1265,7 +1223,6 @@ void BSP_LCD_DrawPixel(uint16_t Xpos, uint16_t Ypos, uint32_t RGB_Code)
   * @param  Xpos: the Line where to display the character shape
   * @param  Ypos: start column address
   * @param  c: pointer to the character data
-  * @retval None
   */
 static void DrawChar(uint16_t Xpos, uint16_t Ypos, const uint8_t *c)
 {
@@ -1323,7 +1280,6 @@ static void DrawChar(uint16_t Xpos, uint16_t Ypos, const uint8_t *c)
   * @param  ySize: buffer height
   * @param  OffLine: offset
   * @param  ColorIndex: color Index  
-  * @retval None
   */
 static void FillBuffer(uint32_t LayerIndex, void * pDst, uint32_t xSize, uint32_t ySize, uint32_t OffLine, uint32_t ColorIndex) 
 {
@@ -1355,7 +1311,6 @@ static void FillBuffer(uint32_t LayerIndex, void * pDst, uint32_t xSize, uint32_
   * @param  pDst: output color
   * @param  xSize: buffer width
   * @param  ColorMode: input color mode   
-  * @retval None
   */
 static void ConvertLineToARGB8888(void * pSrc, void * pDst, uint32_t xSize, uint32_t ColorMode)
 {    

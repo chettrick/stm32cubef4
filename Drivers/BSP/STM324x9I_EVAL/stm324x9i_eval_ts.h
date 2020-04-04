@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm324x9i_eval_ts.h
   * @author  MCD Application Team
-  * @version V2.2.1
-  * @date    07-October-2015
+  * @version V2.2.2
+  * @date    13-January-2016
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm324x9i_eval_ts.c driver.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -59,11 +59,11 @@
   * @{
   */
     
-/** @defgroup STM324x9I_EVAL_TS
+/** @defgroup STM324x9I_EVAL_TS STM324x9I EVAL TS
   * @{
   */    
 
-/** @defgroup STM324x9I_EVAL_TS_Exported_Types
+/** @defgroup STM324x9I_EVAL_TS_Exported_Types STM324x9I EVAL TS Exported Types
   * @{
   */
 typedef struct
@@ -77,7 +77,7 @@ typedef struct
   * @}
   */ 
 
-/** @defgroup STM324x9I_EVAL_TS_Exported_Constants
+/** @defgroup STM324x9I_EVAL_TS_Exported_Constants STM324x9I EVAL TS Exported Constants
   * @{
   */
 #define TS_SWAP_NONE                    0x00
@@ -98,14 +98,14 @@ typedef enum
   * @}
   */ 
 
-/** @defgroup STM324x9I_EVAL_TS_Exported_Macros
+/** @defgroup STM324x9I_EVAL_TS_Exported_Macros STM324x9I EVAL TS Exported Macros
   * @{
   */ 
 /**
   * @}
   */ 
 
-/** @defgroup STM324x9I_EVAL_TS_Exported_Functions
+/** @defgroup STM324x9I_EVAL_TS_Exported_Functions STM324x9I EVAL TS Exported Functions
   * @{
   */
 uint8_t BSP_TS_Init(uint16_t xSize, uint16_t ySize);

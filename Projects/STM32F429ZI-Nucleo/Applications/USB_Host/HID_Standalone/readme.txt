@@ -2,11 +2,11 @@
   @page HID_Standalone USB Host Human Interface (HID) application
   
   @verbatim
-  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    USB_Host/HID_Standalone/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    13-November-2015
+  * @version V1.0.1
+  * @date    29-January-2016
   * @brief   Description of the USB Host HID application.
   ******************************************************************************
   *
@@ -113,7 +113,7 @@ requirements, such as:
   - Adafruit 1.8" TFT shield must be connected on CN5,CN6, CN8 and CN9 Arduino connectors, 
     for more details please refer to UM1726.
 
-  - Make sure the SB146, SB121 are closed and the SB174, SB165, SB122 are opened on the NUCLEO-429ZI board (bottom side) 
+  - Make sure the SB146, SB121 are closed and the SB174, SB165, SB122 are opened on the NUCLEO-F429ZI board (bottom side) 
 
 @par How to use it ?
 

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    IAP/IAP_Main/Src/ymodem.c 
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    13-November-2015
+  * @version V1.0.3
+  * @date    29-January-2016
   * @brief   This file provides all the software functions related to the ymodem 
   *          protocol.
   ******************************************************************************
@@ -652,4 +652,4 @@ COM_StatusTypeDef Ymodem_Transmit (uint8_t *p_buf, const uint8_t *p_file_name, u
   * @}
   */
 
-/*******************(C)COPYRIGHT 2015 STMicroelectronics *****END OF FILE****/
+/*******************(C)COPYRIGHT 2016 STMicroelectronics *****END OF FILE****/

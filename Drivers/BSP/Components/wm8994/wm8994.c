@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    wm8994.c
   * @author  MCD Application Team
-  * @version V2.0.0
-  * @date    24-June-2015
+  * @version V2.1.0RC1
+  * @date    16-September-2015
   * @brief   This file provides the WM8994 Audio Codec driver.   
   ******************************************************************************
   * @attention
@@ -66,7 +66,7 @@
 /* Uncomment this line to enable verifying data sent to codec after each write 
    operation (for debug purpose) */
 #if !defined (VERIFY_WRITTENDATA)  
-/* #define VERIFY_WRITTENDATA */
+/*#define VERIFY_WRITTENDATA*/
 #endif /* VERIFY_WRITTENDATA */
 /**
   * @}
@@ -149,9 +149,16 @@ uint32_t wm8994_Init(uint16_t DeviceAddr, uint16_t OutputInputDevice, uint8_t Vo
   /* Enable VMID soft start (fast), Start-up Bias Current Enabled */
   counter += CODEC_IO_Write(DeviceAddr, 0x39, 0x006C);
   
-  /* Enable bias generator, Enable VMID */
-  counter += CODEC_IO_Write(DeviceAddr, 0x01, 0x0003);
-  
+    /* Enable bias generator, Enable VMID */
+  if (input_device > 0)
+  {
+    counter += CODEC_IO_Write(DeviceAddr, 0x01, 0x0013);
+  }
+  else
+  {
+    counter += CODEC_IO_Write(DeviceAddr, 0x01, 0x0003);
+  }
+
   /* Add Delay */
   AUDIO_IO_Delay(50);
 
@@ -269,6 +276,15 @@ uint32_t wm8994_Init(uint16_t DeviceAddr, uint16_t OutputInputDevice, uint8_t Vo
       break;
 
     case INPUT_DEVICE_INPUT_LINE_1 :
+      /* IN1LN_TO_IN1L, IN1LP_TO_VMID, IN1RN_TO_IN1R, IN1RP_TO_VMID */
+      counter += CODEC_IO_Write(DeviceAddr, 0x28, 0x0011);
+
+      /* Disable mute on IN1L_TO_MIXINL and +30dB on IN1L PGA output */
+      counter += CODEC_IO_Write(DeviceAddr, 0x29, 0x0035);
+
+      /* Disable mute on IN1R_TO_MIXINL, Gain = +30dB */
+      counter += CODEC_IO_Write(DeviceAddr, 0x2A, 0x0035);
+
       /* Enable AIF1ADC1 (Left), Enable AIF1ADC1 (Right)
        * Enable Left ADC, Enable Right ADC */
       counter += CODEC_IO_Write(DeviceAddr, 0x04, 0x0303);
@@ -455,24 +471,12 @@ uint32_t wm8994_Init(uint16_t DeviceAddr, uint16_t OutputInputDevice, uint8_t Vo
     }
     else if ((input_device == INPUT_DEVICE_INPUT_LINE_1) || (input_device == INPUT_DEVICE_INPUT_LINE_2))
     {
-      /* Enable normal bias generator, Enable VMID */
-      power_mgnt_reg_1 |= 0x0003;
-      counter += CODEC_IO_Write(DeviceAddr, 0x01, power_mgnt_reg_1);
 
       /* Disable mute on IN1L, IN1L Volume = +0dB */
       counter += CODEC_IO_Write(DeviceAddr, 0x18, 0x000B);
 
       /* Disable mute on IN1R, IN1R Volume = +0dB */
       counter += CODEC_IO_Write(DeviceAddr, 0x1A, 0x000B);
-
-      /* Disable mute on IN1L_TO_MIXINL, Gain = +0dB */
-      counter += CODEC_IO_Write(DeviceAddr, 0x29, 0x0025);
-
-      /* Disable mute on IN1R_TO_MIXINL, Gain = +0dB */
-      counter += CODEC_IO_Write(DeviceAddr, 0x2A, 0x0025);
-
-      /* IN1LN_TO_IN1L, IN1LP_TO_VMID, IN1RN_TO_IN1R, IN1RP_TO_VMID */
-      counter += CODEC_IO_Write(DeviceAddr, 0x28, 0x0011);
 
       /* AIF ADC1 HPF enable, HPF cut = hifi mode fc=4Hz at fs=48kHz */
       counter += CODEC_IO_Write(DeviceAddr, 0x410, 0x1800);

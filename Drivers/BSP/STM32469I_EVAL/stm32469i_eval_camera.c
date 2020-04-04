@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm32469i_eval_camera.c
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    29-September-2015
+  * @version V1.0.2
+  * @date    12-January-2016
   * @brief   This file includes the driver for Camera modules mounted on
   *          STM32469I-EVAL evaluation board.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -70,36 +70,36 @@
   * @{
   */
 
-/** @addtogroup STM32469I-EVAL
+/** @addtogroup STM32469I_EVAL
   * @{
   */
 
-/** @addtogroup STM32469I-EVAL_CAMERA
+/** @defgroup STM32469I-EVAL_CAMERA STM32469I EVAL CAMERA
   * @{
   */
 
-/** @defgroup STM32469I-EVAL_CAMERA_Private_TypesDefinitions STM32469I Eval Camera Private TypesDef
-  * @{
-  */
-/**
-  * @}
-  */
-
-/** @defgroup STM32469I-EVAL_CAMERA_Private_Defines STM32469I Eval Camera Private Defines
+/** @defgroup STM32469I-EVAL_CAMERA_Private_TypesDefinitions STM32469I EVAL CAMERA Private TypesDefinitions
   * @{
   */
 /**
   * @}
   */
 
-/** @defgroup STM32469I-EVAL_CAMERA_Private_Macros STM32469I Eval Camera Private Macros
+/** @defgroup STM32469I-EVAL_CAMERA_Private_Defines STM32469I EVAL CAMERA Private Defines
   * @{
   */
 /**
   * @}
   */
 
-/** @defgroup STM32469I-EVAL_CAMERA_Imported_Variables STM32469I Eval Camera Imported Variables
+/** @defgroup STM32469I-EVAL_CAMERA_Private_Macros STM32469I EVAL CAMERA Private Macros
+  * @{
+  */
+/**
+  * @}
+  */
+
+/** @defgroup STM32469I-EVAL_CAMERA_Imported_Variables STM32469I EVAL CAMERA Imported Variables
   * @{
   */
 /**
@@ -110,7 +110,7 @@ extern DMA2D_HandleTypeDef hdma2d_eval;
   * @}
   */
 
-/** @defgroup STM32469I-EVAL_CAMERA_Private_Variables STM32469I Eval Camera Private Variables
+/** @defgroup STM32469I-EVAL_CAMERA_Private_Variables STM32469I EVAL CAMERA Private Variables
   * @{
   */
 static DCMI_HandleTypeDef  hDcmiEval;
@@ -128,7 +128,7 @@ static uint32_t  CameraHwAddress;
   * @}
   */
 
-/** @defgroup STM32469I-EVAL_CAMERA_Private_FunctionPrototypes STM32469I Eval Camera Private Prototypes
+/** @defgroup STM32469I-EVAL_CAMERA_Private_FunctionPrototypes STM32469I EVAL CAMERA Private FunctionPrototypes
   * @{
   */
 static uint32_t GetSize(uint32_t Resolution);
@@ -136,7 +136,7 @@ static uint32_t GetSize(uint32_t Resolution);
   * @}
   */
 
-/** @defgroup STM32469I-EVAL_CAMERA_Public_Functions STM32469I Eval Camera Public Functions
+/** @defgroup STM32469I-EVAL_CAMERA_Public_Functions STM32469I EVAL CAMERA Public Functions
   * @{
   */
 

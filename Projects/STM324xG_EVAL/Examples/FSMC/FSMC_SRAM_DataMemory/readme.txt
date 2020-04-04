@@ -2,11 +2,11 @@
   @page FSMC_SRAM_DataMemory FSMC SRAM data memory example
   
   @verbatim
-  ******************* (C) COPYRIGHT 2015 STMicroelectronics ********************
+  ******************* (C) COPYRIGHT 2016 STMicroelectronics ********************
   * @file    FSMC/FSMC_SRAM_DataMemory/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.4
-  * @date    13-November-2015
+  * @version V1.2.5
+  * @date    29-January-2016
   * @brief   Description of the FSMC SRAM data memory example.
   ******************************************************************************
   *

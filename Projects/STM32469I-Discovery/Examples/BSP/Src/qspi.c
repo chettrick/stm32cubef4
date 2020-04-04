@@ -2,13 +2,13 @@
 ******************************************************************************
 * @file    BSP/Src/qspi.c
 * @author  MCD Application Team
-* @version $VERSION$
-* @date    $DATE$
+* @version V1.0.2
+* @date    29-January-2016
 * @brief   This example code shows how to use the QSPI Driver
 ******************************************************************************
 * @attention
 *
-* <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+* <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
 *
 * Redistribution and use in source and binary forms, with or without modification,
 * are permitted provided that the following conditions are met:

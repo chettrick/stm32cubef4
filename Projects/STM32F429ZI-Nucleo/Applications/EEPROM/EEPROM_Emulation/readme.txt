@@ -2,11 +2,11 @@
   @page EEPROM_Emulation application to show an eeprom emulation
 
   @verbatim
-  ******************* (C) COPYRIGHT 2015 STMicroelectronics ********************
+  ******************* (C) COPYRIGHT 2016 STMicroelectronics ********************
   * @file    EEPROM/EEPROM_Emulation/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    13-November-2015
+  * @version V1.0.1
+  * @date    29-January-2016
   * @brief   Description of the EEPROM_Emulation application.
   ******************************************************************************
   *
@@ -49,7 +49,7 @@ the first half word (16-bit) of each sector indicates the sector status. Each of
 considered as a page.
 The sectors used are Sector 2 and Sector 3 with a size of 16KB each one.
 
-NUCLEO-429ZI  board's LEDs can be used to monitor the application status:
+NUCLEO-F429ZI  board's LEDs can be used to monitor the application status:
   - LED1 is On when the application runs successfully.
   - LED1 is toggle in case of error.
 
@@ -78,10 +78,10 @@ NUCLEO-429ZI  board's LEDs can be used to monitor the application status:
 
   - This application runs on STM32F429ZI device.
     
-  - This application has been tested with NUCLEO-429ZI  Rev B board and can be
+  - This application has been tested with NUCLEO-F429ZI  Rev B board and can be
     easily tailored to any other supported device and development board.
 
-Table 1. EEPROM application implementation on NUCLEO-429ZI 
+Table 1. EEPROM application implementation on NUCLEO-F429ZI 
 /*** Platform ***|************* Implementation **************************|***** Configuration *****\
 ****************************************************************************************************
 |    Firmware    | The EEPROM program is located at 0x08000000. The Flash|                         |

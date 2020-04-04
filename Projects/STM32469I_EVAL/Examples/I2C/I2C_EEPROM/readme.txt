@@ -2,11 +2,11 @@
   @page I2C_EEPROM I2C EEPROM DMA example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    I2C/I2C_EEPROM/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    13-November-2015
+  * @version V1.0.3
+  * @date    29-January-2016
   * @brief   Description of the I2C EEPROM DMA example.
   ******************************************************************************
   *

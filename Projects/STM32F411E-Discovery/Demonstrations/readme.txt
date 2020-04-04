@@ -2,11 +2,11 @@
   @page Demo   Demo STM32F411E_Discovery 
  
   @verbatim
-  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    Demonstrations/readme.txt 
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    01-July-2015
+  * @version V1.3.1
+  * @date    29-January-2016
   * @brief   Description STM32F411E Discovery Demo 
   ******************************************************************************
   *

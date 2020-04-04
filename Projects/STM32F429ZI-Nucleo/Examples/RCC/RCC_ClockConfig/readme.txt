@@ -2,11 +2,11 @@
   @page RCC_ClockConfig RCC Clock Config example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    RCC/RCC_ClockConfig/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    13-November-2015
+  * @version V1.0.1
+  * @date    29-January-2016
   * @brief   Description of the RCC Clock Config example.
   ******************************************************************************
   *
@@ -97,7 +97,7 @@ LED1 is toggled with a timing defined by the HAL_Delay() API.
 
   - This example runs on STM32F429ZI devices.
     
-  - This example has been tested with NUCLEO-429ZI  Rev.B 
+  - This example has been tested with NUCLEO-F429ZI  Rev.B 
     board and can be easily tailored to any other supported device
     and development board.
     

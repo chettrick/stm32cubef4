@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    IAP/IAP_Main/Src/menu.c 
   * @author  MCD Application Team
-  * @version V1.4.2
-  * @date    13-November-2015
+  * @version V1.4.3
+  * @date    29-January-2016
 
   * @brief   This file provides the software which contains the main menu routine.
   *          The main menu gives the options of:
@@ -131,7 +131,7 @@ void Main_Menu(void)
   uint8_t key = 0;
 
   Serial_PutString((uint8_t *)"\r\n======================================================================");
-  Serial_PutString((uint8_t *)"\r\n=              (C) COPYRIGHT 2015 STMicroelectronics                 =");
+  Serial_PutString((uint8_t *)"\r\n=              (C) COPYRIGHT(c) 2016 STMicroelectronics                 =");
   Serial_PutString((uint8_t *)"\r\n=                                                                    =");
   Serial_PutString((uint8_t *)"\r\n=          STM32F4xx In-Application Programming Application          =");
   Serial_PutString((uint8_t *)"\r\n=                                                                    =");

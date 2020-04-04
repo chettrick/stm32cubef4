@@ -2,11 +2,11 @@
   @page TIM_PWMInput TIM_PWMInput example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    TIM/TIM_PWMInput/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    13-November-2015
+  * @version V1.0.1
+  * @date    29-January-2016
   * @brief   Description of the TIM PWM_Input example.
   ******************************************************************************
   *

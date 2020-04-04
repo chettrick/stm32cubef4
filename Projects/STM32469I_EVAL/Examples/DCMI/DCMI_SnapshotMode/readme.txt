@@ -2,16 +2,16 @@
   @page DCMI_SnapshotMode DCMI Capture Mode example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    DCMI/DCMI_SnapshotMode/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    13-November-2015
+  * @version V1.0.3
+  * @date    29-January-2016
   * @brief   Description of the STM32F4xx DCMI_SnapshotMode example.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -52,15 +52,15 @@ clock (SYSCLK) to run at 180 MHz.
 The Digital camera interface (DCMI) is configured to receive the capture from
 the camera module mounted on STM32469I-EVAL evaluation board.
 A DMA Peripheral to Memory is programmed between DCMI and Camera Frame buffer to receive a 320x240 RGB565
-in camera frame buffer in SDRAM or SRAM on a line by line basis.
-On each DCMI Line event callback, the DMA2D is used to copy and convert 
-a RGB565 line from Camera frame buffer in a ARGB8888 line in LCD Frame buffer also in SDRAM or SRAM. 
-When the IT DCMI End of frame occurs, the obtained LCD Frame buffer is displayed on LCD.
+in camera frame buffer in SDRAM or SRAM.
+When the IT DCMI End of frame occurs, the DMA2D is used to copy and convert the RGB565 frame from Camera into an ARGB8888 LCD Frame buffer
+and therefore the obtained buffer is displayed on LCD.
 
 The camera module is configured to generate QVGA (320x240) image resolution
 and the LCD is configured to display QVGA image resolution
 
-LED1 is ON to indicate the test is OK. LED3 is toggling to indicate the CPU is still running.
+LED1 is ON to indicate the test is OK. 
+LED3 is ON in case of initialization error.
 
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
       based on variable incremented in SysTick ISR. This implies that if HAL_Delay() is called from

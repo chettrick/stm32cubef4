@@ -2,11 +2,11 @@
   @page FatFs_RAMDisk   FatFs with RAM disk drive application
  
   @verbatim
-  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    FatFs/FatFs_RAMDisk/readme.txt 
   * @author  MCD Application Team
-  * @version V1.3.2
-  * @date    13-November-2015
+  * @version V1.3.3
+  * @date    29-January-2016
   * @brief   Description of the FatFs with RAM disk drive application
   ******************************************************************************
   *

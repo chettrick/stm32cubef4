@@ -2,11 +2,11 @@
   @page LwIP_HTTP_Server_Netconn_RTOS LwIP HTTP Server Netconn Application
   
   @verbatim
-  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    LwIP/LwIP_HTTP_Server_Netconn_RTOS/readme.txt 
   * @author  MCD Application Team
-  * @version V1.4.2
-  * @date    13-November-2015
+  * @version V1.4.3
+  * @date    29-January-2016
   * @brief   Description of the LwIP http server Netconn API.
   ******************************************************************************
   *

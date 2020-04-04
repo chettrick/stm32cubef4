@@ -2,11 +2,11 @@
   @page PWR_STOP Power Stop Mode Example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    PWR/PWR_STOP/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date  09-October-2015
+  * @version V1.0.2
+  * @date    29-January-2016
   * @brief   Description of the Power Stop Mode example.
   ******************************************************************************
   *

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BSP/Inc/lcd_log_conf.h
   * @author  MCD Application Team
-  * @version V1.1.2
-  * @date    13-November-2015
+  * @version V1.1.3
+  * @date    29-January-2016
   * @brief   lcd_log configuration template file.
   *          This file should be copied to the application folder and modified 
   *          as follows:
@@ -14,7 +14,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:

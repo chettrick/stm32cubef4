@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    STM32F4xx_IAP/inc/stm32f4xx_conf.h  
   * @author  MCD Application Team
-  * @version V1.0.0
+  * @version V1.3.3
   * @date    10-October-2011
   * @brief   Library configuration file.
   ******************************************************************************

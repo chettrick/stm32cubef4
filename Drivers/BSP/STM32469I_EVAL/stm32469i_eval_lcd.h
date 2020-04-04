@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm32469i_eval_lcd.h
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    29-September-2015
+  * @version V1.0.2
+  * @date    12-January-2016
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm32469i_eval_lcd.c driver.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -62,15 +62,15 @@
   * @{
   */
 
-/** @addtogroup STM32469I-EVAL
+/** @addtogroup STM32469I_EVAL
   * @{
   */
 
-/** @addtogroup STM32469I-EVAL_LCD STM32469I EVAL LCD
+/** @addtogroup STM32469I_EVAL_LCD STM32469I EVAL LCD
   * @{
   */
 
-/** @defgroup STM32469I-EVAL_LCD_Exported_Constants STM32469I EVAL LCD Exported Constants
+/** @defgroup STM32469I_EVAL_LCD_Exported_Constants STM32469I EVAL LCD Exported Constants
   * @{
   */
 
@@ -301,8 +301,12 @@ typedef enum
 /** @defgroup STM32469I-EVAL_LCD_Exported_Macro STM32469I EVAL LCD Exported Macro
   * @{
   */
+  
+/**
+  * @}
+  */
 
-/** @defgroup STM32469I-EVAL_LCD_Exported_Functions STM32469I EVAL LCD Exported Functions
+/** @addtogroup STM32469I-EVAL_LCD_Exported_Functions 
   * @{
   */
 
@@ -369,16 +373,12 @@ void     BSP_LCD_DisplayOn(void);
   * @}
   */
 
-/** @defgroup STM32469I-EVAL_LCD_Exported_Variables STM32469I EVAL LCD Exported Variables
+/** @addtogroup STM32469I-EVAL_LCD_Exported_Variables 
   * @{
   */
 
 /* @brief DMA2D handle variable */
 extern DMA2D_HandleTypeDef hdma2d_eval;
-
-/**
-  * @}
-  */
 
 /**
   * @}

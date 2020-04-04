@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm324x9i_eval_sdram.c
   * @author  MCD Application Team
-  * @version V2.2.1
-  * @date    07-October-2015
+  * @version V2.2.2
+  * @date    13-January-2016
   * @brief   This file includes the SDRAM driver for the MT48LC4M32B2B5-7 memory 
   *          device mounted on STM324x9I-EVAL evaluation board.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -88,32 +88,32 @@
   * @{
   */ 
   
-/** @defgroup STM324x9I_EVAL_SDRAM
+/** @defgroup STM324x9I_EVAL_SDRAM STM324x9I EVAL SDRAM
   * @{
   */ 
 
-/** @defgroup STM324x9I_EVAL_SDRAM_Private_Types_Definitions
+/** @defgroup STM324x9I_EVAL_SDRAM_Private_Types_Definitions STM324x9I EVAL SDRAM Private Types Definitions
   * @{
   */ 
 /**
   * @}
   */
 
-/** @defgroup STM324x9I_EVAL_SDRAM_Private_Defines
+/** @defgroup STM324x9I_EVAL_SDRAM_Private_Defines STM324x9I EVAL SDRAM Private Defines
   * @{
   */
 /**
   * @}
   */
 
-/** @defgroup STM324x9I_EVAL_SDRAM_Private_Macros
+/** @defgroup STM324x9I_EVAL_SDRAM_Private_Macros STM324x9I EVAL SDRAM Private Macros
   * @{
   */  
 /**
   * @}
   */
 
-/** @defgroup STM324x9I_EVAL_SDRAM_Private_Variables
+/** @defgroup STM324x9I_EVAL_SDRAM_Private_Variables STM324x9I EVAL SDRAM Private Variables
   * @{
   */       
 static SDRAM_HandleTypeDef sdramHandle;
@@ -123,7 +123,7 @@ static FMC_SDRAM_CommandTypeDef Command;
   * @}
   */ 
 
-/** @defgroup STM324x9I_EVAL_SDRAM_Private_Function_Prototypes
+/** @defgroup STM324x9I_EVAL_SDRAM_Private_Function_Prototypes STM324x9I EVAL SDRAM Private Function Prototypes
   * @{
   */ 
 static void SDRAM_MspInit(void); 
@@ -131,13 +131,12 @@ static void SDRAM_MspInit(void);
   * @}
   */
     
-/** @defgroup STM324x9I_EVAL_SDRAM_Private_Functions
+/** @defgroup STM324x9I_EVAL_SDRAM_Private_Functions STM324x9I EVAL SDRAM Private Functions
   * @{
   */ 
 
 /**
   * @brief  Initializes the SDRAM device.
-  * @param  None
   * @retval SDRAM status
   */
 uint8_t BSP_SDRAM_Init(void)
@@ -186,7 +185,6 @@ uint8_t BSP_SDRAM_Init(void)
 /**
   * @brief  Programs the SDRAM device.
   * @param  RefreshCount: SDRAM refresh counter value 
-  * @retval None
   */
 void BSP_SDRAM_Initialization_sequence(uint32_t RefreshCount)
 {
@@ -338,8 +336,6 @@ uint8_t BSP_SDRAM_Sendcmd(FMC_SDRAM_CommandTypeDef *SdramCmd)
 
 /**
   * @brief  Handles SDRAM DMA transfer interrupt request.
-  * @param  None
-  * @retval None
   */
 void BSP_SDRAM_DMA_IRQHandler(void)
 {
@@ -348,8 +344,6 @@ void BSP_SDRAM_DMA_IRQHandler(void)
 
 /**
   * @brief  Initializes SDRAM MSP.
-  * @param  None
-  * @retval None
   */
 static void SDRAM_MspInit(void)
 {  

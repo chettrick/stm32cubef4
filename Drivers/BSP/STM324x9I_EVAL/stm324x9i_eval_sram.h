@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm324x9i_eval_sram.h
   * @author  MCD Application Team
-  * @version V2.2.1
-  * @date    07-October-2015
+  * @version V2.2.2
+  * @date    13-January-2016
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm324x9i_eval_sram.c driver.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -55,18 +55,18 @@
   * @{
   */
     
-/** @defgroup STM324x9I_EVAL_SRAM
+/** @defgroup STM324x9I_EVAL_SRAM STM324x9I EVAL SRAM
   * @{
   */    
 
-/** @defgroup STM324x9I_EVAL_SRAM_Exported_Types
+/** @defgroup STM324x9I_EVAL_SRAM_Exported_Types STM324x9I EVAL SRAM Exported Types
   * @{
   */
 /**
   * @}
   */
 
-/** @defgroup STM324x9I_EVAL_SRAM_Exported_Constants
+/** @defgroup STM324x9I_EVAL_SRAM_Exported_Constants STM324x9I EVAL SRAM Exported Constants
   * @{
   */ 
 
@@ -101,14 +101,14 @@
   * @}
   */ 
   
-/** @defgroup STM324x9I_EVAL_SRAM_Exported_Macro
+/** @defgroup STM324x9I_EVAL_SRAM_Exported_Macro STM324x9I EVAL SRAM Exported Macro
   * @{
   */  
 /**
   * @}
   */ 
    
-/** @defgroup STM324x9I_EVAL_SRAM_Exported_Functions
+/** @defgroup STM324x9I_EVAL_SRAM_Exported_Functions STM324x9I EVAL SRAM Exported Functions
   * @{
   */    
 uint8_t BSP_SRAM_Init(void);

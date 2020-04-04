@@ -2,11 +2,11 @@
   @page LwIP_IAP  LwIP IAP over Ethernet application. 
  
   @verbatim
-  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    LwIP/LwIP_IAP/readme.txt 
   * @author  MCD Application Team
-  * @version V1.3.2
-  * @date    13-November-2015
+  * @version V1.3.3
+  * @date    29-January-2016
   * @brief   Description of the In-Application Programming (IAP) over Ethernet application. 
   ******************************************************************************
   *

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    rtc.c
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    13-November-2015
+  * @version V1.0.3
+  * @date    29-January-2016
   * @brief   <Add here what does this driver do>
   ******************************************************************************
   * @attention

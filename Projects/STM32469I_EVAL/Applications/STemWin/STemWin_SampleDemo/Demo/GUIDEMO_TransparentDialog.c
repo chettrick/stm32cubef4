@@ -1,5 +1,5 @@
 /*********************************************************************
-*          Portions COPYRIGHT 2015 STMicroelectronics                *
+*          Portions COPYRIGHT 2016 STMicroelectronics                *
 *          Portions SEGGER Microcontroller GmbH & Co. KG             *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
@@ -36,8 +36,8 @@ Purpose     : Demo of a semi transparent dialog
   ******************************************************************************
   * @file    GUIDEMO_TransparentDialog.c
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    13-March-2015
+  * @version V1.0.3
+  * @date    29-January-2016
   * @brief   Demo of a semi transparent dialog
   ******************************************************************************
   * @attention

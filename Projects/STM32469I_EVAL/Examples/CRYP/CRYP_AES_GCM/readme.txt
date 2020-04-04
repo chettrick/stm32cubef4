@@ -2,11 +2,11 @@
   @page CRYP_AES_GCM  Encrypt and Decrypt data using AES Algo using GCM chaining mode
   
   @verbatim
-  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    CRYP/CRYP_AES_GCM/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    13-November-2015
+  * @version V1.0.3
+  * @date    29-January-2016
   * @brief   Description of the CRYP AES Algorithm using GCM chaining mode example
   ******************************************************************************
   *

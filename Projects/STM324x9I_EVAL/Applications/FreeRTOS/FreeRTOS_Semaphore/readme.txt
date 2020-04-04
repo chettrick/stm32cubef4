@@ -2,11 +2,11 @@
   @page FreeRTOS_Semaphore FreeRTOS Semaphore application
  
   @verbatim
-  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    FreeRTOS/FreeRTOS_Semaphore/readme.txt
   * @author  MCD Application Team
-  * @version V1.4.2
-  * @date    13-November-2015 
+  * @version V1.4.3
+  * @date    29-January-2016 
   * @brief   Description of the FreeRTOS Semaphore application.
   ******************************************************************************
   *

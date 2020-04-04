@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    USB_Host/HID_Standalone/Inc/lcd_log_conf.h
   * @author  MCD Application Team
-  * @version V1.2.2
-  * @date    13-November-2015
+  * @version V1.2.3
+  * @date    29-January-2016
   * @brief   LCD Log configuration file.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics </center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:

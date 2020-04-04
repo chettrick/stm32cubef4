@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    Demonstrations/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    01-July-2015
+  * @version V1.3.1
+  * @date    29-January-2016
   * @brief   This demo describes how to use accelerometer to control mouse on 
   *          PC.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:

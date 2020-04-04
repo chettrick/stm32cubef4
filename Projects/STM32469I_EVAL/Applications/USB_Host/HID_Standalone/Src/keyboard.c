@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    USB_Host/HID_Standalone/Src/keyboard.c 
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    13-November-2015
+  * @version V1.0.3
+  * @date    29-January-2016
   * @brief   This file implements the HID keyboard functions
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -150,18 +150,18 @@ void USR_KEYBRD_ProcessData(uint8_t data)
     {
       /* First character of first line to be deleted */
       if(KeybrdCharXpos == KYBRD_FIRST_LINE)
-      {  
+      { 
         KeybrdCharYpos = KYBRD_FIRST_COLUMN; 
       }
       else
       {
-        KeybrdCharXpos += SMALL_FONT_LINE_WIDTH;
-        KeybrdCharYpos = (KYBRD_LAST_COLUMN + SMALL_FONT_COLUMN_WIDTH); 
+        KeybrdCharXpos -= SMALL_FONT_LINE_WIDTH;
+        KeybrdCharYpos = (KYBRD_LAST_COLUMN - SMALL_FONT_COLUMN_WIDTH); 
       }
     }
     else
     {
-      KeybrdCharYpos += SMALL_FONT_COLUMN_WIDTH;      
+      KeybrdCharYpos -= SMALL_FONT_COLUMN_WIDTH; 
     } 
     BSP_LCD_DisplayChar(KeybrdCharYpos, KeybrdCharXpos, ' '); 
   }

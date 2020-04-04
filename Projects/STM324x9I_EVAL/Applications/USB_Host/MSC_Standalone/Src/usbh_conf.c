@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    USB_Host/MSC_Standalone/Src/usbh_conf.c
   * @author  MCD Application Team
-  * @version V1.4.2
-  * @date    13-November-2015
+  * @version V1.4.3
+  * @date    29-January-2016
   * @brief   USB Host configuration file.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -29,6 +29,7 @@
 #include "stm32f4xx_hal.h"
 #include "usbh_core.h"
 #include "stm324x9i_eval_io.h"
+#include "main.h"
 
 HCD_HandleTypeDef hhcd;
 
@@ -200,6 +201,12 @@ void HAL_HCD_SOF_Callback(HCD_HandleTypeDef *hhcd)
 void HAL_HCD_Connect_Callback(HCD_HandleTypeDef *hhcd)
 {
   USBH_LL_Connect(hhcd->pData);
+  
+  /* Register the file system object to the FatFs module */
+  if(f_mount(&USBH_fatfs, "", 0) != FR_OK)
+  {  
+    LCD_ErrLog("ERROR : Cannot Initialize FatFs! \n");
+  }
 }
 
 /**

@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm324x9i_eval.h
   * @author  MCD Application Team
-  * @version V2.2.1
-  * @date    07-October-2015
+  * @version V2.2.2
+  * @date    13-January-2016
   * @brief   This file contains definitions for STM324x9I_EVAL's LEDs, 
   *          push-buttons and COM ports hardware resources.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -59,7 +59,7 @@
   * @{
   */ 
 
-/** @defgroup STM324x9I_EVAL_LOW_LEVEL_Exported_Types
+/** @defgroup STM324x9I_EVAL_LOW_LEVEL_Exported_Types STM324x9I EVAL LOW LEVEL Exported Types
   * @{
   */
 typedef enum 
@@ -108,7 +108,7 @@ typedef enum
   * @}
   */ 
 
-/** @defgroup STM324x9I_EVAL_LOW_LEVEL_Exported_Constants
+/** @defgroup STM324x9I_EVAL_LOW_LEVEL_Exported_Constants STM324x9I EVAL LOW LEVEL Exported Constants
   * @{
   */ 
 
@@ -119,7 +119,7 @@ typedef enum
  #define USE_STM324x9I_EVAL
 #endif
 
-/** @addtogroup STM324x9I_EVAL_LOW_LEVEL_LED
+/** @defgroup STM324x9I_EVAL_LOW_LEVEL_LED STM324x9I EVAL LOW LEVEL LED
   * @{
   */
 #define LEDn                             4
@@ -161,7 +161,7 @@ typedef enum
   * @}
   */ 
   
-/** @addtogroup STM324x9I_EVAL_LOW_LEVEL_BUTTON
+/** @defgroup STM324x9I_EVAL_LOW_LEVEL_BUTTON STM324x9I EVAL LOW LEVEL BUTTON
   * @{
   */ 
 /* Joystick pins are connected to IO Expander (accessible through I2C1 interface) */ 
@@ -206,7 +206,7 @@ typedef enum
   * @}
   */ 
 
-/** @addtogroup STM324x9I_EVAL_LOW_LEVEL_COM
+/** @defgroup STM324x9I_EVAL_LOW_LEVEL_COM STM324x9I EVAL LOW LEVEL COM
   * @{
   */
 #define COMn                             1
@@ -319,14 +319,14 @@ typedef enum
   * @}
   */ 
   
-/** @defgroup STM324x9I_EVAL_LOW_LEVEL_Exported_Macros
+/** @defgroup STM324x9I_EVAL_LOW_LEVEL_Exported_Macros STM324x9I EVAL LOW LEVEL Exported Macros
   * @{
   */  
 /**
   * @}
   */ 
 
-/** @defgroup STM324x9I_EVAL_LOW_LEVEL_Exported_Functions
+/** @defgroup STM324x9I_EVAL_LOW_LEVEL_Exported_Functions STM324x9I EVAL LOW LEVEL Exported Functions
   * @{
   */
 uint32_t         BSP_GetVersion(void);  

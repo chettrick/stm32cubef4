@@ -2,15 +2,15 @@
   ******************************************************************************
   * @file    stm324x9i_eval.c
   * @author  MCD Application Team
-  * @version V2.2.1
-  * @date    07-October-2015
+  * @version V2.2.2
+  * @date    13-January-2016
   * @brief   This file provides a set of firmware functions to manage LEDs, 
   *          push-buttons and COM ports available on STM324x9I-EVAL evaluation 
   *          board(MB1045) RevB from STMicroelectronics.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -48,34 +48,34 @@
 #include "stm324x9i_eval.h"
 #include "stm324x9i_eval_io.h"
 
-/** @addtogroup BSP
+/** @defgroup BSP BSP
   * @{
   */ 
 
-/** @addtogroup STM324x9I_EVAL
+/** @defgroup STM324x9I_EVAL STM324x9I EVAL
   * @{
   */
 
-/** @defgroup STM324x9I_EVAL_LOW_LEVEL 
+/** @defgroup STM324x9I_EVAL_LOW_LEVEL STM324x9I EVAL LOW LEVEL
   * @{
   */
 
-/** @defgroup STM324x9I_EVAL_LOW_LEVEL_Private_TypesDefinitions
+/** @defgroup STM324x9I_EVAL_LOW_LEVEL_Private_TypesDefinitions STM324x9I EVAL LOW LEVEL Private TypesDefinitions
   * @{
   */
 /**
   * @}
   */
 
-/** @defgroup STM324x9I_EVAL_LOW_LEVEL_Private_Defines
+/** @defgroup STM324x9I_EVAL_LOW_LEVEL_Private_Defines STM324x9I EVAL LOW LEVEL Private Defines
   * @{
   */
 /**
- * @brief STM324x9I EVAL BSP Driver version number V2.2.1
+ * @brief STM324x9I EVAL BSP Driver version number V2.2.2
    */
 #define __STM324x9I_EVAL_BSP_VERSION_MAIN   (0x02) /*!< [31:24] main version */
 #define __STM324x9I_EVAL_BSP_VERSION_SUB1   (0x02) /*!< [23:16] sub1 version */
-#define __STM324x9I_EVAL_BSP_VERSION_SUB2   (0x01) /*!< [15:8]  sub2 version */
+#define __STM324x9I_EVAL_BSP_VERSION_SUB2   (0x02) /*!< [15:8]  sub2 version */
 #define __STM324x9I_EVAL_BSP_VERSION_RC     (0x00) /*!< [7:0]  release candidate */ 
 #define __STM324x9I_EVAL_BSP_VERSION         ((__STM324x9I_EVAL_BSP_VERSION_MAIN << 24)\
                                              |(__STM324x9I_EVAL_BSP_VERSION_SUB1 << 16)\
@@ -85,14 +85,14 @@
   * @}
   */
 
-/** @defgroup STM324x9I_EVAL_LOW_LEVEL_Private_Macros
+/** @defgroup STM324x9I_EVAL_LOW_LEVEL_Private_Macros STM324x9I EVAL LOW_LEVEL_Private_Macros
   * @{
   */
 /**
   * @}
   */
 
-/** @defgroup STM324x9I_EVAL_LOW_LEVEL_Private_Variables
+/** @defgroup STM324x9I_EVAL_LOW_LEVEL_Private_Variables STM324x9I EVAL LOW LEVEL Private Variables
   * @{
   */
 GPIO_TypeDef* GPIO_PORT[LEDn] = {LED1_GPIO_PORT,
@@ -137,7 +137,7 @@ static I2C_HandleTypeDef heval_I2c;
   * @}
   */
 
-/** @defgroup STM324x9I_EVAL_LOW_LEVEL_Private_FunctionPrototypes
+/** @defgroup STM324x9I_EVAL_LOW_LEVEL_Private_FunctionPrototypes STM324x9I EVAL LOW LEVEL Private FunctionPrototypes
   * @{
   */
 static void     I2Cx_MspInit(void);
@@ -181,13 +181,12 @@ HAL_StatusTypeDef   EEPROM_IO_IsDeviceReady(uint16_t DevAddress, uint32_t Trials
   * @}
   */
 
-/** @defgroup STM324x9I_EVAL_LOW_LEVEL_Private_Functions
+/** @defgroup STM324x9I_EVAL_LOW_LEVEL_Private_Functions STM324x9I EVAL LOW LEVEL Private Functions
   * @{
   */ 
 
   /**
   * @brief  This method returns the STM324x9I EVAL BSP Driver revision
-  * @param  None
   * @retval version: 0xXYZR (8bits for each decimal, R for RC)
   */
 uint32_t BSP_GetVersion(void)
@@ -203,7 +202,6 @@ uint32_t BSP_GetVersion(void)
   *            @arg  LED2
   *            @arg  LED3
   *            @arg  LED4
-  * @retval None
   */
 void BSP_LED_Init(Led_TypeDef Led)
 {
@@ -231,7 +229,6 @@ void BSP_LED_Init(Led_TypeDef Led)
   *            @arg  LED2
   *            @arg  LED3
   *            @arg  LED4
-  * @retval None
   */
 void BSP_LED_On(Led_TypeDef Led)
 {
@@ -246,7 +243,6 @@ void BSP_LED_On(Led_TypeDef Led)
   *            @arg  LED2
   *            @arg  LED3
   *            @arg  LED4
-  * @retval None
   */
 void BSP_LED_Off(Led_TypeDef Led)
 {
@@ -261,7 +257,6 @@ void BSP_LED_Off(Led_TypeDef Led)
   *            @arg  LED2
   *            @arg  LED3
   *            @arg  LED4
-  * @retval None
   */
 void BSP_LED_Toggle(Led_TypeDef Led)
 {
@@ -279,7 +274,6 @@ void BSP_LED_Toggle(Led_TypeDef Led)
   *            @arg  BUTTON_MODE_GPIO: Button will be used as simple IO
   *            @arg  BUTTON_MODE_EXTI: Button will be connected to EXTI line 
   *                                    with interrupt generation capability  
-  * @retval None
   */
 void BSP_PB_Init(Button_TypeDef Button, ButtonMode_TypeDef Button_Mode)
 {
@@ -344,7 +338,6 @@ uint32_t BSP_PB_GetState(Button_TypeDef Button)
   *            @arg  COM2 
   * @param  huart: Pointer to a UART_HandleTypeDef structure that contains the
   *                configuration information for the specified USART peripheral.
-  * @retval None
   */
 void BSP_COM_Init(COM_TypeDef COM, UART_HandleTypeDef *huart)
 {
@@ -404,7 +397,6 @@ uint8_t BSP_JOY_Init(JOYMode_TypeDef Joy_Mode)
 
 /**
   * @brief  Returns the current joystick status.
-  * @param  None
   * @retval Code of the joystick key pressed
   *          This code can be one of the following values:
   *            @arg  JOY_NONE
@@ -454,7 +446,6 @@ JOYState_TypeDef BSP_JOY_GetState(void)
 
 /**
   * @brief  Check TS3510 touch screen presence
-  * @param  None
   * @retval Return 0 if TS3510 is detected, return 1 if not detected 
   */
 uint8_t BSP_TS3510_IsDetected(void)
@@ -492,8 +483,6 @@ uint8_t BSP_TS3510_IsDetected(void)
 /******************************* I2C Routines *********************************/
 /**
   * @brief  Initializes I2C MSP.
-  * @param  None
-  * @retval None
   */
 static void I2Cx_MspInit(void)
 {
@@ -536,8 +525,6 @@ static void I2Cx_MspInit(void)
 
 /**
   * @brief  Initializes I2C HAL.
-  * @param  None
-  * @retval None
   */
 static void I2Cx_Init(void)
 {
@@ -561,8 +548,6 @@ static void I2Cx_Init(void)
 
 /**
   * @brief  Configures I2C Interrupt.
-  * @param  None
-  * @retval None
   */
 static void I2Cx_ITConfig(void)
 {
@@ -593,7 +578,6 @@ static void I2Cx_ITConfig(void)
   * @param  Addr: I2C address
   * @param  Reg: Register address 
   * @param  Value: Data to be written
-  * @retval None
   */
 static void I2Cx_Write(uint8_t Addr, uint8_t Reg, uint8_t Value)
 {
@@ -635,6 +619,7 @@ static uint8_t I2Cx_Read(uint8_t Addr, uint8_t Reg)
   * @brief  Reads multiple data.
   * @param  Addr: I2C address
   * @param  Reg: Reg address 
+  * @param  MemAddress: Internal memory address
   * @param  Buffer: Pointer to data buffer
   * @param  Length: Length of the data
   * @retval Number of read data
@@ -665,7 +650,8 @@ static HAL_StatusTypeDef I2Cx_ReadMultiple(uint8_t Addr, uint16_t Reg, uint16_t 
   * @brief  Writes a value in a register of the device through BUS in using DMA mode.
   * @param  Addr: Device address on BUS Bus.  
   * @param  Reg: The target register address to write
-  * @param  pBuffer: The target register value to be written 
+  * @param  MemAddress: Internal memory address
+  * @param  Buffer: The target register value to be written 
   * @param  Length: buffer size to be written
   * @retval HAL status
   */
@@ -699,7 +685,6 @@ static HAL_StatusTypeDef I2Cx_IsDeviceReady(uint16_t DevAddress, uint32_t Trials
 /**
   * @brief  Manages error callback by re-initializing I2C.
   * @param  Addr: I2C Address
-  * @retval None
   */
 static void I2Cx_Error(uint8_t Addr)
 {
@@ -718,8 +703,6 @@ static void I2Cx_Error(uint8_t Addr)
 
 /**
   * @brief  Initializes IOE low level.
-  * @param  None
-  * @retval None
   */
 void IOE_Init(void) 
 {
@@ -728,8 +711,6 @@ void IOE_Init(void)
 
 /**
   * @brief  Configures IOE low level interrupt.
-  * @param  None
-  * @retval None
   */
 void IOE_ITConfig(void)
 {
@@ -741,7 +722,6 @@ void IOE_ITConfig(void)
   * @param  Addr: I2C address
   * @param  Reg: Register address 
   * @param  Value: Data to be written
-  * @retval None
   */
 void IOE_Write(uint8_t Addr, uint8_t Reg, uint8_t Value)
 {
@@ -778,7 +758,6 @@ uint16_t IOE_ReadMultiple(uint8_t Addr, uint8_t Reg, uint8_t *Buffer, uint16_t L
   * @param  Reg: Register address 
   * @param  Buffer: Pointer to data buffer
   * @param  Length: Length of the data
-  * @retval None
   */
 void IOE_WriteMultiple(uint8_t Addr, uint8_t Reg, uint8_t *Buffer, uint16_t Length)
 {
@@ -788,7 +767,6 @@ void IOE_WriteMultiple(uint8_t Addr, uint8_t Reg, uint8_t *Buffer, uint16_t Leng
 /**
   * @brief  IOE delay 
   * @param  Delay: Delay in ms
-  * @retval None
   */
 void IOE_Delay(uint32_t Delay)
 {
@@ -799,8 +777,6 @@ void IOE_Delay(uint32_t Delay)
 
 /**
   * @brief  Initializes Audio low level.
-  * @param  None
-  * @retval None
   */
 void AUDIO_IO_Init(void) 
 {
@@ -820,7 +796,6 @@ void AUDIO_IO_DeInit(void)
   * @param  Addr: I2C address
   * @param  Reg: Reg address 
   * @param  Value: Data to be written
-  * @retval None
   */
 void AUDIO_IO_Write(uint8_t Addr, uint16_t Reg, uint16_t Value)
 {
@@ -857,7 +832,6 @@ uint16_t AUDIO_IO_Read(uint8_t Addr, uint16_t Reg)
 /**
   * @brief  AUDIO Codec delay 
   * @param  Delay: Delay in ms
-  * @retval None
   */
 void AUDIO_IO_Delay(uint32_t Delay)
 {
@@ -868,8 +842,6 @@ void AUDIO_IO_Delay(uint32_t Delay)
 
 /**
   * @brief  Initializes Camera low level.
-  * @param  None
-  * @retval None
   */
 void CAMERA_IO_Init(void) 
 {
@@ -881,7 +853,6 @@ void CAMERA_IO_Init(void)
   * @param  Addr: I2C address
   * @param  Reg: Register address 
   * @param  Value: Data to be written
-  * @retval None
   */
 void CAMERA_IO_Write(uint8_t Addr, uint8_t Reg, uint8_t Value)
 {
@@ -902,7 +873,6 @@ uint8_t CAMERA_IO_Read(uint8_t Addr, uint8_t Reg)
 /**
   * @brief  Camera delay 
   * @param  Delay: Delay in ms
-  * @retval None
   */
 void CAMERA_Delay(uint32_t Delay)
 {
@@ -913,8 +883,6 @@ void CAMERA_Delay(uint32_t Delay)
 
 /**
   * @brief  Initializes peripherals used by the I2C EEPROM driver.
-  * @param  None
-  * @retval None
   */
 void EEPROM_IO_Init(void)
 {

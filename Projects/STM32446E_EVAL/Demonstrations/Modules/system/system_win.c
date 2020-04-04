@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    system_win.c
   * @author  MCD Application Team
-  * @version V1.2.2
-  * @date    13-November-2015
+  * @version V1.2.3
+  * @date    29-January-2016
   * @brief   System information functions
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -109,7 +109,7 @@ static const GUI_WIDGET_CREATE_INFO _aDialogSystemInformation[] = {
   { TEXT_CreateIndirect, "CPU Speed : 180MHz", ID_TEXT_CPU,                          15,  55,  200, 20,  0,   0x0, 0 },
   { TEXT_CreateIndirect, "Firmware Version : 1.0", ID_TEXT_VERSION,                  15,  75,  280, 20,  0,   0x0, 0 },
   { IMAGE_CreateIndirect, "Image", ID_IMAGE_LOGO,                                    90,  95,  40,  20,  0,   0,   0 },
-  { TEXT_CreateIndirect, "Copyright (c) STMicroelectronics 2015", ID_TEXT_COPYRIGHT, 15,  125, 200, 20,  0,   0x0, 0 },  
+  { TEXT_CreateIndirect, "Copyright (c) STMicroelectronics 2016", ID_TEXT_COPYRIGHT, 15,  125, 200, 20,  0,   0x0, 0 },  
 };
 
 static const GUI_WIDGET_CREATE_INFO _aDialogGeneralSettings[] = {

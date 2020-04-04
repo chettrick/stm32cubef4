@@ -2,11 +2,11 @@
   @page Binary Description of the binary template
   
   @verbatim
-  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    USB_Device/DFU_Standalone/Binary/readme.txt 
   * @author  MCD Application Team
-  * @version 
-  * @date    
+  * @version V1.0.1
+  * @date    29-January-2016
   * @brief   Description of the binary template application.
   ******************************************************************************
   *

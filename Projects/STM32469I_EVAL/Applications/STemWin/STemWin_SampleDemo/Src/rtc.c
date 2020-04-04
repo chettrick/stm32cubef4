@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    rtc.c
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    13-November-2015
-  * @brief   <Add here what does this driver do>
+  * @version V1.0.3
+  * @date    29-January-2016
+  * @brief   RTC user API
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT YYYY STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2016 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.

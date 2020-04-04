@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm32469i_discovery_lcd.c
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    29-September-2015
+  * @version V1.0.2
+  * @date    13-January-2016
   * @brief   This file includes the driver for Liquid Crystal Display (LCD) module
   *          mounted on STM32469I-Discovery evaluation board.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -85,15 +85,15 @@
   * @{
   */
 
-/** @addtogroup STM32469I-Discovery
+/** @addtogroup STM32469I_Discovery
   * @{
   */
 
-/** @addtogroup STM32469I-Discovery_LCD
+/** @defgroup STM32469I-Discovery_LCD STM32469I Discovery LCD
   * @{
   */
 
-/** @defgroup STM32469I-Discovery_LCD_Private_TypesDefinitions LCD Private TypesDefinitions
+/** @defgroup STM32469I-Discovery_LCD_Private_TypesDefinitions STM32469I Discovery LCD Private TypesDefinitions
   * @{
   */
 static DSI_VidCfgTypeDef hdsivideo_handle;
@@ -102,14 +102,14 @@ static DSI_VidCfgTypeDef hdsivideo_handle;
   * @}
   */
 
-/** @defgroup STM32469I-Discovery_LCD_Private_Defines LCD Private Defines
+/** @defgroup STM32469I-Discovery_LCD_Private_Defines STM32469I Discovery LCD Private Defines
   * @{
   */
 /**
   * @}
   */
 
-/** @defgroup STM32469I-Discovery_LCD_Private_Macros LCD Private Macros
+/** @defgroup STM32469I-Discovery_LCD_Private_Macros STM32469I Discovery LCD Private Macros
   * @{
   */
 #define ABS(X)                 ((X) > 0 ? (X) : -(X))
@@ -129,7 +129,7 @@ static DSI_VidCfgTypeDef hdsivideo_handle;
   */
 
 
-/** @defgroup STM32469I-Discovery_LCD_Private_Variables LCD Private Variables
+/** @defgroup STM32469I-Discovery_LCD_Private_Variables STM32469I Discovery LCD Private Variables
   * @{
   */
 
@@ -144,7 +144,7 @@ uint32_t lcd_y_size = OTM8009A_800X480_HEIGHT;
   */
 
 
-/** @defgroup STM32469I-Discovery_LCD_Private_Variables LCD Private Variables
+/** @defgroup STM32469I-Discovery_LCD_Private_Variables STM32469I Discovery LCD Private Variables
   * @{
   */
 
@@ -161,7 +161,7 @@ static LCD_DrawPropTypeDef DrawProp[LTDC_MAX_LAYER_NUMBER];
   * @}
   */
 
-/** @defgroup STM32469I-Discovery_LCD_Private_FunctionPrototypes LCD Private FunctionPrototypes
+/** @defgroup STM32469I-Discovery_LCD_Private_FunctionPrototypes STM32469I Discovery LCD Private FunctionPrototypes
   * @{
   */
 static void DrawChar(uint16_t Xpos, uint16_t Ypos, const uint8_t *c);
@@ -172,13 +172,12 @@ static void LL_ConvertLineToARGB8888(void * pSrc, void *pDst, uint32_t xSize, ui
   * @}
   */
 
-/** @defgroup STM32469I-Discovery_LCD_Exported_Functions LCD Exported Functions
+/** @defgroup STM32469I-Discovery_LCD_Exported_Functions STM32469I Discovery LCD Exported Functions
   * @{
   */
 
 /**
   * @brief  Initializes the DSI LCD.
-  * @param  None
   * @retval LCD state
   */
 uint8_t BSP_LCD_Init(void)
@@ -193,7 +192,6 @@ uint8_t BSP_LCD_Init(void)
   *     - DSI ititialization
   *     - LTDC ititialization
   *     - OTM8009A LCD Display IC Driver ititialization
-  * @param  None
   * @retval LCD state
   */
 uint8_t BSP_LCD_InitEx(LCD_OrientationTypeDef orientation)
@@ -201,7 +199,7 @@ uint8_t BSP_LCD_InitEx(LCD_OrientationTypeDef orientation)
   DSI_PLLInitTypeDef dsiPllInit;
   static RCC_PeriphCLKInitTypeDef  PeriphClkInitStruct;
   uint32_t LcdClock  = 27429; /*!< LcdClk = 27429 kHz */
-  uint32_t Clockratio  = 0;
+  
   uint32_t laneByteClk_kHz = 0;
   uint32_t                   VSA; /*!< Vertical start active time in units of lines */
   uint32_t                   VBP; /*!< Vertical Back Porch time in units of lines */
@@ -250,7 +248,7 @@ uint8_t BSP_LCD_InitEx(LCD_OrientationTypeDef orientation)
   hdsi_eval.Init.TXEscapeCkdiv = laneByteClk_kHz/15620; 
   
   HAL_DSI_Init(&(hdsi_eval), &(dsiPllInit));
-  Clockratio = laneByteClk_kHz/LcdClock;
+  
   /* Timing parameters for all Video modes
   * Set Timing parameters of LTDC depending on its chosen orientation
   */
@@ -291,9 +289,9 @@ uint8_t BSP_LCD_InitEx(LCD_OrientationTypeDef orientation)
   hdsivideo_handle.NullPacketSize = 0xFFF;
   hdsivideo_handle.NumberOfChunks = 0;
   hdsivideo_handle.PacketSize                = HACT; /* Value depending on display orientation choice portrait/landscape */ 
-  hdsivideo_handle.HorizontalSyncActive      = HSA*Clockratio;
-  hdsivideo_handle.HorizontalBackPorch       = HBP*Clockratio;
-  hdsivideo_handle.HorizontalLine            = (HACT + HSA + HBP + HFP)*Clockratio; /* Value depending on display orientation choice portrait/landscape */
+  hdsivideo_handle.HorizontalSyncActive      = (HSA * laneByteClk_kHz) / LcdClock;
+  hdsivideo_handle.HorizontalBackPorch       = (HBP * laneByteClk_kHz) / LcdClock;
+  hdsivideo_handle.HorizontalLine            = ((HACT + HSA + HBP + HFP) * laneByteClk_kHz) / LcdClock; /* Value depending on display orientation choice portrait/landscape */
   hdsivideo_handle.VerticalSyncActive        = VSA;
   hdsivideo_handle.VerticalBackPorch         = VBP;
   hdsivideo_handle.VerticalFrontPorch        = VFP;
@@ -446,7 +444,6 @@ uint32_t BSP_LCD_GetYSize(void)
 /**
   * @brief  Set the LCD X size.
   * @param  imageWidthPixels : uint32_t image width in pixels unit
-  * @retval None
   */
 void BSP_LCD_SetXSize(uint32_t imageWidthPixels)
 {
@@ -467,7 +464,6 @@ void BSP_LCD_SetYSize(uint32_t imageHeightPixels)
   * @brief  Initializes the LCD layers.
   * @param  LayerIndex: Layer foreground or background
   * @param  FB_Address: Layer frame buffer
-  * @retval None
   */
 void BSP_LCD_LayerDefaultInit(uint16_t LayerIndex, uint32_t FB_Address)
 {
@@ -1290,7 +1286,7 @@ void BSP_LCD_DisplayOff(void)
 
 /**
   * @brief  DCS or Generic short/long write command
-  * @param  NbParams: Number of parameters. It indicates the write command mode:
+  * @param  NbrParams: Number of parameters. It indicates the write command mode:
   *                 If inferior to 2, a long write command is performed else short.
   * @param  pParams: Pointer to parameter values table.
   * @retval HAL status

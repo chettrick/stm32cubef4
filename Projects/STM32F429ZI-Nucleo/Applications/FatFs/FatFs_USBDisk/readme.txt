@@ -2,11 +2,11 @@
   @page FatFs_USBDisk   FatFs with USB disk drive application
  
   @verbatim
-  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    FatFs/FatFs_USBDisk/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    13-November-2015
+  * @version V1.0.1
+  * @date    29-January-2016
   * @brief   Description of the FatFs with USB disk drive application
   ******************************************************************************
   *
@@ -57,7 +57,7 @@ It is possible to fine tune needed FatFs features by modifying defines values
 in FatFs configuration file “ffconf.h” available under the project includes 
 directory, in a way to fit the application requirements. 
 
-NUCLEO-429ZI  Rev B board's LEDs can be used to monitor the application status:
+NUCLEO-F429ZI  Rev B board's LEDs can be used to monitor the application status:
   - LED1 is ON when the application runs successfully.
   - LED3 is ON when any error occurs. 
 
@@ -89,11 +89,11 @@ on STM32Cube with FatFs".
 
   - This application runs on STM32F429ZI devices.
     
-  - This application has been tested with STMicroelectronics NUCLEO-429ZI  boards 
+  - This application has been tested with STMicroelectronics NUCLEO-F429ZI  boards 
     and can be easily tailored to any other supported device and board.
 
-  - NUCLEO-429ZI Set-up
-    - Plug the USB key into the NUCLEO-429ZI Rev.B board through 'USB micro A-Male 
+  - NUCLEO-F429ZI Set-up
+    - Plug the USB key into the NUCLEO-F429ZI Rev.B board through 'USB micro A-Male 
       to A-Female' cable.
 
   - Make sure that the jumper JP4 is closed

@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm324xg_eval_sram.c
   * @author  MCD Application Team
-  * @version V2.1.0
-  * @date    14-August-2015
+  * @version V2.2.1
+  * @date    15-January-2016
   * @brief   This file includes the SRAM driver for the IS61WV102416BLL-10MLI memory 
   *          device mounted on STM324xG-EVAL evaluation board.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -80,32 +80,32 @@
   * @{
   */ 
   
-/** @defgroup STM324xG_EVAL_SRAM
+/** @defgroup STM324xG_EVAL_SRAM STM324xG EVAL SRAM
   * @{
   */ 
 
-/** @defgroup STM324xG_EVAL_SRAM_Private_Types_Definitions
+/** @defgroup STM324xG_EVAL_SRAM_Private_Types_Definitions STM324xG EVAL SRAM Private Types Definitions
   * @{
   */ 
 /**
   * @}
   */
          
-/** @defgroup STM324xG_EVAL_SRAM_Private_Defines
+/** @defgroup STM324xG_EVAL_SRAM_Private_Defines STM324xG EVAL SRAM Private Defines
   * @{
   */
 /**
   * @}
   */
 
-/** @defgroup STM324xG_EVAL_SRAM_Private_Macros
+/** @defgroup STM324xG_EVAL_SRAM_Private_Macros STM324xG EVAL SRAM Private Macros
   * @{
   */  
 /**
   * @}
   */
 
-/** @defgroup stm324xg_eval_sram_Private_Variables
+/** @defgroup STM324xG_EVAL_SRAM_Private_Variables STM324xG EVAL SRAM Private Variables
   * @{
   */       
 static SRAM_HandleTypeDef sramHandle;
@@ -114,7 +114,7 @@ static FMC_NORSRAM_TimingTypeDef Timing;
   * @}
   */ 
 
-/** @defgroup STM324xG_EVAL_SRAM_Private_Function_Prototypes
+/** @defgroup STM324xG_EVAL_SRAM_Private_Function_Prototypes STM324xG EVAL SRAM Private Function Prototypes
   * @{
   */ 
 static void SRAM_MspInit(void); 
@@ -122,13 +122,12 @@ static void SRAM_MspInit(void);
   * @}
   */
     
-/** @defgroup STM324xG_EVAL_SRAM_Private_Functions
+/** @defgroup STM324xG_EVAL_SRAM_Private_Functions STM324xG EVAL SRAM Private Functions
   * @{
   */
   
 /**
   * @brief  Initializes the SRAM device.
-  * @param  None
   * @retval SRAM status
   */
 uint8_t BSP_SRAM_Init(void)
@@ -249,8 +248,6 @@ uint8_t BSP_SRAM_WriteData_DMA(uint32_t uwStartAddress, uint16_t *pData, uint32_
 
 /**
   * @brief  Handles SRAM DMA transfer interrupt request.
-  * @param  None
-  * @retval None
   */
 void BSP_SRAM_DMA_IRQHandler(void)
 {
@@ -259,8 +256,6 @@ void BSP_SRAM_DMA_IRQHandler(void)
 
 /**
   * @brief  Initializes SRAM MSP.
-  * @param  hsram: SRAM handle
-  * @retval None
   */
 static void SRAM_MspInit(void)
 {

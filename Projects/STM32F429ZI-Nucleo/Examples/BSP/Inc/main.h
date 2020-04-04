@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    main.h 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    13-November-2015
+  * @version V1.0.1
+  * @date    29-January-2016
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention

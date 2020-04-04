@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm324x9i_eval_lcd.h
   * @author  MCD Application Team
-  * @version V2.2.1
-  * @date    07-October-2015
+  * @version V2.2.2
+  * @date    13-January-2016
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm324x9i_eval_lcd.c driver.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -72,7 +72,7 @@
   * @{
   */ 
 
-/** @defgroup STM324x9I_EVAL_LCD_Exported_Types
+/** @defgroup STM324x9I_EVAL_LCD_Exported_Types STM324x9I EVAL LCD Exported Types
   * @{
   */  
 typedef struct 
@@ -102,7 +102,7 @@ typedef enum
   * @}
   */ 
 
-/** @defgroup STM324x9I_EVAL_LCD_Exported_Constants
+/** @defgroup STM324x9I_EVAL_LCD_Exported_Constants STM324x9I EVAL LCD Exported Constants
   * @{
   */ 
 #define MAX_LAYER_NUMBER       2
@@ -166,7 +166,7 @@ typedef enum
   * @}
   */ 
 
-/** @defgroup STM324x9I_EVAL_LCD_Exported_Functions
+/** @defgroup STM324x9I_EVAL_LCD_Exported_Functions STM324x9I EVAL LCD Exported Functions
   * @{
   */
 uint8_t  BSP_LCD_Init(void);

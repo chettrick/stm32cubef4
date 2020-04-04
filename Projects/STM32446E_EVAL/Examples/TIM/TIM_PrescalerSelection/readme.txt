@@ -2,11 +2,11 @@
   @page TIM_PrescalerSelection TIM PWM Output example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    TIM/TIM_PrescalerSelection/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.2
-  * @date    13-November-2015
+  * @version V1.1.3
+  * @date    29-January-2016
   * @brief   Description of the PWM signals generation using TIM3
   ******************************************************************************
   *

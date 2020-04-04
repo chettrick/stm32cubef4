@@ -2,11 +2,11 @@
   @page CDC_Standalone USB Device Communication (CDC) application
   
   @verbatim
-  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    USB_Device/CDC_Standalone/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.2
-  * @date    13-November-2015
+  * @version V1.2.3
+  * @date    29-January-2016
   * @brief   Description of the USB Device CDC application.
   ******************************************************************************
   *
@@ -105,6 +105,9 @@ To run this application, the user can use one of the following configurations:
    (Loopback mode). In this case, you can open one terminal (relative to USB com port or UART com port)
    and all data sent from this terminal will be received by the same terminal in loopback mode.
    This mode is useful for test and performance measurements.
+
+@note If using this example in loopback mode (ie. USART Tx IO connected to USART Rx IO on STM32 side) 
+and with baudrates higher than 9600, there might be communication errors.
 
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
       based on variable incremented in SysTick ISR. This implies that if HAL_Delay() is called from

@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm32f429i_discovery_sdram.c
   * @author  MCD Application Team
-  * @version V2.1.2
-  * @date    02-March-2015
+  * @version V2.1.3
+  * @date    13-January-2016
   * @brief   This file provides a set of functions needed to drive the
   *          IS42S16400J SDRAM memory mounted on STM32F429I-Discovery Kit.    
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -47,32 +47,32 @@
   * @{
   */
   
-/** @defgroup STM32F429I_DISCOVERY_SDRAM
+/** @defgroup STM32F429I_DISCOVERY_SDRAM STM32F429I DISCOVERY SDRAM
   * @{
 */ 
 
-/** @defgroup STM32F429I_DISCOVERY_SDRAM_Private_Types_Definitions
+/** @defgroup STM32F429I_DISCOVERY_SDRAM_Private_Types_Definitions STM32F429I DISCOVERY SDRAM Private Types Definitions
   * @{
   */
 /**
   * @}
   */ 
 
-/** @defgroup STM32F429I_DISCOVERY_SDRAM_Private_Defines
+/** @defgroup STM32F429I_DISCOVERY_SDRAM_Private_Defines STM32F429I DISCOVERY SDRAM Private Defines
   * @{
   */
 /**
   * @}
   */  
 
-/** @defgroup STM32F429I_DISCOVERY_SDRAM_Private_Macros
+/** @defgroup STM32F429I_DISCOVERY_SDRAM_Private_Macros STM32F429I DISCOVERY SDRAM Private Macros
   * @{
   */ 
 /**
   * @}
   */  
 
-/** @defgroup STM32F429I_DISCOVERY_SDRAM_Private_Variables
+/** @defgroup STM32F429I_DISCOVERY_SDRAM_Private_Variables STM32F429I DISCOVERY SDRAM Private Variables
   * @{
   */
 static SDRAM_HandleTypeDef SdramHandle;
@@ -82,7 +82,7 @@ static FMC_SDRAM_CommandTypeDef Command;
   * @}
   */ 
 
-/** @defgroup STM32F429I_DISCOVERY_SDRAM_Private_Function_Prototypes
+/** @defgroup STM32F429I_DISCOVERY_SDRAM_Private_Function_Prototypes STM32F429I DISCOVERY SDRAM Private Function Prototypes
   * @{
   */ 
 static void MspInit(void);
@@ -90,14 +90,12 @@ static void MspInit(void);
   * @}
   */
 
-/** @defgroup STM32F429I_DISCOVERY_SDRAM_Private_Functions
+/** @defgroup STM32F429I_DISCOVERY_SDRAM_Private_Functions STM32F429I DISCOVERY SDRAM Private Functions
   * @{
   */
 
 /**
   * @brief  Initializes the SDRAM device.
-  * @param  None
-  * @retval None
   */
 void BSP_SDRAM_Init(void)
 {
@@ -147,7 +145,6 @@ void BSP_SDRAM_Init(void)
 /**
   * @brief  Programs the SDRAM device.
   * @param  RefreshCount: SDRAM refresh counter value 
-  * @retval None
   */
 void BSP_SDRAM_Initialization_sequence(uint32_t RefreshCount)
 {
@@ -209,7 +206,6 @@ void BSP_SDRAM_Initialization_sequence(uint32_t RefreshCount)
   * @param  uwStartAddress : Read start address
   * @param  pData : Pointer to data to be read  
   * @param  uwDataSize: Size of read data from the memory
-  * @retval None
   */
 void BSP_SDRAM_ReadData(uint32_t uwStartAddress, uint32_t *pData, uint32_t uwDataSize)
 {
@@ -221,7 +217,6 @@ void BSP_SDRAM_ReadData(uint32_t uwStartAddress, uint32_t *pData, uint32_t uwDat
   * @param  uwStartAddress : Read start address
   * @param  pData : Pointer to data to be read  
   * @param  uwDataSize: Size of read data from the memory
-  * @retval None
   */
 void BSP_SDRAM_ReadData_DMA(uint32_t uwStartAddress, uint32_t *pData, uint32_t uwDataSize)
 {
@@ -233,7 +228,6 @@ void BSP_SDRAM_ReadData_DMA(uint32_t uwStartAddress, uint32_t *pData, uint32_t u
   * @param  uwStartAddress : Write start address
   * @param  pData : Pointer to data to be written  
   * @param  uwDataSize: Size of written data from the memory
-  * @retval None
   */
 void BSP_SDRAM_WriteData(uint32_t uwStartAddress, uint32_t *pData, uint32_t uwDataSize) 
 {
@@ -249,7 +243,6 @@ void BSP_SDRAM_WriteData(uint32_t uwStartAddress, uint32_t *pData, uint32_t uwDa
   * @param  uwStartAddress : Write start address
   * @param  pData : Pointer to data to be written  
   * @param  uwDataSize: Size of written data from the memory
-  * @retval None
   */
 void BSP_SDRAM_WriteData_DMA(uint32_t uwStartAddress, uint32_t *pData, uint32_t uwDataSize) 
 {
@@ -268,8 +261,6 @@ HAL_StatusTypeDef BSP_SDRAM_Sendcmd(FMC_SDRAM_CommandTypeDef *SdramCmd)
 
 /**
   * @brief  Handles SDRAM DMA transfer interrupt request.
-  * @param  None
-  * @retval None
   */
 void BSP_SDRAM_DMA_IRQHandler(void)
 {
@@ -278,8 +269,6 @@ void BSP_SDRAM_DMA_IRQHandler(void)
 
 /**
   * @brief  Initializes SDRAM MSP.
-  * @param  None
-  * @retval None
   */
 static void MspInit(void)
 {

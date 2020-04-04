@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    stm324x9i_eval_audio.c
   * @author  MCD Application Team
-  * @version V2.2.1
-  * @date    07-October-2015
+  * @version V2.2.2
+  * @date    13-January-2016
   * @brief   This file provides the Audio driver for the STM324x9I-EVAL evaluation board.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -104,34 +104,34 @@ Known Limitations:
   * @{
   */ 
   
-/** @defgroup STM324x9I_EVAL_AUDIO
+/** @defgroup STM324x9I_EVAL_AUDIO STM324x9I EVAL AUDIO
   * @brief This file includes the low layer driver for wm8994 Audio Codec
   *        available on STM324x9I-EVAL evaluation board(MB1045).
   * @{
   */ 
 
-/** @defgroup STM324x9I_EVAL_AUDIO_Private_Types
+/** @defgroup STM324x9I_EVAL_AUDIO_Private_Types STM324x9I EVAL AUDIO Private Types
   * @{
   */ 
 /**
   * @}
   */ 
   
-/** @defgroup STM324x9I_EVAL_AUDIO_Private_Defines
+/** @defgroup STM324x9I_EVAL_AUDIO_Private_Defines STM324x9I EVAL AUDIO Private Defines
   * @{
   */
 /**
   * @}
   */ 
 
-/** @defgroup STM324x9I_EVAL_AUDIO_Private_Macros
+/** @defgroup STM324x9I_EVAL_AUDIO_Private_Macros STM324x9I EVAL AUDIO Private Macros
   * @{
   */
 /**
   * @}
   */ 
   
-/** @defgroup STM324x9I_EVAL_AUDIO_Private_Variables
+/** @defgroup STM324x9I_EVAL_AUDIO_Private_Variables STM324x9I EVAL AUDIO Private Variables
   * @{
   */
 AUDIO_DrvTypeDef          *audio_drv;
@@ -165,7 +165,7 @@ uint16_t __IO AudioInVolume = DEFAULT_AUDIO_IN_VOLUME;
   * @}
   */ 
 
-/** @defgroup STM324x9I_EVAL_AUDIO_Private_Function_Prototypes
+/** @defgroup STM324x9I_EVAL_AUDIO_Private_Function_Prototypes STM324x9I EVAL AUDIO Private Function Prototypes
   * @{
   */
 static void SAIx_MspInit(void);
@@ -179,7 +179,7 @@ static void PDMDecoder_Init(uint32_t AudioFreq, uint32_t ChnlNbr);
   * @}
   */ 
 
-/** @defgroup STM324x9I_EVAL_AUDIO_out_Private_Functions
+/** @defgroup STM324x9I_EVAL_AUDIO_out_Private_Functions STM324x9I EVAL AUDIO OUT Private Functions
   * @{
   */ 
 
@@ -277,7 +277,6 @@ uint8_t BSP_AUDIO_OUT_Play(uint16_t* pBuffer, uint32_t Size)
   * @brief  Sends n-Bytes on the SAI interface.
   * @param  pData: pointer on data address 
   * @param  Size: number of data to be written
-  * @retval None
   */
 void BSP_AUDIO_OUT_ChangeBuffer(uint16_t *pData, uint16_t Size)
 {
@@ -287,7 +286,7 @@ void BSP_AUDIO_OUT_ChangeBuffer(uint16_t *pData, uint16_t Size)
 /**
   * @brief  This function Pauses the audio file stream. In case
   *         of using DMA, the DMA Pause feature is used.
-  * @WARNING When calling BSP_AUDIO_OUT_Pause() function for pause, only
+  * WARNING: When calling BSP_AUDIO_OUT_Pause() function for pause, only
   *          BSP_AUDIO_OUT_Resume() function should be called for resume (use of BSP_AUDIO_OUT_Play() 
   *          function for resume could lead to unexpected behavior).
   * @retval AUDIO_OK if correct communication, else wrong communication
@@ -311,7 +310,7 @@ uint8_t BSP_AUDIO_OUT_Pause(void)
 
 /**
   * @brief  This function  Resumes the audio file stream.  
-  * @WARNING When calling BSP_AUDIO_OUT_Pause() function for pause, only
+  * WARNING: When calling BSP_AUDIO_OUT_Pause() function for pause, only
   *          BSP_AUDIO_OUT_Resume() function should be called for resume (use of BSP_AUDIO_OUT_Play() 
   *          function for resume could lead to unexpected behavior).
   * @retval AUDIO_OK if correct communication, else wrong communication
@@ -430,7 +429,6 @@ uint8_t BSP_AUDIO_OUT_SetOutputMode(uint8_t Output)
   * @param  AudioFreq: Audio frequency used to play the audio stream.
   * @note   This API should be called after the BSP_AUDIO_OUT_Init() to adjust the
   *         audio frequency.
-  * @retval None
   */
 void BSP_AUDIO_OUT_SetFrequency(uint32_t AudioFreq)
 { 
@@ -480,7 +478,6 @@ void BSP_AUDIO_OUT_SetFrequency(uint32_t AudioFreq)
   *         This parameter can be any value of @ref CODEC_AudioFrame_SLOT_TDMMode
   * @note   This API should be called after the BSP_AUDIO_OUT_Init() to adjust the
   *         audio frame slot.
-  * @retval None
   */
 void BSP_AUDIO_OUT_SetAudioFrameSlot(uint32_t AudioFrameSlot)
 { 
@@ -498,7 +495,6 @@ void BSP_AUDIO_OUT_SetAudioFrameSlot(uint32_t AudioFrameSlot)
 /**
   * @brief  Tx Transfer completed callbacks.
   * @param  hsai: SAI handle
-  * @retval None
   */
 void HAL_SAI_TxCpltCallback(SAI_HandleTypeDef *hsai)
 {
@@ -510,7 +506,6 @@ void HAL_SAI_TxCpltCallback(SAI_HandleTypeDef *hsai)
 /**
   * @brief  Tx Half Transfer completed callbacks.
   * @param  hsai: SAI handle
-  * @retval None
   */
 void HAL_SAI_TxHalfCpltCallback(SAI_HandleTypeDef *hsai)
 {
@@ -522,7 +517,6 @@ void HAL_SAI_TxHalfCpltCallback(SAI_HandleTypeDef *hsai)
 /**
   * @brief  SAI error callbacks.
   * @param  hsai: SAI handle
-  * @retval None
   */
 void HAL_SAI_ErrorCallback(SAI_HandleTypeDef *hsai)
 {
@@ -531,8 +525,6 @@ void HAL_SAI_ErrorCallback(SAI_HandleTypeDef *hsai)
 
 /**
   * @brief  Manages the DMA full Transfer complete event.
-  * @param  None
-  * @retval None
   */
 __weak void BSP_AUDIO_OUT_TransferComplete_CallBack(void)
 {
@@ -540,8 +532,6 @@ __weak void BSP_AUDIO_OUT_TransferComplete_CallBack(void)
 
 /**
   * @brief  Manages the DMA Half Transfer complete event.
-  * @param  None
-  * @retval None
   */
 __weak void BSP_AUDIO_OUT_HalfTransfer_CallBack(void)
 { 
@@ -549,8 +539,6 @@ __weak void BSP_AUDIO_OUT_HalfTransfer_CallBack(void)
 
 /**
   * @brief  Manages the DMA FIFO error event.
-  * @param  None
-  * @retval None
   */
 __weak void BSP_AUDIO_OUT_Error_CallBack(void)
 {
@@ -562,8 +550,6 @@ __weak void BSP_AUDIO_OUT_Error_CallBack(void)
 
 /**
   * @brief  Initializes SAI MSP.
-  * @param  None
-  * @retval None
   */
 static void SAIx_MspInit(void)
 { 
@@ -626,7 +612,6 @@ static void SAIx_MspInit(void)
   * @param  AudioFreq: Audio frequency to be configured for the SAI peripheral.
   * @note   The default SlotActive configuration is set to CODEC_AUDIOFRAME_SLOT_0123 
   *         and user can update this configuration using 
-  * @retval None
   */
 static void SAIx_Init(uint32_t AudioFreq)
 {
@@ -646,7 +631,7 @@ static void SAIx_Init(uint32_t AudioFreq)
   haudio_out_sai.Init.Protocol = SAI_FREE_PROTOCOL;
   haudio_out_sai.Init.DataSize = SAI_DATASIZE_16;
   haudio_out_sai.Init.FirstBit = SAI_FIRSTBIT_MSB;
-  haudio_out_sai.Init.ClockStrobing = SAI_CLOCKSTROBING_RISINGEDGE;
+  haudio_out_sai.Init.ClockStrobing = SAI_CLOCKSTROBING_FALLINGEDGE;
   haudio_out_sai.Init.Synchro = SAI_ASYNCHRONOUS;
   haudio_out_sai.Init.OutputDrive = SAI_OUTPUTDRIVE_ENABLED;
   haudio_out_sai.Init.FIFOThreshold = SAI_FIFOTHRESHOLD_1QF;
@@ -681,11 +666,7 @@ static void SAIx_Init(uint32_t AudioFreq)
   
   /* Enable SAI peripheral to generate MCLK */
   __HAL_SAI_ENABLE(&haudio_out_sai);
-}
-
-/** @defgroup STM324x9I_EVAL_AUDIO_out_Private_Functions
-  * @{
-  */ 
+} 
   
 /**
   * @brief  Initializes wave recording.
@@ -741,7 +722,6 @@ uint8_t BSP_AUDIO_IN_Record(uint16_t* pbuf, uint32_t size)
 
 /**
   * @brief  Stops audio recording.
-  * @param  None
   * @retval AUDIO_OK if correct communication, else wrong communication
   */
 uint8_t BSP_AUDIO_IN_Stop(void)
@@ -762,7 +742,6 @@ uint8_t BSP_AUDIO_IN_Stop(void)
 
 /**
   * @brief  Pauses the audio file stream.
-  * @param  None
   * @retval AUDIO_OK if correct communication, else wrong communication
   */
 uint8_t BSP_AUDIO_IN_Pause(void)
@@ -775,8 +754,7 @@ uint8_t BSP_AUDIO_IN_Pause(void)
 }
 
 /**
-  * @brief  Resumes the audio file stream.
-  * @param  None    
+  * @brief  Resumes the audio file stream.   
   * @retval AUDIO_OK if correct communication, else wrong communication
   */
 uint8_t BSP_AUDIO_IN_Resume(void)
@@ -837,7 +815,6 @@ uint8_t BSP_AUDIO_IN_PDMToPCM(uint16_t* PDMBuf, uint16_t* PCMBuf)
  /**
   * @brief  Rx Transfer completed callbacks.
   * @param  hi2s: I2S handle
-  * @retval None
   */
 void HAL_I2S_RxCpltCallback(I2S_HandleTypeDef *hi2s)
 {
@@ -848,7 +825,6 @@ void HAL_I2S_RxCpltCallback(I2S_HandleTypeDef *hi2s)
 /**
   * @brief  Rx Half Transfer completed callbacks.
   * @param  hi2s: I2S handle
-  * @retval None
   */
 void HAL_I2S_RxHalfCpltCallback(I2S_HandleTypeDef *hi2s)
 {
@@ -860,7 +836,6 @@ void HAL_I2S_RxHalfCpltCallback(I2S_HandleTypeDef *hi2s)
 /**
   * @brief  I2S error callbacks.
   * @param  hi2s: I2S handle
-  * @retval None
   */
 void HAL_I2S_ErrorCallback(I2S_HandleTypeDef *hi2s)
 {
@@ -871,8 +846,6 @@ void HAL_I2S_ErrorCallback(I2S_HandleTypeDef *hi2s)
 
 /**
   * @brief  User callback when record buffer is filled.
-  * @param  None  
-  * @retval None
   */
 __weak void BSP_AUDIO_IN_TransferComplete_CallBack(void)
 {
@@ -883,8 +856,6 @@ __weak void BSP_AUDIO_IN_TransferComplete_CallBack(void)
 
 /**
   * @brief  Manages the DMA Half Transfer complete event.
-  * @param  None
-  * @retval None
   */
 __weak void BSP_AUDIO_IN_HalfTransfer_CallBack(void)
 { 
@@ -895,8 +866,6 @@ __weak void BSP_AUDIO_IN_HalfTransfer_CallBack(void)
 
 /**
   * @brief  Audio IN Error callback function.
-  * @param  None
-  * @retval None
   */
 __weak void BSP_AUDIO_IN_Error_Callback(void)
 {   
@@ -912,7 +881,6 @@ __weak void BSP_AUDIO_IN_Error_Callback(void)
   * @brief  Initializes the PDM library.
   * @param  AudioFreq: Audio sampling frequency
   * @param  ChnlNbr: Number of audio channels (1: mono; 2: stereo)
-  * @retval None
   */
 static void PDMDecoder_Init(uint32_t AudioFreq, uint32_t ChnlNbr)
 { 
@@ -935,8 +903,6 @@ static void PDMDecoder_Init(uint32_t AudioFreq, uint32_t ChnlNbr)
 
 /**
   * @brief  AUDIO IN I2S MSP Init.
-  * @param  hi2s: I2S handle
-  * @retval None
   */
 static void I2Sx_MspInit(void)
 {
@@ -1004,7 +970,6 @@ static void I2Sx_MspInit(void)
   *         Devices RevA/Z and through dedicated PLLI2S_R in Devices RevB/Y)
   *         is already configured and ready to be used.    
   * @param  AudioFreq: Audio frequency to be configured for the I2S peripheral. 
-  * @retval None
   */
 static void I2Sx_Init(uint32_t AudioFreq)
 {
@@ -1035,7 +1000,6 @@ static void I2Sx_Init(uint32_t AudioFreq)
 /**
   * @brief  Initializes the TIM INput Capture MSP.
   * @param  htim: TIM handle
-  * @retval None
   */
 static void TIMx_IC_MspInit(TIM_HandleTypeDef *htim)
 {
@@ -1067,8 +1031,6 @@ static void TIMx_IC_MspInit(TIM_HandleTypeDef *htim)
 /**
   * @brief  Configure TIM as a clock divider by 2.
   *         I2S_SCK is externally connected to TIMx input channel
-  * @param  None
-  * @retval None
   */
 static void TIMx_Init(void)
 {
@@ -1150,6 +1112,10 @@ static void TIMx_Init(void)
   * @}
   */
 
+/**
+  * @}
+  */ 
+  
 /**
   * @}
   */ 

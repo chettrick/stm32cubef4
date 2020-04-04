@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm324xg_eval_sd.h
   * @author  MCD Application Team
-  * @version V2.1.0
-  * @date    14-August-2015
+  * @version V2.2.1
+  * @date    15-January-2016
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm324xg_eval_sd.c driver.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -55,11 +55,11 @@
   * @{
   */
     
-/** @defgroup STM324xG_EVAL_SD
+/** @defgroup STM324xG_EVAL_SD STM324xG EVAL SD
   * @{
   */    
 
-/** @defgroup STM324xG_EVAL_SD_Exported_Types
+/** @defgroup STM324xG_EVAL_SD_Exported_Types STM324xG EVAL SD Exported Types
   * @{
   */
 
@@ -74,8 +74,11 @@
 #define MSD_OK         0x00
 #define MSD_ERROR      0x01
 
+/**
+  * @}
+  */
 
-/** @defgroup STM324xG_EVAL_SD_Exported_Constants
+/** @defgroup STM324xG_EVAL_SD_Exported_Constants STM324xG EVAL SD Exported Constants
   * @{
   */ 
 #define SD_DETECT_PIN                    GPIO_PIN_13
@@ -104,11 +107,15 @@
   * @}
   */
   
-/** @defgroup STM324xG_EVAL_SD_Exported_Macro
+/** @defgroup STM324xG_EVAL_SD_Exported_Macro STM324xG EVAL SD Exported Macro
   * @{
   */ 
 
-/** @defgroup STM324xG_EVAL_SD_Exported_Functions
+/**
+  * @}
+  */
+  
+/** @defgroup STM324xG_EVAL_SD_Exported_Functions STM324xG EVAL SD Exported Functions
   * @{
   */  
 uint8_t BSP_SD_Init(void);
@@ -125,7 +132,7 @@ void    BSP_SD_DMA_Tx_IRQHandler(void);
 void    BSP_SD_DMA_Rx_IRQHandler(void);
 HAL_SD_TransferStateTypedef BSP_SD_GetStatus(void);
 void    BSP_SD_GetCardInfo(HAL_SD_CardInfoTypedef *CardInfo);
-uint8_t BSP_SD_IsDetected(void);  
+uint8_t BSP_SD_IsDetected(void);   
 
 /**
   * @}
@@ -134,11 +141,11 @@ uint8_t BSP_SD_IsDetected(void);
 /**
   * @}
   */ 
-
+  
 /**
   * @}
   */ 
-
+  
 /**
   * @}
   */ 

@@ -2,11 +2,11 @@
   @page Demo   STM32469I-EVAL Demonstration Firmware
  
   @verbatim
-  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    Demonstrations/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    13-November-2015
+  * @version V1.1.2
+  * @date    29-January-2016
   * @brief   Description of STM32469I-EVAL Demonstration
   ******************************************************************************
   *

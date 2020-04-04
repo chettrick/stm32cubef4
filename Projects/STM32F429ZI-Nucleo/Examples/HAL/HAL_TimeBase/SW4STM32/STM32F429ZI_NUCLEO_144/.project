@@ -65,6 +65,10 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c</location>
 		</link><link>
+			<name>Example/User/stm32f4xx_hal_timebase_tim.c</name>
+			<type>1</type>
+			<location>PARENT-2-PROJECT_LOC/Src/stm32f4xx_hal_timebase_tim.c</location>
+		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c</location>

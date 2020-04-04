@@ -2,11 +2,11 @@
   @page IWDG_Example Independent Watchdog example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    IWDG/IWDG_Example/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    13-November-2015
+  * @version V1.0.1
+  * @date    29-January-2016
   * @brief   Description of the Independent Watchdog example.
   ******************************************************************************
   *
@@ -112,7 +112,7 @@ LED3 is turned ON and remains ON if any error occurs.
 
   - This example runs on STM32F429xx devices.
     
-  - This example has been tested with NUCLEO-429ZI  Rev.B board and can be
+  - This example has been tested with NUCLEO-F429ZI  Rev.B board and can be
     easily tailored to any other supported device and development board.
 
 @par How to use it ? 

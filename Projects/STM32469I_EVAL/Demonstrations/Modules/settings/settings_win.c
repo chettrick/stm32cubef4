@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    settings_win.c
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    13-November-2015
+  * @version V1.1.2
+  * @date    29-January-2016
   * @brief   settings functions
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -89,7 +89,7 @@ static const GUI_WIDGET_CREATE_INFO _aDialog[] =
   { TEXT_CreateIndirect, " 180MHz", ID_TEXT_CPU_1,       450, 300, 100, 20, 0, 0x0, 0 },
   { TEXT_CreateIndirect, "V1.1.0", ID_TEXT_VERSION_1,    655, 300, 100, 20, 0, 0x0, 0 }, 
   
-  { TEXT_CreateIndirect, "Copyright (c) STMicroelectronics 2015", ID_TEXT_COPYRIGHT, 550, 453, 240, 20, 0, 0x0, 0 },
+  { TEXT_CreateIndirect, "Copyright (c) STMicroelectronics 2016", ID_TEXT_COPYRIGHT, 550, 453, 240, 20, 0, 0x0, 0 },
 };
 
 static WM_HTIMER                  hTimer; 

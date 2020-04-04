@@ -2,11 +2,11 @@
   @page HAL_TimeBase HAL Time base example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    HAL/HAL_TimeBase/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    13-November-2015
+  * @version V1.0.3
+  * @date    29-January-2016
   * @brief   Description of the HAL time base example.
   ******************************************************************************
   *
@@ -40,7 +40,7 @@
 This example describes how to customize the HAL time base using a general 
 purpose timer instead of Systick as main source of time base.
 
-In this example the used timer is TIM3.
+In this example the used timer is TIM6.
 
 Time base duration is kept unchanged: 1ms  since PPP_TIMEOUT_VALUEs are defined 
 and handled in milliseconds basis.
@@ -65,12 +65,12 @@ enabled, else it will be resumed.
 In an infinite loop, LED1 toggles spaced out over 1s delay.
 
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
-      based on variable incremented in TIM3 ISR. This implies that if HAL_Delay() is called from
-      a peripheral ISR process, then the TIM3 interrupt must have higher priority (numerically lower)
+      based on variable incremented in TIM6 ISR. This implies that if HAL_Delay() is called from
+      a peripheral ISR process, then the TIM6 interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
-      To change the TIM3 interrupt priority you have to use HAL_NVIC_SetPriority() function.
+      To change the TIM6 interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the TIM3 time base is always set to 1 millisecond
+@note The application need to ensure that the TIM6 time base is always set to 1 millisecond
       to have correct HAL operation.
 
 @note The connection of the LCD reset pin to a dedicated GPIO PK7 instead of the STM32F469 NRST pin may cause residual display on LCD with applications/examples that do not require display.

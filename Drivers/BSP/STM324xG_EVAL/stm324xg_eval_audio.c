@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm324xg_eval_audio.c
   * @author  MCD Application Team
-  * @version V2.1.0
-  * @date    14-August-2015
+  * @version V2.2.1
+  * @date    15-January-2016
   * @brief   This file provides the Audio driver for the STM324xG-EVAL evaluation
   *          board.  
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -117,20 +117,20 @@ Driver architecture:
   * @{
   */ 
   
-/** @defgroup STM324xG_EVAL_AUDIO
+/** @defgroup STM324xG_EVAL_AUDIO STM324xG EVAL AUDIO
   * @brief This file includes the low layer audio driver available on STM324xG-EVAL
   *        evaluation board.
   * @{
   */ 
 
-/** @defgroup STM324xG_EVAL_AUDIO_Private_Types
+/** @defgroup STM324xG_EVAL_AUDIO_Private_Types STM324xG EVAL AUDIO Private Types
   * @{
   */ 
 /**
   * @}
   */ 
   
-/** @defgroup STM324xG_EVAL_AUDIO_Private_Defines
+/** @defgroup STM324xG_EVAL_AUDIO_Private_Defines STM324xG EVAL AUDIO Private Defines
   * @{
   */
 /* These PLL parameters are valide when the f(VCO clock) = 1Mhz */
@@ -141,14 +141,14 @@ const uint32_t I2SPLLR[8] = {5, 4, 4, 4, 4, 6, 3, 1};
   * @}
   */ 
 
-/** @defgroup STM324xG_EVAL_AUDIO_Private_Macros
+/** @defgroup STM324xG_EVAL_AUDIO_Private_Macros STM324xG EVAL AUDIO Private Macros
   * @{
   */
 /**
   * @}
   */ 
   
-/** @defgroup STM324xG_EVAL_AUDIO_Private_Variables
+/** @defgroup STM324xG_EVAL_AUDIO_Private_Variables STM324xG EVAL AUDIO Private Variables
   * @{
   */
 AUDIO_DrvTypeDef   *audio_drv;
@@ -157,7 +157,7 @@ I2S_HandleTypeDef  haudio_i2s;
   * @}
   */ 
 
-/** @defgroup STM324xG_EVAL_AUDIO_Private_Function_Prototypes
+/** @defgroup STM324xG_EVAL_AUDIO_Private_Function_Prototypes STM324xG EVAL AUDIO Private Function Prototypes
   * @{
   */
 static void CODEC_Reset(void);
@@ -167,7 +167,7 @@ static void I2Sx_Init(uint32_t AudioFreq);
   * @}
   */ 
 
-/** @defgroup STM324xG_EVAL_AUDIO_Private_Functions
+/** @defgroup STM324xG_EVAL_AUDIO_Private_Functions STM324xG EVAL AUDIO Private Functions
   * @{
   */ 
 
@@ -269,7 +269,6 @@ uint8_t BSP_AUDIO_OUT_Play(uint16_t* pBuffer, uint32_t Size)
   * @brief  Sends n-Bytes on the I2S interface.
   * @param  pData: Pointer to data address 
   * @param  Size: Number of data to be written.
-  * @retval None
   */
 void BSP_AUDIO_OUT_ChangeBuffer(uint16_t *pData, uint16_t Size)
 {
@@ -279,10 +278,9 @@ void BSP_AUDIO_OUT_ChangeBuffer(uint16_t *pData, uint16_t Size)
 /**
   * @brief   Pauses the audio file stream. 
   *          In case of using DMA, the DMA Pause feature is used.
-  * @WARNING When calling BSP_AUDIO_OUT_Pause() function for pause, only
+  * WARNING: When calling BSP_AUDIO_OUT_Pause() function for pause, only
   *          BSP_AUDIO_OUT_Resume() function should be called for resume (use of BSP_AUDIO_OUT_Play() 
   *          function for resume could lead to unexpected behavior).
-  * @param   None
   * @retval  AUDIO_OK if correct communication, else wrong communication
   */
 uint8_t BSP_AUDIO_OUT_Pause(void)
@@ -304,10 +302,9 @@ uint8_t BSP_AUDIO_OUT_Pause(void)
 
 /**
   * @brief   Resumes the audio file stream.  
-  * @WARNING When calling BSP_AUDIO_OUT_Pause() function for pause, only
+  * WARNING: When calling BSP_AUDIO_OUT_Pause() function for pause, only
   *          BSP_AUDIO_OUT_Resume() function should be called for resume (use of BSP_AUDIO_OUT_Play() 
   *          function for resume could lead to unexpected behavior).
-  * @param   None
   * @retval  AUDIO_OK if correct communication, else wrong communication
   */
 uint8_t BSP_AUDIO_OUT_Resume(void)
@@ -469,7 +466,6 @@ void BSP_AUDIO_OUT_SetFrequency(uint32_t AudioFreq)
 /**
   * @brief Tx Transfer completed callbacks
   * @param hi2s: I2S handle
-  * @retval None
   */
 void HAL_I2S_TxCpltCallback(I2S_HandleTypeDef *hi2s)
 {
@@ -481,7 +477,6 @@ void HAL_I2S_TxCpltCallback(I2S_HandleTypeDef *hi2s)
 /**
   * @brief Tx Transfer Half completed callbacks
   * @param hi2s: I2S handle
-  * @retval None
   */
 void HAL_I2S_TxHalfCpltCallback(I2S_HandleTypeDef *hi2s)
 {
@@ -493,7 +488,6 @@ void HAL_I2S_TxHalfCpltCallback(I2S_HandleTypeDef *hi2s)
 /**
   * @brief  I2S error callbacks.
   * @param  hi2s: I2S handle
-  * @retval None
   */
 void HAL_I2S_ErrorCallback(I2S_HandleTypeDef *hi2s) 
 {
@@ -502,8 +496,6 @@ void HAL_I2S_ErrorCallback(I2S_HandleTypeDef *hi2s)
 
 /**
   * @brief  Manages the DMA full Transfer complete event.
-  * @param  None
-  * @retval None
   */
 __weak void BSP_AUDIO_OUT_TransferComplete_CallBack(void)
 {
@@ -511,8 +503,6 @@ __weak void BSP_AUDIO_OUT_TransferComplete_CallBack(void)
 
 /**
   * @brief  Manages the DMA Half Transfer complete event.
-  * @param  None
-  * @retval None
   */
 __weak void BSP_AUDIO_OUT_HalfTransfer_CallBack(void)
 { 
@@ -520,8 +510,6 @@ __weak void BSP_AUDIO_OUT_HalfTransfer_CallBack(void)
 
 /**
   * @brief  Manages the DMA FIFO error event.
-  * @param  None
-  * @retval None
   */
 __weak void BSP_AUDIO_OUT_Error_CallBack(void)
 {
@@ -533,8 +521,6 @@ __weak void BSP_AUDIO_OUT_Error_CallBack(void)
 
 /**
   * @brief  Initializes I2C MSP.
-  * @param  None
-  * @retval None
   */
 static void I2Sx_MspInit(void)
 { 
@@ -608,7 +594,6 @@ static void I2Sx_MspInit(void)
 /**
   * @brief  Initializes the Audio Codec audio interface (I2S).
   * @param  AudioFreq: Audio frequency to be configured for the I2S peripheral. 
-  * @retval None
   */
 static void I2Sx_Init(uint32_t AudioFreq)
 {
@@ -637,8 +622,6 @@ static void I2Sx_Init(uint32_t AudioFreq)
   * @brief  Resets the audio codec. It restores the default configuration of the 
   *         codec (this function shall be called before initializing the codec).
   * @note   This function calls an external driver function: The IO Expander driver.
-  * @param  None
-  * @retval None
   */
 static void CODEC_Reset(void)
 {

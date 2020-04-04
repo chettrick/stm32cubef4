@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm32469i_eval_sram.h
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    29-September-2015
+  * @version V1.0.2
+  * @date    12-January-2016
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm32469i_eval_sram.c driver.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -51,7 +51,7 @@
   * @{
   */
 
-/** @addtogroup STM32469I-EVAL
+/** @addtogroup STM32469I_EVAL
   * @{
   */
 

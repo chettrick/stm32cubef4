@@ -2,11 +2,11 @@
   @page TIM_Encoder TIM Encoder example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    TIM/TIM_Encoder/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    13-November-2015
+  * @version V1.0.3
+  * @date    29-January-2016
   * @brief   This example shows how to configure the Timer in Encoder interface 
   *          to determinate the rotation direction. 
   ******************************************************************************

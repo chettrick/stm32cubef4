@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm32469i_discovery_sd.c
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    29-September-2015
+  * @version V1.0.2
+  * @date    13-January-2016
   * @brief   This file includes the uSD card driver mounted on STM32469I-Discovery
   *          board.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -86,37 +86,37 @@
   * @{
   */
 
-/** @addtogroup STM32469I-Discovery
+/** @addtogroup STM32469I_Discovery
   * @{
   */
 
-/** @defgroup STM32469I-Discovery_SD STM32469I-Discovery SD
+/** @defgroup STM32469I-Discovery_SD STM32469I Discovery SD
   * @{
   */
 
 
-/** @defgroup STM32469I-Discovery_SD_Private_TypesDefinitions STM32469I Discovery Sd Private TypesDef
-  * @{
-  */
-/**
-  * @}
-  */
-
-/** @defgroup STM32469I-Discovery_SD_Private_Defines STM32469I Discovery Sd Private Defines
+/** @defgroup STM32469I-Discovery_SD_Private_TypesDefinitions STM32469I Discovery SD Private TypesDef
   * @{
   */
 /**
   * @}
   */
 
-/** @defgroup STM32469I-Discovery_SD_Private_Macros STM32469I Discovery Sd Private Macro
+/** @defgroup STM32469I-Discovery_SD_Private_Defines STM32469I Discovery SD Private Defines
   * @{
   */
 /**
   * @}
   */
 
-/** @defgroup STM32469I-Discovery_SD_Private_Variables STM32469I Discovery Sd Private Variables
+/** @defgroup STM32469I-Discovery_SD_Private_Macros STM32469I Discovery SD Private Macro
+  * @{
+  */
+/**
+  * @}
+  */
+
+/** @defgroup STM32469I-Discovery_SD_Private_Variables STM32469I Discovery SD Private Variables
   * @{
   */
 static SD_HandleTypeDef uSdHandle;
@@ -126,14 +126,14 @@ static SD_CardInfo uSdCardInfo;
   * @}
   */
 
-/** @defgroup STM32469I-Discovery_SD_Private_FunctionPrototypes STM32469I Discovery Sd Private Prototypes
+/** @defgroup STM32469I-Discovery_SD_Private_FunctionPrototypes STM32469I Discovery SD Private Prototypes
   * @{
   */
 /**
   * @}
   */
 
-/** @defgroup STM32469I-Discovery_SD_Private_Functions STM32469I Discovery Sd Private Functions
+/** @defgroup STM32469I-Discovery_SD_Private_Functions STM32469I Discovery SD Private Functions
   * @{
   */
 
@@ -481,7 +481,7 @@ __weak void BSP_SD_MspInit(SD_HandleTypeDef *hsd, void *Params)
 /**
   * @brief  Initializes the SD Detect pin MSP.
   * @param  hsd: SD handle
-  * @retval None
+  * @param  Params : pointer on additional configuration parameters, can be NULL.
   */
 __weak void BSP_SD_Detect_MspInit(SD_HandleTypeDef *hsd, void *Params)
 {

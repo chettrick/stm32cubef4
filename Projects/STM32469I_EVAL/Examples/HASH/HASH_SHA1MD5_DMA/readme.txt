@@ -3,11 +3,11 @@
   with DMA transfer.
   
   @verbatim
-  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    HASH/HASH_SHA1MD5_DMA/readme.txt
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    13-November-2015
+  * @version V1.0.3
+  * @date    29-January-2016
   * @brief   Description of the HASH digest calculation using SHA1 and MD5 example.
   ******************************************************************************
   *

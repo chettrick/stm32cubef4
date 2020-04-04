@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm324xg_eval_sd.c
   * @author  MCD Application Team
-  * @version V2.1.0
-  * @date    14-August-2015
+  * @version V2.2.1
+  * @date    15-January-2016
   * @brief   This file includes the uSD card driver mounted on STM324xG-EVAL
   *          evaluation board.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -90,32 +90,32 @@
   * @{
   */ 
   
-/** @defgroup STM324xG_EVAL_SD
+/** @defgroup STM324xG_EVAL_SD STM324xG EVAL SD
   * @{
   */ 
   
-/** @defgroup STM324xG_EVAL_SD_Private_Types_Definitions
+/** @defgroup STM324xG_EVAL_SD_Private_Types_Definitions STM324xG EVAL SD Private Types Definitions
   * @{
   */ 
 /**
   * @}
   */ 
 
-/** @defgroup STM324xG_EVAL_SD_Private_Defines
+/** @defgroup STM324xG_EVAL_SD_Private_Defines STM324xG EVAL SD Private Defines
   * @{
   */
 /**
   * @}
   */
    
-/** @defgroup STM324xG_EVAL_SD_Private_Macros
+/** @defgroup STM324xG_EVAL_SD_Private_Macros STM324xG EVAL SD Private Macros
   * @{
   */  
 /**
   * @}
   */   
 
-/** @defgroup STM324xG_EVAL_SD_Private_Variables
+/** @defgroup STM324xG_EVAL_SD_Private_Variables STM324xG EVAL SD Private Variables
   * @{
   */       
 static SD_HandleTypeDef uSdHandle;
@@ -124,7 +124,7 @@ static SD_CardInfo uSdCardInfo;
   * @}
   */ 
 
-/** @defgroup STM324xG_EVAL_SD_Private_Function_Prototypes
+/** @defgroup STM324xG_EVAL_SD_Private_Function_Prototypes STM324xG EVAL SD Private Function Prototypes
   * @{
   */ 
 static void SD_MspInit(void);
@@ -132,13 +132,12 @@ static void SD_MspInit(void);
   * @}
   */
 
-/** @defgroup STM324xG_EVAL_SD_Private_Functions
+/** @defgroup STM324xG_EVAL_SD_Private_Functions STM324xG EVAL SD Private Functions
   * @{
   */
 
 /**
   * @brief  Initializes the SD card device.
-  * @param  None
   * @retval SD status.
   */
 uint8_t BSP_SD_Init(void)
@@ -187,7 +186,6 @@ uint8_t BSP_SD_Init(void)
 
 /**
   * @brief  Configures Interrupt mode for SD detection pin.
-  * @param  None
   * @retval Returns 0
   */
 uint8_t BSP_SD_ITConfig(void)
@@ -210,7 +208,6 @@ uint8_t BSP_SD_ITConfig(void)
 
 /**
  * @brief  Detects if SD card is correctly plugged in the memory slot or not.
- * @param  None
  * @retval Returns if SD is detected or not
  */
 uint8_t BSP_SD_IsDetected(void)
@@ -227,8 +224,6 @@ uint8_t BSP_SD_IsDetected(void)
 }
 
 /** @brief  SD detect IT treatment
-  * @param  None
-  * @retval None
   */
 void BSP_SD_DetectIT(void)
 {
@@ -239,8 +234,6 @@ void BSP_SD_DetectIT(void)
 
 
 /** @brief  SD detect IT detection callback
-  * @param  None
-  * @retval None
   */
 __weak void BSP_SD_DetectCallback(void)
 {
@@ -378,8 +371,6 @@ uint8_t BSP_SD_Erase(uint64_t StartAddr, uint64_t EndAddr)
 
 /**
   * @brief  Initializes the SD MSP.
-  * @param  None
-  * @retval None
   */
 static void SD_MspInit(void)
 {
@@ -486,8 +477,6 @@ static void SD_MspInit(void)
 
 /**
   * @brief  Handles SD card interrupt request.
-  * @param  None
-  * @retval None
   */
 void BSP_SD_IRQHandler(void)
 {
@@ -496,8 +485,6 @@ void BSP_SD_IRQHandler(void)
 
 /**
   * @brief  Handles SD DMA Tx transfer interrupt request.
-  * @param  None
-  * @retval None
   */
 void BSP_SD_DMA_Tx_IRQHandler(void)
 {
@@ -506,8 +493,6 @@ void BSP_SD_DMA_Tx_IRQHandler(void)
 
 /**
   * @brief  Handles SD DMA Rx transfer interrupt request.
-  * @param  None
-  * @retval None
   */
 void BSP_SD_DMA_Rx_IRQHandler(void)
 {
@@ -516,7 +501,6 @@ void BSP_SD_DMA_Rx_IRQHandler(void)
 
 /**
   * @brief  Gets the current SD card data status.
-  * @param  None
   * @retval Data transfer state.
   *          This value can be one of the following values:
   *            @arg  SD_TRANSFER_OK: No data transfer is acting
@@ -531,7 +515,6 @@ HAL_SD_TransferStateTypedef BSP_SD_GetStatus(void)
 /**
   * @brief  Get SD information about specific SD card.
   * @param  CardInfo: Pointer to HAL_SD_CardInfoTypedef structure
-  * @retval None 
   */
 void BSP_SD_GetCardInfo(HAL_SD_CardInfoTypedef *CardInfo)
 {

@@ -2,11 +2,11 @@
   @page CRC_Example Cyclic Redundancy Check Example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    CRC/CRC_Example/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    13-November-2015
+  * @version V1.0.1
+  * @date    29-January-2016
   * @brief   Description of Cyclic Redundancy Check Example.
   ******************************************************************************
   *
@@ -81,7 +81,7 @@ STM32 nucleo's LEDs are used to monitor the example status:
 
   - This example runs on STM32F429xx devices.
   
-  - This example has been tested with an STMicroelectronics NUCLEO-429ZI  Rev B
+  - This example has been tested with an STMicroelectronics NUCLEO-F429ZI  Rev B
     board and can be easily tailored to any other supported device 
     and development board.
 

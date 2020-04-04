@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    BSP/Src/ioe_gpio.c 
   * @author  MCD Application Team
-  * @version V1.1.2
-  * @date    13-November-2015
+  * @version V1.1.3
+  * @date    29-January-2016
   * @brief   This test check the IO and exti of the MFX expander Driver
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:

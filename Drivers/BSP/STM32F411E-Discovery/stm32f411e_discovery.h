@@ -1,15 +1,15 @@
 /** 
   ******************************************************************************
-  * @file    stm32f4011e_discovery.h
+  * @file    stm32f411e_discovery.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    12-November-2015
+  * @version V1.0.1
+  * @date    12-January-2016
   * @brief   This file contains definitions for STM32F401-Discovery Kit's Leds and 
   *          push-button hardware resources.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -55,11 +55,11 @@
   * @{
   */
       
-/** @addtogroup __STM32F411E_DISCOVERY_HLOW_LEVEL
+/** @defgroup __STM32F411E_DISCOVERY_HLOW_LEVEL STM32F411E DISCOVERY HLOW LEVEL
   * @{
   */ 
 
-/** @defgroup __STM32F411E_DISCOVERY_HLOW_LEVEL_Exported_Types
+/** @defgroup __STM32F411E_DISCOVERY_HLOW_LEVEL_Exported_Types STM32F411E DISCOVERY HLOW LEVEL Exported Types
   * @{
   */
 typedef enum 
@@ -84,7 +84,7 @@ typedef enum
   * @}
   */ 
 
-/** @defgroup __STM32F411E_DISCOVERY_HLOW_LEVEL_Exported_Constants
+/** @defgroup __STM32F411E_DISCOVERY_HLOW_LEVEL_Exported_Constants STM32F411E DISCOVERY HLOW LEVEL Exported Constants
   * @{
   */ 
 
@@ -95,7 +95,7 @@ typedef enum
  #define USE_STM32F411E_DISCO
 #endif
 
-/** @addtogroup __STM32F411E_DISCOVERY_HLOW_LEVEL_LED
+/** @defgroup __STM32F411E_DISCOVERY_HLOW_LEVEL_LED STM32F411E DISCOVERY HLOW LEVEL LED
   * @{
   */
 #define LEDn                                    4
@@ -138,7 +138,7 @@ typedef enum
   * @}
   */ 
   
-/** @addtogroup __STM32F411E_DISCOVERY_HLOW_LEVEL_BUTTON
+/** @defgroup __STM32F411E_DISCOVERY_HLOW_LEVEL_BUTTON STM32F411E DISCOVERY HLOW LEVEL BUTTON
   * @{
   */  
 #define BUTTONn                                 1  
@@ -160,7 +160,7 @@ typedef enum
   * @}
   */ 
 
-/** @addtogroup __STM32F411E_DISCOVERY_HLOW_LEVEL_BUS
+/** @defgroup __STM32F411E_DISCOVERY_HLOW_LEVEL_BUS  STM32F411E DISCOVERY HLOW LEVEL BUS
   * @{
   */  
 
@@ -270,14 +270,14 @@ typedef enum
   * @}
   */ 
 
-/** @defgroup __STM32F411E_DISCOVERY_HLOW_LEVEL_Exported_Macros
+/** @defgroup __STM32F411E_DISCOVERY_HLOW_LEVEL_Exported_Macros STM32F411E DISCOVERY HLOW LEVEL Exported Macros
   * @{
   */  
 /**
   * @}
   */ 
 
-/** @defgroup __STM32F411E_DISCOVERY_HLOW_LEVEL_Exported_Functions
+/** @defgroup __STM32F411E_DISCOVERY_HLOW_LEVEL_Exported_Functions  STM32F411E DISCOVERY HLOW LEVEL Exported Functions
   * @{
   */
 uint32_t BSP_GetVersion(void);  

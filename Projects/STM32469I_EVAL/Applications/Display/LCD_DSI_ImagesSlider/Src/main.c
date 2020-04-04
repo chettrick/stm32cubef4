@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    Display/LCD_DSI_ImagesSlider/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    13-November-2015
+  * @version V1.0.3
+  * @date    29-January-2016
   * @brief   This example describes how to configure and use LCD DSI to display an image
   *          of size WVGA in mode landscape (800x480) using the STM32F4xx HAL API and BSP.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -184,7 +184,7 @@ int main(void)
   
   /* Initialise QSPI */
   BSP_QSPI_Init();
-  BSP_QSPI_MemoryMappedMode(); 
+  BSP_QSPI_EnableMemoryMappedMode(); 
   
   /* Initialize the SDRAM */
   BSP_SDRAM_Init();

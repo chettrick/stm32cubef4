@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm32469i_discovery_audio.h
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    29-September-2015
+  * @version V1.0.2
+  * @date    13-January-2016
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm32469i_discovery_audio.c driver.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -60,7 +60,7 @@
   * @{
   */
 
-/** @addtogroup STM32469I-Discovery
+/** @addtogroup STM32469I_Discovery
   * @{
   */
 
@@ -68,18 +68,18 @@
   * @{
   */
 
-/** @defgroup STM32469I-Discovery_AUDIO_Exported_Types STM32469I Discovery Audio Exported Types
+/** @defgroup STM32469I-Discovery_AUDIO_Exported_Types STM32469I Discovery AUDIO Exported Types
   * @{
   */
 /**
   * @}
   */
 
-/** @defgroup STM32469I-Discovery_AUDIO_Exported_Constants  STM32469I Discovery Audio Exported Constants
+/** @defgroup STM32469I-Discovery_AUDIO_Exported_Constants  STM32469I Discovery AUDIO Exported Constants
   * @{
   */
 
-/** @defgroup BSP_Audio_Out_Option BSP Audio Out Option
+/** @defgroup BSP_Audio_Out_Option BSP AUDIO OUT Option
   * @{
   */
 #define BSP_AUDIO_OUT_CIRCULARMODE      ((uint32_t)0x00000001) /* BUFFER CIRCULAR MODE */
@@ -257,7 +257,7 @@ extern __IO uint16_t AudioInVolume;
   * @}
   */
 
-/** @defgroup STM32469I-Discovery_AUDIO_OUT_Exported_Functions  STM32469I Discovery AudioOUT Exported Functions
+/** @defgroup STM32469I-Discovery_AUDIO_OUT_Exported_Functions  STM32469I Discovery AUDIO OUT Exported Functions
   * @{
   */
 uint8_t BSP_AUDIO_OUT_Init(uint16_t OutputDevice, uint8_t Volume, uint32_t AudioFreq);
@@ -294,7 +294,7 @@ void  BSP_AUDIO_OUT_MspDeInit(SAI_HandleTypeDef *hsai, void *Params);
   * @}
   */
 
-/** @defgroup STM32469I-Discovery_AUDIO_IN_Exported_Functions  STM32469I Discovery AudioIN Exported Functions
+/** @defgroup STM32469I-Discovery_AUDIO_IN_Exported_Functions  STM32469I Discovery AUDIO IN Exported Functions
   * @{
   */
 uint8_t BSP_AUDIO_IN_Init(uint32_t AudioFreq, uint32_t BitRes, uint32_t ChnlNbr);

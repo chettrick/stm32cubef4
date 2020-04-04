@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32446e_eval_qspi.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    14-August-2015
+  * @version V1.1.1
+  * @date    13-January-2016
   * @brief   This file includes a standard driver for the N25Q256A QSPI 
   *          memory mounted on STM32446E-EVAL board.
   @verbatim
@@ -37,7 +37,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -75,14 +75,14 @@
   * @{
   */ 
   
-/** @defgroup STM32446E_EVAL_QSPI STM32446E-EVAL QSPI
+/** @defgroup STM32446E_EVAL_QSPI STM32446E EVAL QSPI
   * @{
   */ 
 
 
 /* Private variables ---------------------------------------------------------*/
 
-/** @defgroup STM32446E_EVAL_QSPI_Private_Variables Private Variables
+/** @defgroup STM32446E_EVAL_QSPI_Private_Variables STM32446E EVAL QSPI Private Variables
   * @{
   */       
 QSPI_HandleTypeDef QSPIHandle;
@@ -95,7 +95,7 @@ QSPI_HandleTypeDef QSPIHandle;
 
 /* Private functions ---------------------------------------------------------*/
     
-/** @defgroup STM32446E_EVAL_QSPI_Private_Functions Private Functions
+/** @defgroup STM32446E_EVAL_QSPI_Private_Functions STM32446E EVAL QSPI Private Functions
   * @{
   */ 
 static uint8_t QSPI_ResetMemory          (QSPI_HandleTypeDef *hqspi);
@@ -108,7 +108,7 @@ static uint8_t QSPI_AutoPollingMemReady(QSPI_HandleTypeDef *hqspi, uint32_t Time
   * @}
   */
     
-/** @defgroup STM32446E_EVAL_QSPI_Exported_Functions Exported Functions
+/** @defgroup STM32446E_EVAL_QSPI_Exported_Functions STM32446E EVAL QSPI Exported Functions
   * @{
   */ 
 
@@ -460,11 +460,10 @@ uint8_t BSP_QSPI_GetInfo(QSPI_Info* pInfo)
 }
 
 /**
-  * @brief  Configure the QSPI in memory-mapped mode
-  * @param  None  
+  * @brief  Configure the QSPI in memory-mapped mode 
   * @retval QSPI memory status
   */
-uint8_t BSP_QSPI_MemoryMappedMode(void)
+uint8_t BSP_QSPI_EnableMemoryMappedMode(void)
 {
   QSPI_CommandTypeDef      s_command;
   QSPI_MemoryMappedTypeDef s_mem_mapped_cfg;
@@ -482,8 +481,7 @@ uint8_t BSP_QSPI_MemoryMappedMode(void)
   s_command.SIOOMode          = QSPI_SIOO_INST_EVERY_CMD;
   
   /* Configure the memory mapped mode */
-  s_mem_mapped_cfg.TimeOutActivation = QSPI_TIMEOUT_COUNTER_ENABLE;
-  s_mem_mapped_cfg.TimeOutPeriod     = 1;
+  s_mem_mapped_cfg.TimeOutActivation = QSPI_TIMEOUT_COUNTER_DISABLE;
   
   if (HAL_QSPI_MemoryMapped(&QSPIHandle, &s_command, &s_mem_mapped_cfg) != HAL_OK)
   {
@@ -779,6 +777,7 @@ static uint8_t QSPI_WriteEnable(QSPI_HandleTypeDef *hqspi)
 /**
   * @brief  This function read the SR of the memory and wait the EOP.
   * @param  hqspi: QSPI handle
+  * @param  Timeout: timeout value
   * @retval None
   */
 static uint8_t QSPI_AutoPollingMemReady(QSPI_HandleTypeDef *hqspi, uint32_t Timeout)

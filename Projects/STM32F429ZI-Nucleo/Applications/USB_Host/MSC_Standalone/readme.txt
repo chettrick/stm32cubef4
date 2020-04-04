@@ -2,11 +2,11 @@
   @page MSC_Standalone USB Host Mass Storage (MSC) application
   
   @verbatim
-  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    USB_Host/MSC_Standalone/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    13-November-2015
+  * @version V1.0.1
+  * @date    29-January-2016
   * @brief   Description of the USB Host MSC application.
   ******************************************************************************
   *
@@ -103,11 +103,11 @@ requirements, such as:
 
   - This application runs on STM32F429xx devices.
     
-  - This application has been tested with STMicroelectronics NUCLEO-429ZI  
+  - This application has been tested with STMicroelectronics NUCLEO-F429ZI  
     boards and can be easily tailored to any other supported device and board.
 
-  - NUCLEO-429ZI  Set-up
-    - Plug the USB key into the NUCLEO-429ZI  board through 'USB micro A-Male 
+  - NUCLEO-F429ZI  Set-up
+    - Plug the USB key into the NUCLEO-F429ZI  board through 'USB micro A-Male 
       to A-Female' cable to the connector:
 
   - Make sure that the jumper JP4 is closed
@@ -115,7 +115,7 @@ requirements, such as:
   - Adafruit 1.8" TFT shield must be connected on CN5,CN6, CN8 and CN9 Arduino connectors, 
     for more details please refer to UM1726.
 
-  - Make sure the SB146, SB121 are closed and the SB174, SB165, SB122 are opened on the NUCLEO-429ZI board (bottom side) 
+  - Make sure the SB146, SB121 are closed and the SB174, SB165, SB122 are opened on the NUCLEO-F429ZI board (bottom side) 
 
 
 @par How to use it ?

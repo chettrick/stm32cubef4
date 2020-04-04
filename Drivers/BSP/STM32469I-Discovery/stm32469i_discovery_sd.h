@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm32469i_discovery_sd.h
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    29-September-2015
+  * @version V1.0.2
+  * @date    13-January-2016
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm32469i_discovery_sd.c driver.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -51,15 +51,15 @@
   * @{
   */
 
-/** @addtogroup STM32469I-Discovery
+/** @addtogroup STM32469I_Discovery
   * @{
   */
 
-/** @defgroup STM32469I-Discovery_SD STM32469I-Discovery SD
+/** @addtogroup STM32469I-Discovery_SD 
   * @{
   */
 
-/** @defgroup STM32469I-Discovery_SD_Exported_Types SD Exported Types
+/** @defgroup STM32469I-Discovery_SD_Exported_Types STM32469I Discovery SD Exported Types
   * @{
   */
 
@@ -78,7 +78,7 @@
 #define   MSD_ERROR                     ((uint8_t)0x01)
 #define   MSD_ERROR_SD_NOT_PRESENT      ((uint8_t)0x02)
 
-/** @defgroup STM32469I-Discovery_SD_Exported_Constants SD Exported Constants
+/** @defgroup STM32469I-Discovery_SD_Exported_Constants STM32469I Discovery SD Exported Constants
   * @{
   */
 #define SD_PRESENT               ((uint8_t)0x01)
