@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    FreeRTOS/FreeRTOS_Mutexes/Inc/main.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    13-March-2015
+  * @version V1.1.0
+  * @date    01-July-2015
   * @brief   This file contains all the functions prototypes for the main.c 
   *          file.
   ******************************************************************************

@@ -36,8 +36,8 @@ Purpose     : Shows how to use memory devices for rotation.
   ******************************************************************************
   * @file    MEMDEV_Speedometer.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    13-March-2015
+  * @version V1.1.0
+  * @date    01-July-2015
   * @brief   Shows how to use memory devices for rotation.
   ******************************************************************************
   * @attention

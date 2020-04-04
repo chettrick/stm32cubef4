@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    SMARTCARD/T0/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    13-March-2015
+  * @version V1.2.2
+  * @date    01-July-2015
   * @brief   Description of the Smart Card T0 protocol example.
   ******************************************************************************
   *
@@ -36,10 +36,13 @@
   @endverbatim
 
 @par Example Description 
-This example describes a firmware Smartcard Interface based on the STM32F4xx USART
+
+
+This example describes a firmware Smartcard Interface based on the USART
 peripheral. The main purpose of this firmware example is to provide resources 
 facilitating the development of an application using the USART peripheral in 
 smartcard mode.
+
 
 The firmware interface is composed of library source files developed in order to
 support ISO7816-3/4 specification, an application example is also provided.

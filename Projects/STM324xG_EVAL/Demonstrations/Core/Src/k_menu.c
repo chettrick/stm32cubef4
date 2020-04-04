@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    k_menu.c
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    13-March-2015   
+  * @version V1.3.0
+  * @date    01-March-2015   
   * @brief   This file provides the kernel menu functions 
   ******************************************************************************
   * @attention
@@ -87,6 +87,7 @@ static WM_HWIN  hPerformance = 0;
 static WM_HWIN  hProcess = 0;
 static WM_HWIN  hLog = 0;
 static WM_HWIN  hStatusWin = 0;
+int    module_active = (-1);
 
 xTaskStatusType  ProcessStatus[16] ={{0}};
 static SystemSettingsTypeDef    settings;
@@ -506,7 +507,7 @@ static void _cbBk(WM_MESSAGE * pMsg) {
   
   MENU_MSG_DATA* pData;
   uint32_t NCode, Id;
-  static uint8_t sel = 0;
+  static int sel = 0;
   
   switch (pMsg->MsgId) 
   {
@@ -624,10 +625,11 @@ static void _cbBk(WM_MESSAGE * pMsg) {
         if(sel < k_ModuleGetNumber())
         { 
           module_prop[sel].module->startup(pMsg->hWin, 0, 25);
-          sel = 0;
+          module_active = sel;
+          sel = -1;
         }
       }
-      else if (Id == ID_BUTTON_BKGND)
+      else if ((Id == ID_BUTTON_BKGND) && module_active != 0)
       {
         /* Create popup menu after touching the display */
         _OpenPopup(WM_HBKWIN, _aMenuItems, GUI_COUNTOF(_aMenuItems),0 , 25);  

@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    DAC/DAC_SimpleConversion/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    13-March-2015
+  * @version V1.1.0
+  * @date    01-July-2015
   * @brief   Description of the DAC Simple Conversion example.
   ******************************************************************************
   *
@@ -36,6 +36,9 @@
   @endverbatim
 
 @par Example Description 
+
+This example provides a short description of how to use the DAC peripheral to 
+do a simple conversion.
 
 This example provides a short description of how to use the DAC peripheral to 
 do a simple conversion in 8 bits right alignment of 0xFF value, the result of 

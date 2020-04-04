@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    UART/UART_TwoBoards_ComDMA/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    13-March-2015
+  * @version V1.2.2
+  * @date    01-July-2015
   * @brief   Description of the UART Two Boards Communication DMA example.
   ******************************************************************************
   *
@@ -37,8 +37,8 @@
 
 @par Example Description 
 
-This Example shows a UART transmission (transmit/receive) between 2 
-STM32F4-Discovery kits in DMA mode.
+This example describes an UART transmission (transmit/receive) in DMA mode
+between two boards.
 
 At the beginning of the main program the HAL_Init() function is called to reset 
 all the peripherals, initialize the Flash interface and the systick.

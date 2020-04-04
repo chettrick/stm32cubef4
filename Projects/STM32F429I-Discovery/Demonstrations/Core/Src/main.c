@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    main.c 
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    13-March-2015
+  * @version V1.3.0
+  * @date    01-July-2015 
   * @brief   This file provides main program functions
   ******************************************************************************
   * @attention
@@ -131,7 +131,7 @@ int main(void)
   k_CalendarBkupInit();   
   
   /* Create GUI task */
-  osThreadDef(GUI_Thread, GUIThread, osPriorityHigh, 0, 30 * configMINIMAL_STACK_SIZE);
+  osThreadDef(GUI_Thread, GUIThread, osPriorityHigh, 0, 768);
   osThreadCreate (osThread(GUI_Thread), NULL);     
   
   /* Add Modules*/
@@ -155,8 +155,7 @@ int main(void)
   
   /* Initialize GUI */
   GUI_Init();
-  WM_MULTIBUF_Enable(1);
-  GUI_SelectLayer(1);    
+  WM_MULTIBUF_Enable(1);  
   
   /* Set General Graphical proprieties */
   k_SetGuiProfile();     
@@ -192,7 +191,9 @@ int main(void)
   lcd_timer =  osTimerCreate(osTimer(TS_Timer), osTimerPeriodic, (void *)0);
 
   /* Start the TS Timer */
-  osTimerStart(lcd_timer, 100);  
+  osTimerStart(lcd_timer, 100);
+
+  GUI_X_InitOS();  
   
   /* Start scheduler */
   osKernelStart();
@@ -213,14 +214,12 @@ static void GUIThread(void const * argument)
 
   if(k_CalibrationIsDone() == 0)
   {
-    GUI_SelectLayer(1);
     k_CalibrationInit();
   }
   
   /* Demo Startup */
   k_StartUp();
   
-  GUI_SelectLayer(0);
   
   /* Show the main menu */
   k_InitMenu();
@@ -232,7 +231,7 @@ static void GUIThread(void const * argument)
     /* Toggle LED3 and LED4 */
     BSP_LED_Toggle(LED3);
     BSP_LED_Toggle(LED4);     
-    osDelay(250); 
+    osDelay(20); 
     GUI_FreeMem = GUI_ALLOC_GetNumFreeBytes();
   }
 }

@@ -99,7 +99,7 @@
         </option>
         <option>
           <name>OGChipSelectEditMenu</name>
-          <state>STM32F446	ST STM32F446</state>
+          <state>STM32F446ZE	ST STM32F446ZE</state>
         </option>
         <option>
           <name>GenLowLevelInterface</name>

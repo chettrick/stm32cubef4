@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    usbh_conf.h
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    13-March-2015
+  * @version V1.3.0
+  * @date    01-July-2015
   * @brief   General low level driver configuration
   ******************************************************************************
   * @attention
@@ -76,7 +76,7 @@
 #if (USBH_USE_OS == 1)
   #include "cmsis_os.h"
   #define   USBH_PROCESS_PRIO          osPriorityNormal
-  #define   USBH_PROCESS_STACK_SIZE    (8 * configMINIMAL_STACK_SIZE)
+  #define   USBH_PROCESS_STACK_SIZE    (configMINIMAL_STACK_SIZE)
 #endif   
 
  /* Memory management macros */   

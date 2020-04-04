@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324x9i_eval_sdram.c
   * @author  MCD Application Team
-  * @version V2.0.4
-  * @date    02-March-2015
+  * @version V2.1.0
+  * @date    26-June-2015
   * @brief   This file includes the SDRAM driver for the MT48LC4M32B2B5-7 memory 
   *          device mounted on STM324x9I-EVAL evaluation board.
   ******************************************************************************
@@ -156,7 +156,7 @@ uint8_t BSP_SDRAM_Init(void)
   Timing.RCDDelay             = 2;
   
   sdramHandle.Init.SDBank             = FMC_SDRAM_BANK1;
-  sdramHandle.Init.ColumnBitsNumber   = FMC_SDRAM_COLUMN_BITS_NUM_8;
+  sdramHandle.Init.ColumnBitsNumber   = FMC_SDRAM_COLUMN_BITS_NUM_9;
   sdramHandle.Init.RowBitsNumber      = FMC_SDRAM_ROW_BITS_NUM_12;
   sdramHandle.Init.MemoryDataWidth    = SDRAM_MEMORY_WIDTH;
   sdramHandle.Init.InternalBankNumber = FMC_SDRAM_INTERN_BANKS_NUM_4;

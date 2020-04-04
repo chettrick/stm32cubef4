@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    Audio/Audio_playback_and_record/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.2
-  * @date    25-May-2015
+  * @version V1.2.3
+  * @date    01-July-2015
   * @brief   Description of the Audio Playback and Record application.
   ******************************************************************************
   *
@@ -37,8 +37,9 @@
 
 @par Application Description 
 
+
 This application provides a description of an audio play and record with different
-MEMS used on STM32F401-Discovery. 
+MEMS used on STM32F401-Discovery.
 
 At the beginning of the main program the HAL_Init() function is called to reset 
 all the peripherals.

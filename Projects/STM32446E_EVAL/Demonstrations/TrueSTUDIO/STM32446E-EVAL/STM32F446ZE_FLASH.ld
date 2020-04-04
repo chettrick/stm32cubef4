@@ -167,8 +167,8 @@ SECTIONS
 
   .ARM.attributes 0 : { *(.ARM.attributes) }
   .ExtFlashSection : {*(.ExtFlashSection)} > QSPI
-  .ExtRAMData  : {*(.ExtRAMData)} > PSRAM
-  .ExtRAMData1  : {*(.ExtRAMData1)} > PSRAM1
+  .ExtRAMData (NOLOAD)  : {*(.ExtRAMData)} > PSRAM
+  .ExtRAMData1 (NOLOAD)  : {*(.ExtRAMData1)} > PSRAM1
   
 }
 

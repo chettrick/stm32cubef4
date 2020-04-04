@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    videoplayer_win.c
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    13-March-2015   
+  * @version V1.3.0
+  * @date    01-July-2015   
   * @brief   Video player functions
   ******************************************************************************
   * @attention
@@ -45,6 +45,8 @@
   */
 
 /* External variables --------------------------------------------------------*/
+extern int module_active;
+
 /* Private function prototypes -----------------------------------------------*/
 typedef union
 {
@@ -130,7 +132,7 @@ static const GUI_WIDGET_CREATE_INFO _aDialogCreate[] = {
   { SLIDER_CreateIndirect,   "Slider",      ID_PROGRESS_SLIDER,   5, 150, 205,  20, 0,  0x0, 0 },
 }; 
 
-static WM_HWIN VIDEOPLAYER_hWin, hFrame; 
+static WM_HWIN VIDEOPLAYER_hWin, hFrame, hBigFrame;
 static char const                *apDrives = "0:";
 static const char                acMask_video[] = ".video";
 static const char                acMask_dir[] = ".dir";
@@ -140,7 +142,7 @@ static  CHOOSEFILE_INFO      *pFileInfo;
 static uint8_t              playlist_select = 0;
 uint8_t VideoPlayer_State = VIDEO_IDLE;
 static uint8_t                    FullScreen = 0;
-static uint32_t                   file_pos = 0;
+static uint32_t                   Video_file_pos = 0;
 static GUI_MOVIE_HANDLE hMovie = NULL;
 static WM_HTIMER hPlaylistTimer;
 FIL Video_File;
@@ -568,6 +570,7 @@ void _cbNotify(GUI_HMEM hMem, int Notification, U32 CurrentFrame)
   switch (Notification) {
   case GUI_MOVIE_NOTIFICATION_PREDRAW:
     GUI_MULTIBUF_Begin();
+        
     break;
   case GUI_MOVIE_NOTIFICATION_POSTDRAW:
     GUI_MULTIBUF_End();
@@ -579,26 +582,29 @@ void _cbNotify(GUI_HMEM hMem, int Notification, U32 CurrentFrame)
     
     if(GUI_MOVIE_GetFrameIndex(hMovie) >= (Video_Info.NumFrames - 1))
     {  
-      
+      if( FullScreen == 1)
+      {
+        WM_InvalidateWindow(hBigFrame);
+        WM_Update(hBigFrame);
+      }   
       _StopPlay();
       
       if(PlayerSettings.b.repeat != REPEAT_NONE)
       {
         if (PlayerSettings.b.repeat == REPEAT_ALL)
         {
-          if(file_pos < (pVideoList->ptr - 1))
+          if(Video_file_pos < (pVideoList->ptr - 1))
           {
-            file_pos++;
-            LISTVIEW_IncSel(WM_GetDialogItem(VIDEOPLAYER_hWin, ID_VIDEO_LIST)); 
+            Video_file_pos++;
           }
           else 
           {        
-            file_pos = 0; 
-            LISTVIEW_SetSel(WM_GetDialogItem(VIDEOPLAYER_hWin, ID_VIDEO_LIST), file_pos);
+            Video_file_pos = 0; 
           }
+          LISTVIEW_SetSel(WM_GetDialogItem(VIDEOPLAYER_hWin, ID_VIDEO_LIST), Video_file_pos);          
         }
         
-        _StartPlay((char *)pVideoList->file[file_pos].name);
+        _StartPlay((char *)pVideoList->file[Video_file_pos].name);
       }
       else
       {
@@ -669,7 +675,7 @@ static uint8_t _StartPlay(char * filename)
     }
     else
     {
-      if((Video_Info.xSize != LCD_GetXSize()) ||(Video_Info.ySize != LCD_GetYSize()))
+      if((Video_Info.xSize > LCD_GetXSize()) ||(Video_Info.ySize > LCD_GetYSize()))
       {
         nx = (LCD_GetXSize() * 1000) / Video_Info.xSize;
         ny = (LCD_GetYSize() * 1000) / Video_Info.ySize; 
@@ -745,13 +751,13 @@ static uint8_t _ShowFullScreen(void)
   if(hMovie != 0)
   {
     FullScreen = 1;
-    WM_CreateWindowAsChild(0, 0, LCD_GetXSize(), LCD_GetYSize(), 
-                           WM_HBKWIN, 
-                           WM_CF_SHOW | WM_CF_STAYONTOP, 
-                           _cbFullScreen, 
-                           0);
+    hBigFrame = WM_CreateWindowAsChild(0, 0, LCD_GetXSize(), LCD_GetYSize(), 
+                                       WM_HBKWIN, 
+                                       WM_CF_SHOW | WM_CF_STAYONTOP, 
+                                       _cbFullScreen, 
+                                       0);
     
-    if((Video_Info.xSize != LCD_GetXSize()) ||(Video_Info.ySize != LCD_GetYSize()))
+    if((Video_Info.xSize > LCD_GetXSize()) ||(Video_Info.ySize > LCD_GetYSize()))
     {
       nx = (LCD_GetXSize() * 1000) / Video_Info.xSize;
       ny = (LCD_GetYSize() * 1000) / Video_Info.ySize; 
@@ -995,7 +1001,7 @@ static void _cbMediaConnection(WM_MESSAGE * pMsg)
     if(prev_usb_status != k_StorageGetStatus(USB_DISK_UNIT))
     {
       prev_usb_status = k_StorageGetStatus(USB_DISK_UNIT);
-      if(pVideoList->file[file_pos].name[0] == '0')
+      if(pVideoList->file[Video_file_pos].name[0] == '0')
       {
         if(VideoPlayer_State != VIDEO_IDLE)
         {
@@ -1212,6 +1218,8 @@ case WM_NOTIFY_PARENT:
         k_free(pFileInfo);   
         _StopPlay();
         GUI_EndDialog(pMsg->hWin, 0);
+        module_active = (-1);
+        
         break;
       }
       break;      
@@ -1225,8 +1233,8 @@ case WM_NOTIFY_PARENT:
         {
           if (pVideoList->ptr > 0)
           {
-            _StartPlay((char *)pVideoList->file[file_pos].name);
-            LISTVIEW_SetSel(WM_GetDialogItem(VIDEOPLAYER_hWin, ID_VIDEO_LIST), file_pos);
+            _StartPlay((char *)pVideoList->file[Video_file_pos].name);
+            LISTVIEW_SetSel(WM_GetDialogItem(VIDEOPLAYER_hWin, ID_VIDEO_LIST), Video_file_pos);
           }
           else
           {
@@ -1258,9 +1266,9 @@ case WM_NOTIFY_PARENT:
                 LISTVIEW_AddRow(hItem, NULL);         
                 LISTVIEW_SetItemText(hItem, 0, pVideoList->ptr, tmp);
                 pVideoList->ptr++;  
-                file_pos = 0;
+                Video_file_pos = 0;
                 LISTVIEW_SetSel(hItem, 0);
-                _StartPlay((char *)pVideoList->file[file_pos].name);
+                _StartPlay((char *)pVideoList->file[Video_file_pos].name);
                 WM_InvalidateWindow(hFrame);
                 
               }
@@ -1309,22 +1317,21 @@ case WM_NOTIFY_PARENT:
     case ID_NEXT_BUTTON: 
       switch(NCode) {
       case WM_NOTIFICATION_RELEASED:
-        if(file_pos < (pVideoList->ptr - 1))
+        if(Video_file_pos < (pVideoList->ptr - 1))
         {
           /*Play Next */
-          file_pos++;
-          LISTVIEW_IncSel(WM_GetDialogItem(VIDEOPLAYER_hWin, ID_VIDEO_LIST)); 
+          Video_file_pos++;
         }
         else if(PlayerSettings.b.repeat == REPEAT_ALL)
         {
-          file_pos = 0; 
-          LISTVIEW_SetSel(WM_GetDialogItem(VIDEOPLAYER_hWin, ID_VIDEO_LIST), file_pos);
+          Video_file_pos = 0; 
         }           
+        LISTVIEW_SetSel(WM_GetDialogItem(VIDEOPLAYER_hWin, ID_VIDEO_LIST), Video_file_pos);        
 
         if(VideoPlayer_State == VIDEO_PLAY)
         {
           _StopPlay();
-          _StartPlay((char *)pVideoList->file[file_pos].name);
+          _StartPlay((char *)pVideoList->file[Video_file_pos].name);
           WM_InvalidateWindow(hFrame);
         }
         break;
@@ -1338,20 +1345,20 @@ case WM_NOTIFY_PARENT:
         
         if( pVideoList->ptr > 0)
         {
-          if(file_pos > 0)
+          if(Video_file_pos > 0)
           {   
-            file_pos--;
-            LISTVIEW_DecSel(WM_GetDialogItem(VIDEOPLAYER_hWin, ID_VIDEO_LIST));             
+            Video_file_pos--;            
           }
           else if(PlayerSettings.b.repeat == REPEAT_ALL)
           {
-            file_pos = (pVideoList->ptr - 1); 
-            LISTVIEW_SetSel(WM_GetDialogItem(VIDEOPLAYER_hWin, ID_VIDEO_LIST), file_pos);
+            Video_file_pos = (pVideoList->ptr - 1); 
           } 
+          LISTVIEW_SetSel(WM_GetDialogItem(VIDEOPLAYER_hWin, ID_VIDEO_LIST), Video_file_pos);
+          
           if(VideoPlayer_State == VIDEO_PLAY)
           {
             _StopPlay();
-            _StartPlay((char *)pVideoList->file[file_pos].name);
+            _StartPlay((char *)pVideoList->file[Video_file_pos].name);
             WM_InvalidateWindow(hFrame);
           }
         }    
@@ -1387,7 +1394,7 @@ case WM_NOTIFY_PARENT:
         
         if(Index < pVideoList->ptr)
         {
-          file_pos = Index;
+          Video_file_pos = Index;
           
           if(playlist_select == 0)
           {
@@ -1435,7 +1442,7 @@ case WM_NOTIFY_PARENT:
   */
 static void Startup(WM_HWIN hWin, uint16_t xpos, uint16_t ypos)
 {
-  file_pos = 0;
+  Video_file_pos = 0;
   pVideoList->ptr = 0;
   VideoPlayer_State = VIDEO_IDLE;
   VIDEOPLAYER_hWin = GUI_CreateDialogBox(_aDialogCreate, GUI_COUNTOF(_aDialogCreate), _cbDialog, hWin, xpos, ypos);
@@ -1475,9 +1482,9 @@ static void VideoDirectOpen(char *filename)
       LISTVIEW_AddRow(hItem, NULL);         
       LISTVIEW_SetItemText(hItem, 0, pVideoList->ptr, tmp);
       pVideoList->ptr++;  
-      file_pos = 0;
+      Video_file_pos = 0;
       LISTVIEW_SetSel(hItem, 0);
-      _StartPlay((char *)pVideoList->file[file_pos].name);
+      _StartPlay((char *)pVideoList->file[Video_file_pos].name);
       
       WM_InvalidateWindow(hFrame);
 

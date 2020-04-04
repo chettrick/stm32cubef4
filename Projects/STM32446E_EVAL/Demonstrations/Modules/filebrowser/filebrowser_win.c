@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    filebrowser_win.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    13-March-2015
+  * @version V1.1.0
+  * @date    01-July-2015
   * @brief   File browser functions
   ******************************************************************************
   * @attention
@@ -519,6 +519,12 @@ static void ShowNodeContent(WM_HWIN hTree, TREEVIEW_ITEM_Handle hNode, char *pat
         strcat (fullpath, (char *)list->file[i].name);        
         hItem = TREEVIEW_InsertItem(hTree, TREEVIEW_ITEM_TYPE_NODE, hItem, Position, (char *)list->file[i].name);
         list->next = malloc(sizeof(FILELIST_FileTypeDef));
+        
+        if (list->next == NULL)
+        {
+          break;
+        }
+        
         list->next->prev = list;
         list = list->next;
         if(FolderLevel++ < FILEMGR_MAX_LEVEL)
@@ -581,7 +587,18 @@ static void ExploreDisks(WM_HWIN hTree)
   TREEVIEW_SetIndent(hTree, 22);
   hItem = TREEVIEW_GetItem(hTree, 0, TREEVIEW_GET_FIRST);
   TREEVIEW_ITEM_Expand(hItem);
-    
+  
+  hItem = TREEVIEW_GetItem(hTree, hItem, TREEVIEW_GET_FIRST_CHILD);
+  if(hItem != 0)
+  {
+    TREEVIEW_ITEM_Expand(hItem);
+    hItem = TREEVIEW_GetItem(hTree, hItem, TREEVIEW_GET_NEXT_SIBLING);
+    if(hItem != 0)
+    {      
+      TREEVIEW_ITEM_Expand(hItem); 
+    }
+  }  
+  
   WM_SetFocus(hTree);
 }
 

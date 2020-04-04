@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    k_bsp.c
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    13-March-2015   
+  * @version V1.3.0
+  * @date    01-July-2015   
   * @brief   This file provides the kernel bsp functions
   ******************************************************************************
   * @attention
@@ -122,13 +122,13 @@ void k_TouchUpdate(void)
       
     if(k_CalibrationIsDone())
     {
-      TS_State.Layer = 1;
+      TS_State.Layer = 0;
       TS_State.x = k_CalibrationGetX (prev_state.x);
       TS_State.y = k_CalibrationGetY (prev_state.y);
     }
     else
     {
-      TS_State.Layer = 1;
+      TS_State.Layer = 0;
       TS_State.x = prev_state.x;
       TS_State.y = prev_state.y;
     }

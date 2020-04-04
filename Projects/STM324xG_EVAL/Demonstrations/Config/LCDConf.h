@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    lcdconf.h
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    13-March-2015
+  * @version V1.3.0
+  * @date    01-July-2015
   * @brief   Header for LCDConf file
   ******************************************************************************
   * @attention

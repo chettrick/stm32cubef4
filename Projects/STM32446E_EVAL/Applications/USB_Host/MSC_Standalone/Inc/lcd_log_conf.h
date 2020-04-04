@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Host/MSC_Standalone/Inc/lcd_log_conf.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    13-March-2015
+  * @version V1.1.0
+  * @date    01-July-2015
   * @brief   LCD Log configuration file.
   ******************************************************************************
   * @attention

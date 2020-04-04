@@ -36,8 +36,8 @@ Purpose     : Runtime configurability of the GUIDEMO
   ******************************************************************************
   * @file    GUIDEMO_Conf.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    13-March-2015
+  * @version V1.1.0
+  * @date    01-July-2015
   * @brief   Runtime configurability of the GUIDEMO
   ******************************************************************************
   * @attention

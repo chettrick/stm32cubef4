@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    SPI/SPI_FullDuplex_ComIT/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    13-March-2015
+  * @version V1.2.2
+  * @date    01-July-2015
   * @brief   Description of the SPI Full Duplex IT example.
   ******************************************************************************
   *
@@ -36,6 +36,10 @@
   @endverbatim
 
 @par Example Description 
+
+This example shows how to ensure SPI data buffer transmission/reception between 
+two boards by using an interrupt.
+
 The communication is done with 2 boards through SPI.
 
    _________________________                        _________________________

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Device/AUDIO_Standalone/Inc/usbd_desc.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    13-March-2015
+  * @version V1.1.0
+  * @date    01-July-2015
   * @brief   Header for usbd_desc.c module
   ******************************************************************************
   * @attention

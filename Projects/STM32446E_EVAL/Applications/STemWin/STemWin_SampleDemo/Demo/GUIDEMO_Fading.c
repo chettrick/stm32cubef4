@@ -36,8 +36,8 @@ Purpose     : Demo of fading effect function
   ******************************************************************************
   * @file    GUIDEMO_Fading.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    13-March-2015
+  * @version V1.1.0
+  * @date    01-July-2015
   * @brief   Demo of fading effect function
   ******************************************************************************
   * @attention

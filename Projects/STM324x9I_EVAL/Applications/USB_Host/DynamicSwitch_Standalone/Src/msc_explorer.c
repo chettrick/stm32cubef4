@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Host/DynamicSwitch_Standalone/Src/msc_explorer.c 
   * @author  MCD Application Team
-  * @version V1.2.2
-  * @date    25-May-2015
+  * @version V1.3.0
+  * @date    01-July-2015
   * @brief   Explore the USB flash disk content
   ******************************************************************************
   * @attention

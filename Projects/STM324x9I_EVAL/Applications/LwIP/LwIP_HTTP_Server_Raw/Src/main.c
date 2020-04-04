@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LwIP/LwIP_HTTP_Server_Raw/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.2.2
-  * @date    25-May-2015
+  * @version V1.3.0
+  * @date    01-July-2015
   * @brief   This sample code implements a http server application based on LwIP 
   *          Raw API of LwIP stack. This application uses the STM32F4Cube ETH HAL  
   *          API to transmit and receive data. 

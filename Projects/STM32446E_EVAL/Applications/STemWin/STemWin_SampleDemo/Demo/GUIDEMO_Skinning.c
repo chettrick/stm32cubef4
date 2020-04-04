@@ -36,8 +36,8 @@ Purpose     : Plays with some dialogs and uses skinning
   ******************************************************************************
   * @file    GUIDEMO_Skinning.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    13-March-2015
+  * @version V1.1.0
+  * @date    01-July-2015
   * @brief   Plays with some dialogs and uses skinning
   ******************************************************************************
   * @attention

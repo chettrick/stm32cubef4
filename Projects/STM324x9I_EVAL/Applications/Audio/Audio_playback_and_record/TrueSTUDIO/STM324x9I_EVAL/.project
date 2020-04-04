@@ -352,6 +352,11 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
+			<name>Drivers/BSP/Components/exc7200.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/exc7200/exc7200.c</locationURI>
+		</link>
+		<link>
 			<name>Drivers/BSP/Components/stmpe1600.c</name>
 			<type>1</type>
 			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/stmpe1600/stmpe1600.c</locationURI>

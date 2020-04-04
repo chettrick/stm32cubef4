@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    ADC/ADC_InjectedConversion_Interrupt/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.2
-  * @date    25-May-2015
+  * @version V1.3.0
+  * @date    01-July-2015
   * @brief   Description of the ADC InjectedConversion Interrupt example.
   ******************************************************************************
   *
@@ -36,6 +36,9 @@
   @endverbatim
 
 @par Example Description 
+
+
+This example describes how to use the ADC in interrupt mode to convert data through the HAL API.
 
 This example describes how to interrupt continuous ADC3 regular channel8 conversion 
 using ADC3 injected channel12 and how to get the converted value of this conversion.

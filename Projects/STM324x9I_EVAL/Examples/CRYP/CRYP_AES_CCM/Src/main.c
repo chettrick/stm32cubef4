@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    CRYP/CRYP_AES_CCM/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.2.2
-  * @date    25-May-2015
+  * @version V1.3.0
+  * @date    01-July-2015
   * @brief   This example provides a short description of how to use the CRYPTO
   *          peripheral to encrypt data using AES with Combined Cypher Machine (CCM).
   ******************************************************************************

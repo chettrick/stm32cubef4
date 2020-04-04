@@ -2,11 +2,11 @@
   @page PWR_CurrentConsumption PWR Current Consumption example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    PWR/PWR_CurrentConsumption/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-December-2014
+  * @version V1.1.1
+  * @date    01-July-2015
   * @brief   Description of the PWR Current Consumption example.
   ******************************************************************************
   *
@@ -38,12 +38,13 @@
 @par Example Description 
 
 This example shows how to configure the STM32F4xx system to measure different
-Low Power modes current consumption. The Low Power modes are:
+Low Power modes current consumption.
+ The Low Power modes are:
   - Sleep Mode
   - STOP mode with RTC
   - STANDBY mode without RTC and BKPSRAM
   - STANDBY mode with RTC
-  - STANDBY mode with RTC and BKPSRAM
+  - STANDBY mode with RTC and BKPSRAM.
   
 To run this example, user has to follow these steps:
  1. Select the Low power modes to be measured by uncommenting the corresponding

@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    Templates/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    25-May-2015
+  * @version V1.1.0
+  * @date    01-July-2015
   * @brief   Description of the Templates example.
   ******************************************************************************
   *
@@ -36,6 +36,8 @@
   @endverbatim
 
 @par Example Description
+
+This projects provides a reference template that can be used to build any firmware application.
 
 This directory provides a reference template project that can be used to build any firmware application for
 STM32F446xx devices using STM32CubeF4 HAL and running on STM32446E-EVAL board from STMicroelectronics. 

@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    UART/UART_Hyperterminal_DMA/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.2
-  * @date    25-May-2015
+  * @version V1.3.0
+  * @date    01-July-2015
   * @brief   Description of the UART Hyperterminal example.
   ******************************************************************************
   *
@@ -36,6 +36,10 @@
   @endverbatim
 
 @par Example Description 
+
+
+This example describes an UART transmission (transmit/receive) in DMA mode
+between a board and an Hyperterminal PC application.
 
    _________________________ 
   |           ______________|                       _______________

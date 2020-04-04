@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    ADC/ADC_RegularConversion_DMA/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    13-March-2015
+  * @version V1.2.2
+  * @date    01-July-2015 
   * @brief   Description of the ADC RegularConversion DMA example.
   ******************************************************************************
   *
@@ -36,6 +36,10 @@
   @endverbatim
 
 @par Example Description 
+
+
+This example describes how to use the ADC and DMA to transfer continuously 
+converted data from ADC to memory.
 
 This example describes how to use the ADC3 and DMA to transfer continuously 
 converted data from ADC3 to memory.

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    usbh_mtp.c
   * @author  MCD Application Team
-  * @version V3.2.0
-  * @date    04-November-2014
+  * @version V3.2.1
+  * @date    26-June-2015
   * @brief   This file is the MTP Layer Handlers for USB Host MTP class.
   *
   * @verbatim
@@ -21,7 +21,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -589,7 +589,7 @@ USBH_StatusTypeDef USBH_MTP_GetNumObjects (USBH_HandleTypeDef *phost,
 {
   USBH_StatusTypeDef status = USBH_FAIL;
   MTP_HandleTypeDef *MTP_Handle =  (MTP_HandleTypeDef *)phost->pActiveClass->pData;
-  uint32_t timeout = phost->Timer + 5000;
+  uint32_t timeout = phost->Timer;
   if((storage_idx < MTP_Handle->info.storids.n) && (MTP_Handle->is_ready))
   {
     while ((status = USBH_PTP_GetNumObjects (phost, 
@@ -598,7 +598,7 @@ USBH_StatusTypeDef USBH_MTP_GetNumObjects (USBH_HandleTypeDef *phost,
                                              associationOH,
                                              numobs)) == USBH_BUSY)
     {
-      if((phost->Timer > timeout) || (phost->device.is_connected == 0)) 
+      if(((phost->Timer - timeout) >   5000) || (phost->device.is_connected == 0)) 
       {
         return USBH_FAIL;
       }
@@ -622,7 +622,7 @@ USBH_StatusTypeDef USBH_MTP_GetObjectHandles (USBH_HandleTypeDef *phost,
 {
   USBH_StatusTypeDef status = USBH_FAIL;
   MTP_HandleTypeDef *MTP_Handle =  (MTP_HandleTypeDef *)phost->pActiveClass->pData;
-  uint32_t timeout = phost->Timer + 5000;
+  uint32_t timeout = phost->Timer;
   
   if((storage_idx < MTP_Handle->info.storids.n) && (MTP_Handle->is_ready))
   {  
@@ -632,7 +632,7 @@ USBH_StatusTypeDef USBH_MTP_GetObjectHandles (USBH_HandleTypeDef *phost,
                                                 associationOH,
                                                 objecthandles)) == USBH_BUSY)
     {
-      if((phost->Timer > timeout) || (phost->device.is_connected == 0)) 
+      if(((phost->Timer - timeout) >  5000) || (phost->device.is_connected == 0)) 
       {
         return USBH_FAIL;
       }
@@ -654,13 +654,13 @@ USBH_StatusTypeDef USBH_MTP_GetObjectInfo (USBH_HandleTypeDef *phost,
 {
   USBH_StatusTypeDef status = USBH_FAIL;
   MTP_HandleTypeDef *MTP_Handle =  (MTP_HandleTypeDef *)phost->pActiveClass->pData;
-  uint32_t timeout = phost->Timer + 5000;
+  uint32_t timeout = phost->Timer;
   
   if(MTP_Handle->is_ready)
   {   
     while ((status = USBH_PTP_GetObjectInfo (phost, handle, objectinfo)) == USBH_BUSY)
     {
-      if((phost->Timer > timeout) || (phost->device.is_connected == 0)) 
+      if(((phost->Timer - timeout) >  5000) || (phost->device.is_connected == 0)) 
       {
         return USBH_FAIL;
       }
@@ -681,13 +681,13 @@ USBH_StatusTypeDef USBH_MTP_DeleteObject (USBH_HandleTypeDef *phost,
 {
   USBH_StatusTypeDef status = USBH_FAIL;
   MTP_HandleTypeDef *MTP_Handle =  (MTP_HandleTypeDef *)phost->pActiveClass->pData;
-  uint32_t timeout = phost->Timer + 5000;
+  uint32_t timeout = phost->Timer;
   
   if(MTP_Handle->is_ready)
   {   
     while ((status = USBH_PTP_DeleteObject (phost, handle, objectformatcode)) == USBH_BUSY)
     {
-      if((phost->Timer > timeout) || (phost->device.is_connected == 0)) 
+      if(((phost->Timer - timeout) >  5000) || (phost->device.is_connected == 0)) 
       {
         return USBH_FAIL;
       }
@@ -709,13 +709,13 @@ USBH_StatusTypeDef USBH_MTP_GetObject (USBH_HandleTypeDef *phost,
 {
   USBH_StatusTypeDef status = USBH_FAIL;
   MTP_HandleTypeDef *MTP_Handle =  (MTP_HandleTypeDef *)phost->pActiveClass->pData;
-  uint32_t timeout = phost->Timer + 5000;
+  uint32_t timeout = phost->Timer;
   
   if(MTP_Handle->is_ready)
   {   
     while ((status = USBH_PTP_GetObject (phost, handle, object)) == USBH_BUSY)
     {
-      if((phost->Timer > timeout) || (phost->device.is_connected == 0)) 
+      if(((phost->Timer - timeout) >  5000) || (phost->device.is_connected == 0)) 
       {
         return USBH_FAIL;
       }
@@ -740,7 +740,7 @@ USBH_StatusTypeDef USBH_MTP_GetPartialObject(USBH_HandleTypeDef *phost,
 {
   USBH_StatusTypeDef status = USBH_FAIL;
   MTP_HandleTypeDef *MTP_Handle =  (MTP_HandleTypeDef *)phost->pActiveClass->pData;
-  uint32_t timeout = phost->Timer + 5000;
+  uint32_t timeout = phost->Timer;
   
   if(MTP_Handle->is_ready)
   {   
@@ -751,7 +751,7 @@ USBH_StatusTypeDef USBH_MTP_GetPartialObject(USBH_HandleTypeDef *phost,
                                            object,
                                            len)) == USBH_BUSY)
     {
-      if((phost->Timer > timeout) || (phost->device.is_connected == 0)) 
+      if(((phost->Timer - timeout) >  5000) || (phost->device.is_connected == 0))  
       {
         return USBH_FAIL;
       }
@@ -774,7 +774,7 @@ USBH_StatusTypeDef USBH_MTP_GetObjectPropsSupported (USBH_HandleTypeDef *phost,
 {
   USBH_StatusTypeDef status = USBH_FAIL;
   MTP_HandleTypeDef *MTP_Handle =  (MTP_HandleTypeDef *)phost->pActiveClass->pData;
-  uint32_t timeout = phost->Timer + 5000;
+  uint32_t timeout = phost->Timer;
   
   if(MTP_Handle->is_ready)
   {   
@@ -783,7 +783,7 @@ USBH_StatusTypeDef USBH_MTP_GetObjectPropsSupported (USBH_HandleTypeDef *phost,
                                                      propnum, 
                                                      props)) == USBH_BUSY)
     {
-      if((phost->Timer > timeout) || (phost->device.is_connected == 0)) 
+      if(((phost->Timer - timeout) >  5000) || (phost->device.is_connected == 0)) 
       {
         return USBH_FAIL;
       }
@@ -806,7 +806,7 @@ USBH_StatusTypeDef USBH_MTP_GetObjectPropDesc (USBH_HandleTypeDef *phost,
 {
   USBH_StatusTypeDef status = USBH_FAIL;
   MTP_HandleTypeDef *MTP_Handle =  (MTP_HandleTypeDef *)phost->pActiveClass->pData;
-  uint32_t timeout = phost->Timer + 5000;
+  uint32_t timeout = phost->Timer;
   
   if(MTP_Handle->is_ready)
   {   
@@ -815,7 +815,7 @@ USBH_StatusTypeDef USBH_MTP_GetObjectPropDesc (USBH_HandleTypeDef *phost,
                                                 ofc, 
                                                 opd)) == USBH_BUSY)
     {
-      if((phost->Timer > timeout) || (phost->device.is_connected == 0)) 
+      if(((phost->Timer - timeout) >  5000) || (phost->device.is_connected == 0))  
       {
         return USBH_FAIL;
       }
@@ -838,7 +838,7 @@ USBH_StatusTypeDef USBH_MTP_GetObjectPropList (USBH_HandleTypeDef *phost,
 {
   USBH_StatusTypeDef status = USBH_FAIL;
   MTP_HandleTypeDef *MTP_Handle =  (MTP_HandleTypeDef *)phost->pActiveClass->pData;
-  uint32_t timeout = phost->Timer + 5000;
+  uint32_t timeout = phost->Timer;
   
   if(MTP_Handle->is_ready)
   {   
@@ -847,7 +847,7 @@ USBH_StatusTypeDef USBH_MTP_GetObjectPropList (USBH_HandleTypeDef *phost,
                                                 pprops, 
                                                 nrofprops)) == USBH_BUSY)
     {
-      if((phost->Timer > timeout) || (phost->device.is_connected == 0)) 
+      if(((phost->Timer - timeout) >  5000) || (phost->device.is_connected == 0))  
       {
         return USBH_FAIL;
       }
@@ -870,13 +870,13 @@ USBH_StatusTypeDef USBH_MTP_SendObject (USBH_HandleTypeDef *phost,
 {
   USBH_StatusTypeDef status = USBH_FAIL;
   MTP_HandleTypeDef *MTP_Handle =  (MTP_HandleTypeDef *)phost->pActiveClass->pData;
-  uint32_t timeout = phost->Timer + 5000;
+  uint32_t timeout = phost->Timer;
   
   if(MTP_Handle->is_ready)
   {   
     while ((status = USBH_PTP_SendObject (phost, handle, object, size)) == USBH_BUSY)
     {
-      if((phost->Timer > timeout) || (phost->device.is_connected == 0)) 
+      if(((phost->Timer - timeout) >  5000) || (phost->device.is_connected == 0)) 
       {
         return USBH_FAIL;
       }
@@ -1035,13 +1035,13 @@ USBH_StatusTypeDef USBH_MTP_GetDevicePropDesc (USBH_HandleTypeDef *phost,
 {
   USBH_StatusTypeDef status = USBH_FAIL;
   MTP_HandleTypeDef *MTP_Handle =  (MTP_HandleTypeDef *)phost->pActiveClass->pData;
-  uint32_t timeout = phost->Timer + 5000;
+  uint32_t timeout = phost->Timer;
   
   if(MTP_Handle->is_ready)
   {   
     while ((status = USBH_PTP_GetDevicePropDesc (phost, propcode, devicepropertydesc)) == USBH_BUSY)
     {
-      if((phost->Timer > timeout) || (phost->device.is_connected == 0)) 
+      if(((phost->Timer - timeout) >  5000) || (phost->device.is_connected == 0))  
       {
         return USBH_FAIL;
       }

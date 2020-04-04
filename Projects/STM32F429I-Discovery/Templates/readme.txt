@@ -37,6 +37,8 @@
 
 @par Example Description
 
+This projects provides a reference template that can be used to build any firmware application.
+
 This directory provides a reference template project that can be used to build any firmware application for
 STM32F429xx devices using STM32CubeF4 HAL and running on STM32F429I-DISCO board from STMicroelectronics. 
 

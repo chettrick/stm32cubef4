@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    ADC/ADC_RegularConversion_Polling/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    13-March-2015
+  * @version V1.1.0
+  * @date    01-July-2015
   * @brief   Description of the ADC RegularConversion Polling example.
   ******************************************************************************
   *
@@ -36,6 +36,9 @@
   @endverbatim
 
 @par Example Description 
+
+
+This example describes how to use the ADC in Polling mode to convert data through the HAL API.
 
 This example describes how to use the ADC1 with channel ADC_CHANNEL_4 in Polling mode to convert data.
 

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    main.c 
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    13-March-2015
+  * @version V1.3.0
+  * @date    01-July-2015
   * @brief   This file provides main program functions
   ******************************************************************************
   * @attention
@@ -130,7 +130,7 @@ int main(void)
   k_CalendarBkupInit();  
   
   /* Create GUI task */
-  osThreadDef(GUI_Thread, GUIThread, osPriorityHigh, 0, 18 * configMINIMAL_STACK_SIZE);
+  osThreadDef(GUI_Thread, GUIThread, osPriorityHigh, 0, 1024);
   osThreadCreate (osThread(GUI_Thread), NULL); 
 
   /*Initialize memory pools */
@@ -171,7 +171,9 @@ int main(void)
   lcd_timer =  osTimerCreate(osTimer(TS_Timer), osTimerPeriodic, (void *)0);
 
   /* Start the TS Timer */
-  osTimerStart(lcd_timer, 100);
+  osTimerStart(lcd_timer, 40);
+  
+  GUI_X_InitOS();
   
   /* Start scheduler */
   osKernelStart();
@@ -207,15 +209,8 @@ static void GUIThread(void const * argument)
     
   /* Gui background Task */
   while(1) {
-    GUI_Exec(); /* Do the background work ... Update windows etc.) */
-    
-    /* Toggle LED1 .. LED4 */
-    BSP_LED_Toggle(LED1);
-    BSP_LED_Toggle(LED2);
-    BSP_LED_Toggle(LED3);
-    BSP_LED_Toggle(LED4);     
-    
-    osDelay(250); /* Nothing left to do for the moment ... Idle processing */
+    GUI_Exec(); /* Do the background work ... Update windows etc.) */    
+    osDelay(20); /* Nothing left to do for the moment ... Idle processing */
     GUI_FreeMem = GUI_ALLOC_GetNumFreeBytes();
 
   }

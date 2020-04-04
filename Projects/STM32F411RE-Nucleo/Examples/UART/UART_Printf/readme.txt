@@ -2,11 +2,11 @@
   @page UART_Printf UART Printf example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    UART/UART_Printf/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-December-2014
+  * @version V1.1.1
+  * @date    01-July-2015
   * @brief   Description of the UART Printf example.
   ******************************************************************************
   *
@@ -35,7 +35,9 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description                  
+@par Example Description       
+
+This example shows how to use the STM32 Nucleo boards Virtual Com port feature.           
 
 The STM32 Nucleo boards integrate the ST-LINK/V2.1 interfacing with the PC and 
 offering the following capabilities:
@@ -44,7 +46,6 @@ offering the following capabilities:
   – Mass storage interface
   – USB power management request for more than 100 mA power
 
-This example shows how to use the STM32 Nucleo boards Virtual Com port feature.
 
 Once connected to your PC via the ST-LINK port, the STM32 Nucleo board is enumerated 
 as a serial communication port USART2 and listed under Ports (COM & LPT) of Windows

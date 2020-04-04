@@ -1,8 +1,8 @@
 ;******************** (C) COPYRIGHT 2015 STMicroelectronics ********************
 ;* File Name          : startup_stm32f446xx.s
 ;* Author             : MCD Application Team
-;* Version            : V2.3.0
-;* Date               : 02-March-2015
+;* Version            : V1.1.0
+;* Date               : 01-July-2015
 ;* Description        : STM32F446x devices vector table for MDK-ARM toolchain. 
 ;*                      This module performs:
 ;*                      - Set the initial SP
@@ -54,7 +54,7 @@ __initial_sp
 ;   <o>  Heap Size (in Bytes) <0x0-0xFFFFFFFF:8>
 ; </h>
 
-Heap_Size      EQU     0x800;
+Heap_Size      EQU     0x4800;
 
                 AREA    HEAP, NOINIT, READWRITE, ALIGN=3
 __heap_base

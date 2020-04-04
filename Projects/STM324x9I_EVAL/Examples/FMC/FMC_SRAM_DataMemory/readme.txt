@@ -5,8 +5,8 @@
   ******************* (C) COPYRIGHT 2015 STMicroelectronics ********************
   * @file    FMC/FMC_SRAM_DataMemory/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.2
-  * @date    25-May-2015
+  * @version V1.3.0
+  * @date    01-July-2015
   * @brief   Description of the FMC SRAM_DataMemory example.
   ******************************************************************************
   *
@@ -36,6 +36,10 @@
   @endverbatim
  
 @par Example Description 
+
+This example guides you through the different configuration steps by mean of HAL API
+to configure the FMC controller to access the  SRAM memory mounted 
+on evaluation board (including heap and stack).
 
 This example guides you through the different configuration steps by mean of HAL API
 to use the IS61WV102416BLL-10M SRAM mounted on STM324x9I-EVAL as data memory 

@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    I2C/FMPI2C_EEPROM/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    13-March-2015
+  * @version V1.1.0
+  * @date    01-July-2015
   * @brief   Description of the I2C EEPROM DMA example.
   ******************************************************************************
   *
@@ -35,7 +35,13 @@
   ******************************************************************************
   @endverbatim
 
+
+
 @par Example Description 
+
+This example describes how to perform I2C data buffer transmission/reception via 
+DMA. The communication uses an I2C EEPROM memory.
+
 SCL Pin: PD.12
 SDA Pin: PD.13
 

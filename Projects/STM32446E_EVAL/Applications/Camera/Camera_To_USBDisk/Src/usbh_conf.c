@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Camera/Camera_To_USBDisk/Src/usbh_conf.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    13-March-2015
+  * @version V1.1.0
+  * @date    01-July-2015
   * @brief   USB Host configuration file.
   ******************************************************************************
   * @attention
@@ -249,12 +249,8 @@ USBH_StatusTypeDef USBH_LL_Init(USBH_HandleTypeDef *phost)
   hhcd.Instance = USB_OTG_HS;
   hhcd.Init.Host_channels = 11; 
   hhcd.Init.dma_enable = 0;
-  hhcd.Init.low_power_enable = 0;
-#ifdef USE_USB_HS_IN_FS
-  hhcd.Init.phy_itface = HCD_PHY_EMBEDDED; 
-#else  
-  hhcd.Init.phy_itface = HCD_PHY_ULPI; 
-#endif  
+  hhcd.Init.low_power_enable = 0;  
+  hhcd.Init.phy_itface = HCD_PHY_ULPI;
   hhcd.Init.Sof_enable = 0;
   hhcd.Init.speed = HCD_SPEED_HIGH;
   hhcd.Init.vbus_sensing_enable = 0;
@@ -488,19 +484,6 @@ USBH_StatusTypeDef USBH_LL_DriverVBUS(USBH_HandleTypeDef *phost, uint8_t state)
     BSP_IO_WritePin(OTG_FS1_POWER_SWITCH_PIN, BSP_IO_PIN_SET);
   }
 #endif /* USE_USB_FS */
-  
-#ifdef USE_USB_HS_IN_FS
-  if(state == 0)
-  {
-    /* Configure Low Charge pump */
-    BSP_IO_WritePin(OTG_FS2_POWER_SWITCH_PIN, BSP_IO_PIN_RESET);
-  }
-  else
-  {
-    /* Drive High Charge pump */
-    BSP_IO_WritePin(OTG_FS2_POWER_SWITCH_PIN, BSP_IO_PIN_SET);
-  }  
-#endif  
 
   HAL_Delay(200);
   return USBH_OK;  

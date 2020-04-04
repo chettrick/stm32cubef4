@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    QSPI/QSPI_ExecuteInPlace/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    13-March-2015
+  * @version V1.1.0
+  * @date    01-July-2015
   * @brief   This example describes how to configure and use QuadSPI through
   *          the STM32F4xx HAL API.
   ******************************************************************************
@@ -251,7 +251,7 @@ int main(void)
             /* Update the remaining size if it is less than the page size */
             if ((qspi_addr + size) > max_size)
             {
-              size = max_size - (qspi_addr + size);
+              size = max_size - qspi_addr;
             }
             step = 2;
           }

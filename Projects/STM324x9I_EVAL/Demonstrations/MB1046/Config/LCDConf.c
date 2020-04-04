@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    lcdconf.c
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    13-March-2015
+  * @version V1.3.0
+  * @date    01-July-2015
   * @brief   This file implements the configuration for the GUI library
   ******************************************************************************
   * @attention
@@ -73,10 +73,10 @@
 #define BK_COLOR GUI_DARKBLUE
 
 #undef  GUI_NUM_LAYERS
-#define GUI_NUM_LAYERS 2
+#define GUI_NUM_LAYERS 1
 
-#define COLOR_CONVERSION_0 GUICC_M565
-#define DISPLAY_DRIVER_0   GUIDRV_LIN_16
+#define COLOR_CONVERSION_0 GUICC_M8888I
+#define DISPLAY_DRIVER_0   GUIDRV_LIN_32
 
 
 #if (GUI_NUM_LAYERS > 1)
@@ -162,14 +162,7 @@ static U32      GetBufferSize(U32 LayerIndex);
   */
 static inline U32 LCD_LL_GetPixelformat(U32 LayerIndex)
 {
-  if (LayerIndex == 0)
-  { 
-    return LTDC_PIXEL_FORMAT_RGB565;
-  } 
-  else
-  {
     return LTDC_PIXEL_FORMAT_ARGB8888;
-  } 
 }
 /*******************************************************************************
                        LTDC and DMA2D BSP Routines
@@ -256,7 +249,7 @@ void HAL_LTDC_MspInit(LTDC_HandleTypeDef *hltdc)
   HAL_GPIO_Init(GPIOK, &GPIO_Init_Structure);
   
   /* Set LTDC Interrupt to the lowest priority */
-  HAL_NVIC_SetPriority(LTDC_IRQn, NVIC_PRIORITYGROUP_4, 0);
+  HAL_NVIC_SetPriority(LTDC_IRQn, 0xE, 0);
   
   /* Enable LTDC Interrupt */
   HAL_NVIC_EnableIRQ(LTDC_IRQn);
@@ -366,7 +359,7 @@ void LCD_X_Config(void)
     /*Initialize GUI Layer structure */
     layer_prop[0].address = LCD_LAYER0_FRAME_BUFFER;
     
-#if (NUM_BUFFERS > 1)    
+#if (GUI_NUM_LAYERS > 1)    
     layer_prop[1].address = LCD_LAYER1_FRAME_BUFFER; 
 #endif
        
@@ -585,7 +578,7 @@ static void LCD_LL_Init(void)
   
  /* Configure the DMA2D default mode */ 
   hdma2d.Init.Mode         = DMA2D_R2M;
-  hdma2d.Init.ColorMode    = DMA2D_RGB565;
+  hdma2d.Init.ColorMode    = DMA2D_ARGB8888;
   hdma2d.Init.OutputOffset = 0x0;     
 
   hdma2d.Instance          = DMA2D; 

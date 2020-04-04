@@ -37,8 +37,9 @@
 
 @par Application Description 
 
+
 This application provides a description of an audio play and record with different
-MEMS used on STM32F4-Discovery. 
+MEMS used on STM32F4-Discovery.
 
 At the beginning of the main program the HAL_Init() function is called to reset 
 all the peripherals.

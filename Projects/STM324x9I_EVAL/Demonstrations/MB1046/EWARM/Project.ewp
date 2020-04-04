@@ -60,8 +60,8 @@
         </option>
         <option>
           <name>FPU</name>
-          <version>3</version>
-          <state>5</state>
+          <version>4</version>
+          <state>6</state>
         </option>
         <option>
           <name>OGCoreOrChip</name>
@@ -87,7 +87,7 @@
         </option>
         <option>
           <name>OGLastSavedByProductVersion</name>
-          <state>7.30.3.8061</state>
+          <state>7.40.1.8463</state>
         </option>
         <option>
           <name>GeneralEnableMisra</name>
@@ -615,7 +615,7 @@
         </option>
         <option>
           <name>OOCOutputFile</name>
-          <state>STM32CubeDemo_STM32429I-EVAL_1.2.1.hex</state>
+          <state>STM32CubeDemo_STM32429I-EVAL_1.3.0.hex</state>
         </option>
         <option>
           <name>OOCCommandLineProducer</name>
@@ -1107,6 +1107,9 @@
       <name>BSP</name>
       <group>
         <name>Component</name>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\Components\exc7200\exc7200.c</name>
+        </file>
         <file>
           <name>$PROJ_DIR$\..\..\..\..\..\Drivers\BSP\Components\ov2640\ov2640.c</name>
         </file>

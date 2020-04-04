@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    DCMI/DCMI_SnapshotMode/readme.txt 
   * @author  MCD Application Team
-  * @version V0.1.0
-  * @date    27-January-2015
+  * @version V1.1.0
+  * @date    01-July-2015
   * @brief   Description of the STM32F4xx DCMI_SnapshotMode example.
   ******************************************************************************
   * @attention

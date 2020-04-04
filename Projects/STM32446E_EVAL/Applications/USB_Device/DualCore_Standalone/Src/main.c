@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Device/DualCore_Standalone/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    13-March-2015
+  * @version V1.1.0
+  * @date    01-July-2015
   * @brief   USB device DualCore demo main file
   ******************************************************************************
   * @attention

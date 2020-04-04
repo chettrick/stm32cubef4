@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    RTC/RTC_Calendar/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    13-March-2015
+  * @version V1.1.0
+  * @date    01-July-2015
   * @brief   This sample code shows how to use STM32F4xx RTC HAL API to configure
   *          Time and Date.
   ******************************************************************************
@@ -114,9 +114,6 @@ int main(void)
     Error_Handler();
   }
   
-  /* Turn on LED1 */
-  BSP_LED_On(LED1);
-
   /*##-2- Check if Data stored in BackUp register1: No Need to reconfigure RTC#*/
   /* Read the Back Up Register 1 Data */
   if (HAL_RTCEx_BKUPRead(&RtcHandle, RTC_BKP_DR1) != 0x32F2)

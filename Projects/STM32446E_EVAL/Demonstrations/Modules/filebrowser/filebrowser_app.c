@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    filebrowser_app.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    13-March-2015
+  * @version V1.1.0
+  * @date    01-July-2015
   * @brief   Utilities for file handling
   ******************************************************************************
   * @attention
@@ -104,8 +104,9 @@ uint8_t  FILEMGR_ParseDisks (char *path, FILELIST_FileTypeDef *list)
         }
       }   
     }
+    f_closedir(&dir);
   }
-  f_closedir(&dir);
+  
   return res;
 }
 

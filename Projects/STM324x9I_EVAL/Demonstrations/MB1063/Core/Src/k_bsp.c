@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    k_bsp.c
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    13-March-2015   
+  * @version V1.3.0
+  * @date    01-July-2015   
   * @brief   This file provides the kernel bsp functions
   ******************************************************************************
   * @attention
@@ -88,6 +88,7 @@ void k_BspAudioInit(void)
 }
 
 
+
 /**
   * @brief  Read the coordinate of the point touched and assign their
   *         value to the variables u32_TSXCoordinate and u32_TSYCoordinate
@@ -96,44 +97,41 @@ void k_BspAudioInit(void)
   */
 void k_TouchUpdate(void)
 {
-  GUI_PID_STATE TS_State;
-  static TS_StateTypeDef prev_state;
+  static GUI_PID_STATE TS_State = {{0}, {0}, {0}, {0}};
   __IO TS_StateTypeDef  ts;
   uint16_t xDiff, yDiff;  
-  
-  BSP_TS_GetState((TS_StateTypeDef *)&ts);
-  
-  TS_State.Pressed = ts.TouchDetected;
 
-  xDiff = (prev_state.x > ts.x) ? (prev_state.x - ts.x) : (ts.x - prev_state.x);
-  yDiff = (prev_state.y > ts.y) ? (prev_state.y - ts.y) : (ts.y - prev_state.y);
-  
-  if((prev_state.TouchDetected != ts.TouchDetected )||
-     (xDiff > 3 )||
-       (yDiff > 3))
+  BSP_TS_GetState((TS_StateTypeDef *)&ts);
+
+  if((ts.x >= LCD_GetXSize()) ||(ts.y >= LCD_GetYSize()) ) 
   {
-    prev_state.TouchDetected = ts.TouchDetected;
-    
-    if((ts.x != 0) &&  (ts.y != 0)) 
+    ts.x = 0;
+    ts.y = 0;
+    ts.TouchDetected =0;
+  }
+
+  xDiff = (TS_State.x > ts.x) ? (TS_State.x - ts.x) : (ts.x - TS_State.x);
+  yDiff = (TS_State.y > ts.y) ? (TS_State.y - ts.y) : (ts.y - TS_State.y);
+  
+  
+  if((TS_State.Pressed != ts.TouchDetected ) ||
+     (xDiff > 30 )||
+      (yDiff > 30))
+  {
+    TS_State.Pressed = ts.TouchDetected;
+    TS_State.Layer = 0;
+    if(ts.TouchDetected) 
     {
-      prev_state.x = ts.x;
-      prev_state.y = ts.y;
-    }
-      
-    if(k_CalibrationIsDone())
-    {
-      TS_State.Layer = 1;
-      TS_State.x = k_CalibrationGetX (prev_state.x);
-      TS_State.y = k_CalibrationGetY (prev_state.y);
+      TS_State.x = ts.x;
+      TS_State.y = ts.y;
+      GUI_TOUCH_StoreStateEx(&TS_State);
     }
     else
     {
-      TS_State.Layer = 1;
-      TS_State.x = prev_state.x;
-      TS_State.y = prev_state.y;
+      GUI_TOUCH_StoreStateEx(&TS_State);
+      TS_State.x = 0;
+      TS_State.y = 0;
     }
-    
-    GUI_TOUCH_StoreStateEx(&TS_State);
   }
 }
 

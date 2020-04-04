@@ -5,8 +5,8 @@
   ******************* (C) COPYRIGHT 2015 STMicroelectronics ********************
   * @file    FMC/FMC_SDRAM/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.2
-  * @date    25-May-2015
+  * @version V1.3.0
+  * @date    01-July-2015
   * @brief   Description of the FMC SDRAM example.
   ******************************************************************************
   *
@@ -36,6 +36,10 @@
   @endverbatim
  
 @par Example Description 
+
+
+This example describes how to configure the FMC controller to access the SDRAM 
+memory.
 
 This example guides you through the different configuration steps by mean of HAL API
 to configure the FMC controller to access the MT48LC4M32B2B5-7 SDRAM memory mounted 

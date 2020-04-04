@@ -427,6 +427,11 @@
 			<locationURI>PARENT-2-PROJECT_LOC/Src/stm32f4xx_it.c</locationURI>
 		</link>
 		<link>
+			<name>Drivers/BSP/Components/exc7200.c</name>
+			<type>1</type>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers/BSP/Components/exc7200/exc7200.c</locationURI>
+		</link>
+		<link>
 			<name>Drivers/BSP/Components/ov2640.c</name>
 			<type>1</type>
 			<locationURI>PARENT-5-PROJECT_LOC/Drivers/BSP/Components/ov2640/ov2640.c</locationURI>

@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    ADC/ADC_InjectedConversion_Interrupt/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    13-March-2015
+  * @version V1.1.0
+  * @date    01-July-2015
   * @brief   Description of the ADC RegularConversion interrupt example.
   ******************************************************************************
   *
@@ -36,6 +36,10 @@
   @endverbatim
 
 @par Example Description 
+
+
+This example describes how to interrupt continuous ADC regular channel conversion 
+using ADC injected channels and how to get the converted value of this conversion.
 
 This example describes how to interrupt continuous ADC1 regular ADC_CHANNEL_4 conversion 
 using ADC1 injected ADC_CHANNEL_12 and how to get the converted value of this conversion.

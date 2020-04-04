@@ -2,11 +2,11 @@
   @page GPIO_IOToggle GPIO IO Toggle example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    GPIO/GPIO_IOToggle/readme.txt  
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-December-2014
+  * @version V1.1.1
+  * @date    01-July-2015
   * @brief   Description of the GPIO EXTI example.
   ******************************************************************************
   *
@@ -37,7 +37,9 @@
 
 @par Example Description 
 
-This example describes how to toggles GPIO. On STM32F4xx-Nucleo RevC, PA05 
+This example describes how to configure and use GPIOs through the HAL API. 
+
+On STM32F4xx-Nucleo RevC, PA05 
 GPIO pin is linked to LED2 - Green.
 Main function configures GPIO on output pushpull mode, then in while loop, HAL 
 toggle pin function is called.

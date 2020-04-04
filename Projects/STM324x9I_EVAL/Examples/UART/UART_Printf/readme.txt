@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    UART/UART_Printf/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.2
-  * @date    25-May-2015
+  * @version V1.3.0
+  * @date    01-July-2015
   * @brief   Description of the UART Printf example.
   ******************************************************************************
   *
@@ -37,6 +37,9 @@
 
 @par Example Description 
 
+This example shows how to reroute the C library printf function to the UART. It 
+outputs a message sent by the UART on the HyperTerminal.
+
    _________________________ 
   |           ______________|                       _______________
   |          |USART1        |                      | Hyperterminal |
@@ -52,9 +55,8 @@
   |                         |                    
   |                         |                      
   |                         |                      
-  |_STM324x9I_______________|                      
+  |_STM324x9I_______________|                
 
-This example shows how to retarget the C library printf function to the UART. 
 This implementation output the printf message on the Hyperterminal using USART1.
 
 The USART1 is configured as follows:

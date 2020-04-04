@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    usbd_cdc.c
   * @author  MCD Application Team
-  * @version V2.4.0
-  * @date    28-February-2015
+  * @version V2.4.1
+  * @date    19-June-2015
   * @brief   This file provides the high layer firmware functions to manage the 
   *          following functionalities of the USB CDC Class:
   *           - Initialization and Configuration of high and low layer
@@ -655,7 +655,7 @@ static uint8_t  USBD_CDC_Setup (USBD_HandleTypeDef *pdev,
 }
 
 /**
-  * @brief  usbd_audio_DataIn
+  * @brief  USBD_CDC_DataIn
   *         Data sent on non-control IN endpoint
   * @param  pdev: device instance
   * @param  epnum: endpoint number

@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    I2C/I2C_TwoBoards_ComDMA/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    13-March-2015
+  * @version V1.2.2
+  * @date    01-July-2015 
   * @brief   Description of the I2C Two Boards Communication DMA example.
   ******************************************************************************
   *
@@ -36,6 +36,9 @@
   @endverbatim
 
 @par Example Description 
+
+This example describes how to perform I2C data buffer transmission/reception 
+between two boards, via DMA.
 
    _________________________                        _________________________
   |           ______________|                      |______________           |

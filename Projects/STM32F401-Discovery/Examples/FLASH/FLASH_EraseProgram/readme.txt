@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    FLASH/FLASH_EraseProgram/readme.txt
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    13-March-2015
+  * @version V1.2.2
+  * @date    01-July-2015
   * @brief   Description of the FLASH Erase and Program example.
   ******************************************************************************
   *
@@ -37,7 +37,8 @@
 
 @par Example Description 
 
-This example provides a description of how to erase and program the STM32F4xx FLASH.
+This example describes how to configure and use the FLASH HAL API to erase and program 
+the internal FLASH memory.
 
 After Reset, the Flash memory Program/Erase Controller is locked. To unlock it,
 the FLASH_Unlock function is used.

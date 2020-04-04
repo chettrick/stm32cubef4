@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324x9i_eval_ts.h
   * @author  MCD Application Team
-  * @version V2.0.4
-  * @date    02-March-2015
+  * @version V2.1.0
+  * @date    26-June-2015
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm324x9i_eval_ts.c driver.
   ******************************************************************************
@@ -48,9 +48,9 @@
 #include "stm324x9i_eval.h"
 /* Include IOExpander(STMPE811) component Driver */ 
 #include "../Components/stmpe811/stmpe811.h"
-/* Include TouchScreen component driver */
+/* Include TouchScreen component drivers */
 #include "../Components/ts3510/ts3510.h"
-   
+#include "../Components/exc7200/exc7200.h"   
 /** @addtogroup BSP
   * @{
   */ 
@@ -109,6 +109,7 @@ typedef enum
   * @{
   */
 uint8_t BSP_TS_Init(uint16_t xSize, uint16_t ySize);
+uint8_t BSP_TS_DeInit(void);
 uint8_t BSP_TS_GetState(TS_StateTypeDef *TS_State);
 uint8_t BSP_TS_ITConfig(void);
 uint8_t BSP_TS_ITGetStatus(void);

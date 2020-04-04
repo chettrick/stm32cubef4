@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    PWR/PWR_STOP/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.2
-  * @date    25-May-2015
+  * @version V1.3.0
+  * @date    01-July-2015
   * @brief   Description of the Power Stop Mode example.
   ******************************************************************************
   *
@@ -36,6 +36,10 @@
   @endverbatim
 
 @par Example Description 
+
+
+This example shows how to enter Stop mode and wake up from this mode by using the 
+RTC Wakeup timer event or an interrupt.
 
 This example shows how to enters the system to STOP mode and wake-up from this
 mode using RTC Wake-up Timer Event connected to EXTI Line 22 or Key push button

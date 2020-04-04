@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    usbd_msc_storage_template.c
   * @author  MCD Application Team
-  * @version V2.4.0
-  * @date    28-February-2015
+  * @version V2.4.1
+  * @date    19-June-2015
   * @brief   Memory management layer
   ******************************************************************************
   * @attention

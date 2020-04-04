@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    usbh_msc.c
   * @author  MCD Application Team
-  * @version V3.2.0
-  * @date    04-November-2014
+  * @version V3.2.1
+  * @date    26-June-2015
   * @brief   This file implements the MSC class driver functions
   *          ===================================================================      
   *                                MSC Class  Description
@@ -20,7 +20,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -343,7 +343,7 @@ static USBH_StatusTypeDef USBH_MSC_Process(USBH_HandleTypeDef *phost)
       case MSC_INIT:
         USBH_UsrLog ("LUN #%d: ", MSC_Handle->current_lun);
         MSC_Handle->unit[MSC_Handle->current_lun].state = MSC_READ_INQUIRY;
-        MSC_Handle->timer = phost->Timer + 10000;
+        MSC_Handle->timer = phost->Timer;
         
       case MSC_READ_INQUIRY:
         scsi_status = USBH_MSC_SCSI_Inquiry(phost, MSC_Handle->current_lun, &MSC_Handle->unit[MSC_Handle->current_lun].inquiry);
@@ -443,7 +443,7 @@ static USBH_StatusTypeDef USBH_MSC_Process(USBH_HandleTypeDef *phost)
              (MSC_Handle->unit[MSC_Handle->current_lun].sense.key == SCSI_SENSE_KEY_NOT_READY) )   
           {
             
-            if(phost->Timer <= MSC_Handle->timer)
+            if((phost->Timer - MSC_Handle->timer) > 10000)
             {
               MSC_Handle->unit[MSC_Handle->current_lun].state = MSC_TEST_UNIT_READY;
               break;
@@ -638,7 +638,7 @@ int8_t  USBH_MSC_GetMaxLUN (USBH_HandleTypeDef *phost)
 {
   MSC_HandleTypeDef *MSC_Handle =  (MSC_HandleTypeDef *) phost->pActiveClass->pData;    
   
-  if ((phost->gState != HOST_CLASS) && (MSC_Handle->state == MSC_IDLE))
+  if ((phost->gState == HOST_CLASS) && (MSC_Handle->state == MSC_IDLE))
   {
     return  MSC_Handle->max_lun;
   }  
@@ -721,10 +721,11 @@ USBH_StatusTypeDef USBH_MSC_Read(USBH_HandleTypeDef *phost,
                      pbuf,
                      length);
   
-  timeout = phost->Timer + (10000 * length);
+  timeout = phost->Timer;
+  
   while (USBH_MSC_RdWrProcess(phost, lun) == USBH_BUSY)
   {
-    if((phost->Timer > timeout) || (phost->device.is_connected == 0))
+    if(((phost->Timer - timeout) > (10000 * length)) || (phost->device.is_connected == 0))
     {
       MSC_Handle->state = MSC_IDLE;
       return USBH_FAIL;
@@ -768,10 +769,10 @@ USBH_StatusTypeDef USBH_MSC_Write(USBH_HandleTypeDef *phost,
                      pbuf,
                      length);
   
-  timeout = phost->Timer + (10000 * length);
+  timeout = phost->Timer;
   while (USBH_MSC_RdWrProcess(phost, lun) == USBH_BUSY)
   {
-    if((phost->Timer > timeout) || (phost->device.is_connected == 0))
+    if(((phost->Timer - timeout) >  (10000 * length)) || (phost->device.is_connected == 0))
     {
       MSC_Handle->state = MSC_IDLE;
       return USBH_FAIL;

@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    FLASH/FLASH_WriteProtection/readme.txt
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    13-March-2015
+  * @version V1.1.0
+  * @date    01-July-2015
   * @brief   Description of the FLASH write protection example.
   ******************************************************************************
   *
@@ -36,6 +36,9 @@
   @endverbatim
 
 @par Example Description 
+
+This example describes how to configure and use the FLASH HAL API to enable and 
+disable the write protection of the internal FLASH memory.
 
 This example guides you through the different configuration steps by mean of 
 HAL API how to enable and disable the write protection for internal FLASH memory 

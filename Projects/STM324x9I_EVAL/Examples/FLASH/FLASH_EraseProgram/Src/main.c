@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    FLASH/FLASH_EraseProgram/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.2.2
-  * @date    25-May-2015
+  * @version V1.3.0
+  * @date    01-July-2015
   * @brief   This example provides a description of how to erase and program the 
   *	     STM32F4xx FLASH.
   ******************************************************************************
@@ -108,11 +108,6 @@ int main(void)
   EraseInitStruct.VoltageRange = FLASH_VOLTAGE_RANGE_3;
   EraseInitStruct.Sector = FirstSector;
   EraseInitStruct.NbSectors = NbOfSectors;
- 
-  /* Note: If an erase operation in Flash memory also concerns data in the data or instruction cache,
-     you have to make sure that these data are rewritten before they are accessed during code
-     execution. If this cannot be done safely, it is recommended to flush the caches by setting the
-     DCRST and ICRST bits in the FLASH_CR register. */
   if(HAL_FLASHEx_Erase(&EraseInitStruct, &SectorError) != HAL_OK)
   { 
     /* 
@@ -126,6 +121,19 @@ int main(void)
       BSP_LED_On(LED3);
     }
   }
+
+  /* Note: If an erase operation in Flash memory also concerns data in the data or instruction cache,
+     you have to make sure that these data are rewritten before they are accessed during code
+     execution. If this cannot be done safely, it is recommended to flush the caches by setting the
+     DCRST and ICRST bits in the FLASH_CR register. */
+  __HAL_FLASH_DATA_CACHE_DISABLE();
+  __HAL_FLASH_INSTRUCTION_CACHE_DISABLE();
+
+  __HAL_FLASH_DATA_CACHE_RESET();
+  __HAL_FLASH_INSTRUCTION_CACHE_RESET();
+
+  __HAL_FLASH_INSTRUCTION_CACHE_ENABLE();
+  __HAL_FLASH_DATA_CACHE_ENABLE();
 
   /* Program the user Flash area word by word
     (area defined by FLASH_USER_START_ADDR and FLASH_USER_END_ADDR) ***********/

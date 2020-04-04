@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    usbd_msc_bot.h
   * @author  MCD Application Team
-  * @version V2.4.0
-  * @date    28-February-2015
+  * @version V2.4.1
+  * @date    19-June-2015
   * @brief   Header for the usbd_msc_bot.c file
   ******************************************************************************
   * @attention
@@ -28,6 +28,10 @@
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __USBD_MSC_BOT_H
 #define __USBD_MSC_BOT_H
+
+#ifdef __cplusplus
+ extern "C" {
+#endif
 
 /* Includes ------------------------------------------------------------------*/
 #include "usbd_core.h"

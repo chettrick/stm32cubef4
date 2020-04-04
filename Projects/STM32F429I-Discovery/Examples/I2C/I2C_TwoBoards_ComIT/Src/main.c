@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    I2C/I2C_TwoBoards_ComIT/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    13-March-2015
+  * @version V1.2.2
+  * @date    01-July-2015 
   * @brief   This sample code shows how to use STM32F4xx I2C HAL API to transmit 
   *          and receive a data buffer with a communication process based on
   *          IT transfer. 

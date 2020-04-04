@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    main.c 
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    13-March-2015
+  * @version V1.3.0
+  * @date    01-July-2015
   * @brief   This file provides main program functions
   ******************************************************************************
   * @attention
@@ -39,44 +39,41 @@
   */
 
 /** @defgroup MAIN
-* @brief main file
-* @{
-*/ 
+  * @brief main file
+  * @{
+  */ 
 
 /** @defgroup MAIN_Private_TypesDefinitions
-* @{
-*/ 
+  * @{
+  */ 
 /**
-* @}
-*/ 
+  * @}
+  */ 
 
 /** @defgroup MAIN_Private_Defines
-* @{
-*/ 
+  * @{
+  */ 
 /**
-* @}
-*/ 
-
+  * @}
+  */ 
 
 /** @defgroup MAIN_Private_Macros
-* @{
-*/ 
+  * @{
+  */ 
 /**
-* @}
-*/ 
-
+  * @}
+  */ 
 
 /** @defgroup MAIN_Private_Variables
-* @{
-*/
+  * @{
+  */
 /**
-* @}
-*/ 
-
+  * @}
+  */ 
 
 /** @defgroup MAIN_Private_FunctionPrototypes
-* @{
-*/ 
+  * @{
+  */ 
 static void SystemClock_Config(void);
 static void GUIThread(void const * argument);
 static void TimerCallback(void const *n);
@@ -96,19 +93,18 @@ uint32_t GUI_FreeMem = 0;
 
 
 /**
-* @}
-*/ 
+  * @}
+  */ 
 
 /** @defgroup MAIN_Private_Functions
-* @{
-*/ 
-
+  * @{
+  */ 
 
 /**
-* @brief  Main program
-* @param  None
-* @retval int
-*/
+  * @brief  Main program
+  * @param  None
+  * @retval int
+  */
 int main(void)
 {
   RCC_ClkInitTypeDef RCC_ClkInitStruct;
@@ -126,7 +122,7 @@ int main(void)
   HAL_Init();
  
   /* Configure the system clock to 168 MHz */
-  SystemClock_Config();  
+  SystemClock_Config();
   
   /* Initialize Joystick, Touch screen and LEDs */
   k_BspInit();
@@ -145,7 +141,7 @@ int main(void)
   k_ModuleInit();  
   
   /* Create GUI task */
-  osThreadDef(GUI_Thread, GUIThread, osPriorityHigh, 0, 20 * configMINIMAL_STACK_SIZE);
+  osThreadDef(GUI_Thread, GUIThread, osPriorityHigh, 0, 2048);
   osThreadCreate (osThread(GUI_Thread), NULL); 
   
   k_ModuleAdd(&video_player);
@@ -168,8 +164,7 @@ int main(void)
   
   /* Initialize GUI */
   GUI_Init();
-  WM_MULTIBUF_Enable(1);
-  GUI_SelectLayer(1);  
+  WM_MULTIBUF_Enable(1);  
   
   /* Set General Graphical proprieties */
   k_SetGuiProfile();  
@@ -205,11 +200,13 @@ int main(void)
   lcd_timer =  osTimerCreate(osTimer(TS_Timer), osTimerPeriodic, (void *)0);
 
   /* Start the TS Timer */
-  osTimerStart(lcd_timer, 100);
-    
+  osTimerStart(lcd_timer, 50);
+
+  GUI_X_InitOS();  
+  
   /* Start scheduler */
   osKernelStart();
-
+    
   /* We should never get here as control is now taken by the scheduler */
   for( ;; );
 }
@@ -244,38 +241,23 @@ static void GUIThread(void const * argument)
 { 
   /* Initialize Storage Units */
   k_StorageInit();  
-  
-  /* Check for calibration */
-  if(k_CalibrationIsDone() == 0)
-  {
-    GUI_SelectLayer(1);
-    k_CalibrationInit();
-  }  
  
   /* Demo Startup */
   k_StartUp();  
-  
-  GUI_SelectLayer(0);      
   
   /* Show the main menu */
   k_InitMenu();
     
   /* Gui background Task */
   while(1) {
-    GUI_Exec(); /* Do the background work ... Update windows etc.) */
-    /* Toggle LED1 .. LED4 */
-    BSP_LED_Toggle(LED1);
-    BSP_LED_Toggle(LED2);
-    BSP_LED_Toggle(LED3);
-    BSP_LED_Toggle(LED4);      
-    osDelay(100); /* Nothing left to do for the moment ... Idle processing */
+    GUI_Exec(); /* Do the background work ... Update windows etc.) */    
+    osDelay(10); /* Nothing left to do for the moment ... Idle processing */
     GUI_FreeMem = GUI_ALLOC_GetNumFreeBytes();
-
   }
 }
 
 /**
-  * @brief  Timer callbacsk (40 ms)
+  * @brief  Timer callbacsk (100 ms)
   * @param  n: Timer index 
   * @retval None
   */

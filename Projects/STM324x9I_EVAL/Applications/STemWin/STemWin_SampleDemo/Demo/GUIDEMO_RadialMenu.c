@@ -36,8 +36,8 @@ Purpose     : Shows how to create a radial menu with motion support
   ******************************************************************************
   * @file    MOTION_RadialMenu.c
   * @author  MCD Application Team
-  * @version V1.2.2
-  * @date    25-May-2015
+  * @version V1.3.0
+  * @date    01-July-2015
   * @brief   Shows how to create a radial menu with motion support
   ******************************************************************************
   * @attention

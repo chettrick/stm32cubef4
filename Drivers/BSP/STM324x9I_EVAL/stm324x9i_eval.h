@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324x9i_eval.h
   * @author  MCD Application Team
-  * @version V2.0.4
-  * @date    02-March-2015
+  * @version V2.1.0
+  * @date    26-June-2015
   * @brief   This file contains definitions for STM324x9I_EVAL's LEDs, 
   *          push-buttons and COM ports hardware resources.
   ******************************************************************************
@@ -277,6 +277,7 @@ typedef enum
 #define IO_I2C_ADDRESS                   0x84 
 #define TS_I2C_ADDRESS                   0x82
 #define TS3510_I2C_ADDRESS               0x80
+#define EXC7200_I2C_ADDRESS              0x08                                                         
 #define CAMERA_I2C_ADDRESS               0x60
 #define AUDIO_I2C_ADDRESS                0x34
 #define EEPROM_I2C_ADDRESS_A01           0xA0
@@ -338,6 +339,7 @@ uint32_t         BSP_PB_GetState(Button_TypeDef Button);
 void             BSP_COM_Init(COM_TypeDef COM, UART_HandleTypeDef *husart);
 uint8_t          BSP_JOY_Init(JOYMode_TypeDef Joy_Mode);
 JOYState_TypeDef BSP_JOY_GetState(void);
+uint8_t          BSP_TS3510_IsDetected(void);
 
 /**
   * @}

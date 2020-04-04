@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324x9i_eval_ts.c
   * @author  MCD Application Team
-  * @version V2.0.4
-  * @date    02-March-2015
+  * @version V2.1.0
+  * @date    26-June-2015
   * @brief   This file provides a set of functions needed to manage the Touch 
   *          Screen on STM324x9I-EVAL evaluation board.
   ******************************************************************************
@@ -43,7 +43,8 @@
    - This driver is used to drive the touch screen module of the STM324x9I-EVAL 
      evaluation board on the AMPIRE 640x480 LCD mounted on MB1063 or AMPIRE 
      480x272 LCD mounted on MB1046 daughter board.
-   - If the AMPIRE 640x480 LCD is used, the TS3510 component driver must be included 
+   - If the AMPIRE 640x480 LCD is used, the TS3510 or EXC7200 component driver
+     must be included according to the touch screen driver present on this board.
    - If the AMPIRE 480x272 LCD is used, the STMPE811 IO expander device component 
      driver must be included in order to run the TS module commanded by the IO 
      expander device, the STMPE1600 IO expander device component driver must be 
@@ -143,6 +144,7 @@ static uint8_t  I2C_Address;
   */
 uint8_t BSP_TS_Init(uint16_t xSize, uint16_t ySize)
 {
+  uint8_t status = TS_OK;
   ts_x_boundary = xSize;
   ts_y_boundary = ySize;
   
@@ -156,9 +158,22 @@ uint8_t BSP_TS_Init(uint16_t xSize, uint16_t ySize)
   }
   else
   {
-    /* Initialize the TS driver structure */
-    ts_driver = &ts3510_ts_drv; 
-    I2C_Address = TS3510_I2C_ADDRESS;
+    IOE_Init();
+    
+    /* Check TS3510 touch screen driver presence to determine if TS3510 or
+     * EXC7200 driver will be used */
+    if(BSP_TS3510_IsDetected() == 0)
+    {
+      /* Initialize the TS driver structure */
+      ts_driver = &ts3510_ts_drv; 
+      I2C_Address = TS3510_I2C_ADDRESS;
+    }
+    else    
+    {
+      /* Initialize the TS driver structure */
+      ts_driver = &exc7200_ts_drv; 
+      I2C_Address = EXC7200_I2C_ADDRESS;
+    }
     ts_orientation = TS_SWAP_NONE;
   }
   
@@ -166,6 +181,17 @@ uint8_t BSP_TS_Init(uint16_t xSize, uint16_t ySize)
   ts_driver->Init(I2C_Address);
   ts_driver->Start(I2C_Address);
   
+  return status;
+}
+
+/**
+  * @brief  DeInitializes the TouchScreen.
+  * @param  None
+  * @retval TS state
+  */
+uint8_t BSP_TS_DeInit(void)
+{ 
+  /* Actually ts_driver does not provide a DeInit function */
   return TS_OK;
 }
 
@@ -242,8 +268,16 @@ uint8_t BSP_TS_GetState(TS_StateTypeDef *TS_State)
       _y = y; 
     }
     
-    TS_State->x = (ts_x_boundary * _x) >> 12;
-    TS_State->y = (ts_y_boundary * _y) >> 12; 
+    if(I2C_Address == EXC7200_I2C_ADDRESS)
+    { 
+      TS_State->x = x;
+      TS_State->y = y;        
+    }
+    else
+    {
+      TS_State->x = (ts_x_boundary * _x) >> 12;
+      TS_State->y = (ts_y_boundary * _y) >> 12; 
+    }
   }  
   return TS_OK;
 }

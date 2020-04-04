@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    audioplayer_win.c
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    13-March-2015   
+  * @version V1.3.0
+  * @date    01-July-2015   
   * @brief   Audio player functions
   ******************************************************************************
   * @attention
@@ -777,13 +777,12 @@ AUDIOPLAYER_ErrorTypdef  AUDIOPLAYER_NotifyEndOfFile(void)
       if(file_pos < (pWavList->ptr - 1))
       {
         file_pos++;
-        LISTVIEW_IncSel(WM_GetDialogItem(AUDIOPLAYER_hWin, ID_WAVFILE_LIST)); 
       }
       else 
       {        
         file_pos = 0; 
-        LISTVIEW_SetSel(WM_GetDialogItem(AUDIOPLAYER_hWin, ID_WAVFILE_LIST), file_pos);
       }
+      LISTVIEW_SetSel(WM_GetDialogItem(AUDIOPLAYER_hWin, ID_WAVFILE_LIST), file_pos);      
     }
     
     _PlayFile((char *)pWavList->file[file_pos].name);
@@ -1334,14 +1333,13 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
         {        
           if(file_pos < (pWavList->ptr - 1))
           {
-            file_pos++;
-            LISTVIEW_IncSel(WM_GetDialogItem(AUDIOPLAYER_hWin, ID_WAVFILE_LIST)); 
+            file_pos++; 
           }
           else if(PlayerSettings.b.repeat == REPEAT_ALL)
           {
             file_pos = 0; 
-            LISTVIEW_SetSel(WM_GetDialogItem(AUDIOPLAYER_hWin, ID_WAVFILE_LIST), file_pos);
           }
+          LISTVIEW_SetSel(WM_GetDialogItem(AUDIOPLAYER_hWin, ID_WAVFILE_LIST), file_pos); 
           
           if(AUDIOPLAYER_GetState() == AUDIOPLAYER_PLAY)
           {    
@@ -1368,14 +1366,13 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
         {
           if(file_pos > 0)
           {   
-            file_pos--;
-            LISTVIEW_DecSel(WM_GetDialogItem(AUDIOPLAYER_hWin, ID_WAVFILE_LIST));             
+            file_pos--;           
           }
           else if(PlayerSettings.b.repeat == REPEAT_ALL)
           {
             file_pos = (pWavList->ptr - 1); 
-            LISTVIEW_SetSel(WM_GetDialogItem(AUDIOPLAYER_hWin, ID_WAVFILE_LIST), file_pos);
           }          
+          LISTVIEW_SetSel(WM_GetDialogItem(AUDIOPLAYER_hWin, ID_WAVFILE_LIST), file_pos);          
           
           if(AUDIOPLAYER_GetState() == AUDIOPLAYER_PLAY)
           {  

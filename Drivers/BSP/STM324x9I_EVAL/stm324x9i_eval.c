@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324x9i_eval.c
   * @author  MCD Application Team
-  * @version V2.0.4
-  * @date    02-March-2015
+  * @version V2.1.0
+  * @date    26-June-2015
   * @brief   This file provides a set of firmware functions to manage LEDs, 
   *          push-buttons and COM ports available on STM324x9I-EVAL evaluation 
   *          board(MB1045) RevB from STMicroelectronics.
@@ -451,6 +451,39 @@ JOYState_TypeDef BSP_JOY_GetState(void)
   }  
 }
 
+/**
+  * @brief  Check TS3510 touch screen presence
+  * @param  None
+  * @retval Return 0 if TS3510 is detected, return 1 if not detected 
+  */
+uint8_t BSP_TS3510_IsDetected(void)
+{
+  HAL_StatusTypeDef status = HAL_OK;
+  uint32_t error = 0;
+  uint8_t a_buffer;
+  
+  uint8_t tmp_buffer[2] = {0x81, 0x08};
+   
+  /* Prepare for LCD read data */
+  IOE_WriteMultiple(TS3510_I2C_ADDRESS, 0x8A, tmp_buffer, 2);
+
+  status = HAL_I2C_Mem_Read(&heval_I2c, TS3510_I2C_ADDRESS, 0x8A, I2C_MEMADD_SIZE_8BIT, &a_buffer, 1, 1000);
+
+  /* Check the communication status */
+  if(status != HAL_OK)
+  {
+    error = (uint32_t)HAL_I2C_GetError(&heval_I2c);
+
+    /* I2C error occured */
+    I2Cx_Error(TS3510_I2C_ADDRESS);
+    
+    if(error == HAL_I2C_ERROR_AF)
+    {
+      return 1;
+    }    
+  }  
+  return 0;
+}
 /*******************************************************************************
                             BUS OPERATIONS
 *******************************************************************************/
@@ -608,13 +641,20 @@ static uint8_t I2Cx_Read(uint8_t Addr, uint8_t Reg)
 static HAL_StatusTypeDef I2Cx_ReadMultiple(uint8_t Addr, uint16_t Reg, uint16_t MemAddress, uint8_t *Buffer, uint16_t Length)
 {
   HAL_StatusTypeDef status = HAL_OK;
-  
-  status = HAL_I2C_Mem_Read(&heval_I2c, Addr, (uint16_t)Reg, MemAddress, Buffer, Length, 1000);
-  
+
+  if(Addr == EXC7200_I2C_ADDRESS)
+  {
+    status = HAL_I2C_Master_Receive(&heval_I2c, Addr, Buffer, Length, 1000);  
+  }
+  else
+  {
+    status = HAL_I2C_Mem_Read(&heval_I2c, Addr, (uint16_t)Reg, MemAddress, Buffer, Length, 1000);
+  }
+
   /* Check the communication status */
   if(status != HAL_OK)
   {
-    /* I2C error occurred */
+    /* I2C error occured */
     I2Cx_Error(Addr);
   }
   return status;    

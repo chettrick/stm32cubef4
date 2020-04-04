@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    audioplayer_win.c
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    13-March-2015   
+  * @version V1.3.0
+  * @date    01-July-2015   
   * @brief   Audio player functions
   ******************************************************************************
   * @attention
@@ -777,13 +777,12 @@ AUDIOPLAYER_ErrorTypdef  AUDIOPLAYER_NotifyEndOfFile(void)
       if(file_pos < (pWavList->ptr - 1))
       {
         file_pos++;
-        LISTVIEW_IncSel(WM_GetDialogItem(AUDIOPLAYER_hWin, ID_WAVFILE_LIST)); 
       }
       else 
       {        
         file_pos = 0; 
-        LISTVIEW_SetSel(WM_GetDialogItem(AUDIOPLAYER_hWin, ID_WAVFILE_LIST), file_pos);
       }
+        LISTVIEW_SetSel(WM_GetDialogItem(AUDIOPLAYER_hWin, ID_WAVFILE_LIST), file_pos);      
     }
     
     _PlayFile((char *)pWavList->file[file_pos].name);
@@ -1102,81 +1101,6 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
     Id    = WM_GetId(pMsg->hWinSrc);
     NCode = pMsg->Data.v;
 
-//    if (NCode == WM_NOTIFICATION_CHILD_DELETED)
-//    {
-//      if(pMsg->hWinSrc == chooser_openfile)
-//      {    
-//        if((strstr(pFileInfo->pRoot, ".wav")) || (strstr(pFileInfo->pRoot, ".WAV")))
-//        {         
-//          if(AUDIOPLAYER_GetFileInfo(pFileInfo->pRoot, &WavInfo) == 0)
-//          {
-//            if(AUDIOPLAYER_GetState() == AUDIOPLAYER_PLAY)
-//            {
-//              /* Stop current audio sample */
-//              AUDIOPLAYER_Stop();   
-//            }
-//            
-//            pWavList->ptr = 0;
-//            file_pos = 0;
-//            
-//            strcpy((char *)pWavList->file[pWavList->ptr].name, pFileInfo->pRoot);
-//            FILEMGR_GetFileOnly (tmp, pFileInfo->pRoot);
-//            hItem = WM_GetDialogItem(pMsg->hWin, ID_WAVFILE_LIST);
-//            
-//            /* Update Play list */
-//            strcpy((char *)pWavList->file[pWavList->ptr].name, pFileInfo->pRoot);
-//            
-//            ItemNbr = LISTVIEW_GetNumRows(hItem);
-//            while(ItemNbr--)
-//            {
-//              LISTVIEW_DeleteRow(hItem, ItemNbr);
-//            }
-//            
-//            LISTVIEW_AddRow(hItem, NULL);         
-//            LISTVIEW_SetItemText(hItem, 0, pWavList->ptr, tmp);
-//            duration = WavInfo.FileSize / WavInfo.ByteRate; 
-//            sprintf((char *)tmp , "%02d:%02d", duration/60, duration%60 );
-//            LISTVIEW_SetItemText(hItem, 1, pWavList->ptr, tmp);
-//            pWavList->ptr++;  
-//            
-//            LISTVIEW_SetSel(hItem, 0);
-//            _PlayFile(pFileInfo->pRoot);              
-//          }
-//        }
-//        chooser_openfile = 0;
-//      }
-//      
-//      if(pMsg->hWinSrc == chooser_addfolder)
-//      {
-//        _AddEntireFolder(pFileInfo->pRoot);
-//        chooser_addfolder = 0;
-//      }    
-//      
-//      if(pMsg->hWinSrc == chooser_add2playlist)
-//      {
-//        if((strstr(pFileInfo->pRoot, ".wav")) || (strstr(pFileInfo->pRoot, ".WAV")))
-//        {
-//          if(pWavList->ptr < FILEMGR_LIST_DEPDTH)
-//          {
-//            strcpy((char *)pWavList->file[pWavList->ptr].name, pFileInfo->pRoot);
-//            FILEMGR_GetFileOnly (tmp, pFileInfo->pRoot);
-//            hItem = WM_GetDialogItem(pMsg->hWin, ID_WAVFILE_LIST);
-//            
-//            if(AUDIOPLAYER_GetFileInfo(pFileInfo->pRoot, &WavInfo) == 0)
-//            {
-//              LISTVIEW_AddRow(hItem, NULL);         
-//              LISTVIEW_SetItemText(hItem, 0, pWavList->ptr, tmp);
-//              duration = WavInfo.FileSize / WavInfo.ByteRate; 
-//              sprintf((char *)tmp , "%02d:%02d", duration/60, duration%60 );
-//              LISTVIEW_SetItemText(hItem, 1, pWavList->ptr, tmp);
-//              pWavList->ptr++;      
-//            }
-//          }
-//        }
-//        chooser_add2playlist = 0;
-//      } 
-//    }
-
     switch(Id) {
       
     /* Notification sent by "Button_Close" */  
@@ -1412,14 +1336,13 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
           if(file_pos < (pWavList->ptr - 1))
           {
             file_pos++;
-            LISTVIEW_IncSel(WM_GetDialogItem(AUDIOPLAYER_hWin, ID_WAVFILE_LIST)); 
           }
           else if(PlayerSettings.b.repeat == REPEAT_ALL)
           {
             file_pos = 0; 
-            LISTVIEW_SetSel(WM_GetDialogItem(AUDIOPLAYER_hWin, ID_WAVFILE_LIST), file_pos);
+            
           }
-          
+          LISTVIEW_SetSel(WM_GetDialogItem(AUDIOPLAYER_hWin, ID_WAVFILE_LIST), file_pos);
           if(AUDIOPLAYER_GetState() == AUDIOPLAYER_PLAY)
           {    
             if(PlayerSettings.b.pause == PAUSE_ACTIVE)
@@ -1445,15 +1368,14 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
         {
           if(file_pos > 0)
           {   
-            file_pos--;
-            LISTVIEW_DecSel(WM_GetDialogItem(AUDIOPLAYER_hWin, ID_WAVFILE_LIST));             
+            file_pos--;           
           }
           else if(PlayerSettings.b.repeat == REPEAT_ALL)
           {
             file_pos = (pWavList->ptr - 1); 
-            LISTVIEW_SetSel(WM_GetDialogItem(AUDIOPLAYER_hWin, ID_WAVFILE_LIST), file_pos);
+            
           }          
-          
+          LISTVIEW_SetSel(WM_GetDialogItem(AUDIOPLAYER_hWin, ID_WAVFILE_LIST), file_pos);
           if(AUDIOPLAYER_GetState() == AUDIOPLAYER_PLAY)
           {  
             if(PlayerSettings.b.pause == PAUSE_ACTIVE)

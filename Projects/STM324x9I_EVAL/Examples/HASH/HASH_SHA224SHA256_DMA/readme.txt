@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    HASH/HASH_SHA224SHA256_DMA/readme.txt
   * @author  MCD Application Team
-  * @version V1.2.2
-  * @date    25-May-2015
+  * @version V1.3.0
+  * @date    01-July-2015
   * @brief   Description of the digest calculation using SHA224 and SHA256 Example.
   ******************************************************************************
   *

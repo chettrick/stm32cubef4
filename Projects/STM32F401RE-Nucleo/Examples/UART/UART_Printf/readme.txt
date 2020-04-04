@@ -37,14 +37,15 @@
 
 @par Example Description                  
 
+
+This example shows how to use the STM32 Nucleo boards Virtual Com port feature.
+
 The STM32 Nucleo boards integrate the ST-LINK/V2.1 interfacing with the PC and 
 offering the following capabilities:
   – Debug and programming port
   – Virtual com port interface
   – Mass storage interface
   – USB power management request for more than 100 mA power
-
-This example shows how to use the STM32 Nucleo boards Virtual Com port feature.
 
 Once connected to your PC via the ST-LINK port, the STM32 Nucleo board is enumerated 
 as a serial communication port USART2 and listed under Ports (COM & LPT) of Windows

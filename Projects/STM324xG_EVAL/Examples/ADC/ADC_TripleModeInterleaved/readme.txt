@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    ADC/ADC_TripleModeInterleaved/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    13-March-2015
+  * @version V1.2.2
+  * @date    01-July-2015
   * @brief   Description of the Triple interleaved mode and DMA mode2 example
   ******************************************************************************
   *
@@ -36,6 +36,9 @@
   @endverbatim
 
 @par Example Description 
+
+This example provides a short description of how to use the ADC peripheral to
+convert a regular channel in Triple interleaved mode.
 
 This example provides a short description of how to use the ADC peripheral to 
 convert a regular channel in Triple interleaved mode using DMA in mode 2 with 

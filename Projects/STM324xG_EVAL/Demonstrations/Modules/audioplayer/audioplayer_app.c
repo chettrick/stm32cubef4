@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    audioplayer_app.c
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    13-March-2015   
+  * @version V1.3.0
+  * @date    01-July-2015   
   * @brief   Audio player application functions
   ******************************************************************************
   * @attention
@@ -71,7 +71,7 @@ AUDIOPLAYER_ErrorTypdef  AUDIOPLAYER_Init(void)
   AudioEvent = osMessageCreate (osMessageQ(AUDIO_Queue), NULL); 
   
   /* Create Audio task */
-  osThreadDef(osAudio_Thread, Audio_Thread, osPriorityHigh, 0, 4 * configMINIMAL_STACK_SIZE);
+  osThreadDef(osAudio_Thread, Audio_Thread, osPriorityHigh, 0, 256);
   AudioThreadId = osThreadCreate (osThread(osAudio_Thread), NULL);  
 
   return AUDIOPLAYER_ERROR_NONE;

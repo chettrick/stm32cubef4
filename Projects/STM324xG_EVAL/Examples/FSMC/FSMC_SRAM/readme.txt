@@ -5,8 +5,8 @@
   ******************* (C) COPYRIGHT 2015 STMicroelectronics ********************
   * @file    FSMC/FSMC_SRAM/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    13-March-2015
+  * @version V1.2.2
+  * @date    01-July-2015
   * @brief   Description of the FSMC SRAM memory basic functionalities use example.
   ******************************************************************************
   *
@@ -36,6 +36,9 @@
   @endverbatim
  
 @par Example Description 
+
+This example describes how to configure the FSMC controller to access the SRAM 
+memory.
 
 This example guides you through the different configuration steps by mean of HAL API
 to configure the FMC controller to access the IS61WV102416BLL-10MLI SRAM memory mounted 

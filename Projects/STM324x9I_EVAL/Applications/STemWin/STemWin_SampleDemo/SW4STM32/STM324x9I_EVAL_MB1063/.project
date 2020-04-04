@@ -26,11 +26,6 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>syscalls.c</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/syscalls.c</locationURI>
-		</link>
-		<link>
 			<name>Doc/readme.txt</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/readme.txt</locationURI>
@@ -171,6 +166,11 @@
 			<locationURI>PARENT-1-PROJECT_LOC/startup_stm32f429xx.s</locationURI>
 		</link>
 		<link>
+			<name>Application/SW4STM32/syscalls.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/syscalls.c</locationURI>
+		</link>
+		<link>
 			<name>Application/User/calibration.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/Src/calibration.c</locationURI>
@@ -309,6 +309,11 @@
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_ll_fmc.c</name>
 			<type>1</type>
 			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_fmc.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/BSP/Components/exc7200.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/exc7200/exc7200.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/BSP/Components/stmpe811.c</name>

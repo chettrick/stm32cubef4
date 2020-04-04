@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    usbd_audio.c
   * @author  MCD Application Team
-  * @version V2.4.0
-  * @date    28-February-2015
+  * @version V2.4.1
+  * @date    19-June-2015
   * @brief   This file provides the Audio core functions.
   *
   * @verbatim
@@ -470,7 +470,7 @@ static uint8_t  USBD_AUDIO_Setup (USBD_HandleTypeDef *pdev,
       
     case USB_REQ_GET_INTERFACE :
       USBD_CtlSendData (pdev,
-                        (uint8_t *)haudio->alt_setting,
+                        (uint8_t *)&(haudio->alt_setting),
                         1);
       break;
       
@@ -626,16 +626,8 @@ void  USBD_AUDIO_Sync (USBD_HandleTypeDef *pdev, AUDIO_OffsetTypeDef offset)
                                                          AUDIO_CMD_PLAY); 
       haudio->offset = AUDIO_OFFSET_NONE;           
   }
-  else if (haudio->offset == AUDIO_OFFSET_HALF)
-  {
-    
-    ((USBD_AUDIO_ItfTypeDef *)pdev->pUserData)->AudioCmd(&haudio->buffer[AUDIO_TOTAL_BUF_SIZE/2],
-                                                         AUDIO_TOTAL_BUF_SIZE/2 - shift,
-                                                         AUDIO_CMD_PLAY); 
-      haudio->offset = AUDIO_OFFSET_NONE;  
-      
-  }  
 }
+
 /**
   * @brief  USBD_AUDIO_IsoINIncomplete
   *         handle data ISO IN Incomplete event

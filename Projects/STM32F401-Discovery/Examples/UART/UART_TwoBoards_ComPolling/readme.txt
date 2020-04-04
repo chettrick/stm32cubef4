@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    UART/UART_TwoBoards_ComPolling/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    13-March-2015
+  * @version V1.2.2
+  * @date    01-July-2015
   * @brief   Description of the UART TwoBoards Communication Polling example.
   ******************************************************************************
   *
@@ -37,8 +37,9 @@
 
 @par Example Description 
 
-This Example shows a UART transmission (transmit/receive) between 2 
-STM32F401-Discovery kits in polling mode.
+
+This example describes a UART transmission (transmit/receive) in polling mode
+between two boards.
 
 At the beginning of the main program the HAL_Init() function is called to reset 
 all the peripherals, initialize the Flash interface and the systick.

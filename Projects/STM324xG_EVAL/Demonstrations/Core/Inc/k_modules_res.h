@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    k_modules_res.h
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    13-March-2015
+  * @version V1.3.0
+  * @date    01-July-2015
   * @brief   Header for k_modules_res.c file
   ******************************************************************************
   * @attention
@@ -67,8 +67,6 @@ extern GUI_CONST_STORAGE GUI_BITMAP bmspeaker_mute;
 extern GUI_CONST_STORAGE GUI_BITMAP bmrepeat1;
 extern GUI_CONST_STORAGE GUI_BITMAP bmrepeat_all;
 extern GUI_CONST_STORAGE GUI_BITMAP bmrepeat_off;
-extern GUI_CONST_STORAGE GUI_BITMAP bmwindowfullscreen;
-extern GUI_CONST_STORAGE GUI_BITMAP bmwindownofullscreen;
 extern GUI_CONST_STORAGE GUI_BITMAP bmsettings_button_not_pressed;
 extern GUI_CONST_STORAGE GUI_BITMAP bmsettings_button_pressed;
 extern GUI_CONST_STORAGE GUI_BITMAP bmvncstop_pressed;

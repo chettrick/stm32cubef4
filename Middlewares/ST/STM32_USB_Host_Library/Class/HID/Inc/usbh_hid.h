@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    usbh_hid.h
   * @author  MCD Application Team
-  * @version V3.2.0
-  * @date    04-November-2014
+  * @version V3.2.1
+  * @date    26-June-2015
   * @brief   This file contains all the prototypes for the usbh_hid.c
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -226,7 +226,7 @@ typedef struct _HID_Process
   uint16_t             length;
   uint8_t              ep_addr;
   uint16_t             poll; 
-  uint16_t             timer;
+  uint32_t             timer;
   uint8_t              DataReady;
   HID_DescTypeDef      HID_Desc;  
   USBH_StatusTypeDef  ( * Init)(USBH_HandleTypeDef *phost);

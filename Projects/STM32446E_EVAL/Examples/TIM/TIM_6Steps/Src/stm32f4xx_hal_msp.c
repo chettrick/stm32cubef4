@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    TIM/TIM_6Steps/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    13-March-2015
+  * @version V1.1.0
+  * @date    01-July-2015
   * @brief   HAL MSP module.
   ******************************************************************************
   * @attention

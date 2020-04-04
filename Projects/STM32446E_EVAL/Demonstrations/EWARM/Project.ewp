@@ -614,7 +614,7 @@
         </option>
         <option>
           <name>OOCOutputFile</name>
-          <state>STM32CubeDemo_STM32446E-EVAL_1.0.0.hex</state>
+          <state>STM32CubeDemo_STM32446E-EVAL_1.1.0.hex</state>
         </option>
         <option>
           <name>OOCCommandLineProducer</name>

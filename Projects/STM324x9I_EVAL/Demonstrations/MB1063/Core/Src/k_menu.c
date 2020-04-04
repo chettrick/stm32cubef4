@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    k_menu.c
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    13-March-2015   
+  * @version V1.3.0
+  * @date    01-July-2015   
   * @brief   This file provides the kernel menu functions 
   ******************************************************************************
   * @attention
@@ -81,7 +81,8 @@
 #define ID_LISTVIEW_PROCESSMANAGER       (GUI_ID_USER + 0x32)
 
 ICONVIEW_Handle hIcon = 0;
- 
+int module_active = (-1);
+
 static GRAPH_DATA_Handle hData = 0;
 static GRAPH_SCALE_Handle hScale = 0;
 static WM_HWIN  hPerformance = 0;
@@ -534,6 +535,7 @@ static void _OpenPopup(WM_HWIN hParent, MENU_ITEM * pMenuItems, int NumItems, in
   if (!hMenu) {
     int i;
     /* Create the popup window only one time */
+    
     hMenu = MENU_CreateEx(0, 0, 0, 0, WM_UNATTACHED, 0, MENU_CF_VERTICAL, 0);
     MENU_SetFont(hMenu, GUI_FONT_16_ASCII);
     MENU_SetBkColor(hMenu, MENU_CI_SELECTED, GUI_LIGHTBLUE);
@@ -555,7 +557,7 @@ static void _cbBk(WM_MESSAGE * pMsg) {
   
   MENU_MSG_DATA* pData;
   uint32_t NCode, Id;
-  static uint8_t sel = 0;
+  static int sel = 0;
   
   switch (pMsg->MsgId) 
   {
@@ -628,8 +630,7 @@ static void _cbBk(WM_MESSAGE * pMsg) {
     break;
       
   case WM_PAINT:
-    GUI_SetBkColor(GUI_TRANSPARENT);
-    GUI_Clear();
+    GUI_DrawBitmap(&bmbackground, 0,0);
     if(hIcon)
     {
       WM_BringToBottom(hIcon);
@@ -682,10 +683,11 @@ static void _cbBk(WM_MESSAGE * pMsg) {
           SpriteDisabled = 1;
           GUI_SPRITE_Hide(_aSprite[0].hSprite);
           module_prop[sel].module->startup(pMsg->hWin, 0, 41);
-          sel = 0;
+          module_active = sel;
+          sel = -1;
         }
       }
-      else if (Id == ID_BUTTON_BKGND)
+      else if ((Id == ID_BUTTON_BKGND) && module_active != 0)
       {
         /* Create popup menu after touching the display */
         _OpenPopup(WM_HBKWIN, _aMenuItems, GUI_COUNTOF(_aMenuItems),5 , 45);  
@@ -953,15 +955,9 @@ void k_InitMenu(void)
 {
 
   WM_HWIN  hItem;
-  uint8_t i = 0;
-  GUI_SetLayerVisEx (0, 0);
-  GUI_DrawBitmap(&bmbackground, 0,0);     
+  uint8_t i = 0;   
   
   settings.d32 = k_BkupRestoreParameter(CALIBRATION_GENERAL_SETTINGS_BKP);
-  
-  GUI_SetLayerVisEx (0, 1);
-  GUI_SelectLayer(1);
-  GUI_Clear();
 
   WM_SetCallback(WM_HBKWIN, _cbBk);
   
@@ -976,7 +972,7 @@ void k_InitMenu(void)
      
   hIcon = ICONVIEW_CreateEx(0, 
                             26, 
-                            LCD_GetXSize(), 
+                            LCD_GetXSize() - 20, 
                             LCD_GetYSize()- 26, 
                             WM_HBKWIN, 
                             WM_CF_SHOW | WM_CF_HASTRANS | WM_CF_BGND ,
@@ -990,7 +986,6 @@ void k_InitMenu(void)
   ICONVIEW_SetBkColor(hIcon, ICONVIEW_CI_SEL, GUI_LIGHTBLUE |GUI_TRANSPARENT);
   
   ICONVIEW_SetSpace(hIcon, GUI_COORD_Y, 20);
-  
   ICONVIEW_SetFrame(hIcon, GUI_COORD_Y, 20);
     
   for (i = 0; i < k_ModuleGetNumber(); i++)

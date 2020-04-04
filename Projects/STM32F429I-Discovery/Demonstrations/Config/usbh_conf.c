@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    usbh_conf.c
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    13-March-2015
+  * @version V1.3.0
+  * @date    01-July-2015 
   * @brief   USB Host configuration file.
   ******************************************************************************
   * @attention
@@ -178,7 +178,7 @@ USBH_StatusTypeDef USBH_LL_Init(USBH_HandleTypeDef *phost)
   /*Set LL Driver parameters */
   hhcd.Instance = USB_OTG_HS;
   hhcd.Init.Host_channels = 11; 
-  hhcd.Init.dma_enable = 1;
+  hhcd.Init.dma_enable = 0;
   hhcd.Init.low_power_enable = 0;
   hhcd.Init.phy_itface = HCD_PHY_EMBEDDED; 
   hhcd.Init.Sof_enable = 0;

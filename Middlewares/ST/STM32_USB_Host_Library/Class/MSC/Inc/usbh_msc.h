@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    usbh_msc.h
   * @author  MCD Application Team
-  * @version V3.2.0
-  * @date    04-November-2014
+  * @version V3.2.1
+  * @date    26-June-2015
   * @brief   This file contains all the prototypes for the usbh_msc.c
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -93,7 +93,10 @@ typedef enum
 }
 MSC_ReqStateTypeDef;
 
-#define MAX_SUPPORTED_LUN       2
+#ifndef MAX_SUPPORTED_LUN       
+    #define MAX_SUPPORTED_LUN       2
+#endif
+
 
 /* Structure for LUN */
 typedef struct

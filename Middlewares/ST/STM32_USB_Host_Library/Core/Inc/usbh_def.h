@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    usbh_def.h
   * @author  MCD Application Team
-  * @version V3.2.0
-  * @date    04-November-2014
+  * @version V3.2.1
+  * @date    26-June-2015
   * @brief   Definitions used in the USB host library
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -176,9 +176,9 @@
 #define  USB_EP_DIR_IN                                  0x80
 #define  USB_EP_DIR_MSK                                 0x80  
 
-#define USBH_MAX_PIPES_NBR                              15                                                
-
-
+#ifndef USBH_MAX_PIPES_NBR
+ #define USBH_MAX_PIPES_NBR                             15                                                
+#endif /* USBH_MAX_PIPES_NBR */
 
 #define USBH_DEVICE_ADDRESS_DEFAULT                     0
 #define USBH_MAX_ERROR_COUNT                            2

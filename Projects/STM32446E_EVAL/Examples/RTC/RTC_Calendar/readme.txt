@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    RTC/RTC_Calendar/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    13-March-2015
+  * @version V1.1.0
+  * @date    01-July-2015
   * @brief   Description of the RTC Calendar example.
   ******************************************************************************
   *
@@ -78,9 +78,6 @@ The program behaves as follows:
 
     - If no battery is connected to the VBAT pin: the BKP domain is reset and the
       RTC configuration is lost.
-
-LED1 is turned ON when the RTC configuration is done correctly.
-
 
 The current time and date are updated and displayed on the debugger in aShowTime 
 and aShowDate variables.
