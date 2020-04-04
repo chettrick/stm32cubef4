@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    I2S/I2S_Audio/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.2.5
-  * @date    29-January-2016
+  * @version V1.2.6
+  * @date    06-May-2016
   * @brief   Main program body
   ******************************************************************************
   * @attention

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f4xx_it.c
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    29-January-2016
+  * @version V1.2.2
+  * @date    06-May-2016 
   * @brief   Main Interrupt Service Routines.
   ******************************************************************************
   * @attention
@@ -36,7 +36,7 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 extern volatile GUI_TIMER_TIME OS_TimeMS;
-extern LTDC_HandleTypeDef hltdc_eval;
+extern LTDC_HandleTypeDef hltdc_disco;
 extern TIM_HandleTypeDef TimHandle;
 
 /* Private function prototypes -----------------------------------------------*/
@@ -47,7 +47,7 @@ extern TIM_HandleTypeDef TimHandle;
 /******************************************************************************/
 
 /**
-  * @brief   This function handles NMI exception.
+  * @brief  This function handles NMI exception.
   * @param  None
   * @retval None
   */
@@ -108,29 +108,11 @@ void UsageFault_Handler(void)
 }
 
 /**
-  * @brief  This function handles SVCall exception.
-  * @param  None
-  * @retval None
-  */
-void SVC_Handler(void)
-{
-}
-
-/**
   * @brief  This function handles Debug Monitor exception.
   * @param  None
   * @retval None
   */
 void DebugMon_Handler(void)
-{
-}
-
-/**
-  * @brief  This function handles PendSVC exception.
-  * @param  None
-  * @retval None
-  */
-void PendSV_Handler(void)
 {
 }
 
@@ -180,7 +162,7 @@ void TIM3_IRQHandler(void)
   */
 void LTDC_IRQHandler(void)
 {
-  HAL_LTDC_IRQHandler(&hltdc_eval);
+  HAL_LTDC_IRQHandler(&hltdc_disco);
 }
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

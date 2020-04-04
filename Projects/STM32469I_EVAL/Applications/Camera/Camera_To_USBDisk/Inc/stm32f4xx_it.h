@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Camera\Camera_To_USBDisk/Inc/stm32f4xx_it.h 
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    29-January-2016
+  * @version V1.0.4
+  * @date    06-May-2016
   * @brief   This file contains the headers of the interrupt handlers.
   ******************************************************************************
   * @attention
@@ -52,6 +52,8 @@ void PendSV_Handler(void);
 void SysTick_Handler(void);
 void DMA2_Stream1_IRQHandler(void);
 void DCMI_IRQHandler(void);
+void DMA2D_IRQHandler(void);
+void DSI_IRQHandler(void);
 #ifdef USE_USB_OTG_FS
 void OTG_FS_IRQHandler(void);
 #else

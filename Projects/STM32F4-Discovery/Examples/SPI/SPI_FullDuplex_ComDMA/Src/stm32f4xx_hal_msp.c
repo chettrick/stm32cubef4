@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    SPI/SPI_FullDuplex_ComDMA/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.2.5
-  * @date    29-January-2016
+  * @version V1.2.6
+  * @date    06-May-2016
   * @brief   HAL MSP module.    
   ******************************************************************************
   * @attention
@@ -65,6 +65,7 @@
   *           - Peripheral's GPIO Configuration  
   *           - DMA configuration for transmission request by peripheral 
   *           - NVIC configuration for DMA interrupt request enable
+  *           - NVIC configuration for SPI interrupt request enable
   * @param hspi: SPI handle pointer
   * @retval None
   */
@@ -158,6 +159,10 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef *hspi)
   /* NVIC configuration for DMA transfer complete interrupt (SPI3_RX) */
   HAL_NVIC_SetPriority(SPIx_DMA_RX_IRQn, 0, 0);   
   HAL_NVIC_EnableIRQ(SPIx_DMA_RX_IRQn);
+  
+  /*##-5- Configure the NVIC for SPI #########################################*/
+  HAL_NVIC_SetPriority(SPIx_IRQn, 0, 2);
+  HAL_NVIC_EnableIRQ(SPIx_IRQn);
 }
 
 /**
@@ -195,6 +200,9 @@ void HAL_SPI_MspDeInit(SPI_HandleTypeDef *hspi)
   /*##-4- Disable the NVIC for DMA ###########################################*/
   HAL_NVIC_DisableIRQ(SPIx_DMA_TX_IRQn);
   HAL_NVIC_DisableIRQ(SPIx_DMA_RX_IRQn);
+  
+  /*##-5- Disable the NVIC for SPI ###########################################*/
+  HAL_NVIC_DisableIRQ(SPIx_IRQn);
 }
 
 /**

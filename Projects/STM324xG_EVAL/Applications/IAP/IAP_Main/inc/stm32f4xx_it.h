@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    STM32F4xx_IAP/inc/stm32f4xx_it.h 
   * @author  MCD Application Team
-  * @version V1.3.3
-  * @date    10-October-2011
+  * @version V1.3.4
+  * @date    06-May-2016
   * @brief   This file contains the headers of the interrupt handlers.
   ******************************************************************************
   * @attention

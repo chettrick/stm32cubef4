@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    SPI/SPI_FullDuplex_ComDMA/Inc/stm32f4xx_it.h
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    29-January-2016
+  * @version V1.0.3
+  * @date    06-May-2016
   * @brief   This file contains the headers of the interrupt handlers.
   ******************************************************************************
   * @attention
@@ -60,6 +60,7 @@ void PendSV_Handler(void);
 void SysTick_Handler(void);
 void SPIx_DMA_RX_IRQHandler(void);
 void SPIx_DMA_TX_IRQHandler(void);
+void SPIx_IRQHandler(void);
 
 #ifdef __cplusplus
 }

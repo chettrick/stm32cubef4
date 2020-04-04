@@ -25,7 +25,7 @@ typedef struct
   char data[TFTP_DATA_PKT_LEN_MAX];
   int  data_len;
   /* destination ip:port */
-  struct ip_addr to_ip;
+  ip_addr_t to_ip;
   int to_port;
   /* next block number */
   int block;

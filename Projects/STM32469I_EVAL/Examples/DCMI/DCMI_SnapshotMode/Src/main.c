@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    DCMI/DCMI_SnapshotMode/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    29-January-2016
+  * @version V1.0.4
+  * @date    06-May-2016
   * @brief   This example describe how to configure the camera interface (DCMI) in snapshot
   *          mode to handle a single image capture in QVGA (320x240) resolution and RGB565
   *          format and display the obtained image on LCD screen.
@@ -170,7 +170,7 @@ static void LCD_LL_ConvertFrameToARGB8888(uint32_t pSrc, uint32_t pDst)
   /* Foreground Configuration */
   hdma2d_eval.LayerCfg[1].AlphaMode = DMA2D_NO_MODIF_ALPHA;
   hdma2d_eval.LayerCfg[1].InputAlpha = 0xFF;                  /* fully opaque */
-  hdma2d_eval.LayerCfg[1].InputColorMode = CM_RGB565;
+  hdma2d_eval.LayerCfg[1].InputColorMode = DMA2D_INPUT_RGB565;
   hdma2d_eval.LayerCfg[1].InputOffset = 0;
   
   hdma2d_eval.Instance = DMA2D;

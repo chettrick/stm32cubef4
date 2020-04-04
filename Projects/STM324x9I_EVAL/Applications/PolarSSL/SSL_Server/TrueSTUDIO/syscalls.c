@@ -16,11 +16,13 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
-#undef errno
-extern int errno;
+
 
 #define FreeRTOS
-#define MAX_STACK_SIZE 0x200
+#define MAX_STACK_SIZE 0x2000
+
+extern int __io_putchar(int ch) __attribute__((weak));
+extern int __io_getchar(void) __attribute__((weak));
 
 #ifndef FreeRTOS
   register char * stack_ptr asm("sp");
@@ -61,7 +63,12 @@ caddr_t _sbrk(int incr)
 
 	return (caddr_t) prev_heap_end;
 }
-
+#ifdef _SYS_TIME_H_
+struct timezone {
+	int	tz_minuteswest;	/* minutes west of Greenwich */
+	int	tz_dsttime;	/* type of dst correction */
+};
+#endif
 /*
  * _gettimeofday primitive (Stub function)
  * */
@@ -99,6 +106,12 @@ void _exit (int status)
 
 int _write(int file, char *ptr, int len)
 {
+	int DataIdx;
+
+		for (DataIdx = 0; DataIdx < len; DataIdx++)
+		{
+		   __io_putchar( *ptr++ );
+		}
 	return len;
 }
 
@@ -125,7 +138,14 @@ int _lseek(int file, int ptr, int dir)
 
 int _read(int file, char *ptr, int len)
 {
-	return 0;
+	int DataIdx;
+
+	for (DataIdx = 0; DataIdx < len; DataIdx++)
+	{
+	  *ptr++ = __io_getchar();
+	}
+
+   return len;
 }
 
 int _open(char *path, int flags, ...)

@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    I2C/I2C_TwoBoards_RestartAdvComIT/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.5
-  * @date    29-January-2016
+  * @version V1.2.6
+  * @date    06-May-2016
   * @brief   Description of the I2C_TwoBoards_RestartAdvComIT I2C example.
   ******************************************************************************
   *
@@ -36,6 +36,9 @@
   @endverbatim
 
 @par Example Description 
+
+This example describes how to perform I2C data buffer sequential transmission/reception 
+between two boards using an interrupt.
 
    _________________________                        _________________________
   |           ______________|                      |______________           |

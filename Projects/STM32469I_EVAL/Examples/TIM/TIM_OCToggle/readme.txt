@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    TIM/TIM_OCToggle/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    29-January-2016
+  * @version V1.0.4
+  * @date    06-May-2016
   * @brief   This example shows how to configure the Timer to generate four different 
   *          signals with four different frequencies.
   ******************************************************************************

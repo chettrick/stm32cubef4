@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324xg_eval_camera.c
   * @author  MCD Application Team
-  * @version V2.2.1
-  * @date    15-January-2016
+  * @version V2.2.2
+  * @date    22-April-2016
   * @brief   This file includes the driver for Camera module mounted on
   *          STM324xG-EVAL evaluation board(MB786).
   ******************************************************************************
@@ -191,10 +191,8 @@ void BSP_CAMERA_SnapshotStart(uint8_t *buff)
   */
 void BSP_CAMERA_Suspend(void) 
 {
-  /* Disable the DMA */
-  __HAL_DMA_DISABLE(hdcmi_eval.DMA_Handle);
-  /* Disable the DCMI */
-  __HAL_DCMI_DISABLE(&hdcmi_eval); 
+  /* Suspend the Camera Capture */
+  HAL_DCMI_Suspend(&hdcmi_eval);
 }
 
 /**
@@ -202,10 +200,8 @@ void BSP_CAMERA_Suspend(void)
   */
 void BSP_CAMERA_Resume(void) 
 {
-  /* Enable the DCMI */
-  __HAL_DCMI_ENABLE(&hdcmi_eval);
-  /* Enable the DMA */
-  __HAL_DMA_ENABLE(hdcmi_eval.DMA_Handle);
+  /* Start the Camera Capture */
+  HAL_DCMI_Resume(&hdcmi_eval);
 }
 
 /**

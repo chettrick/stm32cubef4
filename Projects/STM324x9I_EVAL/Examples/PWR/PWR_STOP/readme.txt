@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    PWR/PWR_STOP/readme.txt 
   * @author  MCD Application Team
-  * @version V1.3.3
-  * @date    29-January-2016
+  * @version V1.3.4
+  * @date    06-May-2016
   * @brief   Description of the Power Stop Mode example.
   ******************************************************************************
   *
@@ -59,6 +59,10 @@ generated each 4s, or Key push button is pressed.
  - If the RTC WakeUp event (EXTI_Line22) is the source of wake-up from STOP, LED1 is toggled.
  - If the Key button (EXTI_Line13) is the source of wake-up from STOP, LED4 is toggled.
 
+User may select either Stop mode or under drive stop mode by uncommenting the corresponding line inside the main.h file
+  /* #define STOP_MODE            */
+  /* #define STOP_UNDERDRIVE_MODE */
+ 
 This behavior is repeated in an infinite loop.
 
 LEDs are used to monitor the system state as following:

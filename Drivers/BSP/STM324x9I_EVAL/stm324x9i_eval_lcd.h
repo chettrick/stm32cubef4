@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324x9i_eval_lcd.h
   * @author  MCD Application Team
-  * @version V2.2.2
-  * @date    13-January-2016
+  * @version V2.2.3
+  * @date    22-April-2016
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm324x9i_eval_lcd.c driver.
   ******************************************************************************
@@ -162,6 +162,13 @@ typedef enum
   * @brief LCD default font 
   */ 
 #define LCD_DEFAULT_FONT        Font24     
+
+/** 
+  * @brief  LCD Reload Types  
+  */
+#define LCD_RELOAD_IMMEDIATE               ((uint32_t)LTDC_SRCR_IMR)
+#define LCD_RELOAD_VERTICAL_BLANKING       ((uint32_t)LTDC_SRCR_VBR) 
+
 /**
   * @}
   */ 
@@ -178,13 +185,19 @@ uint32_t BSP_LCD_GetYSize(void);
 /* Functions using the LTDC controller */
 void     BSP_LCD_LayerDefaultInit(uint16_t LayerIndex, uint32_t FrameBuffer);
 void     BSP_LCD_SetTransparency(uint32_t LayerIndex, uint8_t Transparency);
+void     BSP_LCD_SetTransparency_NoReload(uint32_t LayerIndex, uint8_t Transparency);
 void     BSP_LCD_SetLayerAddress(uint32_t LayerIndex, uint32_t Address);
+void     BSP_LCD_SetLayerAddress_NoReload(uint32_t LayerIndex, uint32_t Address);
 void     BSP_LCD_SetColorKeying(uint32_t LayerIndex, uint32_t RGBValue);
+void     BSP_LCD_SetColorKeying_NoReload(uint32_t LayerIndex, uint32_t RGBValue);
 void     BSP_LCD_ResetColorKeying(uint32_t LayerIndex);
+void     BSP_LCD_ResetColorKeying_NoReload(uint32_t LayerIndex);
 void     BSP_LCD_SetLayerWindow(uint16_t LayerIndex, uint16_t Xpos, uint16_t Ypos, uint16_t Width, uint16_t Height);
-
+void     BSP_LCD_SetLayerWindow_NoReload(uint16_t LayerIndex, uint16_t Xpos, uint16_t Ypos, uint16_t Width, uint16_t Height);
 void     BSP_LCD_SelectLayer(uint32_t LayerIndex);
 void     BSP_LCD_SetLayerVisible(uint32_t LayerIndex, FunctionalState State);
+void     BSP_LCD_SetLayerVisible_NoReload(uint32_t LayerIndex, FunctionalState State);
+void     BSP_LCD_Relaod(uint32_t ReloadType);
 
 void     BSP_LCD_SetTextColor(uint32_t Color);
 uint32_t BSP_LCD_GetTextColor(void);

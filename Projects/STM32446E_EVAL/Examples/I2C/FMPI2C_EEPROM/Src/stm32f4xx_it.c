@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    I2C/I2C_EEPROM/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
-  * @version V1.1.3
-  * @date    29-January-2016
+  * @version V1.1.4
+  * @date    06-May-2016
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and
   *          peripherals interrupt service routine.
@@ -167,6 +167,27 @@ void SysTick_Handler(void)
 /*  available peripheral interrupt handler's name please refer to the startup */
 /*  file (startup_stm32f4xx.s).                                               */
 /******************************************************************************/
+/**
+  * @brief  This function handles I2C event interrupt request.  
+  * @param  None
+  * @retval None
+  * @Note   This function is redefined in "main.h" and related to I2C data transmission     
+  */
+void FMPI2C1_Event_IRQHandler(void)
+{
+  HAL_FMPI2C_EV_IRQHandler(&I2cHandle);
+}
+
+/**
+  * @brief  This function handles I2C error interrupt request.
+  * @param  None
+  * @retval None
+  * @Note   This function is redefined in "main.h" and related to I2C error
+  */
+void FMPI2C1_Error_IRQHandler(void)
+{
+  HAL_FMPI2C_ER_IRQHandler(&I2cHandle);
+}
 /**
   * @brief  This function handles DMA interrupt request.
   * @param  None

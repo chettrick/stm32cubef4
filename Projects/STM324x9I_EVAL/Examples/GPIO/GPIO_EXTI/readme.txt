@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    GPIO/GPIO_EXTI/readme.txt 
   * @author  MCD Application Team
-  * @version V1.3.3
-  * @date    29-January-2016
+  * @version V1.3.4
+  * @date    06-May-2016
   * @brief   Description of the GPIO EXTI example.
   ******************************************************************************
   *

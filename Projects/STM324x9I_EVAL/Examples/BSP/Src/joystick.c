@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BSP/Src/joystick.c 
   * @author  MCD Application Team
-  * @version V1.3.3
-  * @date    29-January-2016
+  * @version V1.3.4
+  * @date    06-May-2016
   * @brief   This example code shows how to use the joystick feature in the 
   *          stm324x9i_eval driver
   ******************************************************************************

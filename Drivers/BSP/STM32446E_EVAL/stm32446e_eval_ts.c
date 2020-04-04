@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32446e_eval_ts.c
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    13-January-2016
+  * @version V1.1.2
+  * @date    06-May-2016
   * @brief   This file provides a set of functions needed to manage the Touch 
   *          Screen on STM32446E-EVAL evaluation board.
   ******************************************************************************

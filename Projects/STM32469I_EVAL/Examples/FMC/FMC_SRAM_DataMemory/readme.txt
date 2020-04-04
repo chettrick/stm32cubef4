@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    FMC/FMC_SRAM_DataMemory/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    29-January-2016
+  * @version V1.0.4
+  * @date    06-May-2016
   * @brief   Description of the FMC SRAM example.
   ******************************************************************************
   *
@@ -37,9 +37,9 @@
 
 @par Example Description
 
-This example guides you through the different configuration steps by mean of HAL API
-to configure the FMC controller to access the IS61WV102416BLL-10MLI SRAM memory mounted 
-on STM32469I-EVAL evaluation board (including heap and stack).
+This example guides you through the differentconfiguration steps by mean of HAL API
+to configure the FMC controller to access the SRAM memory mountedon evaluation
+board (including heap and stack).
  
 At the beginning of the main program the HAL_Init() function is called to reset 
 all the peripherals, initialize the Flash interface and the systick.

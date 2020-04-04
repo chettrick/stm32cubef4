@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    PWR/PWR_CurrentConsumption/stm32f4xx_lp_modes.c 
   * @author  MCD Application Team
-  * @version V1.2.4
-  * @date    29-January-2016
+  * @version V1.2.5
+  * @date    06-May-2016
   * @brief   This file provides firmware functions to manage the following 
   *          functionalities of the STM32F4xx Low Power Modes:
   *           - Sleep Mode
@@ -148,6 +148,8 @@ void StopMode_Measure(void)
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
   __HAL_RCC_GPIOC_CLK_ENABLE();
+  __HAL_RCC_GPIOD_CLK_ENABLE();
+  __HAL_RCC_GPIOE_CLK_ENABLE();
   __HAL_RCC_GPIOH_CLK_ENABLE();
 
   GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
@@ -155,6 +157,8 @@ void StopMode_Measure(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Pin = GPIO_PIN_All;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
   HAL_GPIO_Init(GPIOH, &GPIO_InitStruct); 
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct); 
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
@@ -163,8 +167,10 @@ void StopMode_Measure(void)
   __HAL_RCC_GPIOA_CLK_DISABLE();
   __HAL_RCC_GPIOB_CLK_DISABLE();
   __HAL_RCC_GPIOC_CLK_DISABLE();
+  __HAL_RCC_GPIOD_CLK_DISABLE();
+  __HAL_RCC_GPIOE_CLK_DISABLE();
   __HAL_RCC_GPIOH_CLK_DISABLE();
-    
+
   /* Configure RTC prescaler and RTC data registers as follow:
   - Hour Format = Format 24
   - Asynch Prediv = Value according to source clock
@@ -179,13 +185,13 @@ void StopMode_Measure(void)
   RTCHandle.Init.OutPut = RTC_OUTPUT_DISABLE;
   RTCHandle.Init.OutPutPolarity = RTC_OUTPUT_POLARITY_HIGH;
   RTCHandle.Init.OutPutType = RTC_OUTPUT_TYPE_OPENDRAIN;
-  
+
   if(HAL_RTC_Init(&RTCHandle) != HAL_OK)
   {
     /* Initialization Error */
     Error_Handler(); 
   }
-  
+
   /*## Configure the Wake up timer ###########################################*/
   /*  RTC Wakeup Interrupt Generation:
       Wakeup Time Base = (RTC_WAKEUPCLOCK_RTCCLK_DIV /(LSI))
@@ -212,7 +218,7 @@ void StopMode_Measure(void)
   HAL_PWR_EnterSTOPMode(PWR_LOWPOWERREGULATOR_ON, PWR_STOPENTRY_WFI);
 
   /* Configures system clock after wake-up from STOP: enable HSI, PLL and select 
-  PLL as system clock source (HSI and PLL are disabled in STOP mode) */
+     PLL as system clock source (HSI and PLL are disabled in STOP mode) */
   SYSCLKConfig_STOP();
   
   /* Disable Wake-up timer */

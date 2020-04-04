@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Camera/Camera_To_USBDisk/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    29-January-2016
+  * @version V1.0.4
+  * @date    06-May-2016
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
@@ -44,6 +44,8 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 extern HCD_HandleTypeDef hhcd;
+extern DMA2D_HandleTypeDef hdma2d_eval;
+extern DSI_HandleTypeDef hdsi_eval;
 
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
@@ -211,6 +213,26 @@ void EXTI9_5_IRQHandler(void)
 void EXTI15_10_IRQHandler(void)
 {
   HAL_GPIO_EXTI_IRQHandler(TAMPER_BUTTON_PIN);
+}
+
+/**
+  * @brief  This function handles DMA2D interrupt request.
+  * @param  None
+  * @retval None
+  */
+void DMA2D_IRQHandler(void)
+{
+  HAL_DMA2D_IRQHandler(&hdma2d_eval);
+}
+
+/**
+  * @brief  This function handles DSI Handler.
+  * @param  None
+  * @retval None
+  */
+void DSI_IRQHandler(void)
+{
+  HAL_DSI_IRQHandler(&hdsi_eval);
 }
 
 /**

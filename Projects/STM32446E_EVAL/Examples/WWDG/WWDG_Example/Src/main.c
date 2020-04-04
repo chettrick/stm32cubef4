@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    WWDG/WWDG_Example/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.3
-  * @date    29-January-2016
+  * @version V1.1.4
+  * @date    06-May-2016
   * @brief   This sample code shows how to use the STM32F446xx WWDG HAL API
   *          to update at regular period the WWDG counter and how to simulate
   *          a software fault generating an MCU WWDG reset on expiry of a
@@ -124,12 +124,6 @@ int main(void)
     Error_Handler();
   }
 
-  /*##-3- Start the WWDG #####################################################*/
-  if (HAL_WWDG_Start(&WwdgHandle) != HAL_OK)
-  {
-    Error_Handler();
-  }
-
   /* Infinite loop */
   while (1)
   {
@@ -142,7 +136,7 @@ int main(void)
     /* Refresh WWDG: update counter value to 127, the refresh window is:
  between 31 ms (~656 * (127-80)) and 42 ms (~656 * 64) */
 
-    if (HAL_WWDG_Refresh(&WwdgHandle, 127) != HAL_OK)
+    if (HAL_WWDG_Refresh(&WwdgHandle) != HAL_OK)
     {
       Error_Handler();
     }

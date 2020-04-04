@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LwIP/LwIP_IAP/Src/flash_if.c 
   * @author  MCD Application Team
-  * @version V1.3.3
-  * @date    29-January-2016
+  * @version V1.3.4
+  * @date    06-May-2016
   * @brief   This file provides high level routines to manage internal Flash 
   *          programming (erase and write). 
   ******************************************************************************

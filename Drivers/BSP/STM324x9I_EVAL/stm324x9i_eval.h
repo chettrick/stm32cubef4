@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324x9i_eval.h
   * @author  MCD Application Team
-  * @version V2.2.2
-  * @date    13-January-2016
+  * @version V2.2.3
+  * @date    22-April-2016
   * @brief   This file contains definitions for STM324x9I_EVAL's LEDs, 
   *          push-buttons and COM ports hardware resources.
   ******************************************************************************

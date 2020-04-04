@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    system_stm32f4xx.c
   * @author  MCD Application Team
-  * @version V1.2.3
-  * @date    29-January-2016
+  * @version V1.2.4
+  * @date    06-May-2016
 
   * @brief   CMSIS Cortex-M4 Device Peripheral Access Layer System Source File.
   *

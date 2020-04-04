@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    QSPI/QSPI_ExecuteInPlace/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    29-January-2016
+  * @version V1.0.4
+  * @date    06-May-2016
   * @brief   This example describes how to configure and use QuadSPI through
   *          the STM32F4xx HAL API.
   ******************************************************************************
@@ -347,6 +347,19 @@ void HAL_QSPI_TxCpltCallback(QSPI_HandleTypeDef *hqspi)
 void HAL_QSPI_StatusMatchCallback(QSPI_HandleTypeDef *hqspi)
 {
   StatusMatch++;
+}
+
+/**
+  * @brief  QSPI error callbacks.
+  * @param  hqspi: QSPI handle
+  * @note   This example shows a simple way to report transfer error, and you can
+  *         add your own implementation.
+  * @retval None
+  */
+ void HAL_QSPI_ErrorCallback(QSPI_HandleTypeDef *hqspi)
+{
+  /* Turn LED3 on: Transfer error in reception/transmission process */
+  BSP_LED_On(LED3); 
 }
 
 /**

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    UART/UART_TwoBoards_ComPolling/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    29-January-2016
+  * @version V1.0.2
+  * @date    06-May-2016
   * @brief   This sample code shows how to use STM32F4xx UART HAL API to transmit 
   *          and receive a data buffer with a communication process based on
   *          polling transfer. 

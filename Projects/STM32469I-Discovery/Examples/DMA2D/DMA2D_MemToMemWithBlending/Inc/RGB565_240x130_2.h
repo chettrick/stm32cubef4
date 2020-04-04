@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    DMA2D/DMA2D_MemToMemWithBlending/Inc/RGB565_240x130_2.h 
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    29-January-2016
+  * @version V1.0.3
+  * @date    06-May-2016
   * @brief   This file contains the DMA2D scenario background layer texture in RGB565 and size 240x130
   ******************************************************************************
   * @attention

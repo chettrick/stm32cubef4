@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    FMC/FMC_SDRAM_DataMemory/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.3
-  * @date    29-January-2016
+  * @version V1.1.4
+  * @date    06-May-2016
   * @brief   This sample code shows how to use the SDRAM device mounted on the
   *          Evaluation board as a data memory.
   ******************************************************************************

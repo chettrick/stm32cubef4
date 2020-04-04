@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    Display/LCD_PicturesFromSDCard/Media/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    29-January-2016
+  * @version V1.0.4
+  * @date    06-May-2016
   * @brief   Description of the LCD_PicturesFromSDCard application used pictures.
   ******************************************************************************
   * @attention
@@ -38,7 +38,7 @@
   ******************************************************************************  
    @endverbatim
 
-@par Description 
+@par Application Description 
   - The bitmap images should be copied inside a dedicated directory named as "Media" 
     at the micro SD card root.
     The images should have the following properties:

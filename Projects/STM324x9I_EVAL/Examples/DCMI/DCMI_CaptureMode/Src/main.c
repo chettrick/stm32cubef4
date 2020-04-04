@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    DCMI/DCMI_CaptureMode/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.3.3
-  * @date    29-January-2016
+  * @version V1.3.4
+  * @date    06-May-2016
   * @brief   This example describes how to configure the camera in continuous mode.
   ******************************************************************************
   * @attention
@@ -158,7 +158,7 @@ static void LCD_LL_ConvertLineToARGB8888(void *pSrc, void *pDst)
   /* Foreground Configuration */
   hdma2d_eval.LayerCfg[1].AlphaMode = DMA2D_NO_MODIF_ALPHA;
   hdma2d_eval.LayerCfg[1].InputAlpha = 0xFF;
-  hdma2d_eval.LayerCfg[1].InputColorMode = CM_RGB565;
+  hdma2d_eval.LayerCfg[1].InputColorMode = DMA2D_INPUT_RGB565;
   hdma2d_eval.LayerCfg[1].InputOffset = 0;
   
   hdma2d_eval.Instance = DMA2D; 

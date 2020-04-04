@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file      startup_stm32f407xx.s
   * @author    MCD Application Team
-  * @version   V1.3.3
-  * @date      29-January-2016
+  * @version   V2.5.0
+  * @date      22-April-2015
   * @brief     STM32F407xx Devices vector table for GCC based toolchains. 
   *            This module performs:
   *                - Set the initial SP
@@ -77,9 +77,9 @@ defined in linker script */
   .weak  Reset_Handler
   .type  Reset_Handler, %function
 Reset_Handler:  
-  ldr   sp, =_estack      /* set stack pointer */
+  ldr   sp, =_estack     /* set stack pointer */
 
-/* Copy the data segment initializers from flash to SRAM */
+/* Copy the data segment initializers from flash to SRAM */  
   movs  r1, #0
   b  LoopCopyDataInit
 

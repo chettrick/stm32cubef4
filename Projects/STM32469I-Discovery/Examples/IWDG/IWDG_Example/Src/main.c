@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    IWDG/IWDG_Example/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    29-January-2016
+  * @version V1.0.3
+  * @date    06-May-2016
   * @brief   This sample code shows how to use the STM32F4xx IWDG HAL API
   *          to update at regular period the IWDG counter and how to simulate a
   *          software fault generating an MCU IWDG reset on expiry of a
@@ -134,12 +134,6 @@ int main(void)
   if (HAL_IWDG_Init(&IwdgHandle) != HAL_OK)
   {
     /* Initialization Error */
-    Error_Handler();
-  }
-
-  /*##-4- Start the IWDG #####################################################*/
-  if (HAL_IWDG_Start(&IwdgHandle) != HAL_OK)
-  {
     Error_Handler();
   }
 

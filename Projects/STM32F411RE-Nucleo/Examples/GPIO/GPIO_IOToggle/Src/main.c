@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    GPIO/GPIO_IOToggle/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.1.4
-  * @date    29-January-2016
+  * @version V1.1.5
+  * @date    06-May-2016
   * @brief   This example describes how to configure and use GPIOs through 
   *          the STM32F4xx HAL API.
   ******************************************************************************

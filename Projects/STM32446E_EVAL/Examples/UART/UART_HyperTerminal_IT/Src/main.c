@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    UART/UART_HyperTerminal_IT/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.3
-  * @date    29-January-2016
+  * @version V1.1.4
+  * @date    06-May-2016
   * @brief   This sample code shows how to use UART HAL API to transmit
   *          and receive a data buffer with a communication process based on
   *          DMA transfer.

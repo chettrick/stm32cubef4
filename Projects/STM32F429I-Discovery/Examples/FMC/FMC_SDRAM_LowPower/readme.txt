@@ -5,8 +5,8 @@
   ******************* (C) COPYRIGHT 2016 STMicroelectronics ********************
   * @file    FMC/FMC_SDRAM_LowPower/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.5
-  * @date    29-January-2016 
+  * @version V1.2.6
+  * @date    06-May-2016 
   * @brief   Description of the FMC SDRAM Low power example.
   ******************************************************************************
   *
@@ -37,9 +37,8 @@
  
 @par Example Description 
 
-This example guides you through the different configuration steps by mean of HAL API
-to drive the IS42S16400J SDRAM memory mounted on STM32F429I-Discovery RevB board, in
-low power mode (SDRAM Self Refresh mode).
+This example describes how to configure the FMC controller to access the SDRAM 
+memory in low power mode (SDRAM Self Refresh mode).
 
 It gives a simple application of the FMC SDRAM low power mode use (self refresh mode) 
 while the MCU is in a low power mode (STOP mode).

@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    I2C/I2C_TwoBoards_AdvComIT/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    29-January-2016
+  * @version V1.0.3
+  * @date    06-May-2016
   * @brief   Description of the I2C Two Boards Advanced Communication with 
   *          Interrupt example.
   ******************************************************************************
@@ -36,7 +36,10 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description 
+@par Example Description
+ 
+This example describes how to perform I2C data buffer transmission/reception between
+two boards, using an interrupt.
 
    _________________________                        _________________________
   |           ______________|                      |______________           |
@@ -55,8 +58,7 @@
   |                      GND|______________________|GND                      |
   |_STM32F4 ________________|                      |_________________STM32F4_|
 
-This example guides you through the different configuration steps by mean of HAL API 
-to ensure I2C Data buffer transmission and reception using Interrupt.
+
 The communication is done with 2 Boards through I2C and using the following I2C features:
   - 7-bit addressing mode
   - Fast speed mode (400KHz)

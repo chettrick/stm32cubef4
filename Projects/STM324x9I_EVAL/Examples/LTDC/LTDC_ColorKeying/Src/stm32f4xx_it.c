@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LTDC/LTDC_ColorKeying/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
-  * @version V1.3.3
-  * @date    29-January-2016
+  * @version V1.3.4
+  * @date    06-May-2016
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
@@ -53,6 +53,7 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
+extern LTDC_HandleTypeDef            LtdcHandle;
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -164,6 +165,15 @@ void SysTick_Handler(void)
 /*  available peripheral interrupt handler's name please refer to the startup */
 /*  file (startup_stm32f40xx.s/startup_stm32f427x.s/startup_stm32f429x.s).    */
 /******************************************************************************/
+/**
+  * @brief  This function handles LTDC global interrupt request.
+  * @param  None
+  * @retval None
+  */
+void LTDC_IRQHandler(void)
+{
+  HAL_LTDC_IRQHandler(&LtdcHandle);
+}
 
 /**
   * @brief  This function handles PPP interrupt request.

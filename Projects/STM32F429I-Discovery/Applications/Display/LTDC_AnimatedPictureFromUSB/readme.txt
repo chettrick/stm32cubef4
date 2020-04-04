@@ -5,8 +5,8 @@
   ******************************************************************************
   * @file    Display/LTDC_AnimatedPictureFromUSB/readme.txt 
   * @author  MCD Application Team
-  * @version V1.3.3
-  * @date    29-January-2016
+  * @version V1.3.4
+  * @date    06-May-2016
   * @brief   Description of the LTDC Animated Picture From USB application.
   ******************************************************************************
   * @attention

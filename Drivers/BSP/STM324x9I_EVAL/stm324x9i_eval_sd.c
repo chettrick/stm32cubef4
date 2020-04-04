@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324x9i_eval_sd.c
   * @author  MCD Application Team
-  * @version V2.2.2
-  * @date    13-January-2016
+  * @version V2.2.3
+  * @date    22-April-2016
   * @brief   This file includes the uSD card driver mounted on STM324x9I-EVAL
   *          evaluation board.
   ******************************************************************************

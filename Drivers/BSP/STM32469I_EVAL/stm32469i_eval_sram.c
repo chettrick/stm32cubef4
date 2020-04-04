@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32469i_eval_sram.c
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    12-January-2016
+  * @version V1.0.3
+  * @date    06-May-2016
   * @brief   This file includes the SRAM driver for the IS61WV102416BLL-10M memory
   *          device mounted on STM32469I-EVAL evaluation board.
   ******************************************************************************

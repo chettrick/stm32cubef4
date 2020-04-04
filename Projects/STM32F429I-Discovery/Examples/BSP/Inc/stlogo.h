@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BSP/Inc/stlogo.h 
   * @author  MCD Application Team
-  * @version V1.2.5
-  * @date    29-January-2016 
+  * @version V1.2.6
+  * @date    06-May-2016 
   * @brief   This file contains image used for BSP example.   
   ******************************************************************************
   * @attention

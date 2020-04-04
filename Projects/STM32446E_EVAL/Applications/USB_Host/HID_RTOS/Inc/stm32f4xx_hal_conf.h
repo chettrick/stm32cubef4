@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Device/HID_RTOS/Inc/stm32f4xx_hal_conf.h
   * @author  MCD Application Team
-  * @version V1.2.3
-  * @date    29-January-2016
+  * @version V1.2.4
+  * @date    06-May-2016
   * @brief   HAL configuration file.
   ******************************************************************************
   * @attention
@@ -81,7 +81,7 @@
 /* #define HAL_SAI_MODULE_ENABLED */
 /* #define HAL_SD_MODULE_ENABLED */
 /* #define HAL_SPI_MODULE_ENABLED */
-/* #define HAL_TIM_MODULE_ENABLED */
+#define HAL_TIM_MODULE_ENABLED
 #define HAL_UART_MODULE_ENABLED
 /* #define HAL_USART_MODULE_ENABLED */
 /* #define HAL_IRDA_MODULE_ENABLED */

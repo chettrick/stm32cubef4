@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    SAI/SAI_Audio/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.3
-  * @date    29-January-2016
+  * @version V1.1.4
+  * @date    06-May-2016
   * @brief   Description of the STM32F4xx SAI Audio example.
   ******************************************************************************
   * @attention
@@ -40,7 +40,7 @@
 
 @par Example Description 
 
-This example provides basic implementation of audio features using BSP_AUDIO.
+This example provides basic implementation of audio features.
 It allows to play two audio files at the same time through the SAI peripheral
 and using the external codec WM8994 implemented on the STM32446E-EVAL board.
 

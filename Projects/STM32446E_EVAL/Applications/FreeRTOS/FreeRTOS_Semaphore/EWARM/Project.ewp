@@ -968,6 +968,9 @@
         <name>$PROJ_DIR$\..\Src\main.c</name>
       </file>
       <file>
+        <name>$PROJ_DIR$\..\Src\stm32f4xx_hal_timebase_tim.c</name>
+      </file>
+      <file>
         <name>$PROJ_DIR$\..\Src\stm32f4xx_it.c</name>
       </file>
     </group>
@@ -983,18 +986,9 @@
     <group>
       <name>BSP</name>
       <group>
-        <name>Components</name>
-        <file>
-          <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\mfxstm32l152\mfxstm32l152.c</name>
-        </file>
-      </group>
-      <group>
         <name>STM32446E_EVAL</name>
         <file>
           <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32446E_EVAL\stm32446e_eval.c</name>
-        </file>
-        <file>
-          <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32446E_EVAL\stm32446e_eval_io.c</name>
         </file>
       </group>
     </group>
@@ -1059,6 +1053,12 @@
       </file>
       <file>
         <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_sram.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim_ex.c</name>
       </file>
       <file>
         <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_uart.c</name>

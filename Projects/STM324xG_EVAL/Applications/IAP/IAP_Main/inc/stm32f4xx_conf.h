@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    STM32F4xx_IAP/inc/stm32f4xx_conf.h  
   * @author  MCD Application Team
-  * @version V1.3.3
-  * @date    10-October-2011
+  * @version V1.3.4
+  * @date    06-May-2016
   * @brief   Library configuration file.
   ******************************************************************************
   * @attention
@@ -15,7 +15,7 @@
   * FROM THE CONTENT OF SUCH FIRMWARE AND/OR THE USE MADE BY CUSTOMERS OF THE
   * CODING INFORMATION CONTAINED HEREIN IN CONNECTION WITH THEIR PRODUCTS.
   *
-  * <h2><center>&copy; COPYRIGHT 2011 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2016 STMicroelectronics</center></h2>
   ******************************************************************************
   */ 
 
@@ -85,4 +85,4 @@
 
 #endif /* __STM32F4xx_CONF_H */
 
-/******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT 2016 STMicroelectronics *****END OF FILE****/

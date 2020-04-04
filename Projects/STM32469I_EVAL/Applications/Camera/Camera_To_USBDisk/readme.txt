@@ -5,8 +5,8 @@
   ******************************************************************************
   * @file    Camera/Camera_To_USBDisk/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    29-January-2016
+  * @version V1.0.4
+  * @date    06-May-2016
   * @brief   Description of the Camera to USB Disk application.
   ******************************************************************************
   * @attention

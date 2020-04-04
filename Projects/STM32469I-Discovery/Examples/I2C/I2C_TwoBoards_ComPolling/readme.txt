@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    I2C/I2C_TwoBoards_ComPolling/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    29-January-2016
+  * @version V1.0.3
+  * @date    06-May-2016
   * @brief   Description of the I2C Two Boards Communication Polling example.
   ******************************************************************************
   *
@@ -37,8 +37,8 @@
 
 @par Example Description 
 
-This example describes how to ensure I2C Data buffer transmission and reception using 
-Polling. The communication is done with 2 Boards through I2C.
+This example describes how to perform I2C data buffer transmission/reception between 
+two boards in Polling mode.
 
    _________________________                        _________________________
   |       __________________|                      |_________________        |

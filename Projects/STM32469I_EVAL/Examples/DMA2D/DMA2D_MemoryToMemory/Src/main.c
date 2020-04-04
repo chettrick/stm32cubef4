@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    DMA2D/DMA2D_MemoryToMemory/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    29-January-2016
+  * @version V1.0.4
+  * @date    06-May-2016
   * @brief   This example provides a description of how to configure
   *          DMA2D peripheral in Memory to Memory transfer mode
   ******************************************************************************
@@ -138,7 +138,7 @@ int main(void)
   /*##-3- Foreground Layer Configuration ###########################################*/
   Dma2dHandle.LayerCfg[1].AlphaMode = DMA2D_NO_MODIF_ALPHA; /* Keep original Alpha from ARGB4444 input */
   Dma2dHandle.LayerCfg[1].InputAlpha = 0xFF; /* Fully opaque */
-  Dma2dHandle.LayerCfg[1].InputColorMode = CM_ARGB4444; /* Input color is ARGB4444 : 16 bpp */
+  Dma2dHandle.LayerCfg[1].InputColorMode = DMA2D_INPUT_ARGB4444; /* Input color is ARGB4444 : 16 bpp */
   Dma2dHandle.LayerCfg[1].InputOffset = 0x0; /* No offset in input */
 
   Dma2dHandle.Instance = DMA2D;

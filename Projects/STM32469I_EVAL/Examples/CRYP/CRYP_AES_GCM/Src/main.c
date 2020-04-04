@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    CRYP/CRYP_AES_GCM/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    29-January-2016
+  * @version V1.0.4
+  * @date    06-May-2016
   * @brief   Description of the CRYP AES Algorithm using GCM chaining mode
   ******************************************************************************
   * @attention

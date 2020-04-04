@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    TIM/TIM_Encoder/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    29-January-2016
+  * @version V1.0.4
+  * @date    06-May-2016
   * @brief   This example shows how to configure the Timer in Encoder interface 
   *          to determinate the rotation direction. 
   ******************************************************************************
@@ -37,6 +37,9 @@
   @endverbatim
 
 @par Example Description 
+
+This example shows how to configure the TIM1 peripheral in encoder mode to
+determinate the rotation direction.
                                      
      -------------                               -------------
     |             |CH1:PC6              CH1:PA8 |             |
@@ -52,10 +55,6 @@
     |             |                             |  Direction  |--> |uwDirection|     
      -------------                               -------------      -----------
                Encoder interface example description
-               
-
-  This example shows how to configure the TIM1 peripheral in encoder mode to
-determinate the rotation direction.
 
   To emulate a quadrature encoder, TIM3 is configured in toggle mode to generate
 2 quadrature signals on (PC6 and PC7) at 10KHz. Each 1s, signals change phase

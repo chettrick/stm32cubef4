@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32446e_eval_eeprom.h
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    13-January-2016
+  * @version V1.1.2
+  * @date    06-May-2016
   * @brief   This file contains all the functions prototypes for 
   *          the stm32446e_eval_eeprom.c firmware driver.
   ******************************************************************************

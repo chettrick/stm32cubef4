@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    DMA2D/DMA2D_MemToMemWithLCD/Src/main.c
   * @author  MCD Application Team
-  * @version V1.3.3
-  * @date    29-January-2016
+  * @version V1.3.4
+  * @date    06-May-2016
   * @brief   This example provides a description of how to configure 
   *          DMA2D peripheral in Memory to Memory transfer mode 
   *          and display the result on LCD.
@@ -135,7 +135,7 @@ static void DMA2D_Config(void)
   /* Foreground Configuration */
   Dma2dHandle.LayerCfg[1].AlphaMode = DMA2D_NO_MODIF_ALPHA;
   Dma2dHandle.LayerCfg[1].InputAlpha = 0xFF;
-  Dma2dHandle.LayerCfg[1].InputColorMode = CM_RGB565;
+  Dma2dHandle.LayerCfg[1].InputColorMode = DMA2D_INPUT_RGB565;
   Dma2dHandle.LayerCfg[1].InputOffset = 0x0;
 
   Dma2dHandle.Instance          = DMA2D; 

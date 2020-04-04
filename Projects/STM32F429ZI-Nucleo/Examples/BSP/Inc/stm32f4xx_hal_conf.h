@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BSP/inc/stm32f4xx_hal_conf.h
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    29-January-2016
+  * @version V1.0.2
+  * @date    06-May-2016
   * @brief   HAL configuration template file. 
   *          This file should be copied to the application folder and renamed
   *          to stm32f4xx_hal_conf.h.
@@ -218,6 +218,15 @@
 
 #define PHY_ISFR                        ((uint16_t)0x1D)    /*!< PHY Interrupt Source Flag register Offset       */
 #define PHY_ISFR_INT4                   ((uint16_t)0x0010)  /*!< PHY Link down inturrupt                         */ 
+
+/* ################## SPI peripheral configuration ########################## */
+
+/* CRC FEATURE: Use to activate CRC feature inside HAL SPI Driver
+* Activated: CRC code is present inside driver
+* Deactivated: CRC code cleaned from driver
+*/
+
+#define USE_SPI_CRC                     1U
 
 /* Includes ------------------------------------------------------------------*/
 /**

@@ -16,11 +16,10 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
-#undef errno
-extern int errno;
+
 
 #define FreeRTOS
-#define MAX_STACK_SIZE 0x200
+#define MAX_STACK_SIZE 0x2000
 
 extern int __io_putchar(int ch) __attribute__((weak));
 extern int __io_getchar(void) __attribute__((weak));
@@ -64,7 +63,12 @@ caddr_t _sbrk(int incr)
 
 	return (caddr_t) prev_heap_end;
 }
-
+#ifdef _SYS_TIME_H_
+struct timezone {
+	int	tz_minuteswest;	/* minutes west of Greenwich */
+	int	tz_dsttime;	/* type of dst correction */
+};
+#endif
 /*
  * _gettimeofday primitive (Stub function)
  * */

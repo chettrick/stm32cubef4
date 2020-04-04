@@ -1953,6 +1953,9 @@
       <file>
         <name>$PROJ_DIR$\..\Src\usbh_diskio.c</name>
       </file>
+      <file>
+        <name>$PROJ_DIR$\..\Src\stm32f4xx_hal_timebase_tim.c</name>
+      </file>
     </group>
   </group>
   <group>
@@ -2051,6 +2054,12 @@
       </file>
       <file>
         <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_usb.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim_ex.c</name>
       </file>
     </group>
   </group>

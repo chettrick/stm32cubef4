@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    DCMI/DCMI_CaptureMode/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    29-January-2016
+  * @version V1.0.4
+  * @date    06-May-2016
   * @brief   Description of the STM32F4xx DCMI_CaptureMode example.
   ******************************************************************************
   * @attention
@@ -41,9 +41,11 @@
 @par Example Description 
 
 This example provides a short description of how to use the DCMI to interface with
-a camera module to capture continuously camera images in a Camera Frame Buffer 
-(320x240 in RGB565) in external SDRAM and each time a full frame camera 
-image is captured display it on the LCD DSI in ARGB8888 format by a partial refresh in DSI adapted
+a camera module to capture and display in continuous mode the picture on LCD.
+
+This example captures continuously camera images in a Camera Frame Buffer 
+(320x240 in RGB565) into external SDRAM. 
+Each time a full frame camera image is captured display it on the LCD DSI in ARGB8888 format by a partial refresh in DSI adapted
 command mode with Tearing Effect by DSI Link in RGB888 format inside DSI packets.
 This use example implements a camera preview mode.
 

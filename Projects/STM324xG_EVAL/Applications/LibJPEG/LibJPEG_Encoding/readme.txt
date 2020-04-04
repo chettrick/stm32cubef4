@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    LibJPEG/LibJPEG_Encoding/readme.txt 
   * @author  MCD Application Team
-  * @version V1.3.3
-  * @date    29-January-2016
+  * @version V1.3.4
+  * @date    06-May-2016
   * @brief   Description of the LibJPEG encoding application.
   ******************************************************************************
   * @attention
@@ -42,6 +42,9 @@
 
 This application demonstrates how to read BMP file from micro SD, encode it, save the jpeg file
 in uSD Card then decode the jpeg file and display the final BMP image on the LCD.
+BMP image is read from the bottom to the top, in order to be encoded in JPG from the top to the bottom.
+BMP image is in BGR format and JPG in RGB format. B and R values of the pixels are swapped by redefining
+the order of pixel components.
 
 The BMP image should be copied at the micro SD card root.
 

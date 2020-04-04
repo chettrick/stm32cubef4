@@ -970,6 +970,9 @@
       <file>
         <name>$PROJ_DIR$\..\Src\stm32f4xx_it.c</name>
       </file>
+      <file>
+        <name>$PROJ_DIR$\..\Src\stm32f4xx_hal_timebase_tim.c</name>
+      </file>
     </group>
   </group>
   <group>
@@ -1034,6 +1037,9 @@
         <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma.c</name>
       </file>
       <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma_ex.c</name>
+      </file>
+      <file>
         <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash.c</name>
       </file>
       <file>
@@ -1086,6 +1092,12 @@
       </file>
       <file>
         <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_sdmmc.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim_ex.c</name>
       </file>
     </group>
   </group>

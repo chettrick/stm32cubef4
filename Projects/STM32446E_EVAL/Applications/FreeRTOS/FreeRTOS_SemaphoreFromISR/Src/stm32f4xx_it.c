@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    FreeRTOS/FreeRTOS_SemaphoreFromISR/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
-  * @version V1.2.3
-  * @date    29-January-2016 
+  * @version V1.2.4
+  * @date    06-May-2016 
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
@@ -119,7 +119,6 @@ void DebugMon_Handler(void)
   */
 void SysTick_Handler(void)
 {
-  HAL_IncTick();
   osSystickHandler();
 }
 

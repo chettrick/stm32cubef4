@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324xg_eval_camera.h
   * @author  MCD Application Team
-  * @version V2.2.1
-  * @date    15-January-2016
+  * @version V2.2.2
+  * @date    22-April-2016
   * @brief   This file contains all the functions prototypes for the 
   *          stm324xg_eval_camera.c driver.
   ******************************************************************************

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    TIM/TIM_OnePulse/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    29-January-2016
+  * @version V1.0.4
+  * @date    06-May-2016
   * @brief   This sample code shows how to use TIM HAL API to generate
   *          a one pulse signal
   ******************************************************************************

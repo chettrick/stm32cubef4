@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LTDC/LTDC_Display_1Layer/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.3.3
-  * @date    29-January-2016
+  * @version V1.3.4
+  * @date    06-May-2016
   * @brief   This example provides a description of how to configure LTDC peripheral 
   *          to display BMP image on LCD using only one layer.
   ******************************************************************************

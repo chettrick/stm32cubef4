@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    WWDG/WWDG_Example/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    29-January-2016
+  * @version V1.0.2
+  * @date    06-May-2016
   * @brief   Description of the Window Watchdog example.
   ******************************************************************************
   *
@@ -37,9 +37,9 @@
 
 @par Example Description
 
-This example guides you through the different configuration steps by means of the 
-HAL API to perform periodic WWDG counter update and simulate a software fault that 
-generates an MCU WWDG reset when a predefined time period has elapsed.
+This example guides you through the different configuration steps by mean of HAL API 
+to ensure WWDG counter update at regular period and simulate a software fault generating 
+an MCU WWDG reset on expiry of a programmed time period.
 
 At the beginning of the main program the HAL_Init() function is called to reset 
 all the peripherals, initialize the Flash interface and the systick.

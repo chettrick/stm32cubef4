@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    Templates/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.2
-  * @date    29-January-2016
+  * @version V1.0.3
+  * @date    06-May-2016
   * @brief   Description of the Templates example.
   ******************************************************************************
   *
@@ -38,7 +38,7 @@
 @par Example Description
 
 
-This projects provides a reference template that can be used to build any firmware application.
+This project provides a reference template that can be used to build any firmware application.
 
 This directory provides a reference template project that can be used to build any firmware application for
 STM32F411xE devices using STM32CubeF4 HAL and running on STM32F411E-DISCO board from STMicroelectronics. 

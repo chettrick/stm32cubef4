@@ -7,8 +7,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    LCD_DSI/LCD_DSI_ULPM_Data/readme.txt
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    29-January-2016
+  * @version V1.0.3
+  * @date    06-May-2016
   * @brief   Description of the LCD DSI enter and exit DSI ULPM Mode on data lane only example.
   ******************************************************************************
   *
@@ -39,7 +39,7 @@
 
 @par Example Description
 
-This example provides a description of how to use the embedded LCD DSI controller 
+This example describes how to use the embedded LCD DSI controller 
 (using IPs LTDC and DSI Host) to drive the KoD LCD mounted on board and manage entry and exit in 
 DSI ULPM mode on data lane only. In this mode, the DSI PHY state machine is entering a low power state
 on data lane and allows to save some power when the LCD does not need to display. 

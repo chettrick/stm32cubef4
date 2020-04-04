@@ -2,9 +2,9 @@
   ******************************************************************************
   * @file      startup_stm32f410cx.s
   * @author    MCD Application Team
-  * @version   V1.0.3
-  * @date      29-January-2016
-  * @brief     STM32F410Cx Devices vector table for Atollic TrueSTUDIO toolchain. 
+  * @version   V2.5.0
+  * @date      22-April-2015
+  * @brief     STM32F410Cx Devices vector table for GCC based toolchains. 
   *            This module performs:
   *                - Set the initial SP
   *                - Set the initial PC == Reset_Handler,

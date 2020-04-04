@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    SPI/SPI_FullDuplex_ComDMA/Inc/main.h 
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    29-January-2016
+  * @version V1.0.2
+  * @date    06-May-2016
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
@@ -75,6 +75,8 @@
 #define SPIx_RX_DMA_STREAM               DMA1_Stream3
 
 /* Definition for SPIx's NVIC */
+#define SPIx_IRQn                        SPI2_IRQn
+#define SPIx_IRQHandler                  SPI2_IRQHandler
 #define SPIx_DMA_TX_IRQn                 DMA1_Stream4_IRQn
 #define SPIx_DMA_RX_IRQn                 DMA1_Stream3_IRQn
 #define SPIx_DMA_TX_IRQHandler           DMA1_Stream4_IRQHandler

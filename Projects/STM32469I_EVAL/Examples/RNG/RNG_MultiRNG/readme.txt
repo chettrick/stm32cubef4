@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    RNG/RNG_MultiRNG/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    29-January-2016
+  * @version V1.0.4
+  * @date    06-May-2016
   * @brief   Description of multiple random numbers generation example.
   ******************************************************************************
   *
@@ -37,8 +37,8 @@
 
 @par Example Description 
 
-This example guides you through the HAL API different configuration steps 
-to ensure 32-bit long random numbers generation by RNG peripheral.
+This example guides you through the different configuration steps by mean of 
+HAL API to ensure RNG random 32bit numbers generation.
 
 At the beginning of the main program the HAL_Init() function is called to reset 
 all the peripherals, initialize the Flash interface and the systick.

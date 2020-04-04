@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    FSMC/FSMC_SRAM/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.2.5
-  * @date    29-January-2016
+  * @version V1.2.6
+  * @date    06-May-2016
   * @brief   This sample code shows how to use STM32F4xx FSMC HAL API to access 
   *          by read and write operation the SRAM external memory device.
   ******************************************************************************

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BSP/Src/camera.c
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    29-January-2016
+  * @version V1.0.4
+  * @date    06-May-2016
   * @brief   This example code shows how to use the camera feature in the
   *          stm32446e_eval driver
   ******************************************************************************

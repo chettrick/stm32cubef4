@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    CORTEXM/CORTEXM_ModePrivilege/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    29-January-2016
+  * @version V1.0.4
+  * @date    06-May-2016
   * @brief   Description of the Cortex-M4 Mode Privilege example.
   ******************************************************************************
   *
@@ -35,10 +35,10 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description 
-
-This example shows how to modify Thread mode privilege access and stack. Thread 
-mode is entered on Reset, and can be entered as a result of an exception return.  
+@par Example Description
+ 
+This example shows how to modify Cortex-M4 Thread mode privilege access and stack.
+Thread mode is entered on Reset, and can be entered as a result of an exception return.  
 
 The associated program is used to:
 

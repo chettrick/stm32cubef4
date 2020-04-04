@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    PWR/PWR_STANDBY/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.5
-  * @date    29-January-2016
+  * @version V1.2.6
+  * @date    06-May-2016
   * @brief   Description of the PWR Standby example.
   ******************************************************************************
   *
@@ -39,7 +39,7 @@
 
 
 This example shows how to enters the system to STANDBY mode and wake-up from this mode
-using: external RESET, RTC Alarm A or WKUP pin.
+using external RESET, RTC Alarm A or WKUP pin.
 
 In the associated software, the system clock is set to 168 MHz, an EXTI line
 is configured to generate an interrupt on falling edge and the SysTick is programmed

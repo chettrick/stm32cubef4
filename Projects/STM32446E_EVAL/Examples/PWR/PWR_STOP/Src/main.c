@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    PWR/PWR_STOP/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.3
-  * @date    29-January-2016
+  * @version V1.1.4
+  * @date    06-May-2016
   * @brief   This sample code shows how to use STM32F4xx PWR HAL API to enter
   *          and exit the stop mode with an EXTI.
   ******************************************************************************
@@ -80,12 +80,12 @@ int main(void)
 
   /* Configure LED1 */
   BSP_LED_Init(LED1);
-  
+
   while (1)
   {
     /* Turn LED1 ON LED */
     BSP_LED_On(LED1);
-    
+
     /* Insert 5 second delay */
     HAL_Delay(5000);
 
@@ -94,13 +94,18 @@ int main(void)
 
     /* Enable Power Control clock */
     __HAL_RCC_PWR_CLK_ENABLE();
-    
+
     /* Turn OFF LED */
     BSP_LED_Off(LED1);
-	
-      /* Enter Stop Mode */
+
+#ifdef STOP_MODE
+    /* Enter Stop Mode */
     HAL_PWR_EnterSTOPMode(PWR_LOWPOWERREGULATOR_ON, PWR_STOPENTRY_WFI);
-    
+#else
+    /* Enter in Under-Drive Stop Mode */
+    HAL_PWREx_EnterUnderDriveSTOPMode(PWR_LOWPOWERREGULATOR_ON, PWR_STOPENTRY_WFI);    
+#endif
+
     /* Configures system clock after wake-up from STOP */
     SystemClock_Config();
   }

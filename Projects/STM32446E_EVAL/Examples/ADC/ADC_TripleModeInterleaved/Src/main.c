@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    ADC/ADC_TripleModeInterleaved/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.3
-  * @date    29-January-2016
+  * @version V1.1.4
+  * @date    06-May-2016
   * @brief   This example provides a short description of how to use the ADC
   *          peripheral to convert a regular channel in Triple interleaved mode.
   ******************************************************************************

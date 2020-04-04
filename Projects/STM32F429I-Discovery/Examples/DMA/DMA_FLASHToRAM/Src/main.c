@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    DMA/DMA_FLASHToRAM/Src/main.c  
   * @author  MCD Application Team
-  * @version V1.2.5
-  * @date    29-January-2016 
+  * @version V1.2.6
+  * @date    06-May-2016 
   * @brief   This example provides a description of how to use a DMA channel 
   *          to transfer a word data buffer from FLASH memory to embedded 
   *          SRAM memory through the STM32F4xx HAL API.
@@ -122,7 +122,7 @@ int main(void)
   * @retval None
   */
 static void DMA_Config(void)
-{   
+{
   /*## -1- Enable DMA2 clock #################################################*/
   __HAL_RCC_DMA2_CLK_ENABLE();
 
@@ -139,15 +139,11 @@ static void DMA_Config(void)
   DmaHandle.Init.FIFOThreshold = DMA_FIFO_THRESHOLD_FULL;  
   DmaHandle.Init.MemBurst = DMA_MBURST_SINGLE;              /* Memory burst                     */  
   DmaHandle.Init.PeriphBurst = DMA_PBURST_SINGLE;           /* Peripheral burst                 */
-  
+
   /*##-3- Select the DMA instance to be used for the transfer : DMA2_Stream0 #*/
   DmaHandle.Instance = DMA_STREAM;
 
-  /*##-4- Select Callbacks functions called after Transfer complete and Transfer error */
-  DmaHandle.XferCpltCallback  = TransferComplete;
-  DmaHandle.XferErrorCallback = TransferError;
-  
-  /*##-5- Initialize the DMA stream ##########################################*/
+  /*##-4- Initialize the DMA stream ##########################################*/
   if(HAL_DMA_Init(&DmaHandle) != HAL_OK)
   {
     /* Turn LED3/LED4 on: in case of Initialization Error */
@@ -157,7 +153,11 @@ static void DMA_Config(void)
     {
     }
   }
-  
+ 
+  /*##-5- Select Callbacks functions called after Transfer complete and Transfer error */
+  HAL_DMA_RegisterCallback(&DmaHandle, HAL_DMA_XFER_CPLT_CB_ID, TransferComplete);
+  HAL_DMA_RegisterCallback(&DmaHandle, HAL_DMA_XFER_ERROR_CB_ID, TransferError);
+
   /*##-6- Configure NVIC for DMA transfer complete/error interrupts ##########*/
   HAL_NVIC_SetPriority(DMA_STREAM_IRQ, 0, 0);
   HAL_NVIC_EnableIRQ(DMA_STREAM_IRQ);

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32469i_eval_nor.h
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    12-January-2016
+  * @version V1.0.3
+  * @date    06-May-2016
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm32469i_eval_nor.c driver.
   ******************************************************************************

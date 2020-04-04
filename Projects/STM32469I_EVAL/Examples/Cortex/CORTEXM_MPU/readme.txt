@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    CORTEXM/CORTEXM_MPU/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    29-January-2016
+  * @version V1.0.4
+  * @date    06-May-2016
   * @brief   Description of the CortexM MPU example.
   ******************************************************************************
   *
@@ -37,9 +37,11 @@
 
 @par Example Description 
 
-This example presents the MPU features. The example purpose is to configure a 
-memory region as privileged read only region and tries to perform read and write 
-operation in different mode.
+This example presents the MPU features on STM32F4xx devices and it can be easily ported to any
+other STM32 device supporting MPU.
+
+The example purpose is to configure a memory region as privileged read only region and tries to
+perform read and write operation in different mode.
 
 If the access is permitted LED1 is toggling. If the access is not permitted, 
 a memory management fault is generated and LED3 is ON.

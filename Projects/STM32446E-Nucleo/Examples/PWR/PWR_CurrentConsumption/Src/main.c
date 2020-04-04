@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    PWR/PWR_CurrentConsumption/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    29-January-2016
+  * @version V1.0.3
+  * @date    06-May-2016
   * @brief   This example shows how to use STM32F4xx PWR HAL API to enter
   *          and exit the stop mode.
   ******************************************************************************
@@ -126,6 +126,7 @@ int main(void)
       - Wake-up using EXTI Line (User Button)
    */
   SleepMode_Measure();
+
 #elif defined (STOP_MODE)
   /* STOP Mode Entry 
       - RTC Clocked by LSI
@@ -136,6 +137,19 @@ int main(void)
       - Automatic Wake-up using RTC clocked by LSI (after ~20s)
    */
   StopMode_Measure();
+
+#elif defined (STOP_UNDERDRIVE_MODE)
+  /* Under-Drive STOP Mode Entry 
+      - RTC Clocked by LSI
+      - Regulator in LP mode
+      - Under drive feature enabled
+      - HSI, HSE OFF and LSI OFF if not used as RTC Clock source  
+      - No IWDG
+      - FLASH in deep power down mode
+      - Automatic Wake-up using RTC clocked by LSI (after ~20s)
+  */
+  StopUnderDriveMode_Measure();
+
 #elif defined (STANDBY_MODE)
   /* STANDBY Mode Entry 
       - Backup SRAM and RTC OFF

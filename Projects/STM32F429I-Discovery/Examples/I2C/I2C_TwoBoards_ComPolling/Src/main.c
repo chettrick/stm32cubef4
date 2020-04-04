@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    I2C/I2C_TwoBoards_ComPolling/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.2.5
-  * @date    29-January-2016 
+  * @version V1.2.6
+  * @date    06-May-2016 
   * @brief   This sample code shows how to use STM32F4xx I2C HAL API to transmit 
   *          and receive a data buffer with a communication process based on
   *          Polling transfer. 
@@ -92,7 +92,7 @@ int main(void)
   BSP_LED_Init(LED3);
   BSP_LED_Init(LED4);  
   
-  /* Configure the system clock to 168 MHz */
+  /* Configure the system clock to 180 MHz */
   SystemClock_Config();
   
   /*##-1- Configure the I2C peripheral #######################################*/

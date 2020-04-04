@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    DMA2D/DMA2D_MemToMemWithLCD/Inc/ARGB4444_150x150.h 
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    29-January-2016
+  * @version V1.0.4
+  * @date    06-May-2016
   * @brief   This file contains image used for Foreground texture copied by DMA2D and displayed by LTDC.     
   ******************************************************************************
   * @attention

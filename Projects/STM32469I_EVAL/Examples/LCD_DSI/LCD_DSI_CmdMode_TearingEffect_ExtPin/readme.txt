@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    LCD_DSI/LCD_DSI_CmdMode_TearingEffect_ExtPin/readme.txt
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    29-January-2016
+  * @version V1.0.4
+  * @date    06-May-2016
   * @brief   Description of the LCD DSI in command mode example.
   ******************************************************************************
   *
@@ -37,7 +37,7 @@
 
 @par Example Description
 
-This example provides a description of how to use the embedded LCD DSI controller 
+This example describes how to use the embedded LCD DSI controller 
 (using IPs LTDC and DSI Host) to drive the KoD LCD mounted on board.
 
 The goal of this example is to display a QVGA landscape (320x240) images on LCD glass

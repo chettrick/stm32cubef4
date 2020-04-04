@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    I2C/I2C_TwoBoards_ComDMA/Inc/main.h 
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    29-January-2016
+  * @version V1.0.3
+  * @date    06-May-2016
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
@@ -76,6 +76,12 @@
 #define I2Cx_DMA_RX_IRQn                DMA1_Stream0_IRQn
 #define I2Cx_DMA_TX_IRQHandler          DMA1_Stream6_IRQHandler
 #define I2Cx_DMA_RX_IRQHandler          DMA1_Stream0_IRQHandler
+
+/* Definition for I2Cx's NVIC */
+#define I2Cx_EV_IRQn                    I2C1_EV_IRQn
+#define I2Cx_EV_IRQHandler              I2C1_EV_IRQHandler
+#define I2Cx_ER_IRQn                    I2C1_ER_IRQn
+#define I2Cx_ER_IRQHandler              I2C1_ER_IRQHandler
 
 /* Size of Transmission buffer */
 #define TXBUFFERSIZE                      (COUNTOF(aTxBuffer) - 1)

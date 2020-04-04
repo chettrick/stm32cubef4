@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    system_stm32f4xx.c
   * @author  MCD Application Team
-  * @version V1.3.3
-  * @date    29-January-2016
+  * @version V1.3.4
+  * @date    06-May-2016
   * @brief   CMSIS Cortex-M4 Device Peripheral Access Layer System Source File.
   *             
   *   This file provides two functions and one global variable to be called from 
@@ -380,7 +380,7 @@ void SystemInit_ExtMemCtl(void)
 void SystemInit_ExtMemCtl(void)
 {
   register uint32_t tmpreg = 0, timeout = 0xFFFF;
-  register uint32_t index;
+  register __IO uint32_t index;
 
   /* Enable GPIOC, GPIOD, GPIOE, GPIOF, GPIOG, GPIOH and GPIOI interface 
       clock */

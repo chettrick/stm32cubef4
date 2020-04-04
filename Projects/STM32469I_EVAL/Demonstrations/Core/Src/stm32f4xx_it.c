@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f4xx_it.c
   * @author  MCD Application Team
-  * @version V1.1.2
-  * @date    29-January-2016
+  * @version V1.1.3
+  * @date    06-May-2016
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
@@ -157,10 +157,10 @@ void SysTick_Handler(void)
 }
 
 /******************************************************************************/
-/*                 STM32F7xx Peripherals Interrupt Handlers                   */
+/*                 STM32F4xx Peripherals Interrupt Handlers                   */
 /*  Add here the Interrupt Handler for the used peripheral(s) (PPP), for the  */
 /*  available peripheral interrupt handler's name please refer to the startup */
-/*  file (startup_stm32f7xx.s).                                               */
+/*  file (startup_stm32f4xx.s).                                               */
 /******************************************************************************/
 
 /**
@@ -222,17 +222,6 @@ void QUADSPI_IRQHandler(void)
 {
   HAL_QSPI_IRQHandler(&QSPIHandle);
 }
-
-    /**
-  * @brief  This function handles DSI Handler.
-  * @param  None
-  * @retval None
-  */
-void DSI_IRQHandler(void)
-{
-  HAL_DSI_IRQHandler(&hdsi_eval);
-}
-
 
 /**
   * @brief  This function handles Ethernet interrupt request.

@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    ADC/ADC_RegularConversion_Interrupt/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    29-January-2016
+  * @version V1.0.4
+  * @date    06-May-2016
   * @brief   Description of the ADC RegularConversion interrupt example.
   ******************************************************************************
   *
@@ -35,9 +35,9 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description 
-
-This example describes how to use the ADC3 with channel ADC_CHANNEL_10 in interrupt mode to convert data.
+@par Example Description
+ 
+This example describes how to use the ADC in interrupt mode to convert data through the HAL API.
 
 The ADC3 is configured to convert continuously ADC_CHANNEL_10.
 

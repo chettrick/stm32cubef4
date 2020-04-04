@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    ADC/ADC_RegularConversion_Polling/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    29-January-2016
+  * @version V1.0.4
+  * @date    06-May-2016
   * @brief   Description of the ADC RegularConversion Polling example.
   ******************************************************************************
   *
@@ -37,7 +37,7 @@
 
 @par Example Description 
 
-This example describes how to use the ADC3 with channel ADC_CHANNEL_10 in Polling mode to convert data.
+This example describes how to use the ADC in Polling mode to convert data through the HAL API.
 
 When the end of conversion occurs, the converted data of ADC3 DR register is 
 affected to the uhADCxConvertedValue variable.

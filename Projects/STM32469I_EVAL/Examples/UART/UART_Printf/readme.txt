@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    UART/UART_Printf/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    29-January-2016
+  * @version V1.0.4
+  * @date    06-May-2016
   * @brief   Description of the UART Printf example.
   ******************************************************************************
   *
@@ -37,6 +37,9 @@
 
 @par Example Description 
 
+This example shows how to reroute the C library printf function to the UART. It 
+outputs a message sent by the UART on the HyperTerminal.
+
 Board: STM32469I-EVAL
 Tx Pin: PA.09
 Rx Pin: PA.10
@@ -57,8 +60,6 @@ Rx Pin: PA.10
   |                         |                      
   |_STM32_Board_____________|                      
 
-This example shows how to retarget the C library printf function to the UART. 
-This implementation output the printf message on the Hyperterminal using USART1.
 
 The USART is configured as follows:
     - BaudRate = 9600 baud  

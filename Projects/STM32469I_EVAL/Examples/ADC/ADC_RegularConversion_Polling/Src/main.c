@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    ADC/ADC_RegularConversion_Polling/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    29-January-2016
+  * @version V1.0.4
+  * @date    06-May-2016
   * @brief   This example describes how to use Polling mode to convert data.
   ******************************************************************************
   * @attention

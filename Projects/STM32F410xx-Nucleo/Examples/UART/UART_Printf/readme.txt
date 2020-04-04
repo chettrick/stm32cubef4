@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    UART/UART_Printf/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    29-January-2016
+  * @version V1.0.4
+  * @date    06-May-2016
   * @brief   Description of the UART Printf example.
   ******************************************************************************
   *
@@ -36,6 +36,9 @@
   @endverbatim
 
 @par Example Description                  
+
+This example shows how to reroute the C library printf function to the UART. It 
+outputs a message sent by the UART on the HyperTerminal.
 
 The STM32 Nucleo boards integrate the ST-LINK/V2.1 interfacing with the PC and 
 offering the following capabilities:

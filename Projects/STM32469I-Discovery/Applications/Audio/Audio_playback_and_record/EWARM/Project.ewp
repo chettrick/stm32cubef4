@@ -964,6 +964,12 @@
   <group>
     <name>Application</name>
     <group>
+      <name>EWARM</name>
+      <file>
+        <name>$PROJ_DIR$\startup_stm32f469xx.s</name>
+      </file>
+    </group>
+    <group>
       <name>User</name>
       <file>
         <name>$PROJ_DIR$\..\Src\explorer.c</name>
@@ -1126,15 +1132,6 @@
       </file>
       <file>
         <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_usb.c</name>
-      </file>
-    </group>
-  </group>
-  <group>
-    <name>Example</name>
-    <group>
-      <name>EWARM</name>
-      <file>
-        <name>$PROJ_DIR$\startup_stm32f469xx.s</name>
       </file>
     </group>
   </group>

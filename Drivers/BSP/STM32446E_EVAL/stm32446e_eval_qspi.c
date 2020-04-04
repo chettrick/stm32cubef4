@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32446e_eval_qspi.c
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    13-January-2016
+  * @version V1.1.2
+  * @date    06-May-2016
   * @brief   This file includes a standard driver for the N25Q256A QSPI 
   *          memory mounted on STM32446E-EVAL board.
   @verbatim

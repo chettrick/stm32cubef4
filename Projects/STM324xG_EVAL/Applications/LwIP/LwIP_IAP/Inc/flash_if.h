@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LwIP/LwIP_IAP/Inc/flash_if.h 
   * @author  MCD Application Team
-  * @version V1.3.3
-  * @date    29-January-2016
+  * @version V1.3.4
+  * @date    06-May-2016
   * @brief   Header for flash_if.c module
   ******************************************************************************
   * @attention

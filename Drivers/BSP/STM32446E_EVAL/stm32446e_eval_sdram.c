@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32446e_eval_sdram.c
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    13-January-2016
+  * @version V1.1.2
+  * @date    06-May-2016
   * @brief   This file includes the SDRAM driver for the MT48LC4M32B2B5-7 memory 
   *          device mounted on STM32446E-EVAL evaluation board.
   ******************************************************************************

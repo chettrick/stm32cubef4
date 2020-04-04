@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    I2C/I2C_TwoBoards_RestartAdvComIT/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    29-January-2016
+  * @version V1.0.2
+  * @date    06-May-2016
   * @brief   This sample code shows how to use STM32F4xx I2C HAL API to transmit
   *          and receive a data buffer with a communication process based on
   *          IT transfer and with a repeated start condition between the transmit
@@ -60,7 +60,9 @@
 /* Private define ------------------------------------------------------------*/
 /* Uncomment this line to use the board as master, if not it is used as slave */
 #define MASTER_BOARD
-#define I2C_ADDRESS        0x3C
+#define I2C_ADDRESS        0x3C  /* Real 7 bits slave address value in Datasheet is: b0011110
+                                    mean in uint8_t equivalent at 0x1E and this value can be
+                                    seen in the OAR1 register in bits ADD[1:7] */
 
 /**
   * @brief Defines related to Slave process

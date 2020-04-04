@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BSP/Inc/lcd_log_conf.h
   * @author  MCD Application Team
-  * @version V1.1.3
-  * @date    29-January-2016
+  * @version V1.1.4
+  * @date    06-May-2016
   * @brief   lcd_log configuration template file.
   *          This file should be copied to the application folder and modified 
   *          as follows:

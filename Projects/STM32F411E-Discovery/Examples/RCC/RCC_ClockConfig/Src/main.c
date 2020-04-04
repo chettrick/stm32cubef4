@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    RCC/RCC_ClockConfig/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    29-January-2016
+  * @version V1.0.2
+  * @date    06-May-2016
   * @brief   This example describes how to use the RCC HAL API to configure the
   *          system clock (SYSCLK) and modify the clock settings on run time.
   ******************************************************************************

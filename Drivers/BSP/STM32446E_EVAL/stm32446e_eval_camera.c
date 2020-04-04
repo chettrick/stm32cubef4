@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32446e_eval_camera.c
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    13-January-2016
+  * @version V1.1.2
+  * @date    06-May-2016
   * @brief   This file includes the driver for Camera modules mounted on
   *          STM32446E-EVAL evaluation board.
   ******************************************************************************
@@ -236,11 +236,8 @@ void BSP_CAMERA_SnapshotStart(uint8_t *buff)
   */
 void BSP_CAMERA_Suspend(void) 
 {
-  /* Disable the DMA */
-  __HAL_DMA_DISABLE(hDcmiEval.DMA_Handle);
-  /* Disable the DCMI */
-  __HAL_DCMI_DISABLE(&hDcmiEval);
-  
+  /* Suspend the Camera Capture */
+  HAL_DCMI_Suspend(&hDcmiEval);
 }
 
 /**
@@ -248,10 +245,8 @@ void BSP_CAMERA_Suspend(void)
   */
 void BSP_CAMERA_Resume(void) 
 {
-  /* Enable the DCMI */
-  __HAL_DCMI_ENABLE(&hDcmiEval);
-  /* Enable the DMA */
-  __HAL_DMA_ENABLE(hDcmiEval.DMA_Handle);
+  /* Start the Camera Capture */
+  HAL_DCMI_Resume(&hDcmiEval);
 }
 
 /**

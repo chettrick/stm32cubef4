@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    TIM/TIM_DMABurst/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    29-January-2016
+  * @version V1.0.4
+  * @date    06-May-2016
   * @brief   Description of the TIM DMA Burst example.
   ******************************************************************************
   *
@@ -37,8 +37,8 @@
 
 @par Example Description 
 
-This example shows how to update the TIMER channel1 period and the duty cycle 
-using the TIMER DMA burst feature.
+This example shows how to update the TIM1 channel1 period and the duty cycle 
+using the TIM1 DMA burst feature.
 
 Every update DMA request, the DMA will do 3 transfers of half words into Timer 
 registers beginning from ARR register.

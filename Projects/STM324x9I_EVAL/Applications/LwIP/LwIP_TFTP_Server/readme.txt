@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    LwIP/LwIP_TFTP_Server/readme.txt
   * @author  MCD Application Team
-  * @version V1.4.3
-  * @date    29-January-2016
+  * @version V1.4.4
+  * @date    06-May-2016
   * @brief   Description of the tftp server demonstration.
   ******************************************************************************
   * @attention
@@ -28,12 +28,12 @@
   ******************************************************************************
    @endverbatim
 
-@par Description
+@par Application Description
 
 This application guides STM32Cube HAL API users to run a tftp server demonstration
 for STM32F4xx devices.
 
-User hs to use a PC SW tool (ex. TFTPD32) to send/receive data to/from micro SD 
+User has to use a PC SW tool (ex. TFTPD32) to send/receive data to/from micro SD 
 card installed in STM324x9I-EVAL board 
 
 If the LCD is used (#define USE_LCD in main.h), log messages will be displayed 

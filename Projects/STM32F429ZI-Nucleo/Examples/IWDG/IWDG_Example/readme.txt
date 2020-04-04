@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    IWDG/IWDG_Example/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    29-January-2016
+  * @version V1.0.2
+  * @date    06-May-2016
   * @brief   Description of the Independent Watchdog example.
   ******************************************************************************
   *
@@ -37,8 +37,9 @@
 
 @par Example Description 
 
-This example describes how to reload the IWDG counter and to simulate a software 
-fault by generating an MCU IWDG reset when a programmed time period has elapsed.
+This example guides you through the different configuration steps by mean of HAL API to ensure
+IWDG reload counter and simulate a software fault generating an MCU IWDG reset on expiry of a
+programmed time period.
 
 At the beginning of the main program the HAL_Init() function is called to reset 
 all the peripherals, initialize the Flash interface and the systick.

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    system_stm32f4xx.c
   * @author  MCD Application Team
-  * @version V1.2.5
-  * @date    29-January-2016
+  * @version V1.2.6
+  * @date    06-May-2016
   * @brief   CMSIS Cortex-M4 Device Peripheral Access Layer System Source File.
   *
   *   This file provides two functions and one global variable to be called from 
@@ -302,7 +302,7 @@ void SystemInit_ExtMemCtl(void)
   __IO uint32_t tmp = 0x00;
 
   register uint32_t tmpreg = 0, timeout = 0xFFFF;
-  register uint32_t index;
+  register __IO uint32_t index;
 
   /* Enable GPIOC, GPIOD, GPIOE, GPIOF, GPIOG, GPIOH and GPIOI interface clock */
   RCC->AHB1ENR |= 0x000001F8;
@@ -467,7 +467,7 @@ void SystemInit_ExtMemCtl(void)
  || defined(STM32F446xx) || defined(STM32F469xx) || defined(STM32F479xx)
 #if defined (DATA_IN_ExtSDRAM)
   register uint32_t tmpreg = 0, timeout = 0xFFFF;
-  register uint32_t index;
+  register __IO uint32_t index;
 
 #if defined(STM32F446xx)
   /* Enable GPIOA, GPIOC, GPIOD, GPIOE, GPIOF, GPIOG interface

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    CEC/CEC_ListenMode/Inc/main.h 
   * @author  MCD Application Team
-  * @version V1.1.3
-  * @date    29-January-2016
+  * @version V1.1.4
+  * @date    06-May-2016
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
@@ -55,9 +55,6 @@
 /* Uncomment the line below if you use the CEC peripheral as Spy Device    */ 
 #define DEVICE_3  
 
-#define DEVICE_ADDRESS_1               0x01  /* CEC device 1 address   */
-#define DEVICE_ADDRESS_2               0x03  /* CEC device 2 address   */
-#define DEVICE_ADDRESS_3               0x04  /* CEC spy device address   */
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 

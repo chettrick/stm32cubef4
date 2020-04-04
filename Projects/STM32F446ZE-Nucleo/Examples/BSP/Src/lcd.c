@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BSP/Src/lcd.c 
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    29-January-2016
+  * @version V1.0.2
+  * @date    06-May-2016
   * @brief   This example code shows how to use LCD drawing features.
   ******************************************************************************
   * @attention

@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    DMA2D/DMA2D_MemToMemWithPFC/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    29-January-2016
+  * @version V1.0.4
+  * @date    06-May-2016
   * @brief   Description of the DMA2D Memory to Memory with PFC example.
   ******************************************************************************
   * @attention
@@ -41,7 +41,7 @@
 @par Example Description
 
   This example provides a description of how to configure DMA2D peripheral for transfer 
-  in Memory_to_Memory with Pixel Format Conversion (PFC) Mode.
+  in Memory_to_Memory with pixel format conversion transfer mode.
 
   At the beginning of the main program the HAL_Init() function is called to reset 
   all the peripherals, initialize the Flash interface and the systick.

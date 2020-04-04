@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Templates/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.3.3
-  * @date    29-January-2016 
+  * @version V1.3.4
+  * @date    06-May-2016 
   * @brief   HAL MSP module.
   *         
   @verbatim

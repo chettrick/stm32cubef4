@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f429i_discovery_lcd.c
   * @author  MCD Application Team
-  * @version V2.1.3
-  * @date    13-January-2016
+  * @version V2.1.4
+  * @date    06-May-2016
   * @brief   This file includes the LCD driver for ILI9341 Liquid Crystal 
   *          Display Modules of STM32F429I-Discovery kit (MB1075).
   ******************************************************************************
@@ -122,7 +122,7 @@
 /** @defgroup STM32F429I_DISCOVERY_LCD_Private_Variables STM32F429I DISCOVERY LCD Private Variables
   * @{
   */ 
-static LTDC_HandleTypeDef  LtdcHandler;
+LTDC_HandleTypeDef  LtdcHandler;
 static DMA2D_HandleTypeDef Dma2dHandler;
 static RCC_PeriphCLKInitTypeDef  PeriphClkInitStruct;
 
@@ -312,7 +312,29 @@ void BSP_LCD_SetLayerVisible(uint32_t LayerIndex, FunctionalState state)
     __HAL_LTDC_LAYER_DISABLE(&LtdcHandler, LayerIndex);
   }
   __HAL_LTDC_RELOAD_CONFIG(&LtdcHandler);
-} 
+}
+
+/**
+  * @brief  Sets an LCD Layer visible without reloading.
+  * @param  LayerIndex: Visible Layer
+  * @param  State: New state of the specified layer
+  *          This parameter can be one of the following values:
+  *            @arg  ENABLE
+  *            @arg  DISABLE 
+  * @retval None
+  */
+void BSP_LCD_SetLayerVisible_NoReload(uint32_t LayerIndex, FunctionalState State)
+{
+  if(State == ENABLE)
+  {
+    __HAL_LTDC_LAYER_ENABLE(&LtdcHandler, LayerIndex);
+  }
+  else
+  {
+    __HAL_LTDC_LAYER_DISABLE(&LtdcHandler, LayerIndex);
+  }
+  /* Do not Sets the Reload  */
+}
 
 /**
   * @brief  Configures the Transparency.
@@ -326,6 +348,18 @@ void BSP_LCD_SetTransparency(uint32_t LayerIndex, uint8_t Transparency)
 }
 
 /**
+  * @brief  Configures the transparency without reloading.
+  * @param  LayerIndex: Layer foreground or background.
+  * @param  Transparency: Transparency
+  *           This parameter must be a number between Min_Data = 0x00 and Max_Data = 0xFF 
+  * @retval None
+  */
+void BSP_LCD_SetTransparency_NoReload(uint32_t LayerIndex, uint8_t Transparency)
+{    
+  HAL_LTDC_SetAlpha_NoReload(&LtdcHandler, Transparency, LayerIndex);
+}
+
+/**
   * @brief  Sets a LCD layer frame buffer address.
   * @param  LayerIndex: specifies the Layer foreground or background
   * @param  Address: new LCD frame buffer value      
@@ -333,6 +367,17 @@ void BSP_LCD_SetTransparency(uint32_t LayerIndex, uint8_t Transparency)
 void BSP_LCD_SetLayerAddress(uint32_t LayerIndex, uint32_t Address)
 {     
   HAL_LTDC_SetAddress(&LtdcHandler, Address, LayerIndex);
+}
+
+/**
+  * @brief  Sets an LCD layer frame buffer address without reloading.
+  * @param  LayerIndex: Layer foreground or background
+  * @param  Address: New LCD frame buffer value      
+  * @retval None
+  */
+void BSP_LCD_SetLayerAddress_NoReload(uint32_t LayerIndex, uint32_t Address)
+{
+  HAL_LTDC_SetAddress_NoReload(&LtdcHandler, Address, LayerIndex);
 }
 
 /**
@@ -353,6 +398,24 @@ void BSP_LCD_SetLayerWindow(uint16_t LayerIndex, uint16_t Xpos, uint16_t Ypos, u
 }
 
 /**
+  * @brief  Sets display window without reloading.
+  * @param  LayerIndex: Layer index
+  * @param  Xpos: LCD X position
+  * @param  Ypos: LCD Y position
+  * @param  Width: LCD window width
+  * @param  Height: LCD window height  
+  * @retval None
+  */
+void BSP_LCD_SetLayerWindow_NoReload(uint16_t LayerIndex, uint16_t Xpos, uint16_t Ypos, uint16_t Width, uint16_t Height)
+{
+  /* Reconfigure the layer size */
+  HAL_LTDC_SetWindowSize_NoReload(&LtdcHandler, Width, Height, LayerIndex);
+  
+  /* Reconfigure the layer position */
+  HAL_LTDC_SetWindowPosition_NoReload(&LtdcHandler, Xpos, Ypos, LayerIndex); 
+}
+
+/**
   * @brief  Configures and sets the color Keying.
   * @param  LayerIndex: the Layer foreground or background
   * @param  RGBValue: the Color reference
@@ -365,6 +428,19 @@ void BSP_LCD_SetColorKeying(uint32_t LayerIndex, uint32_t RGBValue)
 }
 
 /**
+  * @brief  Configures and sets the color keying without reloading.
+  * @param  LayerIndex: Layer foreground or background
+  * @param  RGBValue: Color reference
+  * @retval None
+  */
+void BSP_LCD_SetColorKeying_NoReload(uint32_t LayerIndex, uint32_t RGBValue)
+{  
+  /* Configure and Enable the color Keying for LCD Layer */
+  HAL_LTDC_ConfigColorKeying_NoReload(&LtdcHandler, RGBValue, LayerIndex);
+  HAL_LTDC_EnableColorKeying_NoReload(&LtdcHandler, LayerIndex);
+}
+
+/**
   * @brief  Disables the color Keying.
   * @param  LayerIndex: the Layer foreground or background
   */
@@ -372,6 +448,29 @@ void BSP_LCD_ResetColorKeying(uint32_t LayerIndex)
 {
   /* Disable the color Keying for LCD Layer */
   HAL_LTDC_DisableColorKeying(&LtdcHandler, LayerIndex);
+}
+
+/**
+  * @brief  Disables the color keying without reloading.
+  * @param  LayerIndex: Layer foreground or background
+  * @retval None
+  */
+void BSP_LCD_ResetColorKeying_NoReload(uint32_t LayerIndex)
+{   
+  /* Disable the color Keying for LCD Layer */
+  HAL_LTDC_DisableColorKeying_NoReload(&LtdcHandler, LayerIndex);
+}
+
+/**
+  * @brief  Disables the color keying without reloading.
+  * @param  ReloadType: can be one of the following values
+  *         - LCD_RELOAD_IMMEDIATE
+  *         - LCD_RELOAD_VERTICAL_BLANKING
+  * @retval None
+  */
+void BSP_LCD_Relaod(uint32_t ReloadType)
+{
+  HAL_LTDC_Relaod (&LtdcHandler, ReloadType);
 }
 
 /**

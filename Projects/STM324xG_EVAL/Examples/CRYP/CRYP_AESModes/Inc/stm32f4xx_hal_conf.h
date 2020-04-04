@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    CRYP/CRYP_AESModes/Inc/stm32f4xx_hal_conf.h
   * @author  MCD Application Team
-  * @version V1.2.5
-  * @date    29-January-2016
+  * @version V1.2.6
+  * @date    06-May-2016
   * @brief   HAL configuration file.
   ******************************************************************************
   * @attention
@@ -226,8 +226,17 @@
 #define PHY_MICR_INT_EN                 ((uint16_t)0x0002)  /*!< PHY Enable interrupts                           */
 #define PHY_MICR_INT_OE                 ((uint16_t)0x0001)  /*!< PHY Enable output interrupt events              */
 
-#define PHY_MISR_LINK_INT_EN            ((uint16_t)0x0020)  /*!< Enable Interrupt on change of link status       */
-#define PHY_LINK_INTERRUPT              ((uint16_t)0x2000)  /*!< PHY link status interrupt mask                  */
+#define PHY_MISR_LINK_INT_EN            ((uint16_t)0x0020U)  /*!< Enable Interrupt on change of link status       */
+#define PHY_LINK_INTERRUPT              ((uint16_t)0x2000U)  /*!< PHY link status interrupt mask                  */
+
+/* ################## SPI peripheral configuration ########################## */
+
+/* CRC FEATURE: Use to activate CRC feature inside HAL SPI Driver
+* Activated: CRC code is present inside driver
+* Deactivated: CRC code cleaned from driver
+*/
+
+#define USE_SPI_CRC                     1U
 
 /* Includes ------------------------------------------------------------------*/
 /**

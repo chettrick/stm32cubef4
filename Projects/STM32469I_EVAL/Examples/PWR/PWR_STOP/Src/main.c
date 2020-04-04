@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    PWR/PWR_STOP/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    29-January-2016
+  * @version V1.0.4
+  * @date    06-May-2016
   * @brief   This sample code shows how to use STM32F4xx PWR HAL API to enter
   *          and exit the stop mode with an EXTI.
   ******************************************************************************
@@ -99,8 +99,13 @@ int main(void)
     /* Tamper push-button (lines 15 to 10) will be used to wakeup the system from STOP mode */
     BSP_PB_Init(BUTTON_TAMPER, BUTTON_MODE_EXTI);
 
+#ifdef STOP_MODE
     /* Enter Stop Mode */
     HAL_PWR_EnterSTOPMode(PWR_LOWPOWERREGULATOR_ON, PWR_STOPENTRY_WFI);
+#else
+    /* Enter in Under-Drive Stop Mode */
+    HAL_PWREx_EnterUnderDriveSTOPMode(PWR_LOWPOWERREGULATOR_ON, PWR_STOPENTRY_WFI);    
+#endif
 
     /* Configures system clock after wake-up from STOP */
     SystemClock_Config();

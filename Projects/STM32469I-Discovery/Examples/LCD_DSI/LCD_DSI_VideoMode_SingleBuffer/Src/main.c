@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LCD_DSI/LCD_DSI_VideoMode_SingleBuffer/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    29-January-2016
+  * @version V1.0.3
+  * @date    06-May-2016
   * @brief   This example describes how to configure and use LCD DSI to display an image
   *          of size WVGA in mode landscape (800x480) using the STM32F4xx HAL API and BSP.
   ******************************************************************************
@@ -260,7 +260,7 @@ static void CopyBuffer(uint32_t *pSrc, uint32_t *pDst, uint16_t x, uint16_t y, u
   /*##-3- Foreground Configuration ###########################################*/
   hdma2d.LayerCfg[1].AlphaMode = DMA2D_NO_MODIF_ALPHA;
   hdma2d.LayerCfg[1].InputAlpha = 0xFF;
-  hdma2d.LayerCfg[1].InputColorMode = CM_ARGB8888;
+  hdma2d.LayerCfg[1].InputColorMode = DMA2D_INPUT_ARGB8888;
   hdma2d.LayerCfg[1].InputOffset = 0;
 
   hdma2d.Instance          = DMA2D; 

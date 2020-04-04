@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    DAC/DAC_SimpleConversion/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    29-January-2016
+  * @version V1.0.4
+  * @date    06-May-2016
   * @brief   Description of the DAC Simple Conversion example.
   ******************************************************************************
   *
@@ -36,6 +36,9 @@
   @endverbatim
 
 @par Example Description 
+
+This example provides a short description of how to use the DAC peripheral to 
+do a simple conversion.
 
 - Test description:
 This example provides a short description of how to use the DAC peripheral to 

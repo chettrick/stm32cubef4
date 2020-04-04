@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    DCMI/DCMI_SnapshotMode/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    29-January-2016
+  * @version V1.0.4
+  * @date    06-May-2016
   * @brief   Description of the STM32F4xx DCMI_SnapshotMode example.
   ******************************************************************************
   * @attention
@@ -41,7 +41,9 @@
 @par Example Description 
 
 This example provides a short description of how to use the DCMI to interface with
-a camera module, capture a single image in Camera Frame Buffer (320x240 in RGB565) 
+a camera module and display in snapshot mode the picture on LCD.
+
+This example captures a single image in Camera Frame Buffer (320x240 in RGB565) 
 and once full frame camera is captured display it on the LCD in ARGB8888 format.
 
 At the beginning of the main program the HAL_Init() function is called to reset 

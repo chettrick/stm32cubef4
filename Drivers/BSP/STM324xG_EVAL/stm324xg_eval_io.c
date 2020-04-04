@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324xg_eval_io.c
   * @author  MCD Application Team
-  * @version V2.2.1
-  * @date    15-January-2016
+  * @version V2.2.2
+  * @date    22-April-2016
   * @brief   This file provides a set of functions needed to manage the IO pins
   *          on STM324xG-EVAL evaluation board.
   ******************************************************************************

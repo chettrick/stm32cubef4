@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32446e_eval.c
   * @author  MCD Application Team
-  * @version V1.1.1
-  * @date    13-January-2016
+  * @version V1.1.2
+  * @date    06-May-2016
   * @brief   This file provides a set of firmware functions to manage LEDs, 
   *          push-buttons and COM ports available on STM32446E-EVAL evaluation
   *          board(MB1045) RevB from STMicroelectronics.
@@ -35,8 +35,8 @@
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
-  */ 
-  
+  */
+
 /* File Info: ------------------------------------------------------------------
                                    User NOTE
 
@@ -78,21 +78,22 @@ typedef struct
 /** @defgroup STM32446E_EVAL_LOW_LEVEL_Private_Defines STM32446E EVAL LOW LEVEL Private Defines
   * @{
   */
+
 /**
- * @brief STM32446E EVAL BSP Driver version number V1.1.1
-   */
+  * @brief STM32446E EVAL BSP Driver version number V1.1.2
+  */
 #define __STM32446E_EVAL_BSP_VERSION_MAIN   (0x01) /*!< [31:24] main version */
 #define __STM32446E_EVAL_BSP_VERSION_SUB1   (0x01) /*!< [23:16] sub1 version */
-#define __STM32446E_EVAL_BSP_VERSION_SUB2   (0x01) /*!< [15:8]  sub2 version */
+#define __STM32446E_EVAL_BSP_VERSION_SUB2   (0x02) /*!< [15:8]  sub2 version */
 #define __STM32446E_EVAL_BSP_VERSION_RC     (0x00) /*!< [7:0]  release candidate */
 #define __STM32446E_EVAL_BSP_VERSION         ((__STM32446E_EVAL_BSP_VERSION_MAIN << 24)\
                                              |(__STM32446E_EVAL_BSP_VERSION_SUB1 << 16)\
                                              |(__STM32446E_EVAL_BSP_VERSION_SUB2 << 8 )\
                                              |(__STM32446E_EVAL_BSP_VERSION_RC))
-											                                    
-/* compared to F4xG we use BANK1 rather then BANK3 since we use FMC_NE1 signal (not FMC_NE3) */																				
-#define FMC_BANK1_BASE  ((uint32_t)(0x60000000 | 0x00000000))  
-#define FMC_BANK3_BASE  ((uint32_t)(0x60000000 | 0x08000000))  
+
+/* Compared to F4xG we use BANK1 rather then BANK3 since we use FMC_NE1 signal (not FMC_NE3) */
+#define FMC_BANK1_BASE  ((uint32_t)(0x60000000 | 0x00000000))
+#define FMC_BANK3_BASE  ((uint32_t)(0x60000000 | 0x08000000))
 #define FMC_BANK1       ((LCD_CONTROLLER_TypeDef *) FMC_BANK1_BASE)
 
 /**
@@ -189,9 +190,10 @@ void            MFX_IO_EnableWakeupPin(void);
 
 /* LCD IO functions */
 void            LCD_IO_Init(void);
-void            LCD_IO_WriteData(uint16_t RegValue);
+void            LCD_IO_WriteData(uint16_t Data); 
+void            LCD_IO_WriteMultipleData(uint8_t *pData, uint32_t Size);
 void            LCD_IO_WriteReg(uint8_t Reg);
-uint16_t        LCD_IO_ReadData(void);
+uint16_t        LCD_IO_ReadData(uint16_t Reg);
 
 /* AUDIO IO functions */
 void            AUDIO_IO_Init(void);
@@ -281,7 +283,6 @@ void BSP_LED_Init(Led_TypeDef Led)
   }
 #endif /* !USE_STM32446E_EVAL_REVA */
 }
-
 
 /**
   * @brief  DeInit LEDs.
@@ -504,7 +505,6 @@ void BSP_PB_DeInit(Button_TypeDef Button)
     HAL_GPIO_DeInit(BUTTON_PORT[Button], gpio_init_structure.Pin);
 }
 
-
 /**
   * @brief  Returns the selected button state.
   * @param  Button: Button to be checked
@@ -587,7 +587,6 @@ void BSP_COM_DeInit(COM_TypeDef COM, UART_HandleTypeDef *huart)
 }
 
 #if defined(USE_IOEXPANDER)
-
 /**
   * @brief  Configures joystick GPIO and EXTI modes.
   * @param  JoyMode: Button mode.
@@ -678,7 +677,6 @@ JOYState_TypeDef BSP_JOY_GetState(void)
 }
 
 #endif /* USE_IOEXPANDER */
-
 
 /*******************************************************************************
                             BUS OPERATIONS
@@ -1100,12 +1098,31 @@ void LCD_IO_Init(void)
 
 /**
   * @brief  Writes data on LCD data register.
-  * @param  RegValue: Data to be written
+  * @param  Data: Data to be written
   */
-void LCD_IO_WriteData(uint16_t RegValue) 
+void LCD_IO_WriteData(uint16_t Data) 
 {
   /* Write 16-bit Reg */
-  FMC_BANK1_WriteData(RegValue);
+  FMC_BANK1_WriteData(Data);
+}
+
+/**
+  * @brief  Writes multiple data on LCD data register..
+  * @param  pData Pointer on the register value
+  * @param  Size Size of byte to transmit to the register
+  * @retval None
+  */
+void LCD_IO_WriteMultipleData(uint8_t *pData, uint32_t Size)
+{
+  uint32_t counter;
+  uint16_t *ptr = (uint16_t *) pData;
+  
+  for (counter = 0; counter < Size; counter+=2)
+  {  
+    /* Write 16-bit Reg */
+    FMC_BANK1_WriteData(*ptr);
+    ptr++;
+  }
 }
 
 /**
@@ -1120,10 +1137,14 @@ void LCD_IO_WriteReg(uint8_t Reg)
 
 /**
   * @brief  Reads data from LCD data register.
+  * @param  Reg: Register to be read
   * @retval Read data.
   */
-uint16_t LCD_IO_ReadData(void) 
+uint16_t LCD_IO_ReadData(uint16_t Reg)
 {
+  FMC_BANK1_WriteReg(Reg);
+  
+  /* Read 16-bit Reg */  
   return FMC_BANK1_ReadData();
 }
 
@@ -1142,7 +1163,6 @@ void AUDIO_IO_Init(void)
   */
 void AUDIO_IO_DeInit(void)
 {
-
 }
 
 /**
@@ -1291,8 +1311,6 @@ HAL_StatusTypeDef EEPROM_IO_IsDeviceReady(uint16_t DevAddress, uint32_t Trials)
   return (I2Cx_IsDeviceReady(DevAddress, Trials));
 }
 
-
-
 /**
   * @}
   */
@@ -1307,6 +1325,6 @@ HAL_StatusTypeDef EEPROM_IO_IsDeviceReady(uint16_t DevAddress, uint32_t Trials)
 
 /**
   * @}
-  */    
-    
+  */
+
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

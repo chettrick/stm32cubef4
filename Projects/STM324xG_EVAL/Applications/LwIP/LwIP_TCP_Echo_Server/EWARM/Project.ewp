@@ -310,7 +310,6 @@
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM324xG_EVAL</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\include\</state>
-          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\include\ipv4</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\system</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Utilities</state>
         </option>
@@ -1093,6 +1092,9 @@
           <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\api\netifapi.c</name>
         </file>
         <file>
+          <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\api\pppapi.c</name>
+        </file>
+        <file>
           <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\api\sockets.c</name>
         </file>
         <file>
@@ -1107,22 +1109,19 @@
             <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\core\ipv4\autoip.c</name>
           </file>
           <file>
+            <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\core\ipv4\dhcp.c</name>
+          </file>
+          <file>
             <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\core\ipv4\icmp.c</name>
           </file>
           <file>
             <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\core\ipv4\igmp.c</name>
           </file>
           <file>
-            <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\core\ipv4\inet.c</name>
+            <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\core\ipv4\ip4.c</name>
           </file>
           <file>
-            <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\core\ipv4\inet_chksum.c</name>
-          </file>
-          <file>
-            <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\core\ipv4\ip.c</name>
-          </file>
-          <file>
-            <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\core\ipv4\ip_addr.c</name>
+            <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\core\ipv4\ip4_addr.c</name>
           </file>
           <file>
             <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\core\ipv4\ip_frag.c</name>
@@ -1132,10 +1131,10 @@
           <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\core\def.c</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\core\dhcp.c</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\core\dns.c</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\core\dns.c</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\core\inet_chksum.c</name>
         </file>
         <file>
           <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\core\init.c</name>

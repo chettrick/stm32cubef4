@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    FLASH/FLASH_EraseProgram/readme.txt
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    29-January-2016
+  * @version V1.0.4
+  * @date    06-May-2016
   * @brief   Description of the FLASH Erase and Program example.
   ******************************************************************************
   *
@@ -35,10 +35,10 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description 
-
-This example guides you through the different configuration steps by mean of HAL API
-how to erase and program the STM32F4xx internal FLASH memory mounted on STM32469I-EVAL.
+@par Example Description
+ 
+This example describes how to configure and use the FLASH HAL API to erase and program 
+the internal FLASH memory.
   
 At the beginning of the main program the HAL_Init() function is called to reset 
 all the peripherals, initialize the Flash interface and the systick.

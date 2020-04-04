@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    TIM/TIM_CascadeSynchro/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.3
-  * @date    29-January-2016
+  * @version V1.1.4
+  * @date    06-May-2016
   * @brief   How to command 2 Timers as slaves (TIM3 & TIM4) using a Timer
   *          as master (TIM2)
 
@@ -39,7 +39,7 @@
 
 @par Example Description 
 
-This example shows how to synchronize TIM2 and Timers (TIM3 and TIM4) in cascade mode.
+This example shows how to synchronize TIM peripherals in cascade mode.
 
 Timers synchronisation in cascade mode :
    ___________                     ___________              ___________                 

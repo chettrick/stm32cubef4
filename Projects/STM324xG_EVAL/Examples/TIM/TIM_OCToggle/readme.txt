@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    TIM/TIM_OCToggle/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.5
-  * @date    29-January-2016
+  * @version V1.2.6
+  * @date    06-May-2016
   * @brief   This example shows how to configure the Timer to generate four 
   *          delayed signals.
   ******************************************************************************
@@ -38,7 +38,7 @@
 
 @par Example Description 
 
-This example shows how to configure the TIM3 peripheral to generate four different 
+This example shows how to configure the TIM peripheral to generate four different 
 signals with four different frequencies.
 
 The TIM3CLK frequency is set to SystemCoreClock / 2 (Hz), and we want to get TIM3
