@@ -1,5 +1,5 @@
 /*******************************************************************************
-*            Portions COPYRIGHT 2014 STMicroelectronics                        *
+*            Portions COPYRIGHT 2015 STMicroelectronics                        *
 *            Portions Copyright (C) 2006-2013, Brainspark B.V.                 *
 *******************************************************************************/
 
@@ -35,9 +35,9 @@
   * @file    des.h
   * @author  MCD Application Team
   * @brief   This file has been modified to support the hardware Cryptographic and
-  *          Hash processors embedded in STM32F415xx/17xx/437xx/39xx devices.
-  *          This support is activated by defining the macro "USE_STM32F4XX_HW_CRYPTO"
-  *          in PolarSSL config.h file. 
+  *          Hash processors embedded in STM32F415xx/417xx/437xx/439xx/756xx devices.
+  *          This support is activated by defining the "USE_STM32F4XX_HW_CRYPTO"
+  *          or "USE_STM32F7XX_HW_CRYPTO" macro in PolarSSL config.h file. 
   ******************************************************************************
   * @attention
   *
@@ -88,10 +88,10 @@ typedef struct
 {
     int mode;                   /*!<  encrypt/decrypt   */
     uint32_t sk[32];            /*!<  DES subkeys       */
-#ifdef USE_STM32F4XX_HW_CRYPTO 
+#if defined(USE_STM32F4XX_HW_CRYPTO) || defined(USE_STM32F7XX_HW_CRYPTO) 
     unsigned char des_enc_key[8]; /* Encryption key */
     unsigned char des_dec_key[8]; /* Decryption key */
-#endif /* USE_STM32F4XX_HW_CRYPTO */
+#endif /* USE_STM32_HW_CRYPTO */
 }
 des_context;
 
@@ -102,10 +102,10 @@ typedef struct
 {
     int mode;                   /*!<  encrypt/decrypt   */
     uint32_t sk[96];            /*!<  3DES subkeys      */
-#ifdef USE_STM32F4XX_HW_CRYPTO 
+#if defined(USE_STM32F4XX_HW_CRYPTO) || defined(USE_STM32F7XX_HW_CRYPTO)
     unsigned char tdes_enc_key[24]; /* Encryption key */
     unsigned char tdes_dec_key[24]; /* Decryption key */
-#endif /* USE_STM32F4XX_HW_CRYPTO */
+#endif /* USE_STM32_HW_CRYPTO */
 }
 des3_context;
 

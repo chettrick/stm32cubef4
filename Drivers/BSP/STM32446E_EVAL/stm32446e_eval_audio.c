@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32446e_eval_audio.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    11-March-2015
+  * @version V1.1.0
+  * @date    14-August-2015
   * @brief   This file provides the Audio driver for the STM32446E-EVAL evaluation board.
   ******************************************************************************
   * @attention
@@ -180,7 +180,6 @@ uint16_t __IO AudioInVolume = DEFAULT_AUDIO_IN_VOLUME;
 /** @defgroup STM32446E_EVAL_AUDIO_Private_Function_Prototypes STM32446E Eval Audio Private Prototypes
   * @{
   */
-static void CODEC_Reset(void);
 static void SAIx_Init(uint32_t AudioFreq);
 static void SAIx_DeInit(void);
 static void I2Sx_Init(uint32_t AudioFreq);
@@ -226,9 +225,6 @@ uint8_t BSP_AUDIO_OUT_Init(uint16_t OutputDevice, uint8_t Volume, uint32_t Audio
     BSP_AUDIO_OUT_MspInit(&haudio_out_sai, NULL);
   }
   SAIx_Init(AudioFreq);
-
-  /* Reset the Codec Registers */
-  CODEC_Reset();
   
   /* wm8994 codec initialization */
   deviceid = wm8994_drv.ReadID(AUDIO_I2C_ADDRESS);
@@ -246,6 +242,8 @@ uint8_t BSP_AUDIO_OUT_Init(uint16_t OutputDevice, uint8_t Volume, uint32_t Audio
 
   if(ret == AUDIO_OK)
   {
+    /* Resets the audio codec. */
+    audio_drv->Reset(AUDIO_I2C_ADDRESS);
     /* Initialize the codec internal registers */
     audio_drv->Init(AUDIO_I2C_ADDRESS, OutputDevice, Volume, AudioFreq);
   }
@@ -780,19 +778,6 @@ static void SAIx_DeInit(void)
   HAL_SAI_DeInit(&haudio_out_sai);
 }
 
-/**
-  * @brief  Resets the audio codec. It restores the default configuration of the 
-  *         codec (this function shall be called before initializing the codec).
-  * @param  None
-  * @retval None
-  */
-static void CODEC_Reset(void)
-{
-  /* Initialize the audio driver structure */
-  audio_drv = &wm8994_drv; 
-  
-  audio_drv->Reset(AUDIO_I2C_ADDRESS);
-}
 
 /**
   * @}

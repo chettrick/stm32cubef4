@@ -1,16 +1,15 @@
 /*********************************************************************
-*          Portions COPYRIGHT 2014 STMicroelectronics                *
-*          Portions SEGGER Microcontroller GmbH & Co. KG             *
+*                SEGGER Microcontroller GmbH & Co. KG                *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
 *                                                                    *
-*        (c) 1996 - 2014  SEGGER Microcontroller GmbH & Co. KG       *
+*        (c) 1996 - 2015  SEGGER Microcontroller GmbH & Co. KG       *
 *                                                                    *
 *        Internet: www.segger.com    Support:  support@segger.com    *
 *                                                                    *
 **********************************************************************
 
-** emWin V5.26 - Graphical user interface for embedded applications **
+** emWin V5.28 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -32,25 +31,6 @@ Purpose     : Windows manager include
 ----------------------------------------------------------------------
 */
 
-/**
-  ******************************************************************************
-  * @attention
-  *
-  * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
-  * You may not use this file except in compliance with the License.
-  * You may obtain a copy of the License at:
-  *
-  *        http://www.st.com/software_license_agreement_liberty_v2
-  *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
-  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  * See the License for the specific language governing permissions and
-  * limitations under the License.
-  *
-  ******************************************************************************
-  */
-  
 #ifndef WM_H            /* Make sure we only include it once */
 #define WM_H
 
@@ -134,6 +114,19 @@ extern "C" {     /* Make sure we have C-declarations in C++ programs */
 *
 *       Data types
 */
+typedef struct WM_WINDOW_INFO WM_WINDOW_INFO;
+
+struct WM_WINDOW_INFO {
+  GUI_HMEM hWin;
+  GUI_HMEM hParent;
+  GUI_HMEM hFirstChild;
+  GUI_HMEM hNext;
+  GUI_RECT Rect;
+  U32      Status;
+  U32      DebugId;
+  WM_WINDOW_INFO * pNext;
+};
+
 typedef struct {
   int Key, PressedCnt;
 } WM_KEY_INFO;
@@ -152,11 +145,6 @@ typedef struct {
   U8  State;
   U8  StatePrev;
 } WM_PID_STATE_CHANGED_INFO;
-
-typedef struct {
-  void (* cbBegin)(void);
-  void (* cbEnd)  (void);
-} WM_MULTIBUF_API;
 
 typedef struct {
   int Cmd;
@@ -270,6 +258,8 @@ typedef struct {
 #define WM_POST_PAINT               47      /* Send to a window after (the last) WM_PAINT message */
 
 #define WM_MOTION                   48      /* Automatic motion messages */
+
+#define WM_GET_WINDOW_ID            49      /* Return widget type specific Id (DebugId) */
 
 #define WM_GESTURE                  0x0119  /* Gesture message */
 
@@ -644,7 +634,7 @@ void WM_DisableMemdev             (WM_HWIN hWin);
 /* Automatic use of multiple buffers */
 int WM_MULTIBUF_Enable(int OnOff);
 
-extern const WM_MULTIBUF_API * WM_MULTIBUF__pAPI;
+extern const GUI_MULTIBUF_API * WM_MULTIBUF__pAPI;
 
 typedef void (* T_WM_EXEC_GESTURE)(void);
 
@@ -708,6 +698,7 @@ WM_HWIN   WM_Screen2hWinEx  (WM_HWIN hStop, int x, int y);
 void      WM_ForEachDesc    (WM_HWIN hWin, WM_tfForEach * pcb, void * pData);
 void      WM_SetScreenSize  (int xSize, int ySize);
 int       WM_PollSimMsg     (void);
+int       WM_GetWindowInfo  (WM_WINDOW_INFO * pInfo, int FirstWindow);
 
 /*********************************************************************
 *

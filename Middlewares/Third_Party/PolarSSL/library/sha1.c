@@ -1,5 +1,5 @@
 /*******************************************************************************
-*            Portions COPYRIGHT 2014 STMicroelectronics                        *
+*            Portions COPYRIGHT 2015 STMicroelectronics                        *
 *            Portions Copyright (C) 2006-2013, Brainspark B.V.                 *
 *******************************************************************************/
 
@@ -38,9 +38,9 @@
   * @file    sha1.c
   * @author  MCD Application Team
   * @brief   This file has been modified to support the hardware Cryptographic and
-  *          Hash processors embedded in STM32F415xx/17xx/437xx/39xx devices.
-  *          This support is activated by defining the macro "USE_STM32F4XX_HW_CRYPTO"
-  *          in PolarSSL config.h file.
+  *          Hash processors embedded in STM32F415xx/417xx/437xx/439xx/756xx devices.
+  *          This support is activated by defining the "USE_STM32F4XX_HW_CRYPTO"
+  *          or "USE_STM32F7XX_HW_CRYPTO" macro in PolarSSL config.h file.
   ******************************************************************************
   * @attention
   *
@@ -69,9 +69,9 @@
 #include <stdio.h>
 #endif
 
-#ifdef USE_STM32F4XX_HW_CRYPTO /* use HW Crypto */ 
+#if defined(USE_STM32F4XX_HW_CRYPTO) || defined(USE_STM32F7XX_HW_CRYPTO) /* use HW Crypto */ 
 HASH_HandleTypeDef hhash_sha1;
-#endif /* USE_STM32F4XX_HW_CRYPTO */
+#endif /* USE_STM32_HW_CRYPTO */
 
 #if !defined(POLARSSL_SHA1_ALT)
 
@@ -353,7 +353,7 @@ void sha1_finish( sha1_context *ctx, unsigned char output[20] )
  */
 void sha1( const unsigned char *input, size_t ilen, unsigned char output[20] )
 {
-#ifdef USE_STM32F4XX_HW_CRYPTO /* use HW Crypto */
+#if defined(USE_STM32F4XX_HW_CRYPTO) || defined(USE_STM32F7XX_HW_CRYPTO) /* use HW Crypto */
 
   /* HASH IP initialization */
   HAL_HASH_DeInit(&hhash_sha1);
@@ -372,7 +372,7 @@ void sha1( const unsigned char *input, size_t ilen, unsigned char output[20] )
     sha1_finish( &ctx, output );
 
     memset( &ctx, 0, sizeof( sha1_context ) );
-#endif /* USE_STM32F4XX_HW_CRYPTO */
+#endif /* USE_STM32_HW_CRYPTO */
 }
 
 #if defined(POLARSSL_FS_IO)
@@ -479,7 +479,7 @@ void sha1_hmac( const unsigned char *key, size_t keylen,
                 const unsigned char *input, size_t ilen,
                 unsigned char output[20] )
 {
-#ifdef USE_STM32F4XX_HW_CRYPTO /* use HW Crypto */
+#if defined(USE_STM32F4XX_HW_CRYPTO) || defined(USE_STM32F7XX_HW_CRYPTO) /* use HW Crypto */
 
   /* HASH IP initialization */
   HAL_HASH_DeInit(&hhash_sha1);
@@ -501,7 +501,7 @@ void sha1_hmac( const unsigned char *key, size_t keylen,
     sha1_hmac_finish( &ctx, output );
 
     memset( &ctx, 0, sizeof( sha1_context ) );
-#endif /* USE_STM32F4XX_HW_CRYPTO */
+#endif /* USE_STM32_HW_CRYPTO */
 }
 
 #if defined(POLARSSL_SELF_TEST)

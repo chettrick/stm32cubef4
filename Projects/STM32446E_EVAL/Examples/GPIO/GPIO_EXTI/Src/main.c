@@ -176,7 +176,7 @@ static void EXTI15_10_IRQHandler_Config(void)
   __HAL_RCC_GPIOC_CLK_ENABLE();
 
   /* Configure PC.13 pin as input floating */
-  GPIO_InitStructure.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStructure.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStructure.Pull = GPIO_NOPULL;
   GPIO_InitStructure.Pin = GPIO_PIN_13;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStructure);

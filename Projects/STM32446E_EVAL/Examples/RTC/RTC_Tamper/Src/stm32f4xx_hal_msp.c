@@ -73,21 +73,10 @@ void HAL_RTC_MspInit(RTC_HandleTypeDef *hrtc)
 {
   RCC_OscInitTypeDef        RCC_OscInitStruct;
   RCC_PeriphCLKInitTypeDef  PeriphClkInitStruct;
-  
-  /*##-1- Enables the PWR Clock and Enables access to the backup domain ###################################*/
-  /* To change the source clock of the RTC feature (LSE, LSI), You have to:
-     - Enable the power clock using __HAL_RCC_PWR_CLK_ENABLE()
-     - Enable write access using HAL_PWR_EnableBkUpAccess() function before to 
-       configure the RTC clock source (to be done once after reset).
-     - Reset the Back up Domain using __HAL_RCC_BACKUPRESET_FORCE() and 
-       __HAL_RCC_BACKUPRESET_RELEASE().
-     - Configure the needed RTC clock source */
-  __HAL_RCC_PWR_CLK_ENABLE();
-  HAL_PWR_EnableBkUpAccess();
 
   /*##-2- Configure LSE/LSI as RTC clock source ###############################*/
 #ifdef RTC_CLOCK_SOURCE_LSE
-  
+
   RCC_OscInitStruct.OscillatorType =  RCC_OSCILLATORTYPE_LSI | RCC_OSCILLATORTYPE_LSE;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
   RCC_OscInitStruct.LSEState = RCC_LSE_ON;

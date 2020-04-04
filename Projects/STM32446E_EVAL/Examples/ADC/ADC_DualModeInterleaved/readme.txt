@@ -56,9 +56,9 @@ The ADC1 and ADC2 are configured to convert ADC Channel 1, with conversion
 triggered by software.
 By this way, ADC channel 1 is converted each 6 cycles.
 
-In this example, the system clock is 180MHz, APB2 = 90MHz and ADC clock = APB2 /2.
-Since ADCCLK= 45MHz and conversion rate = 6 cycles
-==> Conversion Time = 45M/6cyc = 7.5Msps.
+In this example, the system clock is 180MHz, APB2 = 90MHz and ADC clock = APB2/4.
+Since ADCCLK= 22.5MHz and conversion rate = 6 cycles
+==> Conversion Time = 22.5M/6cyc = 3.75Msps.
 
 STM32 Eval board's LEDs can be used to monitor the transfer status:
  - LED1 is ON when the ADC conversion is complete.

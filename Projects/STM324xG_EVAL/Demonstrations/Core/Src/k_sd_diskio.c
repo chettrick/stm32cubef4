@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    k_sd_diskio.c
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    01-July-2015   
+  * @version V1.4.0
+  * @date    18-August-2015   
   * @brief   kernel SD Disk I/O driver
   ******************************************************************************
   * @attention
@@ -39,14 +39,14 @@
 static volatile DSTATUS Stat = STA_NOINIT;
 
 /* Private function prototypes -----------------------------------------------*/
-DSTATUS SD_initialize(void);
-DSTATUS SD_status(void);
-DRESULT SD_read(BYTE*, DWORD, UINT);
+DSTATUS SD_initialize(BYTE);
+DSTATUS SD_status(BYTE);
+DRESULT SD_read(BYTE, BYTE*, DWORD, UINT);
 #if _USE_WRITE == 1
-  DRESULT SD_write(const BYTE*, DWORD, UINT);
+  DRESULT SD_write(BYTE, const BYTE*, DWORD, UINT);
 #endif /* _USE_WRITE == 1 */
 #if _USE_IOCTL == 1
-  DRESULT SD_ioctl(BYTE, void*);
+  DRESULT SD_ioctl(BYTE, BYTE, void*);
 #endif  /* _USE_IOCTL == 1 */
   
 Diskio_drvTypeDef  SD_Driver =
@@ -67,10 +67,10 @@ Diskio_drvTypeDef  SD_Driver =
 
 /**
   * @brief  Initializes a Drive
-  * @param  None
+  * @param  pdrv: Physical drive number
   * @retval DSTATUS: Operation status
   */
-DSTATUS SD_initialize(void)
+DSTATUS SD_initialize(BYTE pdrv)
 {
   Stat = STA_NOINIT;
   
@@ -85,10 +85,10 @@ DSTATUS SD_initialize(void)
 
 /**
   * @brief  Gets Disk Status
-  * @param  None
+  * @param  pdrv: Physical drive number
   * @retval DSTATUS: Operation status
   */
-DSTATUS SD_status(void)
+DSTATUS SD_status(BYTE pdrv)
 {
   Stat = STA_NOINIT;
 
@@ -102,12 +102,13 @@ DSTATUS SD_status(void)
 
 /**
   * @brief  Reads Sector(s)
+  * @param  pdrv: Physical drive number
   * @param  *buff: Data buffer to store read data
   * @param  sector: Sector address (LBA)
   * @param  count: Number of sectors to read (1..128)
   * @retval DRESULT: Operation result
   */
-DRESULT SD_read(BYTE *buff, DWORD sector, UINT count)
+DRESULT SD_read(BYTE pdrv, BYTE *buff, DWORD sector, UINT count)
 {
   DRESULT res = RES_OK;
   __disable_irq();
@@ -125,13 +126,14 @@ DRESULT SD_read(BYTE *buff, DWORD sector, UINT count)
 
 /**
   * @brief  Writes Sector(s)
+  * @param  pdrv: Physical drive number
   * @param  *buff: Data to be written
   * @param  sector: Sector address (LBA)
   * @param  count: Number of sectors to write (1..128)
   * @retval DRESULT: Operation result
   */
 #if _USE_WRITE == 1
-DRESULT SD_write(const BYTE *buff, DWORD sector, UINT count)
+DRESULT SD_write(BYTE pdrv, const BYTE *buff, DWORD sector, UINT count)
 {
   DRESULT res = RES_OK;
   __disable_irq();
@@ -151,12 +153,13 @@ DRESULT SD_write(const BYTE *buff, DWORD sector, UINT count)
 
 /**
   * @brief  I/O control operation
+  * @param  pdrv: Physical drive number
   * @param  cmd: Control code
   * @param  *buff: Buffer to send/receive control data
   * @retval DRESULT: Operation result
   */
 #if _USE_IOCTL == 1
-DRESULT SD_ioctl(BYTE cmd, void *buff)
+DRESULT SD_ioctl(BYTE pdrv, BYTE cmd, void *buff)
 {
   DRESULT res = RES_ERROR;
   SD_CardInfo CardInfo;

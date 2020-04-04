@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324x9i_eval_eeprom.c
   * @author  MCD Application Team
-  * @version V2.1.0
-  * @date    26-June-2015
+  * @version V2.2.0
+  * @date    14-August-2015
   * @brief   This file provides a set of functions needed to manage an I2C M24LR64 
   *          EEPROM memory.
   *          To be able to use this driver, the switch EE_M24LR64 must be defined

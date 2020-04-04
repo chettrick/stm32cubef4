@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f4xx_nucleo.h
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    02-March-2015
+  * @version V1.2.2
+  * @date    14-August-2015
   * @brief   This file contains definitions for:
   *          - LEDs and push-button available on STM32F4XX-Nucleo Kit 
   *            from STMicroelectronics
@@ -72,8 +72,10 @@ typedef enum
 
 typedef enum 
 {  
-  BUTTON_KEY = 0
-}Button_TypeDef;
+  BUTTON_USER = 0,
+  /* Alias */
+  BUTTON_KEY  = BUTTON_USER
+} Button_TypeDef;
 
 typedef enum 
 {  
@@ -130,18 +132,26 @@ typedef enum
 #define BUTTONn                                 1  
 
 /**
- * @brief Key push-button
- */
-#define KEY_BUTTON_PIN                          GPIO_PIN_13
-#define KEY_BUTTON_GPIO_PORT                    GPIOC
-#define KEY_BUTTON_GPIO_CLK_ENABLE()            __GPIOC_CLK_ENABLE()
-#define KEY_BUTTON_GPIO_CLK_DISABLE()           __GPIOC_CLK_DISABLE()
-#define KEY_BUTTON_EXTI_IRQn                    EXTI15_10_IRQn
+  * @brief Key push-button
+  */
+#define USER_BUTTON_PIN                         GPIO_PIN_13
+#define USER_BUTTON_GPIO_PORT                   GPIOC
+#define USER_BUTTON_GPIO_CLK_ENABLE()           __HAL_RCC_GPIOC_CLK_ENABLE()   
+#define USER_BUTTON_GPIO_CLK_DISABLE()          __HAL_RCC_GPIOC_CLK_DISABLE()  
+#define USER_BUTTON_EXTI_LINE                   GPIO_PIN_13
+#define USER_BUTTON_EXTI_IRQn                   EXTI15_10_IRQn
+/* Aliases */
+#define KEY_BUTTON_PIN                          USER_BUTTON_PIN
+#define KEY_BUTTON_GPIO_PORT                    USER_BUTTON_GPIO_PORT
+#define KEY_BUTTON_GPIO_CLK_ENABLE()            USER_BUTTON_GPIO_CLK_ENABLE()
+#define KEY_BUTTON_GPIO_CLK_DISABLE()           USER_BUTTON_GPIO_CLK_DISABLE()
+#define KEY_BUTTON_EXTI_LINE                    USER_BUTTON_EXTI_LINE
+#define KEY_BUTTON_EXTI_IRQn                    USER_BUTTON_EXTI_IRQn
 
-#define BUTTONx_GPIO_CLK_ENABLE(__INDEX__)    do{if((__INDEX__) == 0) KEY_BUTTON_GPIO_CLK_ENABLE(); \
-                                                }while(0)
-#define BUTTONx_GPIO_CLK_DISABLE(__INDEX__)    do{if((__INDEX__) == 0) KEY_BUTTON_GPIO_CLK_DISABLE(); \
-                                                 }while(0)
+
+#define BUTTONx_GPIO_CLK_ENABLE(__BUTTON__)    do { if((__BUTTON__) == BUTTON_USER) { USER_BUTTON_GPIO_CLK_ENABLE(); } } while(0)
+
+#define BUTTONx_GPIO_CLK_DISABLE(__BUTTON__)   do { if((__BUTTON__) == BUTTON_USER) { USER_BUTTON_GPIO_CLK_DISABLE(); } } while(0)
 /**
   * @}
   */ 

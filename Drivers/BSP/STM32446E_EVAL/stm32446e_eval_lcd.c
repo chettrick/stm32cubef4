@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32446e_eval_lcd.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    11-March-2015
+  * @version V1.1.0
+  * @date    14-August-2015
   * @brief   This file includes the driver for Liquid Crystal Display (LCD) module
   *          mounted on STM32446E-EVAL evaluation board.
   ******************************************************************************

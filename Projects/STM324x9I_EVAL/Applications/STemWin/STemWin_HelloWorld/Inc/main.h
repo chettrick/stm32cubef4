@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    STemWin/STemWin_HelloWorld/Inc/main.h 
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    01-July-2015
+  * @version V1.4.0
+  * @date    14-August-2015
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention

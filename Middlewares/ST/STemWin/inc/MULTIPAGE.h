@@ -1,16 +1,15 @@
 /*********************************************************************
-*          Portions COPYRIGHT 2014 STMicroelectronics                *
-*          Portions SEGGER Microcontroller GmbH & Co. KG             *
+*                SEGGER Microcontroller GmbH & Co. KG                *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
 *                                                                    *
-*        (c) 1996 - 2014  SEGGER Microcontroller GmbH & Co. KG       *
+*        (c) 1996 - 2015  SEGGER Microcontroller GmbH & Co. KG       *
 *                                                                    *
 *        Internet: www.segger.com    Support:  support@segger.com    *
 *                                                                    *
 **********************************************************************
 
-** emWin V5.26 - Graphical user interface for embedded applications **
+** emWin V5.28 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -32,25 +31,6 @@ Purpose     : MULTIPAGE include
 --------------------END-OF-HEADER-------------------------------------
 */
 
-/**
-  ******************************************************************************
-  * @attention
-  *
-  * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
-  * You may not use this file except in compliance with the License.
-  * You may obtain a copy of the License at:
-  *
-  *        http://www.st.com/software_license_agreement_liberty_v2
-  *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
-  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  * See the License for the specific language governing permissions and
-  * limitations under the License.
-  *
-  ******************************************************************************
-  */
-  
 #ifndef MULTIPAGE_H
 #define MULTIPAGE_H
 
@@ -93,7 +73,7 @@ Purpose     : MULTIPAGE include
 #define MULTIPAGE_SKINFLEX_PI_SELECTED  1
 #define MULTIPAGE_SKINFLEX_PI_DISABLED  2
 
-#define SCROLL_DISTANCE                 32 // Defines the space for the scrollbar arrows
+#define SCROLLBAR_SIZE                 32 // Defines the space for the scrollbar arrows
 
 #define MULTIPAGE_BI_SELECTED           0
 #define MULTIPAGE_BI_UNSELECTED         1
@@ -117,20 +97,20 @@ typedef struct {
 } MULTIPAGE_SKINFLEX_PROPS;
 
 typedef struct {
-  U16 StartOff;                 // Offset to use when drawing the unselected item 0.
   U8  SelSideBorderInc;         // Number of pixels to add on both sides when drawing the selected item.
-  U8  UnselTopBorderDec;        // Number of pixels to decrease the height of unselected items.
+  U8  SelTopBorderInc;          // Number of pixels to add on top of selected items.
 } MULTIPAGE_SKIN_PROPS;
 
 typedef struct {
   #if GUI_SUPPORT_ROTATION
-    GUI_ROTATION * pRotation;
+    GUI_ROTATION  * pRotation;
   #endif
-  unsigned       Align;
-  int            Sel;
-  U16            State;
-  U8             FrameFlags;    // Flags to let the drawing function know which parts of the frame to display.
-  U8             PageStatus;
+  unsigned          Align;
+  int               Sel;
+  U16               State;
+  U8                FrameFlags;    // Flags to let the drawing function know which parts of the frame to display.
+  U8                PageStatus;
+  GUI_DRAW_HANDLE * pDrawObj;
 } MULTIPAGE_SKIN_INFO;
 
 /*********************************************************************
@@ -159,8 +139,8 @@ void MULTIPAGE_Callback(WM_MESSAGE * pMsg);
 *
 **********************************************************************
 */
-void             MULTIPAGE_AddPage        (MULTIPAGE_Handle hObj, WM_HWIN hWin ,const char * pText);
 void             MULTIPAGE_AddEmptyPage   (MULTIPAGE_Handle hObj, WM_HWIN hWin ,const char * pText);
+void             MULTIPAGE_AddPage        (MULTIPAGE_Handle hObj, WM_HWIN hWin ,const char * pText);
 WM_HWIN          MULTIPAGE_AttachWindow   (MULTIPAGE_Handle hObj, unsigned Index, WM_HWIN hWin);
 void             MULTIPAGE_DeletePage     (MULTIPAGE_Handle hObj, unsigned Index, int Delete);
 void             MULTIPAGE_DisablePage    (MULTIPAGE_Handle hObj, unsigned Index);

@@ -1,16 +1,15 @@
 /*********************************************************************
-*          Portions COPYRIGHT 2014 STMicroelectronics                *
-*          Portions SEGGER Microcontroller GmbH & Co. KG             *
+*                SEGGER Microcontroller GmbH & Co. KG                *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
 *                                                                    *
-*        (c) 1996 - 2014  SEGGER Microcontroller GmbH & Co. KG       *
+*        (c) 1996 - 2015  SEGGER Microcontroller GmbH & Co. KG       *
 *                                                                    *
 *        Internet: www.segger.com    Support:  support@segger.com    *
 *                                                                    *
 **********************************************************************
 
-** emWin V5.26 - Graphical user interface for embedded applications **
+** emWin V5.28 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -36,25 +35,6 @@ Attention : Do not modify this file ! If you do, you will not
 
 */
 
-/**
-  ******************************************************************************
-  * @attention
-  *
-  * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
-  * You may not use this file except in compliance with the License.
-  * You may obtain a copy of the License at:
-  *
-  *        http://www.st.com/software_license_agreement_liberty_v2
-  *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
-  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  * See the License for the specific language governing permissions and
-  * limitations under the License.
-  *
-  ******************************************************************************
-  */
-  
 #ifndef  GUITYPE_H_INCLUDED
 #define  GUITYPE_H_INCLUDED
 
@@ -166,6 +146,16 @@ struct GUI_REGISTER_EXIT {
   void (* pfVoid)(void);
   GUI_REGISTER_EXIT * pNext;
 };
+
+typedef struct {
+  void (* cbBegin)(void);
+  void (* cbEnd)  (void);
+} GUI_MULTIBUF_API;
+
+typedef struct {
+  void (* cbBeginEx)(int LayerIndex);
+  void (* cbEndEx)  (int LayerIndex);
+} GUI_MULTIBUF_API_EX;
 
 /*********************************************************************
 *
@@ -600,6 +590,18 @@ typedef struct {
   GUI_HMEM       hInput;
 } GUI_MTOUCH_EVENT;
 
+//
+// Used for emWinSPY with reduced data types and array sizes
+//
+typedef struct {
+  U8  Layer;
+  U8  NumPoints;
+  I16 ax[5];
+  I16 ay[5];
+  U16 aId[5];
+  U8  aFlags[5];
+} GUI_MTOUCH_STATE;
+
 typedef void (* T_GUI_MTOUCH_STOREEVENT)(GUI_MTOUCH_EVENT *, GUI_MTOUCH_INPUT * pInput);
 
 /*********************************************************************
@@ -649,6 +651,20 @@ typedef struct {
   //
   void (* pfFlushBuffer)(void);
 } GUI_PORT_API;
+
+/*********************************************************************
+*
+*       Send/Receive function for VNC and/or emWinSPY
+*/
+typedef int    (* GUI_tSend)  (const U8 * pData, int len, void * p);
+typedef int    (* GUI_tRecv)  (      U8 * pData, int len, void * p);
+
+/*********************************************************************
+*
+*       Memory allocation replacement for emWinSPY
+*/
+typedef void * (* GUI_tMalloc)(unsigned int);
+typedef void   (* GUI_tFree)  (void *);
 
 #endif  /* GUITYPE_H_INCLUDED */
 

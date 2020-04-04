@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Display/LCD_Paint/Src/fatfs_storage.c
   * @author  MCD Application Team
-  * @version V1.2.2
-  * @date    25-May-2015
+  * @version V1.3.0
+  * @date    14-August-2015
   * @brief   This file includes the Storage (FatFs) driver for the STM324xG-EVAL
   *          application.
   ******************************************************************************

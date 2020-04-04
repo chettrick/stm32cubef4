@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    USB_Host/HID_RTOS/readme.txt 
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    01-July-2015
+  * @version V1.4.0
+  * @date    14-August-2015
   * @brief   Description of the USB Host HID RTOS application.
   ******************************************************************************
   *
@@ -68,6 +68,8 @@ A menu is displayed and the user can select any operation from the menu using th
       
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
+	  
+@note The FreeRTOS heap size configTOTAL_HEAP_SIZE defined in FreeRTOSConfig.h is set according to the OS resources memory requirements of the application with +10% margin and rounded to the upper Kbyte boundary.
 
 For more details about the STM32Cube USB Host library, please refer to UM1720  
 "STM32Cube USB Host library".

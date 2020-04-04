@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    FreeRTOS/FreeRTOS_LowPower/Src/main.c
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    01-July-2015
+  * @version V1.4.0
+  * @date    14-August-2015
   * @brief   Main program body
   ******************************************************************************
   * @attention
@@ -155,7 +155,7 @@ static void QueueReceiveThread (const void *argument)
   * @param  ulExpectedIdleTime: Expected time in idle state
   * @retval None
   */
-void PreSleepProcessing(unsigned long ulExpectedIdleTime)
+void PreSleepProcessing(uint32_t* ulExpectedIdleTime)
 {
   /* Called by the kernel before it places the MCU into a sleep mode because
   configPRE_SLEEP_PROCESSING() is #defined to PreSleepProcessing().
@@ -177,7 +177,7 @@ void PreSleepProcessing(unsigned long ulExpectedIdleTime)
   * @param  ulExpectedIdleTime : Not used
   * @retval None
   */
-void PostSleepProcessing(unsigned long ulExpectedIdleTime)
+void PostSleepProcessing(uint32_t* ulExpectedIdleTime)
 {
   /* Called by the kernel when the MCU exits a sleep mode because
   configPOST_SLEEP_PROCESSING is #defined to PostSleepProcessing(). */

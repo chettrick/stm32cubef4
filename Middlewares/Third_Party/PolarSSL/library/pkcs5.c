@@ -222,7 +222,7 @@ int pkcs5_pbes2( asn1_buf *pbe_params, int mode,
         return( ret );
     }
 
-    if( ( ret = cipher_setkey( &cipher_ctx, key, keylen, mode ) ) != 0 )
+    if( ( ret = cipher_setkey( &cipher_ctx, key, keylen, (operation_t)mode ) ) != 0 )
         return( ret );
 
     if( ( ret = cipher_reset( &cipher_ctx, iv ) ) != 0 )
@@ -256,9 +256,11 @@ int pkcs5_pbkdf2_hmac( md_context_t *ctx, const unsigned char *password,
 
     memset( counter, 0, 4 );
     counter[3] = 1;
-
-    if( iteration_count > 0xFFFFFFFF )
-        return( POLARSSL_ERR_PKCS5_BAD_INPUT_DATA );
+    
+    /* ST MCD Application Team: this unuseful condition is commented to 
+       avoid compilation warning (iteration_count is always <= 0xFFFFFFFF) */
+    //if( iteration_count > 0xFFFFFFFF )
+    //    return( POLARSSL_ERR_PKCS5_BAD_INPUT_DATA );
 
     while( key_length )
     {

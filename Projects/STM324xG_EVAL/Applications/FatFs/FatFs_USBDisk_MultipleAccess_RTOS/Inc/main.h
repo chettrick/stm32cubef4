@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    FatFs/FatFs_USBDisk_MultipleAccess_RTOS/Inc/main.h 
   * @author  MCD Application Team
-  * @version V1.2.2
-  * @date    25-May-2015
+  * @version V1.3.0
+  * @date    14-August-2015
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention

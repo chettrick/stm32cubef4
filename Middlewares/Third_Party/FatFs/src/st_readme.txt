@@ -2,14 +2,14 @@
   @verbatim
   ******************************************************************************
   *  
-  *           Portions COPYRIGHT 2014 STMicroelectronics                       
-  *           Portions Copyright (C) 2012, ChaN, all right reserved            
-  *  
+  *           Portions COPYRIGHT 2015 STMicroelectronics                       
+  *           Portions Copyright (C) 2015, ChaN, all right reserved            
+  *
   * @file    st_readme.txt 
   * @author  MCD Application Team
   * @brief   This file lists the main modification done by STMicroelectronics on
   *          FatFs for integration with STM32Cube solution.
-  *          For more details on FatFs implementation on STM32Cube, please refer 
+  *          For more details on FatFs implementation on STM32Cube, please refer
   *          to UM1721 "Developing Applications on STM32Cube with FatFs"  
   ******************************************************************************
   *
@@ -27,6 +27,30 @@
   *
   ******************************************************************************
   @endverbatim
+
+### V1.3.0/08-May-2015 ###
+============================
+  + Upgrade to use FatFs R0.11.
+  + Add new APIs FATFS_LinkDriverEx() and FATFS_UnLinkDriverEx() to manage USB Key Disk having 
+     multi-lun capability. These APIs are equivalent to FATFS_LinkDriver() and FATFS_UnLinkDriver()
+     with "lun" parameter set to 0.
+  + ff_conf.h: add new define "_USE_BUFF_WO_ALIGNMENT".
+     This option is available only for usbh diskio interface and allow to disable
+     the management of the unaligned buffer.
+     When STM32 USB OTG HS or FS IP is used with internal DMA enabled, this define
+     must be set to 0 to align data into 32bits through an internal scratch buffer
+     before being processed by the DMA . Otherwise (DMA not used), this define must
+     be set to 1 to avoid Data alignment and improve the performance.
+     Please note that if _USE_BUFF_WO_ALIGNMENT is set to 1 and an unaligned 32bits
+     buffer is forwarded to the FatFs Write/Read functions, an error will be returned. 
+     (0: default value or 1: unaligned buffer return an error).
+
+
+  + Important note:
+      For application code based on previous FatFs version; when moving to R0.11
+      the changes that need to be done is to update ffconf.h file, taking 
+      ffconf_template.h file as reference.
+
 
 ### V1.2.1/20-November-2014 ###
 ============================

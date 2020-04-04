@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Host/DynamicSwitch_Standalone/Src/usbh_diskio.c 
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    01-July-2015
+  * @version V1.4.0
+  * @date    14-August-2015
   * @brief   USB Key Disk I/O driver.
   ******************************************************************************
   * @attention
@@ -37,15 +37,15 @@
 extern USBH_HandleTypeDef  hUSBHost;
 
 /* Private function prototypes -----------------------------------------------*/
-DSTATUS USBH_initialize(void);
-DSTATUS USBH_status(void);
-DRESULT USBH_read(BYTE*, DWORD, UINT);
+DSTATUS USBH_initialize(BYTE);
+DSTATUS USBH_status(BYTE);
+DRESULT USBH_read(BYTE, BYTE*, DWORD, UINT);
 
 #if _USE_WRITE == 1
-  DRESULT USBH_write(const BYTE*, DWORD, UINT);
+  DRESULT USBH_write(BYTE, const BYTE*, DWORD, UINT);
 #endif /* _USE_WRITE == 1 */
 #if _USE_IOCTL == 1
-  DRESULT USBH_ioctl(BYTE, void*);
+  DRESULT USBH_ioctl(BYTE, BYTE, void*);
 #endif /* _USE_IOCTL == 1 */
   
 Diskio_drvTypeDef  USBH_Driver =
@@ -65,20 +65,20 @@ Diskio_drvTypeDef  USBH_Driver =
 
 /**
   * @brief  Initializes a Drive
-  * @param  None
+  * @param  pdrv: Physical drive number
   * @retval DSTATUS: Operation status
   */
-DSTATUS USBH_initialize(void)
+DSTATUS USBH_initialize(BYTE pdrv)
 {
   return RES_OK;
 }
 
 /**
   * @brief  Gets Disk Status
-  * @param  None
+  * @param  pdrv: Physical drive number
   * @retval DSTATUS: Operation status
   */
-DSTATUS USBH_status(void)
+DSTATUS USBH_status(BYTE pdrv)
 {
   DRESULT res = RES_ERROR;
   
@@ -95,13 +95,14 @@ DSTATUS USBH_status(void)
 }
 
 /**
-  * @brief  Reads Sector(s) 
+  * @brief  Reads Sector(s)
+  * @param  pdrv: Physical drive number
   * @param  *buff: Data buffer to store read data
   * @param  sector: Sector address (LBA)
   * @param  count: Number of sectors to read (1..128)
   * @retval DRESULT: Operation result
   */
-DRESULT USBH_read(BYTE *buff, DWORD sector, UINT count)
+DRESULT USBH_read(BYTE pdrv, BYTE *buff, DWORD sector, UINT count)
 {
   DRESULT res = RES_ERROR;
   MSC_LUNTypeDef info;
@@ -156,13 +157,14 @@ DRESULT USBH_read(BYTE *buff, DWORD sector, UINT count)
 
 /**
   * @brief  Writes Sector(s)
+  * @param  pdrv: Physical drive number
   * @param  *buff: Data to be written
   * @param  sector: Sector address (LBA)
   * @param  count: Number of sectors to write (1..128)
   * @retval DRESULT: Operation result
   */
 #if _USE_WRITE == 1
-DRESULT USBH_write(const BYTE *buff, DWORD sector, UINT count)
+DRESULT USBH_write(BYTE pdrv, const BYTE *buff, DWORD sector, UINT count)
 {
   DRESULT res = RES_ERROR; 
   MSC_LUNTypeDef info;
@@ -221,12 +223,13 @@ DRESULT USBH_write(const BYTE *buff, DWORD sector, UINT count)
 
 /**
   * @brief  I/O control operation
+  * @param  pdrv: Physical drive number
   * @param  cmd: Control code
   * @param  *buff: Buffer to send/receive control data
   * @retval DRESULT: Operation result
   */
 #if _USE_IOCTL == 1
-DRESULT USBH_ioctl(BYTE cmd, void *buff)
+DRESULT USBH_ioctl(BYTE pdrv, BYTE cmd, void *buff)
 {
   DRESULT res = RES_ERROR;
   MSC_LUNTypeDef info;

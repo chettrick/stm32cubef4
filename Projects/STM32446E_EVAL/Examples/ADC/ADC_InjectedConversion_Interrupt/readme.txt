@@ -62,12 +62,12 @@ Conversion time (reference manual, Reset and Clock control part):
   1) The system clock is 180 MHz.
   2) AHB Prescaler = 1 => AHB clock is 180 MHz.
   2) APB2 Prescaler = 2 => APB2 clock is 90 MHz.
-  3) ADC Prescaler = 2 => ADC clock is 45 MHz. (45 Mhz max)
+  3) ADC Prescaler = 4 => ADC clock is 22.5 MHz.
 
   Sampling time is set to ADC_SAMPLETIME_56CYCLES (56 cycles).
   ConvTime = Sampling time + 12 cycles ADC conversion time + 3 cycles sampling time.
            = 71 clock cycles
-           = 4.7 us
+           = 3.16 us
 
 
 User can vary the ADC_CHANNEL_4 voltage using the Eval Board potentiometer (P2) connected to PA.04.

@@ -1,4 +1,29 @@
-
+/**
+  ******************************************************************************
+  * @file    LwIP/LwIP_HTTP_Server_Netconn_RTOS/Src/httpser-netconn.c 
+  * @author  MCD Application Team
+  * @version V1.3.0
+  * @date    14-August-2015
+  * @brief   Basic http server implementation using LwIP netconn API  
+  ******************************************************************************
+  * @attention
+  *
+  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  *
+  * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
+  * You may not use this file except in compliance with the License.
+  * You may obtain a copy of the License at:
+  *
+  *        http://www.st.com/software_license_agreement_liberty_v2
+  *
+  * Unless required by applicable law or agreed to in writing, software 
+  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  * See the License for the specific language governing permissions and
+  * limitations under the License.
+  *
+  ******************************************************************************
+  */
 
 /* Includes ------------------------------------------------------------------*/
 #include "lwip/opt.h"
@@ -122,7 +147,6 @@ static const unsigned char PAGE_START[] = {
 
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
-static void http_server_serve(struct netconn *conn);
 
 /**
   * @brief serve tcp connection  
@@ -274,7 +298,7 @@ void DynWebPage(struct netconn *conn)
   strcat((char *)PAGE_BODY, "<br>---------------------------------------------<br>");
     
   /* The list of tasks and their status */
-  osThreadList((signed char *)(PAGE_BODY + strlen(PAGE_BODY)));
+  osThreadList((unsigned char *)(PAGE_BODY + strlen(PAGE_BODY)));
   strcat((char *)PAGE_BODY, "<br><br>---------------------------------------------");
   strcat((char *)PAGE_BODY, "<br>B : Blocked, R : Ready, D : Deleted, S : Suspended<br>");
 

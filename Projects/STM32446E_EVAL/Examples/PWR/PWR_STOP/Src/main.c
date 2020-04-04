@@ -83,6 +83,9 @@ int main(void)
   
   while (1)
   {
+    /* Turn LED1 ON LED */
+    BSP_LED_On(LED1);
+    
     /* Insert 5 second delay */
     HAL_Delay(5000);
 
@@ -98,9 +101,6 @@ int main(void)
       /* Enter Stop Mode */
     HAL_PWR_EnterSTOPMode(PWR_LOWPOWERREGULATOR_ON, PWR_STOPENTRY_WFI);
     
-    /* Turn ON LED after wake-up from STOP */
-    BSP_LED_On(LED1);
-
     /* Configures system clock after wake-up from STOP */
     SystemClock_Config();
   }

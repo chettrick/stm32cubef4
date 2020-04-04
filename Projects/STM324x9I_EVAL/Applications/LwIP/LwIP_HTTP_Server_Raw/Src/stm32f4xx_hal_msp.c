@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LwIP/LwIP_HTTP_Server_Raw/Src/tm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    01-July-2015
+  * @version V1.4.0
+  * @date    14-August-2015
   * @brief   HAL MSP module.
   *         
   ******************************************************************************

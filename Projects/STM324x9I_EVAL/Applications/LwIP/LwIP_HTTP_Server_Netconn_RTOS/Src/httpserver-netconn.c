@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LwIP/LwIP_HTTP_Server_Netconn_RTOS/Src/httpser-netconn.c 
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    01-July-2015
+  * @version V1.4.0
+  * @date    14-August-2015
   * @brief   Basic http server implementation using LwIP netconn API  
   ******************************************************************************
   * @attention
@@ -298,7 +298,7 @@ void DynWebPage(struct netconn *conn)
   strcat((char *)PAGE_BODY, "<br>---------------------------------------------<br>");
     
   /* The list of tasks and their status */
-  osThreadList((signed char *)(PAGE_BODY + strlen(PAGE_BODY)));
+  osThreadList((unsigned char *)(PAGE_BODY + strlen(PAGE_BODY)));
   strcat((char *)PAGE_BODY, "<br><br>---------------------------------------------");
   strcat((char *)PAGE_BODY, "<br>B : Blocked, R : Ready, D : Deleted, S : Suspended<br>");
 

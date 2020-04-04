@@ -199,7 +199,7 @@ static void ADC_Config(void)
   /* ADC Initialization */
   AdcHandle.Instance          = ADCx;
   
-  AdcHandle.Init.ClockPrescaler = ADC_CLOCKPRESCALER_PCLK_DIV6;
+  AdcHandle.Init.ClockPrescaler = ADC_CLOCKPRESCALER_PCLK_DIV2;
   AdcHandle.Init.Resolution = ADC_RESOLUTION_12B;
   AdcHandle.Init.ScanConvMode = DISABLE;
   AdcHandle.Init.ContinuousConvMode = ENABLE;

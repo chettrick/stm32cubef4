@@ -4,7 +4,7 @@
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
 *                                                                    *
-*        (c) 1996 - 2004  SEGGER Microcontroller Systeme GmbH        *
+*        (c) 1996 - 2015  SEGGER Microcontroller Systeme GmbH        *
 *                                                                    *
 *        Internet: www.segger.com    Support:  support@segger.com    *
 *                                                                    *

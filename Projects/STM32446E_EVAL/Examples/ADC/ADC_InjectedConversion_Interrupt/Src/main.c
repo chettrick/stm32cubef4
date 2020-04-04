@@ -94,7 +94,7 @@ int main(void)
 
   /*##-1- Configure the ADC peripheral #######################################*/
   AdcHandle.Instance          = ADCx;
-  AdcHandle.Init.ClockPrescaler = ADC_CLOCKPRESCALER_PCLK_DIV2;
+  AdcHandle.Init.ClockPrescaler = ADC_CLOCKPRESCALER_PCLK_DIV4;
   AdcHandle.Init.Resolution = ADC_RESOLUTION12b;
   AdcHandle.Init.ScanConvMode = DISABLE;
   AdcHandle.Init.ContinuousConvMode = ENABLE;

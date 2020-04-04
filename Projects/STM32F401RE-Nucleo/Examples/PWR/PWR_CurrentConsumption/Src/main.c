@@ -71,14 +71,14 @@ int main(void)
        - Set NVIC Group Priority to 4
        - Global MSP (MCU Support Package) initialization
      */
-  HAL_Init();
-  
+  HAL_Init(); 
+
+  /* Configure the system clock to 100 MHz */
+  SystemClock_Config();
+    
   /* Configure LED2 */
   BSP_LED_Init(LED2);
 
-  /* Configure the system clock to 84 MHz */
-  SystemClock_Config();
-  
   /* Enable Power Clock */
   __HAL_RCC_PWR_CLK_ENABLE();
   
@@ -97,9 +97,9 @@ int main(void)
     {
       /* Toggle LED2 */
       BSP_LED_Toggle(LED2);
-      
-      /* Inserted Delay */
-      HAL_Delay(100);
+   
+      /* Insert 1s Delay */
+      HAL_Delay(1000);
     }
     /* Loop while Key button is maintained pressed */
     while(BSP_PB_GetState(BUTTON_KEY) == RESET)
@@ -259,6 +259,8 @@ void HAL_RTCEx_WakeUpTimerEventCallback(RTC_HandleTypeDef *hrtc)
   */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
+  /* Configure LED2 */
+  BSP_LED_Init(LED2);
   /* NOTE : add the specific code to handle the wake up button interrupt */
   if(GPIO_Pin == KEY_BUTTON_PIN)
   { 

@@ -10,7 +10,7 @@
 *                                                                    *
 **********************************************************************
 
-** emWin V5.24 - Graphical user interface for embedded applications **
+** emWin V5.28 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -38,8 +38,8 @@ Purpose     : Introduction for emWin generic demo
   ******************************************************************************
   * @file    GUIDEMO_Intro.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    01-July-2015
+  * @version V1.2.0
+  * @date    14-August-2015
   * @brief   Introduction for emWin generic demo
   ******************************************************************************
   * @attention

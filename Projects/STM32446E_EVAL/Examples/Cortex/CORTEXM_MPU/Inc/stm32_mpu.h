@@ -44,20 +44,19 @@
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
-
 #define RAM_ADDRESS_START                        (0x20000000UL)
-#define RAM_SIZE                                 (0x19UL << 0UL)
+#define RAM_SIZE                                 MPU_REGION_SIZE_8KB
 #define PERIPH_ADDRESS_START                     (0x40000000)
-#define PERIPH_SIZE                              (0x39UL << 0UL)
-#define MPU_FLASH_ADDRESS_START                  (0x08000000)
-#define MPU_FLASH_SIZE                           (0x27UL << 0UL)
-#define portMPU_REGION_READ_WRITE                (0x03UL << MPU_RASR_AP_Pos)
-#define portMPU_REGION_PRIVILEGED_READ_ONLY      (0x05UL << MPU_RASR_AP_Pos)
-#define portMPU_REGION_READ_ONLY                 (0x06UL << MPU_RASR_AP_Pos)
-#define portMPU_REGION_PRIVILEGED_READ_WRITE     (0x01UL << MPU_RASR_AP_Pos)
-#define RAM_REGION_NUMBER                        (0x00UL << MPU_RNR_REGION_Pos)
-#define MPU_FLASH_REGION_NUMBER                  (0x01UL << MPU_RNR_REGION_Pos)
-#define PERIPH_REGION_NUMBER                     (0x02UL << MPU_RNR_REGION_Pos)
+#define PERIPH_SIZE                              MPU_REGION_SIZE_512MB
+#define FLASH_ADDRESS_START                      (0x08000000)
+#define FLASH_SIZE                               MPU_REGION_SIZE_1MB
+#define portMPU_REGION_READ_WRITE                MPU_REGION_FULL_ACCESS
+#define portMPU_REGION_PRIVILEGED_READ_ONLY      MPU_REGION_PRIV_RO
+#define portMPU_REGION_READ_ONLY                 MPU_REGION_PRIV_RO_URO
+#define portMPU_REGION_PRIVILEGED_READ_WRITE     MPU_REGION_PRIV_RW
+#define RAM_REGION_NUMBER                        MPU_REGION_NUMBER0
+#define FLASH_REGION_NUMBER                      MPU_REGION_NUMBER1
+#define PERIPH_REGION_NUMBER                     MPU_REGION_NUMBER2
 
 
 /* Exported macro ------------------------------------------------------------*/

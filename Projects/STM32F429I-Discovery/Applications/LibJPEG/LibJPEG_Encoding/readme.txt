@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    LibJPEG/LibJPEG_Encoding/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.1
-  * @date    13-March-2015
+  * @version V1.3.0
+  * @date    14-August-2015
   * @brief   Description of the LibJPEG encoding application.
   ******************************************************************************
   * @attention
@@ -47,10 +47,10 @@ The BMP image should be copied at USB disk root.
 
 The images must have the following properties:
  - named as "image.bmp"
- - 320*240 size
+ - 240*320 size
 
 The image size can be modified by changing IMAGE_WIDTH and IMAGE_HEIGHT defines 
-in "main.h" file to decode other resolution than 320x240.
+in "main.h" file to decode other resolution than 240x320.
 
 Uncomment "SWAP_RB" define in "main.h" file if the displayed image color 
 are inverted

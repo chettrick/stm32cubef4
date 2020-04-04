@@ -1,5 +1,5 @@
 /*******************************************************************************
-*            Portions COPYRIGHT 2014 STMicroelectronics                        *
+*            Portions COPYRIGHT 2015 STMicroelectronics                        *
 *            Portions Copyright (C) 2006-2013, Brainspark B.V.                 *
 *******************************************************************************/
 
@@ -39,9 +39,9 @@
   * @file    des.c
   * @author  MCD Application Team
   * @brief   This file has been modified to support the hardware Cryptographic and
-  *          Hash processors embedded in STM32F415xx/17xx/437xx/39xx devices.
-  *          This support is activated by defining the macro "USE_STM32F4XX_HW_CRYPTO"
-  *          in PolarSSL config.h file.
+  *          Hash processors embedded in STM32F415xx/417xx/437xx/439xx/756xx devices.
+  *          This support is activated by defining the "USE_STM32F4XX_HW_CRYPTO"
+  *          or "USE_STM32F7XX_HW_CRYPTO" macro in PolarSSL config.h file.
   ******************************************************************************
   * @attention
   *
@@ -68,11 +68,11 @@
 
 #if !defined(POLARSSL_DES_ALT)
 
-#ifdef USE_STM32F4XX_HW_CRYPTO /* use HW Crypto */ 
+#if defined(USE_STM32F4XX_HW_CRYPTO) || defined(USE_STM32F7XX_HW_CRYPTO) /* use HW Crypto */ 
 CRYP_HandleTypeDef hcryp_tdes;
 CRYP_HandleTypeDef hcryp_des;
 
-#endif /* USE_STM32F4XX_HW_CRYPTO */
+#endif /* USE_STM32_HW_CRYPTO */
 
 /*
 * 32-bit integer manipulation macros (big endian)
@@ -489,13 +489,13 @@ static void des_setkey( uint32_t SK[32], const unsigned char key[DES_KEY_SIZE] )
 */
 int des_setkey_enc( des_context *ctx, const unsigned char key[DES_KEY_SIZE] )
 {
-#ifdef USE_STM32F4XX_HW_CRYPTO /* use HW Crypto */
+#if defined(USE_STM32F4XX_HW_CRYPTO) || defined(USE_STM32F7XX_HW_CRYPTO) /* use HW Crypto */
   memcpy(ctx->des_enc_key, key, DES_KEY_SIZE);
   
 #else /* use SW Crypto */
   des_setkey( ctx->sk, key );
   
-#endif /* USE_STM32F4XX_HW_CRYPTO */
+#endif /* USE_STM32_HW_CRYPTO */
   return( 0 );
 }
 
@@ -504,7 +504,7 @@ int des_setkey_enc( des_context *ctx, const unsigned char key[DES_KEY_SIZE] )
 */
 int des_setkey_dec( des_context *ctx, const unsigned char key[DES_KEY_SIZE] )
 {
-#ifdef USE_STM32F4XX_HW_CRYPTO /* use HW Crypto */
+#if defined(USE_STM32F4XX_HW_CRYPTO) || defined(USE_STM32F7XX_HW_CRYPTO) /* use HW Crypto */
   memcpy(ctx->des_dec_key, key, DES_KEY_SIZE);
   
 #else /* use SW Crypto */
@@ -517,7 +517,7 @@ int des_setkey_dec( des_context *ctx, const unsigned char key[DES_KEY_SIZE] )
     SWAP( ctx->sk[i    ], ctx->sk[30 - i] );
     SWAP( ctx->sk[i + 1], ctx->sk[31 - i] );
   }
-#endif /* USE_STM32F4XX_HW_CRYPTO */
+#endif /* USE_STM32_HW_CRYPTO */
   return( 0 );
 }
 
@@ -572,7 +572,7 @@ int des3_set2key_dec( des3_context *ctx, const unsigned char key[DES_KEY_SIZE * 
   return( 0 );
 }
 
-#ifndef USE_STM32F4XX_HW_CRYPTO /* use SW Crypto */
+#if !defined(USE_STM32F4XX_HW_CRYPTO) && !defined(USE_STM32F7XX_HW_CRYPTO) /* use SW Crypto */
 static void des3_set3key( uint32_t esk[96],
                          uint32_t dsk[96],
                          const unsigned char key[24] )
@@ -595,14 +595,14 @@ static void des3_set3key( uint32_t esk[96],
     dsk[i + 65] = esk[31 - i];
   }
 }
-#endif /* USE_STM32F4XX_HW_CRYPTO */
+#endif /* USE SW CRYPTO */
 
 /*
 * Triple-DES key schedule (168-bit, encryption)
 */
 int des3_set3key_enc( des3_context *ctx, const unsigned char key[DES_KEY_SIZE * 3] )
 {
-#ifdef USE_STM32F4XX_HW_CRYPTO /* use HW Crypto */
+#if defined(USE_STM32F4XX_HW_CRYPTO) || defined(USE_STM32F7XX_HW_CRYPTO) /* use HW Crypto */
   memcpy(ctx->tdes_enc_key, key, 24);
   
 #else /* use SW Crypto */
@@ -611,7 +611,7 @@ int des3_set3key_enc( des3_context *ctx, const unsigned char key[DES_KEY_SIZE * 
   des3_set3key( ctx->sk, sk, key );
   memset( sk, 0, sizeof( sk ) );
   
-#endif /* USE_STM32F4XX_HW_CRYPTO */
+#endif /* USE_STM32_HW_CRYPTO */
   return( 0 );
 }
 
@@ -620,7 +620,7 @@ int des3_set3key_enc( des3_context *ctx, const unsigned char key[DES_KEY_SIZE * 
 */
 int des3_set3key_dec( des3_context *ctx, const unsigned char key[DES_KEY_SIZE * 3] )
 {
-#ifdef USE_STM32F4XX_HW_CRYPTO /* use HW Crypto */
+#if defined(USE_STM32F4XX_HW_CRYPTO) || defined(USE_STM32F7XX_HW_CRYPTO) /* use HW Crypto */
   memcpy(ctx->tdes_dec_key, key, 24);
   
 #else /* use SW Crypto */
@@ -630,7 +630,7 @@ int des3_set3key_dec( des3_context *ctx, const unsigned char key[DES_KEY_SIZE * 
   des3_set3key( sk, ctx->sk, key );
   memset( sk, 0, sizeof( sk ) );
   
-#endif /* USE_STM32F4XX_HW_CRYPTO */    
+#endif /* USE_STM32_HW_CRYPTO */    
   return( 0 );
 }
 
@@ -723,7 +723,7 @@ int des3_crypt_ecb( des3_context *ctx,
                    const unsigned char input[8],
                    unsigned char output[8] )
 {
-#ifdef USE_STM32F4XX_HW_CRYPTO /* use HW Crypto */
+#if defined(USE_STM32F4XX_HW_CRYPTO) || defined(USE_STM32F7XX_HW_CRYPTO) /* use HW Crypto */
   
   /* Deinitializes the CRYP peripheral */  
   HAL_CRYP_DeInit(&hcryp_tdes);
@@ -792,7 +792,7 @@ int des3_crypt_ecb( des3_context *ctx,
   PUT_UINT32_BE( Y, output, 0 );
   PUT_UINT32_BE( X, output, 4 );
   
-#endif /* USE_STM32F4XX_HW_CRYPTO */
+#endif /* USE_STM32_HW_CRYPTO */
   return( 0 );
 }
 
@@ -808,7 +808,7 @@ int des3_crypt_cbc( des3_context *ctx,
 {
   int i;
   unsigned char temp[8];
-#ifdef USE_STM32F4XX_HW_CRYPTO
+#if defined(USE_STM32F4XX_HW_CRYPTO) || defined(USE_STM32F7XX_HW_CRYPTO) /* use HW Crypto */
   
   unsigned char *tdeskey; /* 3DES encryption/decryption key */
   
@@ -910,7 +910,7 @@ int des3_crypt_cbc( des3_context *ctx,
       length -= 8;
     }
   }
-#endif
+#endif /* USE_STM32_HW_CRYPTO */
   return( 0 );
 }
 

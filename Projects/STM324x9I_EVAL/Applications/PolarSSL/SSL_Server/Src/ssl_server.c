@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    PolarSSL/SSL_Server/Src/ssl_server.c
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    01-July-2015
+  * @version V1.4.0
+  * @date    14-August-2015
   * @brief   SSL Server main task
   ******************************************************************************
   * @attention
@@ -323,7 +323,7 @@ void ssl_DynPage(ssl_context *ssl)
   strcat((char *) buf, "<br>---------------------------------------------<br>"); 
     
   /* The list of tasks and their status */
-  vTaskList((signed char *)buf + strlen(buf));
+  vTaskList((char *)buf + strlen(buf));
   strcat((char *) buf, "<br>---------------------------------------------"); 
   strcat((char *) buf, "<br>B : Blocked, R : Ready, D : Deleted, S : Suspended<br><br>");
 

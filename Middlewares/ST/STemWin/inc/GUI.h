@@ -1,16 +1,15 @@
 /*********************************************************************
-*          Portions COPYRIGHT 2014 STMicroelectronics                *
-*          Portions SEGGER Microcontroller GmbH & Co. KG             *
+*                SEGGER Microcontroller GmbH & Co. KG                *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
 *                                                                    *
-*        (c) 1996 - 2014  SEGGER Microcontroller GmbH & Co. KG       *
+*        (c) 1996 - 2015  SEGGER Microcontroller GmbH & Co. KG       *
 *                                                                    *
 *        Internet: www.segger.com    Support:  support@segger.com    *
 *                                                                    *
 **********************************************************************
 
-** emWin V5.26 - Graphical user interface for embedded applications **
+** emWin V5.28 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -32,25 +31,6 @@ Purpose     : GUI API include file
 ---------------------------END-OF-HEADER------------------------------
 */
 
-/**
-  ******************************************************************************
-  * @attention
-  *
-  * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
-  * You may not use this file except in compliance with the License.
-  * You may obtain a copy of the License at:
-  *
-  *        http://www.st.com/software_license_agreement_liberty_v2
-  *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
-  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  * See the License for the specific language governing permissions and
-  * limitations under the License.
-  *
-  ******************************************************************************
-  */
-  
 #ifndef  GUI_H
 #define  GUI_H
 
@@ -98,6 +78,7 @@ typedef struct GUI_CONTEXT GUI_CONTEXT;
   void GUITASK_Init(void);
   void GUITASK_CopyContext(void);
   void GUITASK_SetMaxTask(int MaxTask);
+  int  GUITASK_GetMaxTask(void);
   GUI_CONTEXT * GUITASK_GetpContext(int Index);
   #define GUI_LOCK()             GUI_Lock()
   #define GUI_UNLOCK()           GUI_Unlock()
@@ -325,6 +306,23 @@ int GUI_DIRTYDEVICE_FetchEx (GUI_DIRTYDEVICE_INFO * pInfo, int LayerIndex);
 
 /*********************************************************************
 *
+*       GUI_SOFTLAYER
+*/
+typedef struct {
+  int xPos;
+  int yPos;
+  int xSize;
+  int ySize;
+  int Visible;
+} GUI_SOFTLAYER_CONFIG;
+
+int  GUI_SOFTLAYER_Enable           (GUI_SOFTLAYER_CONFIG * pConfig, int NumLayers, GUI_COLOR CompositeColor);
+int  GUI_SOFTLAYER_Refresh          (void);
+void GUI_SOFTLAYER_SetCompositeColor(U32 Color);
+int  GUI_SOFTLAYER_MULTIBUF_Enable  (int OnOff);
+
+/*********************************************************************
+*
 *       General routines
 */
 int          GUI_Init             (void);
@@ -362,6 +360,7 @@ I32  GUI__ATan2(I32 x, I32 y, I32 * ph);
 I32  GUI__ASinHQ(I32 SinHQ);
 int  GUI__CompactPixelIndices  (LCD_PIXELINDEX * pBuffer, int NumPixels, int BitsPerPixel);
 int  GUI__CompactPixelIndicesEx(LCD_PIXELINDEX * pBuffer, int NumPixels, int BitsPerPixel, const LCD_API_COLOR_CONV * pColorConvAPI);
+int  GUI__ConvertColor2Index   (LCD_PIXELINDEX * pBuffer, int NumPixels, int BitsPerPixel, const LCD_API_COLOR_CONV * pColorConvAPI, void * pResult);
 void GUI__Config(void);
 I32  GUI__CosHQ(I32 Ang1000);
 int  GUI__DivideRound     (int a, int b);
@@ -594,7 +593,6 @@ int              GUI_MOVIE_Pause        (GUI_MOVIE_HANDLE hMovie);
 int              GUI_MOVIE_Play         (GUI_MOVIE_HANDLE hMovie);
 int              GUI_MOVIE_SetPeriod    (GUI_MOVIE_HANDLE hMovie, unsigned Period);
 int              GUI_MOVIE_SetPos       (GUI_MOVIE_HANDLE hMovie, int xPos, int yPos);
-int              GUI_MOVIE_ShowScaled   (GUI_MOVIE_HANDLE hMovie, int xPos, int yPos, int num, int denom, int DoLoop);
 int              GUI_MOVIE_Show         (GUI_MOVIE_HANDLE hMovie, int xPos, int yPos, int DoLoop);
 
 /*********************************************************************
@@ -840,18 +838,23 @@ void GUI_DispSFloatMin(float v, char Fract);
 *
 *       Dynamic memory management
 */
-#if !defined(GUI_ALLOC_ALLOC)
-  /* diagnostics */
-  GUI_ALLOC_DATATYPE GUI_ALLOC_GetNumFreeBlocks(void);
-  GUI_ALLOC_DATATYPE GUI_ALLOC_GetNumFreeBytes (void);
-  GUI_ALLOC_DATATYPE GUI_ALLOC_GetNumUsedBlocks(void);
-  GUI_ALLOC_DATATYPE GUI_ALLOC_GetNumUsedBytes (void);
-#else
-  #define GUI_ALLOC_GetNumFreeBlocks() 0
-  #define GUI_ALLOC_GetNumFreeBytes()  0
-  #define GUI_ALLOC_GetNumUsedBlocks() 0
-  #define GUI_ALLOC_GetNumUsedBytes()  0
-#endif
+typedef struct {
+  U32 TotalBytes;
+  U32 FreeBytes;
+  U32 UsedBytes;
+  U32 AllocSize;
+  U32 NumFixedBytes;
+  U32 MaxUsedBytes;
+} GUI_ALLOC_INFO;
+
+GUI_ALLOC_DATATYPE GUI_ALLOC_GetNumFreeBlocks(void);
+GUI_ALLOC_DATATYPE GUI_ALLOC_GetNumFreeBytes (void);
+GUI_ALLOC_DATATYPE GUI_ALLOC_GetNumUsedBlocks(void);
+GUI_ALLOC_DATATYPE GUI_ALLOC_GetNumUsedBytes (void);
+GUI_ALLOC_DATATYPE GUI_ALLOC_GetMaxUsedBytes (void);
+
+void GUI_ALLOC_GetMemInfo  (GUI_ALLOC_INFO * pInfo);
+void GUI_ALLOC_SuppressPeak(int OnOff);
 
 GUI_HMEM           GUI_ALLOC_AllocInit       (const void * pInitData, GUI_ALLOC_DATATYPE Size);
 GUI_HMEM           GUI_ALLOC_AllocNoInit     (GUI_ALLOC_DATATYPE size);
@@ -1023,6 +1026,15 @@ void GUI_MULTIBUF_ConfirmEx      (int LayerIndex, int BufferIndex);
 int  GUI_MULTIBUF_GetNumBuffers  (void);
 int  GUI_MULTIBUF_GetNumBuffersEx(int LayerIndex);
 void GUI_MULTIBUF_UseSingleBuffer(void);
+
+/*********************************************************************
+*
+*       emWinSPY
+*/
+int  GUI_SPY_Process      (GUI_tSend pfSend, GUI_tRecv pfRecv, void * pConnectInfo);
+void GUI_SPY_SetMemHandler(GUI_tMalloc pMalloc, GUI_tFree pFree);
+int  GUI_SPY_StartServer  (void);
+int  GUI_SPY_X_StartServer(void);
 
 /*********************************************************************
 *
@@ -1227,6 +1239,8 @@ void GUI_SendKeyMsg (int Key, int Pressed);
 int  GUI_PollKeyMsg (void);
 void GUI_GetKeyState(GUI_KEY_STATE * pState);
 
+void GUI_KEY__SetHook(void (* pfHook)(const GUI_KEY_STATE *));
+
 /* Application layer */
 int  GUI_GetKey(void);
 int  GUI_WaitKey(void);
@@ -1258,6 +1272,7 @@ int  GUI_PID_GetState       (      GUI_PID_STATE * pState);
 void GUI_PID_GetCurrentState(      GUI_PID_STATE * pState);
 int  GUI_PID_IsEmpty        (void);
 int  GUI_PID_IsPressed      (void);
+void GUI_PID__SetHook       (void (* pfHook)(const GUI_PID_STATE *));
 
 /*********************************************************************
 *

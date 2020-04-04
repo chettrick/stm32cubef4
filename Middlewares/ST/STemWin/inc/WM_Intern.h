@@ -1,16 +1,15 @@
 /*********************************************************************
-*          Portions COPYRIGHT 2014 STMicroelectronics                *
-*          Portions SEGGER Microcontroller GmbH & Co. KG             *
+*                SEGGER Microcontroller GmbH & Co. KG                *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
 *                                                                    *
-*        (c) 1996 - 2014  SEGGER Microcontroller GmbH & Co. KG       *
+*        (c) 1996 - 2015  SEGGER Microcontroller GmbH & Co. KG       *
 *                                                                    *
 *        Internet: www.segger.com    Support:  support@segger.com    *
 *                                                                    *
 **********************************************************************
 
-** emWin V5.26 - Graphical user interface for embedded applications **
+** emWin V5.28 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -32,25 +31,6 @@ Purpose     : Windows manager internal include
 ----------------------------------------------------------------------
 */
 
-/**
-  ******************************************************************************
-  * @attention
-  *
-  * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
-  * You may not use this file except in compliance with the License.
-  * You may obtain a copy of the License at:
-  *
-  *        http://www.st.com/software_license_agreement_liberty_v2
-  *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
-  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  * See the License for the specific language governing permissions and
-  * limitations under the License.
-  *
-  ******************************************************************************
-  */
-  
 #ifndef WM_INTERN_H            /* Make sure we only include it once */
 #define WM_INTERN_H            /* Make sure we only include it once */
 
@@ -217,7 +197,6 @@ void    WM__MoveWindow              (WM_HWIN hWin, int dx, int dy);
 void    WM__NotifyVisChanged        (WM_HWIN hWin, GUI_RECT * pRect);
 int     WM__RectIsNZ                (const GUI_RECT * pr);
 void    WM__RemoveWindowFromList    (WM_HWIN hWin);
-void    WM__RemoveFromLinList       (WM_HWIN hWin);
 void    WM__Screen2Client           (const WM_Obj * pWin, GUI_RECT * pRect);
 void    WM__SelectTopLevelLayer     (WM_HWIN  hWin);
 void    WM__SendMsgNoData           (WM_HWIN hWin, U8 MsgId);
@@ -252,9 +231,9 @@ void    WM__SetLastTouched          (WM_HWIN hWin);
   } EFFECT_CONTEXT;
 
   int  GUI_MEMDEV__CalcParaFadeIn    (int Period, int TimeUsed);
-  void GUI_MEMDEV__ChangeBK          (EFFECT_CONTEXT * pContext);
+  void GUI_MEMDEV__ClipBK            (EFFECT_CONTEXT * pContext);
   void GUI_MEMDEV__RemoveStaticDevice(WM_HWIN hWin);
-  void GUI_MEMDEV__UndoBK            (EFFECT_CONTEXT * pContext);
+  void GUI_MEMDEV__UndoClipBK        (EFFECT_CONTEXT * pContext);
 #endif
 
 void WM__InvalidateParent(const GUI_RECT * pInvalidRect, WM_HWIN hParent, WM_HWIN hStop);

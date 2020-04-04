@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    USB_Device/AUDIO_Standalone/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    01-July-2015
+  * @version V1.2.0
+  * @date    14-August-2015
   * @brief   Description of the USB Device AUDIO application.
   ******************************************************************************
   *

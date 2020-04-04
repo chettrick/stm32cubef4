@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    gyro.h
   * @author  MCD Application Team
-  * @version V2.2.0
-  * @date    09-February-2015
+  * @version V4.0.1
+  * @date    21-July-2015
   * @brief   This header file contains the functions prototypes for the gyroscope driver.
   ******************************************************************************
   * @attention
@@ -69,8 +69,10 @@
 typedef struct
 {  
   void       (*Init)(uint16_t);
+  void       (*DeInit)(void); 
   uint8_t    (*ReadID)(void);
   void       (*Reset)(void);
+  void       (*LowPower)(uint16_t);   
   void       (*ConfigIT)(uint16_t); 
   void       (*EnableIT)(uint8_t);
   void       (*DisableIT)(uint8_t);  

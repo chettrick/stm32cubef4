@@ -8,6 +8,8 @@
 
 
 
+
+
   
   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
@@ -96,7 +98,7 @@ div.Section1
             <h1 style="margin-bottom: 18pt; text-align: center;" align="center"><span style="font-size: 20pt; font-family: Verdana; color: rgb(51, 102, 255);">Release
 Notes for PDM audio software decoding Library</span><span style="font-size: 20pt; font-family: Verdana;"><o:p></o:p></span></h1>
             <p class="MsoNormal" style="text-align: center;" align="center"><span style="font-size: 10pt; font-family: Arial; color: black;">Copyright
-2013 STMicroelectronics</span><span style="color: black;"><u1:p></u1:p><o:p></o:p></span></p>
+2015 STMicroelectronics</span><span style="color: black;"><u1:p></u1:p><o:p></o:p></span></p>
             <p class="MsoNormal" style="text-align: center;" align="center"><span style="font-size: 10pt; font-family: Arial; color: black;"><img alt="" id="_x0000_i1025" src="_htmresc/st_logo.png" style="border: 0px solid ; width: 171px; height: 126px;"></span><span style="font-size: 10pt;"><o:p></o:p></span></p>
             </td>
           </tr>
@@ -117,10 +119,10 @@ format.</span><br>
             <span style="font-size: 10pt; font-family: Verdana;">
             </span><br>
             <span style="font-size: 10pt; font-family: Verdana;">
-            </span><span style="font-size: 10pt; font-family: Verdana;">This Library includes one header file <span style="font-style: italic;">pdm_filter.h</span> and binary/object codes running on all STM32 devices based on CortexM0, CortexM3 or CortexM4F cores. The naming format is <span style="font-weight: bold;">libPDMFilter_<span style="font-style: italic;">CMx</span>_<span style="font-style: italic;">C</span>.a/.lib</span>, where:</span><br>
+            </span><span style="font-size: 10pt; font-family: Verdana;">This Library includes one header file <span style="font-style: italic;">pdm_filter.h</span> and binary/object codes running on all STM32 devices. The naming format is <span style="font-weight: bold;">libPDMFilter_<span style="font-style: italic;">CMx</span>_<span style="font-style: italic;">C</span>.a/.lib</span>, where:</span><br>
             <span style="font-size: 10pt; font-family: Verdana;"></span></div>
             <ul style="margin-top: 0cm; margin-left: 80px;" type="square">
-<li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">x: CortexMx core class (CM0, CM3, CM4 and CM4F)</span><span style="font-size: 10pt; font-family: Verdana;"></span></li><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">C: compiler (IAR, Keil and GCC)</span><span style="font-size: 10pt; font-family: Verdana;"></span><span style="font-size: 10pt; font-family: Verdana;"></span></li>
+<li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">CMx: CortexMx core class (CM0, </span><span style="font-size: 10pt; font-family: Verdana;"></span><span style="font-size: 10pt; font-family: Verdana;">CM3, CM4</span><span style="font-size: 10pt; font-family: Verdana;"> and CM7</span><span style="font-size: 10pt; font-family: Verdana;">)</span><span style="font-size: 10pt; font-family: Verdana;"></span></li><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">C: compiler (IAR, Keil and GCC)</span><span style="font-size: 10pt; font-family: Verdana;"></span><span style="font-size: 10pt; font-family: Verdana;"></span></li>
             </ul>
             <div style="margin-left: 40px;"><span style="font-size: 10pt; font-family: Verdana;">For more&nbsp;</span><span style="font-size: 10pt; font-family: Verdana;">information</span><span style="font-size: 10pt; font-family: Verdana;"> about this Library, please refer to the document <span style="font-weight: bold; font-style: italic;">"</span></span><span style="font-size: 10pt; font-family: Verdana; font-weight: bold; font-style: italic;">AN3998 </span><span style="font-size: 10pt; font-family: Verdana;"><span style="font-weight: bold; font-style: italic;">PDM audio software decoding on STM32 microcontrollers"</span> </span><span style="font-family: Verdana; font-size: 10pt;">available for download from&nbsp;STMicroelectronics website at <a href="http://www.st.com/internet/mcu/family/141.jsp" target="_blank">www.st.com</a>.</span></div>
             <ol style="margin-top: 0cm;" start="1" type="1">
@@ -130,7 +132,27 @@ format.</span><br>
 
             <span style="font-family: &quot;Times New Roman&quot;;">
             </span>
-            <h2 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;"><a name="History"></a><span style="font-size: 12pt; color: white;">Update History</span></h2><br>
+            <h2 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;"><a name="History"></a><span style="font-size: 12pt; color: white;">Update History</span></h2>
+            <h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; margin-right: 500pt; width: 200px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V2.1.0 / 31-March-2015<o:p></o:p></span></h3>
+
+
+            
+            
+            <p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">Main
+Changes<o:p></o:p></span></u></b></p>
+
+
+
+            
+            
+            <ul style="list-style-type: square;">
+              <li><span style="font-size: 10pt; font-family: Verdana;">Add Binaries for </span><span style="font-size: 10pt; font-family: Verdana;">CortexM7 (CM7) core<br>
+                </span></li>
+              <li><span style="font-size: 10pt; font-family: Verdana;"><span style="font-style: italic;">PDM_Filter_128_MSB()</span> and <span style="font-style: italic;">PDM_Filter_128_LSB()</span> functions: enhance volume setting, it was lower than expected</span></li>
+              <li><span style="font-size: 10pt; font-family: Verdana;"><span style="font-style: italic;">PDM_Filter_64_MSB()</span> function: fix issue when using more than 2 microphones<span style="font-style: italic;"><br>
+                </span></span></li>
+            </ul>
+
             <h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; margin-right: 500pt; width: 200px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V2.0.1 / 17-December-2013<o:p></o:p></span></h3>
 
             

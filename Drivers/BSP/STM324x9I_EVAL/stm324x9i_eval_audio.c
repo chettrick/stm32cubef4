@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324x9i_eval_audio.c
   * @author  MCD Application Team
-  * @version V2.1.0
-  * @date    26-June-2015
+  * @version V2.2.0
+  * @date    14-August-2015
   * @brief   This file provides the Audio driver for the STM324x9I-EVAL evaluation board.
   ******************************************************************************
   * @attention
@@ -168,7 +168,6 @@ uint16_t __IO AudioInVolume = DEFAULT_AUDIO_IN_VOLUME;
 /** @defgroup STM324x9I_EVAL_AUDIO_Private_Function_Prototypes
   * @{
   */
-static void CODEC_Reset(void);
 static void SAIx_MspInit(void);
 static void SAIx_Init(uint32_t AudioFreq);
 static void I2Sx_MspInit(void);
@@ -228,9 +227,6 @@ uint8_t BSP_AUDIO_OUT_Init(uint16_t OutputDevice, uint8_t Volume, uint32_t Audio
   /* SAI data transfer preparation:
   Prepare the Media to be used for the audio transfer from memory to SAI peripheral */
   SAIx_Init(AudioFreq);
-
-  /* Reset the Codec Registers */
-  CODEC_Reset();
   
   /* wm8994 codec initialization */
   deviceid = wm8994_drv.ReadID(AUDIO_I2C_ADDRESS);
@@ -686,24 +682,6 @@ static void SAIx_Init(uint32_t AudioFreq)
   /* Enable SAI peripheral to generate MCLK */
   __HAL_SAI_ENABLE(&haudio_out_sai);
 }
-
-/**
-  * @brief  Resets the audio codec. It restores the default configuration of the 
-  *         codec (this function shall be called before initializing the codec).
-  * @param  None
-  * @retval None
-  */
-static void CODEC_Reset(void)
-{
-  /* Initialize the audio driver structure */
-  audio_drv = &wm8994_drv; 
-  
-  audio_drv->Reset(AUDIO_I2C_ADDRESS);
-}
-
-/**
-  * @}
-  */
 
 /** @defgroup STM324x9I_EVAL_AUDIO_out_Private_Functions
   * @{

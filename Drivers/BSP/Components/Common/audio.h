@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    audio.h
   * @author  MCD Application Team
-  * @version V2.2.0
-  * @date    09-February-2015
+  * @version V4.0.1
+  * @date    21-July-2015
   * @brief   This header file contains the common defines and functions prototypes
   *          for the Audio driver.  
   ******************************************************************************
@@ -81,6 +81,7 @@
 typedef struct
 {
   uint32_t  (*Init)(uint16_t, uint16_t, uint8_t, uint32_t);
+  void      (*DeInit)(void);
   uint32_t  (*ReadID)(uint16_t);
   uint32_t  (*Play)(uint16_t, uint16_t*, uint16_t);
   uint32_t  (*Pause)(uint16_t);

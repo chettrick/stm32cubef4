@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LwIP/LwIP_UDP_Echo_Client/Inc/udp_echoclient.h
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    01-July-2015 
+  * @version V1.4.0
+  * @date    14-August-2015 
   * @brief   Header file for udp_echoclient.c
   ******************************************************************************
   * @attention

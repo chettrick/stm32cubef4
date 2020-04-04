@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm32f401_discovery_audio.c
   * @author  MCD Application Team
-  * @version V2.1.3
-  * @date    02-March-2015
+  * @version V2.2.0
+  * @date    14-August-2015
   * @brief   This file provides the Audio driver for the STM32F401-Discovery 
   *          board.  
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:

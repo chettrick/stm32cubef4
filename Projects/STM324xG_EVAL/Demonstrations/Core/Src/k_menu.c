@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    k_menu.c
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    01-March-2015   
+  * @version V1.4.0
+  * @date    18-August-2015
   * @brief   This file provides the kernel menu functions 
   ******************************************************************************
   * @attention

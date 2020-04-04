@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f4xx_it.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    01-July-2015
+  * @version V1.2.0
+  * @date    14-August-2015
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
@@ -269,7 +269,7 @@ void DCMI_IRQHandler(void)
   * @param  None
   * @retval None
   */
-void QuadSPI_IRQHandler(void)
+void QUADSPI_IRQHandler(void)
 {
   HAL_QSPI_IRQHandler(&QSPIHandle);
 }

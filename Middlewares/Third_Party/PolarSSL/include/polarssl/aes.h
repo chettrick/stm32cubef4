@@ -1,5 +1,5 @@
 /*******************************************************************************
-*            Portions COPYRIGHT 2014 STMicroelectronics                        *
+*            Portions COPYRIGHT 2015 STMicroelectronics                        *
 *            Portions Copyright (C) 2006-2013, Brainspark B.V.                 *
 *******************************************************************************/
 
@@ -35,9 +35,9 @@
   * @file    aes.h
   * @author  MCD Application Team
   * @brief   This file has been modified to support the hardware Cryptographic and
-  *          Hash processors embedded in STM32F415xx/17xx/437xx/39xx devices.
-  *          This support is activated by defining the macro "USE_STM32F4XX_HW_CRYPTO"
-  *          in PolarSSL config.h file.
+  *          Hash processors embedded in STM32F415xx/417xx/437xx/439xx/756xx devices.
+  *          This support is activated by defining the "USE_STM32F4XX_HW_CRYPTO"
+  *          or "USE_STM32F7XX_HW_CRYPTO" macro in PolarSSL config.h file.
   ******************************************************************************
   * @attention
   *
@@ -88,10 +88,10 @@ typedef struct
     int nr;                     /*!<  number of rounds  */
     uint32_t *rk;               /*!<  AES round keys    */
     uint32_t buf[68];           /*!<  unaligned data    */
-#ifdef USE_STM32F4XX_HW_CRYPTO 
+#if defined(USE_STM32F4XX_HW_CRYPTO) || defined(USE_STM32F7XX_HW_CRYPTO) 
     unsigned char aes_enc_key[32]; /* Encryption key */
     unsigned char aes_dec_key[32]; /* Decryption key */
-#endif /* USE_STM32F4XX_HW_CRYPTO */
+#endif /* USE_STM32_HW_CRYPTO */
 }
 aes_context;
 

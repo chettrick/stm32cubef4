@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32446e_eval.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    11-March-2015
+  * @version V1.1.0
+  * @date    14-August-2015
   * @brief   This file provides a set of firmware functions to manage LEDs, 
   *          push-buttons and COM ports available on STM32446E-EVAL evaluation
   *          board(MB1045) RevB from STMicroelectronics.
@@ -79,11 +79,11 @@ typedef struct
   * @{
   */
 /**
- * @brief STM32446E EVAL BSP Driver version number V2.0.2
+ * @brief STM32446E EVAL BSP Driver version number V1.1.0
    */
-#define __STM32446E_EVAL_BSP_VERSION_MAIN   (0x02) /*!< [31:24] main version */
-#define __STM32446E_EVAL_BSP_VERSION_SUB1   (0x00) /*!< [23:16] sub1 version */
-#define __STM32446E_EVAL_BSP_VERSION_SUB2   (0x02) /*!< [15:8]  sub2 version */
+#define __STM32446E_EVAL_BSP_VERSION_MAIN   (0x01) /*!< [31:24] main version */
+#define __STM32446E_EVAL_BSP_VERSION_SUB1   (0x01) /*!< [23:16] sub1 version */
+#define __STM32446E_EVAL_BSP_VERSION_SUB2   (0x00) /*!< [15:8]  sub2 version */
 #define __STM32446E_EVAL_BSP_VERSION_RC     (0x00) /*!< [7:0]  release candidate */
 #define __STM32446E_EVAL_BSP_VERSION         ((__STM32446E_EVAL_BSP_VERSION_MAIN << 24)\
                                              |(__STM32446E_EVAL_BSP_VERSION_SUB1 << 16)\
@@ -195,6 +195,7 @@ uint16_t        LCD_IO_ReadData(void);
 
 /* AUDIO IO functions */
 void            AUDIO_IO_Init(void);
+void            AUDIO_IO_DeInit(void);
 void            AUDIO_IO_Write(uint8_t Addr, uint16_t Reg, uint16_t Value);
 uint16_t        AUDIO_IO_Read(uint8_t Addr, uint16_t Reg);
 void            AUDIO_IO_Delay(uint32_t Delay);
@@ -1176,6 +1177,14 @@ uint16_t LCD_IO_ReadData(void)
 void AUDIO_IO_Init(void) 
 {
   I2Cx_Init();
+}
+
+/**
+  * @brief  DeInitializes Audio low level.
+  */
+void AUDIO_IO_DeInit(void)
+{
+
 }
 
 /**

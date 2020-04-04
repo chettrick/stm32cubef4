@@ -1,5 +1,5 @@
 /*---------------------------------------------------------------------------/
-/  FatFs - FAT file system module configuration file  R0.10b  (C)ChaN, 2014
+/  FatFs - FAT file system module configuration file  R0.11  (C)ChaN, 2014
 /----------------------------------------------------------------------------/
 /
 / CAUTION! Do not forget to make clean the project after any changes to
@@ -7,7 +7,7 @@
 /
 /----------------------------------------------------------------------------*/
 #ifndef _FFCONF
-#define _FFCONF 8051 /* Revision ID */
+#define _FFCONF 32020 /* Revision ID */
 
 /*-----------------------------------------------------------------------------/
 / Functions and Buffer Configurations

@@ -5,8 +5,8 @@
   ******************************************************************************
   * @file    Display/LTDC_AnimatedPictureFromSDCard/readme.txt 
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    01-July-2015
+  * @version V1.4.0
+  * @date    14-August-2015
   * @brief   Description of the LTDC animated picture from SD card application.
   ******************************************************************************
   * @attention
@@ -47,7 +47,7 @@
   frequency to be seen like one animated image.
  
   The user has to copy the two directories "BACK" and "TOP" available 
-  with this under "/Utilities/Pictures/Animated" under the micro SD card root. 
+  with this under "/Utilities/Media/Pictures/Animated" under the micro SD card root. 
  
   * Background picture display
   ----------------------------           
@@ -127,7 +127,7 @@
 @par How to use it ?
 
 In order to make the program work, you must do the following :
- - The two directories "BACK" and "TOP" under "/Utilities/Pictures/Animated" 
+ - The two directories "BACK" and "TOP" under "/Utilities/Media/Pictures/Animated" 
    folder must be copied at the micro SD card root.
  - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory

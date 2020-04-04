@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    WIN32/STemWin_Simulation/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-December-2014  
+  * @version V1.2.0
+  * @date    14-August-2015  
   * @brief   Description of the STemWin Simulation project. 
   ******************************************************************************
   *

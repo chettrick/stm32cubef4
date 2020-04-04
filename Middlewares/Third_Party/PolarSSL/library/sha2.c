@@ -1,5 +1,5 @@
 /*******************************************************************************
-*            Portions COPYRIGHT 2014 STMicroelectronics                        *
+*            Portions COPYRIGHT 2015 STMicroelectronics                        *
 *            Portions Copyright (C) 2006-2013, Brainspark B.V.                 *
 *******************************************************************************/
 
@@ -38,9 +38,9 @@
   * @file    sha2.c
   * @author  MCD Application Team
   * @brief   This file has been modified to support the hardware Cryptographic and
-  *          Hash processors embedded in STM32F415xx/17xx/437xx/39xx devices.
-  *          This support is activated by defining the macro "USE_STM32F4XX_HW_CRYPTO"
-  *          in PolarSSL config.h file.
+  *          Hash processors embedded in STM32F437xx/439xx/756xx devices.
+  *          This support is activated by defining the "USE_STM32F4XX_HW_CRYPTO"
+  *          or "USE_STM32F7XX_HW_CRYPTO" macro in PolarSSL config.h file.
   ******************************************************************************
   * @attention
   *
@@ -69,9 +69,9 @@
 #include <stdio.h>
 #endif
 
-#if defined(USE_STM32F4XX_HW_CRYPTO) && defined(STM32F439xx) /* use HW Crypto */ 
+#if (defined(USE_STM32F4XX_HW_CRYPTO) || defined(USE_STM32F7XX_HW_CRYPTO)) && (defined(STM32F439xx) || defined(STM32F756xx)) /* use HW Crypto */ 
 HASH_HandleTypeDef hhash_sha2;
-#endif /* USE_STM32F4XX_HW_CRYPTO */
+#endif /* USE_STM32_HW_CRYPTO */
 
 #if !defined(POLARSSL_SHA2_ALT)
 
@@ -355,7 +355,7 @@ void sha2_finish( sha2_context *ctx, unsigned char output[32] )
 void sha2( const unsigned char *input, size_t ilen,
            unsigned char output[32], int is224 )
 {
-#if defined(USE_STM32F4XX_HW_CRYPTO) && defined(STM32F439xx) /* use HW Crypto */
+#if (defined(USE_STM32F4XX_HW_CRYPTO) || defined(USE_STM32F7XX_HW_CRYPTO)) && (defined(STM32F439xx) || defined(STM32F756xx)) /* use HW Crypto */
   /* HASH IP initialization */
   HAL_HASH_DeInit(&hhash_sha2);
 
@@ -381,7 +381,7 @@ void sha2( const unsigned char *input, size_t ilen,
     sha2_finish( &ctx, output );
 
     memset( &ctx, 0, sizeof( sha2_context ) );
-#endif /* USE_STM32F4XX_HW_CRYPTO */
+#endif /* USE_STM32_HW_CRYPTO */
 }
 
 #if defined(POLARSSL_FS_IO)
@@ -493,7 +493,7 @@ void sha2_hmac( const unsigned char *key, size_t keylen,
                 const unsigned char *input, size_t ilen,
                 unsigned char output[32], int is224 )
 {
-#if defined(USE_STM32F4XX_HW_CRYPTO) && defined(STM32F439xx) /* use HW Crypto */
+#if (defined(USE_STM32F4XX_HW_CRYPTO) || defined(USE_STM32F7XX_HW_CRYPTO)) && (defined(STM32F439xx) || defined(STM32F756xx)) /* use HW Crypto */
 
   /* HASH IP initialization */
   HAL_HASH_DeInit(&hhash_sha2);
@@ -522,7 +522,7 @@ void sha2_hmac( const unsigned char *key, size_t keylen,
     sha2_hmac_finish( &ctx, output );
 
     memset( &ctx, 0, sizeof( sha2_context ) );
-#endif /* USE_STM32F4XX_HW_CRYPTO */
+#endif /* USE_STM32_HW_CRYPTO */
 }
 
 #if defined(POLARSSL_SELF_TEST)

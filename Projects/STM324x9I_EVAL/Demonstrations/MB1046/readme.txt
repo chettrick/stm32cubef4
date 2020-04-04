@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    Demonstrations/MB1046/readme.txt 
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    01-July-2015
+  * @version V1.4.0
+  * @date    14-August-2015  
   * @brief   Description of MB1046 Demonstration
   ******************************************************************************
   *
@@ -57,7 +57,7 @@ Below you find an overview of the different offered module in the demonstration:
  storage unit(s), to delete or to open a selected file. The file list structure 
  is built during the media connection and updated after a connection status change of one
  of the used media.
- User can use the images available under "Utilities/Pictures/JPG" or any other ones.
+ User can use the images available under "Utilities/Media/Pictures/JPG" or any other ones.
   
  + Game
  -------
@@ -77,7 +77,7 @@ Below you find an overview of the different offered module in the demonstration:
  The audio player module provides a complete audio solution based on the STM32F4xx and
  delivers a high-quality music experience. It supports playing music in WAV format but may
  be extended to support other compressed formats such as MP3 and WMA audio formats.
- You can use the *.wav audio provided under "Utilities/Audio" or any other ones.
+ You can use the *.wav audio provided under "Utilities/Media/Audio" or any other ones.
   
  + Video
  -------

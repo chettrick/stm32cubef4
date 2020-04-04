@@ -133,6 +133,7 @@ void HAL_DAC_MspDeInit(DAC_HandleTypeDef* hdac)
   
   /*##-3- Disable the DMA Streams ############################################*/
   /* De-Initialize the DMA Stream associate to Channel1 */
+  hdma_dac1.Instance = DACx_DMA_STREAM1;
   HAL_DMA_DeInit(&hdma_dac1);
     
   /*##-4- Disable the NVIC for DMA ###########################################*/

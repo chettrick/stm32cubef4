@@ -59,7 +59,7 @@
 							<tool id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.1188646484" name="MCU GCC Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker">
 								<option id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script.$(UID)" name="Linker Script (-T)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script" value="..\STM32F429NIHx_FLASH.ld" valueType="string"/>
 								<option id="gnu.c.link.option.libs.2086104375" name="Libraries (-l)" superClass="gnu.c.link.option.libs" valueType="libs">
-									<listOptionValue builtIn="false" value=":STemWin526_CM4_GCC.a"/>
+									<listOptionValue builtIn="false" value=":STemWin528_CM4_GCC.a"/>
 								</option>
 								<option id="gnu.c.link.option.paths.1126963068" name="Library search path (-L)" superClass="gnu.c.link.option.paths" valueType="libPaths">
 									<listOptionValue builtIn="false" value="&quot;..\..\..\..\..\..\..\..\Middlewares\ST\STemWin\Lib&quot;"/>

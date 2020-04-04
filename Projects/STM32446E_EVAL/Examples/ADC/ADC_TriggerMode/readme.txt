@@ -54,8 +54,10 @@ Configuration of the timer to trig an ADC measure at 20 Khz:
   The function SystemClock_Config() configures the clock divider as follows:
   1) The system clock is 180 MHz.
   2) AHB  Prescaler = 1 => AHB clock is 180 MHz.
-  3) APB1 Prescaler = 4 => PCLK1 clock is 180 MHz/4.
+  3) APB1 Prescaler = 4 => PCLK1 clock is 180 MHz/4 = 45 MHz.
   4) For Timer 2, as APB1 Prescaler = 4, Timer 2 Clock is PCLK1 clock X 2 = 180 MHz/2.
+  5) APB2 Prescaler = 2 => PCLK2 clock is 180 MHz/2 = 90 MHz.
+  6) For ADC, as ADC Prescaler = 4, ADC Clock is PCLK2 clock / 4 = 22.5 MHz.
 
   For a 20 Khz frequency, we need (180 MHz/2) / 20 KHz = 5000 clock cycle.
   So, in TIM_Config function, we set the following period: htim.Init.Period = 5000;

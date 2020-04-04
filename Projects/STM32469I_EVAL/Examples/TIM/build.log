@@ -1,0 +1,29 @@
+Thursday, 07/23/15 14:17:43 PM
+EWARM 7.2.0: C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.2
+MDK-ARM 5.14: C:\Keil_v5
+TrueSTUDIO  5.3.0: C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM Pro 5.3.0
+RIDE : C:\Raisonance\Ride: Warning: This directory doesn't exist
+SW4STM32 : C:\Ac6\SystemWorkbench 1.2 - TSTP
+
+Build log file:  C:\STM32Cube_FW_F4_V1.8.0RC3\Projects\STM32469I_EVAL\Examples\TIM/build.log
+Build Start
+14:17:44: Building C:\STM32Cube_FW_F4_V1.8.0RC3\Projects\STM32469I_EVAL\Examples\TIM\TIM_6Steps/SW4STM32 -> OK
+14:18:42: Building C:\STM32Cube_FW_F4_V1.8.0RC3\Projects\STM32469I_EVAL\Examples\TIM\TIM_7PWMOutput/SW4STM32 -> OK
+14:19:43: Building C:\STM32Cube_FW_F4_V1.8.0RC3\Projects\STM32469I_EVAL\Examples\TIM\TIM_CascadeSynchro/SW4STM32 -> ERROR
+14:19:52: Building C:\STM32Cube_FW_F4_V1.8.0RC3\Projects\STM32469I_EVAL\Examples\TIM\TIM_ComplementarySignals/SW4STM32 -> ERROR
+14:20:05: Building C:\STM32Cube_FW_F4_V1.8.0RC3\Projects\STM32469I_EVAL\Examples\TIM\TIM_DMA/SW4STM32 -> OK
+14:21:00: Building C:\STM32Cube_FW_F4_V1.8.0RC3\Projects\STM32469I_EVAL\Examples\TIM\TIM_DMABurst/SW4STM32 -> OK
+14:22:03: Building C:\STM32Cube_FW_F4_V1.8.0RC3\Projects\STM32469I_EVAL\Examples\TIM\TIM_Encoder/SW4STM32 -> OK
+14:22:53: Building C:\STM32Cube_FW_F4_V1.8.0RC3\Projects\STM32469I_EVAL\Examples\TIM\TIM_ExtTriggerSynchro/SW4STM32 -> OK
+14:23:50: Building C:\STM32Cube_FW_F4_V1.8.0RC3\Projects\STM32469I_EVAL\Examples\TIM\TIM_InputCapture/SW4STM32 -> OK
+14:24:43: Building C:\STM32Cube_FW_F4_V1.8.0RC3\Projects\STM32469I_EVAL\Examples\TIM\TIM_OCActive/SW4STM32 -> ERROR
+14:25:00: Building C:\STM32Cube_FW_F4_V1.8.0RC3\Projects\STM32469I_EVAL\Examples\TIM\TIM_OCInactive/SW4STM32 -> ERROR
+14:25:17: Building C:\STM32Cube_FW_F4_V1.8.0RC3\Projects\STM32469I_EVAL\Examples\TIM\TIM_OCToggle/SW4STM32 -> OK
+14:26:06: Building C:\STM32Cube_FW_F4_V1.8.0RC3\Projects\STM32469I_EVAL\Examples\TIM\TIM_OnePulse/SW4STM32 -> ERROR
+14:26:22: Building C:\STM32Cube_FW_F4_V1.8.0RC3\Projects\STM32469I_EVAL\Examples\TIM\TIM_PWMInput/SW4STM32 -> OK
+14:27:16: Building C:\STM32Cube_FW_F4_V1.8.0RC3\Projects\STM32469I_EVAL\Examples\TIM\TIM_PWMOutput/SW4STM32 -> OK
+14:28:10: Building C:\STM32Cube_FW_F4_V1.8.0RC3\Projects\STM32469I_EVAL\Examples\TIM\TIM_ParallelSynchro/SW4STM32 -> ERROR
+14:28:22: Building C:\STM32Cube_FW_F4_V1.8.0RC3\Projects\STM32469I_EVAL\Examples\TIM\TIM_PrescalerSelection/SW4STM32 -> OK
+14:29:17: Building C:\STM32Cube_FW_F4_V1.8.0RC3\Projects\STM32469I_EVAL\Examples\TIM\TIM_Synchronization/SW4STM32 -> OK
+14:30:10: Building C:\STM32Cube_FW_F4_V1.8.0RC3\Projects\STM32469I_EVAL\Examples\TIM\TIM_TimeBase/SW4STM32 -> OK
+Buil End

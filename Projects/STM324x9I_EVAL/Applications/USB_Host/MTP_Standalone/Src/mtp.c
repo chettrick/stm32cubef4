@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Host/MTP_Standalone/Src/mtp.c 
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    01-July-2015
+  * @version V1.4.0
+  * @date    14-August-2015
   * @brief   This file provides APIs to explore MTP Storage Objects
   ******************************************************************************
   * @attention

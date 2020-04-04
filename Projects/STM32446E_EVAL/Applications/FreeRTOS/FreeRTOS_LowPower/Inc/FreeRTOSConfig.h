@@ -94,7 +94,7 @@
 #define configTICK_RATE_HZ			( ( TickType_t ) 1000 )
 #define configMAX_PRIORITIES			(  7 )
 #define configMINIMAL_STACK_SIZE		( ( uint16_t ) 128 )
-#define configTOTAL_HEAP_SIZE			( ( size_t ) ( 15 * 1024 ) )
+#define configTOTAL_HEAP_SIZE       ( ( size_t ) ( 3 * 1024 ) )          /* 3 Kbytes */
 #define configMAX_TASK_NAME_LEN			( 16 )
 #define configUSE_TRACE_FACILITY		1
 #define configUSE_16_BIT_TICKS			0
@@ -164,8 +164,8 @@ standard names. */
 #define xPortPendSVHandler PendSV_Handler
 
 #if defined(__ICCARM__) || defined(__CC_ARM) || defined(__GNUC__)
-void PreSleepProcessing(unsigned long ulExpectedIdleTime);
-void PostSleepProcessing(unsigned long ulExpectedIdleTime);
+void PreSleepProcessing(uint32_t* ulExpectedIdleTime);
+void PostSleepProcessing(uint32_t* ulExpectedIdleTime);
 #endif
 /* The configPRE_SLEEP_PROCESSING() and configPOST_SLEEP_PROCESSING() macros
 allow the application writer to add additional code before and after the MCU is

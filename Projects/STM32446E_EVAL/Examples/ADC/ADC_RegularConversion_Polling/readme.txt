@@ -46,9 +46,9 @@ When the end of conversion occurs, the converted data of ADC1 DR register is
 affected to the uhADCxConvertedValue variable.
 
 Conversion time (reference manual, "Reset and clock control" and "ADC clocks" sections):
-  1) the system clock is 180 MHz. APB2 = 90MHz and ADC clock = APB2/2
+  1) the system clock is 180 MHz. APB2 = 90MHz and ADC clock = APB2/4
   2) __HAL_RCC_ADC_CONFIG() macro in HAL_ADC_MspInit() API sets the system clock as ADC asynchronous clock source 
-  2) ClockPrescaler field of initialization structure is set to ADC_CLOCKPRESCALER_PCLK_DIV2
+  2) ClockPrescaler field of initialization structure is set to ADC_CLOCKPRESCALER_PCLK_DIV4
      => the input ADC clock is set in asynchronous clock mode   
      => the input ADC clock is the undivided system clock 
 
@@ -56,7 +56,7 @@ Conversion time (reference manual, "Reset and clock control" and "ADC clocks" se
   Sampling time is set to ADC_SAMPLETIME_6CYCLES_5 (6.5 cycles).
   ConvTime = Sampling time + 12.5 ADC clock cycles.
            = 19 clock cycles
-           = (19 / 45 MHz) = 422.2 ns 
+           = (19 / 22.5 MHz) = 844.4 ns 
                     
 
 User can vary the ADC_CHANNEL_4 voltage using the Eval Board potentiometer (CN21) connected to PA.04.

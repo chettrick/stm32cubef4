@@ -180,7 +180,7 @@ __vector_table
         DCD     0                                 ; Reserved
         DCD     0                                 ; Reserved
         DCD     SAI2_IRQHandler                   ; SAI2
-        DCD     QuadSPI_IRQHandler                ; QuadSPI
+        DCD     QUADSPI_IRQHandler                ; QuadSPI
         DCD     CEC_IRQHandler                    ; CEC
         DCD     SPDIF_RX_IRQHandler               ; SPDIF RX
         DCD     FMPI2C1_Event_IRQHandler          ; FMPI2C1 Event
@@ -651,10 +651,10 @@ SAI1_IRQHandler
 SAI2_IRQHandler 
         B SAI2_IRQHandler                     
 
-        PUBWEAK QuadSPI_IRQHandler
+        PUBWEAK QUADSPI_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1) 
-QuadSPI_IRQHandler 
-        B QuadSPI_IRQHandler                 
+QUADSPI_IRQHandler 
+        B QUADSPI_IRQHandler                 
 
         PUBWEAK CEC_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1) 

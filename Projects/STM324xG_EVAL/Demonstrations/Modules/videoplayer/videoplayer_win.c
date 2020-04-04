@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    videoplayer_win.c
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    01-March-2015   
+  * @version V1.4.0
+  * @date    18-August-2015
   * @brief   Video player functions
   ******************************************************************************
   * @attention
@@ -63,6 +63,7 @@ VideoSettingsTypeDef;
 
 static void Startup(WM_HWIN hWin, uint16_t xpos, uint16_t ypos);
 static void VideoDirectOpen(char *filename);
+extern int GUI_MOVIE_ShowScaled   (GUI_MOVIE_HANDLE hMovie, int xPos, int yPos, int num, int denom, int DoLoop);
 
 /* Private typedef -----------------------------------------------------------*/
 K_ModuleItem_Typedef  video_player =

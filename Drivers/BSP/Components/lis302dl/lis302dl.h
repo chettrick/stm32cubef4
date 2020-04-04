@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    lis302dl.h
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    02-December-2014
+  * @version V2.0.0
+  * @date    03-August-2015
   * @brief   This file contains all the functions prototypes for the lis302dl.c
   *          firmware driver.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -674,6 +674,7 @@ typedef struct
   * @{
   */ 
 void    LIS302DL_Init(uint16_t InitStruct);
+void    LIS302DL_DeInit(void);
 uint8_t LIS302DL_ReadID(void);
 void    LIS302DL_FilterConfig(uint8_t FilterStruct);
 void    LIS302DL_InterruptConfig(LIS302DL_InterruptConfigTypeDef *LIS302DL_IntConfigStruct);

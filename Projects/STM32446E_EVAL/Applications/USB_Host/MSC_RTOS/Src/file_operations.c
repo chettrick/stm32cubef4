@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Host/MSC_RTOS/Src/file_operations.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    01-July-2015
+  * @version V1.2.0
+  * @date    14-August-2015
   * @brief   Write/read file on the disk.
   ******************************************************************************
   * @attention

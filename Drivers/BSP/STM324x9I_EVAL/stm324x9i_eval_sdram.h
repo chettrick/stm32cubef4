@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324x9i_eval_sdram.h
   * @author  MCD Application Team
-  * @version V2.1.0
-  * @date    26-June-2015
+  * @version V2.2.0
+  * @date    14-August-2015
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm324x9i_eval_sdram.c driver.
   ******************************************************************************

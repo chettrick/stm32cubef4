@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    mfxstm32l152.h
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    11-February-2015
+  * @version V2.0.0
+  * @date    24-June-2015
   * @brief   This file contains all the functions prototypes for the
   *          mfxstm32l152.c IO expander driver.
   ******************************************************************************
@@ -416,6 +416,32 @@ typedef struct
   */
 #define MFXSTM32L152_REG_ADR_IDD_SHUNT_USED     ((uint8_t)0x1A)
 
+/**
+  * @brief  Register address: shunt stabilisation delay registers (R/W)
+  */
+#define MFXSTM32L152_REG_ADR_IDD_SH0_STABILIZATION  ((uint8_t)0x90)
+#define MFXSTM32L152_REG_ADR_IDD_SH1_STABILIZATION  ((uint8_t)0x91)
+#define MFXSTM32L152_REG_ADR_IDD_SH2_STABILIZATION  ((uint8_t)0x92)
+#define MFXSTM32L152_REG_ADR_IDD_SH3_STABILIZATION  ((uint8_t)0x93)
+#define MFXSTM32L152_REG_ADR_IDD_SH4_STABILIZATION  ((uint8_t)0x94)
+
+/**
+  * @brief  Register address: Idd number of measurements register (R/W)
+  */
+#define MFXSTM32L152_REG_ADR_IDD_NBR_OF_MEAS    ((uint8_t)0x96)
+
+/**
+  * @brief  Register address: Idd delta delay between 2 measurements register (R/W)
+  */
+#define MFXSTM32L152_REG_ADR_IDD_MEAS_DELTA_DELAY  ((uint8_t)0x97)
+
+/**
+  * @brief  Register address: Idd number of shunt on board register (R/W)
+  */
+#define MFXSTM32L152_REG_ADR_IDD_SHUNTS_ON_BOARD  ((uint8_t)0x98)
+
+ 
+
 /** @defgroup IDD_Control_Register_Defines  IDD Control Register Defines
   * @{
   */
@@ -465,7 +491,26 @@ typedef struct
   * @brief  IDD PreDelay unit
   */
 #define MFXSTM32L152_IDD_PREDELAY_0_5_MS                ((uint8_t) 0x00)
-#define MFXSTM32L152_IDD_PREDELAY_10_MS                 ((uint8_t) 0x80)
+#define MFXSTM32L152_IDD_PREDELAY_20_MS                 ((uint8_t) 0x80)
+/**
+  * @}
+  */
+
+/** @defgroup IDD_DeltaDelay_Defines  IDD Delta DElay Defines
+  * @{
+  */
+/**
+  * @brief  IDD Delta Delay masks
+  */
+#define MFXSTM32L152_IDD_DELTADELAY_UNIT                ((uint8_t) 0x80)
+#define MFXSTM32L152_IDD_DELTADELAY_VALUE               ((uint8_t) 0x7F)
+
+
+/**
+  * @brief  IDD Delta Delay unit
+  */
+#define MFXSTM32L152_IDD_DELTADELAY_0_5_MS              ((uint8_t) 0x00)
+#define MFXSTM32L152_IDD_DELTADELAY_20_MS               ((uint8_t) 0x80)
 
 
 /**
@@ -549,7 +594,9 @@ void     mfxstm32l152_TS_ClearIT (uint16_t DeviceAddr);
   */
 void     mfxstm32l152_IDD_Start(uint16_t DeviceAddr);
 void     mfxstm32l152_IDD_Config(uint16_t DeviceAddr, IDD_ConfigTypeDef MfxIddConfig);
+void     mfxstm32l152_IDD_ConfigShuntNbLimit(uint16_t DeviceAddr, uint8_t ShuntNbLimit);
 void     mfxstm32l152_IDD_GetValue(uint16_t DeviceAddr, uint32_t *ReadValue);
+uint8_t  mfxstm32l152_IDD_GetShuntUsed(uint16_t DeviceAddr);
 void     mfxstm32l152_IDD_EnableIT(uint16_t DeviceAddr);
 void     mfxstm32l152_IDD_ClearIT(uint16_t DeviceAddr);
 uint8_t  mfxstm32l152_IDD_GetITStatus(uint16_t DeviceAddr);
@@ -566,6 +613,8 @@ uint8_t  mfxstm32l152_Error_GetITStatus(uint16_t DeviceAddr);
 void     mfxstm32l152_Error_DisableIT(uint16_t DeviceAddr);
 
 uint8_t  mfxstm32l152_ReadReg(uint16_t DeviceAddr, uint8_t RegAddr);
+void     mfxstm32l152_WriteReg(uint16_t DeviceAddr, uint8_t RegAddr, uint8_t Value);
+
 
 
 /** 

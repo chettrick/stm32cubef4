@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    camera.h
   * @author  MCD Application Team
-  * @version V2.2.0
-  * @date    09-February-2015
+  * @version V4.0.1
+  * @date    21-July-2015
   * @brief   This header file contains the common defines and functions prototypes
   *          for the camera driver.   
   ******************************************************************************
@@ -110,10 +110,12 @@ typedef struct
 #define CAMERA_BLACK_WHITE_BW_NEGATIVE  0x02   /* BW and Negative effect      */
 #define CAMERA_BLACK_WHITE_NORMAL       0x03   /* Normal effect               */
                                         
-#define CAMERA_COLOR_EFFECT_ANTIQUE     0x00   /* Antique effect              */
+#define CAMERA_COLOR_EFFECT_NONE        0x00   /* No effects                  */
 #define CAMERA_COLOR_EFFECT_BLUE        0x01   /* Blue effect                 */
 #define CAMERA_COLOR_EFFECT_GREEN       0x02   /* Green effect                */
 #define CAMERA_COLOR_EFFECT_RED         0x03   /* Red effect                  */
+#define CAMERA_COLOR_EFFECT_ANTIQUE     0x04   /* Antique effect              */
+
 /**
   * @}
   */

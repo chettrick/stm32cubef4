@@ -104,8 +104,8 @@ Firstly, push the User button to start first Test.
     board and can be easily tailored to any other supported device and development board.
 
   - Use STLink utility, available on www.st.com or any other in system programming
-    tool to load "/Utilities/Media/Audio/art_of_gard_448K.bin" file to the STM32 
-    internal flash at the address 0x08080000.
+    tool to load "/Utilities/Media/Audio/art_of_gard_128K.bin" file to the STM32 
+    internal flash at the address 0x08020000.
 
 
 @par How to use it ? 

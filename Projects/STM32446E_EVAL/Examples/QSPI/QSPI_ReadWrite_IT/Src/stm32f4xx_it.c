@@ -172,7 +172,7 @@ void SysTick_Handler(void)
   * @param  None
   * @retval None
   */
-void QuadSPI_IRQHandler(void)
+void QUADSPI_IRQHandler(void)
 {
   HAL_QSPI_IRQHandler(&QSPIHandle);
 }

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324x9i_eval_eeprom.h
   * @author  MCD Application Team
-  * @version V2.1.0
-  * @date    26-June-2015
+  * @version V2.2.0
+  * @date    14-August-2015
   * @brief   This file contains all the functions prototypes for 
   *          the stm324x9i_eval_eeprom.c firmware driver.
   ******************************************************************************

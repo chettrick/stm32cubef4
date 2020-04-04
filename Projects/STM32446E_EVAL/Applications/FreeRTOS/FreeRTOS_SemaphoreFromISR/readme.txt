@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    FreeRTOS/FreeRTOS_SemaphoreFromISR/readme.txt
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    01-July-2015 
+  * @version V1.2.0
+  * @date    14-August-2015 
   * @brief   Description of the FreeRTOS Semaphore From ISR example.
   ******************************************************************************
   *
@@ -45,6 +45,8 @@ is given to the SemaphoreTest Thread to toggle the LED1
       
 @note The application need to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
+	  
+@note The FreeRTOS heap size configTOTAL_HEAP_SIZE defined in FreeRTOSConfig.h is set according to the OS resources memory requirements of the application with +10% margin and rounded to the upper Kbyte boundary.
 
 For more details about FreeRTOS implementation on STM32Cube, please refer to UM1722 "Developing Applications 
 on STM32Cube with RTOS".

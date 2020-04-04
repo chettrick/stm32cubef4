@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    lis302dl.c
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    02-December-2014
+  * @version V2.0.0
+  * @date    03-August-2015
   * @brief   This file provides a set of functions needed to manage the LIS302DL
   *          MEMS accelerometer.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -85,9 +85,11 @@
 ACCELERO_DrvTypeDef Lis302dlDrv =
 {
   LIS302DL_Init,
+  LIS302DL_DeInit,
   LIS302DL_ReadID,
   LIS302DL_RebootCmd,
   LIS302DL_Click_IntConfig,
+  0,
   0,
   0,
   0,
@@ -129,6 +131,16 @@ void LIS302DL_Init(uint16_t InitStruct)
 
   /* Write value to MEMS CTRL_REG1 register */
   ACCELERO_IO_Write(&ctrl, LIS302DL_CTRL_REG1_ADDR, 1);
+}
+
+/**
+  * @brief  LIS302DL De-Initialization.
+  * @param  None
+  * @retval None.
+  */
+void LIS302DL_DeInit(void)
+{
+  
 }
 
 /**

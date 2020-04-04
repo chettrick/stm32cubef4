@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    k_bsp.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    01-July-2015
+  * @version V1.2.0
+  * @date    14-August-2015
   * @brief   This file provides the kernel bsp functions
   ******************************************************************************
   * @attention
@@ -100,7 +100,7 @@ void k_TouchUpdate(void)
   xDiff = (prev_state.x > ts.x) ? (prev_state.x - ts.x) : (ts.x - prev_state.x);
   yDiff = (prev_state.y > ts.y) ? (prev_state.y - ts.y) : (ts.y - prev_state.y);
   
-  if((prev_state.TouchDetected != ts.TouchDetected )||
+  if((prev_state.TouchDetected != ts.TouchDetected )&&
      (xDiff > 3 )||
        (yDiff > 3))
   {

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    mfxstm32l152.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    11-February-2015
+  * @version V2.0.0
+  * @date    24-June-2015
   * @brief   This file provides a set of functions needed to manage the MFXSTM32L152
   *          IO Expander devices.
   ******************************************************************************
@@ -722,9 +722,6 @@ uint8_t mfxstm32l152_IO_Config(uint16_t DeviceAddr, uint32_t IO_Pin, IO_ModeType
     break;    
   } 
 
-  /* Wait for 1 ms for MFX to change pin config, before activate it */
-  MFX_IO_Delay(1);
-
   return error_code;
 }
 
@@ -1058,11 +1055,6 @@ uint8_t mfxstm32l152_TS_DetectTouch(uint16_t DeviceAddr)
       ret = 1;
     }
   }
-  else
-  {
-    /* Reset the FIFO memory content. */
-    MFX_IO_Write(DeviceAddr, MFXSTM32L152_TS_FIFO_TH, MFXSTM32L152_TS_CLEAR_FIFO);
-  }
   
   return ret;
 }
@@ -1181,57 +1173,112 @@ void mfxstm32l152_IDD_Config(uint16_t DeviceAddr, IDD_ConfigTypeDef MfxIddConfig
   }
 
   /* Control register setting: number of shunts */
-  value = ((MfxIddConfig.ShuntNumber << 1) & MFXSTM32L152_IDD_CTRL_SHUNT_NB);
+  value =  ((MfxIddConfig.ShuntNbUsed << 1) & MFXSTM32L152_IDD_CTRL_SHUNT_NB);
   value |= (MfxIddConfig.VrefMeasurement & MFXSTM32L152_IDD_CTRL_VREF_DIS);
   value |= (MfxIddConfig.Calibration & MFXSTM32L152_IDD_CTRL_CAL_DIS);
   MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_CTRL, value);
 
-  /* Idd pre delay configuration: nit and value*/
-  value = (MfxIddConfig.PreDelay & MFXSTM32L152_IDD_PREDELAY_UNIT) |
+  /* Idd pre delay configuration: unit and value*/
+  value = (MfxIddConfig.PreDelayUnit & MFXSTM32L152_IDD_PREDELAY_UNIT) |
           (MfxIddConfig.PreDelayValue & MFXSTM32L152_IDD_PREDELAY_VALUE);
   MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_PRE_DELAY, value);
 
   /* Shunt 0 register value: MSB then LSB */
-  value = (uint8_t ) (MfxIddConfig.Shunt0Value >> 8);
+  value = (uint8_t) (MfxIddConfig.Shunt0Value >> 8);
   MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_SHUNT0_MSB, value);
-  value = (uint8_t ) (MfxIddConfig.Shunt0Value);
+  value = (uint8_t) (MfxIddConfig.Shunt0Value);
   MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_SHUNT0_LSB, value);
 
   /* Shunt 1 register value: MSB then LSB */
-  value = (uint8_t ) (MfxIddConfig.Shunt1Value >> 8);
+  value = (uint8_t) (MfxIddConfig.Shunt1Value >> 8);
   MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_SHUNT1_MSB, value);
-  value = (uint8_t ) (MfxIddConfig.Shunt1Value);
+  value = (uint8_t) (MfxIddConfig.Shunt1Value);
   MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_SHUNT1_LSB, value);
 
   /* Shunt 2 register value: MSB then LSB */
-  value = (uint8_t ) (MfxIddConfig.Shunt2Value >> 8);
+  value = (uint8_t) (MfxIddConfig.Shunt2Value >> 8);
   MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_SHUNT2_MSB, value);
-  value = (uint8_t ) (MfxIddConfig.Shunt2Value);
+  value = (uint8_t) (MfxIddConfig.Shunt2Value);
   MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_SHUNT2_LSB, value);
 
   /* Shunt 3 register value: MSB then LSB */
-  value = (uint8_t ) (MfxIddConfig.Shunt3Value >> 8);
+  value = (uint8_t) (MfxIddConfig.Shunt3Value >> 8);
   MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_SHUNT3_MSB, value);
-  value = (uint8_t ) (MfxIddConfig.Shunt3Value);
+  value = (uint8_t) (MfxIddConfig.Shunt3Value);
   MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_SHUNT3_LSB, value);
 
   /* Shunt 4 register value: MSB then LSB */
-  value = (uint8_t ) (MfxIddConfig.Shunt4Value >> 8);
+  value = (uint8_t) (MfxIddConfig.Shunt4Value >> 8);
   MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_SHUNT4_MSB, value);
-  value = (uint8_t ) (MfxIddConfig.Shunt4Value);
+  value = (uint8_t) (MfxIddConfig.Shunt4Value);
   MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_SHUNT4_LSB, value);
 
+  /* Shunt 0 stabilization delay */
+  value = MfxIddConfig.Shunt0StabDelay;
+  MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_SH0_STABILIZATION, value);
+
+  /* Shunt 1 stabilization delay */
+  value = MfxIddConfig.Shunt1StabDelay;
+  MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_SH1_STABILIZATION, value);
+
+  /* Shunt 2 stabilization delay */
+  value = MfxIddConfig.Shunt2StabDelay;
+  MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_SH2_STABILIZATION, value);
+
+  /* Shunt 3 stabilization delay */
+  value = MfxIddConfig.Shunt3StabDelay;
+  MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_SH3_STABILIZATION, value);
+
+  /* Shunt 4 stabilization delay */
+  value = MfxIddConfig.Shunt4StabDelay;
+  MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_SH4_STABILIZATION, value);
+
   /* Idd ampli gain value: MSB then LSB */
-  value = (uint8_t ) (MfxIddConfig.AmpliGain >> 8);
+  value = (uint8_t) (MfxIddConfig.AmpliGain >> 8);
   MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_GAIN_MSB, value);
-  value = (uint8_t ) (MfxIddConfig.AmpliGain);
+  value = (uint8_t) (MfxIddConfig.AmpliGain);
   MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_GAIN_LSB, value);
 
   /* Idd VDD min value: MSB then LSB */
-  value = (uint8_t ) (MfxIddConfig.VddMin >> 8);
+  value = (uint8_t) (MfxIddConfig.VddMin >> 8);
   MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_VDD_MIN_MSB, value);
-  value = (uint8_t ) (MfxIddConfig.VddMin);
+  value = (uint8_t) (MfxIddConfig.VddMin);
   MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_VDD_MIN_LSB, value);
+
+  /* Idd number of measurements */
+  value = MfxIddConfig.MeasureNb;
+  MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_NBR_OF_MEAS, value);
+
+  /* Idd delta delay configuration: unit and value */
+  value = (MfxIddConfig.DeltaDelayUnit & MFXSTM32L152_IDD_DELTADELAY_UNIT) |
+          (MfxIddConfig.DeltaDelayValue & MFXSTM32L152_IDD_DELTADELAY_VALUE);
+  MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_MEAS_DELTA_DELAY, value);
+
+  /* Idd number of shut on board */
+  value = MfxIddConfig.ShuntNbOnBoard;
+  MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_SHUNTS_ON_BOARD, value);
+}
+
+/**
+  * @brief  This function allows to modify number of shunt used for a measurement
+  * @param  DeviceAddr: Device address on communication Bus
+  * @retval None.
+  */
+void mfxstm32l152_IDD_ConfigShuntNbLimit(uint16_t DeviceAddr, uint8_t ShuntNbLimit)
+{
+  uint8_t mode = 0;
+
+  /* Get the current register value */
+  mode = MFX_IO_Read((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_CTRL);
+
+  /* Clear number of shunt limit */
+  mode &= ~(MFXSTM32L152_IDD_CTRL_SHUNT_NB);
+
+  /* Clear number of shunt limit */
+  mode |= ((ShuntNbLimit << 1) & MFXSTM32L152_IDD_CTRL_SHUNT_NB);
+
+  /* Write noewx desired limit */
+  MFX_IO_Write((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_CTRL, mode);
 }
 
 /**
@@ -1249,6 +1296,16 @@ void mfxstm32l152_IDD_GetValue(uint16_t DeviceAddr, uint32_t *ReadValue)
   /* Recompose Idd current value */
   *ReadValue = (data[0] << 16) | (data[1] << 8) | data[2];
 
+}
+
+/**
+  * @brief  Get Last shunt used for measurement
+  * @param  DeviceAddr: Device address on communication Bus
+  * @retval Last shunt used 
+  */
+uint8_t  mfxstm32l152_IDD_GetShuntUsed(uint16_t DeviceAddr)
+{
+  return(MFX_IO_Read((uint8_t) DeviceAddr, MFXSTM32L152_REG_ADR_IDD_SHUNT_USED));
 }
 
 /**
@@ -1380,6 +1437,11 @@ uint8_t mfxstm32l152_ReadReg(uint16_t DeviceAddr, uint8_t RegAddr)
   return(MFX_IO_Read((uint8_t) DeviceAddr, RegAddr));
 }
 
+void mfxstm32l152_WriteReg(uint16_t DeviceAddr, uint8_t RegAddr, uint8_t Value)
+{
+  /* set the current register value */ 
+  MFX_IO_Write((uint8_t) DeviceAddr, RegAddr, Value);
+}
 
 /* ------------------------------------------------------------------ */
 /* ----------------------- Private functions ------------------------ */

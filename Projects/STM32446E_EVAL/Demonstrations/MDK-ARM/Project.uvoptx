@@ -1281,7 +1281,7 @@
 
   <Group>
     <GroupName>Middlewares/STemWin/Library</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1293,8 +1293,8 @@
       <Focus>0</Focus>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\Middlewares\ST\STemWin\Lib\STemWin526_CM4_OS_keil.lib</PathWithFileName>
-      <FilenameWithoutPath>STemWin526_CM4_OS_keil.lib</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\..\Middlewares\ST\STemWin\Lib\STemWin528_CM4_OS_keil.lib</PathWithFileName>
+      <FilenameWithoutPath>STemWin528_CM4_OS_keil.lib</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

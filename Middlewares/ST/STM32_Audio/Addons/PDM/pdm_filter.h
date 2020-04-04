@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    pdm_filter.h
   * @author  MCD Application Team
-  * @version V2.0.1
-  * @date    17-December-2013
+  * @version V2.1.0
+  * @date    31-March-2015
   * @brief   Header file for PDM audio software decoding Library.   
   *          This Library is used to decode and reconstruct the audio signal
   *          produced by ST MEMS microphone (MP45Dxxx, MP34Dxxx).
@@ -12,7 +12,7 @@
  ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2013 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2015 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Image SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.

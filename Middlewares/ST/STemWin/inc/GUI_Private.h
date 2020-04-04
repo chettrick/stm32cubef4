@@ -1,16 +1,15 @@
 /*********************************************************************
-*          Portions COPYRIGHT 2014 STMicroelectronics                *
-*          Portions SEGGER Microcontroller GmbH & Co. KG             *
+*                SEGGER Microcontroller GmbH & Co. KG                *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
 *                                                                    *
-*        (c) 1996 - 2014  SEGGER Microcontroller GmbH & Co. KG       *
+*        (c) 1996 - 2015  SEGGER Microcontroller GmbH & Co. KG       *
 *                                                                    *
 *        Internet: www.segger.com    Support:  support@segger.com    *
 *                                                                    *
 **********************************************************************
 
-** emWin V5.26 - Graphical user interface for embedded applications **
+** emWin V5.28 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -32,25 +31,6 @@ Purpose     : GUI internal declarations
 ---------------------------END-OF-HEADER------------------------------
 */
 
-/**
-  ******************************************************************************
-  * @attention
-  *
-  * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
-  * You may not use this file except in compliance with the License.
-  * You may obtain a copy of the License at:
-  *
-  *        http://www.st.com/software_license_agreement_liberty_v2
-  *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
-  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  * See the License for the specific language governing permissions and
-  * limitations under the License.
-  *
-  ******************************************************************************
-  */
-  
 #ifndef GUI_PRIVATE_H
 #define GUI_PRIVATE_H
 
@@ -447,6 +427,11 @@ void GUI_SetFuncGetpPalConvTable(LCD_PIXELINDEX * (* pFunc)(const LCD_LOGPALETTE
 #define GUI_STREAM_FORMAT_M444_12_1  22  /* DO NOT CHANGE */
 #define GUI_STREAM_FORMAT_444_16     23  /* DO NOT CHANGE */
 #define GUI_STREAM_FORMAT_M444_16    24  /* DO NOT CHANGE */
+#define GUI_STREAM_FORMAT_A555       25  /* DO NOT CHANGE */
+#define GUI_STREAM_FORMAT_AM555      26  /* DO NOT CHANGE */
+#define GUI_STREAM_FORMAT_A565       27  /* DO NOT CHANGE */
+#define GUI_STREAM_FORMAT_AM565      28  /* DO NOT CHANGE */
+
 
 void GUI__ReadHeaderFromStream  (GUI_BITMAP_STREAM * pBitmapHeader, const U8 * pData);
 void GUI__CreateBitmapFromStream(const GUI_BITMAP_STREAM * pBitmapHeader, const void * pData, GUI_BITMAP * pBMP, GUI_LOGPALETTE * pPAL, const GUI_BITMAP_METHODS * pMethods);
@@ -633,11 +618,25 @@ extern LCD_COLOR (* GUI__pfMixColors)(LCD_COLOR Color, LCD_COLOR BkColor, U8 Int
 //
 extern void (* GUI__pfMixColorsBulk)(U32 * pFG, U32 * pBG, U32 * pDst, unsigned OffFG, unsigned OffBG, unsigned OffDest, unsigned xSize, unsigned ySize, U8 Intens);
 
+//
+// API list to be used for MultiBuffering
+//
+extern const GUI_MULTIBUF_API    GUI_MULTIBUF_APIList;
+extern const GUI_MULTIBUF_API_EX GUI_MULTIBUF_APIListEx;
+
 #ifdef  GL_CORE_C
   #define GUI_EXTERN
 #else
   #define GUI_EXTERN extern
 #endif
+
+GUI_EXTERN   int  (* GUI_pfUpdateSoftLayer)(void);
+
+#ifdef WIN32
+  GUI_EXTERN void (* GUI_pfSoftlayerGetPixel)(int x, int y, void * p);
+#endif
+
+GUI_EXTERN void (* GUI_pfHookMTOUCH)(const GUI_MTOUCH_STATE * pState);
 
 GUI_EXTERN const GUI_UC_ENC_APILIST * GUI_pUC_API; /* Unicode encoding API */
 

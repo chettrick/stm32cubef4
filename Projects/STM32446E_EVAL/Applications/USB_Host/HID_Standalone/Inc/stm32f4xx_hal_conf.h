@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Device/HID_Standalone/Inc/stm32f4xx_hal_conf.h
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    01-July-2015
+  * @version V1.2.0
+  * @date    14-August-2015
   * @brief   HAL configuration file.
   ******************************************************************************
   * @attention

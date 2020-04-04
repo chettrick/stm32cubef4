@@ -189,7 +189,7 @@ int pkcs12_pbe( asn1_buf *pbe_params, int mode,
     if( ( ret = cipher_init_ctx( &cipher_ctx, cipher_info ) ) != 0 )
         return( ret );
 
-    if( ( ret = cipher_setkey( &cipher_ctx, key, keylen, mode ) ) != 0 )
+    if( ( ret = cipher_setkey( &cipher_ctx, key, keylen, (operation_t)mode ) ) != 0 )
         return( ret );
 
     if( ( ret = cipher_reset( &cipher_ctx, iv ) ) != 0 )

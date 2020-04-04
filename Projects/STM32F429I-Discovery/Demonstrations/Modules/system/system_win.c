@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    system_win.c
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    01-July-2015   
+  * @version V1.4.0
+  * @date    14-August-2015   
   * @brief   System information functions
   ******************************************************************************
   * @attention
@@ -277,7 +277,7 @@ static void _cbSystemInformation(WM_MESSAGE * pMsg)
     hItem = WM_GetDialogItem(pMsg->hWin, ID_TEXT_VERSION);
     TEXT_SetFont(hItem, GUI_FONT_13_ASCII);
     TEXT_SetTextColor(hItem, GUI_DARKGRAY);
-    strcpy(str, "Demo rev: 1.3.0");
+    strcpy(str, "Demo rev: 1.4.0");
     TEXT_SetText(hItem, str);
 
     /* ST Copyright */

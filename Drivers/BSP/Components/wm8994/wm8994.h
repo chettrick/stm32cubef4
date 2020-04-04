@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    wm8994.h
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    12-February-2015
+  * @version V2.0.0
+  * @date    24-June-2015
   * @brief   This file contains all the functions prototypes for the 
   *          wm8994.c driver.
   ******************************************************************************
@@ -71,10 +71,14 @@
 /***************************  Codec User defines ******************************/
 /******************************************************************************/
 /* Codec output DEVICE */
-#define OUTPUT_DEVICE_SPEAKER         1
-#define OUTPUT_DEVICE_HEADPHONE       2
-#define OUTPUT_DEVICE_BOTH            3
-#define OUTPUT_DEVICE_AUTO            4
+#define OUTPUT_DEVICE_SPEAKER                 ((uint16_t)0x0001)
+#define OUTPUT_DEVICE_HEADPHONE               ((uint16_t)0x0002)
+#define OUTPUT_DEVICE_BOTH                    ((uint16_t)0x0003)
+#define OUTPUT_DEVICE_AUTO                    ((uint16_t)0x0004)
+#define INPUT_DEVICE_DIGITAL_MICROPHONE_1     ((uint16_t)0x0100)
+#define INPUT_DEVICE_DIGITAL_MICROPHONE_2     ((uint16_t)0x0200)
+#define INPUT_DEVICE_INPUT_LINE_1             ((uint16_t)0x0300)
+#define INPUT_DEVICE_INPUT_LINE_2             ((uint16_t)0x0400)
 
 /* Volume Levels values */
 #define DEFAULT_VOLMIN                0x00
@@ -103,7 +107,8 @@
 #define AUDIO_FREQUENCY_11K           ((uint32_t)11025)
 #define AUDIO_FREQUENCY_8K            ((uint32_t)8000)  
 
-#define VOLUME_CONVERT(Volume)    (((Volume) > 100)? 100:((uint8_t)(((Volume) * 63) / 100)))
+#define VOLUME_CONVERT(Volume)        (((Volume) > 100)? 100:((uint8_t)(((Volume) * 63) / 100)))
+#define VOLUME_IN_CONVERT(Volume)     (((Volume) >= 100)? 239:((uint8_t)(((Volume) * 240) / 100)))
 
 /******************************************************************************/
 /****************************** REGISTER MAPPING ******************************/
@@ -138,8 +143,9 @@
                            Audio Codec functions 
 ------------------------------------------------------------------------------*/
 /* High Layer codec functions */
-uint32_t wm8994_Init(uint16_t DeviceAddr, uint16_t OutputDevice, uint8_t Volume, uint32_t AudioFreq);
-uint32_t wm8994_ReadID(uint16_t DeviceAddrq);
+uint32_t wm8994_Init(uint16_t DeviceAddr, uint16_t OutputInputDevice, uint8_t Volume, uint32_t AudioFreq);
+void     wm8994_DeInit(void);
+uint32_t wm8994_ReadID(uint16_t DeviceAddr);
 uint32_t wm8994_Play(uint16_t DeviceAddr, uint16_t* pBuffer, uint16_t Size);
 uint32_t wm8994_Pause(uint16_t DeviceAddr);
 uint32_t wm8994_Resume(uint16_t DeviceAddr);
@@ -152,6 +158,7 @@ uint32_t wm8994_Reset(uint16_t DeviceAddr);
 
 /* AUDIO IO functions */
 void    AUDIO_IO_Init(void);
+void    AUDIO_IO_DeInit(void);
 void    AUDIO_IO_Write(uint8_t Addr, uint16_t Reg, uint16_t Value);
 uint8_t AUDIO_IO_Read(uint8_t Addr, uint16_t Reg);
 void    AUDIO_IO_Delay(uint32_t Delay);

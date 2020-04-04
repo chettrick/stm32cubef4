@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    lis3dsh.c
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    02-December-2014
+  * @version V2.0.0
+  * @date    03-August-2015
   * @brief   This file provides a set of functions needed to manage the LIS3DSH
   *          MEMS Accelerometer.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -83,9 +83,11 @@
 ACCELERO_DrvTypeDef Lis3dshDrv =
 {
   LIS3DSH_Init,
+  LIS3DSH_DeInit,
   LIS3DSH_ReadID,
   LIS3DSH_RebootCmd,
   LIS3DSH_Click_IntConfig,
+  0,
   0,
   0,
   0,
@@ -134,6 +136,16 @@ void LIS3DSH_Init(uint16_t InitStruct)
   
   /* Write value to MEMS CTRL_REG5 register */
   ACCELERO_IO_Write(&ctrl, LIS3DSH_CTRL_REG5_ADDR, 1);
+}
+
+/**
+  * @brief  LIS3DSH De-Initialization.
+  * @param  None
+  * @retval None.
+  */
+void LIS3DSH_DeInit(void)
+{
+  
 }
 
 /**

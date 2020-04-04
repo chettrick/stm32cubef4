@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    USB_Host/DualCore_Standalone/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.2
-  * @date    25-May-2015
+  * @version V1.3.0
+  * @date    14-August-2015
   * @brief   Description of the USB Host Dual Core application.
   ******************************************************************************
   *
@@ -121,9 +121,11 @@ requirements, such as:
     - Plug the USB key into the STM324xG-EVAL board through 'USB micro A-Male 
       to A-Female' cable to the connector:
       - CN9: to use USB High Speed (HS) 
+             Please ensure that jumper JP31 is fitted.
     - Plug the HID device(Mouse/Keyboard) into the STM324xG-EVAL board through 'USB micro A-Male 
       to A-Female' cable to the connector:
       - CN8: to use USB Full Speed (FS) with embedded PHY(U2)
+
 
 
 @par How to use it ?

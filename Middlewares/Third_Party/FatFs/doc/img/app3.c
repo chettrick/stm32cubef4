@@ -6,7 +6,7 @@
 / If the file has been opened without FA_WRITE flag, it only checks if
 / the file is contiguous and returns the resulut. */
 
-#if _FATFS != 8051 /* Check if R0.10b */
+#if _FATFS != 32020 /* Check if R0.11 */
 #error This function may not be compatible with this revision of FatFs module.
 #endif
 

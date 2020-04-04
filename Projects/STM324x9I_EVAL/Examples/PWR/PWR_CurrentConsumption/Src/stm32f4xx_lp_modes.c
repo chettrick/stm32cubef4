@@ -253,11 +253,11 @@ void StopMode_Measure(void)
   /* Disable Wake-up timer */
   HAL_RTCEx_DeactivateWakeUpTimer(&RTCHandle);
   
-  /* Configure LED1 */
-  BSP_LED_Init(LED1);
+  /* Configure LED4 */
+  BSP_LED_Init(LED4);
   
-  /* Toggle LED1 */
-  BSP_LED_Toggle(LED1); 
+  /* Toggle LED4 */
+  BSP_LED_On(LED4); 
 }
 
 /**

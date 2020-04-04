@@ -58,7 +58,7 @@ void SVC_Handler(void);
 void DebugMon_Handler(void);
 void PendSV_Handler(void);
 void SysTick_Handler(void);
-void QuadSPI_IRQHandler(void);
+void QUADSPI_IRQHandler(void);
 void QSPI_DMA_IRQ_HANDLER(void);
 
 #ifdef __cplusplus

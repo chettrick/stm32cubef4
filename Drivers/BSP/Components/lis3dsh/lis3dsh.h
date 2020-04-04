@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    lis3dsh.h
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    02-December-2014
+  * @version V2.0.0
+  * @date    03-August-2015
   * @brief   This file contains all the functions prototypes for the lis3dsh.c
   *          firmware driver.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -1211,6 +1211,7 @@ typedef struct
   * @{
   */ 
 void    LIS3DSH_Init(uint16_t InitStruct);
+void    LIS3DSH_DeInit(void);
 uint8_t LIS3DSH_ReadID(void);
 void    LIS3DSH_InterruptConfig(LIS3DSH_InterruptConfigTypeDef *LIS3DSH_IntConfigStruct);
 void    LIS3DSH_Click_IntConfig(void);

@@ -252,7 +252,7 @@ g_pfnVectors:
   .word     0                                 /* Reserved					            */
   .word     0                                 /* Reserved    				          */
   .word     SAI2_IRQHandler                   /* SAI2                         */
-  .word     QuadSPI_IRQHandler                /* QuadSPI                      */
+  .word     QUADSPI_IRQHandler                /* QuadSPI                      */
   .word     CEC_IRQHandler                    /* CEC                          */
   .word     SPDIF_RX_IRQHandler               /* SPDIF RX                     */
   .word     FMPI2C1_Event_IRQHandler          /* FMPI2C 1 Event               */
@@ -535,8 +535,8 @@ g_pfnVectors:
    .weak      SAI2_IRQHandler            
    .thumb_set SAI2_IRQHandler,Default_Handler
    
-   .weak      QuadSPI_IRQHandler            
-   .thumb_set QuadSPI_IRQHandler,Default_Handler
+   .weak      QUADSPI_IRQHandler            
+   .thumb_set QUADSPI_IRQHandler,Default_Handler
  
    .weak      CEC_IRQHandler            
    .thumb_set CEC_IRQHandler,Default_Handler

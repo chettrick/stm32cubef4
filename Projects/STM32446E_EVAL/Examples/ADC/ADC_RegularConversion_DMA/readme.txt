@@ -45,9 +45,9 @@ The ADC3 is configured to convert continuously ADC_CHANNEL_4.
 Each time an end of conversion occurs the DMA transfers, in circular mode, the
 converted data from ADC3 DR register to the uhADCxConvertedValue variable.
 
-In this example, the system clock is 180MHz, APB2 = 90MHz and ADC clock = APB2/2. 
-Since ADC3 clock is 45 MHz and sampling time is set to 3 cycles, the conversion 
-time to 12bit data is 12 cycles so the total conversion time is (12+3)/45= 0.33us(3Msps).
+In this example, the system clock is 180MHz, APB2 = 90MHz and ADC clock = APB2/4. 
+Since ADC3 clock is 22.5 MHz and sampling time is set to 3 cycles, the conversion 
+time to 12bit data is 12 cycles so the total conversion time is (12+3)/22.5= 0.67us(6Msps).
 
 User can vary the ADC_CHANNEL_4 voltage using the Eval Board potentiometer (P2) connected to PA.4.
 SB94 must be closed to use the potentiometer.

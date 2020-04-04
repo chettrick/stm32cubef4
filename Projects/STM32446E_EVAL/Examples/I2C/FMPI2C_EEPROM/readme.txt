@@ -82,14 +82,14 @@ The HAL_I2C_Mem_Read_DMA() and the HAL_I2C_Mem_Write_DMA() functions allow respe
 the reception of Data from EEPROM and the transmission of a predefined data 
 buffer.
 
-For this example the TxBuffer is predefined and the aRxBuffer size is same as aTxBuffer.
+For this example the aTxBuffer is predefined and the aRxBuffer size is same as aTxBuffer.
 
 In a first step the I2C writes the aTxBuffer by group of 4 bytes (RF EEPROM 
 Page size) using HAL_I2C_Mem_Write_DMA() then read back the data through aRxBuffer
 using HAL_I2C_Mem_Read_DMA(). 
 The end of this two steps are monitored through the HAL_I2C_GetState() function
 result.
-Finally, aRxBuffer and aRxBuffer are compared through Buffercmp() in order to 
+Finally, aTxBuffer and aRxBuffer are compared through Buffercmp() in order to 
 check buffers correctness.  
 
 STM32 Eval board's LEDs can be used to monitor the transfer status:

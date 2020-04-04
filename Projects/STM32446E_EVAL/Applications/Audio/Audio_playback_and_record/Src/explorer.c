@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Audio/Audio_playback_and_record/Src/explorer.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    01-July-2015 
+  * @version V1.2.0
+  * @date    14-August-2015 
   * @brief   This file provides USB Key drive configuration
   ******************************************************************************
   * @attention

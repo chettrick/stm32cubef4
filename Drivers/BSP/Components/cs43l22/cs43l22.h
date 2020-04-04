@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    cs43l22.h
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    02-December-2014
-  * @brief   This file contains all the functions prototypes for the cs43122.c driver.
+  * @version V2.0.0
+  * @date    24-June-2015
+  * @brief   This file contains all the functions prototypes for the cs43l22.c driver.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -50,11 +50,11 @@
   * @{
   */ 
   
-/** @addtogroup CS43122
+/** @addtogroup CS43l22
   * @{
   */
 
-/** @defgroup CS43122_Exported_Types
+/** @defgroup CS43l22_Exported_Types
   * @{
   */
 
@@ -62,7 +62,7 @@
   * @}
   */
 
-/** @defgroup CS43122_Exported_Constants
+/** @defgroup CS43l22_Exported_Constants
   * @{
   */ 
 
@@ -91,6 +91,17 @@
 #define AUDIO_MUTE_ON                 1
 #define AUDIO_MUTE_OFF                0
 
+/* AUDIO FREQUENCY */
+#define AUDIO_FREQUENCY_192K          ((uint32_t)192000)
+#define AUDIO_FREQUENCY_96K           ((uint32_t)96000)
+#define AUDIO_FREQUENCY_48K           ((uint32_t)48000)
+#define AUDIO_FREQUENCY_44K           ((uint32_t)44100)
+#define AUDIO_FREQUENCY_32K           ((uint32_t)32000)
+#define AUDIO_FREQUENCY_22K           ((uint32_t)22050)
+#define AUDIO_FREQUENCY_16K           ((uint32_t)16000)
+#define AUDIO_FREQUENCY_11K           ((uint32_t)11025)
+#define AUDIO_FREQUENCY_8K            ((uint32_t)8000)  
+
 /******************************************************************************/
 /****************************** REGISTER MAPPING ******************************/
 /******************************************************************************/
@@ -118,7 +129,7 @@
   * @}
   */ 
 
-/** @defgroup CS43122_Exported_Macros
+/** @defgroup CS43l22_Exported_Macros
   * @{
   */
 #define VOLUME_CONVERT(Volume)    (((Volume) > 100)? 100:((uint8_t)(((Volume) * 255) / 100)))
@@ -126,7 +137,7 @@
   * @}
   */ 
 
-/** @defgroup CS43122_Exported_Functions
+/** @defgroup CS43l22_Exported_Functions
   * @{
   */
     
@@ -135,6 +146,7 @@
 ------------------------------------------------------------------------------*/
 /* High Layer codec functions */
 uint32_t cs43l22_Init(uint16_t DeviceAddr, uint16_t OutputDevice, uint8_t Volume, uint32_t AudioFreq);
+void     cs43l22_DeInit(void);
 uint32_t cs43l22_ReadID(uint16_t DeviceAddr);
 uint32_t cs43l22_Play(uint16_t DeviceAddr, uint16_t* pBuffer, uint16_t Size);
 uint32_t cs43l22_Pause(uint16_t DeviceAddr);
@@ -144,11 +156,13 @@ uint32_t cs43l22_SetVolume(uint16_t DeviceAddr, uint8_t Volume);
 uint32_t cs43l22_SetFrequency(uint16_t DeviceAddr, uint32_t AudioFreq);
 uint32_t cs43l22_SetMute(uint16_t DeviceAddr, uint32_t Cmd);
 uint32_t cs43l22_SetOutputMode(uint16_t DeviceAddr, uint8_t Output);
+uint32_t cs43l22_Reset(uint16_t DeviceAddr);
 
 /* AUDIO IO functions */
-void AUDIO_IO_Init(void);
-void AUDIO_IO_Write(uint8_t Addr, uint8_t Reg, uint8_t Value);
-uint8_t AUDIO_IO_Read(uint8_t Addr, uint8_t Reg);
+void      AUDIO_IO_Init(void);
+void      AUDIO_IO_DeInit(void);
+void      AUDIO_IO_Write(uint8_t Addr, uint8_t Reg, uint8_t Value);
+uint8_t   AUDIO_IO_Read(uint8_t Addr, uint8_t Reg);
 
 /* Audio driver structure */
 extern AUDIO_DrvTypeDef   cs43l22_drv;

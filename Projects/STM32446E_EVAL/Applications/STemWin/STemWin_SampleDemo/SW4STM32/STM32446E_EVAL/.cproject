@@ -7,10 +7,10 @@
 				<extensions>
 					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
 					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-					<extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
@@ -24,7 +24,7 @@
 							<option id="fr.ac6.managedbuild.option.gnu.cross.fpu.$(UID)" name="Floating point hardware" superClass="fr.ac6.managedbuild.option.gnu.cross.fpu" value="fr.ac6.managedbuild.option.gnu.cross.fpu.fpv4-sp-d16" valueType="enumerated"/>
 							<option id="fr.ac6.managedbuild.option.gnu.cross.floatabi.$(UID)" name="Floating-point ABI" superClass="fr.ac6.managedbuild.option.gnu.cross.floatabi" value="fr.ac6.managedbuild.option.gnu.cross.floatabi.hard" valueType="enumerated"/>
 							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="fr.ac6.managedbuild.targetPlatform.gnu.cross.$(UID)" isAbstract="false" osList="all" superClass="fr.ac6.managedbuild.targetPlatform.gnu.cross"/>
-							<builder buildPath="${workspace_loc:/ $(PROJECT_NAME)}/Debug" id="fr.ac6.managedbuild.builder.gnu.cross.$(UID)" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" superClass="fr.ac6.managedbuild.builder.gnu.cross"/>
+							<builder buildPath="${workspace_loc:/STM32446E_EVAL}/Debug" id="cdt.managedbuild.builder.gnu.cross.778068700" keepEnvironmentInBuildfile="false" name="Gnu Make Builder" superClass="cdt.managedbuild.builder.gnu.cross"/>
 							<tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.$(DEBUG_TOOL_COMPILER_UID)" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler">
 								<option defaultValue="gnu.c.optimization.level.none" id="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level.$(UID)" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.c.optimization.level.size" valueType="enumerated"/>
 								<option id="gnu.c.compiler.option.debugging.level.$(UID)" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.c.debugging.level.max" valueType="enumerated"/>
@@ -52,6 +52,8 @@
 									<listOptionValue builtIn="false" value="USE_IOEXPANDER"/>
 								</option>
 								<option id="fr.ac6.managedbuild.gnu.c.compiler.option.misc.other.$(UID)" name="Other flags" superClass="fr.ac6.managedbuild.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="-fmessage-length=0" valueType="string"/>
+								<option id="gnu.c.compiler.option.dialect.std.1970347466" name="Language standard" superClass="gnu.c.compiler.option.dialect.std" useByScannerDiscovery="true" value="gnu.c.compiler.dialect.default" valueType="enumerated"/>
+								<option id="gnu.c.compiler.option.warnings.allwarn.456283123" name="All warnings (-Wall)" superClass="gnu.c.compiler.option.warnings.allwarn" useByScannerDiscovery="false" value="true" valueType="boolean"/>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.$(DEBUG_TOOL_COMPILER_INPUT_UID)" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.490349396"/>
 								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.1451852041" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c"/>
@@ -64,12 +66,12 @@
 							<tool id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.1188646484" name="MCU GCC Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker">
 								<option id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script.$(UID)" name="Linker Script (-T)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script" value="..\STM32F446ZETx_FLASH.ld" valueType="string"/>
 								<option id="gnu.c.link.option.libs.2086104375" name="Libraries (-l)" superClass="gnu.c.link.option.libs" valueType="libs">
-									<listOptionValue builtIn="false" value=":STemWin526_CM4_GCC.a"/>
+									<listOptionValue builtIn="false" value=":STemWin528_CM4_GCC.a"/>
 								</option>
 								<option id="gnu.c.link.option.paths.1126963068" name="Library search path (-L)" superClass="gnu.c.link.option.paths" valueType="libPaths">
 									<listOptionValue builtIn="false" value="..\..\..\..\..\..\..\..\Middlewares\ST\STemWin\Lib"/>
 								</option>
-								<option id="gnu.c.link.option.ldflags.$(UID)" name="Linker flags" superClass="gnu.c.link.option.ldflags" value="-specs=nosys.specs -specs=nano.specs" valueType="string"/>
+								<option id="gnu.c.link.option.ldflags.$(UID)" name="Linker flags" superClass="gnu.c.link.option.ldflags" value="-specs=nano.specs" valueType="string"/>
 								<inputType id="cdt.managedbuild.tool.gnu.c.linker.input.1329019344" superClass="cdt.managedbuild.tool.gnu.c.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
@@ -88,7 +90,7 @@
 					</folderInfo>
 					<fileInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.debug.405185049.171992274" name="GUIDEMO_Listview.c" rcbsApplicability="disable" resourcePath="Application/Demo/GUIDEMO_Listview.c" toolsToInvoke="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.$(DEBUG_TOOL_COMPILER_UID).1713891227">
 						<tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.$(DEBUG_TOOL_COMPILER_UID).1713891227" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.$(DEBUG_TOOL_COMPILER_UID)">
-							<option id="fr.ac6.managedbuild.gnu.c.compiler.option.misc.other.203686161" superClass="fr.ac6.managedbuild.gnu.c.compiler.option.misc.other" value="-fmessage-length=0-Wno-missing-braces" valueType="string"/>
+							<option id="fr.ac6.managedbuild.gnu.c.compiler.option.misc.other.203686161" name="Other flags" superClass="fr.ac6.managedbuild.gnu.c.compiler.option.misc.other" value="-fmessage-length=0 -Wno-missing-braces" valueType="string"/>
 							<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.822624530" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c"/>
 							<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s.2035304021" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s"/>
 							<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.719294322" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
@@ -102,7 +104,7 @@
 					</fileInfo>
 					<fileInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.debug.405185049.164983452" name="GUIDEMO_Cursor.c" rcbsApplicability="disable" resourcePath="Application/Demo/GUIDEMO_Cursor.c" toolsToInvoke="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.$(DEBUG_TOOL_COMPILER_UID).540514111">
 						<tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.$(DEBUG_TOOL_COMPILER_UID).540514111" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.$(DEBUG_TOOL_COMPILER_UID)">
-							<option id="fr.ac6.managedbuild.gnu.c.compiler.option.misc.other.715788878" name="Other flags" superClass="fr.ac6.managedbuild.gnu.c.compiler.option.misc.other" value="-fmessage-length=0-Wno-missing-braces" valueType="string"/>
+							<option id="fr.ac6.managedbuild.gnu.c.compiler.option.misc.other.715788878" name="Other flags" superClass="fr.ac6.managedbuild.gnu.c.compiler.option.misc.other" value="-fmessage-length=0 -Wno-missing-braces" valueType="string"/>
 							<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.1760114742" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c"/>
 							<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s.34305367" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s"/>
 							<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.2131216044" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
@@ -116,7 +118,7 @@
 					</fileInfo>
 					<fileInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.debug.405185049.20770936" name="GUIDEMO_Automotive.c" rcbsApplicability="disable" resourcePath="Application/Demo/GUIDEMO_Automotive.c" toolsToInvoke="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.$(DEBUG_TOOL_COMPILER_UID).724149095">
 						<tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.$(DEBUG_TOOL_COMPILER_UID).724149095" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.$(DEBUG_TOOL_COMPILER_UID)">
-							<option id="fr.ac6.managedbuild.gnu.c.compiler.option.misc.other.606156907" name="Other flags" superClass="fr.ac6.managedbuild.gnu.c.compiler.option.misc.other" value="-fmessage-length=0-Wno-missing-braces" valueType="string"/>
+							<option id="fr.ac6.managedbuild.gnu.c.compiler.option.misc.other.606156907" name="Other flags" superClass="fr.ac6.managedbuild.gnu.c.compiler.option.misc.other" value="-fmessage-length=0 -Wno-missing-braces" valueType="string"/>
 							<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.1845318696" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c"/>
 							<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s.1224037478" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s"/>
 							<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.13244177" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>

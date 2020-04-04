@@ -220,7 +220,7 @@ static void ADC_Config(void)
   /*##-1- Configure the ADC2 peripheral ######################################*/
   AdcHandle2.Instance          = ADCy;
   
-  AdcHandle2.Init.ClockPrescaler = ADC_CLOCKPRESCALER_PCLK_DIV2;
+  AdcHandle2.Init.ClockPrescaler = ADC_CLOCKPRESCALER_PCLK_DIV4;
   AdcHandle2.Init.Resolution = ADC_RESOLUTION_8B;
   AdcHandle2.Init.ScanConvMode = ENABLE;
   AdcHandle2.Init.ContinuousConvMode = ENABLE;
@@ -254,7 +254,7 @@ static void ADC_Config(void)
   /*##-3- Configure the ADC1 peripheral ######################################*/
   AdcHandle1.Instance          = ADCx;
   
-  AdcHandle1.Init.ClockPrescaler = ADC_CLOCKPRESCALER_PCLK_DIV2;
+  AdcHandle1.Init.ClockPrescaler = ADC_CLOCKPRESCALER_PCLK_DIV4;
   AdcHandle1.Init.Resolution = ADC_RESOLUTION_8B;
   AdcHandle1.Init.ScanConvMode = DISABLE;
   AdcHandle1.Init.ContinuousConvMode = ENABLE;

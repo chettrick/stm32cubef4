@@ -1,16 +1,15 @@
 /*********************************************************************
-*          Portions COPYRIGHT 2014 STMicroelectronics                *
-*          Portions SEGGER Microcontroller GmbH & Co. KG             *
+*                SEGGER Microcontroller GmbH & Co. KG                *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
 *                                                                    *
-*        (c) 1996 - 2014  SEGGER Microcontroller GmbH & Co. KG       *
+*        (c) 1996 - 2015  SEGGER Microcontroller GmbH & Co. KG       *
 *                                                                    *
 *        Internet: www.segger.com    Support:  support@segger.com    *
 *                                                                    *
 **********************************************************************
 
-** emWin V5.26 - Graphical user interface for embedded applications **
+** emWin V5.28 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -32,25 +31,6 @@ Purpose     : Widget interface
 ---------------------------END-OF-HEADER------------------------------
 */
 
-/**
-  ******************************************************************************
-  * @attention
-  *
-  * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
-  * You may not use this file except in compliance with the License.
-  * You may obtain a copy of the License at:
-  *
-  *        http://www.st.com/software_license_agreement_liberty_v2
-  *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
-  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  * See the License for the specific language governing permissions and
-  * limitations under the License.
-  *
-  ******************************************************************************
-  */
-  
 #ifndef WIDGET_H        /* Avoid multiple inclusion  */
 #define WIDGET_H
 
@@ -111,6 +91,7 @@ typedef struct {
 #define DROPDOWN_ID  0x44524f50UL /* DROP */
 #define EDIT_ID      0x45444954UL /* EDIT */
 #define FRAMEWIN_ID  0x4652414dUL /* FRAM */
+#define FRAMECLNT_ID 0x46524143UL /* FRAC */
 #define GRAPH_ID     0x47524150UL /* GRAP */
 #define HEADER_ID    0x48454144UL /* HEAD */
 #define LISTBOX_ID   0x4C495342UL /* LISB */
@@ -119,6 +100,7 @@ typedef struct {
 #define MENU_ID      0x4d454e55UL /* MENU */
 #define MULTIEDIT_ID 0x4d554c45UL /* MULE */
 #define MULTIPAGE_ID 0x4d554c50UL /* MULP */
+#define MPAGECLNT_ID 0x4d50434CUL /* MPCL */
 #define PROGBAR_ID   0x50524f47UL /* PROG */
 #define RADIO_ID     0x52414449UL /* RADI */
 #define SCROLLBAR_ID 0x5343524fUL /* SCRO */
@@ -129,6 +111,7 @@ typedef struct {
 #define IMAGE_ID     0x494d4147UL /* IMAG */
 #define SPINBOX_ID   0x5350494eUL /* SPIN */
 #define KNOB_ID      0x4b4e4f42UL /* KNOB */
+#define WINDOW_ID    0x57494e44UL /* WIND */
 
 #define WIDGET_LOCK(hWin)       ((WIDGET*)GUI_LOCK_H(hWin))
 
@@ -141,7 +124,7 @@ typedef struct {
   #define WIDGET_USE_PARENT_EFFECT 0
 #endif
 #ifndef   WIDGET_USE_FLEX_SKIN
-  #define WIDGET_USE_FLEX_SKIN     0
+  #define WIDGET_USE_FLEX_SKIN     1
 #endif
 #if !defined(WIDGET_USE_SCHEME_SMALL) && !defined(WIDGET_USE_SCHEME_MEDIUM) && !defined(WIDGET_USE_SCHEME_LARGE)
   #define WIDGET_USE_SCHEME_SMALL  1
@@ -248,6 +231,9 @@ typedef struct {
   const WIDGET_EFFECT* pEffect;
   I16 Id;
   U16 State;
+  #if GUI_DEBUG_LEVEL > 1
+    U32 DebugId;
+  #endif  
 } WIDGET;
 
 

@@ -70,7 +70,7 @@ loop to prevent a IWDG reset.
 LED3 is also toggled each 240 ms indicating that the program is running.
 
 An EXTI Line is connected to a GPIO pin, and configured to generate an interrupt
-on the rising edge of the signal.
+on the falling edge of the signal.
 
 The EXTI Line is used to simulate a software failure: once the EXTI Line event 
 occurs, by pressing the User push-button (PC.13), the corresponding interrupt  

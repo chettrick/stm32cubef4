@@ -986,13 +986,10 @@ static int ssl_encrypt_buf( ssl_context *ssl )
     }
     else if( ssl->transform_out->ivlen == 12 )
     {
-        size_t enc_msglen;
-        unsigned char *enc_msg;
         unsigned char add_data[13];
         int ret = POLARSSL_ERR_SSL_FEATURE_UNAVAILABLE;
 
         padlen = 0;
-        enc_msglen = ssl->out_msglen;
 
         memcpy( add_data, ssl->out_ctr, 8 );
         add_data[8]  = ssl->out_msgtype;
@@ -1005,6 +1002,11 @@ static int ssl_encrypt_buf( ssl_context *ssl )
                        add_data, 13 );
 
 #if defined(POLARSSL_AES_C) && defined(POLARSSL_GCM_C)
+        
+        size_t enc_msglen;
+        unsigned char *enc_msg;
+        
+        enc_msglen = ssl->out_msglen;
 
         if( ssl->session_out->ciphersuite == TLS_RSA_WITH_AES_128_GCM_SHA256 ||
             ssl->session_out->ciphersuite == TLS_RSA_WITH_AES_256_GCM_SHA384 ||
@@ -1230,13 +1232,15 @@ static int ssl_decrypt_buf( ssl_context *ssl )
     }
     else if( ssl->transform_in->ivlen == 12 )
     {
+        int ret = POLARSSL_ERR_SSL_FEATURE_UNAVAILABLE;
+
+#if defined(POLARSSL_AES_C) && defined(POLARSSL_GCM_C)
+        
         unsigned char *dec_msg;
         unsigned char *dec_msg_result;
         size_t dec_msglen;
         unsigned char add_data[13];
-        int ret = POLARSSL_ERR_SSL_FEATURE_UNAVAILABLE;
-
-#if defined(POLARSSL_AES_C) && defined(POLARSSL_GCM_C)
+        
         if( ssl->session_in->ciphersuite == TLS_RSA_WITH_AES_128_GCM_SHA256 ||
             ssl->session_in->ciphersuite == TLS_RSA_WITH_AES_256_GCM_SHA384 ||
             ssl->session_in->ciphersuite == TLS_DHE_RSA_WITH_AES_128_GCM_SHA256 ||

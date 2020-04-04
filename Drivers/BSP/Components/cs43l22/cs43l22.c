@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    cs43l22.c
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    02-December-2014
+  * @version V2.0.0
+  * @date    24-June-2015
   * @brief   This file provides the CS43L22 Audio Codec driver.   
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2014 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -88,6 +88,7 @@
 AUDIO_DrvTypeDef cs43l22_drv = 
 {
   cs43l22_Init,
+  cs43l22_DeInit,
   cs43l22_ReadID,
 
   cs43l22_Play,
@@ -99,7 +100,7 @@ AUDIO_DrvTypeDef cs43l22_drv =
   cs43l22_SetVolume,
   cs43l22_SetMute,  
   cs43l22_SetOutputMode,
-  0,
+  cs43l22_Reset,
 };
 
 static uint8_t Is_cs43l22_Stop = 1;
@@ -210,16 +211,31 @@ uint32_t cs43l22_Init(uint16_t DeviceAddr, uint16_t OutputDevice, uint8_t Volume
 }
 
 /**
+  * @brief  Deinitializes the audio codec.
+  * @param  None
+  * @retval  None
+  */
+void cs43l22_DeInit(void)
+{
+  /* Deinitialize Audio Codec interface */
+  AUDIO_IO_DeInit();
+}
+
+/**
   * @brief  Get the CS43L22 ID.
   * @param DeviceAddr: Device address on communication Bus.   
   * @retval The CS43L22 ID 
   */
 uint32_t cs43l22_ReadID(uint16_t DeviceAddr)
 {
+  uint8_t Value;
   /* Initialize the Control interface of the Audio Codec */
   AUDIO_IO_Init(); 
   
-  return ((uint32_t)AUDIO_IO_Read(DeviceAddr, CS43L22_CHIPID_ADDR));
+  Value = AUDIO_IO_Read(DeviceAddr, CS43L22_CHIPID_ADDR);
+  Value = (Value & CS43L22_ID_MASK);
+  
+  return((uint32_t) Value);
 }
 
 /**
@@ -415,6 +431,16 @@ uint32_t cs43l22_SetOutputMode(uint16_t DeviceAddr, uint8_t Output)
       break;
   }  
   return counter;
+}
+
+/**
+  * @brief Resets cs43l22 registers.
+  * @param DeviceAddr: Device address on communication Bus. 
+  * @retval 0 if correct communication, else wrong communication
+  */
+uint32_t cs43l22_Reset(uint16_t DeviceAddr)
+{
+  return 0;
 }
 
 /**

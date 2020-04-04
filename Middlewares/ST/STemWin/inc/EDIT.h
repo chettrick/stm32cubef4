@@ -1,16 +1,15 @@
 /*********************************************************************
-*          Portions COPYRIGHT 2014 STMicroelectronics                *
-*          Portions SEGGER Microcontroller GmbH & Co. KG             *
+*                SEGGER Microcontroller GmbH & Co. KG                *
 *        Solutions for real time microcontroller applications        *
 **********************************************************************
 *                                                                    *
-*        (c) 1996 - 2014  SEGGER Microcontroller GmbH & Co. KG       *
+*        (c) 1996 - 2015  SEGGER Microcontroller GmbH & Co. KG       *
 *                                                                    *
 *        Internet: www.segger.com    Support:  support@segger.com    *
 *                                                                    *
 **********************************************************************
 
-** emWin V5.26 - Graphical user interface for embedded applications **
+** emWin V5.28 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -32,25 +31,6 @@ Purpose     : EDIT include
 --------------------END-OF-HEADER-------------------------------------
 */
 
-/**
-  ******************************************************************************
-  * @attention
-  *
-  * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
-  * You may not use this file except in compliance with the License.
-  * You may obtain a copy of the License at:
-  *
-  *        http://www.st.com/software_license_agreement_liberty_v2
-  *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
-  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  * See the License for the specific language governing permissions and
-  * limitations under the License.
-  *
-  ******************************************************************************
-  */
-  
 #ifndef EDIT_H
 #define EDIT_H
 
@@ -164,15 +144,15 @@ void EDIT_SetBkColor       (EDIT_Handle hObj, unsigned int Index, GUI_COLOR colo
 void EDIT_SetCursorAtChar  (EDIT_Handle hObj, int Pos);
 void EDIT_SetCursorAtPixel (EDIT_Handle hObj, int xPos);
 void EDIT_SetFocussable    (EDIT_Handle hObj, int State);
-void EDIT_SetFont          (EDIT_Handle hObj, const GUI_FONT * pfont);
+void EDIT_SetFont          (EDIT_Handle hObj, const GUI_FONT * pFont);
 int  EDIT_SetInsertMode    (EDIT_Handle hObj, int OnOff);
 void EDIT_SetMaxLen        (EDIT_Handle hObj, int MaxLen);
 void EDIT_SetpfAddKeyEx    (EDIT_Handle hObj, tEDIT_AddKeyEx * pfAddKeyEx);
 void EDIT_SetpfUpdateBuffer(EDIT_Handle hObj, tEDIT_UpdateBuffer * pfUpdateBuffer);
-void EDIT_SetText          (EDIT_Handle hObj, const char* s);
+void EDIT_SetText          (EDIT_Handle hObj, const char * s);
 void EDIT_SetTextAlign     (EDIT_Handle hObj, int Align);
 GUI_COLOR EDIT_GetTextColor(EDIT_Handle hObj, unsigned int Index);
-void EDIT_SetTextColor     (EDIT_Handle hObj, unsigned int Index, GUI_COLOR color);
+void EDIT_SetTextColor     (EDIT_Handle hObj, unsigned int Index, GUI_COLOR Color);
 void EDIT_SetSel           (EDIT_Handle hObj, int FirstChar, int LastChar);
 int  EDIT_SetUserData      (EDIT_Handle hObj, const void * pSrc, int NumBytes);
 //
@@ -183,7 +163,7 @@ void  EDIT_GetCursorPixelPos (EDIT_Handle hObj, int * pxPos, int * pyPos);
 float EDIT_GetFloatValue     (EDIT_Handle hObj);
 const GUI_FONT * EDIT_GetFont(EDIT_Handle hObj);
 int   EDIT_GetNumChars       (EDIT_Handle hObj);
-void  EDIT_GetText           (EDIT_Handle hObj, char* sDest, int MaxLen);
+void  EDIT_GetText           (EDIT_Handle hObj, char * sDest, int MaxLen);
 I32   EDIT_GetValue          (EDIT_Handle hObj);
 void  EDIT_SetFloatValue     (EDIT_Handle hObj, float Value);
 int   EDIT_GetUserData       (EDIT_Handle hObj, void * pDest, int NumBytes);
