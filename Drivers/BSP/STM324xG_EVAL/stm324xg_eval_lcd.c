@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324xg_eval_lcd.c
   * @author  MCD Application Team
-  * @version V2.0.2
-  * @date    19-June-2014
+  * @version V2.0.3
+  * @date    26-June-2014
   * @brief   This file includes the driver for Liquid Crystal Display (LCD) module
   *          mounted on STM324xG-EVAL evaluation board.
   ******************************************************************************

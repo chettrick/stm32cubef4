@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324xg_eval_audio.c
   * @author  MCD Application Team
-  * @version V2.0.2
-  * @date    19-June-2014
+  * @version V2.0.3
+  * @date    26-June-2014
   * @brief   This file provides the Audio driver for the STM324xG-EVAL evaluation
   *          board.  
   ******************************************************************************
@@ -260,8 +260,7 @@ uint8_t BSP_AUDIO_OUT_Play(uint16_t* pBuffer, uint32_t Size)
   else
   {
     /* Update the Media layer and enable it for play */  
-    HAL_I2S_Transmit_DMA(&haudio_i2s, pBuffer, DMA_MAX(Size/(2*AUDIODATA_SIZE)));
-    
+    HAL_I2S_Transmit_DMA(&haudio_i2s, pBuffer, DMA_MAX(Size/AUDIODATA_SIZE));
     return AUDIO_OK;
   }
 }
@@ -269,7 +268,7 @@ uint8_t BSP_AUDIO_OUT_Play(uint16_t* pBuffer, uint32_t Size)
 /**
   * @brief  Sends n-Bytes on the I2S interface.
   * @param  pData: Pointer to data address 
-  * @param  Size: Number of data to be written
+  * @param  Size: Number of data to be written.
   * @retval None
   */
 void BSP_AUDIO_OUT_ChangeBuffer(uint16_t *pData, uint16_t Size)

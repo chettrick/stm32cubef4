@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f401_discovery_audio.h
   * @author  MCD Application Team
-  * @version V2.1.0
-  * @date    19-June-2014
+  * @version V2.1.1
+  * @date    26-June-2014
   * @brief   This file contains the common defines and functions prototypes for
   *          stm32f401_discovery_audio.c driver.
   ******************************************************************************

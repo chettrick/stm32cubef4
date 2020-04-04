@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f4_discovery.h
   * @author  MCD Application Team
-  * @version V2.0.1
-  * @date    19-June-2014
+  * @version V2.0.2
+  * @date    26-June-2014
   * @brief   This file contains definitions for STM32F4-Discovery Kit's Leds and 
   *          push-button hardware resources.
   ******************************************************************************

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f401_discovery_audio.c
   * @author  MCD Application Team
-  * @version V2.1.0
-  * @date    19-June-2014
+  * @version V2.1.1
+  * @date    26-June-2014
   * @brief   This file provides the Audio driver for the STM32F401-Discovery 
   *          board.  
   ******************************************************************************
@@ -178,7 +178,7 @@ I2S_HandleTypeDef                 hAudioOutI2s;
 /*### RECORDER ###*/
 I2S_HandleTypeDef                 hAudioInI2s;
 
-PDMFilter_InitStruct Filter[2];
+PDMFilter_InitStruct Filter[DEFAULT_AUDIO_IN_CHANNEL_NBR];
 uint16_t __IO AudioInVolume = DEFAULT_AUDIO_IN_VOLUME;
     
 /**
@@ -281,7 +281,7 @@ uint8_t BSP_AUDIO_OUT_Play(uint16_t* pBuffer, uint32_t Size)
   else 
   {
     /* Update the Media layer and enable it for play */  
-    HAL_I2S_Transmit_DMA(&hAudioOutI2s, pBuffer, DMA_MAX(Size)); 
+    HAL_I2S_Transmit_DMA(&hAudioOutI2s, pBuffer, DMA_MAX(Size/AUDIODATA_SIZE)); 
     
     return AUDIO_OK;
   }
@@ -799,6 +799,12 @@ uint8_t BSP_AUDIO_IN_PDMToPCM(uint16_t *PDMBuf, uint16_t *PCMBuf)
     PDM_Filter_64_LSB((uint8_t*)&AppPDM[index], (uint16_t*)&(PCMBuf[index]), AudioInVolume , (PDMFilter_InitStruct *)&Filter[index]);
   }
   
+  /* Duplicate samples since a single microphone in mounted on STM32F4-Discovery */
+  for(index = 0; index < PCM_OUT_SIZE; index++)
+  {
+    PCMBuf[(index<<1)+1] = PCMBuf[index<<1];
+  }
+	
   /* Return AUDIO_OK when all operations are correctly done */
   return AUDIO_OK; 
 }
@@ -884,7 +890,9 @@ static void PDMDecoder_Init(uint32_t AudioFreq, uint32_t ChnlNbr)
     Filter[i].LP_HZ = AudioFreq / 2;
     Filter[i].HP_HZ = 10;
     Filter[i].Fs = AudioFreq;
-    Filter[i].Out_MicChannels = ChnlNbr;
+		/* On STM32F401-Discovery a single microphone is mounted, samples are duplicated
+       to make stereo audio streams */
+    Filter[i].Out_MicChannels = 2;
     Filter[i].In_MicChannels = ChnlNbr; 
     PDM_Filter_Init((PDMFilter_InitStruct *)&Filter[i]);
   }  
@@ -974,7 +982,7 @@ static void I2S2_Init(uint32_t AudioFreq)
   __HAL_I2S_DISABLE(&hAudioInI2s);
   
   /* I2S2 peripheral configuration */
-  hAudioInI2s.Init.AudioFreq    = 4 * AudioFreq;
+  hAudioInI2s.Init.AudioFreq    = 2 * AudioFreq;
   hAudioInI2s.Init.ClockSource  = I2S_CLOCK_PLL;
   hAudioInI2s.Init.CPOL         = I2S_CPOL_HIGH;
   hAudioInI2s.Init.DataFormat   = I2S_DATAFORMAT_16B;
