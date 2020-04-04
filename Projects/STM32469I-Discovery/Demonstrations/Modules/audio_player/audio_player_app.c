@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    audioplayer_app.c
   * @author  MCD Application Team
-  * @version V0.1.0
-  * @date    13-July-2015   
+  * @version V1.1.0
+  * @date    09-October-2015
   * @brief   Audio player application functions
   ******************************************************************************
   * @attention
@@ -41,6 +41,21 @@
 /* External variables --------------------------------------------------------*/
 /* Private typedef -----------------------------------------------------------*/
 /* Private defines -----------------------------------------------------------*/
+const uint8_t VOL_LIMIT_TABLE[] = 
+{
+  0,  15, 23, 30, 34, 38, 42, 45, 47, 50,
+  52, 53, 55, 57, 58, 60, 61, 62, 63, 65,
+  66, 67, 68, 69, 69, 70, 71, 72, 73, 73,
+  74, 75, 75, 76, 77, 77, 78, 78, 79, 80,
+  80, 81, 81, 82, 82, 83, 83, 84, 84, 84,
+  85, 85, 86, 86, 87, 87, 87, 88, 88, 88,
+  89, 89, 89, 90, 90, 90, 91, 91, 91, 92,
+  92, 92, 93, 93, 93, 94, 94, 94, 94, 95,
+  95, 95, 95, 96, 96, 96, 96, 97, 97, 97,
+  97, 98, 98, 98, 98, 99, 99, 99, 99, 100, 
+  100   
+ };
+
 /* Private macros ------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 static FIL wav_file;
@@ -146,7 +161,7 @@ AUDIOPLAYER_ErrorTypdef  AUDIOPLAYER_Init(uint8_t volume)
   AudioEvent = osMessageCreate (osMessageQ(AUDIO_Queue), NULL); 
   
   /* Create Audio task */
-  osThreadDef(osAudio_Thread, Audio_Thread, osPriorityNormal, 0, 512);
+  osThreadDef(osAudio_Thread, Audio_Thread, osPriorityRealtime, 0, 512);
   AudioThreadId = osThreadCreate (osThread(osAudio_Thread), NULL);  
 
    portEXIT_CRITICAL();
@@ -233,14 +248,14 @@ uint32_t  AUDIOPLAYER_GetVolume(void)
   */
 AUDIOPLAYER_ErrorTypdef  AUDIOPLAYER_SetVolume(uint32_t volume)
 {
-  if(BSP_AUDIO_OUT_SetVolume(volume) == AUDIO_OK)
+  if(BSP_AUDIO_OUT_SetVolume(VOL_LIMIT_TABLE[volume]) == AUDIO_OK)
   {
     haudio.out.volume = volume;
     return AUDIOPLAYER_ERROR_NONE;    
   }
   else
   {
-    return AUDIOPLAYER_ERROR_HW;
+   return AUDIOPLAYER_ERROR_HW;
   }
 }
 
@@ -287,6 +302,7 @@ AUDIOPLAYER_ErrorTypdef  AUDIOPLAYER_Process(void)
     break;    
 
   case AUDIOPLAYER_EOF:
+     haudio.out.state = AUDIOPLAYER_EOF;
      AUDIOPLAYER_NotifyEndOfFile();
     break;    
     
@@ -338,13 +354,16 @@ AUDIOPLAYER_ErrorTypdef  AUDIOPLAYER_DeInit(void)
   */
 AUDIOPLAYER_ErrorTypdef  AUDIOPLAYER_Stop(void)
 {
-  BSP_AUDIO_OUT_Stop(CODEC_PDWN_SW);  
   haudio.out.state = AUDIOPLAYER_STOP;
-  f_close(&wav_file);
+  BSP_AUDIO_OUT_Stop(CODEC_PDWN_SW); 
+  
   if(AudioThreadId != 0)
   {  
     osThreadSuspend(AudioThreadId); 
   }
+  f_close(&wav_file);
+
+
   return AUDIOPLAYER_ERROR_NONE;
 }
 
@@ -389,10 +408,8 @@ AUDIOPLAYER_ErrorTypdef  AUDIOPLAYER_SetPosition(uint32_t position)
   long file_pos;
   
   file_pos = wav_file.fsize / AUDIO_OUT_BUFFER_SIZE / 100; 
-  file_pos *= (position * AUDIO_OUT_BUFFER_SIZE);
-  AUDIOPLAYER_Pause(); 
+  file_pos *= (position * AUDIO_OUT_BUFFER_SIZE); 
   f_lseek(&wav_file, file_pos);
-  AUDIOPLAYER_Resume(); 
   
   return AUDIOPLAYER_ERROR_NONE;
 }

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LwIP/LwIP_TCP_Echo_Server/Inc/lwipopts.h
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    14-August-2015
+  * @version V1.4.1
+  * @date    09-October-2015
   * @brief   lwIP Options Configuration.
   ******************************************************************************
   * @attention

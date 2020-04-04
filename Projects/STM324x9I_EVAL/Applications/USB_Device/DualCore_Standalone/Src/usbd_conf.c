@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Device/DualCore_Standalone/Src/usbd_conf.c
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    14-August-2015
+  * @version V1.4.1
+  * @date    09-October-2015
   * @brief   This file implements the USB Device library callbacks and MSP
   ******************************************************************************
   * @attention

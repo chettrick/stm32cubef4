@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32469i_eval_sd.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    14-August-2015
+  * @version V1.0.1
+  * @date    29-September-2015
   * @brief   This file includes the uSD card driver mounted on STM32469I-EVAL
   *          evaluation board.
   ******************************************************************************

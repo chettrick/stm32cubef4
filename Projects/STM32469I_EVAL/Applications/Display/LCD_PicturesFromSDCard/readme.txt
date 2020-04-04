@@ -5,8 +5,8 @@
   ******************************************************************************
   * @file    Display/LCD_PicturesFromSDCard/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    14-August-2015
+  * @version V1.0.1
+  * @date    09-October-2015
   * @brief   Description of the LCD pictures from SD card application.
   ******************************************************************************
   * @attention

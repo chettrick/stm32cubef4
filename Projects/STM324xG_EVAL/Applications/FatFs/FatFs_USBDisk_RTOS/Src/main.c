@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    FatFs/FatFs_USBDisk_RTOS/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    14-August-2015
+  * @version V1.3.1
+  * @date    09-October-2015
   * @brief   Main program body
   *          This sample code shows how to use FatFs with USB disk drive in RTOS 
   *          mode.

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    ST_Addons.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    14-August-2015
+  * @version V1.1.0
+  * @date    09-October-2015
   * @brief   ST Graphical addons : Extension for STemWin
   ******************************************************************************
   * @attention

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LCD_DSI/LCD_DSI_CmdMode_DoubleBuffering/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    14-August-2015
+  * @version V1.0.1
+  * @date    09-October-2015
   * @brief   This example describes how to configure and use LCD DSI to display an image
   *          of size WVGA in mode landscape (800x480) using the STM32F4xx HAL API and BSP.
   ******************************************************************************
@@ -310,12 +310,12 @@ static uint8_t LCD_Init(void)
   
   /* LCD clock configuration */
   /* PLLSAI_VCO Input = HSE_VALUE/PLL_M = 1 Mhz */
-  /* PLLSAI_VCO Output = PLLSAI_VCO Input * PLLSAIN = 384 Mhz */
-  /* PLLLCDCLK = PLLSAI_VCO Output/PLLSAIR = 384 MHz / 7 = 54.857 MHz */
-  /* LTDC clock frequency = PLLLCDCLK / LTDC_PLLSAI_DIVR_2 = 54.857 MHz / 2 = 27.429 MHz */
+  /* PLLSAI_VCO Output = PLLSAI_VCO Input * PLLSAIN = 417 Mhz */
+  /* PLLLCDCLK = PLLSAI_VCO Output/PLLSAIR = 417 MHz / 5 = 83.4 MHz */
+  /* LTDC clock frequency = PLLLCDCLK / LTDC_PLLSAI_DIVR_2 = 83.4 / 2 = 41.7 MHz */
   PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_LTDC;
-  PeriphClkInitStruct.PLLSAI.PLLSAIN = 384;
-  PeriphClkInitStruct.PLLSAI.PLLSAIR = 7;
+  PeriphClkInitStruct.PLLSAI.PLLSAIN = 417;
+  PeriphClkInitStruct.PLLSAI.PLLSAIR = 5;
   PeriphClkInitStruct.PLLSAIDivR = RCC_PLLSAIDIVR_2;
   HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);
   
@@ -326,7 +326,7 @@ static uint8_t LCD_Init(void)
   
   dsiPllInit.PLLNDIV  = 100;
   dsiPllInit.PLLIDF   = DSI_PLL_IN_DIV5;
-  dsiPllInit.PLLODF  = DSI_PLL_OUT_DIV1;  
+  dsiPllInit.PLLODF   = DSI_PLL_OUT_DIV1;  
 
   hdsi_eval.Init.NumberOfLanes = DSI_TWO_DATA_LANES;
   hdsi_eval.Init.TXEscapeCkdiv = 0x4;
@@ -434,16 +434,15 @@ void LTDC_Init(void)
 static void LCD_BriefDisplay(void)
 {
   BSP_LCD_SetFont(&Font24);  
-  BSP_LCD_Clear(LCD_COLOR_WHITE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-  BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
+  BSP_LCD_SetTextColor(LCD_COLOR_BLUE); 
   BSP_LCD_FillRect(0, 0, 800, 112);  
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+  BSP_LCD_FillRect(0, 112, 800, 368);
+  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);  
   BSP_LCD_DisplayStringAtLine(1, (uint8_t *)"           LCD_DSI_CmdMode_DoubleBuffering");
   BSP_LCD_SetFont(&Font16);
   BSP_LCD_DisplayStringAtLine(4, (uint8_t *)"This example shows how to display images on LCD DSI using two buffers");
-  BSP_LCD_DisplayStringAtLine(5, (uint8_t *)"one for display and the other for draw     "); 
-  
+  BSP_LCD_DisplayStringAtLine(5, (uint8_t *)"one for display and the other for draw");  
 }
 
 /**

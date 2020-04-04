@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32469i_discovery_qspi.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    14-August-2015
+  * @version V1.0.1
+  * @date    29-September-2015
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm32469i_discovery_qspi.c driver.
   ******************************************************************************

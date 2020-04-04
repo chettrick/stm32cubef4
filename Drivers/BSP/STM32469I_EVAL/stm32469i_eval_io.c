@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32469i_eval_io.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    14-August-2015
+  * @version V1.0.1
+  * @date    29-September-2015
   * @brief   This file provides a set of functions needed to manage the IO pins
   *          on STM32469I-EVAL evaluation board.
   ******************************************************************************

@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    usbd_storage.c
   * @author  MCD Application Team
-  * @version V1.4.0
+  * @version V1.3.1
   * @date    18-August-2015   
   * @brief   Memory management layer
   ******************************************************************************

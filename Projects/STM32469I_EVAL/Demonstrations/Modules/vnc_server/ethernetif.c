@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LwIP/LwIP_HTTP_Server_Netconn_RTOS/Src/ethernetif.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    14-August-2015
+  * @version V1.1.0
+  * @date    09-October-2015
   * @brief   This file implements Ethernet network interface drivers for lwIP
   ******************************************************************************
   * @attention

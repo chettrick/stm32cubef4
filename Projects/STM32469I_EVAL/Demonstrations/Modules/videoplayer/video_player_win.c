@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    videoplayer_win.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    14-August-2015
+  * @version V1.1.0
+  * @date    09-October-2015
   * @brief   Video player functions
   ******************************************************************************
   * @attention
@@ -1536,12 +1536,12 @@ static void _cbDialog(WM_MESSAGE * pMsg) {
             {  
               GUI_SetLayerVisEx (1, 1);
               GUI_SelectLayer(1); 
-              playbackwin = WM_CreateWindowAsChild(-1, 0, 800, 480, WM_GetDesktopWindowEx(1), WM_CF_SHOW, _cbplaybackwin , 0);
+              playbackwin = WM_CreateWindowAsChild(0, 0, 800, 480, WM_GetDesktopWindowEx(1), WM_CF_SHOW, _cbplaybackwin , 0);
               WM_CreateWindowAsChild(100, 100, 600, 280, WM_GetDesktopWindowEx(1), WM_CF_SHOW | WM_CF_HASTRANS, _cbTouch , 0);             
               GUI_SelectLayer(0);
               _StartPlay(&hvideo, (char *)VideoList.file[0].name, &Video_File, 0, 0);
               VideoPlayer_State = VIDEO_PLAY;
-              hFrame = WM_CreateWindowAsChild(-1, 0, 800, 480,pMsg->hWin, WM_CF_SHOW, _cbVideoWindow , 0);    
+              hFrame = WM_CreateWindowAsChild(0, 0, 800, 480,pMsg->hWin, WM_CF_SHOW, _cbVideoWindow , 0);    
               GUI_SelectLayer(1);
               
             }

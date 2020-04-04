@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    settings_win.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    14-August-2015
+  * @version V1.1.0
+  * @date    09-October-2015
   * @brief   settings functions
   ******************************************************************************
   * @attention
@@ -87,7 +87,7 @@ static const GUI_WIDGET_CREATE_INFO _aDialog[] =
   { TEXT_CreateIndirect, " STM32479I",  ID_TEXT_BOARD_2,  65,  320, 100, 20, 0, 0x0, 0 },
   { TEXT_CreateIndirect, " STM32F4", ID_TEXT_CORE_1,     260, 300, 100, 20, 0, 0x0, 0 },
   { TEXT_CreateIndirect, " 180MHz", ID_TEXT_CPU_1,       450, 300, 100, 20, 0, 0x0, 0 },
-  { TEXT_CreateIndirect, "V1.0.0", ID_TEXT_VERSION_1,    640, 300, 100, 20, 0, 0x0, 0 }, 
+  { TEXT_CreateIndirect, "V1.1.0", ID_TEXT_VERSION_1,    655, 300, 100, 20, 0, 0x0, 0 }, 
   
   { TEXT_CreateIndirect, "Copyright (c) STMicroelectronics 2015", ID_TEXT_COPYRIGHT, 550, 453, 240, 20, 0, 0x0, 0 },
 };

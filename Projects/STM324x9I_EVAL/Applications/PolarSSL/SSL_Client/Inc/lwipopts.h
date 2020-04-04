@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    PolarSSL/SSL_Client/Inc/lwipopts.h
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    14-August-2015
+  * @version V1.4.1
+  * @date    09-October-2015
   * @brief   lwIP Options Configuration.
   *          This file is based on Utilities\lwip_v1.4.1\src\include\lwip\opt.h 
   *          and contains the lwIP configuration for the STM32F4x7 demonstration.

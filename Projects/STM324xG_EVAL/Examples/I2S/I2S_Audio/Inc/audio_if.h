@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    I2S/I2S_Audio/Inc/audio_if.h 
   * @author  MCD Application Team
-  * @version V1.2.2
-  * @date    01-July-2015
+  * @version V1.2.3
+  * @date    09-October-2015
   * @brief   Header for audio_if.c module
   ******************************************************************************
   * @attention

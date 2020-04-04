@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    PolarSSL/SSL_Client/Src/ssl_client.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    14-August-2015
+  * @version V1.0.1
+  * @date    09-October-2015
   * @brief   SSL Client main task
   ******************************************************************************
   * @attention

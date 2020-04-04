@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BSP/Src/sram.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    14-August-2015
+  * @version V1.0.1
+  * @date    09-October-2015
   * @brief   This example code shows how to use the SRAM Driver
   ******************************************************************************
   * @attention

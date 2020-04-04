@@ -25,11 +25,6 @@
 		<nature>fr.ac6.mcu.ide.core.MCUProjectNature</nature>
 	</natures>
 	<linkedResources>
-		<link>
-			<name />
-			<type />
-			<location />
-		</link>
 	<link>
 			<name>Middlewares/STM32_USBD_Library/Class/CDC/usbd_cdc.c</name>
 			<type>1</type>

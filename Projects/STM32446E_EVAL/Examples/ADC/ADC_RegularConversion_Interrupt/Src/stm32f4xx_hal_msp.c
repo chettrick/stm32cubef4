@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    ADC/ADC_RegularConversion_Interrupt/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    01-July-2015
+  * @version V1.1.1
+  * @date    09-October-2015
   * @brief   HAL MSP module.
   ******************************************************************************
   * @attention

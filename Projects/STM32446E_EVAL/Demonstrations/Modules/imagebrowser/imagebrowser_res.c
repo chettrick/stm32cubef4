@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    imagebrowser_res.c
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    14-August-2015
+  * @version V1.2.1
+  * @date    09-October-2015
   * @brief   resources define for Image Browser module
   ******************************************************************************
   * @attention

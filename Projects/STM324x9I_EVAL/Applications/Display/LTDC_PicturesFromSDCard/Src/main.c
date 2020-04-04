@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Display/LTDC_PicturesFromSDCard/Src/main.c
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    14-August-2015
+  * @version V1.4.1
+  * @date    09-October-2015
   * @brief   This file provides main program functions
   ******************************************************************************
   * @attention
@@ -86,6 +86,16 @@ int main(void)
   
   /* Configure TAMPER Button */
   BSP_PB_Init(BUTTON_TAMPER, BUTTON_MODE_GPIO);   
+
+  BSP_SD_Init();
+
+  while(BSP_SD_IsDetected() != SD_PRESENT)
+  {
+        BSP_LCD_SetTextColor(LCD_COLOR_RED);
+        BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"  Please insert SD Card                  ");
+  }
+  
+  BSP_LCD_Clear(LCD_COLOR_BLACK);
   
   /*##-2- Link the SD Card disk I/O driver ###################################*/
   if(FATFS_LinkDriver(&SD_Driver, SD_Path) == 0)
@@ -165,9 +175,6 @@ int main(void)
         {
         }
         
-        /* Clear the Foreground Layer */ 
-        BSP_LCD_Clear(LCD_COLOR_BLACK);
-        
         /* Configure the transparency for foreground layer : decrease the transparency */
         for (transparency = 255; transparency > 0; transparency--)
         {        
@@ -176,6 +183,9 @@ int main(void)
           /* Insert a delay of display */
           HAL_Delay(2);
         }
+
+        /* Clear the Foreground Layer */ 
+        BSP_LCD_Clear(LCD_COLOR_BLACK);
         
         /* Jump to the next image */  
         counter++;
@@ -212,9 +222,6 @@ int main(void)
           {
           }
           
-          /* Clear the Foreground Layer */ 
-          BSP_LCD_Clear(LCD_COLOR_BLACK);
-          
           /* Step3 : -------------------------------------------------------*/              
           /* Configure the transparency for background layer : Increase the transparency */
           for (transparency = 255; transparency > 0; transparency--)
@@ -224,6 +231,10 @@ int main(void)
             /* Insert a delay of display */
             HAL_Delay(2);
           }
+
+          /* Clear the Background Layer */
+          BSP_LCD_Clear(LCD_COLOR_BLACK);
+
           counter++;   
         }
         else if (Storage_CheckBitmapFile((const char*)str, &uwBmplen) == 0)
@@ -250,6 +261,8 @@ int main(void)
 static void LCD_Config(void)
 {
   /* LCD Initialization */ 
+  /* Two layers are used in this application but not simultaneously 
+     so "LCD_MAX_PCLK" is recommended to programme the maximum PCLK = 25,16 MHz */
   BSP_LCD_Init();
 
   /* LCD Initialization */ 

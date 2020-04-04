@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    QSPI/QSPI_ReadWrite_IT/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    14-August-2015
+  * @version V1.0.1
+  * @date    09-October-2015
   * @brief   This example describes how to configure and use QuadSPI through
   *          the STM32F4xx HAL API.
   ******************************************************************************

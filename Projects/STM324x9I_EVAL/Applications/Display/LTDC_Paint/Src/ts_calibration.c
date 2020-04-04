@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Display/LTDC_Paint/Src/ts_calibration.c 
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    14-August-2015
+  * @version V1.4.1
+  * @date    09-October-2015
   * @brief   This application code shows how to calibrate the touchscreen.
   ******************************************************************************
   * @attention
@@ -169,7 +169,7 @@ static void WaitForPressedState(uint8_t Pressed)
       uint16_t TimeStart = HAL_GetTick();
       do {
         BSP_TS_GetState(&State);      
-        HAL_Delay(10);
+        HAL_Delay(40);
         if (State.TouchDetected != Pressed) 
         {
           break;

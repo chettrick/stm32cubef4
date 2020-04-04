@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BSP/Src/audio.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    01-July-2015
+  * @version V1.1.1
+  * @date    09-October-2015
   * @brief   This example code shows how to use the audio feature in the 
   *          stm32469i_eval driver
   ******************************************************************************

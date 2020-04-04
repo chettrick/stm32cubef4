@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    TIM/TIM_InputCapture/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    01-July-2015
+  * @version V1.1.1
+  * @date    09-October-2015
   * @brief   Description of the TIM_InputCapture example.
   ******************************************************************************
   *

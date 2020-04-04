@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LCD_DSI/LCD_DSI_ULPM_DataClock/Inc/main.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    14-August-2015
+  * @version V1.0.1
+  * @date  09-October-2015
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
@@ -47,24 +47,9 @@
 #include "stm32469i_discovery_sdram.h"
 
 /* Exported types ------------------------------------------------------------*/
-
-/**
- *  @brief LCD_DsiDphyClkTypeDef
- *  Possible values of supported frequencies of DPHY Clock in  LCD
- */
-typedef enum
-{
-    LCD_DSI_ULPM_MODE_NONE                = 0x00, /*!< Never activate ULPM */
-    LCD_DSI_ULPM_MODE_DATA_LANE_ONLY      = 0x01, /*!< Activate ULPM when possible but on Data lane only   */
-    LCD_DSI_ULPM_MODE_DATA_AND_CLOCK_LANE = 0x02, /*!< Activate ULPM when possible on Data and clock lanes */
-    LCD_DSI_ULPM_MODE_INVALID             = 0x03  /*!< Invalid ULPM configuration */
-
-} LCD_DsiUlpmModeTypeDef;
-
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
-void Toggle_Leds(void);
 
 #endif /* __MAIN_H */
 

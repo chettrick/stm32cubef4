@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Display/LCD_DSI_ImagesSlider/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    14-August-2015
+  * @version V1.0.1
+  * @date    09-October-2015
   * @brief   This example describes how to configure and use LCD DSI to display an image
   *          of size WVGA in mode landscape (800x480) using the STM32F4xx HAL API and BSP.
   ******************************************************************************
@@ -112,7 +112,7 @@ uint32_t first_touch;
 static uint8_t touch = 0;
 static  uint8_t touchdetected = 0;
 __IO uint32_t image_ID  = 0;
-uint32_t MAX_IMAGE_ID   = 9;
+uint32_t MAX_IMAGE_ID   = 8;
 uint32_t image_num = 0, draw_method = HORIZONTAL_SLIDER;
 int32_t counter = 0; 
 
@@ -889,12 +889,12 @@ static uint8_t LCD_Init(void)
   
   /* LCD clock configuration */
   /* PLLSAI_VCO Input = HSE_VALUE/PLL_M = 1 Mhz */
-  /* PLLSAI_VCO Output = PLLSAI_VCO Input * PLLSAIN = 384 Mhz */
-  /* PLLLCDCLK = PLLSAI_VCO Output/PLLSAIR = 384 MHz / 7 = 54.857 MHz */
-  /* LTDC clock frequency = PLLLCDCLK / LTDC_PLLSAI_DIVR_2 = 54.857 MHz / 2 = 27.429 MHz */
+  /* PLLSAI_VCO Output = PLLSAI_VCO Input * PLLSAIN = 417 Mhz */
+  /* PLLLCDCLK = PLLSAI_VCO Output/PLLSAIR = 417 MHz / 5 = 83.4 MHz */
+  /* LTDC clock frequency = PLLLCDCLK / LTDC_PLLSAI_DIVR_2 = 83.4 / 2 = 41.7 MHz */
   PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_LTDC;
-  PeriphClkInitStruct.PLLSAI.PLLSAIN = 384;
-  PeriphClkInitStruct.PLLSAI.PLLSAIR = 7;
+  PeriphClkInitStruct.PLLSAI.PLLSAIN = 417;
+  PeriphClkInitStruct.PLLSAI.PLLSAIR = 5;
   PeriphClkInitStruct.PLLSAIDivR = RCC_PLLSAIDIVR_2;
   HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);
   

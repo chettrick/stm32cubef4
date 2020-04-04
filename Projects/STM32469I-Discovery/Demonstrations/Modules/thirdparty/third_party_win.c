@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    thirdparty_win.c
   * @author  MCD Application Team
-  * @version V1.0.0RC1
-  * @date    06-April-2015 
+  * @version V1.1.0
+  * @date    09-October-2015
   * @brief   third party functions
   ******************************************************************************
   * @attention

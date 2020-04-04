@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    I2C/I2C_TwoBaords_ComIT/Inc/main.h
   * @author  MCD Application Team
-  * @version V1.2.2
-  * @date    01-July-2015 
+  * @version V1.2.3
+  * @date    09-October-2015 
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention

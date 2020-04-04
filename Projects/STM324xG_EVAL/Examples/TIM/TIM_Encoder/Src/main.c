@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    TIM/TIM_Encoder/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.2.2
-  * @date    01-July-2015
+  * @version V1.2.3
+  * @date    09-October-2015
   * @brief   This example shows how to configure the Timer in Encoder interface 
   *          to determinate the rotation direction.
   ******************************************************************************

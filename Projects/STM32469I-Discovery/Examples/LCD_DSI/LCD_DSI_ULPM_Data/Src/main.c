@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LCD_DSI/LCD_DSI_ULPM_Data/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    14-August-2015
+  * @version V1.0.1
+  * @date  09-October-2015
   * @brief   This example describes how to operate the DSI ULPM (Ultra Low Power Mode)
   *          on data lane only in a use case with display in WVGA Landscape
   *          of size (800x480) using the STM32F4xx HAL API and BSP.
@@ -83,22 +83,6 @@ static void OnError_Handler(uint32_t condition)
 }
 
 /**
- * @brief  Toggle Leds.
- * @param  None
- * @retval None
- */
-void Toggle_Leds(void)
-{
-  static uint32_t ticks = 0;
-
-  if (ticks++ > 1000)
-  {
-    BSP_LED_Toggle(LED1);
-    ticks = 0;
-  }
-}
-
-/**
  * @brief  Main program
  * @param  None
  * @retval None
@@ -125,54 +109,53 @@ int main(void)
   /* Configure the system clock to 180 MHz */
   SystemClock_Config();
 
-  /* Initialize used Leds */
+  /* Initialize used LED1 and LED3 */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED3);
-
+  
   /* Configure user push-button */
   BSP_PB_Init(BUTTON_WAKEUP, BUTTON_MODE_GPIO);
-
-  /*##-1- Initialize the LCD */
-
-  /* Get DSI configuration for mode Video Burst  */
+  
+  /* Initialize the LCD DSI in Video Burst mode with LANDSCAPE orientation */
   lcd_status = BSP_LCD_Init();
   OnError_Handler(lcd_status != LCD_OK);
-
-  HAL_LTDC_ProgramLineEvent(&hltdc_eval, 0); 
+  
+  /* Program a line event at line 0 */
+  HAL_LTDC_ProgramLineEvent(&hltdc_eval, 0);  
   
   /* Copy texture to be displayed on LCD from Flash to SDRAM */
   CopyPicture((uint32_t *)&candies_800x480_argb8888, (uint32_t *)LCD_FB_START_ADDRESS, 0, 0, BSP_LCD_GetXSize(), BSP_LCD_GetYSize());
-
+  
   BSP_LCD_LayerDefaultInit(LTDC_ACTIVE_LAYER_BACKGROUND, LCD_FB_START_ADDRESS);
   BSP_LCD_SelectLayer(LTDC_ACTIVE_LAYER_BACKGROUND);
-
+  
   /* Prepare area to display frame number in the image displayed on LCD */
   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
   BSP_LCD_FillRect(0, 400, BSP_LCD_GetXSize(), 80);
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
   BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
   BSP_LCD_SetFont(&Font16);
-
+  
   /* Display title */
   BSP_LCD_DisplayStringAt(0, 420, (uint8_t *) "LCD_DSI_ULPM_Data example", CENTER_MODE);
   BSP_LCD_DisplayStringAt(0, 440, (uint8_t *) "Press TAMPER button to enter ULPM", CENTER_MODE);
-
+  
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
   BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
   BSP_LCD_SetFont(&Font16);
-
+  
   /* Infinite loop */
   while (1)
   {
     /* Clear previous line */
     BSP_LCD_ClearStringLine(460);
-
+    
     /* New text to display */
     sprintf(str_display, ">> Frame Nb : %lu", frameCnt);
-
+    
     /* Print updated frame number */
     BSP_LCD_DisplayStringAt(0, 460, (uint8_t *)str_display, CENTER_MODE);
-
+    
     if (CheckForUserInput() > 0)
     {
       /* Clear previous line */
@@ -180,30 +163,32 @@ int main(void)
       BSP_LCD_ClearStringLine(440);
       BSP_LCD_DisplayStringAt(0, 440, (uint8_t *) "Enter ULPM - switch Off LCD 6 seconds", CENTER_MODE);
       BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-
+      
       /* Display Off with ULPM management Data lane only integrated */
-      BSP_LCD_DisplayOff();    
-      HAL_Delay(100); 
+      BSP_LCD_DisplayOff();
+      HAL_Delay(1000); 
       
       /* Switch Off bit LTDCEN */
       __HAL_LTDC_DISABLE(&hltdc_eval); 
-
+      
       /* Enter ultra low power mode (data lane only integrated) */
       HAL_DSI_EnterULPMData(&hdsi_eval);
+      BSP_LED_On(LED1);
       
       HAL_Delay(6000);
-
+      
       BSP_LCD_ClearStringLine(440);
       BSP_LCD_DisplayStringAt(0, 440, (uint8_t *) " Exited ULPM with success - Press To enter Again ULPM. ", CENTER_MODE);
       
       /* Exit ultra low power mode (data lane only integrated) */
       HAL_DSI_ExitULPMData(&hdsi_eval);
+      BSP_LED_Off(LED1);
       
       /* Switch On bit LTDCEN */
       __HAL_LTDC_ENABLE(&hltdc_eval); 
-
+      
       /* Display On with ULPM exit Data lane only integrated */
-      BSP_LCD_DisplayOn();      
+      BSP_LCD_DisplayOn();          
     }
   }
 }

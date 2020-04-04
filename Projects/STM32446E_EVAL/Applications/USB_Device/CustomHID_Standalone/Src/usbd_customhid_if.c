@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Device/CustomHID_Standalone/Src/usbd_customhid_if.c
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    14-August-2015
+  * @version V1.2.1
+  * @date    09-October-2015
   * @brief   USB Device Custom HID interface file.
   ******************************************************************************
   * @attention

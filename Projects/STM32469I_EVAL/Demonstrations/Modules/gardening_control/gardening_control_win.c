@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    gardening_control_win.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    14-August-2015
+  * @version V1.1.0
+  * @date    09-October-2015
   * @brief   gardening control functions
   ******************************************************************************
   * @attention

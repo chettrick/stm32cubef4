@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    main.c 
   * @author  MCD Application Team
-  * @version V0.1.0
-  * @date    13-July-2015
+  * @version V1.1.0
+  * @date    09-October-2015
   * @brief   This file provides main program functions
   ******************************************************************************
   * @attention
@@ -209,7 +209,7 @@ static void GUIThread(void const * argument)
   lcd_timer =  osTimerCreate(osTimer(TS_Timer), osTimerPeriodic, (void *)0);
 
   /* Start the TS Timer */
-  osTimerStart(lcd_timer, 40);
+  osTimerStart(lcd_timer, 30);
   
   /* Show the main menu */
   k_InitMenu();

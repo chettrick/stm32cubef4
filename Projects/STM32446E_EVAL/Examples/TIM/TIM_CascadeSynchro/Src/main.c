@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    TIM/TIM_CascadeSynchro/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    01-July-2015
+  * @version V1.1.1
+  * @date    09-October-2015
   * @brief   This example shows how to command 2 Timers as slaves (TIM3 & TIM4)
   *          using a Timer as master (TIM2)
   ******************************************************************************

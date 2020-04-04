@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32469i_eval.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    14-August-2015
+  * @version V1.0.1
+  * @date    29-September-2015
   * @brief   This file contains definitions for STM32469I-EVAL's LEDs,
   *          push-buttons and COM ports hardware resources.
   ******************************************************************************

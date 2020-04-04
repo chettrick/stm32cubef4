@@ -7,8 +7,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    LCD_DSI/LCD_DSI_ULPM_Data/readme.txt
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    14-August-2015
+  * @version V1.0.1
+  * @date  09-October-2015
   * @brief   Description of the LCD DSI enter and exit DSI ULPM Mode on data lane only example.
   ******************************************************************************
   *
@@ -46,14 +46,19 @@ on data lane and allows to save some power when the LCD does not need to display
 When the display is needed again, the DSI ULPM on data lane is exited and display should operate as before.
 
 In this example a WVGA landscape picture (800x480) is displayed on LCD in DSI Mode Video Burst.
-On a button press from the user, the LCD display will be switched off, and DSI PHY Data lane will enter
-a ULPM mode. After 6 seconds in Off mode, the ULPM on data lane will be exited, the LCD will be switched
-back on and display the same image as before with a text notifying that the exit from ULPM was successful. 
+On a USER button press from the user, the LCD display will be switched off. One second later,  
+the DSI PHY Data lane will enter ULPM mode. After 6 seconds in Off mode, the ULPM on data lane 
+will be exited, the LCD will be switched back on and display the same image as before with a 
+text notifying that the exit from ULPM was successful. 
 
 The image candies_800x480_argb8888 is of format ARGB8888 and is initially copied from Flash to SDRAM Frame Buffer.
 The LTDC is reading continuously the LCD Frame buffer from SDRAM, sent it to DSI Host which sends it in burst mode (DCS commands)
 via the DSI DPHY to the KoD display that decodes DSI packets and refresh its internal Graphic RAM to display on glass.
 The Frame number display is managed by the BSP_LCD by function implementing font to display a text in SDRAM Frame buffer.
+
+LED1 ON: DSI PHY Data lane in ULPM mode
+LED1 OFF: DSI PHY Data lane in run mode
+LED3 ON: an error occured.
 
 @note Care must be taken when using HAL_Delay(), this function provides accurate
       delay (in milliseconds) based on variable incremented in SysTick ISR. This

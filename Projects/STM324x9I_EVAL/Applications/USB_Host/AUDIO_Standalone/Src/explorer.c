@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Host/AUDIO_Standalone/Src/explorer.c 
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    14-August-2015
+  * @version V1.4.1
+  * @date    09-October-2015
   * @brief   This file provides uSD Card drive configuration
   ******************************************************************************
   * @attention

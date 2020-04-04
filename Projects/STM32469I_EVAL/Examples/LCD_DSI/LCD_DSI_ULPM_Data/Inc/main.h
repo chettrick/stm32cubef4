@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LCD_DSI/LCD_DSI_ULPM_Data/Inc/main.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    14-August-2015
+  * @version V1.0.1
+  * @date    09-October-2015
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
@@ -51,7 +51,6 @@
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
-void Toggle_Leds(void);
 
 #endif /* __MAIN_H */
 

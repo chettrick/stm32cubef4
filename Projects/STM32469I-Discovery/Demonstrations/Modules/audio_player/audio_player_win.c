@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    audioplayer_win.c
   * @author  MCD Application Team
-  * @version V0.1.0
-  * @date    13-July-2015   
+  * @version V1.1.0
+  * @date    09-October-2015
   * @brief   Audio player functions
   ******************************************************************************
   * @attention
@@ -150,10 +150,10 @@ AudioSettingsTypeDef;
 static const GUI_WIDGET_CREATE_INFO _aDialogCreate[] = {
   { WINDOW_CreateIndirect,    "Audio Player", ID_FRAMEWIN_INFO,     1, 0, 800, 480, 0, 0x0, 0 },
   { LISTVIEW_CreateIndirect,  "Listview",     ID_WAVFILE_LIST,      300, 80, 380, 260, 0, 0x0,  0 },  
-  { TEXT_CreateIndirect,      "Title",        ID_TITLE,     300,  20,  400,  125,  0, 0x0,  0 },
+  { TEXT_CreateIndirect,      "Title",        ID_TITLE,     300,  20,  400,  40,  0, 0x0,  0 },
   { TEXT_CreateIndirect,      "00:00",         ID_ELAPSED_TIME,        660,  370,  135,  30,  0, 0x0,  0 },
-  { TEXT_CreateIndirect,      "add",           ID_TEXT_ADD,            110, 315, 133, 120,  0, 0x0,  0 },
-  { TEXT_CreateIndirect,      "file",          ID_TEXT_FILE,           110, 335, 129, 120,  0, 0x0,  0 },
+  { TEXT_CreateIndirect,      "add",           ID_TEXT_ADD,            110, 315, 133, 40,  0, 0x0,  0 },
+  { TEXT_CreateIndirect,      "file",          ID_TEXT_FILE,           110, 335, 129, 40,  0, 0x0,  0 },
   { TEXT_CreateIndirect,      "add",          ID_TEXT_OPEN,           20, 315, 145, 130,  0, 0x0,  0 },
   { TEXT_CreateIndirect,      "folder",        ID_TEXT_FOLDER,         20, 335, 150, 130,  0, 0x0,  0 },  
   { TEXT_CreateIndirect,      "back-",          ID_TEXT_BACK,           210, 315, 80, 30,  0, 0x0,  0 },
@@ -840,7 +840,15 @@ static void _cbAudioProcess(WM_MESSAGE * pMsg) {
           SLIDER_SetValue(hItem, progress);
           WM_Update(hItem);        
         }
-      } 
+      }
+      else if(AUDIOPLAYER_GetState() == AUDIOPLAYER_EOF)
+      {
+        /* Set progress slider position */
+        hItem = WM_GetDialogItem(hMainWin, ID_SLIDER_DURATION);        
+        SLIDER_SetValue(hItem, 100);
+        WM_Update(hItem);
+      }
+
       
       AUDIOPLAYER_Process();
       WM_RestartTimer(pMsg->Data.v, 1000);
@@ -960,35 +968,38 @@ static void _PlayFile(char *filename)
   static char tmp[FILEMGR_FILE_NAME_SIZE];  
   WM_HWIN hItem;
   
-  if(AUDIOPLAYER_GetFileInfo(filename, &WavInfo) == 0)
+  if(haudio.out.state == AUDIOPLAYER_STOP)
   {
-    /* Title */
-    FILEMGR_GetFileOnly (tmp, filename);
-    TEXT_SetText(WM_GetDialogItem(hMainWin, ID_TITLE), tmp);  
-    
-    /* Total Time */
-    duration = WavInfo.FileSize / WavInfo.ByteRate;     
-    sprintf((char *)tmp , "%02lu:%02lu", duration/60, duration%60 );
-    hItem = WM_GetDialogItem(hMainWin, ID_TOTAL_TIME);
-    TEXT_SetText(hItem, tmp); 
-    
-    /* Open audio file */
-    if(AUDIOPLAYER_SelectFile(filename) == 0)
+    if(AUDIOPLAYER_GetFileInfo(filename, &WavInfo) == 0)
     {
-      /* start playing */
-      AUDIOPLAYER_Play(WavInfo.SampleRate);
-      if(PlayerSettings.b.mute == MUTE_ON)
+      /* Title */
+      FILEMGR_GetFileOnly (tmp, filename);
+      TEXT_SetText(WM_GetDialogItem(hMainWin, ID_TITLE), tmp);  
+      
+      /* Total Time */
+      duration = WavInfo.FileSize / WavInfo.ByteRate;     
+      sprintf((char *)tmp , "%02lu:%02lu", duration/60, duration%60 );
+      hItem = WM_GetDialogItem(hMainWin, ID_TOTAL_TIME);
+      TEXT_SetText(hItem, tmp); 
+      
+      /* Open audio file */
+      if(AUDIOPLAYER_SelectFile(filename) == 0)
       {
-        AUDIOPLAYER_Mute(MUTE_ON);
+        /* start playing */
+        AUDIOPLAYER_Play(WavInfo.SampleRate);
+        if(PlayerSettings.b.mute == MUTE_ON)
+        {
+          AUDIOPLAYER_Mute(MUTE_ON);
+        }
       }
     }
+    else
+    {
+      TEXT_SetText(WM_GetDialogItem(hMainWin, ID_TITLE), "Unknown");  
+      hItem = WM_GetDialogItem(hMainWin, ID_TOTAL_TIME);
+      TEXT_SetText(hItem, "--:--");      
+    }  
   }
-  else
-  {
-    TEXT_SetText(WM_GetDialogItem(hMainWin, ID_TITLE), "Unknown");  
-    hItem = WM_GetDialogItem(hMainWin, ID_TOTAL_TIME);
-    TEXT_SetText(hItem, "--:--");      
-  }  
 }
 
 /**
@@ -1338,7 +1349,7 @@ static void _cbEqualDialog(WM_MESSAGE * pMsg) {
     switch(Id) {      
       
     case ID_EQUABAR_1: 
-      if(NCode == WM_NOTIFICATION_CLICKED)
+      if(NCode == WM_NOTIFICATION_VALUE_CHANGED)
       {
         hItem = WM_GetDialogItem(pMsg->hWin, ID_EQUABAR_1);
         AUDIO_SetEq(0, 100 - SLIDER_GetValue(hItem));
@@ -1346,7 +1357,7 @@ static void _cbEqualDialog(WM_MESSAGE * pMsg) {
       break;      
       
     case ID_EQUABAR_2: 
-      if(NCode == WM_NOTIFICATION_CLICKED)
+      if(NCode == WM_NOTIFICATION_VALUE_CHANGED)
       {
         hItem = WM_GetDialogItem(pMsg->hWin, ID_EQUABAR_2);
         AUDIO_SetEq(1, 100 - SLIDER_GetValue(hItem));
@@ -1355,7 +1366,7 @@ static void _cbEqualDialog(WM_MESSAGE * pMsg) {
 
 
     case ID_EQUABAR_3: 
-      if(NCode == WM_NOTIFICATION_CLICKED)
+      if(NCode == WM_NOTIFICATION_VALUE_CHANGED)
       {
         hItem = WM_GetDialogItem(pMsg->hWin, ID_EQUABAR_3);
         AUDIO_SetEq(2, 100- SLIDER_GetValue(hItem));
@@ -1363,7 +1374,7 @@ static void _cbEqualDialog(WM_MESSAGE * pMsg) {
       break;    
 
     case ID_EQUABAR_4: 
-      if(NCode == WM_NOTIFICATION_CLICKED)
+      if(NCode == WM_NOTIFICATION_VALUE_CHANGED)
       {
         hItem = WM_GetDialogItem(pMsg->hWin, ID_EQUABAR_4);
         AUDIO_SetEq(3, 100- SLIDER_GetValue(hItem));
@@ -1371,7 +1382,7 @@ static void _cbEqualDialog(WM_MESSAGE * pMsg) {
       break;    
 
     case ID_EQUABAR_5: 
-      if(NCode == WM_NOTIFICATION_CLICKED)
+      if(NCode == WM_NOTIFICATION_VALUE_CHANGED)
       {
         hItem = WM_GetDialogItem(pMsg->hWin, ID_EQUABAR_5);
         AUDIO_SetEq(4, 100- SLIDER_GetValue(hItem));
@@ -1379,7 +1390,7 @@ static void _cbEqualDialog(WM_MESSAGE * pMsg) {
       break;          
       
     case ID_LOUDBAR_1: 
-      if(NCode == WM_NOTIFICATION_CLICKED)
+      if(NCode == WM_NOTIFICATION_VALUE_CHANGED)
       {
         hItem = WM_GetDialogItem(pMsg->hWin, ID_LOUDBAR_1);
         AUDIO_SetLoudnessGain(100- SLIDER_GetValue(hItem));
@@ -1781,6 +1792,13 @@ static void _cbMainDialog(WM_MESSAGE * pMsg) {
                 hItem = WM_GetDialogItem(pMsg->hWin, ID_PLAY_BUTTON);
                 WM_InvalidateWindow(hItem);
                 WM_Update(hItem); 
+                
+                
+                PlayerSettings.b.pause = PAUSE_INACTIVE;
+                hItem = WM_GetDialogItem(pMsg->hWin, ID_PAUSE_BUTTON);
+                WM_InvalidateWindow(hItem);
+                WM_Update(hItem);
+                
               }
             }
           }
@@ -2000,9 +2018,14 @@ static void _cbMainDialog(WM_MESSAGE * pMsg) {
             if(PlayerSettings.b.pause == PAUSE_ACTIVE)
             {  
               PlayerSettings.b.pause = PAUSE_INACTIVE;
-              hItem = WM_GetDialogItem(pMsg->hWin, ID_PLAY_BUTTON);
+              hItem = WM_GetDialogItem(pMsg->hWin, ID_PAUSE_BUTTON);
               WM_InvalidateWindow(hItem);
               WM_Update(hItem);
+              
+              PlayerSettings.b.play = PLAY_ACTIVE;
+              hItem = WM_GetDialogItem(pMsg->hWin, ID_PLAY_BUTTON);
+              WM_InvalidateWindow(hItem);
+              WM_Update(hItem);              
             }
             
             AUDIOPLAYER_Stop();
@@ -2044,9 +2067,14 @@ static void _cbMainDialog(WM_MESSAGE * pMsg) {
             if(PlayerSettings.b.pause == PAUSE_ACTIVE)
             {  
               PlayerSettings.b.pause = PAUSE_INACTIVE;
-              hItem = WM_GetDialogItem(pMsg->hWin, ID_PLAY_BUTTON);
+              hItem = WM_GetDialogItem(pMsg->hWin, ID_PAUSE_BUTTON);
               WM_InvalidateWindow(hItem);
               WM_Update(hItem);
+              
+              PlayerSettings.b.play = PLAY_ACTIVE;
+              hItem = WM_GetDialogItem(pMsg->hWin, ID_PLAY_BUTTON);
+              WM_InvalidateWindow(hItem);
+              WM_Update(hItem);    
             }
             
             AUDIOPLAYER_Stop();

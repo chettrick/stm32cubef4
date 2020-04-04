@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32469i_eval_lcd.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    14-August-2015
+  * @version V1.0.1
+  * @date    29-September-2015
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm32469i_eval_lcd.c driver.
   ******************************************************************************
@@ -48,7 +48,7 @@
 /* Include LCD component Driver */
 
 /* Include OTM8009A LCD Driver IC driver code */
-#include "..\Components\otm8009a\otm8009a.h"
+#include "../Components/otm8009a/otm8009a.h"
    
 /* Include SDRAM Driver */
 #include "stm32469i_eval_sdram.h"

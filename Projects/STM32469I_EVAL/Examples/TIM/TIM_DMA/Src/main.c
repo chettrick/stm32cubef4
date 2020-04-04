@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    TIM/TIM_DMA/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    14-August-2015
+  * @version V1.0.1
+  * @date    09-October-2015
   * @brief   This sample code shows how to use DMA with TIM2 Update request to
   *          transfer Data from memory to TIM2 Capture Compare Register 3 (CCR3).
   ******************************************************************************

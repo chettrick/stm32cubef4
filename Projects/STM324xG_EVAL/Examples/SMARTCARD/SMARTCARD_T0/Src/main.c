@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    SMARTCARD/SMARTCARD_T0/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.2.2
-  * @date    01-July-2015
+  * @version V1.2.3
+  * @date    09-October-2015
   * @brief   This sample code shows how to use STM32F4xx SMARTCARD HAL API to communicate
   *          with card compatible with T0 protocol. 
   ******************************************************************************

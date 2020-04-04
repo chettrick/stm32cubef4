@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    TIM/TIM_6Steps/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.2
-  * @date    01-July-2015
+  * @version V1.2.3
+  * @date    09-October-2015
   * @brief   Description of the TIM 6 Steps example.
   ******************************************************************************
   *

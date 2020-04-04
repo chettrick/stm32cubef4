@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    lcdconf.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    14-August-2015
+  * @version V1.1.0
+  * @date    09-October-2015
   * @brief   This file implements the configuration for the GUI library
   ******************************************************************************
   * @attention
@@ -206,6 +206,10 @@ static void LCD_LL_Reset(void)
   
   /* Desactivate XRES */
   HAL_GPIO_WritePin(GPIOK, GPIO_PIN_7, GPIO_PIN_SET);
+  
+  /* Wait after releasing RESX before sending commands */
+  HAL_Delay(10); /* wait 10 ms */
+    
 }
 
 /**

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    CRYP/CRYP_AESModes/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    14-August-2015   
+  * @version V1.0.1
+  * @date    09-October-2015   
   * @brief   This example provides a short description of how to use the CRYP
   *          peripheral to encrypt and decrypt data using AES algorithm in 
   *          chaining modes (ECB, CBC, CTR) and with all key sizes.

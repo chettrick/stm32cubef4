@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    game_win.c
   * @author  MCD Application Team
-  * @version V0.1.0
-  * @date    13-July-2015   
+  * @version V1.1.0
+  * @date    09-October-2015
   * @brief   game functions
   ******************************************************************************
   * @attention
@@ -585,7 +585,7 @@ static int _ShowMessageBox(WM_HWIN hWin, const char* pTitle, const char* pText, 
   WM_HWIN hFrame, hClient, hBut, hItem;
   int r = 0;
   /* Create frame win */
-  hFrame = FRAMEWIN_CreateEx(105, 76, 270, 120, hWin, WM_CF_SHOW, FRAMEWIN_CF_MOVEABLE, 0, pTitle, &_cbMessageBox);
+  hFrame = FRAMEWIN_CreateEx(265, 176, 270, 130, hWin, WM_CF_SHOW, FRAMEWIN_CF_MOVEABLE, 0, pTitle, &_cbMessageBox);
   FRAMEWIN_SetClientColor   (hFrame, GUI_WHITE);
   FRAMEWIN_SetFont          (hFrame, &GUI_Font16B_ASCII);
   FRAMEWIN_SetTextAlign     (hFrame, GUI_TA_HCENTER);

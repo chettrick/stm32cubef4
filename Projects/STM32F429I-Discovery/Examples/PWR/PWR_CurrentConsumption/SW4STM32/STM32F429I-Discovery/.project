@@ -25,11 +25,6 @@
 		<nature>fr.ac6.mcu.ide.core.MCUProjectNature</nature>
 	</natures>
 	<linkedResources>
-		<link>
-			<name />
-			<type />
-			<location />
-		</link>
 	<link>
 			<name>Example/User/stm32f4xx_it.c</name>
 			<type>1</type>

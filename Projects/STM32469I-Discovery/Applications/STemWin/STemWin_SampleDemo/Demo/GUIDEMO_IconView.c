@@ -36,7 +36,7 @@ Purpose     : Washing machine demo
   ******************************************************************************
   * @file    GUIDEMO_IconView.c
   * @author  MCD Application Team
-  * @version V1.0.0
+  * @version V1.0.1
   * @date    13-March-2015
   * @brief   Washing machine demo
   ******************************************************************************

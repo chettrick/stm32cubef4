@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    SPI/SPI_FullDuplex_AdvComIT/Slave/Inc/stm32f4xx_it.h
   * @author  MCD Application Team
-  * @version V1.2.2
-  * @date    01-July-2015
+  * @version V1.2.3
+  * @date    09-October-2015
   * @brief   This file contains the headers of the interrupt handlers.
   ******************************************************************************
   * @attention

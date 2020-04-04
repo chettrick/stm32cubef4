@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    I2C/I2C_TwoBoards_ComIT/Inc/stm32f4xx_it.h 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    14-August-2015
+  * @version V1.0.1
+  * @date  09-October-2015
   * @brief   This file contains the headers of the interrupt handlers.
   ******************************************************************************
   * @attention

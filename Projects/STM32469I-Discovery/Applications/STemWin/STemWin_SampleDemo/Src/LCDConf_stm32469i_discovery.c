@@ -36,8 +36,8 @@ Purpose     : Display controller configuration (single layer)
   ******************************************************************************
   * @file    LCDConf_stm32469i_eval.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    14-August-2015
+  * @version V1.0.1
+  * @date    09-October-2015
   * @brief   Driver for STM32469I-EVAL board LCD
   ******************************************************************************
   * @attention

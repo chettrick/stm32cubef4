@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324x9i_eval_lcd.c
   * @author  MCD Application Team
-  * @version V2.2.0
-  * @date    14-August-2015
+  * @version V2.2.1
+  * @date    07-October-2015
   * @brief   This file includes the driver for Liquid Crystal Display (LCD) module
   *          mounted on STM324x9I-EVAL evaluation board.
   ******************************************************************************
@@ -124,7 +124,8 @@
   */ 
 static LTDC_HandleTypeDef  hltdc_eval;
 static DMA2D_HandleTypeDef hdma2d_eval;
-
+static uint32_t            PCLK_profile = LCD_MAX_PCLK;
+    
 /* Default LCD configuration with LCD Layer 1 */
 static uint32_t            ActiveLayer = 0;
 static LCD_DrawPropTypeDef DrawProp[MAX_LAYER_NUMBER];
@@ -147,7 +148,6 @@ static void LL_ConvertLineToARGB8888(void * pSrc, void *pDst, uint32_t xSize, ui
 /** @defgroup STM324x9I_EVAL_LCD_Private_Functions
   * @{
   */
-
 /**
   * @brief  Initializes the LCD.
   * @param  None
@@ -155,8 +155,18 @@ static void LL_ConvertLineToARGB8888(void * pSrc, void *pDst, uint32_t xSize, ui
   */
 uint8_t BSP_LCD_Init(void)
 {    
-  static RCC_PeriphCLKInitTypeDef  PeriphClkInitStruct;
+  return (BSP_LCD_InitEx(LCD_MAX_PCLK));
+}
 
+/**
+  * @brief  Initializes the LCD.
+  * @param  PclkConfig : pixel clock profile
+  * @retval LCD state
+  */
+uint8_t BSP_LCD_InitEx(uint32_t PclkConfig)
+{    
+  PCLK_profile = PclkConfig;
+  
   /* Select the used LCD */
   /* The AMPIRE 480x272 does not contain an ID register then we check the availability 
      of AMPIRE 480x640 LCD using device ID of the STMPE811 mounted on MB1046 daughter board */ 
@@ -168,21 +178,10 @@ uint8_t BSP_LCD_Init(void)
     hltdc_eval.Init.VerticalSync = (AMPIRE480272_VSYNC - 1);
     hltdc_eval.Init.AccumulatedHBP = (AMPIRE480272_HSYNC + AMPIRE480272_HBP - 1);
     hltdc_eval.Init.AccumulatedVBP = (AMPIRE480272_VSYNC + AMPIRE480272_VBP - 1);  
-    hltdc_eval.Init.AccumulatedActiveH = (AMPIRE480272_HEIGHT + AMPIRE480272_VSYNC + AMPIRE640480_VBP - 1);
-    hltdc_eval.Init.AccumulatedActiveW = (AMPIRE480272_WIDTH + AMPIRE480272_HSYNC + AMPIRE640480_HBP - 1);
+    hltdc_eval.Init.AccumulatedActiveH = (AMPIRE480272_HEIGHT + AMPIRE480272_VSYNC + AMPIRE480272_VBP - 1);
+    hltdc_eval.Init.AccumulatedActiveW = (AMPIRE480272_WIDTH + AMPIRE480272_HSYNC + AMPIRE480272_HBP - 1);
     hltdc_eval.Init.TotalHeigh = (AMPIRE480272_HEIGHT + AMPIRE480272_VSYNC + AMPIRE480272_VBP + AMPIRE480272_VFP - 1);
     hltdc_eval.Init.TotalWidth = (AMPIRE480272_WIDTH + AMPIRE480272_HSYNC + AMPIRE480272_HBP + AMPIRE480272_HFP - 1);
-    
-    /* LCD clock configuration */
-    /* PLLSAI_VCO Input = HSE_VALUE/PLL_M = 1 Mhz */
-    /* PLLSAI_VCO Output = PLLSAI_VCO Input * PLLSAIN = 192 Mhz */
-    /* PLLLCDCLK = PLLSAI_VCO Output/PLLSAIR = 192/5 = 38.4 Mhz */
-    /* LTDC clock frequency = PLLLCDCLK / LTDC_PLLSAI_DIVR_4 = 38.4/4 = 9.6Mhz */
-    PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_LTDC;
-    PeriphClkInitStruct.PLLSAI.PLLSAIN = 192;
-    PeriphClkInitStruct.PLLSAI.PLLSAIR = AMPIRE480272_FREQUENCY_DIVIDER;
-    PeriphClkInitStruct.PLLSAIDivR = RCC_PLLSAIDIVR_4;
-    HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct); 
   
     /* Initialize the LCD pixel width and pixel height */
     hltdc_eval.LayerCfg->ImageWidth  = AMPIRE480272_WIDTH;
@@ -199,18 +198,7 @@ uint8_t BSP_LCD_Init(void)
     hltdc_eval.Init.AccumulatedActiveH = (AMPIRE640480_HEIGHT + AMPIRE640480_VSYNC + AMPIRE640480_VBP - 1);
     hltdc_eval.Init.AccumulatedActiveW = (AMPIRE640480_WIDTH + AMPIRE640480_HSYNC + AMPIRE640480_HBP - 1);
     hltdc_eval.Init.TotalHeigh = (AMPIRE640480_HEIGHT + AMPIRE640480_VSYNC + AMPIRE640480_VBP + AMPIRE640480_VFP - 1);
-    hltdc_eval.Init.TotalWidth = (AMPIRE640480_WIDTH + AMPIRE640480_HSYNC + AMPIRE640480_HBP + AMPIRE640480_HFP - 1); 
-    
-    /* LCD clock configuration */
-    /* PLLSAI_VCO Input = HSE_VALUE/PLL_M = 1 Mhz */
-    /* PLLSAI_VCO Output = PLLSAI_VCO Input * PLLSAIN = 108 Mhz */
-    /* PLLLCDCLK = PLLSAI_VCO Output/PLLSAIR = 108/3 = 36 Mhz */
-    /* LTDC clock frequency = PLLLCDCLK / LTDC_PLLSAI_DIVR_2 = 36/2 = 18 Mhz */
-    PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_LTDC;
-    PeriphClkInitStruct.PLLSAI.PLLSAIN = 108;
-    PeriphClkInitStruct.PLLSAI.PLLSAIR = AMPIRE640480_FREQUENCY_DIVIDER;
-    PeriphClkInitStruct.PLLSAIDivR = RCC_PLLSAIDIVR_2;
-    HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct); 
+    hltdc_eval.Init.TotalWidth = (AMPIRE640480_WIDTH + AMPIRE640480_HSYNC + AMPIRE640480_HBP + AMPIRE640480_HFP - 1);
     
     /* Initialize the LCD pixel width and pixel height */
     hltdc_eval.LayerCfg->ImageWidth  = AMPIRE640480_WIDTH;
@@ -229,6 +217,9 @@ uint8_t BSP_LCD_Init(void)
   hltdc_eval.Init.PCPolarity = LTDC_PCPOLARITY_IPC;
   hltdc_eval.Instance = LTDC;
 
+  /* LCD clock configuration */
+  BSP_LCD_ClockConfig(&hltdc_eval, &PCLK_profile);  
+  
   MspInit();
   HAL_LTDC_Init(&hltdc_eval);
   
@@ -1147,6 +1138,63 @@ static void MspInit(void)
   HAL_GPIO_Init(GPIOK, &GPIO_Init_Structure);
 }
 
+/**
+  * @brief  Clock Config.
+  * @param  hltdc: LTDC handle
+  * @note   This API is called by BSP_LCD_Init()
+  *         Being __weak it can be overwritten by the application
+  * @retval None
+  */
+__weak void BSP_LCD_ClockConfig(LTDC_HandleTypeDef *hltdc, void *Params)
+{
+  static RCC_PeriphCLKInitTypeDef  periph_clk_init_struct;
+
+  if(stmpe811_ts_drv.ReadID(TS_I2C_ADDRESS) == STMPE811_ID)
+  {
+    /* AMPIRE480272 LCD clock configuration */
+    /* PLLSAI_VCO Input = HSE_VALUE/PLL_M = 1 Mhz */
+    /* PLLSAI_VCO Output = PLLSAI_VCO Input * PLLSAIN = 192 Mhz */
+    /* PLLLCDCLK = PLLSAI_VCO Output/PLLSAIR = 192/5 = 38.4 Mhz */
+    /* LTDC clock frequency = PLLLCDCLK / LTDC_PLLSAI_DIVR_4 = 38.4/4 = 9.6Mhz */
+    periph_clk_init_struct.PeriphClockSelection = RCC_PERIPHCLK_LTDC;
+    periph_clk_init_struct.PLLSAI.PLLSAIN = 192;
+    periph_clk_init_struct.PLLSAI.PLLSAIR = AMPIRE480272_FREQUENCY_DIVIDER;
+    periph_clk_init_struct.PLLSAIDivR = RCC_PLLSAIDIVR_4;
+    HAL_RCCEx_PeriphCLKConfig(&periph_clk_init_struct);
+  }
+  else
+  {
+    /* The programmed LTDC pixel clock depends on the vertical refresh rate of the panel 60Hz => 25.16MHz and
+       the LCD/SDRAM bandwidth affected by the several access on the bus and the number of used layers.
+    */
+    if(*(uint32_t *)Params == LCD_MAX_PCLK)
+    {
+      /* In case of single layer the bandwidth is arround 160MBytesPerSec ==> theorical PCLK of 40MHz */
+      /* AMPIRE640480 typical PCLK is 25.16 MHz so the PLLSAI is configured to provide this clock */ 
+      /* AMPIRE640480 LCD clock configuration */
+      /* PLLSAI_VCO Input = HSE_VALUE/PLL_M = 1 Mhz */
+      /* PLLSAI_VCO Output = PLLSAI_VCO Input * PLLSAIN = 151 Mhz */
+      /* PLLLCDCLK = PLLSAI_VCO Output/PLLSAIR = 151/3 = 50.3 Mhz */
+      /* LTDC clock frequency = PLLLCDCLK / LTDC_PLLSAI_DIVR_2 = 50.3/2 = 25.16 Mhz */
+      periph_clk_init_struct.PLLSAI.PLLSAIN = 151;
+    }
+    else
+    {
+      /* In case of double layers the bandwidth is arround 72MBytesPerSec => 18MHz (<25,16MHz) */
+      /* so the PLLSAI is configured to provide this clock */
+      /* AMPIRE640480 LCD clock configuration */
+      /* PLLSAI_VCO Input = HSE_VALUE/PLL_M = 1 Mhz */
+      /* PLLSAI_VCO Output = PLLSAI_VCO Input * PLLSAIN = 108 Mhz */
+      /* PLLLCDCLK = PLLSAI_VCO Output/PLLSAIR = 108/3 = 36 Mhz */
+      /* LTDC clock frequency = PLLLCDCLK / LTDC_PLLSAI_DIVR_2 = 36/2 = 18 Mhz */      
+      periph_clk_init_struct.PLLSAI.PLLSAIN = 108;
+    }
+    periph_clk_init_struct.PeriphClockSelection = RCC_PERIPHCLK_LTDC;    
+    periph_clk_init_struct.PLLSAI.PLLSAIR = 3;    
+    periph_clk_init_struct.PLLSAIDivR = RCC_PLLSAIDIVR_2;
+    HAL_RCCEx_PeriphCLKConfig(&periph_clk_init_struct);
+  }
+}
 /*******************************************************************************
                             Static Functions
 *******************************************************************************/

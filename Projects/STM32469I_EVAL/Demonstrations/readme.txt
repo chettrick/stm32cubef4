@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    Demonstrations/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    14-August-2015
+  * @version V1.1.0
+  * @date    09-October-2015
   * @brief   Description of STM32469I-EVAL Demonstration
   ******************************************************************************
   *
@@ -95,6 +95,8 @@ Below you find an overview of the different offered module in the demonstration:
  The system info module provides information about the core, supported eval boards, 
  CPU speed and demonstration version.
 
+ For more details about the demonstration modules please refers to STM32CubeF4 demonstration (UM1743)
+ 
 @note Demonstration Firmware doesn't embed TouchGFX demonstration module. 
       Free evaluation version of the TouchGFX demonstration, based on Draupner Graphics’ 
 	  commercial graphic library, is available at www.touchgfx.com/stmicroelectronics
@@ -107,18 +109,40 @@ Below you find an overview of the different offered module in the demonstration:
     boards RevB and can be easily tailored to any other supported device 
     and development board.
 
+  - Jumpers configuration:
+	 - JP2	  Fitted (Power on MCU)  
+     - JP5    <2-3> (PB3 (I2S Clock) is connected to Timer input PC6 used as microphone clock divider )
+     - JP6	  <2-3> (PD6 is connected to digital microphone as I2S data signal)
+	 - JP7	  <1-2> (25MHz clock is provided by external crystal X4 (used for VNC server demonstration))
+	 - JP11   must be not fitted ==> NOR write protection is disabled
+	 - JP17	  <2-3> (Data signal on digital microphone is connected to I2S port)
+	 - JP18	  <2-3> (Clock signal on digital microphone is connected to Timer output (PC7))
 
 @par How to use it ? 
 
-In order to make the program work, you must do the following :
- - Open your preferred toolchain 
- - Rebuild all files
- - Open STM32 ST-Link Utility V3.6, click on "External Loader" from the bar menu then check "MT25QL512A_STM32469I-EVAL" box 
- - Connect the STM32469I-EVAL board to PC with USB cable through CN22
- - Use "STM32CubeDemo_STM32469I-EVAL_V1.0.0.hex" file with STM32 ST-Link Utility to program both internal Flash and external QSPI memory
- - Run the demonstration
- - copy the audio and video files provided under "Utilities/Media/" in the USB key
- - Plug a USB micro A-Male to A-Female cable on CN8 connector 
+The NOR external flash loader is not integrated with supported toolchains, it’s only supported with STM32
+ST-Link Utility V3.7.
+To load the demonstration, use STM32 ST-Link Utility to program both internal Flash and external NOR memory.
+To edit and debug the demonstration you need first to program the external NOR memory using STLink utility
+and then use your preferred toolchain to update and debug the internal flash content.
+
+Below the detailed steps:
+
+In order to program the demonstration you must do the following:
+1- Open STM32 ST-Link Utility V3.7, click on "External Loader" from the bar menu then check 
+   "MT25QL512A_STM32469I-EVAL" box 
+2- Connect the STM32469I-EVAL board to PC with USB cable through CN22
+3- Use "STM32469I_EVAL_Demo_V1.1.0.hex" file provided under “Binary” with STM32 ST-Link Utility
+   to program both internal Flash and external NOR memory
+4- copy the audio and video files provided under "Utilities/Media/" in the USB key
+5- Plug a USB micro A-Male to A-Female cable on CN8 connector
+-> The internal Flash and the external NOR are now programmed and the demonstration is shown on the board.
+
+In order to Edit and debug the program, you must do the following
+- if not done, perform step 1, 2, 3, 4 and 5 described above,
+- Open your preferred toolchain,
+- Use the IDE to update and load the internal flash content, 
+- Run the demonstration.
      
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

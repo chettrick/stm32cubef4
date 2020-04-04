@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    k_storage.h
   * @author  MCD Application Team
-  * @version V0.1.0
-  * @date    13-July-2015
+  * @version V1.1.0
+  * @date    09-October-2015
   * @brief   Header for k_storage.c file
   ******************************************************************************
   * @attention

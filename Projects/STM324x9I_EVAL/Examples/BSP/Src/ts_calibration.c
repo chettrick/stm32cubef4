@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BSP/Src/ts_calibration.c 
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    01-July-2015
+  * @version V1.3.1
+  * @date    09-October-2015
   * @brief   This example code shows how to calibrate the touchscreen.
   ******************************************************************************
   * @attention
@@ -178,7 +178,7 @@ static void WaitForPressedState(uint8_t Pressed)
       uint16_t TimeStart = HAL_GetTick();
       do {
         BSP_TS_GetState(&State);      
-        HAL_Delay(10);
+        HAL_Delay(40);
         if (State.TouchDetected != Pressed) 
         {
           break;

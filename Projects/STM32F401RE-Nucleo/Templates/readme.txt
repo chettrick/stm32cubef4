@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    Templates/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    26-December-2014
+  * @version V1.2.1
+  * @date    09-October-2015
   * @brief   Description of the Templates example.
   ******************************************************************************
   *

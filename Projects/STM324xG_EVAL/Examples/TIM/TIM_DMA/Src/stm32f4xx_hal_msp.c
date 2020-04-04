@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    TIM/TIM_DMA/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.2.2
-  * @date    01-July-2015
+  * @version V1.2.3
+  * @date    09-October-2015
   * @brief   HAL MSP module.    
   ******************************************************************************
   * @attention

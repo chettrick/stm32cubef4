@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    I2C/I2C_TwoBoards_ComIT/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    01-July-2015
+  * @version V1.0.1
+  * @date    09-October-2015
   * @brief   Description of the I2C Two Boards IT Communication example.
   ******************************************************************************
   *

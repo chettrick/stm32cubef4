@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324x9i_eval_audio.c
   * @author  MCD Application Team
-  * @version V2.2.0
-  * @date    14-August-2015
+  * @version V2.2.1
+  * @date    07-October-2015
   * @brief   This file provides the Audio driver for the STM324x9I-EVAL evaluation board.
   ******************************************************************************
   * @attention

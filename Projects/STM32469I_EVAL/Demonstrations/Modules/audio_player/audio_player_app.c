@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    audioplayer_app.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    14-August-2015  
+  * @version V1.1.0
+  * @date    09-October-2015  
   * @brief   Audio player application functions
   ******************************************************************************
   * @attention
@@ -145,7 +145,7 @@ AUDIOPLAYER_ErrorTypdef  AUDIOPLAYER_Init(uint8_t volume)
   AudioEvent = osMessageCreate (osMessageQ(AUDIO_Queue), NULL); 
   
   /* Create Audio task */
-  osThreadDef(osAudio_Thread, Audio_Thread, osPriorityNormal, 0, 512);
+  osThreadDef(osAudio_Thread, Audio_Thread, osPriorityRealtime, 0, 512);
   AudioThreadId = osThreadCreate (osThread(osAudio_Thread), NULL);  
 
    portEXIT_CRITICAL();
@@ -286,6 +286,7 @@ AUDIOPLAYER_ErrorTypdef  AUDIOPLAYER_Process(void)
     break;    
 
   case AUDIOPLAYER_EOF:
+     haudio.out.state = AUDIOPLAYER_EOF;
      AUDIOPLAYER_NotifyEndOfFile();
     break;    
     
@@ -337,14 +338,16 @@ AUDIOPLAYER_ErrorTypdef  AUDIOPLAYER_DeInit(void)
   */
 AUDIOPLAYER_ErrorTypdef  AUDIOPLAYER_Stop(void)
 {
-
-  BSP_AUDIO_OUT_Stop(CODEC_PDWN_SW);  
   haudio.out.state = AUDIOPLAYER_STOP;
-  f_close(&wav_file);
+  BSP_AUDIO_OUT_Stop(CODEC_PDWN_SW); 
+  
   if(AudioThreadId != 0)
   {  
     osThreadSuspend(AudioThreadId); 
   }
+  f_close(&wav_file);
+
+
   return AUDIOPLAYER_ERROR_NONE;
 }
 
@@ -389,10 +392,8 @@ AUDIOPLAYER_ErrorTypdef  AUDIOPLAYER_SetPosition(uint32_t position)
   long file_pos;
   
   file_pos = wav_file.fsize / AUDIO_OUT_BUFFER_SIZE / 100; 
-  file_pos *= (position * AUDIO_OUT_BUFFER_SIZE);
-  AUDIOPLAYER_Pause(); 
+  file_pos *= (position * AUDIO_OUT_BUFFER_SIZE); 
   f_lseek(&wav_file, file_pos);
-  AUDIOPLAYER_Resume(); 
   
   return AUDIOPLAYER_ERROR_NONE;
 }

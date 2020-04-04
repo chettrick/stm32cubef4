@@ -3,7 +3,7 @@
   * @file    audio_recorder_win.c
   * @author  MCD Application Team
   * @version V1.1.0
-  * @date    26-June-2014   
+  * @date    09-October-2015
   * @brief   audio_recorde functions
   ******************************************************************************
   * @attention

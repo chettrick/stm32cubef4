@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Display/LTDC_Paint/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    14-August-2015
+  * @version V1.4.1
+  * @date    09-October-2015
   * @brief   Main program body
   ******************************************************************************
   * @attention
@@ -79,6 +79,7 @@ static void Prepare_Picture(void);
 static void Update_Color(void);
 static void Update_Size(uint8_t size);
 
+
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -104,18 +105,8 @@ int main(void)
   BSP_LED_Init(LED3);
   
   /*##-1- LCD Initialization #################################################*/ 
-  /* Initialize the LCD */
+  /* Initialize the LCD */ 
   BSP_LCD_Init();
-  
-  /* Foreground Layer Initialization */
-  BSP_LCD_LayerDefaultInit(1, LCD_FRAME_BUFFER_LAYER1);
-  /* Set Foreground Layer */
-  BSP_LCD_SelectLayer(1);
-  /* Clear the LCD Foreground layer */
-  BSP_LCD_Clear(LCD_COLOR_WHITE);
-  /* Enable the color Key for foreground layer */   
-  BSP_LCD_SetColorKeying(1, LCD_COLOR_WHITE);
-  BSP_LCD_SetLayerVisible(1, DISABLE);
   
   /* Background Layer Initialization */
   BSP_LCD_LayerDefaultInit(0, LCD_FRAME_BUFFER_LAYER0);
@@ -352,10 +343,7 @@ static void GetPosition(void)
   */
 static void Draw_Menu(void)
 { 
-  /* Set background Layer */
-  BSP_LCD_SelectLayer(0);
-  
-/* Clear the LCD */
+  /* Clear the LCD */
   BSP_LCD_Clear(LCD_COLOR_WHITE);  
 
   if (BSP_LCD_GetXSize() == 640)
@@ -407,21 +395,21 @@ void Save_Picture(void)
 { 
   FRESULT res1, res2;    /* FatFs function common result code */
   uint32_t byteswritten; /* File write count */
+  static uint32_t color;
+
+  /* Get the current text color */ 
+  color = BSP_LCD_GetTextColor();  
   
-  BSP_LCD_SetLayerVisible(1, ENABLE);
-  BSP_LCD_SetColorKeying(1, LCD_COLOR_WHITE);
-  /* Set foreground Layer */
-  BSP_LCD_SelectLayer(1);
   BSP_LCD_SetTextColor(LCD_COLOR_DARKRED);
   BSP_LCD_SetFont(&Font20);
   
   /* Turn LED1 and LED3 Off */
   BSP_LED_Off(LED1);
   BSP_LED_Off(LED3);
-  
+    
   if (Appli_state == APPLICATION_RUNNIG)
   {
-    BSP_LCD_DisplayStringAt(10, (BSP_LCD_GetYSize()-100), (uint8_t *)"Saving ... ", RIGHT_MODE);
+    BSP_LCD_DisplayStringAt(0, (BSP_LCD_GetYSize()-35), (uint8_t *)"Saving ... ", RIGHT_MODE);
     
     /*##-1- Prepare the image to be saved ####################################*/
     Prepare_Picture();
@@ -453,13 +441,9 @@ void Save_Picture(void)
       {
         /* 'image' file Write or EOF Error */
         BSP_LED_On(LED3);
-        BSP_LCD_DisplayStringAt(10, (BSP_LCD_GetYSize()-100), (uint8_t *)" Aborted...", RIGHT_MODE);
+        BSP_LCD_DisplayStringAt(0, (BSP_LCD_GetYSize()-35), (uint8_t *)" Aborted...", RIGHT_MODE);
         /* Wait for 2s */
         HAL_Delay(2000);
-        /* Disable the Layer 2 */
-        BSP_LCD_SetLayerVisible(1, DISABLE);
-        /* Select Layer 1 */
-        BSP_LCD_SelectLayer(0);
       }
       else
       {
@@ -469,27 +453,23 @@ void Save_Picture(void)
         /* Success of the demo: no error occurrence */
         BSP_LED_On(LED1);
         BSP_LCD_SetTextColor(LCD_COLOR_DARKGREEN);
-        BSP_LCD_DisplayStringAt(10, (BSP_LCD_GetYSize()-100), (uint8_t *)" Saved     ", RIGHT_MODE);
+        BSP_LCD_DisplayStringAt(0, (BSP_LCD_GetYSize()-35), (uint8_t *)" Saved     ", RIGHT_MODE);
         /* Wait for 2s */
         HAL_Delay(2000);
-        /* Disable the Layer 2 */
-        BSP_LCD_SetLayerVisible(1, DISABLE);
-        /* Select Layer 1 */
-        BSP_LCD_SelectLayer(0);
       }
     }
   }
   else
   {
     /* USB not connected */
-    BSP_LCD_DisplayStringAt(10, (BSP_LCD_GetYSize()-100), (uint8_t *)"USB KO... ", RIGHT_MODE);
+    BSP_LCD_DisplayStringAt(0, (BSP_LCD_GetYSize()-35), (uint8_t *)"USB KO... ", RIGHT_MODE);
     /* Wait for 2s */
     HAL_Delay(2000);
-    /* Disable the Layer 2 */
-    BSP_LCD_SetLayerVisible(1, DISABLE);
-    /* Select Layer 1 */
-    BSP_LCD_SelectLayer(0);
   }
+    
+  BSP_LCD_SetTextColor(LCD_COLOR_WHITE);     
+  BSP_LCD_FillRect(480, 430, 160, 50);
+  BSP_LCD_SetTextColor(color);
 }
 
 /**

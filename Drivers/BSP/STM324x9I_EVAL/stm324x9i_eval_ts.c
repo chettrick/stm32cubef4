@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324x9i_eval_ts.c
   * @author  MCD Application Team
-  * @version V2.2.0
-  * @date    14-August-2015
+  * @version V2.2.1
+  * @date    07-October-2015
   * @brief   This file provides a set of functions needed to manage the Touch 
   *          Screen on STM324x9I-EVAL evaluation board.
   ******************************************************************************
@@ -267,17 +267,9 @@ uint8_t BSP_TS_GetState(TS_StateTypeDef *TS_State)
       _x = x;
       _y = y; 
     }
-    
-    if(I2C_Address == EXC7200_I2C_ADDRESS)
-    { 
-      TS_State->x = x;
-      TS_State->y = y;        
-    }
-    else
-    {
+
       TS_State->x = (ts_x_boundary * _x) >> 12;
-      TS_State->y = (ts_y_boundary * _y) >> 12; 
-    }
+      TS_State->y = (ts_y_boundary * _y) >> 12;
   }  
   return TS_OK;
 }

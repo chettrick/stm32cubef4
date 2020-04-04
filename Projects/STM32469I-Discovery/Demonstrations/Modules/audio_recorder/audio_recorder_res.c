@@ -3,7 +3,7 @@
   * @file    audio_recorder_res.c
   * @author  MCD Application Team
   * @version V1.1.0
-  * @date    26-June-2014   
+  * @date    09-October-2015
   * @brief   resources define for audio_recorder module
   ******************************************************************************
   * @attention
@@ -2145,14 +2145,12 @@ const GUI_BITMAP * open_recorder[] = {
   &bmrecorder1,   &bmrecorder2,   &bmrecorder3,   &bmrecorder4, &bmrecorder5
 };
 
-
+extern GUI_CONST_STORAGE GUI_BITMAP bmrecorder;
 #if defined ( __ICCARM__ )
 #pragma location="ExtQSPIFlashSection" 
 #else
 __attribute__((section(".ExtQSPIFlashSection")))
 #endif
-extern GUI_CONST_STORAGE GUI_BITMAP bmrecorder;
-
 static GUI_CONST_STORAGE unsigned short _acrecorder[] = {
   0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 
         0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 

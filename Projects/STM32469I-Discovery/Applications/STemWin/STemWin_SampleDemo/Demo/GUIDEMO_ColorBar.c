@@ -36,7 +36,7 @@ Purpose     : Draws color bars
   ******************************************************************************
   * @file    GUIDEMO_ColorBar.c
   * @author  MCD Application Team
-  * @version V1.0.0
+  * @version V1.0.1
   * @date    13-March-2015
   * @brief   Draws color bars
   ******************************************************************************

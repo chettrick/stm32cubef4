@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Display/LTDC_Paint/Inc/main.h 
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    14-August-2015
+  * @version V1.4.1
+  * @date    09-October-2015
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
@@ -41,9 +41,8 @@
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
-#define LCD_FRAME_BUFFER_LAYER0                  0xC0130000
-#define LCD_FRAME_BUFFER_LAYER1                  0xC0000000
-#define CONVERTED_FRAME_BUFFER                   0xC0260000
+#define LCD_FRAME_BUFFER_LAYER0                  0xC0000000
+#define CONVERTED_FRAME_BUFFER                   0xC0400000
 
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */

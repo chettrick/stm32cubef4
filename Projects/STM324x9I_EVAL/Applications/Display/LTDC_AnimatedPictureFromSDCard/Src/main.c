@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Display/LTDC_AnimatedPictureFromSDCard/Src/main.c
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    14-August-2015
+  * @version V1.4.1
+  * @date    09-October-2015
   * @brief   This file provides main program functions
   ******************************************************************************
   * @attention
@@ -228,8 +228,10 @@ int main(void)
   */
 static void LCD_Config(void)
 {
-  /* LCD Initialization */ 
-  BSP_LCD_Init();
+  /* LCD Initialization */
+  /* Two layers are used in this application simultaneously 
+     so "LCD_MIN_PCLK" is recommended to programme the PCLK at 18 MHz */    
+  BSP_LCD_InitEx(LCD_MIN_PCLK);
 
   /* LCD Layers Initialization */ 
   BSP_LCD_LayerDefaultInit(0, LCD_FB_START_ADDRESS);

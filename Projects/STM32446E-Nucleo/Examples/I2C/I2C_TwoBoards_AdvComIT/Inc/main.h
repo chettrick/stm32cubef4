@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    I2C/I2C_TwoBoards_AdvComIT/Inc/main.h 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    01-July-2015
+  * @version V1.0.1
+  * @date    09-October-2015
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention

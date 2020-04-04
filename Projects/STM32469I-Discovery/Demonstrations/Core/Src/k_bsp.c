@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    k_bsp.c
   * @author  MCD Application Team
-  * @version V0.1.0
-  * @date    13-July-2015 
+  * @version V1.1.0
+  * @date    09-October-2015
   * @brief   This file provides the kernel bsp functions
   ******************************************************************************
   * @attention
@@ -83,7 +83,7 @@ void k_TouchUpdate(void)
   static GUI_PID_STATE TS_State = {0, 0, 0, 0};
   __IO TS_StateTypeDef  ts;
   uint16_t xDiff, yDiff;
-
+  
   BSP_TS_GetState((TS_StateTypeDef *)&ts);
 
   if((ts.touchX[0] >= LCD_GetXSize()) ||(ts.touchY[0] >= LCD_GetYSize()) ) 
@@ -91,7 +91,7 @@ void k_TouchUpdate(void)
     ts.touchX[0] = 0;
     ts.touchY[0] = 0;
   }
-  
+
   xDiff = (TS_State.x > ts.touchX[0]) ? (TS_State.x - ts.touchX[0]) : (ts.touchX[0] - TS_State.x);
   yDiff = (TS_State.y > ts.touchY[0]) ? (TS_State.y - ts.touchY[0]) : (ts.touchY[0] - TS_State.y);
   
@@ -104,7 +104,14 @@ void k_TouchUpdate(void)
     if(ts.touchDetected) 
     {
       TS_State.x = ts.touchX[0];
-      TS_State.y = ts.touchY[0];
+      if(ts.touchY[0] < 240)
+      {
+        TS_State.y = ts.touchY[0] ;
+      }
+      else
+      {
+        TS_State.y = (ts.touchY[0] * 480) / 450;
+      }
       GUI_TOUCH_StoreStateEx(&TS_State);
     }
     else

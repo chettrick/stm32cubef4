@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Host/MSC_RTOS/Src/usbh_conf.c
   * @author  MCD Application Team
-  * @version $VERSION$
-  * @date    $DATE$
+  * @version V1.1.0
+  * @date    09-October-2015
   * @brief   USB Host configuration file.
   ******************************************************************************
   * @attention

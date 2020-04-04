@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    FatFs/FatFs_uSD/Inc/stm32f4xx_hal_conf.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    14-August-2015
+  * @version V1.0.1
+  * @date    09-October-2015
   * @brief   HAL configuration file.
   ******************************************************************************
   * @attention

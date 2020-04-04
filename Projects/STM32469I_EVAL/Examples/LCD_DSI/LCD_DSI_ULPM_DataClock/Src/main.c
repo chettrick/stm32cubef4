@@ -2,8 +2,8 @@
  ******************************************************************************
  * @file    LCD_DSI/LCD_DSI_ULPM_DataClock/Src/main.c
  * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    14-August-2015
+  * @version V1.0.1
+  * @date    09-October-2015
  * @brief   This example describes how to operate the DSI ULPM (Ultra Low Power Mode)
  *          on data lanes and clock lane in a use case with display in WVGA Landscape
  *          of size (800x480) using the STM32F4xx HAL API and BSP.
@@ -138,12 +138,11 @@ int main(void)
   /* Configure Tamper push-button */
   BSP_PB_Init(BUTTON_TAMPER, BUTTON_MODE_GPIO);
 
-  /* Initialize the LCD in mode Video Burst with LANDSCAPE orientation */
-
-  /* Get DSI configuration for mode Video Burst  */
+  /* Initialize the LCD DSI in Video Burst mode with LANDSCAPE orientation */
   lcd_status = BSP_LCD_Init();
   OnError_Handler(lcd_status != LCD_OK);
 
+  /* Program a line event at line 0 */
   HAL_LTDC_ProgramLineEvent(&hltdc_eval, 0);  
   
   /* Copy texture to be displayed on LCD from Flash to SDRAM */
@@ -203,8 +202,9 @@ int main(void)
       /* This means : laneByteClock is derived from PLL.PLLR : ie ck_plldsi @ 60 MHz = 360 MHz / PLLR=6 */
       /* DSI State machine start and wait until ULPM state for Data and Clock lanes, then when reached, switch off PLL DPHY */
       HAL_DSI_EnterULPM(&hdsi_eval);
+      BSP_LED_On(LED1);
       
-      HAL_Delay(5000);
+      HAL_Delay(6000);
       
       BSP_LCD_ClearStringLine(440);
       BSP_LCD_DisplayStringAt(0, 440, (uint8_t *) " Exited ULPM with success - Press To enter Again ULPM. ", CENTER_MODE);
@@ -220,6 +220,7 @@ int main(void)
       * laneByteClock is then switched back on PLL DPHY
       */
       HAL_DSI_ExitULPM(&hdsi_eval);
+      BSP_LED_Off(LED1);
       
       /* Display On with ULPM exit Data and clock lane integrated */
       BSP_LCD_DisplayOn();

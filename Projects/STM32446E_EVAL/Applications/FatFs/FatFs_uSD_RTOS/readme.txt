@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    FatFs/FatFs_uSD_RTOS/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    14-August-2015
+  * @version V1.2.1
+  * @date    09-October-2015
   * @brief   Description of the FatFs with uSD card drive in RTOS mode application
   ******************************************************************************
   *

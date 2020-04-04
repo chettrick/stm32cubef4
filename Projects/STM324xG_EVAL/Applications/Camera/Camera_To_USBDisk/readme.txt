@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    Camera/Camera_To_USBDisk/readme.txt 
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    14-August-2015
+  * @version V1.3.1
+  * @date    09-October-2015
   * @brief   Description of the Camera to USB Disk application.
   ******************************************************************************
   *

@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    LwIP/LwIP_UDP_Echo_Server/readme.txt 
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    14-August-2015
+  * @version V1.4.1
+  * @date    09-October-2015
   * @brief   Description of the LwIP UDP Echo Server Application.
   ******************************************************************************
   *

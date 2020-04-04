@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    lcdconf.c
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    14-August-2015
+  * @version V1.4.1
+  * @date    09-October-2015
   * @brief   This file implements the configuration for the GUI library
   ******************************************************************************
   * @attention
@@ -614,13 +614,13 @@ static void LCD_LL_Init(void)
   
   /* LCD clock configuration */
   /* PLLSAI_VCO Input = HSE_VALUE/PLL_M = 1 MHz */
-  /* PLLSAI_VCO Output = PLLSAI_VCO Input * PLLSAIN = 192 MHz */
-  /* PLLLCDCLK = PLLSAI_VCO Output/PLLSAIR = 192/3 = 64 MHz */
-  /* LTDC clock frequency = PLLLCDCLK / LTDC_PLLSAI_DIVR_4 = 64/4 = 16 MHz */
+  /* PLLSAI_VCO Output = PLLSAI_VCO Input * PLLSAIN = 151 MHz */
+  /* PLLLCDCLK = PLLSAI_VCO Output/PLLSAIR = 151/3 = 50.3 MHz */
+  /* LTDC clock frequency = PLLLCDCLK / LTDC_PLLSAI_DIVR_2 = 50.3/2 = 25.16 MHz */
   PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_LTDC;
-  PeriphClkInitStruct.PLLSAI.PLLSAIN = 192;
+  PeriphClkInitStruct.PLLSAI.PLLSAIN = 151;
   PeriphClkInitStruct.PLLSAI.PLLSAIR = 3;
-  PeriphClkInitStruct.PLLSAIDivR = RCC_PLLSAIDIVR_4;
+  PeriphClkInitStruct.PLLSAIDivR = RCC_PLLSAIDIVR_2;
   HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct); 
   
   /* Polarity */

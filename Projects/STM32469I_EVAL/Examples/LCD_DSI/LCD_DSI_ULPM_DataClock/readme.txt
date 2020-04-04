@@ -7,8 +7,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    LCD_DSI/LCD_DSI_ULPM_DataClock/readme.txt
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    14-August-2015
+  * @version V1.0.1
+  * @date    09-October-2015
   * @brief   Description of the LCD DSI enter and exit DSI ULPM Mode on data lane 
   *          and clock lane example.
   ******************************************************************************
@@ -51,9 +51,10 @@ When exiting from ULPM, the PLL DPHY is first switched back on and locked, then 
 power down and display again as before.
 
 In this example a WVGA landscape picture (800x480) is displayed on LCD in DSI Mode Video Burst.
-On a Tamper push-button press from the user, the LCD display will be switched off, and DSI PHY Data and clock 
-lane will enter a ULPM mode, DphyClk is derived from PLL.PLLR, then 
-DPHY PLL is switched Off. 
+On a Tamper button press from the user, the LCD display will be switched off. One second later, 
+the DSI PHY Data and clock lane will enter ULPM mode. DphyClk is derived from PLL.PLLR, then
+DPHY PLL is switched Off.
+
 After 6 seconds in Off mode, The PLL DPHY is switched back on and locked,
 then the ULPM on data and clock lanes will be exited in DPHY DSI state machine.
 The LCD will then be switched back on and display the same image as before 
@@ -66,6 +67,10 @@ via the DSI DPHY to the KoD display that decodes DSI packets and refresh its int
 The Frame number display is managed by Line Event callback in which the Frame number is incremented
 each time a line event occurs. When entering to ULPM, The Frame number is unchanged untill the
 exit from this mode.
+
+LED1 ON: DSI PHY Data and clock lane in ULPM mode
+LED1 OFF: DSI PHY Data and clock lane in run mode
+LED3 ON: an error occured.
 
 @note Care must be taken when using HAL_Delay(), this function provides accurate
       delay (in milliseconds) based on variable incremented in SysTick ISR. This

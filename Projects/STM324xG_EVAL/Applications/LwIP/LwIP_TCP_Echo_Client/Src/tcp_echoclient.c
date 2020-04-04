@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LwIP/LwIP_TCP_Echo_Client/Src/tcp_echoclient.c
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    14-August-2015 
+  * @version V1.3.1
+  * @date    09-October-2015 
   * @brief   tcp echoclient application using LwIP RAW API
   ******************************************************************************
   * @attention
@@ -96,14 +96,6 @@ void tcp_echoclient_connect(void)
     
     /* connect to destination address/port */
     tcp_connect(echoclient_pcb,&DestIPaddr,DEST_PORT,tcp_echoclient_connected);
-  }
-  else
-  {
-    /* deallocate the pcb */
-    memp_free(MEMP_TCP_PCB, echoclient_pcb);
-#ifdef SERIAL_DEBUG
-    printf("\n\r can not create tcp pcb");
-#endif 
   }
 }
 

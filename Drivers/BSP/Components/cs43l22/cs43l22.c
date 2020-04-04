@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    cs43l22.c
   * @author  MCD Application Team
-  * @version V2.0.0
-  * @date    24-June-2015
+  * @version V2.0.2
+  * @date    06-October-2015
   * @brief   This file provides the CS43L22 Audio Codec driver.   
   ******************************************************************************
   * @attention
@@ -46,9 +46,9 @@
   * @{
   */ 
 
-/** @addtogroup cs43l22
+/** @addtogroup CS43L22
   * @brief     This file provides a set of functions needed to drive the 
-  *            CS43l22 audio codec.
+  *            CS43L22 audio codec.
   * @{
   */
 
@@ -63,6 +63,7 @@
 /** @defgroup CS43L22_Private_Defines
   * @{
   */
+#define VOLUME_CONVERT(Volume)    (((Volume) > 100)? 100:((uint8_t)(((Volume) * 255) / 100)))  
 /* Uncomment this line to enable verifying data sent to codec after each write 
    operation (for debug purpose) */
 #if !defined (VERIFY_WRITTENDATA)  
@@ -139,7 +140,7 @@ uint32_t cs43l22_Init(uint16_t DeviceAddr, uint16_t OutputDevice, uint8_t Volume
   AUDIO_IO_Init();     
     
   /* Keep Codec powered OFF */
-  counter += CODEC_IO_Write(DeviceAddr, 0x02, 0x01);  
+  counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_POWER_CTL1, 0x01);  
   
   /*Save Output device for mute ON/OFF procedure*/
   switch (OutputDevice)
@@ -165,13 +166,13 @@ uint32_t cs43l22_Init(uint16_t DeviceAddr, uint16_t OutputDevice, uint8_t Volume
     break;    
   }
   
-  counter += CODEC_IO_Write(DeviceAddr, 0x04, OutputDev);
+  counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_POWER_CTL2, OutputDev);
   
   /* Clock configuration: Auto detection */  
-  counter += CODEC_IO_Write(DeviceAddr, 0x05, 0x81);
+  counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_CLOCKING_CTL, 0x81);
   
   /* Set the Slave Mode and the audio Standard */  
-  counter += CODEC_IO_Write(DeviceAddr, 0x06, CODEC_STANDARD);
+  counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_INTERFACE_CTL1, CODEC_STANDARD);
   
   /* Set the Master volume */
   counter += cs43l22_SetVolume(DeviceAddr, Volume);
@@ -180,11 +181,11 @@ uint32_t cs43l22_Init(uint16_t DeviceAddr, uint16_t OutputDevice, uint8_t Volume
   if(OutputDevice != OUTPUT_DEVICE_HEADPHONE)
   {
     /* Set the Speaker Mono mode */  
-    counter += CODEC_IO_Write(DeviceAddr, 0x0F , 0x06);
+    counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_PLAYBACK_CTL2, 0x06);
     
     /* Set the Speaker attenuation level */  
-    counter += CODEC_IO_Write(DeviceAddr, 0x24, 0x00);
-    counter += CODEC_IO_Write(DeviceAddr, 0x25, 0x00);
+    counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_SPEAKER_A_VOL, 0x00);
+    counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_SPEAKER_B_VOL, 0x00);
   }
   
   /* Additional configuration for the CODEC. These configurations are done to reduce
@@ -195,16 +196,16 @@ uint32_t cs43l22_Init(uint16_t DeviceAddr, uint16_t OutputDevice, uint8_t Volume
   it results in high noise after shut down. */
   
   /* Disable the analog soft ramp */
-  counter += CODEC_IO_Write(DeviceAddr, 0x0A, 0x00);
+  counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_ANALOG_ZC_SR_SETT, 0x00);
   /* Disable the digital soft ramp */
-  counter += CODEC_IO_Write(DeviceAddr, 0x0E, 0x04);
+  counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_MISC_CTL, 0x04);
   /* Disable the limiter attack level */
-  counter += CODEC_IO_Write(DeviceAddr, 0x27, 0x00);
+  counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_LIMIT_CTL1, 0x00);
   /* Adjust Bass and Treble levels */
-  counter += CODEC_IO_Write(DeviceAddr, 0x1F, 0x0F);
+  counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_TONE_CTL, 0x0F);
   /* Adjust PCM volume level */
-  counter += CODEC_IO_Write(DeviceAddr, 0x1A, 0x0A);
-  counter += CODEC_IO_Write(DeviceAddr, 0x1B, 0x0A);
+  counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_PCMA_VOL, 0x0A);
+  counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_PCMB_VOL, 0x0A);
   
   /* Return communication control value */
   return counter;  
@@ -250,11 +251,14 @@ uint32_t cs43l22_Play(uint16_t DeviceAddr, uint16_t* pBuffer, uint16_t Size)
   
   if(Is_cs43l22_Stop == 1)
   {
+    /* Enable the digital soft ramp */
+    counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_MISC_CTL, 0x06);
+  
     /* Enable Output device */  
     counter += cs43l22_SetMute(DeviceAddr, AUDIO_MUTE_OFF);
     
     /* Power on the Codec */
-    counter += CODEC_IO_Write(DeviceAddr, 0x02, 0x9E);  
+    counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_POWER_CTL1, 0x9E);  
     Is_cs43l22_Stop = 0;
   }
   
@@ -276,7 +280,7 @@ uint32_t cs43l22_Pause(uint16_t DeviceAddr)
   counter += cs43l22_SetMute(DeviceAddr, AUDIO_MUTE_ON);
   
   /* Put the Codec in Power save mode */    
-  counter += CODEC_IO_Write(DeviceAddr,0x02, 0x01);
+  counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_POWER_CTL1, 0x01);
  
   return counter;
 }
@@ -296,10 +300,10 @@ uint32_t cs43l22_Resume(uint16_t DeviceAddr)
 
   for(index = 0x00; index < 0xFF; index++);
   
-  counter += CODEC_IO_Write(DeviceAddr,0x04, OutputDev);
+  counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_POWER_CTL2, OutputDev);
 
   /* Exit the Power save mode */
-  counter += CODEC_IO_Write(DeviceAddr,0x02, 0x9E); 
+  counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_POWER_CTL1, 0x9E); 
   
   return counter;
 }
@@ -320,9 +324,12 @@ uint32_t cs43l22_Stop(uint16_t DeviceAddr, uint32_t CodecPdwnMode)
   
   /* Mute the output first */
   counter += cs43l22_SetMute(DeviceAddr, AUDIO_MUTE_ON);
+
+  /* Disable the digital soft ramp */
+  counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_MISC_CTL, 0x04);
   
   /* Power down the DAC and the speaker (PMDAC and PMSPK bits)*/
-  counter += CODEC_IO_Write(DeviceAddr, 0x02, 0x9F);
+  counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_POWER_CTL1, 0x9F);
   
   Is_cs43l22_Stop = 1;
   return counter;    
@@ -343,14 +350,14 @@ uint32_t cs43l22_SetVolume(uint16_t DeviceAddr, uint8_t Volume)
   if(Volume > 0xE6)
   {
     /* Set the Master volume */
-    counter += CODEC_IO_Write(DeviceAddr, 0x20, convertedvol - 0xE7); 
-    counter += CODEC_IO_Write(DeviceAddr, 0x21, convertedvol - 0xE7);     
+    counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_MASTER_A_VOL, convertedvol - 0xE7); 
+    counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_MASTER_B_VOL, convertedvol - 0xE7);     
   }
   else
   {
     /* Set the Master volume */
-    counter += CODEC_IO_Write(DeviceAddr, 0x20, convertedvol + 0x19); 
-    counter += CODEC_IO_Write(DeviceAddr, 0x21, convertedvol + 0x19); 
+    counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_MASTER_A_VOL, convertedvol + 0x19); 
+    counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_MASTER_B_VOL, convertedvol + 0x19); 
   }
 
   return counter;
@@ -381,11 +388,15 @@ uint32_t cs43l22_SetMute(uint16_t DeviceAddr, uint32_t Cmd)
   /* Set the Mute mode */
   if(Cmd == AUDIO_MUTE_ON)
   {
-    counter += CODEC_IO_Write(DeviceAddr, 0x04, 0xFF);
+    counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_POWER_CTL2, 0xFF);
+    counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_HEADPHONE_A_VOL, 0x01);
+    counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_HEADPHONE_B_VOL, 0x01);
   }
   else /* AUDIO_MUTE_OFF Disable the Mute */
   {
-    counter += CODEC_IO_Write(DeviceAddr, 0x04, OutputDev);
+    counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_HEADPHONE_A_VOL, 0x00);
+    counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_HEADPHONE_B_VOL, 0x00);
+    counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_POWER_CTL2, OutputDev);
   }
   return counter;
 }
@@ -406,27 +417,27 @@ uint32_t cs43l22_SetOutputMode(uint16_t DeviceAddr, uint8_t Output)
   switch (Output) 
   {
     case OUTPUT_DEVICE_SPEAKER:
-      counter += CODEC_IO_Write(DeviceAddr, 0x04, 0xFA); /* SPK always ON & HP always OFF */
+      counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_POWER_CTL2, 0xFA); /* SPK always ON & HP always OFF */
       OutputDev = 0xFA;
       break;
       
     case OUTPUT_DEVICE_HEADPHONE:
-      counter += CODEC_IO_Write(DeviceAddr, 0x04, 0xAF); /* SPK always OFF & HP always ON */
+      counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_POWER_CTL2, 0xAF); /* SPK always OFF & HP always ON */
       OutputDev = 0xAF;
       break;
       
     case OUTPUT_DEVICE_BOTH:
-      counter += CODEC_IO_Write(DeviceAddr, 0x04, 0xAA); /* SPK always ON & HP always ON */
+      counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_POWER_CTL2, 0xAA); /* SPK always ON & HP always ON */
       OutputDev = 0xAA;
       break;
       
     case OUTPUT_DEVICE_AUTO:
-      counter += CODEC_IO_Write(DeviceAddr, 0x04, 0x05); /* Detect the HP or the SPK automatically */
+      counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_POWER_CTL2, 0x05); /* Detect the HP or the SPK automatically */
       OutputDev = 0x05;
       break;    
       
     default:
-      counter += CODEC_IO_Write(DeviceAddr, 0x04, 0x05); /* Detect the HP or the SPK automatically */
+      counter += CODEC_IO_Write(DeviceAddr, CS43L22_REG_POWER_CTL2, 0x05); /* Detect the HP or the SPK automatically */
       OutputDev = 0x05;
       break;
   }  

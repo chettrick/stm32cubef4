@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
   * @file    LCD_DSI/LCD_DSI_CmdMode_DoubleBuffering/readme.txt
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    14-August-2015
+  * @version V1.0.1
+  * @date  09-October-2015
   * @brief   Description of the LCD DSI in command mode example.
   ******************************************************************************
   *

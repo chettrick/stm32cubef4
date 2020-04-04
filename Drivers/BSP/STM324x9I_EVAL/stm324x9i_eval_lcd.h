@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324x9i_eval_lcd.h
   * @author  MCD Application Team
-  * @version V2.2.0
-  * @date    14-August-2015
+  * @version V2.2.1
+  * @date    07-October-2015
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm324x9i_eval_lcd.c driver.
   ******************************************************************************
@@ -121,6 +121,13 @@ typedef enum
   */
 #define LCD_FB_START_ADDRESS       ((uint32_t)0xC0000000)
 
+/* The programmed LTDC pixel clock depends on the vertical refresh rate of the panel 60Hz => 25.16MHz and
+   the LCD/SDRAM bandwidth affected by the several access on the bus and the number of used layers. 
+   when only one layer is enabled "LCD_MAX_PCLK" can be used and when two layers are enabled simultaneously 
+   or/and there is several access on the bus "LCD_MIN_PCLK" parameter is recommended */
+#define LCD_MAX_PCLK       ((uint8_t)0x00)  
+#define LCD_MIN_PCLK       ((uint8_t)0x01)
+
 /** 
   * @brief  LCD color  
   */ 
@@ -163,6 +170,8 @@ typedef enum
   * @{
   */
 uint8_t  BSP_LCD_Init(void);
+uint8_t  BSP_LCD_InitEx(uint32_t PclkConfig);
+
 uint32_t BSP_LCD_GetXSize(void);
 uint32_t BSP_LCD_GetYSize(void);
 
@@ -209,6 +218,7 @@ void     BSP_LCD_FillEllipse(int Xpos, int Ypos, int XRadius, int YRadius);
 void     BSP_LCD_DisplayOff(void);
 void     BSP_LCD_DisplayOn(void);
 
+void     BSP_LCD_ClockConfig(LTDC_HandleTypeDef *hltdc, void *Params);
 /**
   * @}
   */ 

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file   LwIP/LwIP_UDPTCP_Echo_Server_Netconn_RTOS/Inc/app_ethernet.h 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    14-August-2015
+  * @version V1.0.1
+  * @date    09-October-2015
   * @brief   Header for app_ethernet.c module
   ******************************************************************************
   * @attention

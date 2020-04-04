@@ -147,7 +147,7 @@
         </option>
         <option>
           <name>OGUseCmsis</name>
-          <state>1</state>
+          <state>0</state>
         </option>
         <option>
           <name>OGUseCmsisDspLib</name>
@@ -622,7 +622,7 @@
         </option>
         <option>
           <name>OOCOutputFile</name>
-          <state>STM32469I_EVAL_Demo_V1.0.0.hex</state>
+          <state>STM32469I_EVAL_Demo_V1.1.0.hex</state>
         </option>
         <option>
           <name>OOCCommandLineProducer</name>

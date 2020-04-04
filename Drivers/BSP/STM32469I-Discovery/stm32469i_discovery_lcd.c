@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32469i_discovery_lcd.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    14-August-2015
+  * @version V1.0.1
+  * @date    29-September-2015
   * @brief   This file includes the driver for Liquid Crystal Display (LCD) module
   *          mounted on STM32469I-Discovery evaluation board.
   ******************************************************************************
@@ -417,6 +417,9 @@ void BSP_LCD_Reset(void)
 
     /* Desactivate XRES */
     HAL_GPIO_WritePin(GPIOH, GPIO_PIN_7, GPIO_PIN_SET);
+    
+    /* Wait for 10ms after releasing XRES before sending commands */
+    HAL_Delay(10);    
 #else
   
 #endif /* USE_STM32469I_DISCO_REVA == 0 */

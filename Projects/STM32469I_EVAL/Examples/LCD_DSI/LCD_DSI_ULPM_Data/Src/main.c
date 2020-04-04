@@ -83,22 +83,6 @@ static void OnError_Handler(uint32_t condition)
 }
 
 /**
- * @brief  Toggle Leds.
- * @param  None
- * @retval None
- */
-void Toggle_Leds(void)
-{
-  static uint32_t ticks = 0;
-
-  if (ticks++ > 1000)
-  {
-    BSP_LED_Toggle(LED1);
-    ticks = 0;
-  }
-}
-
-/**
  * @brief  Main program
  * @param  None
  * @retval None
@@ -140,14 +124,11 @@ int main(void)
   sdram_status = BSP_SDRAM_Init();
   OnError_Handler(sdram_status != SDRAM_OK);
 
-
-
-  /*##-1- Initialize the LCD depending on 'lcd_mode' #################################################*/
-
-  /* Get DSI configuration for mode Video Burst  */
+  /* Initialize the LCD DSI in Video Burst mode with LANDSCAPE orientation */
   lcd_status = BSP_LCD_Init();
   OnError_Handler(lcd_status != LCD_OK);
 
+  /* Program a line event at line 0 */
   HAL_LTDC_ProgramLineEvent(&hltdc_eval, 0); 
   
   /* Copy texture to be displayed on LCD from Flash to SDRAM */
@@ -200,6 +181,7 @@ int main(void)
 
       /* Enter ultra low power mode (data lane only integrated) */
       HAL_DSI_EnterULPMData(&hdsi_eval);
+      BSP_LED_On(LED1);
       
       HAL_Delay(6000);
 
@@ -208,6 +190,7 @@ int main(void)
       
       /* Exit ultra low power mode (data lane only integrated) */
       HAL_DSI_ExitULPMData(&hdsi_eval);
+      BSP_LED_Off(LED1);
       
       /* Switch On bit LTDCEN */
       __HAL_LTDC_ENABLE(&hltdc_eval); 

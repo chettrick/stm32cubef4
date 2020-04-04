@@ -36,7 +36,7 @@ Purpose     : Speed demo
   ******************************************************************************
   * @file    GUIDEMO_Speed.c
   * @author  MCD Application Team
-  * @version V1.0.0
+  * @version V1.0.1
   * @date    13-March-2015
   * @brief   Speed demo
   ******************************************************************************

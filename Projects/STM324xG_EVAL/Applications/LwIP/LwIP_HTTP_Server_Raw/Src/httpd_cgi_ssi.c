@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LwIP/LwIP_HTTP_Server_Raw/Src/httpd_cg_ssi.c
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    14-August-2015
+  * @version V1.3.1
+  * @date    09-October-2015
   * @brief   Webserver SSI and CGI handlers
   ******************************************************************************
   * @attention

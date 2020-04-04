@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BSP/Src/sd.c 
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    01-July-2015
+  * @version V1.3.1
+  * @date    09-October-2015
   * @brief   This example code shows how to use the SD Driver
   ******************************************************************************
   * @attention
