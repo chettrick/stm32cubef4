@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f429i_discovery_sdram.c
   * @author  MCD Application Team
-  * @version V2.0.0
-  * @date    18-February-2014
+  * @version V2.0.1
+  * @date    26-February-2014
   * @brief   This file provides a set of functions needed to drive the
   *          IS42S16400J SDRAM memory mounted on STM32F429I-DISCO Kit.    
   ******************************************************************************

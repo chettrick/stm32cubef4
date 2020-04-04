@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    PolarSSL/SSL_Client/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   Description of SSL Client application.
   ******************************************************************************
   *
@@ -78,10 +78,10 @@ that the System tick increments while executing the Ethernet Link ISR.
   - This example runs on STM32F417xx Devices.
   
   - This example has been tested with the following environments: 
-     - STM3241G-EVAL board
-     - ssl_server.exe: PC utility is used as a SSL server application
-     - DHCP server:  PC utility TFTPD32 (http://tftpd32.jounin.net/) 
-                     is used as a DHCP server 
+     - STM3241G-EVAL board RevB
+     - ssl_server.exe: PC utility is used as SSL server application
+        This utility is provided within STM32CubeF4 package under \Utilities\PC_Software\ssl_server
+     - DHCP server: PC utility TFTPD32 (http://tftpd32.jounin.net/) is used as a DHCP server 
      - HyperTerminal: used to display debug messages
   
   - STM3241G-EVAL Set-up 

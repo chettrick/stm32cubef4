@@ -87,6 +87,11 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
+			<name>syscalls.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/syscalls.c</locationURI>
+		</link>
+		<link>
 			<name>Doc/readme.txt</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/readme.txt</locationURI>

@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    SMARTCARD/T0/Src/main.c 
+  * @file    SMARTCARD/SMARTCARD_T0/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   This sample code shows how to use STM32F4xx SMARTCARD HAL API to communicate
   *          with card compatible with T0 protocol. 
   ******************************************************************************
@@ -57,11 +57,6 @@ const uint8_t GSMDir[2] = {0x7F, 0x20};
 const uint8_t ICCID[2] = {0x2F, 0xE2};
 const uint8_t IMSI[2] = {0x6F, 0x07};
 const uint8_t CHV1[8] = {'0', '0', '0', '0', '0', '0', '0', '0'};
-
-/* APDU Transport Structures */
-SC_ADPU_Commands SC_ADPU;
-SC_ADPU_Response SC_Response;
-static __IO ErrorStatus HSEStartUpStatus = SUCCESS;
 __IO uint32_t CardInserted = 0;
 uint32_t CHV1Status = 0, i = 0;
 __IO uint8_t ICCID_Content[10] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
@@ -79,7 +74,11 @@ static void Error_Handler(void);
   * @retval None
   */
 int main(void)
-{    
+{
+ /* ADUU Transport Structures */
+ SC_ADPU_Commands SC_ADPU;
+ SC_ADPU_Response SC_Response;
+
   /* STM32F4xx HAL library initialization:
        - Configure the Flash prefetch, instruction and Data caches
        - Configure the Systick to generate an interrupt each 1 msec

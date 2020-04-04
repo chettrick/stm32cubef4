@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Device/HID_Standalone/Src/usbd_conf.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   This file implements the USB Device library callbacks and MSP
   ******************************************************************************
   * @attention
@@ -291,9 +291,7 @@ void HAL_PCD_ResetCallback(PCD_HandleTypeDef *hpcd)
   */
 void HAL_PCD_SuspendCallback(PCD_HandleTypeDef *hpcd)
 {
-  __IO uint32_t i=0;
-  
-  if  (hpcd->Instance == USB_OTG_HS)
+  if(hpcd->Instance == USB_OTG_HS)
   {
 #ifdef USE_USB_HS_IN_FS
     __HAL_PCD_GATE_PHYCLOCK(hpcd);

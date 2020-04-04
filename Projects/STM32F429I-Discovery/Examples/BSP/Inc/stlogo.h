@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BSP/Inc/stlogo.h 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   This file contains image used for BSP example.   
   ******************************************************************************
   * @attention
@@ -39,7 +39,11 @@
 #ifndef __STLOGO_H
 #define __STLOGO_H
 
-unsigned char stlogo[9174]=
+#if defined ( __ICCARM__ ) /*!< IAR Compiler */
+  #pragma data_alignment=4   
+#endif
+
+__ALIGN_BEGIN const  unsigned char stlogo[9174] __ALIGN_END =
 {
 0x42,0x4d,0xd6,0x23,0x00,0x00,0x00,0x00,0x00,0x00,0x36,0x00,0x00,0x00,0x28,0x00,
 0x00,0x00,0x50,0x00,0x00,0x00,0x39,0x00,0x00,0x00,0x01,0x00,0x10,0x00,0x03,0x00,

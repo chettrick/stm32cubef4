@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   Description of the FatFs with uSD card drive example
   ******************************************************************************
   *
@@ -34,7 +34,9 @@ application exploiting FatFs offered features with microSD drive configuration.
 At the beginning of the main program the HAL_Init() function is called to reset 
 all the peripherals, initialize the Flash interface and the systick.
 Then the SystemClock_Config() function is used to configure the system clock
-(SYSCLK) to run at 180 MHz.
+(SYSCLK) to run at 175 MHz and provide 50 MHz at the output PLL divided by PLL_Q. 
+This frequency permit to reach 25 Mhz clock needed for SD operation and in line 
+with microSD sepcification. 
  
 The application is based on writing and reading back a text file from a drive,
 and it's performed using FatFs APIs to access the FAT volume as described

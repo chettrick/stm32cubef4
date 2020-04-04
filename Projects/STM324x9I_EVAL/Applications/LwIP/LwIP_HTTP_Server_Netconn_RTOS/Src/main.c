@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LwIP/LwIP_HTTP_Server_Netconn_RTOS/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   This sample code implements a http server application based on 
   *          Netconn API of LwIP stack and FreeRTOS. This application uses 
   *          STM32F4xx the ETH HAL API to transmit and receive data. 

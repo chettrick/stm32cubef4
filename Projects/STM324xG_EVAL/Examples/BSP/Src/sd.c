@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BSP/Src/sd.c 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   This example code shows how to use the SD Driver
   ******************************************************************************
   * @attention
@@ -48,7 +48,6 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-#define SD_DATATIMEOUT           ((uint32_t)0xFFFFFFFF)
 #define BLOCK_START_ADDR         0     /* Block start address      */
 #define BLOCKSIZE                512   /* Block Size in Bytes      */
 #define NUM_OF_BLOCKS            5     /* Total number of blocks   */

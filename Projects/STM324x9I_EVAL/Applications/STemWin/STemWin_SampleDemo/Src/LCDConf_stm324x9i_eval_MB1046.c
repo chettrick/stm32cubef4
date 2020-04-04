@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    lcdconf.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   This file implements the configuration for the GUI library
   ******************************************************************************
   * @attention
@@ -228,8 +228,6 @@ void HAL_LTDC_MspInit(LTDC_HandleTypeDef *hltdc)
   __LTDC_CLK_ENABLE();
   
   /* Enable GPIO Clock */
-  __GPIOA_CLK_ENABLE();
-  __GPIOC_CLK_ENABLE();
   __GPIOI_CLK_ENABLE();
   __GPIOJ_CLK_ENABLE();
   __GPIOK_CLK_ENABLE();  
@@ -263,27 +261,7 @@ void HAL_LTDC_MspInit(LTDC_HandleTypeDef *hltdc)
   GPIO_Init_Structure.Speed     = GPIO_SPEED_FAST;
   GPIO_Init_Structure.Alternate = GPIO_AF14_LTDC;  
   HAL_GPIO_Init(GPIOK, &GPIO_Init_Structure);   
-
-  /* LTDC pins configuraiton: PA8 */  
-  GPIO_Init_Structure.Pin       = GPIO_PIN_8; 
-  GPIO_Init_Structure.Mode      = GPIO_MODE_OUTPUT_PP;
-  GPIO_Init_Structure.Pull      = GPIO_NOPULL;
-  GPIO_Init_Structure.Speed     = GPIO_SPEED_FAST;
-  GPIO_Init_Structure.Alternate = GPIO_AF14_LTDC;  
-  HAL_GPIO_Init(GPIOA, &GPIO_Init_Structure);   
   
-  /* LTDC pins configuraiton: PC6 */  
-  GPIO_Init_Structure.Pin       = GPIO_PIN_6; 
-  GPIO_Init_Structure.Mode      = GPIO_MODE_OUTPUT_PP;
-  GPIO_Init_Structure.Pull      = GPIO_NOPULL;
-  GPIO_Init_Structure.Speed     = GPIO_SPEED_FAST;
-  GPIO_Init_Structure.Alternate = GPIO_AF14_LTDC;  
-  HAL_GPIO_Init(GPIOC, &GPIO_Init_Structure);   
-
-  /* Enable LCD Backlight */ 
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_SET);
-  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_6, GPIO_PIN_SET);  
-
   /* Set LTDC Interrupt to the lowest priority */
   HAL_NVIC_SetPriority(LTDC_IRQn, 0xF, 0);
   

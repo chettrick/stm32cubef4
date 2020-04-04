@@ -36,8 +36,8 @@ Purpose     : Contains fonts and bitmaps used in the demo.
   ******************************************************************************
   * @file    GUIDEMO_Resource.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   Contains fonts and bitmaps used in the demo.
   ******************************************************************************
   * @attention

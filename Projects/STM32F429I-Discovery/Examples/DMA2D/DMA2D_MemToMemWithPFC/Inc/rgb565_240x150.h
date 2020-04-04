@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    DMA2D_MemToMemWithPFC/rgb565_240x150.h 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   This file contains image used for DMA2D Validation.
   ******************************************************************************
   * @attention
@@ -42,7 +42,11 @@
 /* Private define ------------------------------------------------------------*/
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
-const uint32_t aRGB565_240x150[18000] =
+#if defined ( __ICCARM__ ) /*!< IAR Compiler */
+  #pragma data_alignment=4   
+#endif
+
+__ALIGN_BEGIN const uint32_t aRGB565_240x150[18000] __ALIGN_END =
 {
 0xFFFFFFFF,
 0xFFFFFFFF,

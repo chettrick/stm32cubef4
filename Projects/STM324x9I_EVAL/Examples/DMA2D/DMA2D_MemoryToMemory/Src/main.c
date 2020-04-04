@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    DMA2D/DMA2D_MemoryToMemory/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   This example provides a description of how to configure 
   *          DMA2D peripheral in Memory to Memory transfer mode
   ******************************************************************************
@@ -53,9 +53,9 @@
 /* Private variables ---------------------------------------------------------*/
 DMA2D_HandleTypeDef     Dma2dHandle;
 
-uint32_t aBufferResult[256];
+__ALIGN_BEGIN uint32_t aBufferResult[256] __ALIGN_END;
 
-uint32_t aBufferInput[256] = {0xEFFFFFF2, 0xAB1FFFF0, 0x0504044E, 0x89ADCDEF, 0x15248722, 0x5201245E, 0x01025FDE, 0xFE010203,
+__ALIGN_BEGIN uint32_t aBufferInput[256] __ALIGN_END = {0xEFFFFFF2, 0xAB1FFFF0, 0x0504044E, 0x89ADCDEF, 0x15248722, 0x5201245E, 0x01025FDE, 0xFE010203,
                           0xEFFFFFF2, 0xAB1FFFF0, 0x0504044E, 0x89ADCDEF, 0x15248722, 0x5201245E, 0x01025FDE, 0xFE010203,
                           0xEFFFFFF2, 0xAB1FFFF0, 0x0504044E, 0x89ADCDEF, 0x15248722, 0x5201245E, 0x01025FDE, 0xFE010203,
                           0xEFFFFFF2, 0xAB1FFFF0, 0x0504044E, 0x89ADCDEF, 0x15248722, 0x5201245E, 0x01025FDE, 0xFE010203,

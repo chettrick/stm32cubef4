@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    I2C/I2C_TwoBoards_ComIT/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   HAL MSP module.    
   ******************************************************************************
   * @attention
@@ -72,12 +72,10 @@ void HAL_I2C_MspInit(I2C_HandleTypeDef *hi2c)
 {  
   GPIO_InitTypeDef  GPIO_InitStruct;
   
-  /*##-1- Enable peripherals and GPIO Clocks #################################*/
+  /*##-1- Enable GPIO Clocks #################################################*/
   /* Enable GPIO TX/RX clock */
   I2Cx_SCL_GPIO_CLK_ENABLE();
   I2Cx_SDA_GPIO_CLK_ENABLE();
-  /* Enable I2C1 clock */
-  I2Cx_CLK_ENABLE(); 
   
   /*##-2- Configure peripheral GPIO ##########################################*/  
   /* I2C TX GPIO pin configuration  */
@@ -86,20 +84,22 @@ void HAL_I2C_MspInit(I2C_HandleTypeDef *hi2c)
   GPIO_InitStruct.Pull      = GPIO_PULLUP;
   GPIO_InitStruct.Speed     = GPIO_SPEED_FAST;
   GPIO_InitStruct.Alternate = I2Cx_SCL_AF;
-  
   HAL_GPIO_Init(I2Cx_SCL_GPIO_PORT, &GPIO_InitStruct);
     
   /* I2C RX GPIO pin configuration  */
   GPIO_InitStruct.Pin = I2Cx_SDA_PIN;
   GPIO_InitStruct.Alternate = I2Cx_SDA_AF;
-    
   HAL_GPIO_Init(I2Cx_SDA_GPIO_PORT, &GPIO_InitStruct);
-    
-  /*##-3- Configure the NVIC for I2C #########################################*/   
+
+  /*##-3- Enable I2C peripherals Clock #######################################*/
+  /* Enable I2C1 clock */
+  I2Cx_CLK_ENABLE();
+      
+  /*##-4- Configure the NVIC for I2C #########################################*/   
   /* NVIC for I2C1 */
-  HAL_NVIC_SetPriority(I2Cx_ER_IRQn, 0, 1);
+  HAL_NVIC_SetPriority(I2Cx_ER_IRQn, 1, 0);
   HAL_NVIC_EnableIRQ(I2Cx_ER_IRQn);
-  HAL_NVIC_SetPriority(I2Cx_EV_IRQn, 0, 2);
+  HAL_NVIC_SetPriority(I2Cx_EV_IRQn, 2, 0);
   HAL_NVIC_EnableIRQ(I2Cx_EV_IRQn);
 }
 

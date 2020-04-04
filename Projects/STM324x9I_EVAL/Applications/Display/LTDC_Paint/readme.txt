@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    Display/LTDC_Paint/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   Description of the STM32F4xx LTDC Paint application.
   ******************************************************************************
   * @attention
@@ -45,8 +45,10 @@
  
  At the beginning of the main program the HAL_Init() function is called to reset 
  all the peripherals, initialize the Flash interface and the systick.
- Then the SystemClock_Config() function is used to configure the system
- clock (SYSCLK) to run at 180 MHz. 
+ Then the SystemClock_Config() function is used to configure the system clock
+ (SYSCLK) to run at 175 MHz and provide 50 MHz at the output PLL divided by PLL_Q. 
+ This frequency permit to reach 25 Mhz clock needed for SD operation and in line 
+ with microSD specification.  
 
  After LCD and touch screen initialization, touchscreen calibration is requested
  for better accuracy, then, menu is displayed on the screen. 

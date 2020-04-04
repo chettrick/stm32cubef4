@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LTDC_Display_2Layers/st_logo2.h 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   This file contains image used for LTDC layers Validation.
   ******************************************************************************
   * @attention

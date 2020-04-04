@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LTDC/LTDC_Paint/save.h 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   This file contains image used for LTDC example.   
   ******************************************************************************
   * @attention
@@ -29,7 +29,11 @@
 #ifndef __SAVE_H
 #define __SAVE_H
 
-const unsigned char save[5054]=
+#if defined ( __ICCARM__ ) /*!< IAR Compiler */
+  #pragma data_alignment=4   
+#endif
+
+__ALIGN_BEGIN const unsigned char save[5054] __ALIGN_END =
 {
 0x42,0x4d,0xbe,0x13,0x00,0x00,0x00,0x00,0x00,0x00,0x36,0x00,0x00,0x00,0x28,0x00,
 0x00,0x00,0x32,0x00,0x00,0x00,0x32,0x00,0x00,0x00,0x01,0x00,0x10,0x00,0x03,0x00,

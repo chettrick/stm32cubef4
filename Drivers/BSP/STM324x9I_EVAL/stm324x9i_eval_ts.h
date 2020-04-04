@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324x9i_eval_ts.h
   * @author  MCD Application Team
-  * @version V2.0.0
-  * @date    18-February-2014
+  * @version V2.0.1
+  * @date    26-February-2014
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm324x9i_eval_ts.c driver.
   ******************************************************************************

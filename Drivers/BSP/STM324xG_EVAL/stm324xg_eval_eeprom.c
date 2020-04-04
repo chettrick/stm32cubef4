@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324xg_eval_eeprom.c
   * @author  MCD Application Team
-  * @version V2.0.0
-  * @date    18-February-2014
+  * @version V2.0.1
+  * @date    26-February-2014
   * @brief   This file provides a set of functions needed to manage an I2C M24C64 
   *          EEPROM memory.
   *          
@@ -176,6 +176,7 @@ uint32_t BSP_EEPROM_ReadBuffer(uint8_t* pBuffer, uint16_t ReadAddr, uint16_t* Nu
   
   if(EEPROM_IO_ReadData(EEPROM_I2C_ADDRESS, ReadAddr, pBuffer, buffersize) != HAL_OK)
   {
+    BSP_EEPROM_TIMEOUT_UserCallback();
     return EEPROM_FAIL;
   }
   
@@ -215,6 +216,7 @@ uint32_t BSP_EEPROM_WritePage(uint8_t* pBuffer, uint16_t WriteAddr, uint8_t* Num
   EEPROMDataWrite = *NumByteToWrite;  
   if(EEPROM_IO_WriteData(EEPROM_I2C_ADDRESS, WriteAddr, pBuffer, buffersize) != HAL_OK)  
   {
+    BSP_EEPROM_TIMEOUT_UserCallback();
     status = EEPROM_FAIL;
   }
   
@@ -400,7 +402,8 @@ uint32_t BSP_EEPROM_WaitEepromStandbyState(void)
   if(EEPROM_IO_IsDeviceReady(EEPROM_I2C_ADDRESS, EEPROM_MAX_TRIALS) != HAL_OK)
   {
     /* If the maximum number of trials has been reached, exit the function */
-    return BSP_EEPROM_TIMEOUT_UserCallback();
+    BSP_EEPROM_TIMEOUT_UserCallback();
+    return EEPROM_TIMEOUT;
   }
   return EEPROM_OK;
 }
@@ -410,9 +413,8 @@ uint32_t BSP_EEPROM_WaitEepromStandbyState(void)
   * @param  None.
   * @retval None.
   */
-__weak uint32_t BSP_EEPROM_TIMEOUT_UserCallback(void)
+__weak void BSP_EEPROM_TIMEOUT_UserCallback(void)
 {
-  return EEPROM_TIMEOUT;
 }
 
 /**

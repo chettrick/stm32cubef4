@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    DAC/DAC_SignalsGeneration/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   This example provides a short description of how to use the DAC 
   *          peripheral to generate several signals.
   ******************************************************************************

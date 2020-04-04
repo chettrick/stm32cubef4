@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    DMA2D/DMA2D_MemToMemWithBlending/Inc/RGB565_240x130_1.h 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   This file contains image used for DMA2D Validation.   
   ******************************************************************************
   * @attention
@@ -39,7 +39,7 @@
 #ifndef __RGB565_240x130_1_H
 #define __RGB565_240x130_1_H
 
-const uint32_t RGB565_240x130_1[15600] =
+__ALIGN_BEGIN const uint32_t RGB565_240x130_1[15600] __ALIGN_END =
 {
 0xFFFFFFFF,
 0xFFFFFFFF,

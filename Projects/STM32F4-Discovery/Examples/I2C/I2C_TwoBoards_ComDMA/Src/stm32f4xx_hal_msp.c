@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    I2C/I2C_TwoBoards_ComDMA/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   HAL MSP module.    
   ******************************************************************************
   * @attention
@@ -75,14 +75,10 @@ void HAL_I2C_MspInit(I2C_HandleTypeDef *hi2c)
   
   GPIO_InitTypeDef  GPIO_InitStruct;
   
-  /*##-1- Enable peripherals and GPIO Clocks #################################*/
+  /*##-1- Enable GPIO Clocks #################################################*/
   /* Enable GPIO TX/RX clock */
   I2Cx_SCL_GPIO_CLK_ENABLE();
   I2Cx_SDA_GPIO_CLK_ENABLE();
-  /* Enable I2C1 clock */
-  I2Cx_CLK_ENABLE(); 
-  /* Enable DMA2 clock */
-  DMAx_CLK_ENABLE();   
   
   /*##-2- Configure peripheral GPIO ##########################################*/  
   /* I2C TX GPIO pin configuration  */
@@ -91,16 +87,18 @@ void HAL_I2C_MspInit(I2C_HandleTypeDef *hi2c)
   GPIO_InitStruct.Pull      = GPIO_PULLUP;
   GPIO_InitStruct.Speed     = GPIO_SPEED_FAST;
   GPIO_InitStruct.Alternate = I2Cx_SCL_AF;
-  
   HAL_GPIO_Init(I2Cx_SCL_GPIO_PORT, &GPIO_InitStruct);
     
   /* I2C RX GPIO pin configuration  */
   GPIO_InitStruct.Pin = I2Cx_SDA_PIN;
   GPIO_InitStruct.Alternate = I2Cx_SDA_AF;
-    
   HAL_GPIO_Init(I2Cx_SDA_GPIO_PORT, &GPIO_InitStruct);
-    
-  /*##-3- Configure the DMA streams ##########################################*/
+ 
+  /*##-3- Enable DMA peripheral Clock ########################################*/   
+  /* Enable DMA2 clock */
+  DMAx_CLK_ENABLE();
+     
+  /*##-4- Configure the DMA streams ##########################################*/
   /* Configure the DMA handler for Transmission process */
   hdma_tx.Instance                 = I2Cx_TX_DMA_STREAM;
   
@@ -142,10 +140,14 @@ void HAL_I2C_MspInit(I2C_HandleTypeDef *hi2c)
     
   /* Associate the initialized DMA handle to the the I2C handle */
   __HAL_LINKDMA(hi2c, hdmarx, hdma_rx);
-    
-  /*##-4- Configure the NVIC for DMA #########################################*/
+  
+  /*##-5- Enable peripheral Clock ############################################*/
+  /* Enable I2C1 clock */
+  I2Cx_CLK_ENABLE();
+  
+  /*##-6- Configure the NVIC for DMA #########################################*/
   /* NVIC configuration for DMA transfer complete interrupt (I2C1_TX) */
-  HAL_NVIC_SetPriority(I2Cx_DMA_TX_IRQn, 0, 1);
+  HAL_NVIC_SetPriority(I2Cx_DMA_TX_IRQn, 1, 0);
   HAL_NVIC_EnableIRQ(I2Cx_DMA_TX_IRQn);
     
   /* NVIC configuration for DMA transfer complete interrupt (I2C1_RX) */

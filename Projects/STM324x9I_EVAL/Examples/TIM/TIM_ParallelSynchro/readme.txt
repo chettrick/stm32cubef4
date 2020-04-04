@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    TIM/TIM_ParallelSynchro/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   How to command 2 Timers as slaves (TIM3 & TIM4) using a Timer
   *          as master (TIM2)
   ******************************************************************************

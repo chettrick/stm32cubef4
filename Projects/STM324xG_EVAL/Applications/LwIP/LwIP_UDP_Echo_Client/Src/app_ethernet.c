@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LwIP/LwIP_UDP_Echo_Client/Src/app_ethernet.c 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   Ethernet specefic module
   ******************************************************************************
   * @attention

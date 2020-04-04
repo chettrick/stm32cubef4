@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    FatFs/FatFs_MultiDrives/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   Main program body
   *          This sample code shows how to use FatFs with multi drives.
   ******************************************************************************
@@ -64,7 +64,7 @@ int main(void)
      */
   HAL_Init();
   
-  /* Configure the system clock to 180 Mhz */
+  /* Configure the system clock to 175 Mhz */
   SystemClock_Config();
   
   /* Configure LED1 and LED3 */
@@ -182,14 +182,14 @@ int main(void)
   * @brief  System Clock Configuration
   *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
-  *            SYSCLK(Hz)                     = 180000000
-  *            HCLK(Hz)                       = 180000000
+  *            SYSCLK(Hz)                     = 175000000
+  *            HCLK(Hz)                       = 175000000
   *            AHB Prescaler                  = 1
   *            APB1 Prescaler                 = 4
   *            APB2 Prescaler                 = 2
   *            HSE Frequency(Hz)              = 25000000
   *            PLL_M                          = 25
-  *            PLL_N                          = 360
+  *            PLL_N                          = 350
   *            PLL_P                          = 2
   *            PLL_Q                          = 7
   *            VDD(V)                         = 3.3
@@ -217,7 +217,7 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
   RCC_OscInitStruct.PLL.PLLM = 25;
-  RCC_OscInitStruct.PLL.PLLN = 360;
+  RCC_OscInitStruct.PLL.PLLN = 350;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   HAL_RCC_OscConfig(&RCC_OscInitStruct);

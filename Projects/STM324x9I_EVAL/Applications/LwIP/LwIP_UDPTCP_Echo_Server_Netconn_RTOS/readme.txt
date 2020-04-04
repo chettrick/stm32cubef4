@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    LwIP/LwIP_UDPTCP_Echo_Server_Netconn_RTOS/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   Description of the LwIP UDP/TCP Echo Server Netconn API Application.
   ******************************************************************************
   *
@@ -29,7 +29,6 @@
 
 This example guides STM32Cube HAL API users to run a UDP/TCP Echo Server application 
 based on Netconn API of LwIP TCP/IP stack
-The communication is done with a remote PC through echotool application.
 
 To run this application, On the remote PC, open a command prompt window.
 (In Windows, select Start > All Programs > Accessories > Command Prompt.)
@@ -91,8 +90,10 @@ function in the ethernetif.c file
 
   - This example runs on STM32F429x/STM32F439x Devices.
     
-  - This example has been tested with STM324x9I-EVAL evaluation board and can be
-    easily tailored to any other supported device and development board.    
+  - This example has been tested with the following environments:
+     - STM324x9I-EVAL board   
+     - echotool: (http://bansky.net/echotool/) is used as echo client that sends
+       data to the server and checking whether they came back    
       
   - STM324x9I-EVAL Set-up
     - Connect the eval board to remote PC (through a crossover ethernet cable)

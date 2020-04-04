@@ -5,8 +5,8 @@
   ******************************************************************************
   * @file    Display/LTDC_PicturesFromSDCard/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   Description of the STM32F4xx LTDC_PicturesFromSDCard application.
   ******************************************************************************
   * @attention
@@ -83,7 +83,10 @@ under the micro SD card root.
   When the Tamper button is pressed the transparency of the background layer
   begins to decrease until become totally transparent and return to step1.
   
-
+@note the system clock (SYSCLK) is configured to run at 175 MHz and 50 MHz is provided 
+      at the output PLL divided by PLL_Q. This frequency permit to reach 25 Mhz clock 
+      needed for SD operation and in line with microSD specification. 
+      
 @note 
   => If the "Media" directory is empty, a warning message is displayed on 
      the LCD : "  No Bitmap files...  "

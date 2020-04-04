@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    SPI/SPI_FullDuplex_AdvCom/Inc/stm32f4xx_hal_conf.h
+  * @file    I2C/I2C_TwoBoards_AdvComIT/Inc/stm32f4xx_hal_conf.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   HAL configuration file.
   ******************************************************************************
   * @attention

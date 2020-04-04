@@ -5,8 +5,8 @@
   ******************* (C) COPYRIGHT 2014 STMicroelectronics ********************
   * @file    FMC/FMC_SDRAM_DataMemory/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   Description of the FMC SDRAM_DataMemory example.
   ******************************************************************************
   *

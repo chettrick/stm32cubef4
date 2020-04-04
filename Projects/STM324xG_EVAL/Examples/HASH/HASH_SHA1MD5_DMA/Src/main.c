@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    HASH/HASH_SHA1MD5_DMA/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   This example provides a short description of HASH digest calculation
   *          using SHA1 and MD5 example.
   ******************************************************************************

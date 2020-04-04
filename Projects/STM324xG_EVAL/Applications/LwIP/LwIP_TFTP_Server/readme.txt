@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    LwIP/LwIP_TFTP_Server/readme.txt
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   Description of the tftp server demonstration.
   ******************************************************************************
   * @attention
@@ -85,8 +85,7 @@ that the System tick increments while executing the Ethernet Link ISR.
 
   - This example has been tested with the following environments:
      - STM324xG-EVAL board
-     - TFTP client:  PC utility TFTPD32 (http://tftpd32.jounin.net/)
-     - DHCP server:  PC utility TFTPD32 is used as a DHCP server  
+     - TFTP client and DHCP server: PC utility TFTPD32 (http://tftpd32.jounin.net/)
   
   - STM324xG-EVAL Set-up
     - Connect the eval board to remote PC (through a crossover ethernet cable)

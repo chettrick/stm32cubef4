@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Host/DynamicSwitch_Standalone/Src/audio_explorer.c 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   This file provides uSD Card drive configuration
   ******************************************************************************
   * @attention

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f429i_discovery_eeprom.h
   * @author  MCD Application Team
-  * @version V2.0.0
-  * @date    18-February-2014
+  * @version V2.0.1
+  * @date    26-February-2014
   * @brief   This file contains all the functions prototypes for 
   *          the stm32f429i_discovery_eeprom.c firmware driver.
   ******************************************************************************
@@ -117,7 +117,7 @@ uint32_t          BSP_EEPROM_WaitEepromStandbyState(void);
    BSP_EEPROM_TIMEOUT_UserCallback() function is called whenever a timeout condition 
    occure during communication (waiting on an event that doesn't occur, bus 
    errors, busy devices ...). */
-uint32_t   BSP_EEPROM_TIMEOUT_UserCallback(void);
+void              BSP_EEPROM_TIMEOUT_UserCallback(void);
 
 
 /* Link function for I2C EEPROM peripheral */

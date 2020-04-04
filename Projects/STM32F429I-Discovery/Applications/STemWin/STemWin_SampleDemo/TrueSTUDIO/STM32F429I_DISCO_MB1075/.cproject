@@ -57,7 +57,7 @@
 								<option id="com.atollic.truestudio.common_options.target.fpu.829683864" name="Floating point" superClass="com.atollic.truestudio.common_options.target.fpu" value="com.atollic.truestudio.common_options.target.fpu.hard" valueType="enumerated"/>
 								<option id="com.atollic.truestudio.common_options.target.fpucore.257015374" name="FPU" superClass="com.atollic.truestudio.common_options.target.fpucore" value="FPv4-SP-D16" valueType="enumerated"/>
 								<option id="com.atollic.truestudio.common_options.target.interwork.917234212" name="Mix ARM/Thumb" superClass="com.atollic.truestudio.common_options.target.interwork"/>
-								<option id="com.atollic.truestudio.gcc.misc.otherflags.1471459873" superClass="com.atollic.truestudio.gcc.misc.otherflags" value="-Wno-missing-braces" valueType="string"/>
+								<option id="com.atollic.truestudio.gcc.misc.otherflags.1471459873" name="Other options" superClass="com.atollic.truestudio.gcc.misc.otherflags" value="-Wno-unused-but-set-variable -Wno-missing-braces " valueType="string"/>
 								<inputType id="com.atollic.truestudio.gcc.input.850396938" superClass="com.atollic.truestudio.gcc.input"/>
 							</tool>
 							<tool id="com.atollic.truestudio.exe.debug.toolchain.ld.1444973427" name="C Linker" superClass="com.atollic.truestudio.exe.debug.toolchain.ld">
@@ -110,7 +110,7 @@
 					</fileInfo>
 					<fileInfo id="com.atollic.truestudio.exe.debug.1518366166.221711886" name="stm32f4xx_hal_spi.c" rcbsApplicability="disable" resourcePath="Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_spi.c" toolsToInvoke="com.atollic.truestudio.exe.debug.toolchain.gcc.1836874447.335603215">
 						<tool id="com.atollic.truestudio.exe.debug.toolchain.gcc.1836874447.335603215" name="C Compiler" superClass="com.atollic.truestudio.exe.debug.toolchain.gcc.1836874447">
-							<option id="com.atollic.truestudio.gcc.misc.otherflags.611218601" name="Other options" superClass="com.atollic.truestudio.gcc.misc.otherflags" value="-Wno-unused-but-set-variable" valueType="string"/>
+							<option id="com.atollic.truestudio.gcc.misc.otherflags.611218601" name="Other options" superClass="com.atollic.truestudio.gcc.misc.otherflags" value="-Wno-unused-but-set-variable -Wno-missing-braces " valueType="string"/>
 							<inputType id="com.atollic.truestudio.gcc.input.886757091" superClass="com.atollic.truestudio.gcc.input"/>
 						</tool>
 					</fileInfo>

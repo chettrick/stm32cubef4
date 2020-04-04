@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BSP/Src/sdram.c 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   This example code shows how to use the SDRAM Driver
   ******************************************************************************
   * @attention

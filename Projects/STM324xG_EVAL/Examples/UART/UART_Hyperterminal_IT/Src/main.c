@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    UART/UART_Hyperterminal_IT/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   This sample code shows how to use STM32F4xx UART HAL API to transmit 
   *          and receive a data buffer with a communication process based on
   *          IT transfer. 

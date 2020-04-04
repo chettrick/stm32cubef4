@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Host/MSC_RTOS/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014 
+  * @version V1.0.1
+  * @date    26-February-2014 
   * @brief   USB host Mass storage demo main file
   ******************************************************************************
   * @attention

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    DMA2D/DMA2D_MemToMemWithPFC/Inc/ARGB8888_300x120.h 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   This file contains image used for DMA2D Validation.   
   ******************************************************************************
   * @attention
@@ -39,7 +39,7 @@
 #ifndef __ARGB8888_300x120_H
 #define __ARGB8888_300x120_H
 
-const uint32_t ARGB8888_300x120[36000] =
+__ALIGN_BEGIN const uint32_t ARGB8888_300x120[36000] __ALIGN_END =
 {
 0xFF0000FF,
 0xFF0000FF,

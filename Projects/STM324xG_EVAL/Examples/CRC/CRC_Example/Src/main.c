@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    CRC/CRC_Example/Src/main.c  
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   This sample code shows how to use the STM32F4xx CRC HAL API 
   *          to get a CRC code of a given buffer of data word(32-bit), 
   *          based on a fixed generator polynomial(0x4C11DB7).

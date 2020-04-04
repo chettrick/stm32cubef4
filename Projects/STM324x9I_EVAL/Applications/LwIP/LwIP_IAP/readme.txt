@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file   LwIP/LwIP_IAP/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   Description of the in-application programming (IAP) over 
   *          Ethernet.
   ******************************************************************************
@@ -99,8 +99,7 @@ function in the ethernetif.c file
   - This example has been tested with the following environments:
      - STM324x9I-EVAL board
      - Http clients: Firefox Mozilla (v24) or Microsoft Internet Explorer (v8 and later)
-     - TFTP client:  PC utility TFTPD32 (http://tftpd32.jounin.net/)
-     - DHCP server:  PC utility TFTPD32 is used as a DHCP server  
+     - TFTP client and DHCP server: PC utility TFTPD32 (http://tftpd32.jounin.net/)
       
   - STM324x9I-EVAL Set-up
     - Connect the eval board to remote PC (through a crossover ethernet cable)

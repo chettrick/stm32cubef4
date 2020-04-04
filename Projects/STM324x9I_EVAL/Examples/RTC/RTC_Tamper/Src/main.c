@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    RTC/RTC_Tamper/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   This sample code shows how to use STM32F4xx RTC HAL API to write/read 
   *          data to/from RTC Backup data registers and demonstrates the Tamper  
   *          detection feature.
@@ -125,6 +125,9 @@ int main(void)
     Error_Handler(); 
   }
   
+  /* Clear the Tamper interrupt pending bit */
+  __HAL_RTC_TAMPER_CLEAR_FLAG(&RtcHandle, RTC_FLAG_TAMP1F);
+  
   /*##-2- Configure RTC Tamper ###############################################*/
   /* Configure RTC Tamper */
   RTC_TamperConfig();
@@ -150,7 +153,10 @@ int main(void)
   /*##-5- Wait for the tamper button is pressed ##############################*/
   while(TamperStatus != SET);
   
-  /*##-6- Check Data is cleared on the Back Up registers #####################*/
+  /*##-6- Deactivate Tamper ##################################################*/
+  HAL_RTCEx_DeactivateTamper(&RtcHandle, RTC_TAMPER_1);
+  
+  /*##-7- Check Data is cleared on the Back Up registers #####################*/
   for(index = 0; index < BACKUP_COUNT; index++)
   {
     if(HAL_RTCEx_BKUPRead(&RtcHandle,aBKPDataReg[index]) != 0x00)

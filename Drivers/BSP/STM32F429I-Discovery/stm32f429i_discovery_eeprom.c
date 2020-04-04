@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f429i_discovery_eeprom.c
   * @author  MCD Application Team
-  * @version V2.0.0
-  * @date    18-February-2014
+  * @version V2.0.1
+  * @date    26-February-2014
   * @brief   This file provides a set of functions needed to manage an I2C M24LR64 
   *          EEPROM memory.
   *          To be able to use this driver, the switch EE_M24LR64 must be defined
@@ -219,7 +219,8 @@ uint32_t BSP_EEPROM_ReadBuffer(uint8_t* pBuffer, uint16_t ReadAddr, uint16_t* Nu
   {
     if(HAL_GetTick() > EEPROMTimeout)
     {
-      return BSP_EEPROM_TIMEOUT_UserCallback();
+      BSP_EEPROM_TIMEOUT_UserCallback();
+      return EEPROM_TIMEOUT;
     }
   }
   
@@ -275,7 +276,8 @@ uint32_t BSP_EEPROM_WritePage(uint8_t* pBuffer, uint16_t WriteAddr, uint8_t* Num
   {
     if(HAL_GetTick() > EEPROMTimeout)
     {
-      return BSP_EEPROM_TIMEOUT_UserCallback();
+      BSP_EEPROM_TIMEOUT_UserCallback();
+      return EEPROM_TIMEOUT;
     }
   }
   
@@ -461,7 +463,8 @@ uint32_t BSP_EEPROM_WaitEepromStandbyState(void)
   if (EEPROM_IO_IsDeviceReady(EEPROMAddress, EEPROM_MAX_TRIALS) != HAL_OK)
   {
     /* If the maximum number of trials has been reached, exit the function */
-    return BSP_EEPROM_TIMEOUT_UserCallback();
+      BSP_EEPROM_TIMEOUT_UserCallback();
+      return EEPROM_TIMEOUT;
   }
   return EEPROM_OK;
 }
@@ -491,9 +494,8 @@ void HAL_I2C_MemRxCpltCallback(I2C_HandleTypeDef *hi2c)
   * @param  None.
   * @retval None.
   */
-__weak uint32_t BSP_EEPROM_TIMEOUT_UserCallback(void)
+__weak void BSP_EEPROM_TIMEOUT_UserCallback(void)
 {
-  return EEPROM_TIMEOUT;
 }
 
 /**

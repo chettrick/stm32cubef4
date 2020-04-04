@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324x9i_eval_sd.c
   * @author  MCD Application Team
-  * @version V2.0.0
-  * @date    18-February-2014
+  * @version V2.0.1
+  * @date    26-February-2014
   * @brief   This file includes the uSD card driver mounted on STM324x9I-EVAL
   *          evaluation board.
   ******************************************************************************
@@ -93,49 +93,46 @@
 /** @defgroup STM324x9I_EVAL_SD
   * @{
   */ 
-  
-/* Private typedef -----------------------------------------------------------*/
 
-/** @defgroup STM324x9I_EVAL_SD_Private_Types_Definitions
+
+/** @defgroup STM324x9I_EVAL_SD_Private_TypesDefinitions
   * @{
+  */
+/**
+  * @}
   */ 
-  
-/* Private define ------------------------------------------------------------*/
 
 /** @defgroup STM324x9I_EVAL_SD_Private_Defines
   * @{
   */
+/**
+  * @}
+  */ 
   
-/* Private macro -------------------------------------------------------------*/
-
 /** @defgroup STM324x9I_EVAL_SD_Private_Macros
   * @{
+  */    
+/**
+  * @}
   */  
-  
-/* Private variables ---------------------------------------------------------*/
 
 /** @defgroup STM324x9I_EVAL_SD_Private_Variables
   * @{
-  */       
+  */
 static SD_HandleTypeDef uSdHandle;
 static HAL_SD_CardInfoTypedef SD_CardInfo;
-
 /**
   * @}
   */ 
-
-/* Private function prototypes -----------------------------------------------*/
-
-/** @defgroup STM324x9I_EVAL_SD_Private_Function_Prototypes
+  
+/** @defgroup STM324x9I_EVAL_SD_Private_FunctionPrototypes
   * @{
-  */ 
+  */
 static void SD_MspInit(void);
 /**
   * @}
-  */
-
-/* Private functions ---------------------------------------------------------*/
-
+  */ 
+  
 /** @defgroup STM324x9I_EVAL_SD_Private_Functions
   * @{
   */
@@ -536,10 +533,6 @@ void BSP_SD_GetCardInfo(HAL_SD_CardInfoTypedef *CardInfo)
 
 /**
   * @}
-  */  
-
-/**
-  * @}
   */ 
 
 /**
@@ -550,4 +543,8 @@ void BSP_SD_GetCardInfo(HAL_SD_CardInfoTypedef *CardInfo)
   * @}
   */ 
 
+/**
+  * @}
+  */
+ 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

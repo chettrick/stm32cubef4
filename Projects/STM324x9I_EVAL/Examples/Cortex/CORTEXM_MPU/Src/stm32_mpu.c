@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    CORTEXM/CORTEXM_MPU/Src/stm32_mpu.c 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   Access rights configuration using Cortex-M3 MPU regions.
   ******************************************************************************
   * @attention
@@ -68,6 +68,8 @@
  uint8_t PrivilegedReadOnlyArray[32] __at(0x20002000);
 #endif
 
+ uint8_t uiTemp;
+
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -118,7 +120,7 @@ void MPU_AccessPermConfig(void)
   MPU->RASR |= ARRAY_SIZE | portMPU_REGION_PRIVILEGED_READ_ONLY;
   
   /* Read from PrivilegedReadOnlyArray. This will not generate error */
-  (void)PrivilegedReadOnlyArray[0];
+  uiTemp = PrivilegedReadOnlyArray[0];
   
   /* Uncomment the following line to write to PrivilegedReadOnlyArray. This will
      generate error */

@@ -590,6 +590,7 @@ int              GUI_MOVIE_Pause        (GUI_MOVIE_HANDLE hMovie);
 int              GUI_MOVIE_Play         (GUI_MOVIE_HANDLE hMovie);
 int              GUI_MOVIE_SetPeriod    (GUI_MOVIE_HANDLE hMovie, unsigned Period);
 int              GUI_MOVIE_SetPos       (GUI_MOVIE_HANDLE hMovie, int xPos, int yPos);
+int              GUI_MOVIE_ShowScaled   (GUI_MOVIE_HANDLE hMovie, int xPos, int yPos, int num, int denom, int DoLoop);
 int              GUI_MOVIE_Show         (GUI_MOVIE_HANDLE hMovie, int xPos, int yPos, int DoLoop);
 
 /*********************************************************************

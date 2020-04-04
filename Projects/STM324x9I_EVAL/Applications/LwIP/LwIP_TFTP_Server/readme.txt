@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    LwIP/LwIP_TFTP_Server/readme.txt
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   Description of the tftp server demonstration.
   ******************************************************************************
   * @attention
@@ -54,6 +54,10 @@ Note: By default, the Ethernet Half duplex mode is not supported in the
 STM324x9I-EVAL board, for more information refer to the HAL_ETH_MspInit() 
 function in the ethernetif.c file
 
+@note the system clock (SYSCLK) is configured to run at 175 MHz and 50 MHz is provided 
+      at the output PLL divided by PLL_Q. This frequency permit to reach 25 Mhz clock 
+      needed for SD operation and in line with microSD specification. 
+      
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
       based on variable incremented in SysTick ISR. This implies that if HAL_Delay() is called from
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
@@ -89,8 +93,7 @@ function in the ethernetif.c file
   
   - This example has been tested with the following environments:
      - STM324x9I-EVAL board
-     - TFTP client:  PC utility TFTPD32 (http://tftpd32.jounin.net/)
-     - DHCP server:  PC utility TFTPD32 is used as a DHCP server  
+     - TFTP client and DHCP server: PC utility TFTPD32 (http://tftpd32.jounin.net/)
 
   - STM324x9I-EVAL Set-up
     - Connect the eval board to remote PC (through a crossover ethernet cable)

@@ -36,8 +36,8 @@ Purpose     : Demo of a semi transparent dialog
   ******************************************************************************
   * @file    GUIDEMO_TransparentDialog.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   Demo of a semi transparent dialog
   ******************************************************************************
   * @attention

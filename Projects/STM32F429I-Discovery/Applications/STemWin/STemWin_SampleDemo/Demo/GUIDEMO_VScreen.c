@@ -36,8 +36,8 @@ Purpose     : Virtual screen demo
   ******************************************************************************
   * @file    GUIDEMO_VScreen.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   Virtual screen demo
   ******************************************************************************
   * @attention

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324x9i_eval_sd.h
   * @author  MCD Application Team
-  * @version V2.0.0
-  * @date    18-February-2014
+  * @version V2.0.1
+  * @date    26-February-2014
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm324x9i_eval_sd.c driver.
   ******************************************************************************
@@ -78,11 +78,11 @@
 /** @defgroup STM324x9I_EVAL_SD_Exported_Constants
   * @{
   */ 
-#define SD_DATATIMEOUT           ((uint32_t)0xFFFFFFFF)
-
 #define SD_PRESENT               ((uint8_t)0x01)
 #define SD_NOT_PRESENT           ((uint8_t)0x00)
-   
+
+#define SD_DATATIMEOUT           ((uint32_t)100000000)
+    
 /* DMA definitions for SD DMA transfer */
 #define __DMAx_TxRx_CLK_ENABLE            __DMA2_CLK_ENABLE
 #define SD_DMAx_Tx_CHANNEL                DMA_CHANNEL_4

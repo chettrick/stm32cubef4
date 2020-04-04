@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BSP/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   This example code shows how to use the STM324xG BSP Drivers
   ******************************************************************************
   * @attention
@@ -51,8 +51,8 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-uint8_t demo_index = 0;
-uint8_t nb_loop = 0;
+static uint8_t DemoIndex = 0;
+uint8_t NbLoop = 1;
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);
 static void Display_DemoDescription(void);
@@ -105,12 +105,14 @@ int main(void)
     if(BSP_PB_GetState(BUTTON_KEY) == RESET)
     {
       while (BSP_PB_GetState(BUTTON_KEY) == RESET);
-      nb_loop++;
-      BSP_examples[demo_index++].DemoFunc();
+      BSP_examples[DemoIndex++].DemoFunc();
       
-      if(demo_index >= COUNT_OF_EXAMPLE(BSP_examples))
+      if(DemoIndex >= COUNT_OF_EXAMPLE(BSP_examples))
       {
-        demo_index = 0;
+        /* Increment number of loops which be used by EEPROM example*/
+        NbLoop++;
+        
+        DemoIndex = 0;
       }
       Display_DemoDescription();
     }
@@ -204,7 +206,7 @@ static void Display_DemoDescription(void)
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
   BSP_LCD_SetBackColor(LCD_COLOR_BLUE); 
   BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/2 + 30, (uint8_t *)"Press User Button to start :", CENTER_MODE);
-  sprintf(desc,"%s example", BSP_examples[demo_index].DemoName);
+  sprintf(desc,"%s example", BSP_examples[DemoIndex].DemoName);
   BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/2 + 45, (uint8_t *)desc, CENTER_MODE);   
 }
 

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    startup.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   <Add here what does this driver do>
   ******************************************************************************
   * @attention

@@ -36,8 +36,8 @@ Purpose     : Display driver configuration file
   ******************************************************************************
   * @file    LCDConf.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   Display driver configuration file
   ******************************************************************************
   * @attention

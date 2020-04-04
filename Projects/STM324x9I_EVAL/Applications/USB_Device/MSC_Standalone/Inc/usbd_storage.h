@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Device/MSC_Standalone/Inc/usbd_storage.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   Header for usbd_storage.c module
   ******************************************************************************
   * @attention

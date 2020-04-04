@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    RTC/RTC_TimeStamp/Inc/main.h 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
@@ -50,8 +50,8 @@
 #define USE_LCD
 
 /* Uncomment to enable the adaquate RTC Clock Source */
-//#define RTC_CLOCK_SOURCE_LSE
-#define RTC_CLOCK_SOURCE_LSI 
+#define RTC_CLOCK_SOURCE_LSE
+/* #define RTC_CLOCK_SOURCE_LSI */
 
 #ifdef RTC_CLOCK_SOURCE_LSI
   #define RTC_ASYNCH_PREDIV  0x7F

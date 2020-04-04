@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BSP/Src/eeprom.c 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   This example code shows how to manage an I2C M24C64 
   *          EEPROM memory
   ******************************************************************************
@@ -52,19 +52,19 @@ typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
 /* Private define ------------------------------------------------------------*/
 #define EEPROM_FEATURES_NUM     2
 #define BUFFER_SIZE1            (countof(Tx1Buffer)-1 + 8)
-#define sEE_WRITE_ADDRESS1      0x50
-#define sEE_READ_ADDRESS1       0x50
+#define EEPROM_WRITE_ADDRESS1      0x50
+#define EEPROM_READ_ADDRESS1       0x50
 /* Private macro -------------------------------------------------------------*/
 #define countof(a) (sizeof(a) / sizeof(*(a)))
 /* Private variables ---------------------------------------------------------*/
-static uint8_t EEPROM_Feature = 0;
+static uint8_t EEPROMFeature = 0;
 __IO uint16_t NumDataRead = 0;
 /* Private function prototypes -----------------------------------------------*/
 static void EEPROM_SetHint(void);
 static void EEPROM_Show_Feature(uint8_t feature);
 static TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength);
 
-extern uint8_t nb_loop;
+extern uint8_t NbLoop;
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -75,18 +75,18 @@ extern uint8_t nb_loop;
 void EEPROM_demo (void)
 { 
   EEPROM_SetHint();
-  EEPROM_Feature = 0;
+  EEPROMFeature = 0;
 
-  EEPROM_Show_Feature (EEPROM_Feature); 
+  EEPROM_Show_Feature (EEPROMFeature); 
 
   while (1)
   {
     
     if(CheckForUserInput() > 0)
     {
-      if(++EEPROM_Feature < EEPROM_FEATURES_NUM)
+      if(++EEPROMFeature < EEPROM_FEATURES_NUM)
       {
-       EEPROM_Show_Feature (EEPROM_Feature); 
+       EEPROM_Show_Feature(EEPROMFeature); 
       }
       else
       {
@@ -163,8 +163,8 @@ static void EEPROM_Show_Feature(uint8_t feature)
     /* Set the Number of data to be read */
     NumDataRead = BUFFER_SIZE1;
     
-    /* Read from I2C EEPROM from sEE_READ_ADDRESS1 */
-    if(BSP_EEPROM_ReadBuffer(Rx1Buffer, sEE_READ_ADDRESS1, (uint16_t *)(&NumDataRead)) != EEPROM_OK)
+    /* Read from I2C EEPROM from EEPROM_READ_ADDRESS1 */
+    if(BSP_EEPROM_ReadBuffer(Rx1Buffer, EEPROM_READ_ADDRESS1, (uint16_t *)(&NumDataRead)) != EEPROM_OK)
     {
       BSP_LCD_SetTextColor(LCD_COLOR_RED);    
       BSP_LCD_DisplayStringAt(0, 115, (uint8_t *)"Init issue at read old data", CENTER_MODE);
@@ -184,10 +184,10 @@ static void EEPROM_Show_Feature(uint8_t feature)
     
   case 1:
     /* Write new parameter in EEPROM */
-    snprintf((char*)Tx2Buffer, BUFFER_SIZE1, "%s Test %d", Tx1Buffer, (int)"nb_loop");
+    snprintf((char*)Tx2Buffer, BUFFER_SIZE1, "%s Test %d", Tx1Buffer, NbLoop);
     /* First write in the memory followed by a read of the written data --------*/
-    /* Write on I2C EEPROM to sEE_WRITE_ADDRESS1 */
-    if(BSP_EEPROM_WriteBuffer(Tx2Buffer, sEE_WRITE_ADDRESS1, BUFFER_SIZE1) != EEPROM_OK)
+    /* Write on I2C EEPROM to EEPROM_WRITE_ADDRESS1 */
+    if(BSP_EEPROM_WriteBuffer(Tx2Buffer, EEPROM_WRITE_ADDRESS1, BUFFER_SIZE1) != EEPROM_OK)
     {
       BSP_LCD_SetTextColor(LCD_COLOR_RED);    
       BSP_LCD_DisplayStringAt(0, 115, (uint8_t *)"Init issue at write", CENTER_MODE);
@@ -200,8 +200,8 @@ static void EEPROM_Show_Feature(uint8_t feature)
     /* Set the Number of data to be read */
     NumDataRead = BUFFER_SIZE1;
     
-    /* Read from I2C EEPROM from sEE_READ_ADDRESS1 */
-    if(BSP_EEPROM_ReadBuffer(Rx1Buffer, sEE_READ_ADDRESS1, (uint16_t *)(&NumDataRead)) != EEPROM_OK)
+    /* Read from I2C EEPROM from EEPROM_READ_ADDRESS1 */
+    if(BSP_EEPROM_ReadBuffer(Rx1Buffer, EEPROM_READ_ADDRESS1, (uint16_t *)(&NumDataRead)) != EEPROM_OK)
     {
       BSP_LCD_SetTextColor(LCD_COLOR_RED);    
       BSP_LCD_DisplayStringAt(0, 115, (uint8_t *)"Init issue at read", CENTER_MODE);

@@ -5,8 +5,8 @@
   ******************************************************************************
   * @file    Display/LTDC_AnimatedPictureFromSDCard/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   Description of the STM32F4xx LTDC_AnimatedPictureFromSDCard application.
   ******************************************************************************
   * @attention
@@ -61,7 +61,11 @@
 
 @note : The maximum number of BMP file is fixed at 25. It can be raised 
         until reaching the maximum of SD card memory space.
- 
+
+@note : the system clock (SYSCLK) is configured to run at 175 MHz and 50 MHz is provided 
+        at the output PLL divided by PLL_Q. This frequency permit to reach 25 Mhz clock 
+        needed for SD operation and in line with microSD specification. 
+         
   The following steps are performed to scroll all the images stored in the 
   SD Card :
 

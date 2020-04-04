@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BSP/Inc/main.h 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
@@ -58,7 +58,7 @@ typedef struct
   uint32_t DemoIndex;
 }BSP_DemoTypedef;
 
-extern unsigned char stlogo[];
+extern const unsigned char stlogo[];
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
 

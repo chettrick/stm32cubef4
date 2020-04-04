@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f429i_discovery_lcd.c
   * @author  MCD Application Team
-  * @version V2.0.0
-  * @date    18-February-2014
+  * @version V2.0.1
+  * @date    26-February-2014
   * @brief   This file includes the LCD driver for ILI9341 Liquid Crystal 
   *          Display Modules of STM32F429I-DISCO kit (MB1075).
   ******************************************************************************

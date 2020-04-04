@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LwIP/LwIP_HTTP_Server_Netconn_RTOS/Src/ethernetif.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    26-February-2014
   * @brief   This file implements Ethernet network interface drivers for lwIP
   ******************************************************************************
   * @attention
@@ -287,7 +287,7 @@ static void low_level_init(struct netif *netif)
   regvalue |= PHY_MISR_LINK_INT_EN;
     
   /* Enable Interrupt on change of link status */
-  HAL_ETH_WritePHYRegister(&EthHandle, PHY_MISR,PHY_MISR_LINK_INT_EN); 
+  HAL_ETH_WritePHYRegister(&EthHandle, PHY_MISR,regvalue); 
  
 }
 

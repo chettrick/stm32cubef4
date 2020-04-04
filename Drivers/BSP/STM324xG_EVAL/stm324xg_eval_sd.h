@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324xg_eval_sd.h
   * @author  MCD Application Team
-  * @version V2.0.0
-  * @date    18-February-2014
+  * @version V2.0.1
+  * @date    26-February-2014
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm324xg_eval_sd.c driver.
   ******************************************************************************
@@ -80,8 +80,8 @@
 #define SD_DETECT_GPIO_PORT              GPIOH
 #define __SD_DETECT_GPIO_CLK_ENABLE()    __GPIOH_CLK_ENABLE()
 #define SD_DETECT_IRQn                   EXTI15_10_IRQn
-   
-#define SD_DATATIMEOUT           ((uint32_t)0xFFFFFFFF)
+
+#define SD_DATATIMEOUT           ((uint32_t)100000000)
 
 #define SD_PRESENT               ((uint8_t)0x01)
 #define SD_NOT_PRESENT           ((uint8_t)0x00)
