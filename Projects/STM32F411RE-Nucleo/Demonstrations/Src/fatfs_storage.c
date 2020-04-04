@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Demonstrations/Src/fatfs_storage.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    26-June-2014
+  * @version V1.1.0
+  * @date    26-December-2014
   * @brief   This file includes the Storage (FatFs) driver 
   ******************************************************************************
   * @attention
@@ -115,7 +115,7 @@ uint32_t Storage_OpenReadFile(uint8_t Xpoz, uint16_t Ypoz, const char *BmpName)
       BSP_LCD_DrawPixel(x, y, color); 
     }
     y--;
-    for (index = (i1/bit_pixel); index < i1 ; index++)
+    for (index = (i1/bit_pixel); index < i1; index++)
     {
       if( index%bit_pixel == 0)
       {

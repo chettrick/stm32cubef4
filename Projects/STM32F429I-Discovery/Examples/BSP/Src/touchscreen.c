@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BSP/Src/touchscreen.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This example code shows how to use the touchscreen driver.
   ******************************************************************************
   * @attention
@@ -68,7 +68,7 @@ static void Touchscreen_DrawBackground (uint8_t state);
   * @param  None
   * @retval None
   */
-void Touchscreen_demo (void)
+void Touchscreen_demo(void)
 { 
   uint8_t status = 0;
   uint16_t x,y;
@@ -204,7 +204,7 @@ static void Touchscreen_SetHint(void)
 
 /**
   * @brief  Draw Touchscreen Background
-  * @param  state : touch zone state
+  * @param  state: touch zone state
   * @retval None
   */
 static void Touchscreen_DrawBackground (uint8_t state)

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Device/DFU_Standalone/Src/usbd_dfu_flash.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Memory management layer
   ******************************************************************************
   * @attention
@@ -103,8 +103,8 @@ uint16_t Flash_If_Erase(uint32_t Add)
   /* Get the number of sector */
   startsector = GetSector(Add);
   
-  eraseinitstruct.TypeErase = TYPEERASE_SECTORS;
-  eraseinitstruct.VoltageRange = VOLTAGE_RANGE_3;
+  eraseinitstruct.TypeErase = FLASH_TYPEERASE_SECTORS;
+  eraseinitstruct.VoltageRange = FLASH_VOLTAGE_RANGE_3;
   eraseinitstruct.Sector = startsector;
   eraseinitstruct.NbSectors = 1;
   status = HAL_FLASHEx_Erase(&eraseinitstruct, &sectornb);
@@ -131,7 +131,7 @@ uint16_t Flash_If_Write(uint8_t *src, uint8_t *dest, uint32_t Len)
   {
     /* Device voltage range supposed to be [2.7V to 3.6V], the operation will
        be done by byte */ 
-    if(HAL_FLASH_Program(TYPEPROGRAM_WORD, (uint32_t)(dest+i), *(uint32_t*)(src+i)) == HAL_OK)
+    if(HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, (uint32_t)(dest+i), *(uint32_t*)(src+i)) == HAL_OK)
     {
      /* Check the written value */
       if(*(uint32_t *)(src + i) != *(uint32_t*)(dest+i))

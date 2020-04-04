@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    TIM/TIM_TimeBase/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Description of the TIM Time Base example
   ******************************************************************************
   *
@@ -38,7 +38,7 @@
 @par Example Description 
 
 This example shows how to configure the TIM peripheral to generate a time base of 
-one seconde with the corresponding Interrupt request.
+one second with the corresponding Interrupt request.
 
 In this example TIM3 input clock (TIM3CLK) is set to 2 * APB1 clock (PCLK1), 
 since APB1 prescaler is different from 1.   
@@ -54,7 +54,7 @@ The TIM3 ARR register value is equal to 10000 - 1,
 Update rate = TIM3 counter clock / (Period + 1) = 1 Hz,
 So the TIM3 generates an interrupt each 1 s
 
-When the counter value reaches the auto-reload register value, the TIM upadate 
+When the counter value reaches the auto-reload register value, the TIM update 
 interrupt is generated and, in the handler routine, PG.06 is toggled with the 
 following frequency: 
 
@@ -67,7 +67,7 @@ following frequency:
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 

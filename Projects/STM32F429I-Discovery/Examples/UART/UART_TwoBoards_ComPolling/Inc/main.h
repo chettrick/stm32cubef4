@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    UART/UART_TwoBoards_ComPolling/Inc/main.h 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
@@ -49,12 +49,12 @@
    resources */
 /* Definition for USARTx clock resources */
 #define USARTx                           USART1
-#define USARTx_CLK_ENABLE()              __USART1_CLK_ENABLE();
-#define USARTx_RX_GPIO_CLK_ENABLE()      __GPIOA_CLK_ENABLE()
-#define USARTx_TX_GPIO_CLK_ENABLE()      __GPIOA_CLK_ENABLE() 
+#define USARTx_CLK_ENABLE()              __HAL_RCC_USART1_CLK_ENABLE();
+#define USARTx_RX_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOA_CLK_ENABLE()
+#define USARTx_TX_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOA_CLK_ENABLE() 
 
-#define USARTx_FORCE_RESET()             __USART2_FORCE_RESET()
-#define USARTx_RELEASE_RESET()           __USART2_RELEASE_RESET()
+#define USARTx_FORCE_RESET()             __HAL_RCC_USART2_FORCE_RESET()
+#define USARTx_RELEASE_RESET()           __HAL_RCC_USART2_RELEASE_RESET()
 
 /* Definition for USARTx Pins */
 #define USARTx_TX_PIN                    GPIO_PIN_9

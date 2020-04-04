@@ -1100,6 +1100,15 @@
           <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src\drivers\usbh_diskio.c</name>
         </file>
       </group>
+            <group>
+        <name>Options</name>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src\option\syscall.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src\option\unicode.c</name>
+        </file>
+      </group>
     </group>
     <group>
       <name>PDM</name>

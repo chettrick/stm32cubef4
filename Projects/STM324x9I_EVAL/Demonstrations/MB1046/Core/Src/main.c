@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    main.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This file provides main program functions
   ******************************************************************************
   * @attention
@@ -39,44 +39,41 @@
   */
 
 /** @defgroup MAIN
-* @brief main file
-* @{
-*/ 
+  * @brief main file
+  * @{
+  */ 
 
 /** @defgroup MAIN_Private_TypesDefinitions
-* @{
-*/ 
+  * @{
+  */ 
 /**
-* @}
-*/ 
+  * @}
+  */ 
 
 /** @defgroup MAIN_Private_Defines
-* @{
-*/ 
+  * @{
+  */ 
 /**
-* @}
-*/ 
-
+  * @}
+  */ 
 
 /** @defgroup MAIN_Private_Macros
-* @{
-*/ 
+  * @{
+  */ 
 /**
-* @}
-*/ 
-
+  * @}
+  */ 
 
 /** @defgroup MAIN_Private_Variables
-* @{
-*/
+  * @{
+  */
 /**
-* @}
-*/ 
-
+  * @}
+  */ 
 
 /** @defgroup MAIN_Private_FunctionPrototypes
-* @{
-*/ 
+  * @{
+  */ 
 static void SystemClock_Config(void);
 static void StartThread(void const * argument);
 static void GUIThread(void const * argument);
@@ -93,19 +90,18 @@ extern K_ModuleItem_Typedef  audio_player;
 extern K_ModuleItem_Typedef  camera_capture;
 
 /**
-* @}
-*/ 
+  * @}
+  */ 
 
 /** @defgroup MAIN_Private_Functions
-* @{
-*/ 
-
+  * @{
+  */ 
 
 /**
-* @brief  Main program
-* @param  None
-* @retval int
-*/
+  * @brief  Main program
+  * @param  None
+  * @retval int
+  */
 int main(void)
 {
   /* STM32F4xx HAL library initialization:
@@ -116,7 +112,7 @@ int main(void)
   */
   HAL_Init();
  
-  /* Configure the system clock @ 168 Mhz */
+  /* Configure the system clock to 168 MHz */
   SystemClock_Config();
   
   /* Create Start task */
@@ -124,7 +120,7 @@ int main(void)
   osThreadCreate (osThread(Kernel_Thread), NULL);
   
   /* Start scheduler */
-  osKernelStart (NULL, NULL);
+  osKernelStart();
 
   /* We should never get here as control is now taken by the scheduler */
   for( ;; );
@@ -143,7 +139,7 @@ static void StartThread(void const * argument)
   SystemSettingsTypeDef settings;
   osTimerId lcd_timer;
        
-  /* Initialize Joystick, Touch screen and Leds */
+  /* Initialize Joystick, Touch screen and LEDs */
   k_BspInit();
   k_LogInit();
   
@@ -173,7 +169,7 @@ static void StartThread(void const * argument)
     RCC_OscInitStruct.PLL.PLLQ = 7;
     HAL_RCC_OscConfig(&RCC_OscInitStruct);
     
-    HAL_PWREx_ActivateOverDrive();
+    HAL_PWREx_EnableOverDrive();
     
     /* Select PLL as system clock source */
     RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK);
@@ -183,16 +179,16 @@ static void StartThread(void const * argument)
   
   k_StartUp();
     
-  /*Initialize audio Interface */
+  /* Initialize audio Interface */
   k_BspAudioInit();
   
   /* Initialize Storage Units */
   k_StorageInit();
   
-  /*Initialize memory pools */
+  /* Initialize memory pools */
   k_MemInit();
   
-  /* Add Modules*/
+  /* Add Modules */
   k_ModuleInit();
   
   k_ModuleAdd(&video_player);
@@ -273,8 +269,8 @@ static void TimerCallback(void const *n)
   k_TouchUpdate();
 }
 
-/** @brief EXTI line detection callbacks
-  * @param GPIO_Pin: Specifies the pins connected EXTI line
+/** @brief  EXTI line detection callbacks
+  * @param  GPIO_Pin: Specifies the pins connected EXTI line
   * @retval None
   */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
@@ -287,6 +283,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     } 
   }
 }
+
 /**
   * @brief  System Clock Configuration
   *         The system Clock is configured as follow : 
@@ -307,13 +304,13 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
   * @param  None
   * @retval None
   */
-static void SystemClock_Config  (void)
+static void SystemClock_Config(void)
 {
   RCC_ClkInitTypeDef RCC_ClkInitStruct;
   RCC_OscInitTypeDef RCC_OscInitStruct;
   
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
 
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -342,39 +339,36 @@ static void SystemClock_Config  (void)
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
 }
 
-#ifdef USE_FULL_ASSERT
+#ifdef  USE_FULL_ASSERT
 /**
-* @brief  assert_failed
-*         Reports the name of the source file and the source line number
-*         where the assert_param error has occurred.
-* @param  File: pointer to the source file name
-* @param  Line: assert_param error line source number
-* @retval None
-*/
+  * @brief  Reports the name of the source file and the source line number
+  *         where the assert_param error has occurred.
+  * @param  file: pointer to the source file name
+  * @param  line: assert_param error line source number
+  * @retval None
+  */
 void assert_failed(uint8_t* file, uint32_t line)
-{
-  /* User can add his own implementation to report the file name and line
-  number,ex: printf("Wrong parameters value: file %s on line %d\r\n", 
-  file, line) */
-  
+{ 
+  /* User can add his own implementation to report the file name and line number,
+     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+
   /* Infinite loop */
   while (1)
-  {}
+  {
+  }
 }
-
 #endif
 
+/**
+  * @}
+  */ 
 
 /**
-* @}
-*/ 
+  * @}
+  */ 
 
 /**
-* @}
-*/ 
-
-/**
-* @}
-*/ 
+  * @}
+  */ 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

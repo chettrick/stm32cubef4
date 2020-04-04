@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f4_discovery.h
   * @author  MCD Application Team
-  * @version V2.0.2
-  * @date    26-June-2014
+  * @version V2.0.3
+  * @date    10-December-2014
   * @brief   This file contains definitions for STM32F4-Discovery Kit's Leds and 
   *          push-button hardware resources.
   ******************************************************************************
@@ -179,9 +179,9 @@ typedef enum
 
 /*############################# I2C1 #########################################*/
 /* I2C clock speed configuration (in Hz) */
-#ifndef I2C_SPEED
- #define I2C_SPEED                            100000
-#endif /* I2C_SPEED */
+#ifndef BSP_I2C_SPEED
+ #define BSP_I2C_SPEED                            100000
+#endif /* BSP_I2C_SPEED */
 
 /* I2C peripheral configuration defines (control interface of the audio codec) */
 #define DISCOVERY_I2Cx                            I2C1

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    DMA2D/DMA2D_MemToMemWithBlending/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   HAL MSP module.       
   ******************************************************************************
   * @attention
@@ -69,7 +69,7 @@
 void HAL_DMA2D_MspInit(DMA2D_HandleTypeDef *hdma2d)
 {  
   /*##-1- Enable peripherals and GPIO Clocks #################################*/
-  __DMA2D_CLK_ENABLE(); 
+  __HAL_RCC_DMA2D_CLK_ENABLE(); 
   
   /*##-2- NVIC configuration  ################################################*/  
   /* NVIC configuration for DMA2D transfer complete interrupt */
@@ -89,10 +89,10 @@ void HAL_DMA2D_MspDeInit(DMA2D_HandleTypeDef *hdma2d)
   
   /*##-1- Reset peripherals ##################################################*/
   /* Enable DMA2D reset state */
-  __DMA2D_FORCE_RESET();
+  __HAL_RCC_DMA2D_FORCE_RESET();
   
   /* Release DMA2D from reset state */ 
-  __DMA2D_RELEASE_RESET();
+  __HAL_RCC_DMA2D_RELEASE_RESET();
 }
 
 /**
@@ -109,15 +109,15 @@ void HAL_LTDC_MspInit(LTDC_HandleTypeDef *hltdc)
   
   /*##-1- Enable peripherals and GPIO Clocks #################################*/  
   /* Enable the LTDC Clock */
-  __LTDC_CLK_ENABLE();
+  __HAL_RCC_LTDC_CLK_ENABLE();
 
   /* Enable GPIOs clock */
-  __GPIOA_CLK_ENABLE();
-  __GPIOB_CLK_ENABLE();
-  __GPIOC_CLK_ENABLE();
-  __GPIOD_CLK_ENABLE();
-  __GPIOF_CLK_ENABLE();
-  __GPIOG_CLK_ENABLE();
+  __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
+  __HAL_RCC_GPIOC_CLK_ENABLE();
+  __HAL_RCC_GPIOD_CLK_ENABLE();
+  __HAL_RCC_GPIOF_CLK_ENABLE();
+  __HAL_RCC_GPIOG_CLK_ENABLE();
 
   /*##-2- Configure peripheral GPIO ##########################################*/
   /******************** LTDC Pins configuration *************************/
@@ -191,10 +191,10 @@ void HAL_LTDC_MspDeInit(LTDC_HandleTypeDef *hltdc)
   
   /*##-1- Reset peripherals ##################################################*/
   /* Enable LTDC reset state */
-  __LTDC_FORCE_RESET();
+  __HAL_RCC_LTDC_FORCE_RESET();
   
   /* Release LTDC from reset state */ 
-  __LTDC_RELEASE_RESET();
+  __HAL_RCC_LTDC_RELEASE_RESET();
 }
 
 /**

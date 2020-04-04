@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    usbh_mtp.h
   * @author  MCD Application Team
-  * @version V3.1.0
-  * @date    19-June-2014
+  * @version V3.2.0
+  * @date    04-November-2014
   * @brief   This file contains all the prototypes for the usbh_mtp.c
   ******************************************************************************
   * @attention
@@ -26,8 +26,12 @@
   */ 
 
 /* Define to prevent recursive  ----------------------------------------------*/
-#ifndef __USBH_MTP_CORE_H
-#define __USBH_MTP_CORE_H
+#ifndef __USBH_MTP_H
+#define __USBH_MTP_H
+
+#ifdef __cplusplus
+ extern "C" {
+#endif
 
 /* Includes ------------------------------------------------------------------*/
 #include "usbh_mtp_ptp.h"
@@ -47,7 +51,7 @@
 */
 
 /** @defgroup USBH_MTP_CORE
-* @brief This file is the Header file for USBH_MTP_CORE.c
+* @brief This file is the Header file for usbh_mtp.c
 * @{
 */ 
 
@@ -241,8 +245,11 @@ void USBH_MTP_EventsCallback(USBH_HandleTypeDef *phost, uint32_t event, uint32_t
 * @}
 */ 
 
+#ifdef __cplusplus
+}
+#endif
 
-#endif /* __USBH_MTP_CORE_H */
+#endif /* __USBH_MTP_H */
 
 /**
 * @}

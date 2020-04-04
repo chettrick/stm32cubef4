@@ -211,10 +211,10 @@ void CALIBRATION_Check(void)
   data1.d32 = BACKUP_RestoreParameter(RTC_BKP_DR0);
   data2.d32 = BACKUP_RestoreParameter(RTC_BKP_DR1);
   
-  A2 = data2.b.A2 ;
-  B2 = data2.b.B2 ;    
-  A1 = data1.b.A1 ;
-  B1 = data1.b.B1 ;
+  A2 = data2.b.A2;
+  B2 = data2.b.B2;    
+  A1 = data1.b.A1;
+  B1 = data1.b.B1;
   
   if(data2.b.IsCalibrated == 0)
   {

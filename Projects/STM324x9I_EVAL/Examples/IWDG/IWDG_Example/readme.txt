@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    IWDG/IWDG_Example/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Description of the Independent Watchdog example.
   ******************************************************************************
   *
@@ -46,10 +46,10 @@ all the peripherals, initialize the Flash interface and the systick.
 Then the SystemClock_Config() function is used to configure the system
 clock (SYSCLK) to run at 180 MHz.
 
-The RNG peripheral configuration is ensured by the HAL_RNG_Init() function.
-This later is calling the HAL_RNG_MspInit()function which core is implementing
-the configuration of the needed RNG resources according to the used hardware (CLOCK, 
-GPIO, DMA and NVIC). You may update this function to change RNG configuration.
+The IWDG peripheral configuration is ensured by the HAL_IWDG_Init() function.
+This later is calling the HAL_IWDG_MspInit()function which core is implementing
+the configuration of the needed IWDG resources according to the used hardware (CLOCK, 
+GPIO, DMA and NVIC). You may update this function to change IWDG configuration.
 
 The IWDG timeout is set to 250 ms (the timeout may vary due to LSI frequency 
 dispersion).
@@ -99,7 +99,7 @@ LED3 will turn ON, if any error is occurred.
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 

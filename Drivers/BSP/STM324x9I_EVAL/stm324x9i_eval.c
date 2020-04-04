@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324x9i_eval.c
   * @author  MCD Application Team
-  * @version V2.0.2
-  * @date    19-June-2014
+  * @version V2.0.3
+  * @date    10-December-2014
   * @brief   This file provides a set of firmware functions to manage LEDs, 
   *          push-buttons and COM ports available on STM324x9I-EVAL evaluation 
   *          board(MB1045) RevB from STMicroelectronics.
@@ -510,7 +510,7 @@ static void I2Cx_Init(void)
   if(HAL_I2C_GetState(&heval_I2c) == HAL_I2C_STATE_RESET)
   {
     heval_I2c.Instance = I2C1;
-    heval_I2c.Init.ClockSpeed      = I2C_SPEED;
+    heval_I2c.Init.ClockSpeed      = BSP_I2C_SPEED;
     heval_I2c.Init.DutyCycle       = I2C_DUTYCYCLE_2;
     heval_I2c.Init.OwnAddress1     = 0;
     heval_I2c.Init.AddressingMode  = I2C_ADDRESSINGMODE_7BIT;
@@ -614,7 +614,7 @@ static HAL_StatusTypeDef I2Cx_ReadMultiple(uint8_t Addr, uint16_t Reg, uint16_t 
   /* Check the communication status */
   if(status != HAL_OK)
   {
-    /* I2C error occured */
+    /* I2C error occurred */
     I2Cx_Error(Addr);
   }
   return status;    
@@ -637,7 +637,7 @@ static HAL_StatusTypeDef I2Cx_WriteMultiple(uint8_t Addr, uint16_t Reg, uint16_t
   /* Check the communication status */
   if(status != HAL_OK)
   {
-    /* Re-Initiaize the I2C Bus */
+    /* Re-Initialize the I2C Bus */
     I2Cx_Error(Addr);
   }
   return status;
@@ -662,10 +662,10 @@ static HAL_StatusTypeDef I2Cx_IsDeviceReady(uint16_t DevAddress, uint32_t Trials
   */
 static void I2Cx_Error(uint8_t Addr)
 {
-  /* De-initialize the I2C comunication bus */
+  /* De-initialize the I2C communication bus */
   HAL_I2C_DeInit(&heval_I2c);
   
-  /* Re-Initiaize the I2C comunication bus */
+  /* Re-Initialize the I2C communication bus */
   I2Cx_Init();
 }
 

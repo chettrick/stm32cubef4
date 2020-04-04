@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    PolarSSL/SSL_Server/Src/ssl_server.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   SSL Server main task
   ******************************************************************************
   * @attention
@@ -366,7 +366,7 @@ void ssl_sendframes( ssl_context *ssl, char *data, int datalen )
   }
   /* Send the last frame */
   index = k * 16000;
-  lastframe = datalen % 16000 ;
+  lastframe = datalen % 16000;
   ssl_write( ssl, (unsigned char *)(data + index), lastframe );
 }
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -8,7 +8,7 @@
   * @file    st_readme.txt 
   * @author  MCD Application Team
   * @brief   This file lists the main modification done by STMicroelectronics on
-  *          LibJPEG V8d for integration with STM32Cube solution.  
+  *          LibJPEG for integration with STM32Cube solution.  
   ******************************************************************************
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
@@ -26,10 +26,14 @@
   ******************************************************************************
   @endverbatim
 
+### V1.0.1/23-December-2014 ###
+===========================
+   + jinclude.h: add newline at end of file to fix compilation warning.
+
 
 ### V1.0.0/19-June-2014 ###
-===============================
-   + First customized version for STM32Cube solution.
+========================
+   + First customized version of LibJPEG V8d for STM32Cube solution.
    + LibJPEG is preconfigured to support by default the FatFs file system when
      media are processed from a FAT format media
    + The original “jmorecfg.h” and “jconfig.h” files was renamed into “jmorecfg_template.h”

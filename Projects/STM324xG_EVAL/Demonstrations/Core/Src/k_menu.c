@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    k_menu.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014   
+  * @version V1.2.0
+  * @date    26-December-2014   
   * @brief   This file provides the kernel menu functions 
   ******************************************************************************
   * @attention
@@ -281,7 +281,7 @@ static void _UpdateProcessManagerView(WM_HWIN  hItem) {
     tasks_nbr = 16;
   }
   
-  for (Idx = 0; Idx < tasks_nbr ; Idx ++)
+  for (Idx = 0; Idx < tasks_nbr; Idx ++)
   {
     LISTVIEW_SetItemText(hItem, 0, Idx, (char *)(ProcessStatus[Idx].pcTaskName)); 
     sprintf(str, "%lu", ProcessStatus[Idx].uxCurrentPriority);
@@ -347,7 +347,7 @@ static void _cbProcessManagerDialog(WM_MESSAGE * pMsg) {
     LISTVIEW_SetCompareFunc(hItem, 1, LISTVIEW_CompareDec);
     LISTVIEW_SetTextColor(hItem, LISTVIEW_CI_SELFOCUS, GUI_LIGHTBLUE);  
   
-    for (Idx = 0; Idx < 16 ; Idx ++)
+    for (Idx = 0; Idx < 16; Idx ++)
     {
       LISTVIEW_AddRow(hItem, NULL);
     }
@@ -805,7 +805,7 @@ static void _cbButton(WM_MESSAGE * pMsg) {
 /**
   * @brief  set the GUI profile
   * @param  None.
-  * @retval None.
+  * @retval None
   */
 void k_SetGuiProfile(void) 
 {
@@ -868,7 +868,7 @@ void k_SetGuiProfile(void)
 /**
   * @brief  Initializes the menu.
   * @param  None.
-  * @retval None.
+  * @retval None
   */
 void k_InitMenu(void) 
 {

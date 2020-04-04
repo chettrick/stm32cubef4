@@ -1,13 +1,13 @@
 /**
-  @page Audio_playback_and_record  Audio Playback and Record example
+  @page Audio_playback_and_record  Audio Playback and Record application
 
   @verbatim
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
-  * @file    Audio_playback_and_record/readme.txt 
+  * @file    Audio/Audio_playback_and_record/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
-  * @brief   Description of the Audio Playback and Record example
+  * @version V1.2.0
+  * @date    26-December-2014
+  * @brief   Description of the Audio Playback and Record application
   ******************************************************************************
   *
   * Redistribution and use in source and binary forms, with or without modification,
@@ -35,21 +35,21 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description 
+@par Application Description 
 
-This example shows how to use the different functionalities of Audio device 
+This application shows how to use the different functionalities of Audio device 
 and ST MEMS microphones (MP45DT02), three different menu are available to switch
 between them use the joystick button:
   + Explorer Audio File menu
   + Start Audio Player menu
-  + Start Audio Recoder menu
+  + Start Audio Recorder menu
 
 1) Explorer Audio File menu.
-In this menu, the explorer wave files list stored in the USB Key will be dispalyed on the LCD.
+In this menu, the explorer wave files list stored in the USB Key will be displayed on the LCD.
 
 2) Start Audio Play menu (Need headphone).
 In Start Audio Play menu, any wave file stored under the USB Key can be opened using the FatFs 
-file system and transferred to the internal SRAM using the file systeme. All the wave
+file system and transferred to the internal SRAM using the file system. All the wave
 files properties are read from the Wave File Header.
 Plug a headphone to ear the sound  /!\ Take care of yours ears. Default volume is 70%.
 
@@ -76,15 +76,17 @@ This menu also manages information display and control interface through push bu
      [LEFT]: Previous wave file
      [RIGHT]: Next wave file
      [SEL]: Pause/Resume
-     [USer Key]: Stop
-Note: The audio files provided within this package (Binary\Media folder) are based on a free music download from
-www.DanoSongs.com website and user can load his own audio (*.wav) files in the USB Key.
+     [User Key]: Stop
+
+Note: The audio files provided under "/Utilities/Media/Audio" are based on a free 
+music download from www.DanoSongs.com website and user can load his own audio 
+(*.wav) files in the USB Key root.
  
 3) Start Audio Recorder menu:
 Two MEMS microphone MP34DT01 mounted on STM324x9I-EVAL are connected
 to the Inter-IC Sound (I2S) peripheral. The I2S is configured in master
 receiver mode. In this mode, the I2S peripheral provides the clock to an embedded
-timer (TIM3 in this example) which divides the I2S clock. This clock is delivered
+timer (TIM3 in this application) which divides the I2S clock. This clock is delivered
 to the MEMS microphone through CLK. Data acquired (Audio samples) from the MEMS 
 microphone through DOUT.
 
@@ -116,13 +118,13 @@ This menu also manages information display and control interface through push bu
      [UP]: Volume+
      [DOWN]: Volume-
      [SEL]: Pause/Resume
-     [USer Key]: Stop
+     [User Key]: Stop
 
 Note that a PDM Audio software decoding library provided in binary is used in 
 this application. For IAR EWARM toolchain, the library is labeled 
 "libPDMFilter_IAR.a".
 
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 
@@ -145,9 +147,9 @@ this application. For IAR EWARM toolchain, the library is labeled
       
 @par Hardware and Software environment
 
-  - This example runs on STM32F42xxx/STM32F43xxx devices.
+  - This application runs on STM32F42xxx/STM32F43xxx devices.
     
-  - This example has been tested with STM324x9I-EVAL RevB evaluation board and can be
+  - This application has been tested with STM324x9I-EVAL RevB evaluation board and can be
     easily tailored to any other supported device and development board.   
 
   - STM324x9I-EVAL Set-up
@@ -155,7 +157,7 @@ this application. For IAR EWARM toolchain, the library is labeled
     - Please ensure that jumpers JP13, JP14 and JP15 are fitted in position 2-3
     - Plug the USB key into the STM324x9I-EVAL board through 'USB micro A-Male 
       to A-Female' cable (FS mode: connector CN14).
-    - Load wave files on the root of USB mass storage
+    - Load .wav audio file (audio_sample.wav) available under "/Utilities/Media/Audio" to the root of USB mass storage
 
 
 @par How to use it ? 
@@ -163,7 +165,7 @@ this application. For IAR EWARM toolchain, the library is labeled
 In order to make the program work, you must do the following :
  - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
- - Run the example
+ - Run the application
  
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

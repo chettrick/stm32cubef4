@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BSP/Src/log.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This example code shows how to use the LCD Log firmware functions
   ******************************************************************************
   * @attention
@@ -63,7 +63,7 @@ void Log_demo(void)
 { 
   JOYState_TypeDef JoyState = JOY_NONE;
   uint8_t i = 0;
-
+  
   /* Wait For User inputs */
   while(CheckForUserInput() == 0);
   
@@ -84,10 +84,10 @@ void Log_demo(void)
   
   HAL_Delay(2000);
   
-   /* Clear Old logs */
+  /* Clear Old logs */
   LCD_LOG_ClearTextZone();
   
-   /* Output new user logs */
+  /* Output new user logs */
   for (i = 0; i < 30; i++)
   {
     LCD_UsrLog ("This is Line %d \n", i);
@@ -101,7 +101,8 @@ void Log_demo(void)
     {
     case JOY_UP:
       LCD_LOG_ScrollBack();
-      break;     
+      break;
+      
     case JOY_DOWN:
       LCD_LOG_ScrollForward();
       break;          

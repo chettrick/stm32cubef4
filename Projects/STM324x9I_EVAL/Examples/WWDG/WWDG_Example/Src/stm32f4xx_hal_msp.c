@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    WWDG/WWDG_Example/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   HAL MSP module.
   ******************************************************************************
   * @attention
@@ -68,7 +68,7 @@
 void HAL_WWDG_MspInit(WWDG_HandleTypeDef *hwwdg)
 {
   /* WWDG Peripheral clock enable */
-  __WWDG_CLK_ENABLE();
+  __HAL_RCC_WWDG_CLK_ENABLE();
 }
 
 /**
@@ -81,10 +81,10 @@ void HAL_WWDG_MspInit(WWDG_HandleTypeDef *hwwdg)
 void HAL_WWDG_MspDeInit(WWDG_HandleTypeDef *hwwdg)
 {
   /* Enable WWDG reset state */
-  __WWDG_FORCE_RESET();
+  __HAL_RCC_WWDG_FORCE_RESET();
   
   /* Release WWDG from reset state */
-  __WWDG_RELEASE_RESET();
+  __HAL_RCC_WWDG_RELEASE_RESET();
 }
 
 /**

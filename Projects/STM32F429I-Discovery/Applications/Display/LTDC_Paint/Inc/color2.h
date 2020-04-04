@@ -2,9 +2,9 @@
   ******************************************************************************
   * @file    Display/LTDC_Paint/color2.h 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
-  * @brief   This file contains image used for LTDC example.   
+  * @version V1.2.0
+  * @date    26-December-2014
+  * @brief   This file contains image used for LTDC application.   
   ******************************************************************************
   * @attention
   *

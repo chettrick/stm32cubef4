@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    stm32f4xx_it.c 
+  * @file    SAI/SAI_Audio/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
@@ -38,8 +38,8 @@
   */
 
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
 #include "stm32f4xx_it.h"
+#include "audio_if.h"
 
 /** @addtogroup STM32F4xx_HAL_Examples
   * @{
@@ -159,6 +159,11 @@ void PendSV_Handler(void)
 void SysTick_Handler(void)
 {
   HAL_IncTick();
+  
+  /* Check periodically the buffer state and fill played buffer with new data 
+     following the state that has been updated by the BSP_AUDIO_OUT_TransferComplete_CallBack()
+     and BSP_AUDIO_OUT_HalfTransfer_CallBack() */
+  AUDIO_Process();  
 }
 
 /******************************************************************************/

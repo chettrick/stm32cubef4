@@ -2,9 +2,9 @@
   ******************************************************************************
   * @file    usbd_dfu.h
   * @author  MCD Application Team
-  * @version V2.2.0
-  * @date    13-June-2014
-  * @brief   header file for the usbd_dfu.c file.
+  * @version V2.3.0
+  * @date    04-November-2014
+  * @brief   Header file for the usbd_dfu.c file.
   ******************************************************************************
   * @attention
   *
@@ -23,13 +23,17 @@
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
+
+/* Define to prevent recursive inclusion -------------------------------------*/ 
+#ifndef __USB_DFU_H
+#define __USB_DFU_H
+
+#ifdef __cplusplus
+ extern "C" {
+#endif
 
 /* Includes ------------------------------------------------------------------*/
-
-#ifndef __USB_DFU_CORE_H_
-#define __USB_DFU_CORE_H_
-
 #include  "usbd_ioreq.h"
 
 /** @addtogroup STM32_USB_DEVICE_LIBRARY
@@ -37,7 +41,7 @@
   */
   
 /** @defgroup USBD_DFU
-  * @brief This file is the Header file for USBD_msc.c
+  * @brief This file is the Header file for usbd_dfu.c
   * @{
   */ 
 
@@ -46,10 +50,10 @@
   * @{
   */ 
     
-#define USB_DFU_CONFIG_DESC_SIZ       (18 + (9 * USBD_DFU_MAX_ITF_NUM))
-#define USB_DFU_DESC_SIZ              9
+#define USB_DFU_CONFIG_DESC_SIZ        (18 + (9 * USBD_DFU_MAX_ITF_NUM))
+#define USB_DFU_DESC_SIZ               9
     
-#define DFU_DESCRIPTOR_TYPE           0x21
+#define DFU_DESCRIPTOR_TYPE            0x21
     
 
 /**************************************************/
@@ -70,48 +74,46 @@
 /**************************************************/
 /* DFU errors                                     */
 /**************************************************/
-
-#define DFU_ERROR_NONE              0x00
-#define DFU_ERROR_TARGET            0x01
-#define DFU_ERROR_FILE              0x02
-#define DFU_ERROR_WRITE             0x03
-#define DFU_ERROR_ERASE             0x04
-#define DFU_ERROR_CHECK_ERASED      0x05
-#define DFU_ERROR_PROG              0x06
-#define DFU_ERROR_VERIFY            0x07
-#define DFU_ERROR_ADDRESS           0x08
-#define DFU_ERROR_NOTDONE           0x09
-#define DFU_ERROR_FIRMWARE          0x0A
-#define DFU_ERROR_VENDOR            0x0B
-#define DFU_ERROR_USB               0x0C
-#define DFU_ERROR_POR               0x0D
-#define DFU_ERROR_UNKNOWN           0x0E
-#define DFU_ERROR_STALLEDPKT        0x0F
+#define DFU_ERROR_NONE                 0x00
+#define DFU_ERROR_TARGET               0x01
+#define DFU_ERROR_FILE                 0x02
+#define DFU_ERROR_WRITE                0x03
+#define DFU_ERROR_ERASE                0x04
+#define DFU_ERROR_CHECK_ERASED         0x05
+#define DFU_ERROR_PROG                 0x06
+#define DFU_ERROR_VERIFY               0x07
+#define DFU_ERROR_ADDRESS              0x08
+#define DFU_ERROR_NOTDONE              0x09
+#define DFU_ERROR_FIRMWARE             0x0A
+#define DFU_ERROR_VENDOR               0x0B
+#define DFU_ERROR_USB                  0x0C
+#define DFU_ERROR_POR                  0x0D
+#define DFU_ERROR_UNKNOWN              0x0E
+#define DFU_ERROR_STALLEDPKT           0x0F
 
 /**************************************************/
 /* DFU Manifestation State                        */
 /**************************************************/
-
-#define DFU_MANIFEST_COMPLETE       0x00
-#define DFU_MANIFEST_IN_PROGRESS    0x01
+#define DFU_MANIFEST_COMPLETE          0x00
+#define DFU_MANIFEST_IN_PROGRESS       0x01
 
 
 /**************************************************/
 /* Special Commands  with Download Request        */
 /**************************************************/
-
-#define DFU_CMD_GETCOMMANDS         0x00
-#define DFU_CMD_SETADDRESSPOINTER   0x21
-#define DFU_CMD_ERASE               0x41
+#define DFU_CMD_GETCOMMANDS            0x00
+#define DFU_CMD_SETADDRESSPOINTER      0x21
+#define DFU_CMD_ERASE                  0x41
     
-#define DFU_MEDIA_ERASE             0x00
-#define DFU_MEDIA_PROGRAM           0x01
+#define DFU_MEDIA_ERASE                0x00
+#define DFU_MEDIA_PROGRAM              0x01
+
 /**************************************************/
 /* Other defines                                  */
 /**************************************************/
 /* Bit Detach capable = bit 3 in bmAttributes field */
-#define DFU_DETACH_MASK              (uint8_t)(1 << 4) 
-#define DFU_STATUS_DEPTH             (6) 
+#define DFU_DETACH_MASK                (uint8_t)(1 << 4) 
+#define DFU_STATUS_DEPTH               (6) 
     
 typedef enum 
 {
@@ -123,28 +125,25 @@ typedef enum
   DFU_GETSTATE,
   DFU_ABORT
 } DFU_RequestTypeDef;
-  
+
 typedef  void (*pFunction)(void);
 
 
 /**********  Descriptor of DFU interface 0 Alternate setting n ****************/  
-#define USBD_DFU_IF_DESC(n)   0x09,   /* bLength: Interface Descriptor size */ \
-                              USB_DESC_TYPE_INTERFACE,   /* bDescriptorType */ \
-                              0x00,   /* bInterfaceNumber: Number of Interface */ \
-                              (n),      /* bAlternateSetting: Alternate setting */ \
-                              0x00,   /* bNumEndpoints*/ \
-                              0xFE,   /* bInterfaceClass: Application Specific Class Code */ \
-                              0x01,   /* bInterfaceSubClass : Device Firmware Upgrade Code */ \
-                              0x02,   /* nInterfaceProtocol: DFU mode protocol */ \
-                              USBD_IDX_INTERFACE_STR + (n) + 1 /* iInterface: Index of string descriptor */ \
- 
-                             /* 18 */
+#define USBD_DFU_IF_DESC(n)            0x09,   /* bLength: Interface Descriptor size */ \
+                                      USB_DESC_TYPE_INTERFACE,   /* bDescriptorType */ \
+                                      0x00,   /* bInterfaceNumber: Number of Interface */ \
+                                      (n),      /* bAlternateSetting: Alternate setting */ \
+                                      0x00,   /* bNumEndpoints*/ \
+                                      0xFE,   /* bInterfaceClass: Application Specific Class Code */ \
+                                      0x01,   /* bInterfaceSubClass : Device Firmware Upgrade Code */ \
+                                      0x02,   /* nInterfaceProtocol: DFU mode protocol */ \
+                                      USBD_IDX_INTERFACE_STR + (n) + 1 /* iInterface: Index of string descriptor */ \
                                 
-#define TRANSFER_SIZE_BYTES(size)          ((uint8_t)(size)), /* XFERSIZEB0 */\
-                                           ((uint8_t)(size >> 8)) /* XFERSIZEB1 */
+#define TRANSFER_SIZE_BYTES(size)      ((uint8_t)(size)), /* XFERSIZEB0 */\
+                                       ((uint8_t)(size >> 8)) /* XFERSIZEB1 */
                                              
-
-#define IS_PROTECTED_AREA(add)    (uint8_t)(((add >= 0x08000000) && (add < (APP_DEFAULT_ADD)))? 1:0)                                             
+#define IS_PROTECTED_AREA(add)         (uint8_t)(((add >= 0x08000000) && (add < (APP_DEFAULT_ADD)))? 1:0)                                             
                                             
 /**
   * @}
@@ -220,7 +219,11 @@ uint8_t  USBD_DFU_RegisterMedia    (USBD_HandleTypeDef   *pdev,
   * @}
   */ 
 
-#endif  // __USB_DFU_CORE_H_
+#ifdef __cplusplus
+}
+#endif
+
+#endif  /* __USB_DFU_H */
 /**
   * @}
   */ 

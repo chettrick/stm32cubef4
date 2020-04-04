@@ -10,7 +10,7 @@
 *                                                                    *
 **********************************************************************
 
-** emWin V5.24 - Graphical user interface for embedded applications **
+** emWin V5.26 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -62,7 +62,7 @@ Purpose     : Display controller initialization
 //
 // Define the available number of bytes available for the GUI
 //
-#define GUI_NUMBYTES  (77) *  1024
+#define GUI_NUMBYTES  (76) *  1024
 
 U32 aMemory[GUI_NUMBYTES / 4];
 /*********************************************************************

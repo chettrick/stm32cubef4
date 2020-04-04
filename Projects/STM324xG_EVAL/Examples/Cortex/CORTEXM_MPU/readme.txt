@@ -3,10 +3,10 @@
 
   @verbatim
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
-  * @file    CORTEXM/CORTEXM_MPU/readme.txt 
+  * @file    Cortex/CORTEXM_MPU/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Description of the CortexM MPU example.
   ******************************************************************************
   *
@@ -55,18 +55,18 @@ the following line "PrivilegedReadOnlyArray[0] = 'e';" in the "stm32_mpu.c" file
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 
 @par Directory contents 
 
-  - CORTEXM/MPU/Inc/stm32f4xx_hal_conf.h    HAL configuration file
-  - CORTEXM/MPU/Inc/stm32f4xx_it.h          Interrupt handlers header file
-  - CORTEXM/MPU/Inc/main.h                  Main program header file  
-  - CORTEXM/MPU/Src/stm32f4xx_it.c          Interrupt handlers
-  - CORTEXM/MPU/Src/main.c                  Main program
-  - CORTEXM/MPU/Src/system_stm32f4xx.c      STM32F4xx system clock configuration file
+  - Cortex/CORTEXM_MPU/Inc/stm32f4xx_hal_conf.h    HAL configuration file
+  - Cortex/CORTEXM_MPU/Inc/stm32f4xx_it.h          Interrupt handlers header file
+  - Cortex/CORTEXM_MPU/Inc/main.h                  Main program header file  
+  - Cortex/CORTEXM_MPU/Src/stm32f4xx_it.c          Interrupt handlers
+  - Cortex/CORTEXM_MPU/Src/main.c                  Main program
+  - Cortex/CORTEXM_MPU/Src/system_stm32f4xx.c      STM32F4xx system clock configuration file
 
 
 @par Hardware and Software environment
@@ -82,9 +82,6 @@ the following line "PrivilegedReadOnlyArray[0] = 'e';" in the "stm32_mpu.c" file
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain
- - Add the required example files
-   - stm32_mpu.c
-
  - Rebuild all files and load your image into target memory
  - Run the example
 

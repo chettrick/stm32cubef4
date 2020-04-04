@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    k_bsp.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014   
+  * @version V1.2.0
+  * @date    26-December-2014   
   * @brief   This file provides the kernel bsp functions
   ******************************************************************************
   * @attention
@@ -69,10 +69,10 @@ void k_BspInit(void)
   BSP_TS_Init(480, 272);
   
   /* Enable CRC to Unlock GUI */
-  __CRC_CLK_ENABLE();
+  __HAL_RCC_CRC_CLK_ENABLE();
   
   /* Enable Back up SRAM */
-  __BKPSRAM_CLK_ENABLE();
+  __HAL_RCC_BKPSRAM_CLK_ENABLE();
   
 }
 

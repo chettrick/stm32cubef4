@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    ADC/ADC_TripleModeInterleaved/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Description of the Triple interleaved mode and DMA mode2 example
   ******************************************************************************
   *
@@ -71,7 +71,7 @@ Since ADCCLK= 36MHz and Conversion rate = 5 cycles
 ==> Conversion Time = 36M/5cyc = 7.2Msps
 
 STM32 Eval board's LEDs can be used to monitor the transfer status:
-  - LED1 is on when the transfer process is successefully completed.
+  - LED1 is on when the transfer process is successfully completed.
   - LED3 is ON when there is an error in initialization.
 
 User should monitor aADCTripleConvertedValue variable to get the converted value.
@@ -86,7 +86,7 @@ User should monitor aADCTripleConvertedValue variable to get the converted value
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 

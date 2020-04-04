@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    PWR/PWR_STOP/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Description of the Power Stop Mode example.
   ******************************************************************************
   *
@@ -38,22 +38,22 @@
 @par Example Description 
 
 This example shows how to enters the system to STOP mode and wake-up from this
-mode using RTC Wakeup Timer Event connected to EXTI Line 22 or Key push button
+mode using RTC Wake-up Timer Event connected to EXTI Line 22 or Key push button
 EXTI Line 13.
 
 In the associated software
   - the system clock is set to 180 MHz
   - the EXTI_Line13 is configured to generate interrupt on falling edge
-  - the EXTI_Line22 connected internally to the RTC Wakeup event is configured
+  - the EXTI_Line22 connected internally to the RTC Wake-up event is configured
     to generate an interrupt on rising edge each 4s
   - the SysTick is programmed to generate an interrupt each 1 ms 
 In the SysTick interrupt handler, LED2 is toggled, this is used to indicate whether
 the MCU is in STOP or RUN mode.
 
-The system enters STOP mode and will wait for the RTC Wakeup event to be 
+The system enters STOP mode and will wait for the RTC Wake-up event to be 
 generated each 4s, or Key push button is pressed. 
- - If the RTC WakeUp event (EXTI_Line22) is the source of wakeup from STOP, LED1 is toggled.
- - If the Key button (EXTI_Line13) is the source of wakeup from STOP, LED4 is toggled.
+ - If the RTC WakeUp event (EXTI_Line22) is the source of wake-up from STOP, LED1 is toggled.
+ - If the Key button (EXTI_Line13) is the source of wake-up from STOP, LED4 is toggled.
 
 This behavior is repeated in an infinite loop.
 
@@ -68,7 +68,7 @@ LEDs are used to monitor the system state as following:
 
  @note This example can not be used in DEBUG mode, this is due to the fact 
        that the Cortex-M4 core is no longer clocked during low power mode 
-       so debugging features are disbaled
+       so debugging features are disabled
        
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
       based on variable incremented in SysTick ISR. This implies that if HAL_Delay() is called from
@@ -76,7 +76,7 @@ LEDs are used to monitor the system state as following:
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
       
 @note  Care must be taken when HAL_RCCEx_PeriphCLKConfig() is used to select the RTC clock source; in this 

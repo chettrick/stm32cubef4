@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f401_discovery.c
   * @author  MCD Application Team
-  * @version V2.1.1
-  * @date    26-June-2014
+  * @version V2.1.2
+  * @date    10-December-2014
   * @brief   This file provides set of firmware functions to manage LEDs and
   *          push-button available on STM32F401-Discovery Kit from STMicroelectronics.
   ******************************************************************************

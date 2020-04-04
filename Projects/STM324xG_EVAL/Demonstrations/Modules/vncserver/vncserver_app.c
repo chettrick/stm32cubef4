@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    vncserver_app.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014   
+  * @version V1.2.0
+  * @date    26-December-2014   
   * @brief   VNC application functions
   ******************************************************************************
   * @attention
@@ -118,7 +118,7 @@ static int _ListenAtTcpAddr(U16 Port) {
 /**
   * @brief  VNC server thread process
   * @param  argument: not used
-  * @retval none
+  * @retval None
   */
 static void _ServerThread(void const * argument)
 {
@@ -187,7 +187,7 @@ int GUI_VNC_X_StartServer(int LayerIndex, int ServerIndex) {
 /**
   * @brief  Retrieves the IP addr. of the currently connected VNC client. 
   * @param  Addr: IP address
-  * @retval none
+  * @retval None
   */
 void GUI_VNC_X_getpeername(U32 * Addr) {
   *Addr = _Addr.sin_addr.s_addr;

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    system_win.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014   
+  * @version V1.2.0
+  * @date    26-December-2014   
   * @brief   System information functions
   ******************************************************************************
   * @attention
@@ -270,7 +270,7 @@ static void _cbSystemInformation(WM_MESSAGE * pMsg)
     hItem = WM_GetDialogItem(pMsg->hWin, ID_TEXT_VERSION);
     TEXT_SetFont(hItem, GUI_FONT_20_ASCII);
     TEXT_SetTextColor(hItem, GUI_DARKGRAY);
-    strcpy(str, "Demo rev: 1.1.0");
+    strcpy(str, "Demo rev: 1.2.0");
     TEXT_SetText(hItem, str); 
 
     /* ST Copyright */
@@ -398,7 +398,7 @@ static void _cbClockSettings(WM_MESSAGE * pMsg) {
     hTimerTime = WM_CreateTimer(pMsg->hWin, 0, 1000, 0); 
     CALENDAR_Create(pMsg->hWin,12, 12, 2014 + Date.Year, Date.Month, Date.Date, 2, ID_CALENDAR, WM_CF_SHOW);
     CALENDAR_SetDefaultFont(CALENDAR_FI_CONTENT,GUI_FONT_13_1 );
-    CALENDAR_SetDefaultFont(CALENDAR_FI_HEADER, GUI_FONT_13_1) ;
+    CALENDAR_SetDefaultFont(CALENDAR_FI_HEADER, GUI_FONT_13_1);
     
     hItem = WM_GetDialogItem(pMsg->hWin, ID_SPINBOX_HOUR);
     SPINBOX_SetRange(hItem, 0, 23);

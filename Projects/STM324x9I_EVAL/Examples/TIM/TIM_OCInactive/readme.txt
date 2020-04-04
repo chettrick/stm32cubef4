@@ -1,12 +1,12 @@
 /**
-  @page TIM_OCInactive Output Compare Active example
+  @page TIM_OCInactive TIM Output Compare Active example
 
   @verbatim
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    TIM/TIM_OCActive/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This example shows how to configure the Timer to generate four 
   *          delayed signals.
   ******************************************************************************
@@ -75,7 +75,7 @@
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 
@@ -97,9 +97,13 @@
   - This example has been tested with STMicroelectronics STM324x9I-EVAL RevB 
     evaluation boards and can be easily tailored to any other supported device and development board
 
-  - STM324x9I-EVAL RevB Set-up 
-    - Use LED1, LED2, LED3 and LED4 and connect them to an oscilloscope to monitor 
-      the different waveforms.
+  - STM324x9I-EVAL RevB Set-up
+      - Connect the following pins to an oscilloscope to monitor the different 
+      waveforms:
+       - Use LED1 connected to PG.06
+       - Use LED2 connected to PG.07
+       - Use LED3 connected to PG.10
+       - Use LED4 connected to PG.12
 
 
 @par How to use it ? 

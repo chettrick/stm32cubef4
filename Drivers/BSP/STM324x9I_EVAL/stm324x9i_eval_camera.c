@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324x9i_eval_camera.c
   * @author  MCD Application Team
-  * @version V2.0.2
-  * @date    19-June-2014
+  * @version V2.0.3
+  * @date    10-December-2014
   * @brief   This file includes the driver for Camera modules mounted on
   *          STM324x9I-EVAL evaluation board.
   ******************************************************************************
@@ -146,10 +146,14 @@ uint8_t BSP_CAMERA_Init(uint32_t Resolution)
   phdcmi->Init.PCKPolarity      = DCMI_PCKPOLARITY_RISING;
   phdcmi->Instance              = DCMI;  
 
-  /* Configure IO functionalities for CAMERA detect pin */
+  /* Configure IO functionalities for camera detect pin */
   BSP_IO_Init(); 
   
-  /* Check if the CAMERA is plugged */
+  /* Set the camera STANDBY pin */
+  BSP_IO_ConfigPin(XSDN_PIN, IO_MODE_OUTPUT);
+  BSP_IO_WritePin(XSDN_PIN, SET);
+  
+  /* Check if the camera is plugged */
   if(BSP_IO_ReadPin(CAM_PLUG_PIN))
   {
     return CAMERA_ERROR;
@@ -237,12 +241,19 @@ uint8_t BSP_CAMERA_Stop(void)
   uint8_t ret = CAMERA_ERROR;
   
   /* Get the DCMI handle structure */
-  phdcmi = &hdcmi_eval;  
+  phdcmi = &hdcmi_eval;
   
   if(HAL_DCMI_Stop(phdcmi) == HAL_OK)
   {
-     ret = CAMERA_OK;
+    ret = CAMERA_OK;
   }
+  
+  /* Initialize IO */
+  BSP_IO_Init();
+  
+  /* Reset the camera STANDBY pin */
+  BSP_IO_ConfigPin(XSDN_PIN, IO_MODE_OUTPUT);
+  BSP_IO_WritePin(XSDN_PIN, RESET);  
   
   return ret;
 }
@@ -332,7 +343,7 @@ void BSP_CAMERA_DMA_IRQHandler(void)
 /**
   * @brief  Get the capture size.
   * @param  current_resolution: the current resolution.
-  * @retval cpature size.
+  * @retval capture size.
   */
 static uint32_t GetSize(uint32_t resolution)
 { 

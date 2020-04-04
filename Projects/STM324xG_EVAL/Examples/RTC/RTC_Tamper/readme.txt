@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    RTC/RTC_Tamper/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Description of the RTC Tamper example.
   ******************************************************************************
   *
@@ -80,7 +80,7 @@ The associated firmware performs the following:
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 
@@ -89,7 +89,7 @@ The associated firmware performs the following:
   - RTC/RTC_Tamper/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - RTC/RTC_Tamper/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - RTC/RTC_Tamper/Inc/main.h                  Main program header file  
-  - RTC/RTC_Tamper/Src/stm32f4xx_it.c          Interrupt handlers handlers
+  - RTC/RTC_Tamper/Src/stm32f4xx_it.c          Interrupt handlers
   - RTC/RTC_Tamper/Src/main.c                  Main program
   - RTC/RTC_Tamper/Src/stm32f4xx_hal_msp.c     HAL MSP module
   - RTC/RTC_Tamper/Src/system_stm32f4xx.c      STM32F4xx system clock configuration file

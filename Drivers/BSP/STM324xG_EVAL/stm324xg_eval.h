@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324xg_eval.h
   * @author  MCD Application Team
-  * @version V2.0.3
-  * @date    26-June-2014
+  * @version V2.0.4
+  * @date    10-December-2014
   * @brief   This file contains definitions for STM324xG_EVAL's LEDs, 
   *          push-buttons and COM ports hardware resources.
   ******************************************************************************
@@ -255,9 +255,9 @@ typedef enum
    WARNING: 
    Make sure that this define is not already declared in other files (ie. 
    stm324xg_eval.h file). It can be used in parallel by other modules. */
-#ifndef I2C_SPEED
- #define I2C_SPEED                            100000
-#endif /* I2C_SPEED */
+#ifndef BSP_I2C_SPEED
+ #define BSP_I2C_SPEED                            100000
+#endif /* BSP_I2C_SPEED */
 
 #define IO_I2C_ADDRESS                        0x88
 #define TS_I2C_ADDRESS                        0x82

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324x9i_eval_audio.h
   * @author  MCD Application Team
-  * @version V2.0.2
-  * @date    19-June-2014
+  * @version V2.0.3
+  * @date    10-December-2014
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm324x9i_eval_audio.c driver.
   ******************************************************************************
@@ -46,9 +46,9 @@
 
 /* Includes ------------------------------------------------------------------*/
 /* Include audio component Driver */
-#include "..\Components\wm8994\wm8994.h"
+#include "../Components/wm8994/wm8994.h"
 #include "stm324x9i_eval.h"
-#include "..\..\..\Middlewares\ST\STM32_Audio\Addons\PDM\pdm_filter.h"
+#include "../../../Middlewares/ST/STM32_Audio/Addons/PDM/pdm_filter.h"
 
 /** @addtogroup BSP
   * @{
@@ -153,7 +153,7 @@
 
 /* Two channels are used:
    - one channel as input which is connected to I2S SCK in stereo mode 
-   - one channel as outupt which divides the frequency on the input
+   - one channel as output which divides the frequency on the input
 */
 
 #define AUDIO_TIMx_CLK_ENABLE()             __TIM3_CLK_ENABLE()

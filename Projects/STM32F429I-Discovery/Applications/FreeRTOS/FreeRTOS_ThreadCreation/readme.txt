@@ -1,13 +1,13 @@
 /**
-  @page FreeRTOS_ThreadCreation FreeRTOS Thread Creation example
+  @page FreeRTOS_ThreadCreation FreeRTOS Thread Creation application
  
   @verbatim
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    FreeRTOS/FreeRTOS_ThreadCreation/readme.txt
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014 
-  * @brief   Description of the FreeRTOS Thread Creation example.
+  * @version V1.2.0
+  * @date    26-December-2014 
+  * @brief   Description of the FreeRTOS Thread Creation application.
   ******************************************************************************
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
@@ -25,12 +25,12 @@
   ******************************************************************************
   @endverbatim
 
-@par Description
+@par Application Description
 
 This directory contains a set of sources files that implement a thread creation 
-example using CMSIS RTOS API 
+application using CMSIS RTOS API 
 
-This example creates two threads with the same priority, which executes in 
+This application creates two threads with the same priority, which executes in 
 a periodic cycle of 15 seconds. 
 
 In the first 5 seconds, the thread 1 toggles LED3 each 200 ms and the 
@@ -47,7 +47,7 @@ suspend itself, the thread 1 toggles the LED3 each 400 ms
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 For more details about FreeRTOS implementation on STM32Cube, please refer to UM1722 "Developing Applications 
@@ -66,9 +66,9 @@ on STM32Cube with RTOS".
 
 @par Hardware and Software environment
 
-  - This example runs on STM32F429xx devices
+  - This application runs on STM32F429xx devices
     
-  - This example has been tested with STM32F429I-Discovery RevB board and can be
+  - This application has been tested with STM32F429I-Discovery RevB board and can be
     easily tailored to any other supported device and development board.
 
 
@@ -77,7 +77,7 @@ on STM32Cube with RTOS".
 In order to make the program work, you must do the following :
   - Open your preferred toolchain 
   - Rebuild all files and load your image into target memory
-  - Run the example
+  - Run the application
  
  * <h2><center>&copy; COPYRIGHT STMicroelectronics</center></h2>
  */

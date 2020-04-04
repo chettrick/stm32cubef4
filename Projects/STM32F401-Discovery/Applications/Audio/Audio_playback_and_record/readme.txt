@@ -1,13 +1,13 @@
 /**
-  @page Audio_playback_and_record  Audio Playback and Record example
+  @page Audio_playback_and_record  Audio Playback and Record application
 
   @verbatim
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
-  * @file    Audio_playback_and_record/readme.txt 
+  * @file    Audio/Audio_playback_and_record/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
-  * @brief   Description of the Audio Playback and Record example.
+  * @version V1.2.0
+  * @date    26-December-2014
+  * @brief   Description of the Audio Playback and Record application.
   ******************************************************************************
   *
   * Redistribution and use in source and binary forms, with or without modification,
@@ -35,9 +35,9 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description 
+@par Application Description 
 
-This example provides a description of an audio play and record with different
+This application provides a description of an audio play and record with different
 MEMS used on STM32F401-Discovery. 
 
 At the beginning of the main program the HAL_Init() function is called to reset 
@@ -45,12 +45,12 @@ all the peripherals.
 Then the SystemClock_Config() function is used to configure the systemclock (SYSCLK) 
 to run at 84 MHz.
 
-This example shows how to use the different functionalities of Audio device CS43L22 
+This application shows how to use the different functionalities of Audio device CS43L22 
 and ST MEMS microphone (MP45DT02) by switching between play and record audio
 using USER button. 
 
 1) Play audio(Need headphone). Device: "CS43L22"
-Application plays an audio file (audio.wav) which is available on USB Mass Storage.
+Application plays an audio file (audio_sample.wav) which is available on USB Mass Storage.
 Plug a headphone to earn a 48K sound  /!\ Take care of yours ears.
 Default volume is 50%.
 Click feature has been implemented only for RevB board. A click on the board
@@ -58,8 +58,8 @@ will pause the audio file play (LED6 on). Another click resumes audio
 file play (LED6 toggle)
 
 - The player wave name can be customized through the define "WAVE_NAME" in main.h
-  (default name is audio.wav) and if this file is not available on the USB Key the example 
-  switch on the record.
+  (default name is audio_sample.wav) and if this file is not available on the 
+  USB Key the application switch on the record.
  
 To play the audio file, a buffer is used between USB and audio codec. This buffer 
 is used like a ping-pong buffer to be able to read regularly data from USB to be 
@@ -78,7 +78,7 @@ sent to audio codec:
  - When file size is reached, audio codec is stopped and a new play is requested.  
 
 2) Record audio. Device: "MP45DT02"
-When the User button is pressed the example start recording in the USB Key and LD3 will start toggling, 
+When the User button is pressed the application starts recording in the USB Key and LED3 will start toggling, 
 the recorded wave length is (~30secs) and user can interrupt the recording using the User button. 
  - The recorded wave name can be customized through the define "REC_WAVE_NAME" in main.h.
  - Once the recording is finished or interrupted, the recorded wave will start playing
@@ -116,10 +116,10 @@ In main loop of the application, when a buffer is full with PCM format it is wri
 in USB key using the free file system FatFs.
 
 Note that a PDM Audio software decoding library provided in binary is used in 
-this example. For IAR EWARM toolchain, the library is labeled 
+this application. For IAR EWARM toolchain, the library is labeled 
 "libPDMFilter_IAR.a".
 
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
 to have correct HAL operation.
 
 
@@ -138,20 +138,20 @@ to have correct HAL operation.
   - Audio_playback_and_record/Inc/usbh_conf.h          USB driver Configuration file
   - Audio_playback_and_record/Inc/waveplayer.h         Audio play header file
   - Audio_playback_and_record/Inc/waverecorder.h       Audio record header file
-  - Audio_playback_and_record/AudioFile/audio.wav      Audio file example
  
       
 @par Hardware and Software environment  
 
-  - This example runs on and STM32F401xx devices.
+  - This application runs on and STM32F401xx devices.
     
-  - This example has been tested with STMicroelectronics STM32F4-Discovery board 
+  - This application has been tested with STMicroelectronics STM32F4-Discovery board 
     and can be easily tailored to any other supported device and development board.
 
   - STM32F401-DISCO Set-up
     - Plug the USB key into the STM32F401-DISCO board through 'USB micro A-Male 
       to A-Female' cable (FS mode: connector CN5).
-    - audio.wav can be saved on the root of USB mass storage
+    - audio_sample.wav provided under "Utilities/Media/Audio" must be saved 
+      on the root of USB mass storage
 
 
 @par How to use it ? 
@@ -159,7 +159,7 @@ to have correct HAL operation.
 In order to make the program work, you must do the following :
  - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
- - Run the example
+ - Run the application
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    system_win.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014   
+  * @version V1.2.0
+  * @date    26-December-2014   
   * @brief   System information functions
   ******************************************************************************
   * @attention
@@ -388,7 +388,7 @@ static void _cbDateSettings(WM_MESSAGE * pMsg) {
 
     CALENDAR_Create(pMsg->hWin,12, 12, 2014 + Date.Year, Date.Month, Date.Date, 2, ID_CALENDAR, WM_CF_SHOW);
     CALENDAR_SetDefaultFont(CALENDAR_FI_CONTENT,GUI_FONT_13_1 );
-    CALENDAR_SetDefaultFont(CALENDAR_FI_HEADER, GUI_FONT_13_1) ;
+    CALENDAR_SetDefaultFont(CALENDAR_FI_HEADER, GUI_FONT_13_1);
       
     break;
     

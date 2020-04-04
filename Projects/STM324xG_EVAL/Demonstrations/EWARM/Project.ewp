@@ -614,7 +614,7 @@
         </option>
         <option>
           <name>OOCOutputFile</name>
-          <state>STM32CubeDemo_STM324xG-EVAL_1.1.0.hex</state>
+          <state>STM32CubeDemo_STM324xG-EVAL_1.2.0.hex</state>
         </option>
         <option>
           <name>OOCCommandLineProducer</name>
@@ -1412,13 +1412,13 @@
       <group>
         <name>Library</name>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\Middlewares\ST\STemWin\Lib\STemWin524b_CM4_OS_IAR.a</name>
+          <name>$PROJ_DIR$\..\..\..\..\Middlewares\ST\STemWin\Lib\STemWin526_CM4_OS_IAR.a</name>
         </file>
       </group>
       <group>
         <name>OS</name>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\Middlewares\ST\STemWin\OS\GUI_X_FreeRTOS.c</name>
+          <name>$PROJ_DIR$\..\..\..\..\Middlewares\ST\STemWin\OS\GUI_X_OS.c</name>
         </file>
       </group>
     </group>

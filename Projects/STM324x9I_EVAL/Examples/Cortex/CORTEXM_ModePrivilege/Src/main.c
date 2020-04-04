@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    CORTEXM/CORTEXM_ModePrivilege/Src/main.c 
+  * @file    Cortex/CORTEXM_ModePrivilege/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Description of the CortexM4 Mode Privilege example.
   ******************************************************************************
   * @attention
@@ -37,7 +37,6 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-
 
 /** @addtogroup STM32F4xx_HAL_Examples
   * @{
@@ -83,7 +82,7 @@ static void SystemClock_Config(void);
 /* Private functions ---------------------------------------------------------*/
 
 /**
-  * @brief  Main program.
+  * @brief  Main program
   * @param  None
   * @retval None
   */
@@ -97,10 +96,10 @@ int main(void)
      */
   HAL_Init();
   
-  /* Configure the system clock to 180 Mhz */
+  /* Configure the system clock to 180 MHz */
   SystemClock_Config();
   
-  /* Switch Thread mode Stack from Main to Process -----------------------------*/
+  /* Switch Thread mode Stack from Main to Process ###########################*/
   /* Initialize memory reserved for Process Stack */
   for(Index = 0; Index < SP_PROCESS_SIZE; Index++)
   {
@@ -112,6 +111,9 @@ int main(void)
   
   /* Select Process Stack as Thread mode Stack */
   __set_CONTROL(SP_PROCESS);
+  
+  /* Execute ISB instruction to flush pipeline as recommended by Arm */
+  __ISB();
   
   /* Get the Thread mode stack used */
   if((__get_CONTROL() & 0x02) == SP_MAIN)
@@ -131,6 +133,9 @@ int main(void)
   /* Switch Thread mode from privileged to unprivileged ######################*/
   /* Thread mode has unprivileged access */
   __set_CONTROL(THREAD_MODE_UNPRIVILEGED | SP_PROCESS);
+  
+  /* Execute ISB instruction to flush pipeline as recommended by Arm */
+  __ISB();
   
   /* Unprivileged access mainly affect ability to:
   - Use or not use certain instructions such as MSR fields
@@ -153,6 +158,9 @@ int main(void)
   done only in Handler mode) */
   __set_CONTROL(THREAD_MODE_PRIVILEGED | SP_PROCESS);
   
+  /* Execute ISB instruction to flush pipeline as recommended by Arm */
+  __ISB();
+  
   /* Generate a system call exception, and in the ISR switch back Thread mode
   to privileged */
   __SVC();
@@ -160,12 +168,12 @@ int main(void)
   /* Check Thread mode privilege status */
   if((__get_CONTROL() & 0x01) == THREAD_MODE_PRIVILEGED)
   {
-    /* Thread mode has privileged access  */
+    /* Thread mode has privileged access */
     ThreadMode = THREAD_MODE_PRIVILEGED;
   }
   else
   {
-    /* Thread mode has unprivileged access*/
+    /* Thread mode has unprivileged access */
     ThreadMode = THREAD_MODE_UNPRIVILEGED;
   }
   
@@ -201,7 +209,7 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
 
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -220,7 +228,7 @@ static void SystemClock_Config(void)
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
   
   /* Activate the Over-Drive mode */
-  HAL_PWREx_ActivateOverDrive();
+  HAL_PWREx_EnableOverDrive();
   
   /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
@@ -233,7 +241,6 @@ static void SystemClock_Config(void)
 }
 
 #ifdef  USE_FULL_ASSERT
-
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.
@@ -251,7 +258,6 @@ void assert_failed(uint8_t* file, uint32_t line)
   {
   }
 }
-
 #endif
 
 /**

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stmpe1600.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    02-December-2014
   * @brief   This file contains all the functions prototypes for the
   *          stmpe1600.c IO expander driver.
   ******************************************************************************
@@ -45,7 +45,7 @@
 #endif   
    
 /* Includes ------------------------------------------------------------------*/
-#include "..\Common\io.h"
+#include "../Common/io.h"
 
 /** @addtogroup BSP
   * @{

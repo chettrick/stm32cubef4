@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    PWR/PWR_CurrentConsumption/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   HAL MSP module.    
   ******************************************************************************
   * @attention
@@ -69,7 +69,7 @@ void HAL_RTC_MspInit(RTC_HandleTypeDef *hrtc)
   RCC_OscInitTypeDef        RCC_OscInitStruct;
   RCC_PeriphCLKInitTypeDef  PeriphClkInitStruct;
   
-  /*##-1- Configue the RTC clock soucre ######################################*/
+  /*##-1- Configure the RTC clock source ######################################*/
   RCC_OscInitStruct.OscillatorType =  RCC_OSCILLATORTYPE_LSI;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
   RCC_OscInitStruct.LSIState = RCC_LSI_ON;
@@ -90,7 +90,7 @@ void HAL_RTC_MspInit(RTC_HandleTypeDef *hrtc)
   /* Enable RTC Clock */ 
   __HAL_RCC_RTC_ENABLE();
   
-  /*##-3- Configure the NVIC for RTC wakeup timer ############################*/
+  /*##-3- Configure the NVIC for RTC wake-up timer ############################*/
   HAL_NVIC_SetPriority(RTC_WKUP_IRQn, 0x0F, 0);
   HAL_NVIC_EnableIRQ(RTC_WKUP_IRQn);
 }

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    PolarSSL/SSL_Client/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Main program 
   ******************************************************************************
   * @attention
@@ -74,7 +74,7 @@ int main(void)
      */
   HAL_Init();
   
-  /* Configure the system clock to 168 Mhz */
+  /* Configure the system clock to 168 MHz */
   SystemClock_Config();
   
   /* Init task */
@@ -99,12 +99,12 @@ static void StartThread(void const * argument)
   BSP_Config();
   
   /* Create tcp_ip stack thread */
-  tcpip_init( NULL, NULL );
+  tcpip_init(NULL, NULL);
   
-  /* Initilaize the LwIP stack */
+  /* Initialize the LwIP stack */
   Netif_Config();
   
-  /* Notify user about the netwoek interface config */
+  /* Notify user about the network interface config */
   User_notification(&gnetif);
   
   /* Start SSL Client task : Connect to SSL server and provide the SSL handshake protocol */
@@ -188,7 +188,7 @@ static void Netif_Config(void)
 }
 
 /**
-  * @brief  Initializes the STM324x9I-EVAL's LCD and LEDs resources.
+  * @brief  Initializes the STM324xG-EVAL's LCD and LEDs resources.
   * @param  None
   * @retval None
   */
@@ -197,10 +197,10 @@ static void BSP_Config(void)
   GPIO_InitTypeDef GPIO_InitStructure;
    
   /* Enable PB14 to IT mode: Ethernet Link interrupt */ 
-  __GPIOB_CLK_ENABLE(); 
+  __HAL_RCC_GPIOB_CLK_ENABLE(); 
   GPIO_InitStructure.Pin = GPIO_PIN_14;
   GPIO_InitStructure.Mode = GPIO_MODE_IT_FALLING;
-  GPIO_InitStructure.Pull = GPIO_NOPULL ;
+  GPIO_InitStructure.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStructure);
   
   /* Enable EXTI Line interrupt */
@@ -211,21 +211,22 @@ static void BSP_Config(void)
   HAL_RNG_Init(&RngHandle);
 
   /* UART configuration */
-  UartHandle.Instance        = USART1;
-  UartHandle.Init.BaudRate   = 9600;
-  UartHandle.Init.WordLength = UART_WORDLENGTH_8B;
-  UartHandle.Init.StopBits   = UART_STOPBITS_1;
-  UartHandle.Init.Parity     = UART_PARITY_NONE;
-  UartHandle.Init.HwFlowCtl  = UART_HWCONTROL_NONE;
-  UartHandle.Init.Mode       = UART_MODE_TX;
-  
+  UartHandle.Instance          = USART1;
+  UartHandle.Init.BaudRate     = 9600;
+  UartHandle.Init.WordLength   = UART_WORDLENGTH_8B;
+  UartHandle.Init.StopBits     = UART_STOPBITS_1;
+  UartHandle.Init.Parity       = UART_PARITY_NONE;
+  UartHandle.Init.HwFlowCtl    = UART_HWCONTROL_NONE;
+  UartHandle.Init.Mode         = UART_MODE_TX;
+  UartHandle.Init.OverSampling = UART_OVERSAMPLING_16;
+    
   /* Initialize UART peripheral */
   HAL_UART_Init(&UartHandle);
   
   /* Configures COM1 port */
   BSP_COM_Init(COM1, &UartHandle);
   
-  /* Initialize STM324x9I-EVAL's LEDs */
+  /* Configure LED1, LED2, LED3 and LED4 */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED2);
   BSP_LED_Init(LED3);
@@ -300,7 +301,6 @@ int RandVal(void* arg, unsigned char *output, size_t output_len)
   
   while(nbrng > 0)
   {
-    
     /* Wait until random number is ready */  
     while(__HAL_RNG_GET_FLAG(&RngHandle, RNG_FLAG_DRDY)== RESET);
   
@@ -355,7 +355,7 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
 
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -381,13 +381,19 @@ static void SystemClock_Config(void)
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
+
+  /* STM32F405x/407x/415x/417x Revision Z devices: prefetch is supported  */
+  if (HAL_GetREVID() == 0x1001)
+  {
+    /* Enable the Flash prefetch */
+    __HAL_FLASH_PREFETCH_BUFFER_ENABLE();
+  }
 }
 
 #ifdef  USE_FULL_ASSERT
-
 /**
   * @brief  Reports the name of the source file and the source line number
-  *   where the assert_param error has occurred.
+  *         where the assert_param error has occurred.
   * @param  file: pointer to the source file name
   * @param  line: assert_param error line source number
   * @retval None
@@ -395,11 +401,12 @@ static void SystemClock_Config(void)
 void assert_failed(uint8_t* file, uint32_t line)
 {
   /* User can add his own implementation to report the file name and line number,
-  ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
   
   /* Infinite loop */
   while (1)
-  {}
+  {
+  }
 }
 #endif
 

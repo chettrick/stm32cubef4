@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32_adafruit_lcd.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    22-April-2014
+  * @version V1.1.1
+  * @date    21-November-2014
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm32_adafruit_lcd.c driver.
   ******************************************************************************
@@ -45,8 +45,8 @@
 #endif 
 
 /* Includes ------------------------------------------------------------------*/
-#include "..\Components\st7735\st7735.h"
-#include "..\..\..\Utilities\Fonts\fonts.h"
+#include "../Components/st7735/st7735.h"
+#include "../../../Utilities/Fonts/fonts.h"
 
 /** @addtogroup BSP
   * @{
@@ -55,7 +55,7 @@
 /** @addtogroup STM32_ADAFRUIT
   * @{
   */
-#define __IO    volatile   
+ 
 /** @addtogroup STM32_ADAFRUIT_LCD
   * @{
   */ 
@@ -104,6 +104,9 @@ typedef enum
 /** @defgroup STM32_ADAFRUIT_LCD_Exported_Constants
   * @{
   */
+  
+#define __IO    volatile  
+
 /** 
   * @brief  LCD status structure definition  
   */     
@@ -161,6 +164,7 @@ void     BSP_LCD_DrawRect(uint16_t Xpos, uint16_t Ypos, uint16_t Width, uint16_t
 void     BSP_LCD_DrawCircle(uint16_t Xpos, uint16_t Ypos, uint16_t Radius);
 void     BSP_LCD_DrawPolygon(pPoint Points, uint16_t PointCount);
 void     BSP_LCD_DrawEllipse(int Xpos, int Ypos, int XRadius, int YRadius);
+void     BSP_LCD_DrawBitmap(uint16_t Xpos, uint16_t Ypos, uint8_t *pBmp);
 void     BSP_LCD_FillRect(uint16_t Xpos, uint16_t Ypos, uint16_t Width, uint16_t Height);
 void     BSP_LCD_FillCircle(uint16_t Xpos, uint16_t Ypos, uint16_t Radius);
 void     BSP_LCD_FillPolygon(pPoint Points, uint16_t PointCount);

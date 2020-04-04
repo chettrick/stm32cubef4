@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    RTC/RTC_Calendar/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This sample code shows how to use STM32F4xx RTC HAL API to configure 
   *          Time and Date.
   ******************************************************************************
@@ -86,7 +86,7 @@ int main(void)
   BSP_LED_Init(LED3);
   BSP_LED_Init(LED4);
 
-  /* Configure the system clock to 168 Mhz */
+  /* Configure the system clock to 168 MHz */
   SystemClock_Config();  
   
   /* Turn on LED1 */
@@ -129,13 +129,13 @@ int main(void)
     /* Check if the Power On Reset flag is set */  
     if(__HAL_RCC_GET_FLAG(RCC_FLAG_PORRST) != RESET)
     {
-      /* Turn on LED2: Power on reset occured */
+      /* Turn on LED2: Power on reset occurred */
       BSP_LED_On(LED2);
     }
     /* Check if Pin Reset flag is set */
     if(__HAL_RCC_GET_FLAG(RCC_FLAG_PINRST) != RESET)
     {
-      /* Turn on LED4: External reset occured */
+      /* Turn on LED4: External reset occurred */
       BSP_LED_On(LED4);
     }
     /* Clear source Reset Flag */
@@ -176,7 +176,7 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
 
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -207,6 +207,13 @@ static void SystemClock_Config(void)
   if(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)
   {
     Error_Handler();
+  }
+
+  /* STM32F405x/407x/415x/417x Revision Z devices: prefetch is supported  */
+  if (HAL_GetREVID() == 0x1001)
+  {
+    /* Enable the Flash prefetch */
+    __HAL_FLASH_PREFETCH_BUFFER_ENABLE();
   }
 }
 
@@ -241,7 +248,7 @@ static void RTC_CalendarConfig(void)
   sdatestructure.Date = 0x18;
   sdatestructure.WeekDay = RTC_WEEKDAY_TUESDAY;
   
-  if(HAL_RTC_SetDate(&RtcHandle,&sdatestructure,FORMAT_BCD) != HAL_OK)
+  if(HAL_RTC_SetDate(&RtcHandle,&sdatestructure,RTC_FORMAT_BCD) != HAL_OK)
   {
     /* Initialization Error */
     Error_Handler(); 
@@ -253,10 +260,10 @@ static void RTC_CalendarConfig(void)
   stimestructure.Minutes = 0x00;
   stimestructure.Seconds = 0x00;
   stimestructure.TimeFormat = RTC_HOURFORMAT12_AM;
-  stimestructure.DayLightSaving = RTC_DAYLIGHTSAVING_NONE ;
+  stimestructure.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
   stimestructure.StoreOperation = RTC_STOREOPERATION_RESET;
   
-  if(HAL_RTC_SetTime(&RtcHandle,&stimestructure,FORMAT_BCD) != HAL_OK)
+  if(HAL_RTC_SetTime(&RtcHandle,&stimestructure,RTC_FORMAT_BCD) != HAL_OK)
   {
     /* Initialization Error */
     Error_Handler(); 
@@ -278,9 +285,9 @@ static void RTC_CalendarShow(uint8_t* showtime, uint8_t* showdate)
   RTC_TimeTypeDef stimestructureget;
   
   /* Get the RTC current Time */
-  HAL_RTC_GetTime(&RtcHandle, &stimestructureget, FORMAT_BIN);
+  HAL_RTC_GetTime(&RtcHandle, &stimestructureget, RTC_FORMAT_BIN);
   /* Get the RTC current Date */
-  HAL_RTC_GetDate(&RtcHandle, &sdatestructureget, FORMAT_BIN);
+  HAL_RTC_GetDate(&RtcHandle, &sdatestructureget, RTC_FORMAT_BIN);
   /* Display time Format : hh:mm:ss */
   sprintf((char*)showtime,"%02d:%02d:%02d",stimestructureget.Hours, stimestructureget.Minutes, stimestructureget.Seconds);
   /* Display date Format : mm-dd-yy */
@@ -288,7 +295,6 @@ static void RTC_CalendarShow(uint8_t* showtime, uint8_t* showdate)
 } 
 
 #ifdef  USE_FULL_ASSERT
-
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.

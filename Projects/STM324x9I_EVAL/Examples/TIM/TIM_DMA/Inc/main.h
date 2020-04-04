@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    TIM/TIM_DMA/Inc/main.h 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
@@ -49,12 +49,12 @@
 #define TIMx                              TIM1
 
 /* Definition for TIMx clock resources */
-#define TIMx_CLK_ENABLE                  __TIM1_CLK_ENABLE
-#define DMAx_CLK_ENABLE                  __DMA2_CLK_ENABLE();
+#define TIMx_CLK_ENABLE                  __HAL_RCC_TIM1_CLK_ENABLE
+#define DMAx_CLK_ENABLE                  __HAL_RCC_DMA2_CLK_ENABLE();
 
 /* Definition for TIMx Pins */
-#define TIMx_CHANNEL3_GPIOCLK_ENABLE    __GPIOE_CLK_ENABLE
-#define TIMx_CHANNEL3N_GPIOCLK_ENABLE   __GPIOB_CLK_ENABLE
+#define TIMx_CHANNEL3_GPIOCLK_ENABLE    __HAL_RCC_GPIOE_CLK_ENABLE
+#define TIMx_CHANNEL3N_GPIOCLK_ENABLE   __HAL_RCC_GPIOB_CLK_ENABLE
 
 #define TIMx_GPIO_CHANNEL3_PORT          GPIOE
 #define GPIO_PIN_CHANNEL3                GPIO_PIN_13

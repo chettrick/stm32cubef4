@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Host/FWupgrade_Standalone/Src/flash_if.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This file provides all the flash layer functions.
   ******************************************************************************
   * @attention
@@ -33,7 +33,7 @@
 /* Private macros ------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 uint32_t FirstSector = 0;
-uint32_t NbOfSectors = 0 ;
+uint32_t NbOfSectors = 0;
 uint32_t SectorError = 0;
 uint32_t OB_RDP_LEVEL;
 
@@ -97,10 +97,10 @@ uint32_t FLASH_If_EraseSectors(uint32_t Address)
     /* Get the number of sector to erase from 1st sector */
     NbOfSectors = FLASH_If_GetSectorNumber(USER_FLASH_LAST_PAGE_ADDRESS) - FirstSector + 1;
     
-    FLASH_EraseInitStruct.TypeErase = TYPEERASE_SECTORS;
+    FLASH_EraseInitStruct.TypeErase = FLASH_TYPEERASE_SECTORS;
     FLASH_EraseInitStruct.Sector = FirstSector;
     FLASH_EraseInitStruct.NbSectors = NbOfSectors;
-    FLASH_EraseInitStruct.VoltageRange = VOLTAGE_RANGE_3;
+    FLASH_EraseInitStruct.VoltageRange = FLASH_VOLTAGE_RANGE_3;
     
     if(HAL_FLASHEx_Erase(&FLASH_EraseInitStruct, &SectorError) != HAL_OK)
       return (1);
@@ -128,7 +128,7 @@ uint32_t FLASH_If_Write(uint32_t Address, uint32_t Data)
   
   if(Address <= (uint32_t) USER_FLASH_LAST_PAGE_ADDRESS)
   {
-    if(HAL_FLASH_Program(TYPEPROGRAM_WORD, Address, Data)!= HAL_OK)
+    if(HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, Address, Data)!= HAL_OK)
       return (1);  
   }
   else

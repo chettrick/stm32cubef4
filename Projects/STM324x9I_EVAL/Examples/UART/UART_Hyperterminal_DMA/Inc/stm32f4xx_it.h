@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    UART/UART_HyperTerminal_DMA/Inc/stm32f4xx_it.h 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This file contains the headers of the interrupt handlers.
   ******************************************************************************
   * @attention
@@ -44,7 +44,8 @@
 #endif 
 
 /* Includes ------------------------------------------------------------------*/
-#include "main.h" 
+#include "main.h"
+
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
@@ -61,6 +62,7 @@ void PendSV_Handler(void);
 void SysTick_Handler(void);
 void USARTx_DMA_RX_IRQHandler(void);
 void USARTx_DMA_TX_IRQHandler(void);
+void USARTx_IRQHandler(void);
 
 #ifdef __cplusplus
 }

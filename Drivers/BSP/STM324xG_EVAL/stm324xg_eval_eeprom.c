@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324xg_eval_eeprom.c
   * @author  MCD Application Team
-  * @version V2.0.3
-  * @date    26-June-2014
+  * @version V2.0.4
+  * @date    10-December-2014
   * @brief   This file provides a set of functions needed to manage an I2C M24C64 
   *          EEPROM memory.
   *          
@@ -24,7 +24,7 @@
   *          EEPROM_IO_Init() function. 
   *        
   *          @note In this driver, basic read and write functions (BSP_EEPROM_ReadBuffer() 
-  *                and BSP_EEPROM_WritePage()) use Polling mode to perform the data transfer 
+  *                and EEPROM_WritePage()) use Polling mode to perform the data transfer 
   *                to/from EEPROM memory.
   *             
   *     +-----------------------------------------------------------------+
@@ -121,6 +121,8 @@ __IO uint8_t   EEPROMDataWrite;
 /** @defgroup STM32F4xG_EVAL_EEPROM_Private_Function_Prototypes
   * @{
   */ 
+static uint32_t EEPROM_WritePage(uint8_t* pBuffer, uint16_t WriteAddr, uint8_t* NumByteToWrite);
+static uint32_t EEPROM_WaitEepromStandbyState(void);
 /**
   * @}
   */ 
@@ -139,7 +141,7 @@ uint32_t BSP_EEPROM_Init(void)
 { 
   /* I2C Initialization */
   EEPROM_IO_Init();
-
+  
   /* Select the EEPROM address and check if OK */
   if(EEPROM_IO_IsDeviceReady(EEPROM_I2C_ADDRESS, EEPROM_MAX_TRIALS) != HAL_OK)
   {
@@ -181,51 +183,6 @@ uint32_t BSP_EEPROM_ReadBuffer(uint8_t* pBuffer, uint16_t ReadAddr, uint16_t* Nu
 }
 
 /**
-  * @brief  Writes more than one byte to the EEPROM with a single WRITE cycle.
-  *
-  * @note   The number of bytes (combined to write start address) must not 
-  *         cross the EEPROM page boundary. This function can only write into
-  *         the boundaries of an EEPROM page.
-  *         This function doesn't check on boundaries condition (in this driver 
-  *         the function BSP_EEPROM_WriteBuffer() which calls BSP_EEPROM_WritePage() is 
-  *         responsible of checking on Page boundaries).
-  * 
-  * @param  pBuffer: pointer to the buffer containing the data to be written to 
-  *         the EEPROM.
-  * @param  WriteAddr: EEPROM's internal address to write to.
-  * @param  NumByteToWrite: pointer to the variable holding number of bytes to 
-  *         be written into the EEPROM. 
-  * 
-  *        @note The variable pointed by NumByteToWrite is reset to 0 when all the 
-  *              data are written to the EEPROM. Application should monitor this 
-  *              variable in order know when the transfer is complete.
-  * 
-  * @retval EEPROM_OK (0) if operation is correctly performed, else return value 
-  *         different from EEPROM_OK (0) or the timeout user callback.
-  */
-uint32_t BSP_EEPROM_WritePage(uint8_t* pBuffer, uint16_t WriteAddr, uint8_t* NumByteToWrite)
-{ 
-  uint32_t buffersize = *NumByteToWrite;
-  uint32_t status = EEPROM_OK;
-  
-  /* Set the pointer to the Number of data to be written */
-  EEPROMDataWrite = *NumByteToWrite;  
-  if(EEPROM_IO_WriteData(EEPROM_I2C_ADDRESS, WriteAddr, pBuffer, buffersize) != HAL_OK)  
-  {
-    BSP_EEPROM_TIMEOUT_UserCallback();
-    status = EEPROM_FAIL;
-  }
-  
-  while(BSP_EEPROM_WaitEepromStandbyState() != EEPROM_OK)
-  {
-    return EEPROM_FAIL;
-  }
-
-  /* If all operations OK, return EEPROM_OK (0) */
-  return status;
-}
-
-/**
   * @brief  Writes buffer of data to the I2C EEPROM.
   * @param  pBuffer: pointer to the buffer  containing the data to be written 
   *         to the EEPROM.
@@ -240,7 +197,7 @@ uint32_t BSP_EEPROM_WriteBuffer(uint8_t* pBuffer, uint16_t WriteAddr, uint16_t N
   uint16_t addr = 0;
   uint8_t  dataindex = 0;
   uint32_t status = EEPROM_OK;
-
+  
   addr = WriteAddr % EEPROM_PAGESIZE;
   count = EEPROM_PAGESIZE - addr;
   numofpage =  NumByteToWrite / EEPROM_PAGESIZE;
@@ -255,7 +212,7 @@ uint32_t BSP_EEPROM_WriteBuffer(uint8_t* pBuffer, uint16_t WriteAddr, uint16_t N
       /* Store the number of data to be written */
       dataindex = numofsingle;
       /* Start writing data */
-      status = BSP_EEPROM_WritePage(pBuffer, WriteAddr, (uint8_t*)(&dataindex));
+      status = EEPROM_WritePage(pBuffer, WriteAddr, (uint8_t*)(&dataindex));
       if(status != EEPROM_OK)
       {
         return status;
@@ -268,7 +225,7 @@ uint32_t BSP_EEPROM_WriteBuffer(uint8_t* pBuffer, uint16_t WriteAddr, uint16_t N
       {
         /* Store the number of data to be written */
         dataindex = EEPROM_PAGESIZE;        
-        status = BSP_EEPROM_WritePage(pBuffer, WriteAddr, (uint8_t*)(&dataindex));
+        status = EEPROM_WritePage(pBuffer, WriteAddr, (uint8_t*)(&dataindex));
         if(status != EEPROM_OK)
         {
           return status;
@@ -282,7 +239,7 @@ uint32_t BSP_EEPROM_WriteBuffer(uint8_t* pBuffer, uint16_t WriteAddr, uint16_t N
       {
         /* Store the number of data to be written */
         dataindex = numofsingle;          
-        status = BSP_EEPROM_WritePage(pBuffer, WriteAddr, (uint8_t*)(&dataindex));
+        status = EEPROM_WritePage(pBuffer, WriteAddr, (uint8_t*)(&dataindex));
         if(status != EEPROM_OK)
         {
           return status;
@@ -290,7 +247,7 @@ uint32_t BSP_EEPROM_WriteBuffer(uint8_t* pBuffer, uint16_t WriteAddr, uint16_t N
       }
     }
   }
-  /* If WriteAddr is not EEPROM_PAGESIZE aligned  */
+  /* If WriteAddr is not EEPROM_PAGESIZE aligned */
   else 
   {
     /* If NumByteToWrite < EEPROM_PAGESIZE */
@@ -303,7 +260,7 @@ uint32_t BSP_EEPROM_WriteBuffer(uint8_t* pBuffer, uint16_t WriteAddr, uint16_t N
         /* Store the number of data to be written */
         dataindex = count;        
         /* Write the data contained in same page */
-        status = BSP_EEPROM_WritePage(pBuffer, WriteAddr, (uint8_t*)(&dataindex));
+        status = EEPROM_WritePage(pBuffer, WriteAddr, (uint8_t*)(&dataindex));
         if(status != EEPROM_OK)
         {
           return status;
@@ -312,7 +269,7 @@ uint32_t BSP_EEPROM_WriteBuffer(uint8_t* pBuffer, uint16_t WriteAddr, uint16_t N
         /* Store the number of data to be written */
         dataindex = (NumByteToWrite - count);          
         /* Write the remaining data in the following page */
-        status = BSP_EEPROM_WritePage((uint8_t*)(pBuffer + count), (WriteAddr + count), (uint8_t*)(&dataindex));
+        status = EEPROM_WritePage((uint8_t*)(pBuffer + count), (WriteAddr + count), (uint8_t*)(&dataindex));
         if(status != EEPROM_OK)
         {
           return status;
@@ -322,7 +279,7 @@ uint32_t BSP_EEPROM_WriteBuffer(uint8_t* pBuffer, uint16_t WriteAddr, uint16_t N
       {
         /* Store the number of data to be written */
         dataindex = numofsingle;         
-        status = BSP_EEPROM_WritePage(pBuffer, WriteAddr, (uint8_t*)(&dataindex));
+        status = EEPROM_WritePage(pBuffer, WriteAddr, (uint8_t*)(&dataindex));
         if(status != EEPROM_OK)
         {
           return status;
@@ -340,7 +297,7 @@ uint32_t BSP_EEPROM_WriteBuffer(uint8_t* pBuffer, uint16_t WriteAddr, uint16_t N
       {  
         /* Store the number of data to be written */
         dataindex = count;         
-        status = BSP_EEPROM_WritePage(pBuffer, WriteAddr, (uint8_t*)(&dataindex));
+        status = EEPROM_WritePage(pBuffer, WriteAddr, (uint8_t*)(&dataindex));
         if(status != EEPROM_OK)
         {
           return status;
@@ -353,7 +310,7 @@ uint32_t BSP_EEPROM_WriteBuffer(uint8_t* pBuffer, uint16_t WriteAddr, uint16_t N
       {
         /* Store the number of data to be written */
         dataindex = EEPROM_PAGESIZE;          
-        status = BSP_EEPROM_WritePage(pBuffer, WriteAddr, (uint8_t*)(&dataindex));
+        status = EEPROM_WritePage(pBuffer, WriteAddr, (uint8_t*)(&dataindex));
         if(status != EEPROM_OK)
         {
           return status;
@@ -365,7 +322,7 @@ uint32_t BSP_EEPROM_WriteBuffer(uint8_t* pBuffer, uint16_t WriteAddr, uint16_t N
       {
         /* Store the number of data to be written */
         dataindex = numofsingle; 
-        status = BSP_EEPROM_WritePage(pBuffer, WriteAddr, (uint8_t*)(&dataindex));
+        status = EEPROM_WritePage(pBuffer, WriteAddr, (uint8_t*)(&dataindex));
         if(status != EEPROM_OK)
         {
           return status;
@@ -373,9 +330,54 @@ uint32_t BSP_EEPROM_WriteBuffer(uint8_t* pBuffer, uint16_t WriteAddr, uint16_t N
       }
     }
   }  
-                                   
+  
   /* If all operations OK, return EEPROM_OK (0) */
   return EEPROM_OK;
+}
+
+/**
+  * @brief  Writes more than one byte to the EEPROM with a single WRITE cycle.
+  *
+  * @note   The number of bytes (combined to write start address) must not 
+  *         cross the EEPROM page boundary. This function can only write into
+  *         the boundaries of an EEPROM page.
+  *         This function doesn't check on boundaries condition (in this driver 
+  *         the function BSP_EEPROM_WriteBuffer() which calls EEPROM_WritePage() is 
+  *         responsible of checking on Page boundaries).
+  * 
+  * @param  pBuffer: pointer to the buffer containing the data to be written to 
+  *         the EEPROM.
+  * @param  WriteAddr: EEPROM's internal address to write to.
+  * @param  NumByteToWrite: pointer to the variable holding number of bytes to 
+  *         be written into the EEPROM. 
+  * 
+  *        @note The variable pointed by NumByteToWrite is reset to 0 when all the 
+  *              data are written to the EEPROM. Application should monitor this 
+  *              variable in order know when the transfer is complete.
+  * 
+  * @retval EEPROM_OK (0) if operation is correctly performed, else return value 
+  *         different from EEPROM_OK (0) or the timeout user callback.
+  */
+static uint32_t EEPROM_WritePage(uint8_t* pBuffer, uint16_t WriteAddr, uint8_t* NumByteToWrite)
+{ 
+  uint32_t buffersize = *NumByteToWrite;
+  uint32_t status = EEPROM_OK;
+  
+  /* Set the pointer to the Number of data to be written */
+  EEPROMDataWrite = *NumByteToWrite;  
+  if(EEPROM_IO_WriteData(EEPROM_I2C_ADDRESS, WriteAddr, pBuffer, buffersize) != HAL_OK)  
+  {
+    BSP_EEPROM_TIMEOUT_UserCallback();
+    status = EEPROM_FAIL;
+  }
+  
+  while(EEPROM_WaitEepromStandbyState() != EEPROM_OK)
+  {
+    return EEPROM_FAIL;
+  }
+  
+  /* If all operations OK, return EEPROM_OK (0) */
+  return status;
 }
 
 /**
@@ -392,7 +394,7 @@ uint32_t BSP_EEPROM_WriteBuffer(uint8_t* pBuffer, uint16_t WriteAddr, uint16_t N
   * @retval EEPROM_OK (0) if operation is correctly performed, else return value 
   *         different from EEPROM_OK (0) or the timeout user callback.
   */
-uint32_t BSP_EEPROM_WaitEepromStandbyState(void)      
+static uint32_t EEPROM_WaitEepromStandbyState(void)      
 {
   /* Check if the maximum allowed number of trials has bee reached */
   if(EEPROM_IO_IsDeviceReady(EEPROM_I2C_ADDRESS, EEPROM_MAX_TRIALS) != HAL_OK)

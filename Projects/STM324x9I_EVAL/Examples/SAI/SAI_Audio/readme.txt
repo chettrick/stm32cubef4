@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    SAI/SAI_Audio/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Description of the SAI Audio Example.
   ******************************************************************************
   *
@@ -58,13 +58,17 @@ In this example the audio data is stored in the internal flash memory (Stereo,
 The example also manages information display and control interface
 through push buttons: 
  - When the application is Playing audio file:
-     + Tamper : Volume UP
-     + Wakeup : Volume DOWN
+     + Tamper  : Volume UP
+     + Wake-up : Volume DOWN
 
 This example plays the audio data stored in internal flash memory and replays it
-when it reachs end of file. But it can be tailored to use different media storage
+when it reaches end of file. But it can be tailored to use different media storage
 devices; SDCard (through SDIO), external Memory (through FMC),... or to play 
-in streaming mode (ie. from USB port in device or host mode). 
+in streaming mode (ie. from USB port in device or host mode).
+
+Once started, STM32 Eval board's LEDs behaviour is described below:
+ - LED1 and LED4 are turned ON 
+ - LED2 and LED3 are toggling inversely
 
 The WM8994 codec support the TDM format, for this the SAI peripheral is configured 
 with 4 time slot (2 time slots left/right channels for headphone and 2 time slots 
@@ -73,7 +77,7 @@ In the WM8994 configuration the SLOT0 (2 time slots left/right) is dedicated for
 the headphone and SLOT1 (2 time slots left/right) is dedicated for speaker.
 
 List of Known Limitations and more detailed user notes are provided in file 
-stm324x9i_eval_audio.c   (under Drivers\BSP\STM324x9I_EVAL)
+stm324x9i_eval_audio.c   (under Drivers/BSP/STM324x9I_EVAL)
 
 The provided sample audio files (stored in internal flash memory) are:
 - Downloaded from http://www.freesound.org
@@ -87,7 +91,7 @@ The provided sample audio files (stored in internal flash memory) are:
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 
@@ -95,11 +99,12 @@ The provided sample audio files (stored in internal flash memory) are:
 
   - SAI/SAI_Audio/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - SAI/SAI_Audio/Inc/stm32f4xx_it.h          Interrupt handlers header file
-  - SAI/SAI_Audio/Inc/main.h                  Main program header file  
+  - SAI/SAI_Audio/Inc/main.h                  Main program header file
+  - SAI/SAI_Audio/Src/audio_if.h              Audio Out (playback) interface API header file  
   - SAI/SAI_Audio/Src/stm32f4xx_it.c          Interrupt handlers
   - SAI/SAI_Audio/Src/main.c                  Main program
+  - SAI/SAI_Audio/Src/audio_if.c              Audio Out (playback) interface API file
   - SAI/SAI_Audio/Src/system_stm32f4xx.c      STM32F4xx system clock configuration file
-  - SAI/SAI_Audio/Src/stm32f4xx_hal_msp.c     HAL MSP module
 
       
 @par Hardware and Software environment 
@@ -110,9 +115,11 @@ The provided sample audio files (stored in internal flash memory) are:
     evaluation board and can be easily tailored to any other supported device and development board
 
 
-@par How to use it ? 
+@par How to use it ?
+
  - Use STLink utility, available on www.st.com or any other in system programming
-   tool to load "SAI/SAI_Audio/Binary/audio_sample_tdm.bin" file to the STM32 internal flash at the address 0x08080000.
+   tool to load "/Utilities/Media/Audio/audio_sample_tdm.bin" file to the STM32 
+   internal flash at the address 0x08080000.
 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain 

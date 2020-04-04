@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    wm8994.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    28-November-2014
   * @brief   This file contains all the functions prototypes for the 
   *          wm8994.c driver.
   ******************************************************************************
@@ -41,7 +41,7 @@
 #define __WM8994_H
 
 /* Includes ------------------------------------------------------------------*/
-#include "..\Common\audio.h"
+#include "../Common/audio.h"
 
 /** @addtogroup BSP
   * @{

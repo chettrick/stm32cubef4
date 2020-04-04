@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Camera/Camera_To_USBDisk/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
@@ -52,7 +52,7 @@ extern HCD_HandleTypeDef hhcd;
 /******************************************************************************/
 
 /**
-  * @brief   This function handles NMI exception.
+  * @brief  This function handles NMI exception.
   * @param  None
   * @retval None
   */
@@ -149,6 +149,13 @@ void SysTick_Handler(void)
   HAL_IncTick();
 }
 
+/******************************************************************************/
+/*                 STM32F4xx Peripherals Interrupt Handlers                   */
+/*  Add here the Interrupt Handler for the used peripheral(s) (PPP), for the  */
+/*  available peripheral interrupt handler's name please refer to the startup */
+/*  file (startup_stm32f40xx.s/startup_stm32f427x.s/startup_stm32f429x.s).    */
+/******************************************************************************/
+
 /**
   * @brief  DMA interrupt handler.
   * @param  None
@@ -182,15 +189,8 @@ void OTG_FS_IRQHandler(void)
 void OTG_HS_IRQHandler(void)
 #endif
 {
-   HAL_HCD_IRQHandler(&hhcd);
+  HAL_HCD_IRQHandler(&hhcd);
 }
-
-/******************************************************************************/
-/*                 STM32F4xx Peripherals Interrupt Handlers                   */
-/*  Add here the Interrupt Handler for the used peripheral(s) (PPP), for the  */
-/*  available peripheral interrupt handler's name please refer to the startup */
-/*  file (startup_stm32f40xx.s/startup_stm32f427x.s/startup_stm32f429x.s).    */
-/******************************************************************************/
 
 /**
   * @brief  This function handles PPP interrupt request.
@@ -208,6 +208,5 @@ void OTG_HS_IRQHandler(void)
 /**
   * @}
   */ 
-
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

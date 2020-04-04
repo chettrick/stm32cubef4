@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    ADC/ADC_DualModeInterleaved/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This example provides a short description of how to use the ADC 
   *          peripheral to convert a regular channel in Dual interleaved mode.
   ******************************************************************************
@@ -39,7 +39,6 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
-
 /** @addtogroup STM32F4xx_HAL_Examples
   * @{
   */
@@ -67,7 +66,7 @@ static void ADC_Config(void);
 /* Private functions ---------------------------------------------------------*/
 
 /**
-  * @brief  Main program.
+  * @brief  Main program
   * @param  None
   * @retval None
   */
@@ -81,7 +80,7 @@ int main(void)
      */
   HAL_Init();
   
-  /* Configure the system clock to 144 Mhz */
+  /* Configure the system clock to 144 MHz */
   SystemClock_Config();
   
   /* Configure LED1 and LED3 */
@@ -127,7 +126,7 @@ int main(void)
   *            PLL_Q                          = 6
   *            VDD(V)                         = 3.3
   *            Main regulator output voltage  = Scale2 mode
-  *            Flash Latency(WS)              = 5
+  *            Flash Latency(WS)              = 4
   * @param  None
   * @retval None
   */
@@ -137,7 +136,7 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
 
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -163,6 +162,13 @@ static void SystemClock_Config(void)
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4);
+
+  /* STM32F405x/407x/415x/417x Revision Z devices: prefetch is supported  */
+  if (HAL_GetREVID() == 0x1001)
+  {
+    /* Enable the Flash prefetch */
+    __HAL_FLASH_PREFETCH_BUFFER_ENABLE();
+  }
 }
 
 /**
@@ -199,7 +205,7 @@ static void ADC_Config(void)
   AdcHandle2.Instance          = ADCy;
   
   AdcHandle2.Init.ClockPrescaler = ADC_CLOCKPRESCALER_PCLK_DIV2;
-  AdcHandle2.Init.Resolution = ADC_RESOLUTION8b;
+  AdcHandle2.Init.Resolution = ADC_RESOLUTION_8B;
   AdcHandle2.Init.ScanConvMode = ENABLE;
   AdcHandle2.Init.ContinuousConvMode = ENABLE;
   AdcHandle2.Init.DiscontinuousConvMode = DISABLE;
@@ -233,7 +239,7 @@ static void ADC_Config(void)
   AdcHandle1.Instance          = ADCx;
   
   AdcHandle1.Init.ClockPrescaler = ADC_CLOCKPRESCALER_PCLK_DIV2;
-  AdcHandle1.Init.Resolution = ADC_RESOLUTION8b;
+  AdcHandle1.Init.Resolution = ADC_RESOLUTION_8B;
   AdcHandle1.Init.ScanConvMode = DISABLE;
   AdcHandle1.Init.ContinuousConvMode = ENABLE;
   AdcHandle1.Init.DiscontinuousConvMode = DISABLE;
@@ -283,7 +289,6 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 }
 
 #ifdef  USE_FULL_ASSERT
-
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.
@@ -301,7 +306,6 @@ void assert_failed(uint8_t* file, uint32_t line)
   {
   }
 }
-
 #endif
 
 /**

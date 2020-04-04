@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    usbd_conf_template.c
   * @author  MCD Application Team
-  * @version V2.2.0
-  * @date    13-June-2014
+  * @version V2.3.0
+  * @date    04-November-2014
   * @brief   USB Device configuration and interface file
   *          This template should be copied to the user folder, renamed and customized
   *          following user needs.  
@@ -190,7 +190,7 @@ USBD_StatusTypeDef USBD_LL_PrepareReceive(USBD_HandleTypeDef *pdev,
 }
 
 /**
-  * @brief  Returns the last transfered packet size.
+  * @brief  Returns the last transferred packet size.
   * @param  pdev: Device handle
   * @param  ep_addr: Endpoint Number
   * @retval Recived Data Size

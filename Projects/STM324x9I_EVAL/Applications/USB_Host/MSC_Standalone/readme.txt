@@ -1,13 +1,13 @@
 /**
-  @page MSC_Standalone USB Host Mass Storage (MSC) example
+  @page MSC_Standalone USB Host Mass Storage (MSC) application
   
   @verbatim
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    USB_Host/MSC_Standalone/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
-  * @brief   Description of the USB Host MSC example.
+  * @version V1.2.0
+  * @date    26-December-2014
+  * @brief   Description of the USB Host MSC application.
   ******************************************************************************
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
@@ -25,12 +25,12 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Application Description
 
-This example is a part of the USB Host Library package using STM32Cube firmware. It describes how to use
+This application is a part of the USB Host Library package using STM32Cube firmware. It describes how to use
 USB host application based on the Mass Storage Class (MSC) on the STM32F4xx devices.
 
-This is a typical example on how to use the STM32F4xx USB OTG Host peripheral to operate with an USB 
+This is a typical application on how to use the STM32F4xx USB OTG Host peripheral to operate with an USB 
 flash disk using the Bulk Only Transfer (BOT) and Small Computer System Interface (SCSI) transparent
 commands combined with a file system FatFs (Middleware component).
 
@@ -49,7 +49,7 @@ It's worth noting that the system clock (SYSCLK) can be configured, depending on
 When the application is started, the connected USB flash disk device is detected in MSC mode and gets 
 initialized. The STM32 MCU behaves as a MSC Host, it enumerates the device and extracts VID, PID, 
 manufacturer name, Serial no and product name information and displays it on the LCD screen. 
-This example is based on read/write file and explore the USB flash disk content trough a MSC routine.
+This application is based on read/write file and explore the USB flash disk content trough a MSC routine.
 
 A menu is displayed and the user can select any operation from the menu using the Joystick buttons:
  - "File Operations" operation writes a small text file (less to 1 KB) on the USB flash disk.
@@ -73,7 +73,7 @@ For more details about the STM32Cube USB Host library, please refer to UM1720
 @par USB Library Configuration
 
 To select the appropriate USB Core to work with, user must add the following macro defines within the
-compiler preprocessor (already done in the preconfigured projects provided with this example):
+compiler preprocessor (already done in the preconfigured projects provided with this application):
       - "USE_USB_HS" when using USB High Speed (HS) Core
       - "USE_USB_FS" when using USB Full Speed (FS) Core 
       - "USE_USB_HS" and "USE_USB_HS_IN_FS" when using USB High Speed (HS) Core in FS mode
@@ -105,14 +105,14 @@ requirements, such as:
   - USB_Host/MSC_Standalone/Inc/lcd_log_conf.h          LCD log configuration file
   - USB_Host/MSC_Standalone/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - USB_Host/MSC_Standalone/Inc/usbh_conf.h             USB Host driver Configuration file
-  - USB_Host/MSC_Standalone/Inc/ffconf.h                FatFs Module Configuration file
+  - USB_Host/MSC_Standalone/Inc/ffconf.h                FAT file system module configuration file
  
 
 @par Hardware and Software environment
 
-  - This example runs on STM32F429xx/STM32F439xx devices.
+  - This application runs on STM32F429xx/STM32F439xx devices.
     
-  - This example has been tested with STMicroelectronics STM324x9I-EVAL RevB 
+  - This application has been tested with STMicroelectronics STM324x9I-EVAL RevB 
     evaluation boards and can be easily tailored to any other supported device 
     and development board.
 
@@ -137,7 +137,7 @@ In order to make the program work, you must do the following :
    - STM324x9I-EVAL_USBH-FS: to configure the project for STM32F4xx devices using USB OTG FS peripheral
    - STM324x9I-EVAL_USBH-HS-IN-FS: to configure the project for STM32F4xx devices and use USB OTG HS 
                                    peripheral In FS (using embedded PHY).
- - Run the example
+ - Run the application
  
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

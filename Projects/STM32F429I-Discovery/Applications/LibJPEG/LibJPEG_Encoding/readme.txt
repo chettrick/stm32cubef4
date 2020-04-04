@@ -1,13 +1,13 @@
 /**
-  @page LibJPEG_Encoding LibJPEG encoding example
+  @page LibJPEG_Encoding LibJPEG encoding application
   
   @verbatim
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    LibJPEG/LibJPEG_Encoding/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
-  * @brief   Description of the LibJPEG encoding example.
+  * @version V1.2.0
+  * @date    26-December-2014
+  * @brief   Description of the LibJPEG encoding application.
   ******************************************************************************
   * @attention
   *
@@ -40,7 +40,7 @@
 
 @par Application Description
 
-This example demonstrates how to read BMP file from USB disk, encode it, save the jpeg file
+This application demonstrates how to read BMP file from USB disk, encode it, save the jpeg file
 in USB disk then decode the jpeg file and display the final BMP image on the LCD.
 
 The BMP image should be copied at USB disk root.
@@ -65,7 +65,7 @@ with CPU or with DMA2D. Uncomment "USE_DMA2D" define for DMA2D transfer and
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 
@@ -74,23 +74,23 @@ with CPU or with DMA2D. Uncomment "USE_DMA2D" define for DMA2D transfer and
     - LibJPEG/LibJPEG_Encoding/Inc/main.h                      Main program header file
     - LibJPEG/LibJPEG_Encoding/Inc/stm32f4xx_it.h              Interrupt handlers header file
     - LibJPEG/LibJPEG_Encoding/Inc/stm32f4xx_hal_conf.h        HAL Configuration file 
-    - LibJPEG/LibJPEG_Encoding/Inc/ffconf.h                    Configuration file for FatFs module.
-    - LibJPEG/LibJPEG_Encoding/Inc/encode.h                    encoder header file
-    - LibJPEG/LibJPEG_Encoding/Inc/decode.h                    decoder header file
-    - LibJPEG/LibJPEG_Encoding/Inc/jmorecfg.h                  Lib JPEG configuration file (advanced configuration).
-    - LibJPEG/LibJPEG_Encoding/Inc/jconfig.h                   Lib JPEG configuration file.       
+    - LibJPEG/LibJPEG_Encoding/Inc/ffconf.h                    FAT file system module configuration file
+    - LibJPEG/LibJPEG_Encoding/Inc/encode.h                    Encoder header file
+    - LibJPEG/LibJPEG_Encoding/Inc/decode.h                    Decoder header file
+    - LibJPEG/LibJPEG_Encoding/Inc/jmorecfg.h                  Lib JPEG configuration file (advanced configuration)
+    - LibJPEG/LibJPEG_Encoding/Inc/jconfig.h                   Lib JPEG configuration file      
     - LibJPEG/LibJPEG_Encoding/Src/main.c                      Main program  
     - LibJPEG/LibJPEG_Encoding/Src/stm32f4xx_it.c              Interrupt handlers
     - LibJPEG/LibJPEG_Encoding/Src/system_stm32f4xx.c          STM32F4xx system clock configuration file
-    - LibJPEG/LibJPEG_Encoding/Src/encode.c                    encoder file
-    - LibJPEG/LibJPEG_Encoding/Src/decode.c                    decoder file
+    - LibJPEG/LibJPEG_Encoding/Src/encode.c                    Encoder file
+    - LibJPEG/LibJPEG_Encoding/Src/decode.c                    Decoder file
 
 
 @par Hardware and Software environment
 
-  - This example runs on STM32F429xx Devices.
+  - This application runs on STM32F429xx Devices.
     
-  - This example has been tested with STM32F429I-Discovery RevB board and can be
+  - This application has been tested with STM32F429I-Discovery RevB board and can be
     easily tailored to any other supported device and development board.  
 
   - STM32F429I-DISCO RevB Set-up
@@ -103,7 +103,7 @@ with CPU or with DMA2D. Uncomment "USE_DMA2D" define for DMA2D transfer and
 In order to make the program work, you must do the following :
  - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
- - Run the example
+ - Run the application
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

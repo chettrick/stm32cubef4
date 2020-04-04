@@ -1328,8 +1328,8 @@
       <TopLine>0</TopLine>
       <CurrentLine>0</CurrentLine>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\..\Middlewares\ST\STemWin\Lib\STemWin524b_CM4_IAR.a</PathWithFileName>
-      <FilenameWithoutPath>STemWin524b_CM4_Keil.lib</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\..\..\..\Middlewares\ST\STemWin\Lib\STemWin526_CM4_IAR.a</PathWithFileName>
+      <FilenameWithoutPath>STemWin526_CM4_Keil.lib</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

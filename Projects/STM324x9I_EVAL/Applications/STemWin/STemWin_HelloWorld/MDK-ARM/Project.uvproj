@@ -432,7 +432,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Docs</GroupName>
+          <GroupName>Doc</GroupName>
           <Files>
             <File>
               <FileName>readme.txt</FileName>
@@ -668,9 +668,9 @@
           <GroupName>Middlewares/STemWin/Lib</GroupName>
           <Files>
             <File>
-              <FileName>STemWin524b_CM4_Keil.lib</FileName>
+              <FileName>STemWin526_CM4_Keil.lib</FileName>
               <FileType>4</FileType>
-              <FilePath>..\..\..\..\..\..\Middlewares\ST\STemWin\Lib\STemWin524b_CM4_IAR.a</FilePath>
+              <FilePath>..\..\..\..\..\..\Middlewares\ST\STemWin\Lib\STemWin526_CM4_IAR.a</FilePath>
             </File>
           </Files>
         </Group>
@@ -1102,7 +1102,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Docs</GroupName>
+          <GroupName>Doc</GroupName>
           <Files>
             <File>
               <FileName>readme.txt</FileName>
@@ -1338,9 +1338,9 @@
           <GroupName>Middlewares/STemWin/Lib</GroupName>
           <Files>
             <File>
-              <FileName>STemWin524b_CM4_Keil.lib</FileName>
+              <FileName>STemWin526_CM4_Keil.lib</FileName>
               <FileType>4</FileType>
-              <FilePath>..\..\..\..\..\..\Middlewares\ST\STemWin\Lib\STemWin524b_CM4_IAR.a</FilePath>
+              <FilePath>..\..\..\..\..\..\Middlewares\ST\STemWin\Lib\STemWin526_CM4_IAR.a</FilePath>
             </File>
           </Files>
         </Group>

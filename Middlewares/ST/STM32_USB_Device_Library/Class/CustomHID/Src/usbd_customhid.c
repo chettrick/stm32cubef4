@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    usbd_customhid.c
   * @author  MCD Application Team
-  * @version V2.2.0
-  * @date    13-June-2014
+  * @version V2.3.0
+  * @date    04-November-2014
   * @brief   This file provides the CUSTOM_HID core functions.
   *
   * @verbatim
@@ -261,7 +261,7 @@ static uint8_t  USBD_CUSTOM_HID_Init (USBD_HandleTypeDef *pdev,
   }
   else
   {
-    hhid = pdev->pClassData;
+    hhid = (USBD_CUSTOM_HID_HandleTypeDef*) pdev->pClassData;
       
     hhid->state = CUSTOM_HID_IDLE;
     ((USBD_CUSTOM_HID_ItfTypeDef *)pdev->pUserData)->Init();
@@ -313,7 +313,7 @@ static uint8_t  USBD_CUSTOM_HID_Setup (USBD_HandleTypeDef *pdev,
 {
   uint16_t len = 0;
   uint8_t  *pbuf = NULL;
-  USBD_CUSTOM_HID_HandleTypeDef     *hhid = pdev->pClassData;
+  USBD_CUSTOM_HID_HandleTypeDef     *hhid = (USBD_CUSTOM_HID_HandleTypeDef*)pdev->pClassData;
 
   switch (req->bmRequest & USB_REQ_TYPE_MASK)
   {
@@ -399,7 +399,7 @@ uint8_t USBD_CUSTOM_HID_SendReport     (USBD_HandleTypeDef  *pdev,
                                  uint8_t *report,
                                  uint16_t len)
 {
-  USBD_CUSTOM_HID_HandleTypeDef     *hhid = pdev->pClassData;
+  USBD_CUSTOM_HID_HandleTypeDef     *hhid = (USBD_CUSTOM_HID_HandleTypeDef*)pdev->pClassData;
   
   if (pdev->dev_state == USBD_STATE_CONFIGURED )
   {
@@ -457,7 +457,7 @@ static uint8_t  USBD_CUSTOM_HID_DataOut (USBD_HandleTypeDef *pdev,
                               uint8_t epnum)
 {
   
-  USBD_CUSTOM_HID_HandleTypeDef     *hhid = pdev->pClassData;  
+  USBD_CUSTOM_HID_HandleTypeDef     *hhid = (USBD_CUSTOM_HID_HandleTypeDef*)pdev->pClassData;  
   
   ((USBD_CUSTOM_HID_ItfTypeDef *)pdev->pUserData)->OutEvent(hhid->Report_buf[0], 
                                                             hhid->Report_buf[1]);
@@ -476,7 +476,7 @@ static uint8_t  USBD_CUSTOM_HID_DataOut (USBD_HandleTypeDef *pdev,
   */
 uint8_t USBD_CUSTOM_HID_EP0_RxReady(USBD_HandleTypeDef *pdev)
 {
-  USBD_CUSTOM_HID_HandleTypeDef     *hhid = pdev->pClassData;  
+  USBD_CUSTOM_HID_HandleTypeDef     *hhid = (USBD_CUSTOM_HID_HandleTypeDef*)pdev->pClassData;  
 
   if (hhid->IsReportAvailable == 1)
   {

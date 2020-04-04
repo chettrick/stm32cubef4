@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Host/HID_RTOS/Src/mouse.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014 
+  * @version V1.2.0
+  * @date    26-December-2014 
   * @brief   This file implements Functions for mouse menu
   ******************************************************************************
   * @attention
@@ -97,7 +97,7 @@ void HID_MouseMenuProcess(void)
   case HID_MOUSE_WAIT:
     if(hid_demo.select != prev_select)
     {
-      prev_select = hid_demo.select ;
+      prev_select = hid_demo.select;
       HID_SelectItem(DEMO_MOUSE_menu, hid_demo.select & 0x7F);
       
       /* Handle select item */

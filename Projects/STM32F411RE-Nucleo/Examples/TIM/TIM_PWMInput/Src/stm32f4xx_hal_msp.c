@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    TIM/TIM_PWMInput/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    26-June-2014
+  * @version V1.1.0
+  * @date    26-December-2014
   * @brief   HAL MSP module.
   ******************************************************************************
   * @attention
@@ -85,11 +85,11 @@ void HAL_TIM_IC_MspInit(TIM_HandleTypeDef *htim)
   GPIO_InitStruct.Alternate = GPIO_AF_TIMx;
   HAL_GPIO_Init(GPIO_PORT, &GPIO_InitStruct);
 
-  /*##-2- Configure the NVIC for TIMx #########################################*/
-  /* Sets the priority grouping field */
+  /*##-2- Configure the NVIC for TIMx ########################################*/
+  /* Set the TIMx priority */
   HAL_NVIC_SetPriority(TIMx_IRQn, 0, 1);
   
-  /* Enable the TIM4 global Interrupt */
+  /* Enable the TIMx global Interrupt */
   HAL_NVIC_EnableIRQ(TIMx_IRQn);
 }
 

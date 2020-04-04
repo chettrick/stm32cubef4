@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f401_discovery_gyroscope.h
   * @author  MCD Application Team
-  * @version V2.1.1
-  * @date    26-June-2014
+  * @version V2.1.2
+  * @date    10-December-2014
   * @brief   This file contains definitions for stm32f401_discovery_gyroscope.c 
   *          firmware driver.
   ******************************************************************************
@@ -49,7 +49,7 @@
 #include "stm32f401_discovery.h"
 
  /* Include Gyroscope component driver */
-#include "..\Components\l3gd20\l3gd20.h"   
+#include "../Components/l3gd20/l3gd20.h"   
 
 /** @addtogroup BSP
   * @{

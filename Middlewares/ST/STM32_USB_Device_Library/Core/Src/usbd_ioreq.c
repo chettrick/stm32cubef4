@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    usbd_ioreq.c
   * @author  MCD Application Team
-  * @version V2.2.0
-  * @date    13-June-2014
+  * @version V2.3.0
+  * @date    04-November-2014
   * @brief   This file provides the IO requests APIs for control endpoints.
   ******************************************************************************
   * @attention

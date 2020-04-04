@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Demonstrations/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   HAL MSP module.    
   ******************************************************************************
   * @attention
@@ -68,10 +68,10 @@ void HAL_TIM_PWM_MspInit(TIM_HandleTypeDef *htim)
   GPIO_InitTypeDef GPIO_InitStructure;
   /* --------------------------- System Clocks Configuration -----------------*/
   /* TIM4 clock enable */
-  __TIM4_CLK_ENABLE();
+  __HAL_RCC_TIM4_CLK_ENABLE();
   
   /* GPIOD clock enable */
-  __GPIOD_CLK_ENABLE();
+  __HAL_RCC_GPIOD_CLK_ENABLE();
   
   /*-------------------------- GPIO Configuration ----------------------------*/
   /* GPIOD Configuration: Pins 12, 13, 14 and 15 in output push-pull */

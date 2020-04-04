@@ -3,10 +3,10 @@
  
   @verbatim
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
-  * @file    readme.txt 
+  * @file    Demonstrations/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    26-June-2014
+  * @version V1.1.0
+  * @date    26-December-2014
   * @brief   Description of STM32F411RE-Nucleo Demo
   ******************************************************************************
   *
@@ -72,20 +72,20 @@ access to uSD card to parse bmp images:
 
  - If SD Card is not FAT formatted, a message will be displayed on TFT. 
    In this case, format the SD card and put into its root directory the .bmp 
-   files available within the FW package under \Media folder.
+   files available within the "BMP_128x160" folder under "Utilities/Media/Pictures"
 
  - If the content of the SD card is other than a bitmap file, a message will 
    be displayed on TFT mentioning that it is not supported.
-   In this case, put into the SD card's root directory the .bmp 
-   files available within the FW package under \Media folder which are respecting
-   the following criteria:
-   o Dimensions: 128x160
-   o Width: 128 pixels
-   o Height: 160 pixels
-   o Bit depth: 16
-   o Item type: BMP file
-   o The name of the bmp image file must not exceed 11 characters (including
-     .bmp extension).
+   In this case, put into the SD card's root directory the .bmp
+   files available within the "BMP_128x160" folder under "Utilities/Media/Pictures" 
+   which are respecting the following criteria:
+    o Dimensions: 128x160
+    o Width: 128 pixels
+    o Height: 160 pixels
+    o Bit depth: 16
+    o Item type: BMP file
+    o The name of the bmp image file must not exceed 11 characters (including
+      .bmp extension).
 
 
 @note Care must be taken when using HAL_Delay(), this function provides accurate
@@ -95,7 +95,7 @@ access to uSD card to parse bmp images:
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to
+@note The application needs to ensure that the SysTick time base is always set to
       1 millisecond to have correct HAL operation.
 
 @note The clock setting is configured to have the max product performance (max clock frequency) 
@@ -116,14 +116,14 @@ access to uSD card to parse bmp images:
 
 @par Hardware and Software environment
 
-  - This example runs on STM32F411xEx devices.
+  - This demonstration runs on STM32F411xEx devices.
     
-  - This example has been tested with STMicroelectronics STM32F4xx-Nucleo RevC 
+  - This demonstration has been tested with STMicroelectronics STM32F4xx-Nucleo RevC 
     discovery boards and can be easily tailored to any other supported device 
     and development board.
     
   - A SDSC microSD card (capacity up to 4GB), must contain the .bmp files
-    available under the FW package \Media folder.
+    available within the "BMP_128x160" folder under "Utilities/Media/Pictures" 
     
   - Adafruit 1.8" TFT shield must be connected on CN5,CN6, CN8 and CN9 Arduino connectors, 
     for more details please refer to UM1726.
@@ -137,7 +137,7 @@ http://www.adafruit.com/blog/2012/04/26/new-product-adafruit-1-8-18-bit-color-tf
 In order to make the program work, you must do the following :
  - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
- - Run the example
+ - Run the demonstration
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

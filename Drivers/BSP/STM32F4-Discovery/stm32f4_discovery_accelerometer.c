@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f4_discovery_accelerometer.c
   * @author  MCD Application Team
-  * @version V2.0.2
-  * @date    26-June-2014
+  * @version V2.0.3
+  * @date    10-December-2014
   * @brief   This file provides a set of functions needed to manage the
   *          MEMS accelerometers available on STM32F4-Discovery Kit.
   ******************************************************************************
@@ -251,7 +251,7 @@ void BSP_ACCELERO_GetXYZ(int16_t *pDataXYZ)
     { 
       SwitchXY  = pDataXYZ[0];
       pDataXYZ[0] = pDataXYZ[1];
-      /* Invert Y Axis to be conpliant with LIS3DSH MEMS */
+      /* Invert Y Axis to be compliant with LIS3DSH MEMS */
       pDataXYZ[1] = -SwitchXY;
     } 
   }

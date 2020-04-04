@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LibJPEG/LibJPEG_Decoding/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014 
+  * @version V1.2.0
+  * @date    26-December-2014 
   * @brief   Main program body
   *          This sample code shows how to decompress JPEG file.
   ******************************************************************************
@@ -34,8 +34,7 @@ typedef enum
 {
   APPLICATION_IDLE = 0,  
   APPLICATION_START    
-}
-MSC_ApplicationTypeDef;  
+} MSC_ApplicationTypeDef;  
 
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -76,9 +75,9 @@ int main(void)
      */
   HAL_Init();
   
-  /* Configure the system clock to 180 Mhz */
+  /* Configure the system clock to 180 MHz */
   SystemClock_Config();
-
+  
   /*##-1- LCD Configuration ##################################################*/
   LCD_Config();
   
@@ -104,11 +103,10 @@ int main(void)
       switch(Appli_state)
       {
       case APPLICATION_START:
-
+        
         /* Open the JPG image with read access */
         if(f_open(&MyFile, "image.jpg", FA_READ) == FR_OK)
         {
-  
           /* Decode the jpg image file */
           jpeg_decode(&MyFile, IMAGE_WIDTH, _aucLine, Jpeg_CallbackFunction);
         }
@@ -121,20 +119,22 @@ int main(void)
         break;      
       }
     }
-    }  
+  }  
   
   /* TrueStudio compilation error correction */
-  while (1) {}  
-
+  while (1)
+  {
+  }  
 }
 
 /**
   * @brief  LCD Configuration.
+  * @param  None  
   * @retval None
   */
 static void LCD_Config(void)
 {
-  /* Initialize the LCD*/  
+  /* Initialize the LCD */  
   BSP_LCD_Init();
   
   /* Background Layer Initialization */
@@ -142,7 +142,7 @@ static void LCD_Config(void)
   
   /* Set Foreground Layer */
   BSP_LCD_SelectLayer(0);
- 
+  
   /* Enable the LCD */
   BSP_LCD_DisplayOn();  
   
@@ -182,30 +182,30 @@ static uint8_t Jpeg_CallbackFunction(uint8_t* Row, uint32_t DataLength)
 #endif
 
 #ifdef USE_DMA2D  
-  static DMA2D_HandleTypeDef hdma2d_eval;
+  static DMA2D_HandleTypeDef DMA2DHandle;
   
 /* Configure the DMA2D Mode, Color Mode and output offset */
-  hdma2d_eval.Init.Mode         = DMA2D_M2M_PFC;
-  hdma2d_eval.Init.ColorMode    = DMA2D_ARGB8888;
-  hdma2d_eval.Init.OutputOffset = 0;     
+  DMA2DHandle.Init.Mode         = DMA2D_M2M_PFC;
+  DMA2DHandle.Init.ColorMode    = DMA2D_ARGB8888;
+  DMA2DHandle.Init.OutputOffset = 0;     
   
   /* Foreground Configuration */
-  hdma2d_eval.LayerCfg[1].AlphaMode = DMA2D_NO_MODIF_ALPHA;
-  hdma2d_eval.LayerCfg[1].InputAlpha = 0xFF;
-  hdma2d_eval.LayerCfg[1].InputColorMode = CM_RGB888;
-  hdma2d_eval.LayerCfg[1].InputOffset = 0;
+  DMA2DHandle.LayerCfg[1].AlphaMode = DMA2D_NO_MODIF_ALPHA;
+  DMA2DHandle.LayerCfg[1].InputAlpha = 0xFF;
+  DMA2DHandle.LayerCfg[1].InputColorMode = CM_RGB888;
+  DMA2DHandle.LayerCfg[1].InputOffset = 0;
   
-  hdma2d_eval.Instance = DMA2D; 
+  DMA2DHandle.Instance = DMA2D; 
   
   /* DMA2D Initialization */
-  if(HAL_DMA2D_Init(&hdma2d_eval) == HAL_OK) 
+  if(HAL_DMA2D_Init(&DMA2DHandle) == HAL_OK) 
   {
-    if(HAL_DMA2D_ConfigLayer(&hdma2d_eval, 1) == HAL_OK) 
+    if(HAL_DMA2D_ConfigLayer(&DMA2DHandle, 1) == HAL_OK) 
     {
-      if (HAL_DMA2D_Start(&hdma2d_eval, (uint32_t)Row, (uint32_t)offset, IMAGE_WIDTH, 1) == HAL_OK)
+      if (HAL_DMA2D_Start(&DMA2DHandle, (uint32_t)Row, (uint32_t)offset, IMAGE_WIDTH, 1) == HAL_OK)
       {
         /* Polling For DMA transfer */  
-        HAL_DMA2D_PollForTransfer(&hdma2d_eval, 10);
+        HAL_DMA2D_PollForTransfer(&DMA2DHandle, 10);
       }
     }
   }   
@@ -214,15 +214,15 @@ static uint8_t Jpeg_CallbackFunction(uint8_t* Row, uint32_t DataLength)
 #ifdef SWAP_RB 
   uint32_t pixel = 0, width_counter, result = 0, result1 = 0;
   
-   for(width_counter = 0; width_counter < IMAGE_WIDTH; width_counter++)
-   {
-     pixel = *(__IO uint32_t *)(LCD_BUFFER + (width_counter*4) + (offset - LCD_BUFFER)); 
-     result1 = (((pixel & 0x00FF0000) >> 16) | ((pixel & 0x000000FF) << 16));
-     pixel = pixel & 0xFF00FF00;
-     result = (result1 | pixel);
-     *(__IO uint32_t *)(LCD_BUFFER + (width_counter*4) + (offset - LCD_BUFFER)) = result;
-     
-   }  
+  for(width_counter = 0; width_counter < IMAGE_WIDTH; width_counter++)
+  {
+    pixel = *(__IO uint32_t *)(LCD_BUFFER + (width_counter*4) + (offset - LCD_BUFFER)); 
+    result1 = (((pixel & 0x00FF0000) >> 16) | ((pixel & 0x000000FF) << 16));
+    pixel = pixel & 0xFF00FF00;
+    result = (result1 | pixel);
+    *(__IO uint32_t *)(LCD_BUFFER + (width_counter*4) + (offset - LCD_BUFFER)) = result;
+    
+  }  
 #endif
   
   offset += (DataLength + IMAGE_WIDTH);
@@ -230,10 +230,10 @@ static uint8_t Jpeg_CallbackFunction(uint8_t* Row, uint32_t DataLength)
 }
 
 /**
-* @brief  User Process
-* @param  None
-* @retval None
-*/
+  * @brief  User Process
+  * @param  None
+  * @retval None
+  */
 static void USBH_UserProcess  (USBH_HandleTypeDef *phost, uint8_t id)
 {  
   switch (id)
@@ -278,7 +278,7 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
   
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 

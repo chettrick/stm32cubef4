@@ -1,13 +1,13 @@
 /**
-  @page AUDIO_Standalone USB Host AUDIO example
+  @page AUDIO_Standalone USB Host AUDIO application
   
   @verbatim
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    USB_Host/AUDIO_Standalone/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
-  * @brief   Description of the USB Host AUDIO example.
+  * @version V1.2.0
+  * @date    26-December-2014
+  * @brief   Description of the USB Host AUDIO application.
   ******************************************************************************
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
@@ -25,9 +25,9 @@
   ******************************************************************************
   @endverbatim
   
-@par Example Description
+@par Application Description
 
-This example is a part of the USB Host Library package using STM32Cube firmware. It describes how to use
+This application is a part of the USB Host Library package using STM32Cube firmware. It describes how to use
 USB host application based on the Audio OUT class on the STM32F4xx devices.
 
 At the beginning of the main program the HAL_Init() function is called to reset all the peripherals,
@@ -50,8 +50,8 @@ A menu is displayed and the user can select any operation from the menu using th
  - "Start audio Player" operation starts playing the song from the uSD. The files are read using the 
    FatFs file system then USBH_AUDIO_ChangeOutBuffer() function is called while playing songs and the
    bytes are stored in a circular buffer. Sampling frequency, Channels number and File size (duration) 
-   are detected. The audio.c file contains a set of APIs for Audio Out palyback, for example when the 
-   WAV file is playing, USBH_AUDIO_SetVolume() is called to change the volume setting. This example does not 
+   are detected. The audio.c file contains a set of APIs for Audio Out playback, for example when the 
+   WAV file is playing, USBH_AUDIO_SetVolume() is called to change the volume setting. This application does not 
    support compressed WAV formats.
  - "Re-Enumerate" operation performs a new Enumeration of the device.
 
@@ -71,7 +71,7 @@ For more details about the STM32Cube USB Host library, please refer to UM1720
 @par USB Library Configuration
 
 To select the appropriate USB Core to work with, user must add the following macro defines within the
-compiler preprocessor (already done in the preconfigured projects provided with this example):
+compiler preprocessor (already done in the preconfigured projects provided with this application):
       - "USE_USB_HS" when using USB High Speed (HS) Core
       - "USE_USB_FS" when using USB Full Speed (FS) Core
 
@@ -101,14 +101,14 @@ requirements, such as:
   - USB_Host/AUDIO_Standalone/Inc/lcd_log_conf.h          LCD log configuration file
   - USB_Host/AUDIO_Standalone/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - USB_Host/AUDIO_Standalone/Inc/usbh_conf.h             USB Host driver Configuration file
-  - USB_Host/AUDIO_Standalone/Inc/ffconf.h                FatFs Module Configuration file
+  - USB_Host/AUDIO_Standalone/Inc/ffconf.h                FAT file system module configuration file
  
 
 @par Hardware and Software environment
 
-  - This example runs on STM32F407xx/STM32F417xx devices.
+  - This application runs on STM32F407xx/STM32F417xx devices.
     
-  - This example has been tested with STMicroelectronics STM324xG-EVAL RevC 
+  - This application has been tested with STMicroelectronics STM324xG-EVAL RevC 
     evaluation boards and can be easily tailored to any other supported device 
     and development board.
 
@@ -116,9 +116,9 @@ requirements, such as:
     - Insert a microSD card containing .Wav audio file into the STM324xG-EVAL uSD slot (CN6)  
     - Plug the USB headset for sound playback into the STM324xG-EVAL board through 
       'USB micro A-Male to A-Female' cable to the connector:
-      - CN9 : to use USB High Speed (HS) 
-      - CN14: to use USB Full Speed (FS) with embedded PHY(U7)
-              Please ensure that jumpers JP16 and JP22 are in position 1-2.
+      - CN9: to use USB High Speed (HS) 
+      - CN8: to use USB Full Speed (FS) with embedded PHY(U2)
+             Please ensure that jumpers JP16 and JP22 are in position 1-2.
 
 
 @par How to use it ?
@@ -129,7 +129,7 @@ In order to make the program work, you must do the following :
  - In the workspace toolbar select the project configuration:
    - STM324xG-EVAL_USBH-HS: to configure the project for STM32F4xx devices using USB OTG HS peripheral
    - STM324xG-EVAL_USBH-FS: to configure the project for STM32F4xx devices using USB OTG FS peripheral
- - Run the example
+ - Run the application
  
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

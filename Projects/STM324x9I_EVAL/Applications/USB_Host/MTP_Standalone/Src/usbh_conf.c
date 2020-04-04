@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    USB_Host/MTP_Standalone/Src/usbh_conf.h
+  * @file    USB_Host/MTP_Standalone/Src/usbh_conf.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   USB Host configuration file.
   ******************************************************************************
   * @attention
@@ -47,7 +47,7 @@ void HAL_HCD_MspInit(HCD_HandleTypeDef *hhcd)
   if(hhcd->Instance == USB_OTG_FS)
   {
     /* Configure USB FS GPIOs */
-    __GPIOA_CLK_ENABLE();
+    __HAL_RCC_GPIOA_CLK_ENABLE();
     
     GPIO_InitStruct.Pin = (GPIO_PIN_9 | GPIO_PIN_11 | GPIO_PIN_12);
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
@@ -66,12 +66,12 @@ void HAL_HCD_MspInit(HCD_HandleTypeDef *hhcd)
     BSP_IO_ConfigPin(OTG_FS1_POWER_SWITCH_PIN, IO_MODE_OUTPUT);
     
     /* Enable USB FS Clocks */ 
-    __USB_OTG_FS_CLK_ENABLE();
+    __HAL_RCC_USB_OTG_FS_CLK_ENABLE();
     
-    /* Set USBFS Interrupt to the lowest priority */
+    /* Set USB FS Interrupt to the lowest priority */
     HAL_NVIC_SetPriority(OTG_FS_IRQn, 6, 0);
     
-    /* Enable USBFS Interrupt */
+    /* Enable USB FS Interrupt */
     HAL_NVIC_EnableIRQ(OTG_FS_IRQn);
     
   } 
@@ -83,9 +83,9 @@ void HAL_HCD_MspInit(HCD_HandleTypeDef *hhcd)
     /* Configure POWER_SWITCH IO pin */
     BSP_IO_ConfigPin(OTG_FS2_POWER_SWITCH_PIN, IO_MODE_OUTPUT);
     
-    __GPIOB_CLK_ENABLE();
+    __HAL_RCC_GPIOB_CLK_ENABLE();
     
-    /*Configure GPIO for HS on FS mode*/
+    /*Configure GPIO for HS on FS mode */
     GPIO_InitStruct.Pin = GPIO_PIN_12  | GPIO_PIN_13  | GPIO_PIN_14 |GPIO_PIN_15;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
@@ -94,11 +94,11 @@ void HAL_HCD_MspInit(HCD_HandleTypeDef *hhcd)
     
 #else
     /* Configure USB FS GPIOs */
-    __GPIOA_CLK_ENABLE();
-    __GPIOB_CLK_ENABLE();
-    __GPIOC_CLK_ENABLE();
-    __GPIOH_CLK_ENABLE();        
-    __GPIOI_CLK_ENABLE();
+    __HAL_RCC_GPIOA_CLK_ENABLE();
+    __HAL_RCC_GPIOB_CLK_ENABLE();
+    __HAL_RCC_GPIOC_CLK_ENABLE();
+    __HAL_RCC_GPIOH_CLK_ENABLE();        
+    __HAL_RCC_GPIOI_CLK_ENABLE();
     
     /* CLK */
     GPIO_InitStruct.Pin = GPIO_PIN_5;
@@ -144,15 +144,15 @@ void HAL_HCD_MspInit(HCD_HandleTypeDef *hhcd)
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Alternate = GPIO_AF10_OTG_HS;
     HAL_GPIO_Init(GPIOI, &GPIO_InitStruct);     
-    __USB_OTG_HS_ULPI_CLK_ENABLE();
+    __HAL_RCC_USB_OTG_HS_ULPI_CLK_ENABLE();
 #endif   
     /* Enable USB HS Clocks */ 
-    __USB_OTG_HS_CLK_ENABLE();
+    __HAL_RCC_USB_OTG_HS_CLK_ENABLE();
     
-    /* Set USBHS Interrupt to the lowest priority */
+    /* Set USB HS Interrupt to the lowest priority */
     HAL_NVIC_SetPriority(OTG_HS_IRQn, 6, 0);
     
-    /* Enable USBHS Interrupt */
+    /* Enable USB HS Interrupt */
     HAL_NVIC_EnableIRQ(OTG_HS_IRQn);
   }   
 }
@@ -167,13 +167,13 @@ void HAL_HCD_MspDeInit(HCD_HandleTypeDef *hhcd)
   if(hhcd->Instance == USB_OTG_FS)
   {  
     /* Disable USB FS Clocks */ 
-    __USB_OTG_FS_CLK_DISABLE();
+    __HAL_RCC_USB_OTG_FS_CLK_DISABLE();
   }
   else if(hhcd->Instance == USB_OTG_HS)
   {  
     /* Disable USB HS Clocks */ 
-    __USB_OTG_HS_CLK_DISABLE();
-    __USB_OTG_HS_ULPI_CLK_DISABLE();
+    __HAL_RCC_USB_OTG_HS_CLK_DISABLE();
+    __HAL_RCC_USB_OTG_HS_ULPI_CLK_DISABLE();
   }  
 }
 
@@ -244,7 +244,6 @@ USBH_StatusTypeDef USBH_LL_Init(USBH_HandleTypeDef *phost)
   hhcd.Init.phy_itface = HCD_PHY_EMBEDDED; 
   hhcd.Init.Sof_enable = 0;
   hhcd.Init.speed = HCD_SPEED_FULL;
-  hhcd.Init.vbus_sensing_enable = 0;
   /* Link the driver to the stack */
   hhcd.pData = phost;
   phost->pData = &hhcd;
@@ -264,7 +263,6 @@ USBH_StatusTypeDef USBH_LL_Init(USBH_HandleTypeDef *phost)
 #endif  
   hhcd.Init.Sof_enable = 0;
   hhcd.Init.speed = HCD_SPEED_HIGH;
-  hhcd.Init.vbus_sensing_enable = 0;
   hhcd.Init.use_external_vbus = 1;  
   /* Link the driver to the stack */
   hhcd.pData = phost;
@@ -354,7 +352,7 @@ USBH_StatusTypeDef USBH_LL_ResetPort (USBH_HandleTypeDef *phost)
 }
 
 /**
-  * @brief  Returns the last transfered packet size.
+  * @brief  Returns the last transferred packet size.
   * @param  phost: Host handle
   * @param  pipe: Pipe index   
   * @retval Packet Size
@@ -417,7 +415,7 @@ USBH_StatusTypeDef USBH_LL_ClosePipe(USBH_HandleTypeDef *phost, uint8_t pipe)
   * @param  ep_type: Endpoint Type
   *          This parameter can be one of these values:
   *            @arg EP_TYPE_CTRL: Control type
-  *            @arg EP_TYPE_ISOC: Isochrounous type
+  *            @arg EP_TYPE_ISOC: Isochronous type
   *            @arg EP_TYPE_BULK: Bulk type
   *            @arg EP_TYPE_INTR: Interrupt type
   * @param  token: Endpoint Type

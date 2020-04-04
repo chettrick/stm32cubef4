@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324x9i_eval_sram.c
   * @author  MCD Application Team
-  * @version V2.0.2
-  * @date    19-June-2014
+  * @version V2.0.3
+  * @date    10-December-2014
   * @brief   This file includes the SRAM driver for the IS61WV102416BLL-10M memory 
   *          device mounted on STM324x9I-EVAL evaluation board.
   ******************************************************************************

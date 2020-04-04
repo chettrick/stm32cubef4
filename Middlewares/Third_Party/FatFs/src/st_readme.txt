@@ -8,7 +8,7 @@
   * @file    st_readme.txt 
   * @author  MCD Application Team
   * @brief   This file lists the main modification done by STMicroelectronics on
-  *          FatFs R.10 for integration with STM32Cube solution.
+  *          FatFs for integration with STM32Cube solution.
   *          For more details on FatFs implementation on STM32Cube, please refer 
   *          to UM1721 "Developing Applications on STM32Cube with FatFs"  
   ******************************************************************************
@@ -28,6 +28,32 @@
   ******************************************************************************
   @endverbatim
 
+### V1.2.1/20-November-2014 ###
+============================
+  + Disk I/O drivers; change count argument type from BYTE to UINT
+
+  + Important note:
+      For application code based on previous FatFs version; when moving to R0.10b
+      the only change that need to be done is to update ffconf.h file, taking 
+      ffconf_template.h file as reference.
+
+
+### V1.2.0/04-November-2014 ###
+============================
+  + Upgrade to use FatFs R0.10b.
+  + diskio.c: update disk_read() and disk_write() argument's type.
+
+  + Important note:
+      For application code based on previous FatFs version; when moving to R0.10b
+      the only change that need to be done is to update ffconf.h file, taking 
+      ffconf_template.h file as reference.
+
+
+### V1.1.1/12-September-2014 ###
+============================
+  + ff_gen_drv.c: Update the Disk_drvTypeDef disk variable initialization to avoid
+    warnings detected with Atollic TrueSTUDIO Complier.
+
 
 ### V1.1.0/22-April-2014 ###
 ============================
@@ -38,7 +64,7 @@
 
 ### V1.0.0/18-February-2014 ###
 ===============================
-   + First customized version for STM32Cube solution.
+   + First R0.10 customized version for STM32Cube solution.
 
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>

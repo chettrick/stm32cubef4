@@ -10,7 +10,7 @@
 *                                                                    *
 **********************************************************************
 
-** emWin V5.24 - Graphical user interface for embedded applications **
+** emWin V5.26 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -70,7 +70,7 @@ Purpose     : Image include
 *
 **********************************************************************
 */
-#define IMAGE_CF_MEMDEV   (1 << 0) // Widget uses an internally memory device which speeds up use of compressed images (GIF, JPEG, PNG)
+#define IMAGE_CF_MEMDEV   (1 << 0) // Widget uses an internal memory device which speeds up use of compressed images (GIF, JPEG, PNG)
 #define IMAGE_CF_TILE     (1 << 1) // Uses tiling to fill up the whole area of the widget
 #define IMAGE_CF_ALPHA    (1 << 2) // Needs to be set if alpha blending is required (PNG)
 #define IMAGE_CF_ATTACHED (1 << 3) // Widget size is fixed to the parent border

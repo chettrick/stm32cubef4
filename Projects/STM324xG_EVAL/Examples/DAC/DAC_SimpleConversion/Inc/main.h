@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    DAC/DAC_SimpleConversion/Inc/main.h 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
@@ -49,11 +49,11 @@
    resources */
 /* Definition for DACx clock resources */
 #define DACx                            DAC
-#define DACx_CLK_ENABLE()               __DAC_CLK_ENABLE()
-#define DACx_CHANNEL_GPIO_CLK_ENABLE()  __GPIOA_CLK_ENABLE()
+#define DACx_CLK_ENABLE()               __HAL_RCC_DAC_CLK_ENABLE()
+#define DACx_CHANNEL_GPIO_CLK_ENABLE()  __HAL_RCC_GPIOA_CLK_ENABLE()
 
-#define DACx_FORCE_RESET()              __DAC_FORCE_RESET()
-#define DACx_RELEASE_RESET()            __DAC_RELEASE_RESET()
+#define DACx_FORCE_RESET()              __HAL_RCC_DAC_FORCE_RESET()
+#define DACx_RELEASE_RESET()            __HAL_RCC_DAC_RELEASE_RESET()
      
 /* Definition for ADCx Channel Pin */
 #define DACx_CHANNEL_PIN                GPIO_PIN_4

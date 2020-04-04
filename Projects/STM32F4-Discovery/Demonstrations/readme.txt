@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    Demonstrations/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Description STM32F4 Discovery Demo 
   ******************************************************************************
   *
@@ -35,7 +35,7 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Demo Description
 
 At the beginning of the main program the HAL_Init() function is called to reset 
 all the peripherals, initialize the Flash interface and the systick.
@@ -43,9 +43,9 @@ Then the SystemClock_Config() function is used to configure the system clock
 (SYSCLK) to run at 168 MHz.
            
 - Connect the STM32F4-Discovery RevB & RevC board to a PC with a 'USB type A to Mini-B' cable
-through USB connector CN1 to power the board. Then red led LD1 (COM) and
-LD2 (PWR) light up.
-- All 4 leds between B1 and B2 are blinking as chenillard.
+through USB connector CN1 to power the board. Then red LED1 (COM) and
+LED2 (PWR) light up.
+- All 4 LEDs between B1 and B2 are blinking as chenillard.
 - Press User Button B1 (User) then MEMS sensor (LIS302DL for revB or LIS3DSCH 
 for revC) is enabled, move the board and observe the four Leds blinking according 
 to the motion direction.
@@ -60,23 +60,23 @@ board and see the mouse moves according to the motion direction.
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 
 @par Directory contents
  
-  - Demo/Inc/stm32f4xx_hal_conf.h    HAL configuration file
-  - Demo/Inc/stm32f4xx_it.h          Interrupt handlers header file
-  - Demo/Inc/main.h                  Main program header file
-  - Demo/Inc/ffconf.h                FAT file system module configuration file
-  - Demo/Inc/usbd_desc.h             USB device HID descriptor header file   
-  - Demo/Inc/usbd_conf.h             USB device driver Configuration file    
-  - Demo/Src/stm32f4xx_it.c          Interrupt handlers
-  - Demo/Src/main.c                  Main program
-  - Demo/Src/usbd_desc.c             USB device HID descriptor   
-  - Demo/Src/usbd_conf.c             General low level driver configuration
-  - Demo/Src/system_stm32f4xx.c      STM32F4xx system clock configuration file
+  - Demonstrations/Inc/stm32f4xx_hal_conf.h    HAL configuration file
+  - Demonstrations/Inc/stm32f4xx_it.h          Interrupt handlers header file
+  - Demonstrations/Inc/main.h                  Main program header file
+  - Demonstrations/Inc/ffconf.h                FAT file system module configuration file
+  - Demonstrations/Inc/usbd_desc.h             USB device HID descriptor header file   
+  - Demonstrations/Inc/usbd_conf.h             USB device driver Configuration file    
+  - Demonstrations/Src/stm32f4xx_it.c          Interrupt handlers
+  - Demonstrations/Src/main.c                  Main program
+  - Demonstrations/Src/usbd_desc.c             USB device HID descriptor   
+  - Demonstrations/Src/usbd_conf.c             General low level driver configuration
+  - Demonstrations/Src/system_stm32f4xx.c      STM32F4xx system clock configuration file
 
 
 @par Hardware and Software environment
@@ -87,8 +87,8 @@ board and see the mouse moves according to the motion direction.
     and can be easily tailored to any other supported device and development board.
 
   - STM32F4-Discovery RevB & RevC Set-up
-    - Plug the USB key into the STM32F4-DISCO board through 'USB micro A-Male 
-      to A-Female' cable (FS mode: connector CN5).
+    - Connect the STM32F4-DISCO board through 'USB micro A-Male 
+      A-Male' cable to the connector CN5.
 
 
 @par How to use it ? 

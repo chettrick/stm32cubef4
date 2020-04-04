@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Audio_playback_and_record/Src/usbh_conf.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   USB Host configuration file.
   ******************************************************************************
   * @attention
@@ -31,7 +31,7 @@
 
 HCD_HandleTypeDef hHCD;
 
-#define HOST_POWERSW_CLK_ENABLE()          __GPIOC_CLK_ENABLE()
+#define HOST_POWERSW_CLK_ENABLE()          __HAL_RCC_GPIOC_CLK_ENABLE()
 #define HOST_POWERSW_PORT                  GPIOC
 #define HOST_POWERSW_VBUS                  GPIO_PIN_0
 
@@ -51,7 +51,7 @@ void HAL_HCD_MspInit(HCD_HandleTypeDef *hHCD)
   if(hHCD->Instance == USB_OTG_FS)
   {
     /* Configure USB FS GPIOs */
-    __GPIOA_CLK_ENABLE();
+    __HAL_RCC_GPIOA_CLK_ENABLE();
     HOST_POWERSW_CLK_ENABLE();
     
     /* Configure DM DP Pins */
@@ -59,14 +59,14 @@ void HAL_HCD_MspInit(HCD_HandleTypeDef *hHCD)
     
     GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-    GPIO_InitStruct.Pull = GPIO_NOPULL ;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Alternate = GPIO_AF10_OTG_FS;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);  
     
     /* This for ID line debug */
     GPIO_InitStruct.Pin =  GPIO_PIN_10;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
-    GPIO_InitStruct.Pull = GPIO_PULLUP ;  
+    GPIO_InitStruct.Pull = GPIO_PULLUP;  
     GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
     GPIO_InitStruct.Alternate = GPIO_AF10_OTG_FS;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);  
@@ -81,7 +81,7 @@ void HAL_HCD_MspInit(HCD_HandleTypeDef *hHCD)
     HAL_GPIO_Init(HOST_POWERSW_PORT, &GPIO_InitStruct);
     
     /* Enable USB FS Clocks */ 
-    __USB_OTG_FS_CLK_ENABLE();
+    __HAL_RCC_USB_OTG_FS_CLK_ENABLE();
     
     /* Set USBFS Interrupt to the lowest priority */
     HAL_NVIC_SetPriority(OTG_FS_IRQn, 6, 0);
@@ -101,7 +101,7 @@ void HAL_HCD_MspDeInit(HCD_HandleTypeDef *hHCD)
   if(hHCD->Instance == USB_OTG_FS)
   {  
     /* Disable USB FS Clocks */ 
-    __USB_OTG_FS_CLK_DISABLE();
+    __HAL_RCC_USB_OTG_FS_CLK_DISABLE();
   }
 }
 
@@ -142,7 +142,7 @@ void HAL_HCD_Disconnect_Callback(HCD_HandleTypeDef *hHCD)
 
 /**
   * @brief  Notify URB state change callback.
-  * @param  hpcd: HCD handle
+  * @param  hhcd: HCD handle
   * @retval None
   */
 void HAL_HCD_HC_NotifyURBChange_Callback(HCD_HandleTypeDef *hHCD, uint8_t chnum, HCD_URBStateTypeDef urb_state)
@@ -172,11 +172,10 @@ USBH_StatusTypeDef  USBH_LL_Init (USBH_HandleTypeDef *phost)
   hHCD.Init.phy_itface = HCD_PHY_EMBEDDED; 
   hHCD.Init.Sof_enable = 0;
   hHCD.Init.speed = HCD_SPEED_FULL;
-  hHCD.Init.vbus_sensing_enable = 0;
   /* Link The driver to the stack */
   hHCD.pData = phost;
   phost->pData = &hHCD;
-  /*Initialize LL Driver */
+  /* Initialize LL Driver */
   HAL_HCD_Init(&hHCD);
 
   USBH_LL_SetTimer (phost, HAL_HCD_GetCurrentFrame(&hHCD));
@@ -265,7 +264,7 @@ USBH_StatusTypeDef USBH_LL_ResetPort (USBH_HandleTypeDef *phost)
 
 /**
   * @brief  USBH_LL_GetLastXferSize 
-  *         Return the last transfered packet size.
+  *         Return the last transferred packet size.
   * @param  phost: Host handle
   * @param  pipe: Pipe index   
   * @retval Packet Size
@@ -331,7 +330,7 @@ USBH_StatusTypeDef USBH_LL_ClosePipe(USBH_HandleTypeDef *phost, uint8_t pipe)
   * @param  ep_type : Endpoint Type
   *          This parameter can be one of the these values:
   *            @arg EP_TYPE_CTRL: Control type
-  *            @arg EP_TYPE_ISOC: Isochrounous type
+  *            @arg EP_TYPE_ISOC: Isochronous type
   *            @arg EP_TYPE_BULK: Bulk type
   *            @arg EP_TYPE_INTR: Interrupt type
   * @param  token : Endpoint Type

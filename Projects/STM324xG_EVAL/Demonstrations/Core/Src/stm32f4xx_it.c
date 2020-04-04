@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f4xx_it.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
@@ -53,13 +53,11 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-extern HCD_HandleTypeDef             hhcd;
-extern PCD_HandleTypeDef             hpcd;
-extern I2S_HandleTypeDef             haudio_i2s;
+extern HCD_HandleTypeDef hhcd;
+extern PCD_HandleTypeDef hpcd;
+extern I2S_HandleTypeDef haudio_i2s;
 
 /* Private function prototypes -----------------------------------------------*/
-extern void xPortSysTickHandler(void);
-
 /* Private functions ---------------------------------------------------------*/
 
 /******************************************************************************/
@@ -143,10 +141,7 @@ void DebugMon_Handler(void)
 void SysTick_Handler(void)
 {
   HAL_IncTick(); 
-  if (xTaskGetSchedulerState() != taskSCHEDULER_NOT_STARTED)
-  {
-    xPortSysTickHandler();
-  }  
+  osSystickHandler(); 
 }
 
 /******************************************************************************/
@@ -163,7 +158,7 @@ void SysTick_Handler(void)
   */
 void OTG_HS_IRQHandler(void)
 {
-   HAL_HCD_IRQHandler(&hhcd);
+  HAL_HCD_IRQHandler(&hhcd);
 }
 
 /**
@@ -195,7 +190,7 @@ void EXTI15_10_IRQHandler(uint16_t GPIO_Pin)
 {  
   /* SD Detect pin */
   HAL_GPIO_EXTI_IRQHandler(SD_DETECT_PIN);
-
+  
   BSP_SD_DetectIT();
 }
 

@@ -1,13 +1,13 @@
 /**
-  @page DualCore_Standalone USB Device Dual Core example
+  @page DualCore_Standalone USB Device Dual Core application
   
   @verbatim
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    USB_Device/DualCore_Standalone/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
-  * @brief   Description of the USB Device Dual Core example.
+  * @version V1.2.0
+  * @date    26-December-2014
+  * @brief   Description of the USB Device Dual Core application.
   ******************************************************************************
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
@@ -25,13 +25,13 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description 
+@par Application Description 
 
-This example is a part of the USB Device Library package using STM32Cube firmware. It describes how to use
-USB device application based on the STM32F4xx multi core support feature integrating Device Communication Class (CDC) 
-and Humain Interface (HID) in the same project.
+This application is a part of the USB Device Library package using STM32Cube firmware. It describes how to use
+USB device application based on the STM32F4xx multi core support feature integrating Mass Storage (MSC) 
+and Human Interface (HID) in the same project.
 
-This is a typical example on how to use the STM32F4xx USB OTG Device peripheral, where STM32 is 
+This is a typical application on how to use the STM32F4xx USB OTG Device peripheral, where STM32 is 
 enumerated as a CDC device in the High Speed mode, and also as a HID device in the Full Speed mode,
 using the native PC Host HID/CDC drivers to which the STM324x9I-EVAL board is connected.
 
@@ -59,7 +59,7 @@ to user to emulate the Mouse directions.
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
       
 For more details about the STM32Cube USB Device library, please refer to UM1734 
@@ -69,7 +69,7 @@ For more details about the STM32Cube USB Device library, please refer to UM1734
 @par USB Library Configuration
 
 To select the appropriate USB Core to work with, user must add the following macro defines within the
-compiler preprocessor (already done in the preconfigured projects provided with this example):
+compiler preprocessor (already done in the preconfigured projects provided with this application):
       - "USE_USB_HS" and "USE_USB_FS" when using USB Dual Core Mode
 
 
@@ -94,9 +94,9 @@ compiler preprocessor (already done in the preconfigured projects provided with 
 	
 @par Hardware and Software environment
 
-  - This example runs on STM32F429xx/STM32F439xx devices.
+  - This application runs on STM32F429xx/STM32F439xx devices.
     
-  - This example has been tested with STMicroelectronics STM324x9I-EVAL RevB 
+  - This application has been tested with STMicroelectronics STM324x9I-EVAL RevB 
     evaluation boards and can be easily tailored to any other supported device 
     and development board.
 
@@ -113,7 +113,7 @@ compiler preprocessor (already done in the preconfigured projects provided with 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
- - Run the example
+ - Run the application
  
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

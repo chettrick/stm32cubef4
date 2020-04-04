@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Host/DynamicSwitch_Standalone/Src/usbh_diskio.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   USB Key Disk I/O driver.
   ******************************************************************************
   * @attention
@@ -37,15 +37,15 @@
 extern USBH_HandleTypeDef  hUSBHost;
 
 /* Private function prototypes -----------------------------------------------*/
-DSTATUS USBH_initialize (void);
-DSTATUS USBH_status (void);
-DRESULT USBH_read (BYTE*, DWORD, BYTE);
+DSTATUS USBH_initialize(void);
+DSTATUS USBH_status(void);
+DRESULT USBH_read (BYTE*, DWORD, UINT);
 
 #if _USE_WRITE == 1
-  DRESULT USBH_write (const BYTE*, DWORD, BYTE);
+  DRESULT USBH_write(const BYTE*, DWORD, UINT);
 #endif /* _USE_WRITE == 1 */
 #if _USE_IOCTL == 1
-  DRESULT USBH_ioctl (BYTE, void*);
+  DRESULT USBH_ioctl(BYTE, void*);
 #endif /* _USE_IOCTL == 1 */
   
 Diskio_drvTypeDef  USBH_Driver =
@@ -101,7 +101,7 @@ DSTATUS USBH_status(void)
   * @param  count: Number of sectors to read (1..128)
   * @retval DRESULT: Operation result
   */
-DRESULT USBH_read(BYTE *buff, DWORD sector, BYTE count)
+DRESULT USBH_read(BYTE *buff, DWORD sector, UINT count)
 {
   DRESULT res = RES_ERROR;
   MSC_LUNTypeDef info;
@@ -162,7 +162,7 @@ DRESULT USBH_read(BYTE *buff, DWORD sector, BYTE count)
   * @retval DRESULT: Operation result
   */
 #if _USE_WRITE == 1
-DRESULT USBH_write(const BYTE *buff, DWORD sector, BYTE count)
+DRESULT USBH_write(const BYTE *buff, DWORD sector, UINT count)
 {
   DRESULT res = RES_ERROR; 
   MSC_LUNTypeDef info;
@@ -175,7 +175,7 @@ DRESULT USBH_write(const BYTE *buff, DWORD sector, BYTE count)
     {
       memcpy (scratch, &buff[count * _MAX_SS], _MAX_SS);
       
-      status = USBH_MSC_Write(&hUSBHost, 0, sector + count, (BYTE *)scratch, 1) ;
+      status = USBH_MSC_Write(&hUSBHost, 0, sector + count, (BYTE *)scratch, 1);
       if(status == USBH_FAIL)
       {
         break;

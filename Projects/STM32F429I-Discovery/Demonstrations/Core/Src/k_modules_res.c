@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    k_modules_res.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014   
+  * @version V1.2.0
+  * @date    26-December-2014   
   * @brief   This file contains the Hex dumps of the images available 
   ******************************************************************************
   * @attention
@@ -3600,7 +3600,7 @@ GUI_CONST_STORAGE GUI_BITMAP bmstop2_pressed = {
   * @param  y0: Upper left Y-position
   * @param  width: width  of the rectangle
   * @param  height: height  of the rectangle
-  * @retval None.
+  * @retval None
   */
 void DrawRect3D(int x0, int y0, int width, int height)
 {

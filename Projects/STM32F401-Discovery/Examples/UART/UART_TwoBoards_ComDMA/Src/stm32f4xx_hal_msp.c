@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    UART/UART_TwoBoards_ComDMA/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   HAL MSP module.    
   ******************************************************************************
   * @attention
@@ -143,13 +143,17 @@ void HAL_UART_MspInit(UART_HandleTypeDef *huart)
   __HAL_LINKDMA(huart, hdmarx, hdma_rx);
     
   /*##-4- Configure the NVIC for DMA #########################################*/
-  /* NVIC configuration for DMA transfer complete interrupt (USART1_TX) */
+  /* NVIC configuration for DMA transfer complete interrupt (USARTx_TX) */
   HAL_NVIC_SetPriority(USARTx_DMA_TX_IRQn, 0, 1);
   HAL_NVIC_EnableIRQ(USARTx_DMA_TX_IRQn);
     
-  /* NVIC configuration for DMA transfer complete interrupt (USART1_RX) */
+  /* NVIC configuration for DMA transfer complete interrupt (USARTx_RX) */
   HAL_NVIC_SetPriority(USARTx_DMA_RX_IRQn, 0, 0);   
   HAL_NVIC_EnableIRQ(USARTx_DMA_RX_IRQn);
+  
+  /* NVIC configuration for USART TC interrupt */
+  HAL_NVIC_SetPriority(USARTx_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(USARTx_IRQn);
 }
 
 /**
@@ -170,7 +174,7 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef *huart)
   USARTx_FORCE_RESET();
   USARTx_RELEASE_RESET();
 
-  /*##-2- Disable peripherals and GPIO Clocks #################################*/
+  /*##-2- Disable peripherals and GPIO Clocks ################################*/
   /* Configure UART Tx as alternate function  */
   HAL_GPIO_DeInit(USARTx_TX_GPIO_PORT, USARTx_TX_PIN);
   /* Configure UART Rx as alternate function  */

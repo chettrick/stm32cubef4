@@ -10,7 +10,7 @@
 *                                                                    *
 **********************************************************************
 
-** emWin V5.24 - Graphical user interface for embedded applications **
+** emWin V5.26 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -316,9 +316,12 @@ typedef struct {
   int    BytesPerPixel; // Number of bytes required per pixel
 } GUI_DIRTYDEVICE_INFO;
 
-int GUI_DIRTYDEVICE_Fetch (int LayerIndex, GUI_DIRTYDEVICE_INFO * pInfo);
-int GUI_DIRTYDEVICE_Delete(int LayerIndex);
-int GUI_DIRTYDEVICE_Create(int LayerIndex);
+int GUI_DIRTYDEVICE_Create  (void);
+int GUI_DIRTYDEVICE_CreateEx(int LayerIndex);
+int GUI_DIRTYDEVICE_Delete  (void);
+int GUI_DIRTYDEVICE_DeleteEx(int LayerIndex);
+int GUI_DIRTYDEVICE_Fetch   (GUI_DIRTYDEVICE_INFO * pInfo);
+int GUI_DIRTYDEVICE_FetchEx (GUI_DIRTYDEVICE_INFO * pInfo, int LayerIndex);
 
 /*********************************************************************
 *
@@ -337,7 +340,7 @@ void         GUI_SetScreenSizeY   (int ySize);
 int          GUI_GetScreenSizeX   (void);
 int          GUI_GetScreenSizeY   (void);
 const GUI_RECT * GUI_SetClipRect  (const GUI_RECT * pRect);
-
+void         GUI_SetRefreshHook   (void (* pFunc)(void));
 void         MainTask             (void);
 
 /*********************************************************************
@@ -873,17 +876,17 @@ void               GUI_ALLOC_Unlock          (void);
 void *             GUI_ALLOC_UnlockH         (void ** pp);
 int                GUI_ALLOC_SetMaxPercentage(int MaxPercentage);
 
-
 /*********************************************************************
 *
 *       Memory devices: GUI_MEMDEV
 */
 #define GUI_MEMDEV_HASTRANS       0
-#define GUI_MEMDEV_NOTRANS    (1<<0)
+#define GUI_MEMDEV_NOTRANS  (1 << 0)
 
 typedef GUI_HMEM GUI_MEMDEV_Handle;
 typedef void     GUI_CALLBACK_VOID_P        (void * p);
 typedef int      GUI_ANIMATION_CALLBACK_FUNC(int TimeRem, void * pVoid);
+typedef void     GUI_DRAWMEMDEV_16BPP_FUNC  (void * pDst, const void * pSrc, int xSize, int ySize, int BytesPerLineDst, int BytesPerLineSrc);
 
 extern GUI_ANIMATION_CALLBACK_FUNC * GUI_MEMDEV__pCbAnimation;
 extern void                        * GUI_MEMDEV__pVoid;
@@ -927,10 +930,12 @@ int  GUI_MEMDEV_GetYSize             (GUI_MEMDEV_Handle hMem);
 void GUI_MEMDEV_MarkDirty            (GUI_MEMDEV_Handle hMem, int x0, int y0, int x1, int y1);
 void GUI_MEMDEV_ReduceYSize          (GUI_MEMDEV_Handle hMem, int YSize);
 void GUI_MEMDEV_Rotate               (GUI_MEMDEV_Handle hSrc, GUI_MEMDEV_Handle hDst, int dx, int dy, int a, int Mag);
+void GUI_MEMDEV_RotateAlpha          (GUI_MEMDEV_Handle hSrc, GUI_MEMDEV_Handle hDst, int dx, int dy, int a, int Mag, U8 Alpha);
 void GUI_MEMDEV_RotateHR             (GUI_MEMDEV_Handle hSrc, GUI_MEMDEV_Handle hDst, I32 dx, I32 dy, int a, int Mag);
 void GUI_MEMDEV__Rotate              (GUI_MEMDEV_Handle hSrc, GUI_MEMDEV_Handle hDst, int dx, int dy, int a, int Mag, U32 AndMask);
 void GUI_MEMDEV__RotateHR            (GUI_MEMDEV_Handle hSrc, GUI_MEMDEV_Handle hDst, I32 dx, I32 dy, int a, int Mag, U32 AndMask);
 void GUI_MEMDEV_RotateHQ             (GUI_MEMDEV_Handle hSrc, GUI_MEMDEV_Handle hDst, int dx, int dy, int a, int Mag);
+void GUI_MEMDEV_RotateHQAlpha        (GUI_MEMDEV_Handle hSrc, GUI_MEMDEV_Handle hDst, int dx, int dy, int a, int Mag, U8 Alpha);
 void GUI_MEMDEV_RotateHQHR           (GUI_MEMDEV_Handle hSrc, GUI_MEMDEV_Handle hDst, I32 dx, I32 dy, int a, int Mag);
 void GUI_MEMDEV_RotateHQT            (GUI_MEMDEV_Handle hSrc, GUI_MEMDEV_Handle hDst, int dx, int dy, int a, int Mag);
 GUI_MEMDEV_Handle GUI_MEMDEV_Select  (GUI_MEMDEV_Handle hMem);  /* Select (activate) a particular memory device. */
@@ -946,7 +951,8 @@ void* GUI_MEMDEV_GetDataPtr          (GUI_MEMDEV_Handle hMem);
 void  GUI_MEMDEV_SetColorConv        (GUI_MEMDEV_Handle hMem, const LCD_API_COLOR_CONV * pColorConvAPI);
 const LCD_API_COLOR_CONV * GUI_MEMDEV_GetColorConv(GUI_MEMDEV_Handle hMemDev);
 int   GUI_MEMDEV_GetBitsPerPixel     (GUI_MEMDEV_Handle hMemDev);
-int   GUI_MEMDEV_FadeDevices         (GUI_MEMDEV_Handle hMem0, GUI_MEMDEV_Handle hMem1, int Period);
+int   GUI_MEMDEV_FadeInDevices       (GUI_MEMDEV_Handle hMem0, GUI_MEMDEV_Handle hMem1, int Period);
+int   GUI_MEMDEV_FadeOutDevices      (GUI_MEMDEV_Handle hMem0, GUI_MEMDEV_Handle hMem1, int Period);
 void  GUI_MEMDEV_SerializeBMP        (GUI_MEMDEV_Handle hDev, GUI_CALLBACK_VOID_U8_P * pfSerialize, void * p);
 void  GUI_MEMDEV_SetAnimationCallback(GUI_ANIMATION_CALLBACK_FUNC * pCbAnimation, void * pVoid);
 void  GUI_MEMDEV__FadeDevice         (GUI_MEMDEV_Handle hMemWin, GUI_MEMDEV_Handle hMemBk, GUI_MEMDEV_Handle hMemDst, U8 Intens);
@@ -954,12 +960,17 @@ void  GUI_MEMDEV__FadeDeviceEx       (GUI_MEMDEV_Handle hMemWin, GUI_MEMDEV_Hand
 int   GUI_MEMDEV_PunchOutDevice      (GUI_MEMDEV_Handle hMemData, GUI_MEMDEV_Handle hMemMask);
 void  GUI_SelectLCD(void);
 
+/* Blurring, dithering and blending */
 GUI_MEMDEV_Handle GUI_MEMDEV_CreateBlurredDevice32  (GUI_MEMDEV_Handle hMem, U8 Depth);
 GUI_MEMDEV_Handle GUI_MEMDEV_CreateBlurredDevice32HQ(GUI_MEMDEV_Handle hMem, U8 Depth);
 GUI_MEMDEV_Handle GUI_MEMDEV_CreateBlurredDevice32LQ(GUI_MEMDEV_Handle hMem, U8 Depth);
 void              GUI_MEMDEV_SetBlurHQ              (void);
 void              GUI_MEMDEV_SetBlurLQ              (void);
 int               GUI_MEMDEV_BlendColor32           (GUI_MEMDEV_Handle hMem, U32 BlendColor, U8 BlendIntens);
+int               GUI_MEMDEV_Dither32               (GUI_MEMDEV_Handle hMem, const LCD_API_COLOR_CONV * pColorConvAPI);
+
+/* Optional custom drawing of 16bpp memory devices */  
+void GUI_MEMDEV_SetDrawMemdev16bppFunc(GUI_DRAWMEMDEV_16BPP_FUNC * pfDrawMemdev16bppFunc);
 
 /*********************************************************************
 *
@@ -1198,11 +1209,13 @@ void GUI_AA_DrawPolyOutlineEx(const GUI_POINT * pSrc, int NumPoints, int Thickne
 void GUI_AA_DrawRoundedRect  (int x0, int y0, int x1, int y1, int r);
 void GUI_AA_DrawRoundedRectEx(GUI_RECT * pRect, int r);
 void GUI_AA_FillCircle       (int x0, int y0, int r);
+void GUI_AA_FillEllipse      (int x0, int y0, int rx, int ry);
 void GUI_AA_FillPolygon      (GUI_POINT * pPoints, int NumPoints, int x0, int y0);
 void GUI_AA_FillRoundedRect  (int x0, int y0, int x1, int y1, int r);
 void GUI_AA_FillRoundedRectEx(GUI_RECT * pRect, int r);
 int  GUI_AA_PreserveTrans    (int OnOff);
 int  GUI_AA_SetDrawMode      (int Mode);
+void GUI_AA_SetpfDrawCharAA4 (int (* pfDrawChar)(int LayerIndex, int x, int y, U8 const * p, int xSize, int ySize, int BytesPerLine));
 
 /*********************************************************************
 *
@@ -1312,7 +1325,6 @@ int  GUI_TOUCH_X_MeasureY (void);
 * For this module, samples are available for configurations
 * with or without operating system.
 */
-
 //
 // Configuration
 //
@@ -2225,13 +2237,14 @@ extern GUI_CONST_STORAGE GUI_FONT GUI_FontComic24B_ASCII, GUI_FontComic24B_1;
 *
 *       Compatibility with older versions
 */
-#define GUI_DispString_UC  GUI_UC_DispString
-#define TOUCH_X_ActivateX  GUI_TOUCH_X_ActivateX
-#define TOUCH_X_ActivateY  GUI_TOUCH_X_ActivateY
-#define TOUCH_X_Disable    GUI_TOUCH_X_Disable
-#define TOUCH_X_MeasureX   GUI_TOUCH_X_MeasureX
-#define TOUCH_X_MeasureY   GUI_TOUCH_X_MeasureY
-#define GUI_SelLayer       GUI_SelectLayer
+#define GUI_DispString_UC      GUI_UC_DispString
+#define TOUCH_X_ActivateX      GUI_TOUCH_X_ActivateX
+#define TOUCH_X_ActivateY      GUI_TOUCH_X_ActivateY
+#define TOUCH_X_Disable        GUI_TOUCH_X_Disable
+#define TOUCH_X_MeasureX       GUI_TOUCH_X_MeasureX
+#define TOUCH_X_MeasureY       GUI_TOUCH_X_MeasureY
+#define GUI_SelLayer           GUI_SelectLayer
+#define GUI_MEMDEV_FadeDevices GUI_MEMDEV_FadeInDevices
 #if defined(__cplusplus)
 }
 #endif

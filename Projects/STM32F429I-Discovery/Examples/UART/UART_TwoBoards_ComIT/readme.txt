@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    UART/UART_TwoBoards_ComIT/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Description of the UART Two Boards Communication IT example.
   ******************************************************************************
   *
@@ -46,9 +46,9 @@ Then the SystemClock_Config() function is used to configure the system
 clock (SYSCLK) to run at 180 MHz.
 
 Then 1st board is waiting for user button key to be pressed. Once done, data 
-are transmitted through uart2 in IT mode. 2nd board has configured Uart2 
+are transmitted through UART2 in IT mode. 2nd board has configured UART2 
 to receive data in IT mode. Once data received is completed, 2nd board also 
-transmit same characters on Uart2 which will be received by 1st board.
+transmit same characters on UART2 which will be received by 1st board.
 Both boards compare transmitted datas to received ones. If they are same, green 
 led is turn on, else red one is turn On
 
@@ -83,7 +83,7 @@ position of the transmitted data.
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 
@@ -107,8 +107,8 @@ position of the transmitted data.
     and development board.
     
   - STM32F429I-Discovery RevB set-up
-    - Connect a wire between 1st board PA09 pin (Uart Tx) to 2nd board PA10 pin (Uart Rx)
-    - Connect a wire between 1st board PA10 pin (Uart Rx) to 2nd board PA09 pin (Uart Tx)
+    - Connect a wire between 1st board PA09 pin (UART Tx) to 2nd board PA10 pin (UART Rx)
+    - Connect a wire between 1st board PA10 pin (UART Rx) to 2nd board PA09 pin (UART Tx)
  
  
 @par How to use it ? 

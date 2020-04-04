@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    accelero.h
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    21-March-2014
+  * @version V1.2.1
+  * @date    02-December-2014
   * @brief   This header file contains the functions prototypes for the Accelerometer driver.
   ******************************************************************************
   * @attention

@@ -2,9 +2,9 @@
   ******************************************************************************
   * @file    usbd_msc.h
   * @author  MCD Application Team
-  * @version V2.2.0
-  * @date    13-June-2014
-  * @brief   header for the usbd_msc.c file
+  * @version V2.3.0
+  * @date    04-November-2014
+  * @brief   Header for the usbd_msc.c file
   ******************************************************************************
   * @attention
   *
@@ -26,9 +26,14 @@
   */ 
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef _USB_MSC_CORE_H_
-#define _USB_MSC_CORE_H_
+#ifndef __USBD_MSC_H
+#define __USBD_MSC_H
 
+#ifdef __cplusplus
+ extern "C" {
+#endif
+
+/* Includes ------------------------------------------------------------------*/
 #include  "usbd_msc_bot.h"
 #include  "usbd_msc_scsi.h"
 #include  "usbd_ioreq.h"
@@ -38,7 +43,7 @@
   */
   
 /** @defgroup USBD_MSC
-  * @brief This file is the Header file for USBD_msc.c
+  * @brief This file is the Header file for usbd_msc.c
   * @{
   */ 
 
@@ -114,7 +119,12 @@ uint8_t  USBD_MSC_RegisterStorage  (USBD_HandleTypeDef   *pdev,
 /**
   * @}
   */ 
-#endif  // _USB_MSC_CORE_H_
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif  /* __USBD_MSC_H */
 /**
   * @}
   */ 

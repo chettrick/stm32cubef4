@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    usbd_customhid_if_template.c
   * @author  MCD Application Team
-  * @version V2.2.0
-  * @date    13-June-2014
+  * @version V2.3.0
+  * @date    04-November-2014
   * @brief   USB Device Custom HID interface file.
   *		     This template should be copied to the user folder, renamed and customized
   *          following user needs.
@@ -52,7 +52,7 @@ USBD_CUSTOM_HID_ItfTypeDef USBD_CustomHID_template_fops =
   * @brief  TEMPLATE_CUSTOM_HID_Init
   *         Initializes the CUSTOM HID media low layer
   * @param  None
-  * @retval Result of the opeartion: USBD_OK if all operations are OK else USBD_FAIL
+  * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAIL
   */
 static int8_t TEMPLATE_CUSTOM_HID_Init(void)
 {
@@ -64,7 +64,7 @@ static int8_t TEMPLATE_CUSTOM_HID_Init(void)
   * @brief  TEMPLATE_CUSTOM_HID_DeInit
   *         DeInitializes the CUSTOM HID media low layer
   * @param  None
-  * @retval Result of the opeartion: USBD_OK if all operations are OK else USBD_FAIL
+  * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAIL
   */
 static int8_t TEMPLATE_CUSTOM_HID_DeInit(void)
 {
@@ -80,7 +80,7 @@ static int8_t TEMPLATE_CUSTOM_HID_DeInit(void)
   *         Manage the CUSTOM HID class events       
   * @param  event_idx: event index
   * @param  state: event state
-  * @retval Result of the opeartion: USBD_OK if all operations are OK else USBD_FAIL
+  * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAIL
   */
 static int8_t TEMPLATE_CUSTOM_HID_OutEvent  (uint8_t event_idx, uint8_t state)
 { 

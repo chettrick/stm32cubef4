@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32_adafruit_lcd.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    22-April-2014
+  * @version V1.1.1
+  * @date    21-November-2014
   * @brief   This file includes the driver for Liquid Crystal Display (LCD) module
   *          mounted on the Adafruit 1.8" TFT LCD shield (reference ID 802), 
   *          that is used with the STM32 Nucleo board through SPI interface.     
@@ -62,12 +62,12 @@
     
 /* Includes ------------------------------------------------------------------*/
 #include "stm32_adafruit_lcd.h"
-#include "..\..\..\Utilities\Fonts\fonts.h"
-#include "..\..\..\Utilities\Fonts\font24.c"
-#include "..\..\..\Utilities\Fonts\font20.c"
-#include "..\..\..\Utilities\Fonts\font16.c"
-#include "..\..\..\Utilities\Fonts\font12.c"
-#include "..\..\..\Utilities\Fonts\font8.c"
+#include "../../../Utilities/Fonts/fonts.h"
+#include "../../../Utilities/Fonts/font24.c"
+#include "../../../Utilities/Fonts/font20.c"
+#include "../../../Utilities/Fonts/font16.c"
+#include "../../../Utilities/Fonts/font12.c"
+#include "../../../Utilities/Fonts/font8.c"
 
 /** @addtogroup BSP
   * @{
@@ -96,6 +96,9 @@
 #define POLY_Y(Z)             ((int32_t)((Points + (Z))->Y))
 #define NULL                  (void *)0
 
+#define MAX_HEIGHT_FONT         17
+#define MAX_WIDTH_FONT          24
+#define OFFSET_BITMAP           54
 /**
   * @}
   */ 
@@ -115,6 +118,10 @@
 LCD_DrawPropTypeDef DrawProp;
 
 static LCD_DrvTypeDef  *lcd_drv; 
+
+/* Max size of bitmap will based on a font24 (17x24) */
+static uint8_t bitmap[MAX_HEIGHT_FONT*MAX_WIDTH_FONT*2+OFFSET_BITMAP] = {0};
+
 /**
   * @}
   */ 
@@ -124,6 +131,7 @@ static LCD_DrvTypeDef  *lcd_drv;
   */ 
 static void DrawChar(uint16_t Xpos, uint16_t Ypos, const uint8_t *c);
 static void FillTriangle(uint16_t x1, uint16_t x2, uint16_t x3, uint16_t y1, uint16_t y2, uint16_t y3);
+static void SetDisplayWindow(uint16_t Xpos, uint16_t Ypos, uint16_t Width, uint16_t Height);
 /**
   * @}
   */ 
@@ -644,6 +652,41 @@ void BSP_LCD_DrawEllipse(int Xpos, int Ypos, int XRadius, int YRadius)
 }
 
 /**
+  * @brief  Draws a bitmap picture loaded in the STM32 MCU internal memory.
+  * @param  Xpos: Bmp X position in the LCD
+  * @param  Ypos: Bmp Y position in the LCD
+  * @param  pBmp: Pointer to Bmp picture address
+  * @retval None
+  */
+void BSP_LCD_DrawBitmap(uint16_t Xpos, uint16_t Ypos, uint8_t *pBmp)
+{
+  uint32_t height = 0, width  = 0;
+  
+  /* Read bitmap width */
+  width = *(uint16_t *) (pBmp + 18);
+  width |= (*(uint16_t *) (pBmp + 20)) << 16;
+  
+  /* Read bitmap height */
+  height = *(uint16_t *) (pBmp + 22);
+  height |= (*(uint16_t *) (pBmp + 24)) << 16; 
+  
+  /* Remap Ypos, st7735 works with inverted X in case of bitmap */
+  /* X = 0, cursor is on Top corner */
+  if(lcd_drv == &st7735_drv)
+  {
+    Ypos = BSP_LCD_GetYSize() - Ypos - height;
+  }
+  
+  SetDisplayWindow(Xpos, Ypos, width, height);
+  
+  if(lcd_drv->DrawBitmap != NULL)
+  {
+    lcd_drv->DrawBitmap(Xpos, Ypos, pBmp);
+  } 
+  SetDisplayWindow(0, 0, BSP_LCD_GetXSize(), BSP_LCD_GetYSize());
+}
+
+/**
   * @brief  Draws a full rectangle.
   * @param  Xpos: X position
   * @param  Ypos: Y position
@@ -718,7 +761,6 @@ void BSP_LCD_FillCircle(uint16_t Xpos, uint16_t Ypos, uint16_t Radius)
   */
 void BSP_LCD_FillPolygon(pPoint Points, uint16_t PointCount)
 {
-  
   int16_t X = 0, Y = 0, X2 = 0, Y2 = 0, X_center = 0, Y_center = 0, X_first = 0, Y_first = 0, pixelX = 0, pixelY = 0, counter = 0;
   uint16_t  IMAGE_LEFT = 0, IMAGE_RIGHT = 0, IMAGE_TOP = 0, IMAGE_BOTTOM = 0;  
   
@@ -831,63 +873,77 @@ void BSP_LCD_DisplayOff(void)
   lcd_drv->DisplayOff();
 }
 
-/******************************************************************************
-                            Static Function
+/*******************************************************************************
+                            Static Functions
 *******************************************************************************/
 
 /**
   * @brief  Draws a character on LCD.
   * @param  Xpos: Line where to display the character shape
   * @param  Ypos: Start column address
-  * @param  c: Pointer to the character data
+  * @param  pChar: Pointer to the character data
   * @retval None
   */
-static void DrawChar(uint16_t Xpos, uint16_t Ypos, const uint8_t *c)
+static void DrawChar(uint16_t Xpos, uint16_t Ypos, const uint8_t *pChar)
 {
-  uint32_t i = 0, j = 0;
-  uint16_t height, width;
-  uint8_t offset;
-  uint8_t *pchar;
-  uint32_t line;
+  uint32_t counterh = 0, counterw = 0, index = 0;
+  uint16_t height = 0, width = 0;
+  uint8_t offset = 0;
+  uint8_t *pchar = NULL;
+  uint32_t line = 0;
   
   height = DrawProp.pFont->Height;
   width  = DrawProp.pFont->Width;
   
-  offset =  8 *((width + 7)/8) -  width ;
+  /* Fill bitmap header*/
+  *(uint16_t *) (bitmap + 2) = (uint16_t)(height*width*2+OFFSET_BITMAP);
+  *(uint16_t *) (bitmap + 4) = (uint16_t)((height*width*2+OFFSET_BITMAP)>>16);
+  *(uint16_t *) (bitmap + 10) = OFFSET_BITMAP;
+  *(uint16_t *) (bitmap + 18) = (uint16_t)(width);
+  *(uint16_t *) (bitmap + 20) = (uint16_t)((width)>>16);
+  *(uint16_t *) (bitmap + 22) = (uint16_t)(height);
+  *(uint16_t *) (bitmap + 24) = (uint16_t)((height)>>16);
   
-  for(i = 0; i < height; i++)
+  offset =  8 *((width + 7)/8) - width ;
+  
+  for(counterh = 0; counterh < height; counterh++)
   {
-    pchar = ((uint8_t *)c + (width + 7)/8 * i);
+    pchar = ((uint8_t *)pChar + (width + 7)/8 * counterh);
     
-    switch(((width + 7)/8))
+    if(((width + 7)/8) == 3)
     {
-    case 1:
-      line =  pchar[0];
-      break;    
-
-    case 2:
-      line =  (pchar[0]<< 8) | pchar[1];
-      break;
-      
-    case 3:
-    default:
       line =  (pchar[0]<< 16) | (pchar[1]<< 8) | pchar[2];
-      break;
-    }  
+    }
     
-    for (j = 0; j < width; j++)
+    if(((width + 7)/8) == 2)
     {
-      if(line & (1 << (width- j + offset- 1))) 
+      line =  (pchar[0]<< 8) | pchar[1];
+    }
+    
+    if(((width + 7)/8) == 1)
+    {
+      line =  pchar[0];
+    }    
+    
+    for (counterw = 0; counterw < width; counterw++)
+    {
+      /* Image in the bitmap is written from the bottom to the top */
+      /* Need to invert image in the bitmap */
+      index = (((height-counterh-1)*width)+(counterw))*2+OFFSET_BITMAP;
+      if(line & (1 << (width- counterw + offset- 1))) 
       {
-        BSP_LCD_DrawPixel((Xpos + j), Ypos, DrawProp.TextColor);
+        bitmap[index] = (uint8_t)DrawProp.TextColor;
+        bitmap[index+1] = (uint8_t)(DrawProp.TextColor >> 8);
       }
       else
       {
-        BSP_LCD_DrawPixel((Xpos + j), Ypos, DrawProp.BackColor);
+        bitmap[index] = (uint8_t)DrawProp.BackColor;
+        bitmap[index+1] = (uint8_t)(DrawProp.BackColor >> 8);
       } 
     }
-    Ypos++;
   }
+  
+  BSP_LCD_DrawBitmap(Xpos, Ypos, bitmap);
 }
 
 /**
@@ -970,6 +1026,23 @@ static void FillTriangle(uint16_t x1, uint16_t x2, uint16_t x3, uint16_t y1, uin
 }
 
 /**
+  * @brief  Sets display window.
+  * @param  LayerIndex: layer index
+  * @param  Xpos: LCD X position
+  * @param  Ypos: LCD Y position
+  * @param  Width: LCD window width
+  * @param  Height: LCD window height  
+  * @retval None
+  */
+static void SetDisplayWindow(uint16_t Xpos, uint16_t Ypos, uint16_t Width, uint16_t Height)
+{
+  if(lcd_drv->SetDisplayWindow != NULL)
+  {
+    lcd_drv->SetDisplayWindow(Xpos, Ypos, Width, Height);
+  }  
+}
+
+/**
   * @}
   */  
   
@@ -981,4 +1054,7 @@ static void FillTriangle(uint16_t x1, uint16_t x2, uint16_t x3, uint16_t y1, uin
   * @}
   */     
 
+/**
+  * @}
+  */  
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

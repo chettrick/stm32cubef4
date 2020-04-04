@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    Audio/Audio_playback_and_record/Src/audio.c 
+  * @file    Audio/Audio_playback_and_record/Src/waveplayer.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This file provides the Audio Out (playback) interface API
   ******************************************************************************
   * @attention
@@ -26,13 +26,13 @@
   */
 
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
+#include "waveplayer.h"
 
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private typedef -----------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-Audio_BufferTypeDef  BufferCtl;
+static AUDIO_OUT_BufferTypeDef  BufferCtl;
 static int16_t FilePos = 0;
 static __IO uint32_t uwVolume = 70;
 
@@ -41,8 +41,8 @@ FIL WavFile;
 extern FILELIST_FileTypeDef FileList;
 
 /* Private function prototypes -----------------------------------------------*/
-static AUDIO_ErrorTypeDef AUDIO_GetFileInfo(uint16_t file_idx, WAVE_FormatTypeDef *info);
-static uint8_t AUDIO_WavePlayerInit(uint32_t AudioFreq);
+static AUDIO_ErrorTypeDef GetFileInfo(uint16_t file_idx, WAVE_FormatTypeDef *info);
+static uint8_t PlayerInit(uint32_t AudioFreq);
 
 /* Private functions ---------------------------------------------------------*/
 
@@ -51,7 +51,7 @@ static uint8_t AUDIO_WavePlayerInit(uint32_t AudioFreq);
   * @param  None
   * @retval Audio error
   */
-AUDIO_ErrorTypeDef AUDIO_Init(void)
+AUDIO_ErrorTypeDef AUDIO_PLAYER_Init(void)
 {
   if(BSP_AUDIO_OUT_Init(OUTPUT_DEVICE_AUTO, uwVolume, I2S_AUDIOFREQ_48K) == 0)
   {
@@ -68,26 +68,27 @@ AUDIO_ErrorTypeDef AUDIO_Init(void)
   * @param  idx: File index
   * @retval Audio error
   */ 
-AUDIO_ErrorTypeDef AUDIO_Start(uint8_t idx)
+AUDIO_ErrorTypeDef AUDIO_PLAYER_Start(uint8_t idx)
 {
   uint32_t bytesread;
   
   f_close(&WavFile);
   if(AUDIO_GetWavObjectNumber() > idx)
   { 
-    AUDIO_GetFileInfo(idx, &WaveFormat);
+    GetFileInfo(idx, &WaveFormat);
     
     /*Adjust the Audio frequency */
-    AUDIO_WavePlayerInit(WaveFormat.SampleRate); 
+    PlayerInit(WaveFormat.SampleRate); 
     
-    BufferCtl.offset = BUFFER_OFFSET_NONE;
+    BufferCtl.state = BUFFER_OFFSET_NONE;
     
     /* Get Data from USB Flash Disk */
     f_lseek(&WavFile, 0);
+    
     /* Fill whole buffer at first time */
     if(f_read(&WavFile, 
               &BufferCtl.buff[0], 
-              AUDIO_BUFFER_SIZE, 
+              AUDIO_OUT_BUFFER_SIZE, 
               (void *)&bytesread) == FR_OK)
     {
       AudioState = AUDIO_STATE_PLAY;
@@ -95,7 +96,7 @@ AUDIO_ErrorTypeDef AUDIO_Start(uint8_t idx)
       { 
         if(bytesread != 0)
         {
-          BSP_AUDIO_OUT_Play((uint16_t*)&BufferCtl.buff[0], AUDIO_BUFFER_SIZE);
+          BSP_AUDIO_OUT_Play((uint16_t*)&BufferCtl.buff[0], AUDIO_OUT_BUFFER_SIZE);
           BufferCtl.fptr = bytesread;
           return AUDIO_ERROR_NONE;
         }
@@ -110,7 +111,7 @@ AUDIO_ErrorTypeDef AUDIO_Start(uint8_t idx)
   * @param  None
   * @retval Audio error
   */
-AUDIO_ErrorTypeDef AUDIO_Process(void)
+AUDIO_ErrorTypeDef AUDIO_PLAYER_Process(void)
 {
   uint32_t bytesread, elapsed_time;
   AUDIO_ErrorTypeDef audio_error = AUDIO_ERROR_NONE;
@@ -126,32 +127,32 @@ AUDIO_ErrorTypeDef AUDIO_Process(void)
       AudioState = AUDIO_STATE_NEXT;
     }
     
-    if(BufferCtl.offset == BUFFER_OFFSET_HALF)
+    if(BufferCtl.state == BUFFER_OFFSET_HALF)
     {
       if(f_read(&WavFile, 
                 &BufferCtl.buff[0], 
-                AUDIO_BUFFER_SIZE/2, 
+                AUDIO_OUT_BUFFER_SIZE/2, 
                 (void *)&bytesread) != FR_OK)
       { 
         BSP_AUDIO_OUT_Stop(CODEC_PDWN_SW); 
         return AUDIO_ERROR_IO;       
       } 
-      BufferCtl.offset = BUFFER_OFFSET_NONE;
+      BufferCtl.state = BUFFER_OFFSET_NONE;
       BufferCtl.fptr += bytesread; 
     }
     
-    if(BufferCtl.offset == BUFFER_OFFSET_FULL)
+    if(BufferCtl.state == BUFFER_OFFSET_FULL)
     {
       if(f_read(&WavFile, 
-                &BufferCtl.buff[AUDIO_BUFFER_SIZE /2], 
-                AUDIO_BUFFER_SIZE/2, 
+                &BufferCtl.buff[AUDIO_OUT_BUFFER_SIZE /2], 
+                AUDIO_OUT_BUFFER_SIZE/2, 
                 (void *)&bytesread) != FR_OK)
       { 
         BSP_AUDIO_OUT_Stop(CODEC_PDWN_SW); 
         return AUDIO_ERROR_IO;       
       } 
  
-      BufferCtl.offset = BUFFER_OFFSET_NONE;
+      BufferCtl.state = BUFFER_OFFSET_NONE;
       BufferCtl.fptr += bytesread; 
     }
     
@@ -179,7 +180,7 @@ AUDIO_ErrorTypeDef AUDIO_Process(void)
       FilePos = 0; 
     }
     BSP_AUDIO_OUT_Stop(CODEC_PDWN_SW);
-    AUDIO_Start(FilePos);
+    AUDIO_PLAYER_Start(FilePos);
     break;    
     
   case AUDIO_STATE_PREVIOUS:
@@ -188,7 +189,7 @@ AUDIO_ErrorTypeDef AUDIO_Process(void)
       FilePos = AUDIO_GetWavObjectNumber() - 1; 
     }
     BSP_AUDIO_OUT_Stop(CODEC_PDWN_SW);
-    AUDIO_Start(FilePos);
+    AUDIO_PLAYER_Start(FilePos);
     break;   
     
   case AUDIO_STATE_PAUSE:
@@ -222,7 +223,6 @@ AUDIO_ErrorTypeDef AUDIO_Process(void)
     break;
     
   case AUDIO_STATE_WAIT:
-  case AUDIO_STATE_CONFIG:    
   case AUDIO_STATE_IDLE:
   case AUDIO_STATE_INIT:    
   default:
@@ -237,7 +237,7 @@ AUDIO_ErrorTypeDef AUDIO_Process(void)
   * @param  None
   * @retval Audio error
   */
-AUDIO_ErrorTypeDef AUDIO_Stop(void)
+AUDIO_ErrorTypeDef AUDIO_PLAYER_Stop(void)
 {
   AudioState = AUDIO_STATE_STOP;
   FilePos = 0;
@@ -284,56 +284,6 @@ void AUDIO_PlaybackProbeKey(JOYState_TypeDef state)
 }
 
 /**
-  * @brief  Shows audio file (*.wav) on the root
-  * @param  None
-  * @retval None
-  */
-uint8_t AUDIO_ShowWavFiles(void)
-{
-  uint8_t i = 0;
-  uint8_t line_idx = 0;
-  if(AUDIO_StorageInit() == FR_OK)
-  {
-    if(AUDIO_StorageParse() ==  FR_OK)
-    {
-      if(FileList.ptr > 0)
-      {
-        BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-        LCD_UsrLog("audio file(s) [ROOT]:\n\n");
-        
-        for(i = 0; i < FileList.ptr; i++)
-        {
-          line_idx++;
-          if(line_idx > 9)
-          {
-            line_idx = 0;
-            LCD_UsrLog("> Press [Key] To Continue.\n");
-            
-            /* KEY Button in polling */
-            while(BSP_PB_GetState(BUTTON_KEY) != RESET)
-            {
-              /* Wait for User Input */
-            }
-          } 
-          LCD_DbgLog("   |__");
-          LCD_DbgLog((char *)FileList.file[i].name);
-          LCD_DbgLog("\n");
-        }
-        BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-        LCD_UsrLog("\nEnd of files list.\n");
-        return 0;
-      }
-      return 1;
-    }
-    return 2;
-  }
-  else
-  {
-    return 3;
-  }
-}
-
-/**
   * @brief  Calculates the remaining file size and new position of the pointer.
   * @param  None
   * @retval None
@@ -342,8 +292,8 @@ void BSP_AUDIO_OUT_TransferComplete_CallBack(void)
 {
   if(AudioState == AUDIO_STATE_PLAY)
   {
-    BufferCtl.offset = BUFFER_OFFSET_FULL;
-    BSP_AUDIO_OUT_ChangeBuffer((uint16_t*)&BufferCtl.buff[0], AUDIO_BUFFER_SIZE /2);
+    BufferCtl.state = BUFFER_OFFSET_FULL;
+    BSP_AUDIO_OUT_ChangeBuffer((uint16_t*)&BufferCtl.buff[0], AUDIO_OUT_BUFFER_SIZE /2);
   }
 }
 
@@ -356,22 +306,12 @@ void BSP_AUDIO_OUT_HalfTransfer_CallBack(void)
 { 
   if(AudioState == AUDIO_STATE_PLAY)
   {
-    BufferCtl.offset = BUFFER_OFFSET_HALF;
-    BSP_AUDIO_OUT_ChangeBuffer((uint16_t*)&BufferCtl.buff[AUDIO_BUFFER_SIZE /2], AUDIO_BUFFER_SIZE /2);
+    BufferCtl.state = BUFFER_OFFSET_HALF;
+    BSP_AUDIO_OUT_ChangeBuffer((uint16_t*)&BufferCtl.buff[AUDIO_OUT_BUFFER_SIZE /2], AUDIO_OUT_BUFFER_SIZE /2);
   }
 }
-
-/**
-  * @brief  Manages the DMA FIFO error interrupt.
-  * @param  None
-  * @retval None
-  */
-void BSP_AUDIO_OUT_Error_CallBack(void)
-{
-}
-
-/******************************************************************************
-                            Static Function
+/*******************************************************************************
+                            Static Functions
 *******************************************************************************/
 
 /**
@@ -380,7 +320,7 @@ void BSP_AUDIO_OUT_Error_CallBack(void)
   * @param  info: Pointer to WAV file info
   * @retval Audio error
   */
-static AUDIO_ErrorTypeDef AUDIO_GetFileInfo(uint16_t file_idx, WAVE_FormatTypeDef *info)
+static AUDIO_ErrorTypeDef GetFileInfo(uint16_t file_idx, WAVE_FormatTypeDef *info)
 {
   uint32_t bytesread;
   uint32_t duration;
@@ -425,7 +365,7 @@ static AUDIO_ErrorTypeDef AUDIO_GetFileInfo(uint16_t file_idx, WAVE_FormatTypeDe
   * @param  AudioFreq: Audio sampling frequency
   * @retval None
   */
-static uint8_t AUDIO_WavePlayerInit(uint32_t AudioFreq)
+static uint8_t PlayerInit(uint32_t AudioFreq)
 { 
   /* Initialize the Audio codec and all related peripherals (I2S, I2C, IOExpander, IOs...) */  
   if(BSP_AUDIO_OUT_Init(OUTPUT_DEVICE_BOTH, uwVolume, AudioFreq) != 0)

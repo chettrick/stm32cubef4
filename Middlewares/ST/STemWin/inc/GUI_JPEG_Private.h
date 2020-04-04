@@ -10,7 +10,7 @@
 *                                                                    *
 **********************************************************************
 
-** emWin V5.24 - Graphical user interface for embedded applications **
+** emWin V5.26 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -136,8 +136,12 @@ Explanation of terms:
 #define M_DRI   0xdd /* Define Restart Interval */
 
 #define M_APP0  0xe0 /* Application Usage */
+#define M_APP14 0xee /* Adobe marker */
 
 #define M_TEM   0x01
+
+#define ADOBE_TRANSFORM_RGB   0
+#define ADOBE_TRANSFORM_YCBCR 1
 
 /*********************************************************************
 *

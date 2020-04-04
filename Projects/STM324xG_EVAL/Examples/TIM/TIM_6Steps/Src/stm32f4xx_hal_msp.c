@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    TIM/TIM_6Steps/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   HAL MSP module.    
   ******************************************************************************
   * @attention
@@ -73,12 +73,12 @@ void HAL_TIM_OC_MspInit(TIM_HandleTypeDef *htim)
   
   /*##-1- Enable peripherals and GPIO Clocks #################################*/
   /* TIM1 Peripheral clock enable */
-  __TIM1_CLK_ENABLE();
+  __HAL_RCC_TIM1_CLK_ENABLE();
     
   /* Enable GPIO Port Clocks */
-  __GPIOA_CLK_ENABLE();
-  __GPIOB_CLK_ENABLE();
-  __GPIOE_CLK_ENABLE();
+  __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
+  __HAL_RCC_GPIOE_CLK_ENABLE();
   
   /*##-2- Configure I/Os #####################################################*/
   /*

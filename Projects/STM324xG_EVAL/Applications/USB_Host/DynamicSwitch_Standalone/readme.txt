@@ -1,13 +1,13 @@
 /**
-  @page DynamicSwitch_Standalone USB Host Dynamic Switch example
+  @page DynamicSwitch_Standalone USB Host Dynamic Switch application
   
   @verbatim
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    USB_Host/DynamicSwitch_Standalone/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
-  * @brief   Description of the USB Host Dynamic Switch example.
+  * @version V1.2.0
+  * @date    26-December-2014
+  * @brief   Description of the USB Host Dynamic Switch application.
   ******************************************************************************
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
@@ -25,13 +25,13 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description 
+@par Application Description 
 
-This example is a part of the USB Host Library package using STM32Cube firmware. It describes how to use
-dynamically switch, on the same port, between available USB host examples on the STM32F4xx devices.
+This application is a part of the USB Host Library package using STM32Cube firmware. It describes how to use
+dynamically switch, on the same port, between available USB host applications on the STM32F4xx devices.
 
 The USBH_RegisterClass() API is provided by the USB Host Library to load the class driver. In this 
-example MSC, HID and AUDIO classes are loaded and the user can start his application depending on the
+application MSC, HID and AUDIO classes are loaded and the user can start his application depending on the
 connected device. 
 
 At the beginning of the main program the HAL_Init() function is called to reset all the peripherals,
@@ -69,7 +69,7 @@ For more details about the STM32Cube USB Host library, please refer to UM1720
 @par USB Library Configuration
 
 To select the appropriate USB Core to work with, user must add the following macro defines within the
-compiler preprocessor (already done in the preconfigured projects provided with this example):
+compiler preprocessor (already done in the preconfigured projects provided with this application):
       - "USE_USB_HS" when using USB High Speed (HS) Core
       - "USE_USB_FS" when using USB Full Speed (FS) Core 
 
@@ -114,9 +114,9 @@ requirements, such as:
 
 @par Hardware and Software environment
 
-  - This example runs on STM32F407xx/STM32F417xx devices.
+  - This application runs on STM32F407xx/STM32F417xx devices.
     
-  - This example has been tested with STMicroelectronics STM324xG-EVAL RevC 
+  - This application has been tested with STMicroelectronics STM324xG-EVAL RevC 
     evaluation boards and can be easily tailored to any other supported device 
     and development board.
 
@@ -124,9 +124,9 @@ requirements, such as:
     - Insert a microSD card containing .Wav audio file into the STM324xG-EVAL uSD slot (CN6)
     - Plug the USB device into the STM324xG-EVAL board through 'USB micro A-Male 
       to A-Female' cable to the connector:
-      - CN9 : to use USB High Speed (HS) 
-      - CN14: to use USB Full Speed (FS) with embedded PHY(U7)
-              Please ensure that jumpers JP16 and JP22 are in position 1-2.
+      - CN9: to use USB High Speed (HS) 
+      - CN8: to use USB Full Speed (FS) with embedded PHY(U2)
+            Please ensure that jumpers JP16 and JP22 are in position 1-2.
 
 
 @par How to use it ?
@@ -137,7 +137,7 @@ In order to make the program work, you must do the following :
  - In the workspace toolbar select the project configuration:
    - STM324xG-EVAL_USBH-HS: to configure the project for STM32F4xx devices using USB OTG HS peripheral
    - STM324xG-EVAL_USBH-FS: to configure the project for STM32F4xx devices using USB OTG FS peripheral
- - Run the example
+ - Run the application
  
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    usbd_customhid.h
   * @author  MCD Application Team
-  * @version V2.2.0
-  * @date    13-June-2014
+  * @version V2.3.0
+  * @date    04-November-2014
   * @brief   header file for the usbd_customhid.c file.
   ******************************************************************************
   * @attention
@@ -23,13 +23,17 @@
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
+ 
+/* Define to prevent recursive inclusion -------------------------------------*/ 
+#ifndef __USB_CUSTOMHID_H
+#define __USB_CUSTOMHID_H
+
+#ifdef __cplusplus
+ extern "C" {
+#endif
 
 /* Includes ------------------------------------------------------------------*/
-
-#ifndef __USB_CUSTOM_HID_CORE_H_
-#define __USB_CUSTOM_HID_CORE_H_
-
 #include  "usbd_ioreq.h"
 
 /** @addtogroup STM32_USB_DEVICE_LIBRARY
@@ -37,7 +41,7 @@
   */
   
 /** @defgroup USBD_CUSTOM_HID
-  * @brief This file is the Header file for USBD_custom_hid.c
+  * @brief This file is the Header file for USBD_customhid.c
   * @{
   */ 
 
@@ -140,7 +144,11 @@ uint8_t  USBD_CUSTOM_HID_RegisterInterface  (USBD_HandleTypeDef   *pdev,
   * @}
   */ 
 
-#endif  // __USB_CUSTOM_HID_CORE_H_
+#ifdef __cplusplus
+}
+#endif
+
+#endif  /* __USB_CUSTOMHID_H */
 /**
   * @}
   */ 

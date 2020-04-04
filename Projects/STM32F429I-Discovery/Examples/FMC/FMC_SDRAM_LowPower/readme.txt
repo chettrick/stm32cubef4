@@ -5,8 +5,8 @@
   ******************* (C) COPYRIGHT 2014 STMicroelectronics ********************
   * @file    FMC/FMC_SDRAM_LowPower/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Description of the FMC SDRAM Low power example.
   ******************************************************************************
   *
@@ -77,7 +77,7 @@ LEDs are used to indicate the system state as following:
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 

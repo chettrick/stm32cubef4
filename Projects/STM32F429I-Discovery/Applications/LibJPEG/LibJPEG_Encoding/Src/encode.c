@@ -2,9 +2,9 @@
   ******************************************************************************
   * @file    LibJPEG/LibJPEG_Encoding/Src/encode.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014 
-  * @brief   This file contain the compress method.
+  * @version V1.2.0
+  * @date    26-December-2014 
+  * @brief   This file contains the compress method.
   ******************************************************************************
   * @attention
   *
@@ -29,10 +29,10 @@
 #include "encode.h"
 
 /* Private typedef -----------------------------------------------------------*/
-   /* This struct contains the JPEG compression parameters */
-   static struct jpeg_compress_struct cinfo; 
-   /* This struct represents a JPEG error handler */
-   static struct jpeg_error_mgr jerr; 
+/* This struct contains the JPEG compression parameters */
+static struct jpeg_compress_struct cinfo; 
+/* This struct represents a JPEG error handler */
+static struct jpeg_error_mgr jerr; 
   
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -42,21 +42,20 @@
 
 /**
   * @brief  Decode
-  * @param  file:          pointer to the bmp file
-  * @param  file1:         pointer to the jpg file  
-  * @param  width:         image width
-  * @param  height:        image height
+  * @param  file: pointer to the bmp file
+  * @param  file1: pointer to the jpg file  
+  * @param  width: image width
+  * @param  height: image height
   * @param  image_quality: image quality
-  * @param  buff:          pointer to the image line
+  * @param  buff: pointer to the image line
   * @retval None
   */
 void jpeg_encode(FIL *file, FIL *file1, uint32_t width, uint32_t height, uint32_t image_quality, uint8_t * buff)
 { 
-    
   /* Encode BMP Image to JPEG */  
   JSAMPROW row_pointer;    /* Pointer to a single row */
   uint32_t bytesread;
-            
+  
   /* Step 1: allocate and initialize JPEG compression object */
   /* Set up the error handler */
   cinfo.err = jpeg_std_error(&jerr);
@@ -87,7 +86,6 @@ void jpeg_encode(FIL *file, FIL *file1, uint32_t width, uint32_t height, uint32_
   
   while (cinfo.next_scanline < cinfo.image_height)
   {          
-    
     if(f_read(file, buff, width*3, (UINT*)&bytesread) == FR_OK)
     {
       row_pointer = (JSAMPROW)buff;
@@ -98,8 +96,7 @@ void jpeg_encode(FIL *file, FIL *file1, uint32_t width, uint32_t height, uint32_
   jpeg_finish_compress(&cinfo);
   
   /* Step 6: release JPEG compression object */
-  jpeg_destroy_compress(&cinfo);
-    
+  jpeg_destroy_compress(&cinfo);   
 }
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

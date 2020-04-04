@@ -10,7 +10,7 @@
 *                                                                    *
 **********************************************************************
 
-** emWin V5.24 - Graphical user interface for embedded applications **
+** emWin V5.26 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -116,7 +116,7 @@ typedef struct {
 **********************************************************************
 */
 #if GUI_DEBUG_LEVEL >= GUI_DEBUG_LEVEL_CHECK_ALL
-  #define DROPDOWN_INIT_ID(p) p->DebugId = DROPDOWN_ID
+  #define DROPDOWN_INIT_ID(p) (p->DebugId = DROPDOWN_ID)
 #else
   #define DROPDOWN_INIT_ID(p)
 #endif

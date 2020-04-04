@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    FreeRTOS/FreeRTOS_Mutexes/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Main program body
   ******************************************************************************
   * @attention
@@ -54,7 +54,7 @@ static void SystemClock_Config(void);
 /* Private functions ---------------------------------------------------------*/
 
 /**
-  * @brief  Main program.
+  * @brief  Main program
   * @param  None
   * @retval None
   */
@@ -68,16 +68,16 @@ int main(void)
      */
   HAL_Init();  
   
-  /* Configure the system clock to 180 Mhz */
+  /* Configure the system clock to 180 MHz */
   SystemClock_Config();
   
-  /* Initialize LEDs */
+  /* Configure LED1, LED2, LED3 and LED4 */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED2);
   BSP_LED_Init(LED3);
   BSP_LED_Init(LED4); 
   
-  /* Creates the mutex  */
+  /* Creates the mutex */
   osMutexDef(osMutex);
   osMutex = osMutexCreate(osMutex(osMutex));
   
@@ -97,8 +97,8 @@ int main(void)
   }
   
   /* Start scheduler */
-  osKernelStart (NULL, NULL);
-
+  osKernelStart();
+  
   /* We should never get here as control is now taken by the scheduler */
   for(;;);
 }
@@ -135,7 +135,7 @@ static void MutexHighPriorityThread(void const *argument)
     osDelay(mutexSHORT_DELAY);
     
     
-    /* We should now be able to release the mutex .  
+    /* We should now be able to release the mutex.  
     When the mutex is available again the medium priority thread
     should be unblocked but not run because it has a lower priority
     than this thread.  The low priority thread should also not run 
@@ -146,11 +146,11 @@ static void MutexHighPriorityThread(void const *argument)
       BSP_LED_Toggle(LED3);
     }
     
-    /* Keep count of the number of cycles this thread has performed. */
+    /* Keep count of the number of cycles this thread has performed */
     HighPriorityThreadCycles++;
     BSP_LED_Toggle(LED1);
     
-    /* Suspend ourselves to the medium priority thread can execute. */
+    /* Suspend ourselves to the medium priority thread can execute */
     osThreadSuspend(NULL);
   }
 }
@@ -162,7 +162,7 @@ static void MutexHighPriorityThread(void const *argument)
   */
 static void MutexMeduimPriorityThread(void const *argument)
 {
-  /* Just to remove compiler warning. */
+  /* Just to remove compiler warning */
   (void) argument;
   
   for(;;)
@@ -174,7 +174,7 @@ static void MutexMeduimPriorityThread(void const *argument)
     thread is suspended. */
     if(osMutexWait(osMutex, osWaitForever) == osOK)
     {
-      if(osThreadIsSuspended(osHighPriorityThreadHandle) != osOK)
+      if(osThreadGetState(osHighPriorityThreadHandle) != osThreadSuspended)
       {
         /* Did not expect to execute until the high priority thread was
         suspended.
@@ -233,7 +233,7 @@ static void MutexLowPriorityThread(void const *argument)
     if(osMutexWait(osMutex, mutexNO_DELAY) == osOK)
     {
       /* Is the haigh and medium-priority threads suspended? */
-      if((osThreadIsSuspended(osHighPriorityThreadHandle) != osOK) || (osThreadIsSuspended(osMediumPriorityThreadHandle) != osOK))
+      if((osThreadGetState(osHighPriorityThreadHandle) != osThreadSuspended) || (osThreadGetState(osMediumPriorityThreadHandle) != osThreadSuspended))
       {
         /* Toggle LED 3 to indicate error */
         BSP_LED_Toggle(LED3);
@@ -259,7 +259,7 @@ static void MutexLowPriorityThread(void const *argument)
         
         /* The other two tasks should now have executed and no longer
         be suspended. */
-        if((osThreadIsSuspended(osHighPriorityThreadHandle) == osOK) || (osThreadIsSuspended(osMediumPriorityThreadHandle) == osOK))
+        if((osThreadGetState(osHighPriorityThreadHandle) == osThreadSuspended) || (osThreadGetState(osMediumPriorityThreadHandle) == osThreadSuspended))
         {
           /* Toggle LED 3 to indicate error */
           BSP_LED_Toggle(LED3);
@@ -308,7 +308,7 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
 
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -327,7 +327,7 @@ static void SystemClock_Config(void)
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
 
   /* Activate the Over-Drive mode */
-  HAL_PWREx_ActivateOverDrive();  
+  HAL_PWREx_EnableOverDrive();  
   
   /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
   clocks dividers */
@@ -340,10 +340,9 @@ static void SystemClock_Config(void)
 }
 
 #ifdef  USE_FULL_ASSERT
-
 /**
   * @brief  Reports the name of the source file and the source line number
-  *   where the assert_param error has occurred.
+  *         where the assert_param error has occurred.
   * @param  file: pointer to the source file name
   * @param  line: assert_param error line source number
   * @retval None
@@ -355,7 +354,8 @@ void assert_failed(uint8_t* file, uint32_t line)
 
   /* Infinite loop */
   while (1)
-  {}
+  {
+  }
 }
 #endif
 

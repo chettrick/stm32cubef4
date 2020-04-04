@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    HASH/HASH_HMAC_SHA1MD5/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   HAL MSP module.    
   ******************************************************************************
   * @attention
@@ -68,7 +68,7 @@
 void HAL_HASH_MspInit(HASH_HandleTypeDef *hhash)
 {
   /* Enable HASH clock */
-  __HASH_CLK_ENABLE();
+  __HAL_RCC_HASH_CLK_ENABLE();
   
 }
 

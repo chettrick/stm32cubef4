@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LwIP/LwIP_HTTP_Server_Raw/Src/httpd_cg_ssi.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Webserver SSI and CGI handlers
   ******************************************************************************
   * @attention
@@ -66,7 +66,7 @@ static void ADC_Configuration(void)
   /* ADC3 Configuration ------------------------------------------------------*/
   hadc.Instance = ADC3;
   hadc.Init.ClockPrescaler = ADC_CLOCKPRESCALER_PCLK_DIV2;
-  hadc.Init.Resolution = ADC_RESOLUTION12b;
+  hadc.Init.Resolution = ADC_RESOLUTION_12B;
   hadc.Init.ScanConvMode = DISABLE;
   hadc.Init.ContinuousConvMode = ENABLE;
   hadc.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
@@ -116,7 +116,7 @@ u16_t ADC_Handler(int iIndex, char *pcInsert, int iInsertLen)
      /* get digits to display */
      
      Digit1= ADCVal/1000;
-     Digit2= (ADCVal-(Digit1*1000))/100 ;
+     Digit2= (ADCVal-(Digit1*1000))/100;
      Digit3= (ADCVal-((Digit1*1000)+(Digit2*100)))/10;
      Digit4= ADCVal -((Digit1*1000)+(Digit2*100)+ (Digit3*10));
         
@@ -148,7 +148,7 @@ const char * LEDS_CGI_Handler(int iIndex, int iNumParams, char *pcParam[], char 
     BSP_LED_Off(LED3);
     BSP_LED_Off(LED4);
     
-    /* Check cgi parameter : example GET /leds.cgi?led=2&led=4 */
+    /* Check cgi parameter : application GET /leds.cgi?led=2&led=4 */
     for (i=0; i<iNumParams; i++)
     {
       /* check parameter "led" */

@@ -1,11 +1,11 @@
 /**
   ******************************************************************************
-  * @file    fatfs_storage.c
+  * @file    Display/LCD_Paint/Src/fatfs_storage.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
-  * @brief   This file includes the Storage (FatFs) driver for the STM324x9I-EVAL
-  *          example.
+  * @version V1.2.0
+  * @date    26-December-2014
+  * @brief   This file includes the Storage (FatFs) driver for the STM324xG-EVAL
+  *          application.
   ******************************************************************************
   * @attention
   *
@@ -29,13 +29,13 @@
 /* Includes ------------------------------------------------------------------*/
 #include "fatfs_storage.h"
 
-/** @addtogroup STM324x9I_EVAL_FAT_FS
+/** @addtogroup STM324xG_EVAL_FAT_FS
   * @{
   */
 
 /** @defgroup FATFS_STORAGE
-  * @brief This file includes the Storage (FatFs) driver for the STM324x9I-EVAL
-  *        example.
+  * @brief This file includes the Storage (FatFs) driver for the STM324xG-EVAL
+  *        application.
   * @{
   */
 
@@ -91,7 +91,7 @@ uint32_t BytesRead = 0;
   */
 
 /**
-  * @brief  SDCARD Initialisation for FatFs
+  * @brief  SDCARD Initialization for FatFs
   * @param  None
   * @retval err : Error status (0=> success, 1=> fail)
   */
@@ -112,7 +112,7 @@ uint32_t Storage_Init(void)
   * @param  DirName: the Directory name to open
   * @param  FileName: the file name to open
   * @param  BufferAddress: A pointer to a buffer to copy the file to
-  * @param  FileLen: the File lenght
+  * @param  FileLen: the File length
   * @retval err: Error status (0=> success, 1=> fail)
   */
 uint32_t Storage_OpenReadFile(uint32_t Address, const char* BmpName)
@@ -183,7 +183,7 @@ uint32_t Storage_OpenReadFile(uint32_t Address, const char* BmpName)
   * @param  DirName: the Directory name to open
   * @param  FileName: the file name to open
   * @param  BufferAddress: A pointer to a buffer to copy the file to
-  * @param  FileLen: the File lenght
+  * @param  FileLen: the File length
   * @retval err: Error status (0=> success, 1=> fail)
   */
 uint32_t Storage_CheckBitmapFile(const char* BmpName, uint32_t *FileLen)

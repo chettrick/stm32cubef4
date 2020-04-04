@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    SDIO/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Description of SDIO examples.
   ******************************************************************************
   *
@@ -37,12 +37,12 @@
 
   The STM32CubeF4 firmware package comes with the following Examples and Applications
   making use of SDIO peripheral (used to drive uSD card):
-    - \Projects\STM324xG_EVAL\Examples\BSP
-    - \Projects\STM324xG_EVAL\Applications\FatFs\FatFs_uSD
-    - \Projects\STM324xG_EVAL\Applications\FatFs\FatFs_uSD_RTOS
-    - \Projects\STM324xG_EVAL\Applications\FatFs\FatFs_MultiDrives
-    - \Projects\STM324xG_EVAL\Applications\Display\LCD_Paint
-    - \Projects\STM324xG_EVAL\Applications\USB_Device\MSC_Standalone
+    - /Projects/STM324xG_EVAL/Examples/BSP
+    - /Projects/STM324xG_EVAL/Applications/FatFs/FatFs_uSD
+    - /Projects/STM324xG_EVAL/Applications/FatFs/FatFs_uSD_RTOS
+    - /Projects/STM324xG_EVAL/Applications/FatFs/FatFs_MultiDrives
+    - /Projects/STM324xG_EVAL/Applications/Display/LCD_Paint
+    - /Projects/STM324xG_EVAL/Applications/USB_Device/MSC_Standalone
 
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>

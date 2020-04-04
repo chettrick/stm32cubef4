@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LwIP/LwIP_IAP/Src/tftpserver.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014   
+  * @version V1.2.0
+  * @date    26-December-2014   
   * @brief   basic tftp server implementation for IAP (only Write Req supported)
   ******************************************************************************
   * @attention
@@ -64,7 +64,7 @@ static err_t IAP_tftp_send_ack_packet(struct udp_pcb *upcb, struct ip_addr *to, 
 /**
   * @brief Returns the TFTP opcode 
   * @param buf: pointer on the TFTP packet 
-  * @retval none
+  * @retval None
   */
 static tftp_opcode IAP_tftp_decode_op(char *buf)
 {
@@ -86,7 +86,7 @@ static u16_t IAP_tftp_extract_block(char *buf)
   * @brief Sets the TFTP opcode 
   * @param  buffer: pointer on the TFTP packet
   * @param  opcode: TFTP opcode
-  * @retval none
+  * @retval None
   */
 static void IAP_tftp_set_opcode(char *buffer, tftp_opcode opcode)
 {
@@ -98,7 +98,7 @@ static void IAP_tftp_set_opcode(char *buffer, tftp_opcode opcode)
   * @brief Sets the TFTP block number 
   * @param packet: pointer on the TFTP packet 
   * @param  block: block number
-  * @retval none
+  * @retval None
   */
 static void IAP_tftp_set_block(char* packet, u16_t block)
 {
@@ -165,7 +165,7 @@ static err_t IAP_tftp_send_ack_packet(struct udp_pcb *upcb, struct ip_addr *to, 
   * @param pkt_buf: pointer on a pbuf stucture
   * @param ip_addr: pointer on the receive IP_address structure
   * @param port: receive port address
-  * @retval none
+  * @retval None
   */
 static void IAP_wrq_recv_callback(void *_args, struct udp_pcb *upcb, struct pbuf *pkt_buf, struct ip_addr *addr, u16_t port)
 {
@@ -248,7 +248,7 @@ static void IAP_wrq_recv_callback(void *_args, struct udp_pcb *upcb, struct pbuf
   * @brief  Processes TFTP write request
   * @param  to: pointer on the receive IP address
   * @param  to_port: receive port number
-  * @retval none
+  * @retval None
   */
 static int IAP_tftp_process_write(struct udp_pcb *upcb, struct ip_addr *to, int to_port)
 {
@@ -301,7 +301,7 @@ static int IAP_tftp_process_write(struct udp_pcb *upcb, struct ip_addr *to, int 
   * @param  pbuf: pointer on packet buffer
   * @param  addr: pointer on the receive IP address
   * @param  port: receive port number
-  * @retval none
+  * @retval None
   */
 static void IAP_tftp_recv_callback(void *arg, struct udp_pcb *upcb, struct pbuf *pkt_buf,
                         struct ip_addr *addr, u16_t port)
@@ -380,7 +380,7 @@ static void IAP_tftp_recv_callback(void *arg, struct udp_pcb *upcb, struct pbuf 
   * @brief  disconnect and close the connection 
   * @param  upcb: pointer on udp_pcb structure
   * @param  args: pointer on tftp_connection arguments
-  * @retval none
+  * @retval None
   */
 static void IAP_tftp_cleanup_wr(struct udp_pcb *upcb, tftp_connection_args *args)
 {
@@ -402,8 +402,8 @@ static void IAP_tftp_cleanup_wr(struct udp_pcb *upcb, tftp_connection_args *args
 
 /**
   * @brief  Creates and initializes a UDP PCB for TFTP receive operation  
-  * @param  none  
-  * @retval none
+  * @param  None  
+  * @retval None
   */
 void IAP_tftpd_init(void)
 {
@@ -418,7 +418,7 @@ void IAP_tftpd_init(void)
 #ifdef USE_LCD
     LCD_ErrLog("Can not create pcb \n");
 #endif
-    return ;
+    return;
   }
 
   /* Bind this PCB to port 69  */

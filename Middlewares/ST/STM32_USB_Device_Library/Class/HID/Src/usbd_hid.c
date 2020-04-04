@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    usbd_hid.c
   * @author  MCD Application Team
-  * @version V2.2.0
-  * @date    13-June-2014
+  * @version V2.3.0
+  * @date    04-November-2014
   * @brief   This file provides the HID core functions.
   *
   * @verbatim
@@ -339,7 +339,7 @@ static uint8_t  USBD_HID_Setup (USBD_HandleTypeDef *pdev,
 {
   uint16_t len = 0;
   uint8_t  *pbuf = NULL;
-  USBD_HID_HandleTypeDef     *hhid = pdev->pClassData;
+  USBD_HID_HandleTypeDef     *hhid = (USBD_HID_HandleTypeDef*) pdev->pClassData;
   
   switch (req->bmRequest & USB_REQ_TYPE_MASK)
   {
@@ -420,7 +420,7 @@ uint8_t USBD_HID_SendReport     (USBD_HandleTypeDef  *pdev,
                                  uint8_t *report,
                                  uint16_t len)
 {
-  USBD_HID_HandleTypeDef     *hhid = pdev->pClassData;
+  USBD_HID_HandleTypeDef     *hhid = (USBD_HID_HandleTypeDef*)pdev->pClassData;
   
   if (pdev->dev_state == USBD_STATE_CONFIGURED )
   {

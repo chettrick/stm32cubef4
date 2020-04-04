@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324x9i_eval_io.h
   * @author  MCD Application Team
-  * @version V2.0.2
-  * @date    19-June-2014
+  * @version V2.0.3
+  * @date    10-December-2014
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm324x9i_eval_io.c driver.
   ******************************************************************************
@@ -47,7 +47,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm324x9i_eval.h"
 /* Include IO component driver */
-#include "..\Components\stmpe1600\stmpe1600.h"  
+#include "../Components/stmpe1600/stmpe1600.h"  
    
 /** @addtogroup BSP
   * @{

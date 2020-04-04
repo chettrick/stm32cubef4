@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    TIM/TIM_InputCapture/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This example shows how to use the TIM peripheral to measure only 
   *          the frequency of an external signal.
   ******************************************************************************
@@ -113,10 +113,12 @@ int main(void)
        + ClockDivision = 0
        + Counter direction = Up
   */
-  TimHandle.Init.Period        = 0xFFFF;
-  TimHandle.Init.Prescaler     = 0;
-  TimHandle.Init.ClockDivision = 0;
-  TimHandle.Init.CounterMode   = TIM_COUNTERMODE_UP;  
+  TimHandle.Init.Period            = 0xFFFF;
+  TimHandle.Init.Prescaler         = 0;
+  TimHandle.Init.ClockDivision     = 0;
+  TimHandle.Init.CounterMode       = TIM_COUNTERMODE_UP;
+  TimHandle.Init.RepetitionCounter = 0;
+    
   if(HAL_TIM_IC_Init(&TimHandle) != HAL_OK)
   {
     /* Initialization Error */
@@ -212,7 +214,7 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
 
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -238,6 +240,13 @@ static void SystemClock_Config(void)
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
+
+  /* STM32F405x/407x/415x/417x Revision Z devices: prefetch is supported  */
+  if (HAL_GetREVID() == 0x1001)
+  {
+    /* Enable the Flash prefetch */
+    __HAL_FLASH_PREFETCH_BUFFER_ENABLE();
+  }
 }
 
 /**
@@ -255,7 +264,6 @@ static void Error_Handler(void)
 }
 
 #ifdef  USE_FULL_ASSERT
-
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.
@@ -273,7 +281,6 @@ void assert_failed(uint8_t* file, uint32_t line)
   {
   }
 }
-
 #endif
 
 /**

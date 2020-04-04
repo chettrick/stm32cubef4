@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    PolarSSL/SSL_Server/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   HAL MSP module.
   *         
   @verbatim
@@ -71,17 +71,17 @@ void HAL_MspInit(void)
   */ 
   
   /* Enable UART 4 clock  */
-  __UART4_CLK_ENABLE();
+  __HAL_RCC_UART4_CLK_ENABLE();
   
   /* RNG Periph clock enable */
-  __RNG_CLK_ENABLE();
+  __HAL_RCC_RNG_CLK_ENABLE();
  
 #ifdef USE_STM32F4XX_HW_CRYPTO   
   /* Enable CRYP clock */
-  __CRYP_CLK_ENABLE();
+  __HAL_RCC_CRYP_CLK_ENABLE();
     
   /* Enable Hash clock */
-  __HASH_CLK_ENABLE();
+  __HAL_RCC_HASH_CLK_ENABLE();
 
 #endif
   
@@ -96,10 +96,10 @@ void HAL_MspInit(void)
 void HAL_HASH_MspDeInit(HASH_HandleTypeDef *hhash)
 {
   /* Force the HASH Periheral Clock Reset */  
-  __HASH_FORCE_RESET(); 
+  __HAL_RCC_HASH_FORCE_RESET(); 
   
   /* Release the HASH Periheral Clock Reset */  
-  __HASH_RELEASE_RESET();
+  __HAL_RCC_HASH_RELEASE_RESET();
 }
 
 /**
@@ -110,10 +110,10 @@ void HAL_HASH_MspDeInit(HASH_HandleTypeDef *hhash)
 void HAL_CRYP_MspDeInit(CRYP_HandleTypeDef *hcryp)
 {
   /* Force the CRYP Periheral Clock Reset */  
-  __CRYP_FORCE_RESET(); 
+  __HAL_RCC_CRYP_FORCE_RESET(); 
   
   /* Release the CRYP Periheral Clock Reset */  
-  __CRYP_RELEASE_RESET();
+  __HAL_RCC_CRYP_RELEASE_RESET();
 }
 #endif
 

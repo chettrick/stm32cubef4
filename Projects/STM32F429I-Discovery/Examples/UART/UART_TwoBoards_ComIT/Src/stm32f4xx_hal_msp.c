@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    UART/UART_TwoBoards_ComIT/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   HAL MSP module.    
   ******************************************************************************
   * @attention
@@ -113,10 +113,10 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef *huart)
   USARTx_FORCE_RESET();
   USARTx_RELEASE_RESET();
 
-  /*##-2- Disable peripherals and GPIO Clocks #################################*/
-  /* Configure UART Tx as alternate function  */
+  /*##-2- Disable peripherals and GPIO Clocks ################################*/
+  /* Configure UART Tx as alternate function */
   HAL_GPIO_DeInit(USARTx_TX_GPIO_PORT, USARTx_TX_PIN);
-  /* Configure UART Rx as alternate function  */
+  /* Configure UART Rx as alternate function */
   HAL_GPIO_DeInit(USARTx_RX_GPIO_PORT, USARTx_RX_PIN);
   
   /*##-3- Disable the NVIC for UART ##########################################*/

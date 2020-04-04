@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    Audio_playback_and_record/src/main.c 
+  * @file    Audio/Audio_playback_and_record/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Main program body.
   ******************************************************************************
   * @attention
@@ -28,13 +28,8 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
-/** @addtogroup STM32F4-Discovery_Audio_Player_Recorder
-  * @{
-  */ 
-
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-
 /* Private variables ---------------------------------------------------------*/
 TIM_HandleTypeDef hTimLed;
 TIM_OC_InitTypeDef sConfigLed;
@@ -63,44 +58,44 @@ uint8_t MemsID = 0;
 __IO uint32_t CmdIndex = CMD_PLAY;
 __IO uint32_t PbPressCheck = 0;
 
-FATFS USBDISKFatFs;           /* File system object for USB disk logical drive */
-char USBDISKPath[4];          /* USB Host logical drive path */
+FATFS USBDISKFatFs;          /* File system object for USB disk logical drive */
+char USBDISKPath[4];         /* USB Host logical drive path */
 USBH_HandleTypeDef hUSBHost; /* USB Host handle */
 
 MSC_ApplicationTypeDef AppliState = APPLICATION_IDLE;
 static uint8_t  USBH_USR_ApplicationState = USBH_USR_FS_INIT;
 
 /* Private function prototypes -----------------------------------------------*/
-static void  TIM_LED_Config(void);
-static void  SystemClock_Config(void);
-static void  USBH_UserProcess  (USBH_HandleTypeDef *pHost, uint8_t vId);
-static void  MSC_Application(void);
-static void  COMMAND_AudioExecuteApplication(void);
+static void TIM_LED_Config(void);
+static void SystemClock_Config(void);
+static void USBH_UserProcess(USBH_HandleTypeDef *pHost, uint8_t vId);
+static void MSC_Application(void);
+static void COMMAND_AudioExecuteApplication(void);
 
 /* Private functions ---------------------------------------------------------*/
 
 /**
-  * @brief  Main program.
+  * @brief  Main program
   * @param  None
   * @retval None
-*/
+  */
 int main(void)
 {
   /* STM32F4xx HAL library initialization:
-  - Configure the Flash prefetch, instruction and Data caches
-  - Configure the Systick to generate an interrupt each 1 msec
-  - Set NVIC Group Priority to 4
-  - Global MSP (MCU Support Package) initialization
+     - Configure the Flash prefetch, instruction and Data caches
+     - Configure the Systick to generate an interrupt each 1 msec
+     - Set NVIC Group Priority to 4
+     - Global MSP (MCU Support Package) initialization
   */
   HAL_Init();
   
-  /* Initialize LEDs mounted on STM32F4-Discovery board */
+  /* Configure LED3, LED4, LED5 and LED6 */
   BSP_LED_Init(LED3);
   BSP_LED_Init(LED4);
   BSP_LED_Init(LED5);
   BSP_LED_Init(LED6);
   
-  /* Configure the system clock */
+  /* Configure the system clock to 168 MHz */
   SystemClock_Config();
   
   /* Initialize MEMS Accelerometer mounted on STM32F4-Discovery board */
@@ -120,11 +115,11 @@ int main(void)
   
   /* Initialize the Repeat state */
   RepeatState = REPEAT_ON;
-
+  
   /* Turn OFF all LEDs */
   LEDsState = LEDS_OFF;
   
-  /* Initialize User Button */
+  /* Configure USER Button */
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_EXTI);
   
   /*##-1- Link the USB Host disk I/O driver ##################################*/
@@ -156,14 +151,18 @@ int main(void)
       USBH_Process(&hUSBHost);
     }
   }
-  while (1) {}
+  
+  /* TrueStudio compilation error correction */
+  while (1)
+  {
+  }
 }
 
 /**
   * @brief  User Process
   * @param  phost: Host Handle
   * @param  id: Host Library user message ID
-  * @retval none
+  * @retval None
   */
 static void USBH_UserProcess (USBH_HandleTypeDef *pHost, uint8_t vId)
 {  
@@ -193,7 +192,7 @@ static void USBH_UserProcess (USBH_HandleTypeDef *pHost, uint8_t vId)
 /**
   * @brief  Main routine for Mass storage application
   * @param  None
-  * @retval none
+  * @retval None
   */
 static void MSC_Application(void)
 {
@@ -208,10 +207,10 @@ static void MSC_Application(void)
     break;
     
   case USBH_USR_FS_INIT:
-    /* Initialises the File System */
+    /* Initializes the File System */
     if (f_mount(&USBDISKFatFs, (TCHAR const*)USBDISKPath, 0 ) != FR_OK ) 
     {
-      /* efs initialisation fails*/
+      /* FatFs initialisation fails */
       Error_Handler();
     }
     
@@ -234,16 +233,18 @@ static void COMMAND_AudioExecuteApplication(void)
   /* Execute the command switch the command index */
   switch (CmdIndex)
   {
-  /* Start Playing from USB Flash memory */
+    /* Start Playing from USB Flash memory */
   case CMD_PLAY:
     if (RepeatState == REPEAT_ON)
       WavePlayerStart();
     break;
+    
     /* Start Recording in USB Flash memory */ 
   case CMD_RECORD:
     RepeatState = REPEAT_ON;
     WaveRecorderProcess();
-    break;  
+    break;
+    
   default:
     break;
   }
@@ -275,7 +276,7 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
   
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -307,6 +308,13 @@ static void SystemClock_Config(void)
   {
     Error_Handler();
   }
+
+  /* STM32F405x/407x/415x/417x Revision Z devices: prefetch is supported  */
+  if (HAL_GetREVID() == 0x1001)
+  {
+    /* Enable the Flash prefetch */
+    __HAL_FLASH_PREFETCH_BUFFER_ENABLE();
+  }  
 }
 
 /**
@@ -320,7 +328,7 @@ static void TIM_LED_Config(void)
   uint32_t tmpvalue = 0;
 
   /* TIM4 clock enable */
-  __TIM4_CLK_ENABLE();
+  __HAL_RCC_TIM4_CLK_ENABLE();
 
   /* Enable the TIM4 global Interrupt */
   HAL_NVIC_SetPriority(TIM4_IRQn, 6, 0);  
@@ -444,7 +452,7 @@ void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef *htim)
   capture = HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1);
   
   /* Set the TIM4 Capture Compare1 Register value */
-  __HAL_TIM_SetCompare(htim, TIM_CHANNEL_1, (CCR1Val + capture));
+  __HAL_TIM_SET_COMPARE(htim, TIM_CHANNEL_1, (CCR1Val + capture));
 }
 
  /**
@@ -505,6 +513,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 } 
 
 #ifdef USE_FULL_ASSERT
+
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.

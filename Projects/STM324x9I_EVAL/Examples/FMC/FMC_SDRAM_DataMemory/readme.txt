@@ -5,8 +5,8 @@
   ******************* (C) COPYRIGHT 2014 STMicroelectronics ********************
   * @file    FMC/FMC_SDRAM_DataMemory/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Description of the FMC SDRAM_DataMemory example.
   ******************************************************************************
   *
@@ -60,16 +60,13 @@ At this stage, all the used data can be located in the external SDRAM memory.
 The user can use the debugger's watch to evaluate "uwTabAddr" and "MSPValue" variables
 values which should be equal to "0xC00xxxxx".
 
-The user can use the debugger's watch to evaluate "uwTabAddr" and "MSPValue" variables
-values which should be equal to "0xC00xxxxx". 
-
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
       based on variable incremented in SysTick ISR. This implies that if HAL_Delay() is called from
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 

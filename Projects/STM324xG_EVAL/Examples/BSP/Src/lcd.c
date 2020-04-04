@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BSP/Src/lcd.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This example code shows how to use LCD drawing features.
   ******************************************************************************
   * @attention
@@ -49,12 +49,15 @@
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 #define LCD_FEATURES_NUM                3
+
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 static uint8_t LCD_Feature = 0;
+
 /* Private function prototypes -----------------------------------------------*/
 static void LCD_SetHint(void);
 static void LCD_Show_Feature(uint8_t feature);
+
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -62,20 +65,19 @@ static void LCD_Show_Feature(uint8_t feature);
   * @param  None
   * @retval None
   */
-void LCD_demo (void)
+void LCD_demo(void)
 { 
   LCD_SetHint();
   LCD_Feature = 0;
-  LCD_Show_Feature (LCD_Feature); 
+  LCD_Show_Feature(LCD_Feature); 
   
-  while (1)
+  while(1)
   {
-    
     if(CheckForUserInput() > 0)
     {
       if(++LCD_Feature < LCD_FEATURES_NUM)
       {
-       LCD_Show_Feature (LCD_Feature); 
+        LCD_Show_Feature(LCD_Feature); 
       }
       else
       {
@@ -107,16 +109,16 @@ static void LCD_SetHint(void)
   BSP_LCD_DisplayStringAt(0, 30, (uint8_t *)"This example shows the different", CENTER_MODE);
   BSP_LCD_DisplayStringAt(0, 45, (uint8_t *)"LCD Features, use BUTTON to display", CENTER_MODE);
   BSP_LCD_DisplayStringAt(0, 60, (uint8_t *)"next page", CENTER_MODE);
-
-   /* Set the LCD Text Color */
+  
+  /* Set the LCD Text Color */
   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);  
   BSP_LCD_DrawRect(10, 90, BSP_LCD_GetXSize() - 20, BSP_LCD_GetYSize()- 100);
   BSP_LCD_DrawRect(11, 91, BSP_LCD_GetXSize() - 22, BSP_LCD_GetYSize()- 102);
- }
+}
 
 /**
   * @brief  Show LCD Features
-  * @param  feature : feature index
+  * @param  feature: feature index
   * @retval None
   */
 static void LCD_Show_Feature(uint8_t feature)
@@ -128,12 +130,11 @@ static void LCD_Show_Feature(uint8_t feature)
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);    
   BSP_LCD_FillRect(12, 92, BSP_LCD_GetXSize() - 24, BSP_LCD_GetYSize()- 104);
   BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
-
+  
   switch (feature)
   {
   case 0:
     /* Text Feature */
-    
     BSP_LCD_DisplayStringAt(14, 100, (uint8_t *)"Left aligned Text", LEFT_MODE);
     BSP_LCD_DisplayStringAt(0, 115, (uint8_t *)"Center aligned Text", CENTER_MODE);
     BSP_LCD_DisplayStringAt(14, 130, (uint8_t *)"Right aligned Text", RIGHT_MODE);
@@ -146,7 +147,6 @@ static void LCD_Show_Feature(uint8_t feature)
     break;
     
   case 1:
-    
     /* Draw misc. Shapes */
     BSP_LCD_SetTextColor(LCD_COLOR_BLACK); 
     BSP_LCD_DrawRect(20, 100, 60 , 40);
@@ -164,7 +164,7 @@ static void LCD_Show_Feature(uint8_t feature)
     BSP_LCD_DrawEllipse(BSP_LCD_GetXSize() - 120, 170, 30, 20);
     BSP_LCD_FillEllipse(BSP_LCD_GetXSize() - 50, 170, 30, 20);
     
-     BSP_LCD_SetTextColor(LCD_COLOR_BLACK); 
+    BSP_LCD_SetTextColor(LCD_COLOR_BLACK); 
     BSP_LCD_DrawHLine(20, BSP_LCD_GetYSize() - 30, BSP_LCD_GetXSize() / 5);
     BSP_LCD_DrawLine (BSP_LCD_GetXSize() - 150, BSP_LCD_GetYSize()- 20, BSP_LCD_GetXSize()- 20, BSP_LCD_GetYSize()- 50);
     BSP_LCD_DrawLine (BSP_LCD_GetXSize() - 150, BSP_LCD_GetYSize()- 50, BSP_LCD_GetXSize()- 20, BSP_LCD_GetYSize()- 20);
@@ -180,18 +180,19 @@ static void LCD_Show_Feature(uint8_t feature)
     
     BSP_LCD_DrawBitmap(BSP_LCD_GetXSize()-100, 100, (uint8_t *)stlogo);
     HAL_Delay(500);
-
+    
     BSP_LCD_DrawBitmap(20, BSP_LCD_GetYSize()- 80, (uint8_t *)stlogo);
     HAL_Delay(500);
     
     BSP_LCD_DrawBitmap(BSP_LCD_GetXSize()/2 - 40, BSP_LCD_GetYSize()- 80, (uint8_t *)stlogo);
     HAL_Delay(500);     
-
+    
     BSP_LCD_DrawBitmap(BSP_LCD_GetXSize()-100, BSP_LCD_GetYSize()- 80, (uint8_t *)stlogo);
     HAL_Delay(500);    
     break;
   }
 }
+
 /**
   * @}
   */

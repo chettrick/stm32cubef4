@@ -5,8 +5,8 @@
   ******************* (C) COPYRIGHT 2014 STMicroelectronics ********************
   * @file    FMC/FMC_SDRAM_LowPower/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Description of the FMC SDRAM Low power example.
   ******************************************************************************
   *
@@ -55,8 +55,8 @@ domain. Only internal SRAM and registers content are preserved in this mode.
   
 After SDRAM initialization, the data is written to the memory and a "self refresh" 
 command is sent to the SDRAM. The program waits for TAMPER/KEY button to be pushed 
-to enter the CPU in STOP mode, the LED3 is then turned ON. 
-The wakeup from STOP mode is done when pushing WAKEUP Button and the CPU returns 
+to enter the CPU in STOP mode, the LED4 is then turned ON. 
+The wake-up from STOP mode is done when pushing WAKEUP Button and the CPU returns 
 to RUN mode. At this time, the system clock is reconfigured using the function 
 SystemClock_Config(). 
 
@@ -76,18 +76,18 @@ LEDs are used to indicate the system state as following:
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 
 @par Directory contents
  
- - FMC/FMC_SDRAM_LowPower/stm32f4xx_hal_conf.h        Library Configuration file
- - FMC/FMC_SDRAM_LowPower/stm32f4xx_it.h              Interrupt handlers header file
- - FMC/FMC_SDRAM_LowPower/main.h                      Main program header file 
- - FMC/FMC_SDRAM_LowPower/main.c                      Main program  
- - FMC/FMC_SDRAM_LowPower/stm32f4xx_it.c              Interrupt handlers
- - FMC/FMC_SDRAM_LowPower/system_stm32f4xx.c          STM32F4xx system clock configuration file                                      
+ - FMC/FMC_SDRAM_LowPower/Inc/stm32f4xx_hal_conf.h        Library Configuration file
+ - FMC/FMC_SDRAM_LowPower/Inc/stm32f4xx_it.h              Interrupt handlers header file
+ - FMC/FMC_SDRAM_LowPower/Inc/main.h                      Main program header file 
+ - FMC/FMC_SDRAM_LowPower/Src/main.c                      Main program  
+ - FMC/FMC_SDRAM_LowPower/Src/stm32f4xx_it.c              Interrupt handlers
+ - FMC/FMC_SDRAM_LowPower/Src/system_stm32f4xx.c          STM32F4xx system clock configuration file                                      
 
 
 @par Hardware and Software environment 

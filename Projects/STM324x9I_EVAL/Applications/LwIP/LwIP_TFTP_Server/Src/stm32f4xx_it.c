@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LwIP/LwIP_TFTP_Server/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Main Interrupt Service Routines.
   ******************************************************************************
   * @attention
@@ -30,11 +30,11 @@
 #include "stm32f4xx_it.h"
 #include "stm324x9i_eval_sd.h"
     
-/** @addtogroup STM32F4xx_HAL_Examples
+/** @addtogroup STM32F4xx_HAL_Applications
   * @{
   */
 
-/** @addtogroup FatFs_RAMDisk
+/** @addtogroup LwIP_TFTP_Server
   * @{
   */
 
@@ -44,12 +44,13 @@
 /* Private variables ---------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
+
 /******************************************************************************/
 /*            Cortex-M4 Processor Exceptions Handlers                         */
 /******************************************************************************/
 
 /**
-  * @brief   This function handles NMI exception.
+  * @brief  This function handles NMI exception.
   * @param  None
   * @retval None
   */

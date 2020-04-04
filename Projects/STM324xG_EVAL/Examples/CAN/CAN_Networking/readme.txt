@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    CAN/CAN_Networking/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Description of the CAN Networking example.
   ******************************************************************************
   *
@@ -38,7 +38,7 @@
 @par Example Description 
 
 This example shows how to configure the CAN peripheral to send and receive 
-CAN frames in normal mode. The sent frames are used to control Leds by pressing  
+CAN frames in normal mode. The sent frames are used to control LEDs by pressing  
 key push button.
 	
 The CAN serial communication link is a bus to which a number of units may be
@@ -46,10 +46,10 @@ connected. This number has no theoretical limit. Practically the total number
 of units will be limited by delay times and/or electrical loads on the bus line.
 
 This program behaves as follows:
-  - After reset, all Leds are OFF on the N eval boards
-  - By Pressing on KEY Button : LED1 turns ON and all other Leds are OFF, on the N
+  - After reset, all LEDs are OFF on the N eval boards
+  - By Pressing on KEY Button : LED1 turns ON and all other LEDs are OFF, on the N
     eval boards connected to the bus. 
-  - Press on KEY Button again to send CAN Frame to command LEDn+1 ON, all other Leds 
+  - Press on KEY Button again to send CAN Frame to command LEDn+1 ON, all other LEDs 
     are OFF on the N eval boards.
     
 @note This example is tested with a bus of 3 units. The same program example is 
@@ -61,7 +61,7 @@ This program behaves as follows:
 		- ID Filter  = All identifiers are allowed
 		- RTR = Data
 		- DLC = 1 byte
-		- Data: Led number that should be turned ON
+		- Data: LED number that should be turned ON
 
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
       based on variable incremented in SysTick ISR. This implies that if HAL_Delay() is called from
@@ -69,7 +69,7 @@ This program behaves as follows:
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 

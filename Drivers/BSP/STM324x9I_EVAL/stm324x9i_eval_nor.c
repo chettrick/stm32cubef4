@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324x9i_eval_nor.c
   * @author  MCD Application Team
-  * @version V2.0.2
-  * @date    19-June-2014
+  * @version V2.0.3
+  * @date    10-December-2014
   * @brief   This file includes a standard driver for the M29W256GL70ZA6E NOR flash memory 
   *          device mounted on STM324x9I-EVAL evaluation board.
   ******************************************************************************
@@ -170,11 +170,11 @@ uint8_t BSP_NOR_Init(void)
   
   if(HAL_NOR_Init(&norHandle, &Timing, &Timing) != HAL_OK)
   {
-    return NOR_ERROR;
+    return NOR_STATUS_ERROR;
   }
   else
   {
-    return NOR_OK;
+    return NOR_STATUS_OK;
   }
 }
 
@@ -189,11 +189,11 @@ uint8_t BSP_NOR_ReadData(uint32_t uwStartAddress, uint16_t* pData, uint32_t uwDa
 {
   if(HAL_NOR_ReadBuffer(&norHandle, NOR_DEVICE_ADDR + uwStartAddress, pData, uwDataSize) != HAL_OK)
   {
-    return NOR_ERROR;
+    return NOR_STATUS_ERROR;
   }
   else
   {
-    return NOR_OK;
+    return NOR_STATUS_OK;
   }
 }
 
@@ -226,7 +226,7 @@ uint8_t BSP_NOR_WriteData(uint32_t uwStartAddress, uint16_t* pData, uint32_t uwD
     /* Read NOR device status */
     if(HAL_NOR_GetStatus(&norHandle, NOR_DEVICE_ADDR, PROGRAM_TIMEOUT) != NOR_SUCCESS)
     {
-      return NOR_ERROR;
+      return NOR_STATUS_ERROR;
     }
     
     /* Update the counters */
@@ -235,7 +235,7 @@ uint8_t BSP_NOR_WriteData(uint32_t uwStartAddress, uint16_t* pData, uint32_t uwD
     pData++; 
   }
   
-  return NOR_OK;
+  return NOR_STATUS_OK;
 }
 
 /**
@@ -253,11 +253,11 @@ uint8_t BSP_NOR_ProgramData(uint32_t uwStartAddress, uint16_t* pData, uint32_t u
   /* Return the NOR memory status */
   if(HAL_NOR_GetStatus(&norHandle, NOR_DEVICE_ADDR, PROGRAM_TIMEOUT) != NOR_SUCCESS)
   {
-    return NOR_ERROR;
+    return NOR_STATUS_ERROR;
   }
   else
   {
-    return NOR_OK;
+    return NOR_STATUS_OK;
   }
 }
 
@@ -274,11 +274,11 @@ uint8_t BSP_NOR_Erase_Block(uint32_t BlockAddress)
   /* Return the NOR memory status */  
   if(HAL_NOR_GetStatus(&norHandle, NOR_DEVICE_ADDR, BLOCKERASE_TIMEOUT) != NOR_SUCCESS)
   {
-    return NOR_ERROR;
+    return NOR_STATUS_ERROR;
   }
   else
   {
-    return NOR_OK;
+    return NOR_STATUS_OK;
   }
 }
 
@@ -295,11 +295,11 @@ uint8_t BSP_NOR_Erase_Chip(void)
   /* Return the NOR memory status */
   if(HAL_NOR_GetStatus(&norHandle, NOR_DEVICE_ADDR, CHIPERASE_TIMEOUT) != NOR_SUCCESS)
   {
-    return NOR_ERROR;
+    return NOR_STATUS_ERROR;
   }
   else
   {
-    return NOR_OK;
+    return NOR_STATUS_OK;
   } 
 }
 
@@ -312,11 +312,11 @@ uint8_t BSP_NOR_Read_ID(NOR_IDTypeDef *pNOR_ID)
 {
   if(HAL_NOR_Read_ID(&norHandle, pNOR_ID) != HAL_OK)
   {
-    return NOR_ERROR;
+    return NOR_STATUS_ERROR;
   }
   else
   {
-    return NOR_OK;
+    return NOR_STATUS_OK;
   }
 }
 

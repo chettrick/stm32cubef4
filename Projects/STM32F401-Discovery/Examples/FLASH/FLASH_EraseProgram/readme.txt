@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    FLASH/FLASH_EraseProgram/readme.txt
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Description of the FLASH Erase and Program example.
   ******************************************************************************
   *
@@ -54,7 +54,7 @@ Once this operation is finished, the word programming operation will be performe
 using the HAL_FLASH_Program function. The written data is then checked and the
 result of the programming operation is stored into the MemoryProgramStatus variable.
 
-STM32 Eval board's LEDs can be used to monitor the transfer status:
+STM32 Discovery board's LEDs can be used to monitor the transfer status:
  - LED4 (GREEN) is ON when there are no errors detected after programmation
  - LED5 (RED) is ON when there are errors dectected after programmation
  - LED6 (BLUE) is ON when there is an issue during erase procedure
@@ -66,7 +66,7 @@ STM32 Eval board's LEDs can be used to monitor the transfer status:
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
 
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 @par Directory contents 

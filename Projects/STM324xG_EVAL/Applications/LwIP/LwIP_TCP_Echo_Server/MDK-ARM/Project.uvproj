@@ -442,7 +442,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Docs</GroupName>
+          <GroupName>Doc</GroupName>
           <Files>
             <File>
               <FileName>readme.txt</FileName>

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324x9i_eval_sd.c
   * @author  MCD Application Team
-  * @version V2.0.2
-  * @date    19-June-2014
+  * @version V2.0.3
+  * @date    10-December-2014
   * @brief   This file includes the uSD card driver mounted on STM324x9I-EVAL
   *          evaluation board.
   ******************************************************************************
@@ -58,19 +58,19 @@
        SD detection interrupt mode by calling the function BSP_SD_ITConfig(). The interrupt 
        is generated as an external interrupt whenever the micro SD card is 
        plugged/unplugged in/from the evaluation board. The SD detection interrupt
-       is handeled by calling the function BSP_SD_DetectIT() which is called in the IRQ
+       is handled by calling the function BSP_SD_DetectIT() which is called in the IRQ
        handler file, the user callback is implemented in the function BSP_SD_DetectCallback().
      o The function BSP_SD_GetCardInfo() is used to get the micro SD card information 
        which is stored in the structure "HAL_SD_CardInfoTypedef".
   
   + Micro SD card operations
      o The micro SD card can be accessed with read/write block(s) operations once 
-       it is reay for access. The access cand be performed whether using the polling 
+       it is ready for access. The access can be performed whether using the polling 
        mode by calling the functions BSP_SD_ReadBlocks()/BSP_SD_WriteBlocks(), or by DMA 
        transfer using the functions BSP_SD_ReadBlocks_DMA()/BSP_SD_WriteBlocks_DMA()
      o The DMA transfer complete is used with interrupt mode. Once the SD transfer
-       is complete, the SD interrupt is handeled using the function BSP_SD_IRQHandler(),
-       the DMA Tx/Rx transfer complete are handeled using the functions
+       is complete, the SD interrupt is handled using the function BSP_SD_IRQHandler(),
+       the DMA Tx/Rx transfer complete are handled using the functions
        BSP_SD_DMA_Tx_IRQHandler()/BSP_SD_DMA_Rx_IRQHandler(). The corresponding user callbacks 
        are implemented by the user at application level. 
      o The SD erase block(s) is performed using the function BSP_SD_Erase() with specifying

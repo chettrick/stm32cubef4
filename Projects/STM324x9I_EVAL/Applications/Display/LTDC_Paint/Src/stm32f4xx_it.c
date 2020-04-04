@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    Display/LTDC_Paint/stm32f4xx_it.c 
+  * @file    Display/LTDC_Paint/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
@@ -43,14 +43,17 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
+extern HCD_HandleTypeDef hhcd;
+
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
 /******************************************************************************/
 /*            Cortex-M4 Processor Exceptions Handlers                         */
 /******************************************************************************/
+
 /**
-  * @brief   This function handles NMI exception.
+  * @brief  This function handles NMI exception.
   * @param  None
   * @retval None
   */
@@ -147,36 +150,6 @@ void SysTick_Handler(void)
   HAL_IncTick();
 }
 
-/**
-  * @brief  This function handles DMA2 Stream 3 interrupt request.
-  * @param  None
-  * @retval None
-  */
-void DMA2_Stream3_IRQHandler(void)
-{
-  BSP_SD_DMA_Rx_IRQHandler();
-}
-
-/**
-  * @brief  This function handles DMA2 Stream 6 interrupt request.
-  * @param  None
-  * @retval None
-  */
-void DMA2_Stream6_IRQHandler(void)
-{
-  BSP_SD_DMA_Tx_IRQHandler(); 
-}
-
-/**
-  * @brief  This function handles SDIO interrupt request.
-  * @param  None
-  * @retval None
-  */
-void SDIO_IRQHandler(void)
-{
-  BSP_SD_IRQHandler();
-}
-
 /******************************************************************************/
 /*                 STM32F4xx Peripherals Interrupt Handlers                   */
 /*  Add here the Interrupt Handler for the used peripheral(s) (PPP), for the  */
@@ -185,13 +158,20 @@ void SDIO_IRQHandler(void)
 /******************************************************************************/
 
 /**
-  * @brief  This function handles PPP interrupt request.
+  * @brief  OTG_FS_IRQHandler
+  *          This function handles USB-On-The-Go FS global interrupt request.
+  *          requests.
   * @param  None
   * @retval None
   */
-/*void PPP_IRQHandler(void)
+#ifdef USE_USB_OTG_FS
+void OTG_FS_IRQHandler(void)
+#else
+void OTG_HS_IRQHandler(void)
+#endif
 {
-}*/
+  HAL_HCD_IRQHandler(&hhcd);
+}
 
 /**
   * @}
@@ -200,6 +180,5 @@ void SDIO_IRQHandler(void)
 /**
   * @}
   */ 
-
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

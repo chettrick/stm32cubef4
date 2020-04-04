@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    LwIP\LwIP_TCP_Echo_Client\Src\tcp_echoclient.c
+  * @file    LwIP/LwIP_TCP_Echo_Client/Src/tcp_echoclient.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014 
+  * @version V1.2.0
+  * @date    26-December-2014 
   * @brief   tcp echoclient application using LwIP RAW API
   ******************************************************************************
   * @attention
@@ -39,14 +39,12 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-
 u8_t  recev_buf[50];
 __IO uint32_t message_count=0;
 
 u8_t   data[100];
 
 struct tcp_pcb *echoclient_pcb;
-
 
 /* ECHO protocol states */
 enum echoclient_states
@@ -57,7 +55,6 @@ enum echoclient_states
   ES_CLOSING,
 };
 
-
 /* structure to be passed as argument to the tcp callbacks */
 struct echoclient
 {
@@ -65,7 +62,6 @@ struct echoclient
   struct tcp_pcb *pcb;          /* pointer on the current tcp_pcb */
   struct pbuf *p_tx;            /* pointer on pbuf to be transmitted */
 };
-
 
 /* Private function prototypes -----------------------------------------------*/
 static err_t tcp_echoclient_recv(void *arg, struct tcp_pcb *tpcb, struct pbuf *p, err_t err);
@@ -182,8 +178,7 @@ static err_t tcp_echoclient_connected(void *arg, struct tcp_pcb *tpcb, err_t err
 static err_t tcp_echoclient_recv(void *arg, struct tcp_pcb *tpcb, struct pbuf *p, err_t err)
 { 
   struct echoclient *es;
-  err_t ret_err;
-  
+  err_t ret_err; 
 
   LWIP_ASSERT("arg != NULL",arg != NULL);
   
@@ -374,8 +369,7 @@ static void tcp_echoclient_connection_close(struct tcp_pcb *tpcb, struct echocli
   }
 
   /* close tcp connection */
-  tcp_close(tpcb);
-  
+  tcp_close(tpcb);  
 }
 
 #endif /* LWIP_TCP */

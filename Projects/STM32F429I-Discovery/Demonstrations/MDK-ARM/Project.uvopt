@@ -761,7 +761,7 @@
 
   <Group>
     <GroupName>Drivers/STM32F4xx_HAL_Driver</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1091,7 +1091,7 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>2</ColumnNumber>
+      <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
       <TopLine>0</TopLine>
       <CurrentLine>0</CurrentLine>
@@ -1952,8 +1952,8 @@
       <TopLine>0</TopLine>
       <CurrentLine>0</CurrentLine>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\Middlewares\ST\STemWin\Lib\STemWin524b_CM4_OS_Keil.lib</PathWithFileName>
-      <FilenameWithoutPath>STemWin524b_CM4_OS_Keil.lib</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\..\Middlewares\ST\STemWin\Lib\STemWin526_CM4_OS_Keil.lib</PathWithFileName>
+      <FilenameWithoutPath>STemWin526_CM4_OS_Keil.lib</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1976,8 +1976,8 @@
       <TopLine>0</TopLine>
       <CurrentLine>0</CurrentLine>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\Middlewares\ST\STemWin\OS\GUI_X_FreeRTOS.c</PathWithFileName>
-      <FilenameWithoutPath>GUI_X_FreeRTOS.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\..\Middlewares\ST\STemWin\OS\GUI_X_OS.c</PathWithFileName>
+      <FilenameWithoutPath>GUI_X_OS.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

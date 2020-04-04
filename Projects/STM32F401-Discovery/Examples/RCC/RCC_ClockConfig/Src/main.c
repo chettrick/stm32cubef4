@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    RCC/RCC_ClockConfig/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This example describes how to use the RCC HAL API to configure the
   *          system clock (SYSCLK) and modify the clock settings on run time.
   ******************************************************************************
@@ -82,12 +82,12 @@ int main(void)
   BSP_LED_Init(LED5);
   BSP_LED_Init(LED6);
   
-  /* Initialize Key button, will be used to trigger an interrupt each time it's pressed.
+  /* Configure USER Button used to trigger an interrupt each time it's pressed.
      In the ISR the PLL source will be changed from HSE to HSI, and vice versa. */
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_EXTI);  
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
 
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -313,7 +313,6 @@ static void Error_Handler(void)
 {
   /* Turn LED5 on */
   BSP_LED_On(LED5);
-  
   while(1)
   {
   }

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    usbd_audio.c
   * @author  MCD Application Team
-  * @version V2.2.0
-  * @date    13-June-2014
+  * @version V2.3.0
+  * @date    04-November-2014
   * @brief   This file provides the Audio core functions.
   *
   * @verbatim
@@ -369,7 +369,7 @@ static uint8_t  USBD_AUDIO_Init (USBD_HandleTypeDef *pdev,
   }
   else
   {
-    haudio = pdev->pClassData;
+    haudio = (USBD_AUDIO_HandleTypeDef*) pdev->pClassData;
     haudio->alt_setting = 0;
     haudio->offset = AUDIO_OFFSET_UNKNOWN;
     haudio->wr_ptr = 0; 
@@ -431,7 +431,7 @@ static uint8_t  USBD_AUDIO_Setup (USBD_HandleTypeDef *pdev,
   uint16_t len;
   uint8_t *pbuf;
   uint8_t ret = USBD_OK;
-  haudio = pdev->pClassData;
+  haudio = (USBD_AUDIO_HandleTypeDef*) pdev->pClassData;
   
   switch (req->bmRequest & USB_REQ_TYPE_MASK)
   {
@@ -532,7 +532,7 @@ static uint8_t  USBD_AUDIO_DataIn (USBD_HandleTypeDef *pdev,
 static uint8_t  USBD_AUDIO_EP0_RxReady (USBD_HandleTypeDef *pdev)
 {
   USBD_AUDIO_HandleTypeDef   *haudio;
-  haudio = pdev->pClassData;
+  haudio = (USBD_AUDIO_HandleTypeDef*) pdev->pClassData;
   
   if (haudio->control.cmd == AUDIO_REQ_SET_CUR)
   {/* In this driver, to simplify code, only SET_CUR request is managed */
@@ -579,7 +579,7 @@ void  USBD_AUDIO_Sync (USBD_HandleTypeDef *pdev, AUDIO_OffsetTypeDef offset)
 {
   int8_t shift = 0;
   USBD_AUDIO_HandleTypeDef   *haudio;
-  haudio = pdev->pClassData;
+  haudio = (USBD_AUDIO_HandleTypeDef*) pdev->pClassData;
   
   haudio->offset =  offset; 
   
@@ -671,7 +671,7 @@ static uint8_t  USBD_AUDIO_DataOut (USBD_HandleTypeDef *pdev,
                               uint8_t epnum)
 {
   USBD_AUDIO_HandleTypeDef   *haudio;
-  haudio = pdev->pClassData;
+  haudio = (USBD_AUDIO_HandleTypeDef*) pdev->pClassData;
   
   if (epnum == AUDIO_OUT_EP)
   {
@@ -721,7 +721,7 @@ static uint8_t  USBD_AUDIO_DataOut (USBD_HandleTypeDef *pdev,
 static void AUDIO_REQ_GetCurrent(USBD_HandleTypeDef *pdev, USBD_SetupReqTypedef *req)
 {  
   USBD_AUDIO_HandleTypeDef   *haudio;
-  haudio = pdev->pClassData;
+  haudio = (USBD_AUDIO_HandleTypeDef*) pdev->pClassData;
   
   memset(haudio->control.data, 0, 64);
   /* Send the current mute state */
@@ -740,7 +740,7 @@ static void AUDIO_REQ_GetCurrent(USBD_HandleTypeDef *pdev, USBD_SetupReqTypedef 
 static void AUDIO_REQ_SetCurrent(USBD_HandleTypeDef *pdev, USBD_SetupReqTypedef *req)
 { 
   USBD_AUDIO_HandleTypeDef   *haudio;
-  haudio = pdev->pClassData;
+  haudio = (USBD_AUDIO_HandleTypeDef*) pdev->pClassData;
   
   if (req->wLength)
   {

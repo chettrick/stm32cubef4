@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    RNG/RNG_MultiRNG/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   HAL MSP module.    
   ******************************************************************************
   * @attention
@@ -68,7 +68,7 @@
 void HAL_RNG_MspInit(RNG_HandleTypeDef *hrng)
 {
   /* RNG Peripheral clock enable */
-  __RNG_CLK_ENABLE();
+  __HAL_RCC_RNG_CLK_ENABLE();
 }
 
 /**
@@ -81,10 +81,10 @@ void HAL_RNG_MspInit(RNG_HandleTypeDef *hrng)
 void HAL_RNG_MspDeInit(RNG_HandleTypeDef *hrng)
 {
   /* Enable RNG reset state */
-  __RNG_FORCE_RESET();
+  __HAL_RCC_RNG_FORCE_RESET();
   
   /* Release RNG from reset state */
-  __RNG_RELEASE_RESET();
+  __HAL_RCC_RNG_RELEASE_RESET();
 }
 
 /**

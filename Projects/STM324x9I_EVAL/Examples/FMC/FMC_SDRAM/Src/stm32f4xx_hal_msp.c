@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    FMC/FMC_SDRAM/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   HAL MSP module.    
   ******************************************************************************
   * @attention
@@ -42,7 +42,7 @@
   * @{
   */
 
-/** @defgroup FMC_SDRAM_Basic
+/** @defgroup FMC_SDRAM
   * @{
   */
 
@@ -71,15 +71,15 @@ void HAL_SDRAM_MspInit(SDRAM_HandleTypeDef *hsdram)
   
   /*##-1- Enable peripherals and GPIO Clocks #################################*/
   /* Enable GPIO clocks */
-  __GPIOD_CLK_ENABLE();
-  __GPIOE_CLK_ENABLE();
-  __GPIOF_CLK_ENABLE();
-  __GPIOG_CLK_ENABLE();
-  __GPIOH_CLK_ENABLE();
-  __GPIOI_CLK_ENABLE(); 
+  __HAL_RCC_GPIOD_CLK_ENABLE();
+  __HAL_RCC_GPIOE_CLK_ENABLE();
+  __HAL_RCC_GPIOF_CLK_ENABLE();
+  __HAL_RCC_GPIOG_CLK_ENABLE();
+  __HAL_RCC_GPIOH_CLK_ENABLE();
+  __HAL_RCC_GPIOI_CLK_ENABLE(); 
   
   /* Enable FMC clock */
-  __FMC_CLK_ENABLE(); 
+  __HAL_RCC_FMC_CLK_ENABLE(); 
   
   /*##-2- Configure peripheral GPIO ##########################################*/  
   GPIO_Init_Structure.Mode      = GPIO_MODE_AF_PP;

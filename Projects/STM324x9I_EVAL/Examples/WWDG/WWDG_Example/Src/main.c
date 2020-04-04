@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    WWDG/WWDG_Example/Src/main.c  
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This sample code shows how to use the STM32F4xx WWDG HAL API 
   *          to update at regular period the WWDG counter and how to simulate 
   *          a software fault generating an MCU WWDG reset on expiry of a 
@@ -77,13 +77,15 @@ int main(void)
      */
   HAL_Init();
   
-  /* Configure the system clock to 180 Mhz */
+  /* Configure the system clock to 180 MHz */
   SystemClock_Config();
   
-  /* Configure LED1, LED2, LED3 and Key/Tamper Button */     
+  /* Configure LED1, LED2 and LED3 */     
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED2);
   BSP_LED_Init(LED3);
+  
+  /* Configure TAMPER Button */
   BSP_PB_Init(BUTTON_TAMPER, BUTTON_MODE_EXTI);
 
   /*##-1- Check if the system has resumed from WWDG reset ####################*/
@@ -170,7 +172,7 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
 
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -189,7 +191,7 @@ static void SystemClock_Config(void)
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
   
   /* Activate the Over-Drive mode */
-  HAL_PWREx_ActivateOverDrive();
+  HAL_PWREx_EnableOverDrive();
   
   /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */

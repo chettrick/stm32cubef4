@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    usbd_msc.c
   * @author  MCD Application Team
-  * @version V2.2.0
-  * @date    13-June-2014
+  * @version V2.3.0
+  * @date    04-November-2014
   * @brief   This file provides all the MSC core functions.
   *
   * @verbatim
@@ -363,7 +363,7 @@ uint8_t  USBD_MSC_DeInit (USBD_HandleTypeDef *pdev,
                   MSC_EPIN_ADDR);
   
   
-    /* D-Init the BOT layer */
+    /* De-Init the BOT layer */
   MSC_BOT_DeInit(pdev);
   
   /* Free MSC Class Resources */
@@ -383,7 +383,7 @@ uint8_t  USBD_MSC_DeInit (USBD_HandleTypeDef *pdev,
 */
 uint8_t  USBD_MSC_Setup (USBD_HandleTypeDef *pdev, USBD_SetupReqTypedef *req)
 {
-  USBD_MSC_BOT_HandleTypeDef     *hmsc = pdev->pClassData;
+  USBD_MSC_BOT_HandleTypeDef     *hmsc = (USBD_MSC_BOT_HandleTypeDef*) pdev->pClassData;
   
   switch (req->bmRequest & USB_REQ_TYPE_MASK)
   {
@@ -448,7 +448,7 @@ uint8_t  USBD_MSC_Setup (USBD_HandleTypeDef *pdev, USBD_SetupReqTypedef *req)
       /* Flush the FIFO and Clear the stall status */    
       USBD_LL_FlushEP(pdev, (uint8_t)req->wIndex);
       
-      /* Re-activate the EP */      
+      /* Reactivate the EP */      
       USBD_LL_CloseEP (pdev , (uint8_t)req->wIndex);
       if((((uint8_t)req->wIndex) & 0x80) == 0x80)
       {

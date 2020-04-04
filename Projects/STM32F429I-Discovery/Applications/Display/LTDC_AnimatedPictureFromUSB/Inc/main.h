@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Display/LTDC_AnimatedPictureFromUSB/Inc/main.h 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
@@ -38,7 +38,7 @@
 #include "ff_gen_drv.h"
 #include "usbh_diskio.h"
 
-#include  "..\..\..\..\..\..\Utilities\Log\lcd_log.h"
+#include  "../../../../../../Utilities/Log/lcd_log.h"
 
 
 /* Exported types ------------------------------------------------------------*/

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Device/CDC_Standalone/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   HAL MSP module.    
   ******************************************************************************
   * @attention
@@ -58,7 +58,7 @@
 
 /**
   * @brief UART MSP Initialization 
-  *        This function configures the hardware resources used in this example: 
+  *        This function configures the hardware resources used in this application: 
   *           - Peripheral's clock enable
   *           - Peripheral's GPIO Configuration  
   *           - NVIC configuration for UART interrupt request enable
@@ -139,7 +139,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef *huart)
 
 /**
   * @brief UART MSP De-Initialization 
-  *        This function frees the hardware resources used in this example:
+  *        This function frees the hardware resources used in this application:
   *          - Disable the Peripheral's clock
   *          - Revert GPIO, and NVIC configuration to their default state
   * @param huart: UART handle pointer
@@ -151,10 +151,10 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef *huart)
   USARTx_FORCE_RESET();
   USARTx_RELEASE_RESET();
 
-  /*##-2- Disable peripherals and GPIO Clocks #################################*/
-  /* Configure UART Tx as alternate function  */
+  /*##-2- Disable peripherals and GPIO Clocks ################################*/
+  /* Configure UART Tx as alternate function */
   HAL_GPIO_DeInit(USARTx_TX_GPIO_PORT, USARTx_TX_PIN);
-  /* Configure UART Rx as alternate function  */
+  /* Configure UART Rx as alternate function */
   HAL_GPIO_DeInit(USARTx_RX_GPIO_PORT, USARTx_RX_PIN);
   
   /*##-3- Disable the NVIC for UART ##########################################*/

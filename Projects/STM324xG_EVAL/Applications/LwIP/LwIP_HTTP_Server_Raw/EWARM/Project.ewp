@@ -1000,7 +1000,7 @@
     </group>
   </group>
   <group>
-    <name>Docs</name>
+    <name>Doc</name>
     <file>
       <name>$PROJ_DIR$\..\readme.txt</name>
     </file>

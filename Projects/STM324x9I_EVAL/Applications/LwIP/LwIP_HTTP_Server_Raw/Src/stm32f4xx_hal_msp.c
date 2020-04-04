@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LwIP/LwIP_HTTP_Server_Raw/Src/tm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   HAL MSP module.
   *         
   ******************************************************************************
@@ -29,7 +29,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
-/** @addtogroup STM32F4xx_HAL_Examples
+/** @addtogroup STM32F4xx_HAL_Applications
   * @{
   */
 
@@ -59,16 +59,16 @@ void HAL_ADC_MspInit(ADC_HandleTypeDef *heth)
    GPIO_InitTypeDef GPIO_InitStructure;
    
   /* Enable GPIOF clock */
-   __GPIOF_CLK_ENABLE();
+   __HAL_RCC_GPIOF_CLK_ENABLE();
    
    /* Configure PF10 as analog input */
   GPIO_InitStructure.Pin = GPIO_PIN_10;
   GPIO_InitStructure.Mode = GPIO_MODE_ANALOG;
-  GPIO_InitStructure.Pull = GPIO_NOPULL ;
+  GPIO_InitStructure.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOF, &GPIO_InitStructure);
    
    /* ADC3 Periph clock enable */
-   __ADC3_CLK_ENABLE();
+   __HAL_RCC_ADC3_CLK_ENABLE();
 }
 /**
   * @}

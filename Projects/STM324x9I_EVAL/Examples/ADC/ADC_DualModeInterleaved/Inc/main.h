@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    ADC/ADC_DualModeInterleaved/Inc/main.h 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
@@ -49,17 +49,17 @@
    resources */
 /* Definition for ADCx clock resources */
 #define ADCx                             ADC1
-#define ADCx_CLK_ENABLE()                __ADC1_CLK_ENABLE()
+#define ADCx_CLK_ENABLE()                __HAL_RCC_ADC1_CLK_ENABLE()
 
 /* Definition for ADCy clock resources */
 #define ADCy                             ADC2
-#define ADCy_CLK_ENABLE()                __ADC2_CLK_ENABLE();
+#define ADCy_CLK_ENABLE()                __HAL_RCC_ADC2_CLK_ENABLE();
      
-#define DMAxy_CLK_ENABLE()               __DMA2_CLK_ENABLE()     
-#define ADCxy_CHANNEL_GPIO_CLK_ENABLE()  __GPIOC_CLK_ENABLE()
+#define DMAxy_CLK_ENABLE()               __HAL_RCC_DMA2_CLK_ENABLE()     
+#define ADCxy_CHANNEL_GPIO_CLK_ENABLE()  __HAL_RCC_GPIOC_CLK_ENABLE()
      
-#define ADCxy_FORCE_RESET()              __ADC_FORCE_RESET()
-#define ADCxy_RELEASE_RESET()            __ADC_RELEASE_RESET()
+#define ADCxy_FORCE_RESET()              __HAL_RCC_ADC_FORCE_RESET()
+#define ADCxy_RELEASE_RESET()            __HAL_RCC_ADC_RELEASE_RESET()
 
 /* Definition for ADCx Channel Pin */
 #define ADCxy_CHANNEL_PIN                GPIO_PIN_2

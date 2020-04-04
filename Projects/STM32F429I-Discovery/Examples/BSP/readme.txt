@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    BSP/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Description of the BSP example.
   ******************************************************************************
   *
@@ -46,11 +46,8 @@ Then the SystemClock_Config() function is used to configure the system
 clock (SYSCLK) to run at 180 MHz.
 
 This example shows how to use the different functionalities of LCD, MEMS, 
-touchscreen and RF EEPROM (only with  daughter board ANT7-M24LR-A) by switching 
+touchscreen and RF EEPROM (only with daughter board ANT7-M24LR-A) by switching 
 between all tests using USER button. 
-
-Firstly, use the joystick button to move a pointer inside a rectangle 
-(up/down/right/left) and change the pointer color(select).
 
 Touchscreen example: after the touchscreen calibration, use the touchscreen 
 functionality to activate all colored circles inside a rectangle.
@@ -60,8 +57,8 @@ with different fonts, to display different shapes and to draw a bitmap.
 
 LCD log example: this example shows how to use the LCD log features.
 
-MEMS example: this example shows how to use accelerometer mems. You need to color all the
-circles in moving boards: right(Y+)/left(Y-)/Right rotate(z+)/left rotate(z-)/back(X+)/front(X-)
+MEMS example: this example shows how to use accelerometer MEMS. You need to color all the
+circles in moving boards: Right(Y+)/Left(Y-)/Right rotate(Z+)/Left rotate(Z-)/Back(X+)/Front(X-)
  
 EEPROM example: this example shows how to read and write data in RF EEPROM.
   *             The I2C EEPROM memory (M24LR64) is available on separate daughter 
@@ -78,7 +75,7 @@ ANT7-M24LR-A
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 
@@ -92,10 +89,12 @@ ANT7-M24LR-A
   - BSP/Src/ts_calibration.c           Touchscreen calibration
   - BSP/Src/mems.c                     MEMS features
   - BSP/Src/eeprom.c                   EEPROM features (only use in workspace STM32F429I-Discovery+EEPROM)
+  - BSP/Src/log.c                      LCD Log features
   - BSP/Inc/main.h                     Main program header file  
   - BSP/Inc/stm32f4xx_hal_conf.h       HAL configuration file
   - BSP/Inc/stm32f4xx_it.h             Interrupt handlers header file
   - BSP/Inc/stlogo.h                   Image used for BSP example
+  - BSP/Inc/lcd_log_conf.h             LCD Log configuration file
         
         
 @par Hardware and Software environment  

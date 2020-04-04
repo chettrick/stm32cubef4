@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    FatFs/FatFs_USBDisk_MultipleAccess_RTOS/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Main program body
   *          This sample code shows how to use FatFs with USB disk drive with 
   *          multiple access in RTOS mode.
@@ -78,7 +78,7 @@ int main(void)
      */
   HAL_Init();
  
-  /* Configure the system clock to 168 Mhz */
+  /* Configure the system clock to 168 MHz */
   SystemClock_Config();
   
   /* Configure LED1, LED3 and LED4 */
@@ -102,7 +102,7 @@ int main(void)
   DiskEvent = osMessageCreate (osMessageQ(disk_queue), NULL);
   
   /*##-4- Start scheduler ####################################################*/
-  osKernelStart (NULL, NULL);
+  osKernelStart();
 
   /* We should never get here as control is now taken by the scheduler */
   for( ;; );
@@ -328,13 +328,13 @@ static void USBH_UserProcess(USBH_HandleTypeDef *phost, uint8_t id)
   * @param  None
   * @retval None
   */
-static void SystemClock_Config  (void)
+static void SystemClock_Config(void)
 {
   RCC_ClkInitTypeDef RCC_ClkInitStruct;
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
 
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -360,6 +360,13 @@ static void SystemClock_Config  (void)
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
+
+  /* STM32F405x/407x/415x/417x Revision Z devices: prefetch is supported  */
+  if (HAL_GetREVID() == 0x1001)
+  {
+    /* Enable the Flash prefetch */
+    __HAL_FLASH_PREFETCH_BUFFER_ENABLE();
+  }
 }
 
 /**

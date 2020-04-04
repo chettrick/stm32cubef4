@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    RCC/RCC_ClockConfig/Inc/main.h 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    26-June-2014
+  * @version V1.1.0
+  * @date    26-December-2014
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
@@ -41,7 +41,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
-#include "stm32F4xx_nucleo.h"
+#include "stm32f4xx_nucleo.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/

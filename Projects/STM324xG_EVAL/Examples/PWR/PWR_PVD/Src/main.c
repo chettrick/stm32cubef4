@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    PWR/PWR_PVD/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This sample code shows how to use STM32F4xx PWR HAL API to manage the
   * Programmable Voltage Detector (PVD).
   ******************************************************************************
@@ -79,15 +79,16 @@ int main(void)
   BSP_LED_Init(LED2);
   BSP_LED_Init(LED3);
   
-  /* Configure the system clock to 168 Mhz */
+  /* Configure the system clock to 168 MHz */
   SystemClock_Config();
   
   /* Configure the PVD */
   PVD_Config();
-  
+
+  /* Infinite loop */  
   while (1)
   {
-    /* Toggle The LED2 */
+    /* Toggle LED2 */
     BSP_LED_Toggle(LED2);
     
     /* Insert 100 ms delay */
@@ -103,7 +104,7 @@ int main(void)
 static void PVD_Config(void)
 {
   /*##-1- Enable Power Clock #################################################*/
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
 
   /*##-2- Configure the NVIC for PVD #########################################*/
   HAL_NVIC_SetPriority(PVD_IRQn, 0, 0);
@@ -113,8 +114,8 @@ static void PVD_Config(void)
      edges(PVD detection level set to 2.5V, refer to the electrical characteristics
      of you device datasheet for more details) */
   sConfigPVD.PVDLevel = PWR_PVDLEVEL_3;
-  sConfigPVD.Mode = PWR_MODE_IT_RISING_FALLING;
-  HAL_PWR_PVDConfig(&sConfigPVD);
+  sConfigPVD.Mode = PWR_PVD_MODE_IT_RISING_FALLING;
+  HAL_PWR_ConfigPVD(&sConfigPVD);
 
   /* Enable the PVD Output */
   HAL_PWR_EnablePVD();
@@ -146,7 +147,7 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
 
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -178,6 +179,13 @@ static void SystemClock_Config(void)
   {
     Error_Handler();
   }
+
+  /* STM32F405x/407x/415x/417x Revision Z devices: prefetch is supported  */
+  if (HAL_GetREVID() == 0x1001)
+  {
+    /* Enable the Flash prefetch */
+    __HAL_FLASH_PREFETCH_BUFFER_ENABLE();
+  }
 }
 
 /**
@@ -206,8 +214,8 @@ void HAL_SYSTICK_Callback(void)
 
 /**
   * @brief  PWR PVD interrupt callback
-  * @param  none 
-  * @retval none
+  * @param  None 
+  * @retval None
   */
 void HAL_PWR_PVDCallback(void)
 {
@@ -216,7 +224,6 @@ void HAL_PWR_PVDCallback(void)
 }
 
 #ifdef  USE_FULL_ASSERT
-
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.

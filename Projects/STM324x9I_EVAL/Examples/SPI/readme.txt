@@ -1,13 +1,13 @@
 /**
-  @page SDIO_EXAMPLES SDIO Example
+  @page SPI_EXAMPLES SPI Example
   
   @verbatim
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
-  * @file    SDIO/readme.txt 
+  * @file    SPI/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
-  * @brief   Description of SDIO example.
+  * @version V1.2.0
+  * @date    26-December-2014
+  * @brief   Description of SPI example.
   ******************************************************************************
   *
   * Redistribution and use in source and binary forms, with or without modification,
@@ -38,10 +38,10 @@
   The STM32CubeF4 firmware package provides a set of examples showing how to use the SPI
   in master/slave communication, based on polling, interrupt and DMA programming models.  
   These examples are provided for Discovery boards, below the examples set for STM32F4-Discovery:
-    - \Projects\STM32F4-Discovery\Examples\SPI\SPI_FullDuplex_ComPolling
-    - \Projects\STM32F4-Discovery\Examples\SPI\SPI_FullDuplex_ComIT
-    - \Projects\STM32F4-Discovery\Examples\SPI\SPI_FullDuplex_ComDMA
-    - \Projects\STM32F4-Discovery\Examples\SPI\SPI_FullDuplex_AdvCom    
+    - /Projects/STM32F4-Discovery/Examples/SPI/SPI_FullDuplex_ComPolling
+    - /Projects/STM32F4-Discovery/Examples/SPI/SPI_FullDuplex_ComIT
+    - /Projects/STM32F4-Discovery/Examples/SPI/SPI_FullDuplex_ComDMA
+    - /Projects/STM32F4-Discovery/Examples/SPI/SPI_FullDuplex_AdvCom    
     
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

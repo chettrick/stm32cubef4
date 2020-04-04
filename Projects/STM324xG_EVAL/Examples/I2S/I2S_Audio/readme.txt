@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    I2S/I2S_Audio/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Description of the I2S Audio example.
   ******************************************************************************
   *
@@ -75,9 +75,10 @@ DMA mode should be preferred (by enabling the define AUDIO_MAL_MODE_CIRCULAR in
 stm324xg_eval_audio.h file).  
 
 List of Known Limitations and more detailed user notes are provided in file 
-stm324xg_eval_audio.c   (under Drivers\BSP\STM324xG_EVAL)
+stm324xg_eval_audio.c   (under Drivers/BSP/STM324xG_EVAL)
 
-The provided sample audio file (stored in internal flash memory) is extracted from:
+The provided sample audio file, under "/Utilities/Media/Audio/audio_sample_wav.bin"
+that must be stored in internal flash memory, is extracted from:
  - Title: artofgardens-instr 
  - Artist/Composer: Dan O'Connor
  - Creative Commons license: Attribution 3.0 United States
@@ -95,19 +96,21 @@ The provided sample audio file (stored in internal flash memory) is extracted fr
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
 
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
+
 
 @par Directory contents 
 
   - I2S/I2S_Audio/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - I2S/I2S_Audio/Inc/stm32f4xx_it.h          Interrupt handlers header file
-  - I2S/I2S_Audio/Inc/main.h                  Main program header file  
+  - I2S/I2S_Audio/Inc/main.h                  Main program header file
+  - I2S/I2S_Audio/Src/audio_if.h              Audio Out (playback) interface API header file    
   - I2S/I2S_Audio/Src/stm32f4xx_it.c          Interrupt handlers
   - I2S/I2S_Audio/Src/main.c                  Main program
   - I2S/I2S_Audio/Src/system_stm32f4xx.c      STM32F4xx system clock configuration file
   - I2S/I2S_Audio/Src/stm32f4xx_hal_msp.c     HAL MSP module
-  - I2S/I2S_Audio/Src/audio_sample.c          Audio Sample file (in tab format)
+  - I2S/I2S_Audio/Src/audio_if.c              Audio Out (playback) interface API file
       
       
 @par Hardware and Software environment 
@@ -125,7 +128,8 @@ The provided sample audio file (stored in internal flash memory) is extracted fr
 @par How to use it ? 
 
  - Use STLink utility, available on www.st.com or any other in system programming
-   tool to load a ".wav" file to the STM32 internal flash at the address 0x08080000.
+   tool to load "/Utilities/Media/Audio/audio_sample_wav.bin" file to the STM32 
+   internal flash at the address 0x08080000.
    Make sure the audio file size does not exceed 512KB. When using STLink utility change
    the audio file extension to "*.bin" in order to be able to load it directly to flash memory.
    
@@ -137,6 +141,7 @@ In order to make the program work, you must do the following :
             loaded audio file at address 0x08080000 by limiting the application
             end address to 0x0807FFFF. This is already done for the example project 
  - Connect a headphone or a speaker to the audio jack connector (CN11).
+ 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */
  

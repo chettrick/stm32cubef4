@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    BSP/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Description of the BSP example.
   ******************************************************************************
   *
@@ -61,12 +61,13 @@ Firstly, push the User button to start first Test.
         Plug a headphone to ear a 48K sound  /!\ Take care of yours ears.
         Default volume is 50%.
         A click on the board will pause the audio file play (LED6 & LED4 ON). 
-		Another click resumes audio file play (only LED6 on)
-        @Note: Copy file 'audio.bin' directly in the flash at @0x08020000 
+		    Another click resumes audio file play (only LED6 on)
+        @Note: Copy file "/Utilities/Media/Audio/art_of_gard_128K.bin" directly 
+        in the STM32 flash at @0x08080000 
 
      3) AudioRecord_Test. Device: "MP45DT02"
         Record your voice (2 or 3 secs)
-        When LED6 turn on, Plug a headphone to ear a 16K sound  /!\ Take care of yours ears.
+        When LED6 turns on, Plug a headphone to ear a 16K sound  /!\ Take care of yours ears.
         Default volume is 70%.
 
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
@@ -75,7 +76,7 @@ Firstly, push the User button to start first Test.
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 
@@ -93,7 +94,6 @@ Firstly, push the User button to start first Test.
   - BSP/Inc/audio_record.h          Audio record header file
   - BSP/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - BSP/Inc/stm32f4xx_it.h          Interrupt handlers header file
-  - BSP/AudioFile/audio.bin         Audio wave extract
  
       
 @par Hardware and Software environment  
@@ -102,6 +102,10 @@ Firstly, push the User button to start first Test.
     
   - This example has been tested with STMicroelectronics STM32F401-Discovery RevB 
     board and can be easily tailored to any other supported device and development board.
+
+  - Use STLink utility, available on www.st.com or any other in system programming
+    tool to load "/Utilities/Media/Audio/art_of_gard_448K.bin" file to the STM32 
+    internal flash at the address 0x08080000.
 
 
 @par How to use it ? 

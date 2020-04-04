@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Audio/Audio_playback_and_record/Src/explorer.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014 
   * @brief   This file provides USB Key drive configuration
   ******************************************************************************
   * @attention
@@ -129,6 +129,57 @@ FRESULT AUDIO_StorageParse(void)
   NumObs = FileList.ptr;
   f_closedir(&dir);
   return res;
+}
+
+
+/**
+  * @brief  Shows audio file (*.wav) on the root
+  * @param  None
+  * @retval None
+  */
+uint8_t AUDIO_ShowWavFiles(void)
+{
+  uint8_t i = 0;
+  uint8_t line_idx = 0;
+  if(AUDIO_StorageInit() == FR_OK)
+  {
+    if(AUDIO_StorageParse() ==  FR_OK)
+    {
+      if(FileList.ptr > 0)
+      {
+        BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+        LCD_UsrLog("audio file(s) [ROOT]:\n\n");
+        
+        for(i = 0; i < FileList.ptr; i++)
+        {
+          line_idx++;
+          if(line_idx > 9)
+          {
+            line_idx = 0;
+            LCD_UsrLog("> Press [Key] To Continue.\n");
+            
+            /* KEY Button in polling */
+            while(BSP_PB_GetState(BUTTON_KEY) != RESET)
+            {
+              /* Wait for User Input */
+            }
+          } 
+          LCD_DbgLog("   |__");
+          LCD_DbgLog((char *)FileList.file[i].name);
+          LCD_DbgLog("\n");
+        }
+        BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+        LCD_UsrLog("\nEnd of files list.\n");
+        return 0;
+      }
+      return 1;
+    }
+    return 2;
+  }
+  else
+  {
+    return 3;
+  }
 }
 
 /**

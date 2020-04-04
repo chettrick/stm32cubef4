@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    DMA2D/DMA2D_MemoryToMemory/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   HAL MSP module.       
   ******************************************************************************
   * @attention
@@ -68,7 +68,7 @@
 void HAL_DMA2D_MspInit(DMA2D_HandleTypeDef *hdma2d)
 {  
   /*##-1- Enable peripherals and GPIO Clocks #################################*/
-  __DMA2D_CLK_ENABLE();   
+  __HAL_RCC_DMA2D_CLK_ENABLE();   
 
   /*##-2- NVIC configuration  ################################################*/  
   /* NVIC configuration for DMA2D transfer complete interrupt */
@@ -88,10 +88,10 @@ void HAL_DMA2D_MspDeInit(DMA2D_HandleTypeDef *hdma2d)
   
   /*##-1- Reset peripherals ##################################################*/
   /* Enable DMA2D reset state */
-  __DMA2D_FORCE_RESET();
+  __HAL_RCC_DMA2D_FORCE_RESET();
   
   /* Release DMA2D from reset state */ 
-  __DMA2D_RELEASE_RESET();
+  __HAL_RCC_DMA2D_RELEASE_RESET();
 }
 
 /**

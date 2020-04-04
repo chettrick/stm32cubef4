@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    LwIP\LwIP_TCP_Echo_Client\Src\stm32f4xx_it.c 
+  * @file    LwIP/LwIP_TCP_Echo_Client/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Main Interrupt Service Routines.
   *   
   ******************************************************************************
@@ -44,7 +44,7 @@
 /******************************************************************************/
 
 /**
-  * @brief   This function handles NMI exception.
+  * @brief  This function handles NMI exception.
   * @param  None
   * @retval None
   */

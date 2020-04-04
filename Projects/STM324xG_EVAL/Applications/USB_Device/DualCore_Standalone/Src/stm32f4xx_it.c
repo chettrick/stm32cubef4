@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Device/DualCore_Standalone/Src/stm32f4xx_it.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
@@ -142,7 +142,7 @@ void PendSV_Handler(void)
   * @param  None
   * @retval None
   */
-void SysTick_Handler (void)
+void SysTick_Handler(void)
 {
   static __IO uint32_t counter=0;
   HAL_IncTick();
@@ -173,7 +173,7 @@ void SysTick_Handler (void)
   */
 static void GetPointerData(uint8_t *pbuf)
 {
-  int8_t  x = 0, y = 0 ;
+  int8_t  x = 0, y = 0;
   
   switch(BSP_JOY_GetState())
   {

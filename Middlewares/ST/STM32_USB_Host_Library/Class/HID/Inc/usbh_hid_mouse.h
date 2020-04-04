@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    usbh_hid_mouse.h 
   * @author  MCD Application Team
-  * @version V3.1.0
-  * @date    19-June-2014
+  * @version V3.2.0
+  * @date    04-November-2014
   * @brief   This file contains all the prototypes for the usbh_hid_mouse.c
   ******************************************************************************
   * @attention
@@ -25,10 +25,13 @@
   ******************************************************************************
   */ 
 
-
 /* Define to prevent recursive  ----------------------------------------------*/
 #ifndef __USBH_HID_MOUSE_H
 #define __USBH_HID_MOUSE_H
+
+#ifdef __cplusplus
+ extern "C" {
+#endif
 
 /* Includes ------------------------------------------------------------------*/
 #include "usbh_hid.h"
@@ -46,7 +49,7 @@
   */
 
 /** @defgroup USBH_HID_MOUSE
-  * @brief This file is the Header file for USBH_HID_MOUSE.c
+  * @brief This file is the Header file for usbh_hid_mouse.c
   * @{
   */ 
 
@@ -97,6 +100,10 @@ HID_MOUSE_Info_TypeDef *USBH_HID_GetMouseInfo(USBH_HandleTypeDef *phost);
 /**
   * @}
   */ 
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __USBH_HID_MOUSE_H */
 

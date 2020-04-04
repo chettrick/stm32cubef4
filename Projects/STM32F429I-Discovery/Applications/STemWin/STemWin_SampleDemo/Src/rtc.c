@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    rtc.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   <Add here what does this driver do>
   ******************************************************************************
   * @attention
@@ -77,7 +77,7 @@ void RTC_Init(void)
 
 /**
   * @brief RTC MSP Initialization 
-  *        This function configures the hardware resources used in this example: 
+  *        This function configures the hardware resources used in This application: 
   *           - Peripheral's clock enable
   * @param hrtc: RTC handle pointer
   *
@@ -113,7 +113,7 @@ void HAL_RTC_MspInit(RTC_HandleTypeDef *hrtc)
 
 /**
   * @brief RTC MSP De-Initialization 
-  *        This function frees the hardware resources used in this example:
+  *        This function frees the hardware resources used in This application:
   *          - Disable the Peripheral's clock
   * @param hrtc: RTC handle pointer
   * @retval None
@@ -127,7 +127,7 @@ void HAL_RTC_MspDeInit(RTC_HandleTypeDef *hrtc)
 
 /**
   * @brief RTC MSP De-Initialization 
-  *        This function frees the hardware resources used in this example:
+  *        This function frees the hardware resources used in This application:
   *          - Disable the Peripheral's clock
   * @param hrtc: RTC handle pointer
   * @retval None
@@ -139,7 +139,7 @@ void BACKUP_SaveParameter(uint32_t address, uint32_t data)
 
 /**
   * @brief RTC MSP De-Initialization 
-  *        This function frees the hardware resources used in this example:
+  *        This function frees the hardware resources used in This application:
   *          - Disable the Peripheral's clock
   * @param hrtc: RTC handle pointer
   * @retval None

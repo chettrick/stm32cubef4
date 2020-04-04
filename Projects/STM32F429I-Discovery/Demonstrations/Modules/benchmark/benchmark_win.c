@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    benchmark_win.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014   
+  * @version V1.2.0
+  * @date    26-December-2014   
   * @brief   CPU benchmark functions
   ******************************************************************************
   * @attention
@@ -45,8 +45,8 @@
 /* External variables --------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
 static void Startup(WM_HWIN hWin, uint16_t xpos, uint16_t ypos);
-static int Run_SpeedTest(void) ;
-extern void RestoreDefaultFillProcess(void) ;
+static int Run_SpeedTest(void);
+extern void RestoreDefaultFillProcess(void);
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private defines -----------------------------------------------------------*/

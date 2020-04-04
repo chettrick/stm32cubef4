@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    UART/UART_TwoBoards_ComDMA/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Description of the UART Two Boards Communication DMA example.
   ******************************************************************************
   *
@@ -45,12 +45,12 @@ all the peripherals, initialize the Flash interface and the systick.
 Then the SystemClock_Config() function is used to configure the system
 clock (SYSCLK) to run at 84 MHz.
 
-Then 1st board is waiting for user button key to be pressed - orange led is 
-blinking on transmitter board. Once done, data are transmitted through uart2 in
-DMA mode. 2nd board has configured Uart2 to receive data in DMA mode. 
-Once data received is completed, 2nd board also transmit same characters on Uart2
- which will be received by 1st board. Both boards compare transmitted datas 
- to received ones. If they are same, green led is turn on, else red one is turn On
+Then 1st board is waiting for user button key to be pressed - orange LED is 
+blinking on transmitter board. Once done, data are transmitted through UART2 in
+DMA mode. 2nd board has configured UART2 to receive data in DMA mode. 
+Once data received is completed, 2nd board also transmit same characters on UART2
+which will be received by 1st board. Both boards compare transmitted datas 
+to received ones. If they are same, green LED is turn on, else red one is turn On
 
 Warning: As both boards do not behave same way, "TRANSMITTER_BOARD" switch 
 compilation exists to determine either software is for 1st transmitter board or 
@@ -85,7 +85,7 @@ position of the transmitted data.
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 @par Directory contents 
@@ -107,8 +107,8 @@ position of the transmitted data.
     and development board.
     
   - STM32F401-Discovery RevB set-up
-    - Connect a wire between 1st board PA2 pin (Uart Tx) to 2nd board PA3 pin (Uart Rx)
-    - Connect a wire between 1st board PA3 pin (Uart Rx) to 2nd board PA2 pin (Uart Tx)
+    - Connect a wire between 1st board PA2 pin (UART Tx) to 2nd board PA3 pin (UART Rx)
+    - Connect a wire between 1st board PA3 pin (UART Rx) to 2nd board PA2 pin (UART Tx)
 
 @par How to use it ? 
 

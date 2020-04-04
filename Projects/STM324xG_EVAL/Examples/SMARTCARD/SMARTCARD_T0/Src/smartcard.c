@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    SMARTCARD/SMARTCARD_T0/Src/smartcard.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This file provides all the Smartcard firmware functions.
   ******************************************************************************
   * @attention
@@ -73,6 +73,7 @@ static void SC_Init(void);
 static void SC_DeInit(void);
 static void SC_VoltageConfig(uint32_t SC_Voltage);
 static uint8_t SC_Detect(void);
+
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -92,7 +93,7 @@ void SC_Handler(SC_State *SCState, SC_ADPU_Commands *SC_ADPU, SC_ADPU_Response *
   case SC_POWER_ON:
     if (SC_ADPU->Header.INS == SC_GET_A2R)
     {
-      /* Smartcard intialization ---------------------------------------------*/
+      /* Smartcard initialization --------------------------------------------*/
       SC_Init();
       
       /* Reset Data from SC buffer -------------------------------------------*/
@@ -165,11 +166,11 @@ void SC_Handler(SC_State *SCState, SC_ADPU_Commands *SC_ADPU, SC_ADPU_Response *
 }
 
 /**
-* @brief  Enables or disables the power to the Smartcard.
-* @param  NewState: new state of the Smartcard power supply. 
-*         This parameter can be: ENABLE or DISABLE.
-* @retval None
-*/
+  * @brief  Enables or disables the power to the Smartcard.
+  * @param  NewState: new state of the Smartcard power supply. 
+  *         This parameter can be: ENABLE or DISABLE.
+  * @retval None
+  */
 void SC_PowerCmd(FunctionalState NewState)
 {
   if(NewState != DISABLE)
@@ -223,13 +224,13 @@ void SC_PTSConfig(void)
 
   /* Enable the DMA Receive (Set DMAR bit only) to enable interrupt generation
   in case of a framing error FE */  
-  __SMARTCARD_DMA_REQUEST_ENABLE(&SCHandle, SMARTCARD_DMAREQ_RX);
+  __HAL_SMARTCARD_DMA_REQUEST_ENABLE(&SCHandle, SMARTCARD_DMAREQ_RX);
 
   if((SC_A2R.T0 & (uint8_t)0x10) == 0x10)
   {
     if(SC_A2R.T[0] != 0x11)
     {
-      /* PPSS identifies the PPS request or responce and is equal to 0xFF */
+      /* PPSS identifies the PPS request or response and is equal to 0xFF */
       ptscmd[0] = 0xFF;
       
       /* PPS0 indicates by the bits b5, b6, b7 equal to 1 the presence of the optional
@@ -249,7 +250,7 @@ void SC_PTSConfig(void)
       HAL_SMARTCARD_Transmit(&SCHandle, (uint8_t *)ptscmd, 4, SC_TRANSMIT_TIMEOUT);
       
       /* Disable the DMA Receive Request */  
-      __SMARTCARD_DMA_REQUEST_DISABLE(&SCHandle, SMARTCARD_DMAREQ_RX);
+      __HAL_SMARTCARD_DMA_REQUEST_DISABLE(&SCHandle, SMARTCARD_DMAREQ_RX);
       
       /* Wait until receiving the answer from the card */
       while(HAL_SMARTCARD_GetState(&SCHandle) != HAL_SMARTCARD_STATE_READY)
@@ -278,8 +279,9 @@ void SC_PTSConfig(void)
         SCHandle.Init.CLKLastBit = SMARTCARD_LASTBIT_ENABLE;
         SCHandle.Init.Prescaler = 12;
         SCHandle.Init.GuardTime = 16;
-        SCHandle.Init.NACKState = SMARTCARD_NACK_ENABLED;
+        SCHandle.Init.NACKState = SMARTCARD_NACK_ENABLE;
         SCHandle.Instance = SC_USART;
+        
         if(HAL_SMARTCARD_Init(&SCHandle) != HAL_OK)
         {
           while (1);
@@ -291,9 +293,9 @@ void SC_PTSConfig(void)
 
 /**
   * @brief  Manages the Smartcard transport layer: send APDU commands and receives
-  *   the APDU responce.
+  *         the APDU response.
   * @param  SC_ADPU: pointer to a SC_ADPU_Commands structure which will be initialized.  
-  * @param  SC_Response: pointer to a SC_ADPU_Response structure which will be initialized.
+  * @param  SC_ADPU_Response: pointer to a SC_ADPU_Response structure which will be initialized.
   * @retval None
   */
 static void SC_SendData(SC_ADPU_Commands *SC_ADPU, SC_ADPU_Response *SC_ResponseStatus)
@@ -303,7 +305,7 @@ static void SC_SendData(SC_ADPU_Commands *SC_ADPU, SC_ADPU_Response *SC_Response
   uint8_t command[5] = {0x00};
   uint8_t answer[40] = {0x00};
 
-  /* Reset responce buffer ---------------------------------------------------*/
+  /* Reset response buffer ---------------------------------------------------*/
   for(i = 0; i < LC_MAX; i++)
   {
     SC_ResponseStatus->Data[i] = 0;
@@ -314,7 +316,8 @@ static void SC_SendData(SC_ADPU_Commands *SC_ADPU, SC_ADPU_Response *SC_Response
 
   /* Enable the DMA Receive (Set DMAR bit only) to enable interrupt generation
      in case of a framing error FE */  
-  __SMARTCARD_DMA_REQUEST_ENABLE(&SCHandle, SMARTCARD_DMAREQ_RX);
+  __HAL_SMARTCARD_DMA_REQUEST_ENABLE(&SCHandle, SMARTCARD_DMAREQ_RX);
+  
   /* Send header -------------------------------------------------------------*/
   command[0] = SC_ADPU->Header.CLA;
   command[1] = SC_ADPU->Header.INS;
@@ -369,7 +372,7 @@ static void SC_SendData(SC_ADPU_Commands *SC_ADPU, SC_ADPU_Response *SC_Response
   /* If no status bytes received ---------------------------------------------*/
   if(SC_ResponseStatus->SW1 == 0x00)
   {
-    /* Send body data to SC---------------------------------------------------*/
+    /* Send body data to SC --------------------------------------------------*/
     if(SC_ADPU->Body.LC)
     {
       /* Send body data */
@@ -379,7 +382,7 @@ static void SC_SendData(SC_ADPU_Commands *SC_ADPU, SC_ADPU_Response *SC_Response
       __HAL_SMARTCARD_FLUSH_DRREGISTER(&SCHandle);
       
       /* Disable the DMA Receive (Reset DMAR bit only) */  
-      __SMARTCARD_DMA_REQUEST_DISABLE(&SCHandle, SMARTCARD_DMAREQ_RX);
+      __HAL_SMARTCARD_DMA_REQUEST_DISABLE(&SCHandle, SMARTCARD_DMAREQ_RX);
       
       /* Start the receive IT process: to receive the command answer from the card */
       HAL_SMARTCARD_Receive_IT(&SCHandle, (uint8_t *)&answer[0], 2);
@@ -388,10 +391,10 @@ static void SC_SendData(SC_ADPU_Commands *SC_ADPU, SC_ADPU_Response *SC_Response
       while(HAL_SMARTCARD_GetState(&SCHandle) != HAL_SMARTCARD_STATE_READY)
       {}
       
-      /* decode the SW1 */
+      /* Decode the SW1 */
       SC_ResponseStatus->SW1 = answer[0];
       
-      /* decode the SW2 */
+      /* Decode the SW2 */
       SC_ResponseStatus->SW2 = answer[1];
     }
     
@@ -405,16 +408,16 @@ static void SC_SendData(SC_ADPU_Commands *SC_ADPU, SC_ADPU_Response *SC_Response
       while(HAL_SMARTCARD_GetState(&SCHandle) != HAL_SMARTCARD_STATE_READY)
       {}
       
-      /* decode the body data */
+      /* Decode the body data */
       for(i = 0; i < SC_ADPU->Body.LE; i++)
       {
         SC_ResponseStatus->Data[i] = answer[i];
       }
       
-      /* decode the SW1 */
+      /* Decode the SW1 */
       SC_ResponseStatus->SW1 = answer[SC_ADPU->Body.LE];
       
-      /* decode the SW2 */
+      /* Decode the SW2 */
       SC_ResponseStatus->SW2 = answer[SC_ADPU->Body.LE +1];
     }
   }
@@ -432,7 +435,7 @@ static void SC_AnswerReq(SC_State *SCState, uint8_t *card, uint8_t length)
   switch(*SCState)
   {
   case SC_RESET_LOW:
-    /* Check responce with reset low -----------------------------------------*/
+    /* Check response with reset low -----------------------------------------*/
     HAL_SMARTCARD_Receive(&SCHandle, card, length, SC_RECEIVE_TIMEOUT);
 
     if(card[0] != 0x00)
@@ -447,7 +450,7 @@ static void SC_AnswerReq(SC_State *SCState, uint8_t *card, uint8_t length)
     break;
 
   case SC_RESET_HIGH:
-    /* Check responce with reset high ----------------------------------------*/
+    /* Check response with reset high ----------------------------------------*/
     SC_Reset(GPIO_PIN_SET); /* Reset High */
     HAL_SMARTCARD_Receive(&SCHandle, card, length, SC_RECEIVE_TIMEOUT);
 
@@ -479,7 +482,7 @@ static void SC_AnswerReq(SC_State *SCState, uint8_t *card, uint8_t length)
 /**
   * @brief  Decodes the Answer to reset received from card.
   * @param  card: pointer to the buffer containing the card ATR.
-  * @retval None
+  * @retval Smartcard communication Protocol 
   */
 static uint8_t SC_decode_Answer2reset(uint8_t *card)
 {
@@ -504,9 +507,16 @@ static uint8_t SC_decode_Answer2reset(uint8_t *card)
   {
     SC_A2R.T[i] = card[i + 2];
   }
-
-  protocol = SC_A2R.T[SC_A2R.Tlength - 1] & (uint8_t)0x0F;
-
+  
+  if ((SC_A2R.T0 & (uint8_t)0x80) == 0x00)
+  {
+    protocol = 0;
+  }
+  else
+  {
+    protocol = SC_A2R.T[SC_A2R.Tlength - 1] & (uint8_t)0x0F;
+  }
+  
   while (flag)
   {
     if ((SC_A2R.T[SC_A2R.Tlength - 1] & (uint8_t)0x80) == 0x80)
@@ -549,7 +559,7 @@ static uint8_t SC_decode_Answer2reset(uint8_t *card)
 static void SC_Init(void)
 {
   /* SC_USART configuration --------------------------------------------------*/
-  /* SC_USART configured as follow:
+  /* SC_USART configured as follows:
   - Word Length = 9 Bits
   - 1.5 Stop Bit
   - Even parity
@@ -570,7 +580,7 @@ static void SC_Init(void)
   SCHandle.Init.CLKLastBit = SMARTCARD_LASTBIT_ENABLE;  
   SCHandle.Init.Prescaler = 12;
   SCHandle.Init.GuardTime = 16;
-  SCHandle.Init.NACKState = SMARTCARD_NACK_ENABLED; 
+  SCHandle.Init.NACKState = SMARTCARD_NACK_ENABLE; 
   HAL_SMARTCARD_Init(&SCHandle);
 
   /* Set RSTIN HIGH */  
@@ -578,7 +588,7 @@ static void SC_Init(void)
 }
 
 /**
-  * @brief  Deinitializes all ressources used by the Smartcard interface.
+  * @brief  Deinitializes all resources used by the Smartcard interface.
   * @param  None
   * @retval None
   */

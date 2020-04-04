@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    GPIO/GPIO_IOToggle/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This example describes how to configure and use GPIOs through 
   *          the STM32F4xx HAL API.
   ******************************************************************************
@@ -79,11 +79,11 @@ int main(void)
      */
   HAL_Init();
   
-  /* Configure the system clock */
+  /* Configure the system clock to 84 MHz */
   SystemClock_Config();
   
   /* -1- Enable GPIOA Clock (to be able to program the configuration registers) */
-  __GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOA_CLK_ENABLE();
   
   /* -2- Configure PA05 IO in output push-pull mode to
          drive external LED */
@@ -129,7 +129,7 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
   
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -177,7 +177,6 @@ static void Error_Handler(void)
 }
 
 #ifdef  USE_FULL_ASSERT
-
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.

@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    GPIO/GPIO_EXTI/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Description of the GPIO EXTI example.
   ******************************************************************************
   *
@@ -40,7 +40,7 @@
 This example shows how to configure external interrupt lines.
 In this example, 1 EXTI lines (EXTI Line0) is configured  to generate
 an interrupt on each rising and falling edge, respectively. 
-In the interrupt routine a led connected to a specific GPIO pin is toggled.
+In the interrupt routine a LED connected to a specific GPIO pin is toggled.
 
 In this example:
     - EXTI Line0 is connected to PA0 pin
@@ -58,7 +58,7 @@ In this example, HCLK is configured at 84 MHz.
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 @par Directory contents 

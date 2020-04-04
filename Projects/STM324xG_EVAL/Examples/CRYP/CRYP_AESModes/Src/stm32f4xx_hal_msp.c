@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    CRYP/CRYP_AESModes/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   HAL MSP module.    
   ******************************************************************************
   * @attention
@@ -68,7 +68,7 @@
 void HAL_CRYP_MspInit(CRYP_HandleTypeDef *hcryp)
 {
   /* Enable CRYP clock */
-  __CRYP_CLK_ENABLE();
+  __HAL_RCC_CRYP_CLK_ENABLE();
   
 }
 

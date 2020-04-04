@@ -2,10 +2,9 @@
   ******************************************************************************
   * @file    Camera/Camera_To_USBDisk/Src/fatfs_storage.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
-  * @brief   This file includes the Storage (FatFs) driver for the STM324x9I-EVAL
-  *          example.
+  * @version V1.2.0
+  * @date    26-December-2014
+  * @brief   This file includes the Storage (FatFs) driver
   ******************************************************************************
   * @attention
   *
@@ -29,13 +28,13 @@
 /* Includes ------------------------------------------------------------------*/
 #include "fatfs_storage.h"
 
-/** @addtogroup STM324x9I_EVAL_FAT_FS
+/** @addtogroup STM324xG_EVAL_FAT_FS
   * @{
   */
 
 /** @defgroup FATFS_STORAGE
-  * @brief This file includes the Storage (FatFs) driver for the STM324x9I-EVAL
-  *        example.
+  * @brief This file includes the Storage (FatFs) driver for the STM324xG-EVAL
+  *        application.
   * @{
   */
 
@@ -91,7 +90,7 @@ uint32_t BytesRead = 0;
   */
 
 /**
-  * @brief  SDCARD Initialisation for FatFs
+  * @brief  SDCARD Initialization for FatFs
   * @param  None
   * @retval err : Error status (0=> success, 1=> fail)
   */

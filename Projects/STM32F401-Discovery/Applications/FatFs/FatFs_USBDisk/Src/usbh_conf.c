@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    usbh_conf.c
+  * @file    FatFs/FatFs_USBDisk/usbh_conf.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   USB Host configuration file.
   ******************************************************************************
   * @attention
@@ -31,7 +31,7 @@
 
 HCD_HandleTypeDef hhcd;
 
-#define HOST_POWERSW_CLK_ENABLE()          __GPIOC_CLK_ENABLE()
+#define HOST_POWERSW_CLK_ENABLE()          __HAL_RCC_GPIOC_CLK_ENABLE()
 #define HOST_POWERSW_PORT                  GPIOC
 #define HOST_POWERSW_VBUS                  GPIO_PIN_0
 
@@ -51,7 +51,7 @@ void HAL_HCD_MspInit(HCD_HandleTypeDef *hhcd)
   if(hhcd->Instance == USB_OTG_FS)
   {
     /* Configure USB FS GPIOs */
-    __GPIOA_CLK_ENABLE();
+    __HAL_RCC_GPIOA_CLK_ENABLE();
     HOST_POWERSW_CLK_ENABLE();
     
     /* Configure DM DP Pins */
@@ -76,7 +76,7 @@ void HAL_HCD_MspInit(HCD_HandleTypeDef *hhcd)
     HAL_GPIO_Init(HOST_POWERSW_PORT, &GPIO_InitStruct);
     
     /* Enable USB FS Clocks */ 
-    __USB_OTG_FS_CLK_ENABLE();
+    __HAL_RCC_USB_OTG_FS_CLK_ENABLE();
     
     /* Set USBFS Interrupt to the lowest priority */
     HAL_NVIC_SetPriority(OTG_FS_IRQn, 5, 0);
@@ -95,7 +95,7 @@ void HAL_HCD_MspDeInit(HCD_HandleTypeDef *hhcd)
   if(hhcd->Instance == USB_OTG_FS)
   {  
     /* Disable USB FS Clocks */ 
-    __USB_OTG_FS_CLK_DISABLE();
+    __HAL_RCC_USB_OTG_FS_CLK_DISABLE();
   }
 }
 
@@ -164,7 +164,6 @@ USBH_StatusTypeDef USBH_LL_Init(USBH_HandleTypeDef *phost)
   hhcd.Init.phy_itface = HCD_PHY_EMBEDDED; 
   hhcd.Init.Sof_enable = 0;
   hhcd.Init.speed = HCD_SPEED_FULL;
-  hhcd.Init.vbus_sensing_enable = 0;
   /* Link the driver to the stack */
   hhcd.pData = phost;
   phost->pData = &hhcd;
@@ -251,7 +250,7 @@ USBH_StatusTypeDef USBH_LL_ResetPort (USBH_HandleTypeDef *phost)
 }
 
 /**
-  * @brief  Returns the last transfered packet size.
+  * @brief  Returns the last transferred packet size.
   * @param  phost: Host handle
   * @param  pipe: Pipe index   
   * @retval Packet Size
@@ -315,7 +314,7 @@ USBH_StatusTypeDef USBH_LL_ClosePipe(USBH_HandleTypeDef *phost, uint8_t pipe)
   * @param  ep_type: Endpoint Type
   *          This parameter can be one of these values:
   *            @arg EP_TYPE_CTRL: Control type
-  *            @arg EP_TYPE_ISOC: Isochrounous type
+  *            @arg EP_TYPE_ISOC: Isochronous type
   *            @arg EP_TYPE_BULK: Bulk type
   *            @arg EP_TYPE_INTR: Interrupt type
   * @param  token: Endpoint Type

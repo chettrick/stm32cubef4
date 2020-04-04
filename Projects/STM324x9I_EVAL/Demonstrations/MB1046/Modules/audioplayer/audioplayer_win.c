@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    audioplayer_win.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014   
+  * @version V1.2.0
+  * @date    26-December-2014   
   * @brief   Audio player functions
   ******************************************************************************
   * @attention
@@ -805,7 +805,7 @@ AUDIOPLAYER_ErrorTypdef  AUDIOPLAYER_NotifyEndOfFile(void)
 /**
   * @brief  callback for progress slider.
   * @param  pMsg: pointer to data structure of type WM_MESSAGE
-  * @retval None.
+  * @retval None
   */
 static void _cbDrawProgressSlider(WM_MESSAGE * pMsg) {
   
@@ -831,7 +831,7 @@ static void _cbDrawProgressSlider(WM_MESSAGE * pMsg) {
 /**
   * @brief  callback for volume slider
   * @param  pMsg: pointer to data structure of type WM_MESSAGE
-  * @retval None.
+  * @retval None
   */
 static void _cbDrawVolumeSlider(WM_MESSAGE * pMsg) {
   

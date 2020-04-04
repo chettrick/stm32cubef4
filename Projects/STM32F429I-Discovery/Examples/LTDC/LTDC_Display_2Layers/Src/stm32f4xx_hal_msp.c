@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LTDC/LTDC_Display_2Layers/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   HAL MSP module.       
   ******************************************************************************
   * @attention
@@ -71,15 +71,15 @@ void HAL_LTDC_MspInit(LTDC_HandleTypeDef *hltdc)
   
   /*##-1- Enable peripherals and GPIO Clocks #################################*/  
   /* Enable the LTDC Clock */
-  __LTDC_CLK_ENABLE();
+  __HAL_RCC_LTDC_CLK_ENABLE();
 
   /* Enable GPIOs clock */
-  __GPIOA_CLK_ENABLE();
-  __GPIOB_CLK_ENABLE();
-  __GPIOC_CLK_ENABLE();
-  __GPIOD_CLK_ENABLE();
-  __GPIOF_CLK_ENABLE();
-  __GPIOG_CLK_ENABLE();
+  __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
+  __HAL_RCC_GPIOC_CLK_ENABLE();
+  __HAL_RCC_GPIOD_CLK_ENABLE();
+  __HAL_RCC_GPIOF_CLK_ENABLE();
+  __HAL_RCC_GPIOG_CLK_ENABLE();
 
   /*##-2- Configure peripheral GPIO ##########################################*/
   /******************** LTDC Pins configuration *************************/
@@ -153,10 +153,10 @@ void HAL_LTDC_MspDeInit(LTDC_HandleTypeDef *hltdc)
   
   /*##-1- Reset peripherals ##################################################*/
   /* Enable LTDC reset state */
-  __LTDC_FORCE_RESET();
+  __HAL_RCC_LTDC_FORCE_RESET();
   
   /* Release LTDC from reset state */ 
-  __LTDC_RELEASE_RESET();
+  __HAL_RCC_LTDC_RELEASE_RESET();
 }
 
 /**

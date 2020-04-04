@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    Audio_playback_and_record/Inc/stm32f4xx_hal_conf.h
+  * @file    Audio/Audio_playback_and_record/Inc/stm32f4xx_hal_conf.h
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   HAL configuration file
   ******************************************************************************
   * @attention
@@ -116,7 +116,7 @@
   * @brief Internal Low Speed oscillator (LSI) value.
   */
 #if !defined  (LSI_VALUE) 
- #define LSI_VALUE  ((uint32_t)40000)    
+ #define LSI_VALUE  ((uint32_t)32000)    
 #endif /* LSI_VALUE */                      /*!< Value of the Internal Low Speed oscillator in Hz
                                              The real value may vary depending on the variations
                                              in voltage and temperature.  */

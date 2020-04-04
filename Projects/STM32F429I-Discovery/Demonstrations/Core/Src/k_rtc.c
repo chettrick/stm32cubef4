@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    k_rtc.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014   
+  * @version V1.2.0
+  * @date    26-December-2014   
   * @brief   This file provides the kernel rtc functions 
   ******************************************************************************
   * @attention
@@ -155,7 +155,7 @@ uint32_t k_BkupRestoreParameter(uint32_t address)
   */
 void k_GetTime(  RTC_TimeTypeDef *Time)
 {
-   HAL_RTC_GetTime(&RtcHandle, Time, FORMAT_BIN);
+   HAL_RTC_GetTime(&RtcHandle, Time, RTC_FORMAT_BIN);
 }
 
 /**
@@ -168,7 +168,7 @@ void k_SetTime(  RTC_TimeTypeDef *Time)
    Time->StoreOperation = 0;
    Time->SubSeconds = 0;
    Time->DayLightSaving = 0;
-   HAL_RTC_SetTime(&RtcHandle, Time, FORMAT_BIN);
+   HAL_RTC_SetTime(&RtcHandle, Time, RTC_FORMAT_BIN);
 }
 
 /**
@@ -178,7 +178,7 @@ void k_SetTime(  RTC_TimeTypeDef *Time)
   */
 void k_GetDate(  RTC_DateTypeDef *Date)
 {
-   HAL_RTC_GetDate(&RtcHandle, Date, FORMAT_BIN);
+   HAL_RTC_GetDate(&RtcHandle, Date, RTC_FORMAT_BIN);
    
    if((Date->Date == 0) || (Date->Month == 0))
    {
@@ -193,7 +193,7 @@ void k_GetDate(  RTC_DateTypeDef *Date)
   */
 void k_SetDate(  RTC_DateTypeDef *Date)
 {
-   HAL_RTC_SetDate(&RtcHandle, Date, FORMAT_BIN);
+   HAL_RTC_SetDate(&RtcHandle, Date, RTC_FORMAT_BIN);
 }
 
 /**

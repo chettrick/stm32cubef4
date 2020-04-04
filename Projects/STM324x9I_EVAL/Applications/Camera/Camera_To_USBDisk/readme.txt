@@ -1,13 +1,13 @@
 /**
-  @page Camera_To_USBDisk Camera to USB Disk example
+  @page Camera_To_USBDisk Camera to USB Disk application
   
   @verbatim
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    Camera/Camera_To_USBDisk/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
-  * @brief   Description of the Camera to USB Disk example.
+  * @version V1.2.0
+  * @date    26-December-2014
+  * @brief   Description of the Camera to USB Disk application.
   ******************************************************************************
   * @attention
   *
@@ -38,9 +38,9 @@
   ******************************************************************************
    @endverbatim
 
-@par Example Description
+@par Application Description
 
-This example provides a short description of how to use the DCMI to interface with
+This application provides a short description of how to use the DCMI to interface with
 camera module and display in continuous mode the picture on LCD and to save a picture 
 in USB device.
 
@@ -68,7 +68,7 @@ When the tamper button is pressed an image is saved under USBdisk.
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 
@@ -89,9 +89,9 @@ When the tamper button is pressed an image is saved under USBdisk.
 
 @par Hardware and Software environment
   
-  - This example runs on STM32F42xxx/STM32F43xxx devices.
+  - This application runs on STM32F42xxx/STM32F43xxx devices.
   
-  - This example has been tested with STM324x9I-EVAL RevB board which includes
+  - This application has been tested with STM324x9I-EVAL RevB board which includes
     the AMPIRE480272 LCD and OV2640 camera module.
 
   - STM324x9I-EVAL Set-up
@@ -104,7 +104,7 @@ When the tamper button is pressed an image is saved under USBdisk.
 In order to make the program work, you must do the following :
  - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
- - Run the example
+ - Run the application
   
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

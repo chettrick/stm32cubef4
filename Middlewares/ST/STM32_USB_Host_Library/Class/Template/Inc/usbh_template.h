@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    usbh_mtp.h
+  * @file    usbh_template.h
   * @author  MCD Application Team
-  * @version V3.1.0
-  * @date    19-June-2014
+  * @version V3.2.0
+  * @date    04-November-2014
   * @brief   This file contains all the prototypes for the usbh_template.c
   ******************************************************************************
   * @attention
@@ -26,8 +26,12 @@
   */ 
 
 /* Define to prevent recursive  ----------------------------------------------*/
-#ifndef __USBH_TEMPLATE_CORE_H
-#define __USBH_TEMPLATE_CORE_H
+#ifndef __USBH_TEMPLATE_H
+#define __USBH_TEMPLATE_H
+
+#ifdef __cplusplus
+ extern "C" {
+#endif
 
 /* Includes ------------------------------------------------------------------*/
 #include "usbh_core.h"
@@ -45,8 +49,8 @@
 * @{
 */
 
-/** @defgroup USBH_TEMPLATE_CORE
-* @brief This file is the Header file for USBH_TEMPLATE_CORE.c
+/** @defgroup USBH_TEMPLATE_CLASS
+* @brief This file is the Header file for usbh_template.c
 * @{
 */ 
 
@@ -55,7 +59,7 @@
   * @}
   */ 
 
-/** @defgroup USBH_TEMPLATE_CORE_Exported_Types
+/** @defgroup USBH_TEMPLATE_CLASS_Exported_Types
 * @{
 */ 
 
@@ -66,7 +70,7 @@
 * @}
 */ 
 
-/** @defgroup USBH_TEMPLATE_CORE_Exported_Defines
+/** @defgroup USBH_TEMPLATE_CLASS_Exported_Defines
 * @{
 */ 
 
@@ -74,14 +78,14 @@
 * @}
 */ 
 
-/** @defgroup USBH_TEMPLATE_CORE_Exported_Macros
+/** @defgroup USBH_TEMPLATE_CLASS_Exported_Macros
 * @{
 */ 
 /**
 * @}
 */ 
 
-/** @defgroup USBH_TEMPLATE_CORE_Exported_Variables
+/** @defgroup USBH_TEMPLATE_CLASS_Exported_Variables
 * @{
 */ 
 extern USBH_ClassTypeDef  TEMPLATE_Class;
@@ -91,7 +95,7 @@ extern USBH_ClassTypeDef  TEMPLATE_Class;
 * @}
 */ 
 
-/** @defgroup USBH_TEMPLATE_CORE_Exported_FunctionsPrototype
+/** @defgroup USBH_TEMPLATE_CLASS_Exported_FunctionsPrototype
 * @{
 */ 
 USBH_StatusTypeDef USBH_TEMPLATE_IOProcess (USBH_HandleTypeDef *phost);
@@ -100,8 +104,11 @@ USBH_StatusTypeDef USBH_TEMPLATE_Init (USBH_HandleTypeDef *phost);
 * @}
 */ 
 
+#ifdef __cplusplus
+}
+#endif
 
-#endif /* __USBH_TEMPLATE_CORE_H */
+#endif /* __USBH_TEMPLATE_H */
 
 /**
 * @}

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f4xx_nucleo.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    19-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This file provides set of firmware functions to manage:
   *          - LEDs and push-button available on STM32F4XX-Nucleo Kit 
   *            from STMicroelectronics
@@ -69,10 +69,10 @@
   */ 
 
 /**
-  * @brief STM32F4xx NUCLEO BSP Driver version number V1.1.0
+  * @brief STM32F4xx NUCLEO BSP Driver version number V1.2.0
   */
 #define __STM32F4xx_NUCLEO_BSP_VERSION_MAIN   (0x01) /*!< [31:24] main version */
-#define __STM32F4xx_NUCLEO_BSP_VERSION_SUB1   (0x01) /*!< [23:16] sub1 version */
+#define __STM32F4xx_NUCLEO_BSP_VERSION_SUB1   (0x02) /*!< [23:16] sub1 version */
 #define __STM32F4xx_NUCLEO_BSP_VERSION_SUB2   (0x00) /*!< [15:8]  sub2 version */
 #define __STM32F4xx_NUCLEO_BSP_VERSION_RC     (0x00) /*!< [7:0]  release candidate */ 
 #define __STM32F4xx_NUCLEO_BSP_VERSION        ((__STM32F4xx_NUCLEO_BSP_VERSION_MAIN << 24)\
@@ -146,6 +146,7 @@ uint8_t           SD_IO_ReadByte(void);
 /* LCD IO functions */
 void              LCD_IO_Init(void);
 void              LCD_IO_WriteData(uint8_t Data);
+void              LCD_IO_WriteMultipleData(uint8_t *pData, uint32_t Size);
 void              LCD_IO_WriteReg(uint8_t LCDReg);
 void              LCD_Delay(uint32_t delay);
 /**
@@ -260,7 +261,7 @@ void BSP_PB_Init(Button_TypeDef Button, ButtonMode_TypeDef ButtonMode)
     /* Configure Button pin as input with External interrupt */
     GPIO_InitStruct.Pin = BUTTON_PIN[Button];
     GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING; 
+    GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING; 
     HAL_GPIO_Init(BUTTON_PORT[Button], &GPIO_InitStruct);
     
     /* Enable and set Button EXTI Interrupt to the lowest priority */
@@ -633,6 +634,58 @@ void LCD_IO_WriteData(uint8_t Data)
 }
 
 /**
+  * @brief  Writes register value.
+  * @param  pData: Pointer on the register value
+  * @param  Size: Size of byte to transmit to the register
+  * @retval None
+  */
+void LCD_IO_WriteMultipleData(uint8_t *pData, uint32_t Size)
+{
+  uint32_t counter = 0;
+  
+  /* Reset LCD control line CS */
+  LCD_CS_LOW();
+  
+  /* Set LCD data/command line DC to High */
+  LCD_DC_HIGH();
+
+  if (Size == 1)
+  {
+    /* Only 1 byte to be sent to LCD - general interface can be used */
+    /* Send Data */
+    SPIx_Write(*pData);
+  }
+  else
+  {
+    /* Several data should be sent in a raw */
+    /* Direct SPI accesses for optimization */
+    for (counter = Size; counter != 0; counter--)
+    {
+      while(((hnucleo_Spi.Instance->SR) & SPI_FLAG_TXE) != SPI_FLAG_TXE)
+      {
+      }
+      /* Need to invert bytes for LCD*/
+      *((__IO uint8_t*)&hnucleo_Spi.Instance->DR) = *(pData+1);
+      
+      while(((hnucleo_Spi.Instance->SR) & SPI_FLAG_TXE) != SPI_FLAG_TXE)
+      {
+      }
+      *((__IO uint8_t*)&hnucleo_Spi.Instance->DR) = *pData;
+      counter--;
+      pData += 2;
+      }
+  
+    /* Wait until the bus is ready before releasing Chip select */ 
+    while(((hnucleo_Spi.Instance->SR) & SPI_FLAG_BSY) != RESET)
+    {
+    } 
+  } 
+  
+  /* Deselect : Chip Select high */
+  LCD_CS_HIGH();
+}
+
+/**
   * @brief  Wait for loop in ms.
   * @param  Delay in ms.
   * @retval None
@@ -738,7 +791,7 @@ JOYState_TypeDef BSP_JOY_GetState(void)
   /* Wait for the end of conversion */
   HAL_ADC_PollForConversion(&hnucleo_Adc, 10);
   
-  /* Check if the continous conversion of regular channel is finished */
+  /* Check if the continuous conversion of regular channel is finished */
   if(HAL_ADC_GetState(&hnucleo_Adc) == HAL_ADC_STATE_EOC_REG)
   {
     /* Get the converted value of regular channel */

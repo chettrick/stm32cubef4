@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Camera/Camera_To_USBDisk/Inc/fatfs_storage.h
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This file contains all the functions prototypes for the storage
   *          firmware driver.
   ******************************************************************************
@@ -41,7 +41,7 @@ extern "C"
 #include "ff.h"
 
 
-/** @addtogroup STM324x9I_EVAL_FAT_FS
+/** @addtogroup STM324xG_EVAL_FAT_FS
   * @{
   */
 

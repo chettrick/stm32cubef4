@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    TIM/TIM_DMABurst/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This sample code shows how to use DMA with TIM1 Update request to
   *          transfer Data from memory to TIM1 Capture Compare Register 3 (CCR3).
   ******************************************************************************
@@ -85,7 +85,7 @@ int main(void)
      */
   HAL_Init();
   
-  /* Configure the system clock to 180 Mhz */
+  /* Configure the system clock to 180 MHz */
   SystemClock_Config();
   
   /* Configure LED3 */
@@ -150,8 +150,8 @@ int main(void)
   }
   
   /*##-4- Start DMA Burst transfer ###########################################*/ 
-  HAL_TIM_DMABurst_WriteStart(&TimHandle, TIM_DMABase_ARR, TIM_DMA_UPDATE,
-                              (uint32_t*)aSRC_Buffer, TIM_DMABurstLength_3Transfers);
+  HAL_TIM_DMABurst_WriteStart(&TimHandle, TIM_DMABASE_ARR, TIM_DMA_UPDATE,
+                              (uint32_t*)aSRC_Buffer, TIM_DMABURSTLENGTH_3TRANSFERS);
   
   /* Infinite loop */
   while (1)
@@ -199,7 +199,7 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
 
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -218,7 +218,7 @@ static void SystemClock_Config(void)
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
   
   /* Activate the Over-Drive mode */
-  HAL_PWREx_ActivateOverDrive();
+  HAL_PWREx_EnableOverDrive();
   
   /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
   clocks dividers */
@@ -231,7 +231,6 @@ static void SystemClock_Config(void)
 }
 
 #ifdef  USE_FULL_ASSERT
-
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.
@@ -249,7 +248,6 @@ void assert_failed(uint8_t* file, uint32_t line)
   {
   }
 }
-
 #endif
 
 /**

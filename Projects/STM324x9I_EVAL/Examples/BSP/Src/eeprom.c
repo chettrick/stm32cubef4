@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BSP/Src/eeprom.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This example code shows how to manage an I2C M24LR64 
   *          EEPROM memory
   *          =================================================================== 
@@ -58,23 +58,27 @@
   */ 
 
 /* Private typedef -----------------------------------------------------------*/
-typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus; 
+typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
+
 /* Private define ------------------------------------------------------------*/
 #define EEPROM_FEATURES_NUM     2
 #define BUFFER_SIZE1            (countof(Tx1Buffer)-1 + 8)
 #define EEPROM_WRITE_ADDRESS1      0x49
 #define EEPROM_READ_ADDRESS1       0x49
+
 /* Private macro -------------------------------------------------------------*/
 #define countof(a) (sizeof(a) / sizeof(*(a)))
+
 /* Private variables ---------------------------------------------------------*/
+extern uint8_t NbLoop;
 static uint8_t EEPROMFeature = 0;
 uint8_t EEPROMConnected =1;
+
 /* Private function prototypes -----------------------------------------------*/
 static void EEPROM_SetHint(void);
 static void EEPROM_Show_Feature(uint8_t Feature);
 static TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength);
 
-extern uint8_t NbLoop;
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -82,13 +86,13 @@ extern uint8_t NbLoop;
   * @param  None
   * @retval None
   */
-void EEPROM_demo (void)
+void EEPROM_demo(void)
 { 
   EEPROM_SetHint();
   EEPROMFeature = 0;
-
+  
   EEPROM_Show_Feature (EEPROMFeature); 
-
+  
   while (1)
   {
     
@@ -96,7 +100,7 @@ void EEPROM_demo (void)
     {
       if(++EEPROMFeature < EEPROM_FEATURES_NUM)
       {
-       EEPROM_Show_Feature (EEPROMFeature); 
+        EEPROM_Show_Feature (EEPROMFeature); 
       }
       else
       {
@@ -128,32 +132,31 @@ static void EEPROM_SetHint(void)
   BSP_LCD_DisplayStringAt(0, 30, (uint8_t *)"This example shows the different", CENTER_MODE);
   BSP_LCD_DisplayStringAt(0, 45, (uint8_t *)"EEPROM Features, use BUTTON", CENTER_MODE);
   BSP_LCD_DisplayStringAt(0, 60, (uint8_t *)"to start EEPROM data transfer", CENTER_MODE);
-
-   /* Set the LCD Text Color */
+  
+  /* Set the LCD Text Color */
   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);  
   BSP_LCD_DrawRect(10, 90, BSP_LCD_GetXSize() - 20, BSP_LCD_GetYSize()- 100);
   BSP_LCD_DrawRect(11, 91, BSP_LCD_GetXSize() - 22, BSP_LCD_GetYSize()- 102);
- }
+}
 
 /**
   * @brief  Show EEPROM Features
-  * @param  Feature : feature index
+  * @param  Feature: feature index
   * @retval None
   */
 static void EEPROM_Show_Feature(uint8_t Feature)
 {
   uint8_t Tx1Buffer[] = "STM324x9I-EVAL EEPROM Ex.";
-  
   uint8_t Rx1Buffer[BUFFER_SIZE1] = {0}; 
   uint8_t Tx2Buffer[BUFFER_SIZE1] = {0}; 
   __IO TestStatus TransferStatus1 = FAILED;
   __IO uint16_t NumDataRead = 0; 
-
+  
   BSP_LCD_SetBackColor(LCD_COLOR_WHITE);  
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);    
   BSP_LCD_FillRect(12, 92, BSP_LCD_GetXSize() - 24, BSP_LCD_GetYSize()- 104);
   BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
-
+  
   /* Initialize the I2C EEPROM driver ----------------------------------------*/
   if(BSP_EEPROM_Init() != EEPROM_OK)
   {
@@ -202,12 +205,10 @@ static void EEPROM_Show_Feature(uint8_t Feature)
       BSP_LCD_DisplayStringAt(0, 130, (uint8_t *)"with EEPROM", CENTER_MODE);
       BSP_LCD_DisplayStringAt(0, 145, (uint8_t *)"Press again USER key", CENTER_MODE);
     }
-    
     break;
     
   case 1:
-     /* Write new parameter in EEPROM */
-   
+    /* Write new parameter in EEPROM */
     if(EEPROMConnected == 1)
     {
       snprintf((char*)Tx2Buffer, BUFFER_SIZE1, "%s Test %d", Tx1Buffer, NbLoop);
@@ -264,7 +265,7 @@ static void EEPROM_Show_Feature(uint8_t Feature)
 /**
   * @brief  Basic management of the timeout situation.
   * @param  None.
-  * @retval 0.
+  * @retval None
   */
 void BSP_EEPROM_TIMEOUT_UserCallback(void)
 {
@@ -290,10 +291,15 @@ static TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t Buffe
     pBuffer1++;
     pBuffer2++;
   }
-
   return PASSED;  
 }
+
 /**
   * @}
   */ 
+
+/**
+  * @}
+  */ 
+
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

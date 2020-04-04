@@ -2,15 +2,9 @@
   ******************************************************************************
   * @file    Display/LTDC_AnimatedPictureFromUSB/Inc/lcd_log_conf.h
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
-  * @brief   lcd_log configuration template file.
-  *          This file should be copied to the application folder and modified 
-  *          as follows:
-  *            - Rename it to 'lcd_log_conf.h'.
-  *            - Update the name of the LCD driver's header file, depending on
-  *               the EVAL board you are using, see line40 below (be default this  
-  *               file will generate compile error unless you do this modification).
+  * @version V1.2.0
+  * @date    26-December-2014
+  * @brief   LCD Log configuration file.
   ******************************************************************************
   * @attention
   *

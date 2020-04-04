@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    RTC/RTC_TimeStamp/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   HAL MSP module.    
   ******************************************************************************
   * @attention
@@ -119,7 +119,7 @@ void HAL_RTC_MspInit(RTC_HandleTypeDef *hrtc)
   /* Enable RTC Clock */ 
   __HAL_RCC_RTC_ENABLE(); 
 
-  /*##-3- Configure the NVIC for RTC TimeStamp ###################################*/
+  /*##-3- Configure the NVIC for RTC TimeStamp ###############################*/
   HAL_NVIC_SetPriority(TAMP_STAMP_IRQn, 0x0F, 0);
   HAL_NVIC_EnableIRQ(TAMP_STAMP_IRQn);
 }

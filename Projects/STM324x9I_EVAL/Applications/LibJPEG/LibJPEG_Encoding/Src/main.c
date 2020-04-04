@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LibJPEG/LibJPEG_Encoding/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Main program body
   *          This sample code shows how to compress BMP file to JPEG file.
   ******************************************************************************
@@ -33,14 +33,14 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-FATFS SDFatFs;  /* File system object for SD card logical drive */
-FIL MyFile, MyFile1;     /* File object */
-char SDPath[4]; /* SD card logical drive path */
+FATFS SDFatFs;       /* File system object for SD card logical drive */
+FIL MyFile, MyFile1; /* File objects */
+char SDPath[4];      /* SD card logical drive path */
 
 RGB_typedef *RGB_matrix;  
-uint8_t   _aucLine[1024];
-uint32_t  counter = 0, bytesread;
-uint32_t  offset = 0;
+uint8_t _aucLine[1024];
+uint32_t counter = 0, bytesread;
+uint32_t offset = 0;
 uint32_t line_counter = 0;
   
 /* Private function prototypes -----------------------------------------------*/
@@ -65,7 +65,7 @@ int main(void)
      */
   HAL_Init();
   
-  /* Configure the system clock to 180 Mhz */
+  /* Configure the system clock to 180 MHz */
   SystemClock_Config();
   
   /*##-1- LCD Configuration ##################################################*/   
@@ -77,38 +77,34 @@ int main(void)
     /*##-3- Register the file system object to the FatFs module ##############*/
     if(f_mount(&SDFatFs, (TCHAR const*)SDPath, 0) == FR_OK)
     {
-      
-      /*##-4- Create and Open a new jpg image file with write access ########*/
+      /*##-4- Create and Open a new jpg image file with write access #########*/
       if(f_open(&MyFile1, "image.jpg", FA_CREATE_ALWAYS | FA_WRITE) == FR_OK)
       {
-        
         /*##-5- Open the BMP image with read access ##########################*/
         if(f_open(&MyFile, "image.bmp", FA_READ) == FR_OK)
         {
-          
           /*##-6- Jpeg encoding ##############################################*/
           jpeg_encode(&MyFile, &MyFile1, IMAGE_WIDTH, IMAGE_HEIGHT, IMAGE_QUALITY, _aucLine);
           
           /* Close the BMP and JPEG files */
           f_close(&MyFile1);
           f_close(&MyFile);
+          
+          /*##-7- Jpeg decoding ##############################################*/
+          /* Open the BMP file for read */
+          if(f_open(&MyFile1, "image.jpg", FA_READ) == FR_OK)
+          {          
+            /* Jpeg Decoding for display to LCD */
+            jpeg_decode(&MyFile1, IMAGE_WIDTH, _aucLine, Jpeg_CallbackFunction);
+            
+            /* Close the BMP file */
+            f_close(&MyFile1);   
+          }
         }
       }      
     }
   }
-  
-  /*##-7- Jpeg decoding ######################################################*/
-  /* Open the BMP file for read */
-  if(f_open(&MyFile1, "image.jpg", FA_READ) == FR_OK)
-  {  
-  }
-  
-  /* Jpeg Decoding for display to LCD */
-  jpeg_decode(&MyFile1, IMAGE_WIDTH, _aucLine, Jpeg_CallbackFunction);
-  
-  /* Close the BMP file */
-  f_close(&MyFile1);    
-  
+
   /* Infinite loop */
   while (1)
   {
@@ -117,11 +113,12 @@ int main(void)
 
 /**
   * @brief  LCD Configuration.
+  * @Param  None
   * @retval None
   */
 static void LCD_Config(void)
 {
-  /* Initialize the LCD*/  
+  /* Initialize the LCD */  
   BSP_LCD_Init();
   
   /* Background Layer Initialization */
@@ -149,30 +146,30 @@ static void LCD_Config(void)
 
 static uint8_t Jpeg_CallbackFunction(uint8_t* Row, uint32_t DataLength)
 {
-   
+
 #ifdef DONT_USE_DMA2D
   RGB_matrix =  (RGB_typedef*)Row;
   uint32_t  ARGB32Buffer[IMAGE_WIDTH];
   uint32_t counter = 0;
-   
+  
   for(counter = 0; counter < IMAGE_WIDTH; counter++)
   {
     ARGB32Buffer[counter]  = (uint32_t)
-    (
-     ((RGB_matrix[counter].B << 16)|
-      (RGB_matrix[counter].G << 8)|
-      (RGB_matrix[counter].R) | 0xFF000000)
-    );
-
+      (
+       ((RGB_matrix[counter].B << 16)|
+        (RGB_matrix[counter].G << 8)|
+        (RGB_matrix[counter].R) | 0xFF000000)
+         );
+    
     *(__IO uint32_t *)(LCD_FRAME_BUFFER + (counter*4) + (IMAGE_WIDTH * (IMAGE_HEIGHT - line_counter - 1) * 4)) = ARGB32Buffer[counter];
   }
 #endif
-
+  
 #ifdef USE_DMA2D  
   static DMA2D_HandleTypeDef hdma2d_eval;
   
   offset = (LCD_FRAME_BUFFER + (IMAGE_WIDTH * (IMAGE_HEIGHT - line_counter - 1) * 4));
-/* Configure the DMA2D Mode, Color Mode and output offset */
+  /* Configure the DMA2D Mode, Color Mode and output offset */
   hdma2d_eval.Init.Mode         = DMA2D_M2M_PFC;
   hdma2d_eval.Init.ColorMode    = DMA2D_ARGB8888;
   hdma2d_eval.Init.OutputOffset = 0;     
@@ -202,17 +199,17 @@ static uint8_t Jpeg_CallbackFunction(uint8_t* Row, uint32_t DataLength)
 #ifdef SWAP_RB 
   uint32_t pixel = 0, width_counter, result = 0, result1 = 0;
   
-   for(width_counter = 0; width_counter < IMAGE_WIDTH; width_counter++)
-   {
-     pixel = *(__IO uint32_t *)(LCD_FRAME_BUFFER + (width_counter*4) + (IMAGE_WIDTH * (IMAGE_HEIGHT - line_counter - 1) * 4)); 
-     result1 = (((pixel & 0x00FF0000) >> 16) | ((pixel & 0x000000FF) << 16));
-     pixel = pixel & 0xFF00FF00;
-     result = (result1 | pixel);
-     *(__IO uint32_t *)(LCD_FRAME_BUFFER + (width_counter*4) + (IMAGE_WIDTH * (IMAGE_HEIGHT - line_counter - 1) * 4)) = result;
-     
-   }  
+  for(width_counter = 0; width_counter < IMAGE_WIDTH; width_counter++)
+  {
+    pixel = *(__IO uint32_t *)(LCD_FRAME_BUFFER + (width_counter*4) + (IMAGE_WIDTH * (IMAGE_HEIGHT - line_counter - 1) * 4)); 
+    result1 = (((pixel & 0x00FF0000) >> 16) | ((pixel & 0x000000FF) << 16));
+    pixel = pixel & 0xFF00FF00;
+    result = (result1 | pixel);
+    *(__IO uint32_t *)(LCD_FRAME_BUFFER + (width_counter*4) + (IMAGE_WIDTH * (IMAGE_HEIGHT - line_counter - 1) * 4)) = result;
+    
+  }  
 #endif
-
+  
   line_counter++;
   return 0;
 }
@@ -243,7 +240,7 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
 
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -261,7 +258,7 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLQ = 7;
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
   
-  HAL_PWREx_ActivateOverDrive();
+  HAL_PWREx_EnableOverDrive();
   
   /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */

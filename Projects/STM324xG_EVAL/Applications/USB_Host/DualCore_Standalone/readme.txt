@@ -1,13 +1,13 @@
 /**
-  @page DualCore_Standalone USB Host Dual Core example
+  @page DualCore_Standalone USB Host Dual Core application
   
   @verbatim
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    USB_Host/DualCore_Standalone/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
-  * @brief   Description of the USB Host Dual Core example.
+  * @version V1.2.0
+  * @date    26-December-2014
+  * @brief   Description of the USB Host Dual Core application.
   ******************************************************************************
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
@@ -25,13 +25,13 @@
   ******************************************************************************
   @endverbatim
   
-@par Example Description
+@par Application Description
 
-This example is a part of the USB Host Library package using STM32Cube firmware. It describes how to use
+This application is a part of the USB Host Library package using STM32Cube firmware. It describes how to use
 USB host application based on the STM32F4xx multi core support feature integrating Mass Storage (MSC) and
-Humain Interface (HID) in the same project.
+Human Interface (HID) in the same project.
 
-This is a typical example on how to use the STM32F4xx USB OTG Host peripheral to operate with an USB MSC
+This is a typical application on how to use the STM32F4xx USB OTG Host peripheral to operate with an USB MSC
 device connected to the High Speed port and a HID device connected to the Full Speed port.
 
 At the beginning of the main program the HAL_Init() function is called to reset all the peripherals,
@@ -51,8 +51,8 @@ initialized. The STM32 MCU behaves as a MSC/HID Host, it enumerates the devices 
 manufacturer name, Serial no and product name information and displays it on the LCD screen. 
 
 A menu is displayed and the user can select any operation from the menu using the Joystick buttons:
- - "Mass Storage demo" operation starts the Mass Storage example.
- - "Humain Interface demo" operation starts the Humain Interface example.
+ - "Mass Storage demo" operation starts the Mass Storage application.
+ - "Human Interface demo" operation starts the Human Interface application.
  - "Re-Enumerate MSC" operation performs a new Enumeration of the MSC device.
  - "Re-Enumerate HID" operation performs a new Enumeration of the HID device (keyboard/mouse).
 
@@ -72,7 +72,7 @@ For more details about the STM32Cube USB Host library, please refer to UM1720
 @par USB Library Configuration
 
 To select the appropriate USB Core to work with, user must add the following macro defines within the
-compiler preprocessor (already done in the preconfigured projects provided with this example):
+compiler preprocessor (already done in the preconfigured projects provided with this application):
       - "USE_USB_HS" and "USE_USB_FS" when using USB Dual Core Mode
 
 It is possible to fine tune needed USB Host features by modifying defines values in USBH configuration
@@ -106,24 +106,24 @@ requirements, such as:
   - USB_Host/DualCore_Standalone/Inc/lcd_log_conf.h          LCD log configuration file
   - USB_Host/DualCore_Standalone/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - USB_Host/DualCore_Standalone/Inc/usbh_conf.h             USB Host driver Configuration file
-  - USB_Host/DualCore_Standalone/Inc/ffconf.h                FatFs Module Configuration file
+  - USB_Host/DualCore_Standalone/Inc/ffconf.h                FAT file system module configuration file
  
 
 @par Hardware and Software environment
 
-  - This example runs on STM32F407xx/STM32F417xx devices.
+  - This application runs on STM32F407xx/STM32F417xx devices.
     
-  - This example has been tested with STMicroelectronics STM324xG-EVAL RevC 
+  - This application has been tested with STMicroelectronics STM324xG-EVAL RevC 
     evaluation boards and can be easily tailored to any other supported device 
     and development board.
 
   - STM324xG-EVAL RevC Set-up
     - Plug the USB key into the STM324xG-EVAL board through 'USB micro A-Male 
       to A-Female' cable to the connector:
-      - CN9 : to use USB High Speed (HS) 
+      - CN9: to use USB High Speed (HS) 
     - Plug the HID device(Mouse/Keyboard) into the STM324xG-EVAL board through 'USB micro A-Male 
       to A-Female' cable to the connector:
-      - CN14: to use USB Full Speed (FS) with embedded PHY(U7)
+      - CN8: to use USB Full Speed (FS) with embedded PHY(U2)
 
 
 @par How to use it ?
@@ -131,7 +131,7 @@ requirements, such as:
 In order to make the program work, you must do the following :
  - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
- - Run the example
+ - Run the application
  
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

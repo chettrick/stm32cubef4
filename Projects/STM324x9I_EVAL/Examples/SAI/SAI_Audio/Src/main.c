@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    SAI/SAI_Audio/Src/main.c   
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Main program body
   ******************************************************************************
   * @attention
@@ -36,7 +36,7 @@
   */
 
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
+#include "audio_if.h"
 
 /** @addtogroup STM32F4xx_HAL_Examples
   * @{
@@ -46,25 +46,16 @@
   * @{
   */ 
 
-/* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-#define MESSAGE1   "     STM32F429xx    "
+#define MESSAGE1   "    STM32F429xx     "
 #define MESSAGE2   " Device running on  " 
 #define MESSAGE3   "   STM324x9I-EVAL    "
 
-/* Audio file size and start address are defined here since the audio file is 
-   stored in Flash memory as a constant table of 16-bit data */
-#define AUDIO_FILE_SIZE               360000
-#define AUDIO_START_OFFSET_ADDRESS    0            /* Offset relative to audio file header size */
-#define AUDIO_FILE_ADDRESS            0x08080000   /* Audio file address */
-
+   
+/* Private typedef -----------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-__IO uint32_t uwVolume = 70;
-
-uint32_t AudioTotalSize = 0xFFFF; /* This variable holds the total size of the audio file */
-uint32_t AudioRemSize   = 0xFFFF; /* This variable holds the remaining data in audio file */
-uint16_t *CurrentPos;             /* This variable holds the current position of audio pointer */
+__IO uint32_t uwVolume = AUDIO_DEFAULT_VOLUME;
 
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);
@@ -86,7 +77,7 @@ int main(void)
      */
   HAL_Init();
   
-  /* Configure the system clock to 180 Mhz */
+  /* Configure the system clock to 180 MHz */
   SystemClock_Config();
   
   /* Configure LED1, LED2, LED3 and LED4 */
@@ -128,7 +119,7 @@ int main(void)
   BSP_LED_On(LED4);
   
   /* Initialize the Audio codec and all related peripherals (SAI, I2C, IOs...) */  
-  if(BSP_AUDIO_OUT_Init(OUTPUT_DEVICE_BOTH, uwVolume, SAI_AUDIO_FREQUENCY_48K) == 0)
+  if(AUDIO_Init() == AUDIO_ERROR_NONE)
   {
     BSP_LCD_DisplayStringAt(0, LINE(4), (uint8_t *)"====================", CENTER_MODE);
     BSP_LCD_DisplayStringAt(0, LINE(5), (uint8_t *)"Tamper: Vol+        ", CENTER_MODE);
@@ -143,42 +134,28 @@ int main(void)
   }
   
   /* 
-  Normal mode description:
-  Start playing the audio file (using DMA stream) .
-  Using this mode, the application can run other tasks in parallel since 
-  the DMA is handling the Audio Transfer instead of the CPU.
-  The only task remaining for the CPU will be the management of the DMA 
-  Transfer Complete interrupt or the Half Transfer Complete interrupt in 
-  order to load again the buffer and to calculate the remaining data.  
-  Circular mode description:
-  Start playing the file from a circular buffer, once the DMA is enabled it 
-  always run. User has to fill periodically the buffer with the audio data 
+  Start playing the file from a circular buffer, once the DMA is enabled, it is 
+  always in running state. Application has to fill the buffer with the audio data 
   using Transfer complete and/or half transfer complete interrupts callbacks 
   (EVAL_AUDIO_TransferComplete_CallBack() or EVAL_AUDIO_HalfTransfer_CallBack()...
-  In this case the audio data file is smaller than the DMA max buffer 
-  size 65535 so there is no need to load buffer continuously or manage the 
-  transfer complete or Half transfer interrupts callbacks. */
+  */
+  AUDIO_Start();
   
-  AudioTotalSize = (AUDIO_FILE_SIZE - AUDIO_START_OFFSET_ADDRESS)/AUDIODATA_SIZE;  
-  /* Set the current audio pointer position */
-  CurrentPos = (uint16_t *)(AUDIO_FILE_ADDRESS + AUDIO_START_OFFSET_ADDRESS);
-  /* Start the audio player */
-  BSP_AUDIO_OUT_Play((uint16_t*)CurrentPos, (AUDIO_FILE_SIZE - AUDIO_START_OFFSET_ADDRESS));  
-  /* Update the remaining number of data to be played */
-  AudioRemSize = AudioTotalSize - DMA_MAX(AudioTotalSize);   
-  /* Update the current audio pointer position */
-  CurrentPos += DMA_MAX(AudioTotalSize);
-
   /* Display the state on the screen */
   BSP_LCD_DisplayStringAt(0, LINE(9), (uint8_t *)"       PLAYING...     ", CENTER_MODE);
-  
+
+   
+  /* IMPORTANT:
+     AUDIO_Process() is called by the SysTick Handler, as it should be called 
+     within a periodic process */
+   
   /* Infinite loop */
   while(1)
   {      
     /* Check on the Volume high button */
     if (BSP_PB_GetState(BUTTON_WAKEUP) != RESET)
     {
-      /* wait to avoid rebound */
+      /* Wait to avoid rebound */
       while (BSP_PB_GetState(BUTTON_WAKEUP) != RESET);
       
       /* Decrease volume by 5% */
@@ -209,7 +186,7 @@ int main(void)
       BSP_LCD_DisplayStringAt(0, LINE(10), (uint8_t *)"       VOL:   +     ", CENTER_MODE);
     }  
     
-    /* Toggle LED4 */
+    /* Toggle LED3 */
     BSP_LED_Toggle(LED3);
     
     /* Insert 100 ms delay */
@@ -221,86 +198,6 @@ int main(void)
     /* Insert 100 ms delay */
     HAL_Delay(100);
   } 
-}
-
-/*------------------------------------------------------------------------------
-       Callbacks implementation:
-           the callbacks API are defined __weak in the stm324xg_eval_audio.c file
-           and their implementation should be done the user code if they are needed.
-           Below some examples of callback implementations.
-  ----------------------------------------------------------------------------*/
-/**
-  * @brief  Manages the full Transfer complete event.
-  * @param  None
-  * @retval None
-  */
-void BSP_AUDIO_OUT_TransferComplete_CallBack(void)
-{
-  /* Calculate the remaining audio data in the file and the new size 
-     for the DMA transfer. If the Audio files size is less than the DMA max 
-     data transfer size, so there is no calculation to be done, just restart 
-     from the beginning of the file ... */
- 
-  /* Check if the end of file has been reached */
-  if(AudioRemSize > 0)
-  { 
-    /* Replay from the current position */
-    BSP_AUDIO_OUT_ChangeBuffer((uint16_t*)CurrentPos, DMA_MAX(AudioRemSize));
-    
-    /* Update the current pointer position */
-    CurrentPos += DMA_MAX(AudioRemSize);        
-    
-    /* Update the remaining number of data to be played */
-    AudioRemSize -= DMA_MAX(AudioRemSize);  
-  }
-  else
-  {
-    /* Set the current audio pointer position */
-    CurrentPos = (uint16_t *)(AUDIO_FILE_ADDRESS + AUDIO_START_OFFSET_ADDRESS);
-    /* Replay from the beginning */
-    BSP_AUDIO_OUT_Play((uint16_t*)CurrentPos, (AUDIO_FILE_SIZE - AUDIO_START_OFFSET_ADDRESS));
-    /* Update the remaining number of data to be played */
-    AudioRemSize = AudioTotalSize - DMA_MAX(AudioTotalSize);  
-    /* Update the current audio pointer position */
-    CurrentPos += DMA_MAX(AudioTotalSize);
-  }
-}
-
-/**
-  * @brief  Manages the DMA Half Transfer complete event.
-  * @param  None
-  * @retval None
-  */
-void BSP_AUDIO_OUT_HalfTransfer_CallBack(void)
-{  
-  
-  /* Generally this interrupt routine is used to load the buffer when 
-     a streaming scheme is used: When first Half buffer is already transferred load 
-     the new data to the first half of buffer while DMA is transferring data from 
-     the second half. And when Transfer complete occurs, load the second half of 
-     the buffer while the DMA is transferring from the first half ... */
-  /* .... */
-}
-
-/**
-  * @brief  Manages the DMA FIFO error event.
-  * @param  None
-  * @retval None
-  */
-void BSP_AUDIO_OUT_Error_CallBack(void)
-{
-  /* Display message on the LCD screen */
-  BSP_LCD_SetBackColor(LCD_COLOR_RED);
-  BSP_LCD_DisplayStringAt(0, LINE(8), (uint8_t *)"       DMA  ERROR     ", CENTER_MODE);
-  BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-  BSP_LCD_ClearStringLine(9);
-                             
-  /* Stop the program with an infinite loop */
-  while (1)
-  {}
-  
-  /* could also generate a system reset to recover from the error */
-  /* .... */
 }
 
 /**
@@ -347,7 +244,7 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLQ = 7;
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
   
-  /* Activate the Over-Drive mode */
+  /* Activate over drive */
   HAL_PWREx_ActivateOverDrive();
   
   /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 

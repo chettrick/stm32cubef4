@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    DAC/DAC_SignalsGeneration/Inc/main.h 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
@@ -48,11 +48,11 @@
 /* User can use this section to tailor DAC Channel used and associated 
    resources */
 /* Definition for DAC clock resources */
-#define DACx_CHANNEL1_GPIO_CLK_ENABLE()  __GPIOA_CLK_ENABLE()
-#define DMAx_CLK_ENABLE()               __DMA1_CLK_ENABLE()  
+#define DACx_CHANNEL1_GPIO_CLK_ENABLE()  __HAL_RCC_GPIOA_CLK_ENABLE()
+#define DMAx_CLK_ENABLE()               __HAL_RCC_DMA1_CLK_ENABLE()  
      
-#define DACx_FORCE_RESET()              __DAC_FORCE_RESET()
-#define DACx_RELEASE_RESET()            __DAC_RELEASE_RESET()
+#define DACx_FORCE_RESET()              __HAL_RCC_DAC_FORCE_RESET()
+#define DACx_RELEASE_RESET()            __HAL_RCC_DAC_RELEASE_RESET()
 
 /* Definition for DACx Channel1 Pin */
 #define DACx_CHANNEL1_PIN                GPIO_PIN_4

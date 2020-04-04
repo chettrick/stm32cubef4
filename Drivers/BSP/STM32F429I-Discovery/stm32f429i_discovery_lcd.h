@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f429i_discovery_lcd.h
   * @author  MCD Application Team
-  * @version V2.1.0
-  * @date    19-June-2014
+  * @version V2.1.1
+  * @date    10-December-2014
   * @brief   This file contains all the functions prototypes for the 
   *          stm32f429i_discovery_lcd.c driver.
   ******************************************************************************
@@ -48,9 +48,9 @@
 #include "stm32f429i_discovery.h"
 /* Include SDRAM Driver */
 #include "stm32f429i_discovery_sdram.h"
-#include "..\..\..\Utilities\Fonts\fonts.h"
+#include "../../../Utilities/Fonts/fonts.h"
 /* Include LCD component driver */
-#include "..\Components\ili9341\ili9341.h"   
+#include "../Components/ili9341/ili9341.h"   
 
 /** @addtogroup BSP
   * @{

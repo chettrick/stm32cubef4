@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    main.h 
+  * @file    Display/LCD_Paint/Inc/main.h 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
@@ -36,6 +36,7 @@
 #include "stm324xg_eval_sram.h"
 #include <stdlib.h>
 #include <stdio.h>
+
 /* FatFs includes component */
 #include "ff_gen_drv.h"
 #include "sd_diskio.h"
@@ -49,7 +50,7 @@ void Touchscreen_Calibration (void);
 uint16_t Calibration_GetX(uint16_t x);
 uint16_t Calibration_GetY(uint16_t y);
 uint8_t  IsCalibrationDone(void);
-//void Saving_picture(void);
+
 #endif /* __MAIN_H */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

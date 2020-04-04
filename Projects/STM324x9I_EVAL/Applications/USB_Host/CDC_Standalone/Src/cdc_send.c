@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Host/CDC_Standalone/Src/cdc_send.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   CDC Send state machine
   ******************************************************************************
   * @attention
@@ -45,7 +45,7 @@ uint8_t BLANK_LINE [] = "                                                       
 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-FIL MyFile = {0} ;
+FIL MyFile = {0};
 uint8_t FilePos = 0;
 uint8_t FileOffset = 0;
 uint8_t PrevPos = 0;
@@ -283,7 +283,7 @@ static void CDC_ShowFiles(uint8_t offset, uint8_t select)
   if(offset < FileList.ptr)
   {
     BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-    for (i = 4 ; i < 14; i++)
+    for (i = 4; i < 14; i++)
     {
       BSP_LCD_SetBackColor(LCD_COLOR_BLACK);
       BSP_LCD_DisplayStringAtLine(i, BLANK_LINE);

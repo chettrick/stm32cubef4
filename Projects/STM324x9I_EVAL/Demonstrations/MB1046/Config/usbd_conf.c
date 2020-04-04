@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    usbd_conf.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This file implements the USB Device library callbacks and MSP
   ******************************************************************************
   * @attention
@@ -63,7 +63,7 @@ void HAL_PCD_MspInit(PCD_HandleTypeDef *hpcd)
     
   if(hpcd->Instance == USB_OTG_FS)
   {
-    __GPIOA_CLK_ENABLE();
+    __HAL_RCC_GPIOA_CLK_ENABLE();
     
 	/* Configure DM DP Pins */
     GPIO_InitStruct.Pin = (GPIO_PIN_11 | GPIO_PIN_12);
@@ -87,7 +87,7 @@ void HAL_PCD_MspInit(PCD_HandleTypeDef *hpcd)
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 	   
     /* Enable USB FS Clocks */
-    __USB_OTG_FS_CLK_ENABLE();
+    __HAL_RCC_USB_OTG_FS_CLK_ENABLE();
 
      /* Set USBFS Interrupt to the lowest priority */
     HAL_NVIC_SetPriority(OTG_FS_IRQn, 4, 0);
@@ -107,14 +107,14 @@ void HAL_PCD_MspDeInit(PCD_HandleTypeDef *hpcd)
   if(hpcd->Instance == USB_OTG_FS)
   {  
     /* Disable USB FS Clocks */
-    __USB_OTG_FS_CLK_DISABLE();
-    __SYSCFG_CLK_DISABLE();
+    __HAL_RCC_USB_OTG_FS_CLK_DISABLE();
+    __HAL_RCC_SYSCFG_CLK_DISABLE();
   }
   else if(hpcd->Instance == USB_OTG_HS)
   {  
     /* Disable USB HS Clocks */
-    __USB_OTG_HS_CLK_DISABLE();
-    __SYSCFG_CLK_DISABLE();
+    __HAL_RCC_USB_OTG_HS_CLK_DISABLE();
+    __HAL_RCC_SYSCFG_CLK_DISABLE();
   }  
 }
 
@@ -284,9 +284,9 @@ USBD_StatusTypeDef USBD_LL_Init(USBD_HandleTypeDef *pdev)
   /* Initialize LL Driver */
   HAL_PCD_Init(&hpcd);
   
-  HAL_PCD_SetRxFiFo(&hpcd, 0x80);
-  HAL_PCD_SetTxFiFo(&hpcd, 0, 0x40);
-  HAL_PCD_SetTxFiFo(&hpcd, 1, 0x80);
+  HAL_PCDEx_SetRxFiFo(&hpcd, 0x80);
+  HAL_PCDEx_SetTxFiFo(&hpcd, 0, 0x40);
+  HAL_PCDEx_SetTxFiFo(&hpcd, 1, 0x80);
 
   return USBD_OK;
 }

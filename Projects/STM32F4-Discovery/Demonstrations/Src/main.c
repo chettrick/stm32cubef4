@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Demonstrations/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This demo describes how to use accelerometer to control mouse on 
   *          PC.
   ******************************************************************************
@@ -96,7 +96,7 @@ static void Error_Handler(void);
 /* Private functions ---------------------------------------------------------*/
 
 /**
-  * @brief  Main program.
+  * @brief  Main program
   * @param  None
   * @retval None
   */
@@ -110,16 +110,16 @@ int main(void)
      */
   HAL_Init();
 
-  /* Configure LED4, LED3, LED5 and LED6 */
-  BSP_LED_Init(LED4);
+  /* Configure LED3, LED4, LED5 and LED6 */
   BSP_LED_Init(LED3);
+  BSP_LED_Init(LED4);
   BSP_LED_Init(LED5);
   BSP_LED_Init(LED6);
 
-  /* Configure the system clock to 168 Mhz */
+  /* Configure the system clock to 168 MHz */
   SystemClock_Config();
 
-  /* Initialize LEDs and User_Button on STM32F401-Discovery ------------------*/
+  /* Configure USER Button */
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_EXTI); 
 
   /* Execute Demo application */
@@ -140,7 +140,7 @@ static void Demo_Exec(void)
 {
   uint8_t togglecounter = 0x00;
   
-  /* Initialize Accelerometer MEMS*/
+  /* Initialize Accelerometer MEMS */
   if(BSP_ACCELERO_Init() != HAL_OK)
   {
     /* Initialization Error */
@@ -154,7 +154,7 @@ static void Demo_Exec(void)
     /* Reset UserButton_Pressed variable */
     UserButtonPressed = 0x00;
     
-    /* Initialize LEDs to be managed by GPIO */
+    /* Configure LEDs to be managed by GPIO */
     BSP_LED_Init(LED4);
     BSP_LED_Init(LED3);
     BSP_LED_Init(LED5);
@@ -170,7 +170,7 @@ static void Demo_Exec(void)
     BSP_LED_Off(LED5);
     BSP_LED_Off(LED6);
     
-    /* Waiting User Button is pressed */
+    /* Waiting USER Button is pressed */
     while (UserButtonPressed == 0x00)
     {
       /* Toggle LED4 */
@@ -202,7 +202,7 @@ static void Demo_Exec(void)
       }
     }
     
-    /* Waiting User Button is Released */
+    /* Waiting USER Button is Released */
     while (BSP_PB_GetState(BUTTON_KEY) != KEY_NOT_PRESSED)
     {}
     UserButtonPressed = 0x00;
@@ -215,11 +215,11 @@ static void Demo_Exec(void)
     /* USB configuration */
     Demo_USBConfig();
     
-    /* Waiting User Button is pressed */
+    /* Waiting USER Button is pressed */
     while (UserButtonPressed == 0x00)
     {}
     
-    /* Waiting User Button is Released */
+    /* Waiting USER Button is Released */
     while (BSP_PB_GetState(BUTTON_KEY) != KEY_NOT_PRESSED)
     {}
     
@@ -265,7 +265,7 @@ static void TIM4_Config(void)
   => TIM4CLK = 2*(HCLK / 4) = HCLK/2 = SystemCoreClock/2
   
   To get TIM4 counter clock at 2 KHz, the prescaler is computed as follows:
-  Prescaler = (TIM4CLK / TIM1 counter clock) - 1
+  Prescaler = (TIM4CLK / TIM4 counter clock) - 1
   Prescaler = (84 MHz/(2 * 2 KHz)) - 1 = 41999
   
   To get TIM4 output clock at 1 Hz, the period (ARR)) is computed as follows:
@@ -298,7 +298,7 @@ static void TIM4_Config(void)
   /* TIM PWM1 Mode configuration: Channel */
   /* Output Compare Timing Mode configuration: Channel1 */
   sConfigTim4.OCMode = TIM_OCMODE_PWM1;
-  sConfigTim4.OCIdleState = TIM_OUTPUTSTATE_ENABLE;
+  sConfigTim4.OCIdleState = TIM_CCx_ENABLE;
   sConfigTim4.Pulse = TIM_CCR;
   sConfigTim4.OCPolarity = TIM_OCPOLARITY_HIGH;
   
@@ -371,7 +371,7 @@ void HAL_SYSTICK_Callback(void)
       Y_Offset = Buffer[1];
       
       /* Update New autoreload value in case of X or Y acceleration*/
-      /* Basic accelration X_Offset and Y_Offset are divide by 40 to fir with ARR range */
+      /* Basic acceleration X_Offset and Y_Offset are divide by 40 to fir with ARR range */
       NewARR_X = TIM_ARR - ABS(X_Offset/3);
       NewARR_Y = TIM_ARR - ABS(Y_Offset/3);
       
@@ -384,17 +384,17 @@ void HAL_SYSTICK_Callback(void)
       {
         
         /* Reset CNT to a lowest value (equal to min CCRx of all Channels) */
-        __HAL_TIM_SetCounter(&htim4,(TIM_ARR-MaxAcceleration)/2);
+        __HAL_TIM_SET_COUNTER(&htim4,(TIM_ARR-MaxAcceleration)/2);
         
         if (X_Offset < ThreadholdAcceleroLow)
         {
           
           /* Sets the TIM4 Capture Compare for Channel1 Register value */
           /* Equal to NewARR_X/2 to have duty cycle equal to 50% */
-          __HAL_TIM_SetCompare(&htim4, TIM_CHANNEL_1, NewARR_X/2);  
+          __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_1, NewARR_X/2);  
           
           /* Time base configuration */      
-          __HAL_TIM_SetAutoreload(&htim4, NewARR_X);
+          __HAL_TIM_SET_AUTORELOAD(&htim4, NewARR_X);
           
           /* Enable TIM4 Capture Compare Channel1 */
           HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_1);  
@@ -405,10 +405,10 @@ void HAL_SYSTICK_Callback(void)
           
           /* Sets the TIM4 Capture Compare for Channel3 Register value */
           /* Equal to NewARR_X/2 to have duty cycle equal to 50% */
-          __HAL_TIM_SetCompare(&htim4, TIM_CHANNEL_3, NewARR_X/2);                  
+          __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_3, NewARR_X/2);                  
           
           /* Time base configuration */      
-          __HAL_TIM_SetAutoreload(&htim4, NewARR_X);
+          __HAL_TIM_SET_AUTORELOAD(&htim4, NewARR_X);
           
           /* Enable TIM4 Capture Compare Channel3 */
           HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_3);  
@@ -419,10 +419,10 @@ void HAL_SYSTICK_Callback(void)
           
           /* Sets the TIM4 Capture Compare for Channel2 Register value */
           /* Equal to NewARR_Y/2 to have duty cycle equal to 50% */
-          __HAL_TIM_SetCompare(&htim4, TIM_CHANNEL_2,NewARR_Y/2);    
+          __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_2,NewARR_Y/2);    
     
           /* Time base configuration */      
-          __HAL_TIM_SetAutoreload(&htim4, NewARR_Y);
+          __HAL_TIM_SET_AUTORELOAD(&htim4, NewARR_Y);
 
           /* Enable TIM4 Capture Compare Channel2 */
           HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_2);    
@@ -433,10 +433,10 @@ void HAL_SYSTICK_Callback(void)
           
           /* Sets the TIM4 Capture Compare for Channel4 Register value */
           /* Equal to NewARR_Y/2 to have duty cycle equal to 50% */
-          __HAL_TIM_SetCompare(&htim4, TIM_CHANNEL_4, NewARR_Y/2);   
+          __HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_4, NewARR_Y/2);   
           
           /* Time base configuration */      
-          __HAL_TIM_SetAutoreload(&htim4, NewARR_Y);
+          __HAL_TIM_SET_AUTORELOAD(&htim4, NewARR_Y);
           
           /* Enable TIM4 Capture Compare Channel4 */
           HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_4);    
@@ -503,7 +503,7 @@ static uint8_t *USBD_HID_GetPos (void)
   */
 static void Error_Handler(void)
 {
-  /* Turn LED4 (RED) on */
+  /* Turn LED4 on */
   BSP_LED_On(LED4);
   while(1)
   {
@@ -536,7 +536,7 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
   
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -562,6 +562,13 @@ static void SystemClock_Config(void)
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
+
+  /* STM32F405x/407x/415x/417x Revision Z devices: prefetch is supported  */
+  if (HAL_GetREVID() == 0x1001)
+  {
+    /* Enable the Flash prefetch */
+    __HAL_FLASH_PREFETCH_BUFFER_ENABLE();
+  }
 }
 
 #ifdef  USE_FULL_ASSERT

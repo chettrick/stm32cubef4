@@ -2,10 +2,10 @@
   ******************************************************************************
   * @file    Display/LTDC_PicturesFromSDCard/Src/fatfs_storage.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This file includes the Storage (FatFs) driver for the STM324x9I-EVAL
-  *          example.
+  *          application.
   ******************************************************************************
   * @attention
   *
@@ -35,7 +35,7 @@
 
 /** @defgroup FATFS_STORAGE
   * @brief This file includes the Storage (FatFs) driver for the STM324x9I-EVAL
-  *        example.
+  *        application.
   * @{
   */
 

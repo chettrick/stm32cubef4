@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    FMC/FMC_SDRAM/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This sample code shows how to use STM32F4xx FMC HAL API to access 
   *          by read and write operation the SDRAM external memory device.
   ******************************************************************************
@@ -43,7 +43,7 @@
   * @{
   */
 
-/** @addtogroup FMC_SDRAM_Basic
+/** @addtogroup FMC_SDRAM
   * @{
   */ 
 
@@ -93,10 +93,10 @@ int main(void)
      */
   HAL_Init();
   
-  /* Configure the system clock to 180 Mhz */
+  /* Configure the system clock to 180 MHz */
   SystemClock_Config();
   
-  /* Configure LED1 and LED2 and LED3 */
+  /* Configure LED1, LED2 and LED3 */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED2);
   BSP_LED_Init(LED3);
@@ -115,7 +115,7 @@ int main(void)
   
   hsdram.Init.SDBank             = FMC_SDRAM_BANK1;
   hsdram.Init.ColumnBitsNumber   = FMC_SDRAM_COLUMN_BITS_NUM_8;
-  hsdram.Init.RowBitsNumber      = FMC_SDRAM_ROW_BITS_NUM_11;
+  hsdram.Init.RowBitsNumber      = FMC_SDRAM_ROW_BITS_NUM_12;
   hsdram.Init.MemoryDataWidth    = SDRAM_MEMORY_WIDTH;
   hsdram.Init.InternalBankNumber = FMC_SDRAM_INTERN_BANKS_NUM_4;
   hsdram.Init.CASLatency         = FMC_SDRAM_CAS_LATENCY_3;
@@ -206,7 +206,7 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
 
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -225,7 +225,7 @@ static void SystemClock_Config(void)
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
   
   /* Activate the Over-Drive mode */
-  HAL_PWREx_ActivateOverDrive();  
+  HAL_PWREx_EnableOverDrive();  
   
   /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
@@ -244,11 +244,11 @@ static void SystemClock_Config(void)
   */
 static void Error_Handler(void)
 {
-    /* Turn LED3 on */
-    BSP_LED_On(LED3);
-    while(1)
-    {
-    }
+  /* Turn LED3 on */
+  BSP_LED_On(LED3);
+  while(1)
+  {
+  }
 }
 
 /**
@@ -259,39 +259,40 @@ static void Error_Handler(void)
   */
 static void BSP_SDRAM_Initialization_Sequence(SDRAM_HandleTypeDef *hsdram, FMC_SDRAM_CommandTypeDef *Command)
 {
-  __IO uint32_t tmpmrd =0;
-  /* Step 3:  Configure a clock configuration enable command */
+  __IO uint32_t tmpmrd = 0;
+  
+  /* Configure a clock configuration enable command */
   Command->CommandMode = FMC_SDRAM_CMD_CLK_ENABLE;
   Command->CommandTarget = FMC_SDRAM_CMD_TARGET_BANK1;
   Command->AutoRefreshNumber = 1;
   Command->ModeRegisterDefinition = 0;
-
+  
   /* Send the command */
   HAL_SDRAM_SendCommand(hsdram, Command, 0x1000);
-
-  /* Step 4: Insert 100 us minimum delay */ 
+  
+  /* Insert 100 us minimum delay */ 
   /* Inserted delay is equal to 1 ms due to systick time base unit (ms) */
   HAL_Delay(1);
-    
-  /* Step 5: Configure a PALL (precharge all) command */ 
+  
+  /* Configure a PALL (precharge all) command */ 
   Command->CommandMode = FMC_SDRAM_CMD_PALL;
   Command->CommandTarget = FMC_SDRAM_CMD_TARGET_BANK1;
   Command->AutoRefreshNumber = 1;
   Command->ModeRegisterDefinition = 0;
-
+  
   /* Send the command */
   HAL_SDRAM_SendCommand(hsdram, Command, 0x1000);  
   
-  /* Step 6 : Configure a Auto-Refresh command */ 
+  /* Configure a Auto-Refresh command */ 
   Command->CommandMode = FMC_SDRAM_CMD_AUTOREFRESH_MODE;
   Command->CommandTarget = FMC_SDRAM_CMD_TARGET_BANK1;
   Command->AutoRefreshNumber = 8;
   Command->ModeRegisterDefinition = 0;
-
+  
   /* Send the command */
   HAL_SDRAM_SendCommand(hsdram, Command, 0x1000);
   
-  /* Step 7: Program the external memory mode register */
+  /* Program the external memory mode register */
   tmpmrd = (uint32_t)SDRAM_MODEREG_BURST_LENGTH_1          |
                      SDRAM_MODEREG_BURST_TYPE_SEQUENTIAL   |
                      SDRAM_MODEREG_CAS_LATENCY_3           |
@@ -302,15 +303,14 @@ static void BSP_SDRAM_Initialization_Sequence(SDRAM_HandleTypeDef *hsdram, FMC_S
   Command->CommandTarget = FMC_SDRAM_CMD_TARGET_BANK1;
   Command->AutoRefreshNumber = 1;
   Command->ModeRegisterDefinition = tmpmrd;
-
+  
   /* Send the command */
   HAL_SDRAM_SendCommand(hsdram, Command, 0x1000);
   
-  /* Step 8: Set the refresh rate counter */
+  /* Set the refresh rate counter */
   /* (15.62 us x Freq) - 20 */
   /* Set the device refresh counter */
   hsdram->Instance->SDRTR |= ((uint32_t)((1292)<< 1));
-  
 }
                   
 /**
@@ -332,7 +332,6 @@ static void Fill_Buffer(uint32_t *pBuffer, uint32_t uwBufferLenght, uint32_t uwO
 }                  
 
 #ifdef  USE_FULL_ASSERT
-
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.

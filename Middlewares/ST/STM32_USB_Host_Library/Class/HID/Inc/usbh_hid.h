@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    usbh_hid.h
   * @author  MCD Application Team
-  * @version V3.1.0
-  * @date    19-June-2014
+  * @version V3.2.0
+  * @date    04-November-2014
   * @brief   This file contains all the prototypes for the usbh_hid.c
   ******************************************************************************
   * @attention
@@ -29,6 +29,10 @@
 #ifndef __USBH_HID_H
 #define __USBH_HID_H
 
+#ifdef __cplusplus
+ extern "C" {
+#endif
+
 /* Includes ------------------------------------------------------------------*/
 #include "usbh_core.h"
 #include "usbh_hid_mouse.h"
@@ -47,7 +51,7 @@
   */
   
 /** @defgroup USBH_HID_CORE
-  * @brief This file is the Header file for USBH_HID_CORE.c
+  * @brief This file is the Header file for usbh_hid.c
   * @{
   */ 
 
@@ -56,11 +60,11 @@
   * @{
   */ 
 
-#define HID_MIN_POLL                10
-#define HID_REPORT_SIZE             16    
-#define HID_MAX_USAGE               10
-#define HID_MAX_NBR_REPORT_FMT      10 
-#define HID_QUEUE_SIZE              10    
+#define HID_MIN_POLL                                10
+#define HID_REPORT_SIZE                             16    
+#define HID_MAX_USAGE                               10
+#define HID_MAX_NBR_REPORT_FMT                      10 
+#define HID_QUEUE_SIZE                              10    
     
 #define  HID_ITEM_LONG                              0xFE
                                                                        
@@ -321,6 +325,9 @@ uint16_t  fifo_write(FIFO_TypeDef * f, const void * buf, uint16_t  nbytes);
   * @}
   */ 
 
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __USBH_HID_H */
 

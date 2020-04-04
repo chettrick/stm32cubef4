@@ -2,9 +2,9 @@
   ******************************************************************************
   * @file    usbd_msc_data.h
   * @author  MCD Application Team
-  * @version V2.2.0
-  * @date    13-June-2014
-  * @brief   header for the usbd_msc_data.c file
+  * @version V2.3.0
+  * @date    04-November-2014
+  * @brief   Header for the usbd_msc_data.c file
   ******************************************************************************
   * @attention
   *
@@ -26,9 +26,12 @@
   */ 
 
 /* Define to prevent recursive inclusion -------------------------------------*/
+#ifndef __USBD_MSC_DATA_H
+#define __USBD_MSC_DATA_H
 
-#ifndef _USBD_MSC_DATA_H_
-#define _USBD_MSC_DATA_H_
+#ifdef __cplusplus
+ extern "C" {
+#endif
 
 /* Includes ------------------------------------------------------------------*/
 #include "usbd_conf.h"
@@ -91,7 +94,11 @@ extern const uint8_t MSC_Mode_Sense10_data[] ;
   * @}
   */ 
 
-#endif /* _USBD_MSC_DATA_H_ */
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* __USBD_MSC_DATA_H */
 
 /**
   * @}

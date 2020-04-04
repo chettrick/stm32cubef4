@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    k_calibration.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014   
+  * @version V1.2.0
+  * @date    26-December-2014   
   * @brief   This file provides the kernel calibration functions   
   ******************************************************************************
   * @attention
@@ -172,7 +172,7 @@ static void _GetPhysValues(int LogX, int LogY, int * pPhysX, int * pPhysY, const
 /**
   * @brief  Shows text to give short explanation of the sample program
   * @param  None.
-  * @retval None.
+  * @retval None
   */
 static void _Explain(void) {
   _DispStringCentered("At first time, you need to\n"
@@ -187,7 +187,7 @@ static void _Explain(void) {
 /**
   * @brief  Initialization of calibration
   * @param  None.
-  * @retval None.
+  * @retval None
   */
 void k_CalibrationInit(void)
 {
@@ -196,10 +196,10 @@ void k_CalibrationInit(void)
   data1.d32 = k_BkupRestoreParameter(RTC_BKP_DR0);
   data2.d32 = k_BkupRestoreParameter(RTC_BKP_DR1);
   
-  A2 = data2.b.A2 ;
-  B2 = data2.b.B2 ;    
-  A1 = data1.b.A1 ;
-  B1 = data1.b.B1 ;
+  A2 = data2.b.A2;
+  B2 = data2.b.B2;    
+  A1 = data1.b.A1;
+  B1 = data1.b.B1;
   
   if(data2.b.IsCalibrated == 0)
   {

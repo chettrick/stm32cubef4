@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    FreeRTOS/FreeRTOS_LowPower/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Main program body
   ******************************************************************************
   * @attention
@@ -59,7 +59,7 @@ static void SystemClock_Config(void);
 
 /* Private functions ---------------------------------------------------------*/
 /**
-  * @brief  Main program.
+  * @brief  Main program
   * @param  None
   * @retval None
   */
@@ -73,13 +73,13 @@ int main(void)
      */
   HAL_Init();  
   
-  /* Configure the system clock to 180 Mhz */
+  /* Configure the system clock to 180 MHz */
   SystemClock_Config();
   
   /* Configure GPIO's to AN to reduce power consumption */
   GPIO_ConfigAN();
   
-  /* Initialize LED1 */
+  /* Configure LED1 */
   BSP_LED_Init(LED1);
   
   /* Create the queue used by the two threads */
@@ -95,7 +95,7 @@ int main(void)
   osThreadCreate(osThread(TxThread), NULL);
   
   /* Start scheduler */
-  osKernelStart (NULL, NULL);
+  osKernelStart();
 
   /* We should never get here as control is now taken by the scheduler */
   for(;;);
@@ -169,7 +169,7 @@ void PreSleepProcessing(unsigned long ulExpectedIdleTime)
   (void) ulExpectedIdleTime;
   
   /* Disable the peripheral clock during Low Power (Sleep) mode.*/
-  __GPIOG_CLK_SLEEP_DISABLE();
+  __HAL_RCC_GPIOG_CLK_SLEEP_DISABLE();
 }
 
 /**
@@ -197,15 +197,15 @@ static void GPIO_ConfigAN(void)
   
   /* Configure all GPIO as analog to reduce current consumption on non used IOs */
   /* Enable GPIOs clock */
-  __GPIOA_CLK_ENABLE();
-  __GPIOB_CLK_ENABLE();
-  __GPIOC_CLK_ENABLE();
-  __GPIOD_CLK_ENABLE();
-  __GPIOE_CLK_ENABLE();
-  __GPIOF_CLK_ENABLE();
-  __GPIOG_CLK_ENABLE();
-  __GPIOH_CLK_ENABLE();
-  __GPIOI_CLK_ENABLE();
+  __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
+  __HAL_RCC_GPIOC_CLK_ENABLE();
+  __HAL_RCC_GPIOD_CLK_ENABLE();
+  __HAL_RCC_GPIOE_CLK_ENABLE();
+  __HAL_RCC_GPIOF_CLK_ENABLE();
+  __HAL_RCC_GPIOG_CLK_ENABLE();
+  __HAL_RCC_GPIOH_CLK_ENABLE();
+  __HAL_RCC_GPIOI_CLK_ENABLE();
   
   GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
@@ -221,15 +221,15 @@ static void GPIO_ConfigAN(void)
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
   
   /* Disable GPIOs clock */
-  __GPIOA_CLK_DISABLE();
-  __GPIOB_CLK_DISABLE();
-  __GPIOC_CLK_DISABLE();
-  __GPIOD_CLK_DISABLE();
-  __GPIOE_CLK_DISABLE();
-  __GPIOF_CLK_DISABLE();
-  __GPIOG_CLK_DISABLE();
-  __GPIOH_CLK_DISABLE();
-  __GPIOI_CLK_DISABLE();
+  __HAL_RCC_GPIOA_CLK_DISABLE();
+  __HAL_RCC_GPIOB_CLK_DISABLE();
+  __HAL_RCC_GPIOC_CLK_DISABLE();
+  __HAL_RCC_GPIOD_CLK_DISABLE();
+  __HAL_RCC_GPIOE_CLK_DISABLE();
+  __HAL_RCC_GPIOF_CLK_DISABLE();
+  __HAL_RCC_GPIOG_CLK_DISABLE();
+  __HAL_RCC_GPIOH_CLK_DISABLE();
+  __HAL_RCC_GPIOI_CLK_DISABLE();
 }
 
 /**
@@ -258,7 +258,7 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
 
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -277,7 +277,7 @@ static void SystemClock_Config(void)
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
  
   /* Activate the Over-Drive mode */
-  HAL_PWREx_ActivateOverDrive();
+  HAL_PWREx_EnableOverDrive();
  
   /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
   clocks dividers */
@@ -290,10 +290,9 @@ static void SystemClock_Config(void)
 }
 
 #ifdef  USE_FULL_ASSERT
-
 /**
   * @brief  Reports the name of the source file and the source line number
-  *   where the assert_param error has occurred.
+  *         where the assert_param error has occurred.
   * @param  file: pointer to the source file name
   * @param  line: assert_param error line source number
   * @retval None
@@ -305,7 +304,8 @@ void assert_failed(uint8_t* file, uint32_t line)
 
   /* Infinite loop */
   while (1)
-  {}
+  {
+  }
 }
 #endif
 

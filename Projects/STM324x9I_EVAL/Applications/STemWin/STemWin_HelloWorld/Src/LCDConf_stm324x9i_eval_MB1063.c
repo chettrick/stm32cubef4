@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    lcdconf.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This file implements the configuration for the GUI library
   ******************************************************************************
   * @attention
@@ -183,7 +183,7 @@ static uint32_t GetBufferSize(uint32_t LayerIndex);
 *******************************************************************************/
 /**
   * @brief DMA2D MSP Initialization 
-  *        This function configures the hardware resources used in this example: 
+  *        This function configures the hardware resources used in this application: 
   *           - Peripheral's clock enable
   *           - Peripheral's GPIO Configuration  
   * @param hdma2d: DMA2D handle pointer
@@ -192,12 +192,12 @@ static uint32_t GetBufferSize(uint32_t LayerIndex);
 void HAL_DMA2D_MspInit(DMA2D_HandleTypeDef *hdma2d)
 {  
   /* Enable peripheral */
-  __DMA2D_CLK_ENABLE();   
+  __HAL_RCC_DMA2D_CLK_ENABLE();   
 }
 
 /**
   * @brief DMA2D MSP De-Initialization 
-  *        This function frees the hardware resources used in this example:
+  *        This function frees the hardware resources used in this application:
   *          - Disable the Peripheral's clock
   * @param hdma2d: DMA2D handle pointer
   * @retval None
@@ -205,15 +205,15 @@ void HAL_DMA2D_MspInit(DMA2D_HandleTypeDef *hdma2d)
 void HAL_DMA2D_MspDeInit(DMA2D_HandleTypeDef *hdma2d)
 {
   /* Enable DMA2D reset state */
-  __DMA2D_FORCE_RESET();
+  __HAL_RCC_DMA2D_FORCE_RESET();
   
   /* Release DMA2D from reset state */ 
-  __DMA2D_RELEASE_RESET();
+  __HAL_RCC_DMA2D_RELEASE_RESET();
 }
 
 /**
   * @brief LTDC MSP Initialization 
-  *        This function configures the hardware resources used in this example: 
+  *        This function configures the hardware resources used in this application: 
   *           - Peripheral's clock enable
   *           - Peripheral's GPIO Configuration  
   * @param hltdc: LTDC handle pointer
@@ -225,12 +225,12 @@ void HAL_LTDC_MspInit(LTDC_HandleTypeDef *hltdc)
   
   /* Enable peripherals and GPIO Clocks */  
   /* Enable the LTDC Clock */
-  __LTDC_CLK_ENABLE();
+  __HAL_RCC_LTDC_CLK_ENABLE();
   
   /* Enable GPIO Clock */
-  __GPIOI_CLK_ENABLE();
-  __GPIOJ_CLK_ENABLE();
-  __GPIOK_CLK_ENABLE();  
+  __HAL_RCC_GPIOI_CLK_ENABLE();
+  __HAL_RCC_GPIOJ_CLK_ENABLE();
+  __HAL_RCC_GPIOK_CLK_ENABLE();  
   
   /* Configure peripheral GPIO */
 
@@ -271,7 +271,7 @@ void HAL_LTDC_MspInit(LTDC_HandleTypeDef *hltdc)
 
 /**
   * @brief LTDC MSP De-Initialization 
-  *        This function frees the hardware resources used in this example:
+  *        This function frees the hardware resources used in this application:
   *          - Disable the Peripheral's clock
   * @param hltdc: LTDC handle pointer
   * @retval None
@@ -280,10 +280,10 @@ void HAL_LTDC_MspDeInit(LTDC_HandleTypeDef *hltdc)
 {
   /* Reset peripherals */
   /* Enable LTDC reset state */
-  __LTDC_FORCE_RESET();
+  __HAL_RCC_LTDC_FORCE_RESET();
   
   /* Release LTDC from reset state */ 
-  __LTDC_RELEASE_RESET();
+  __HAL_RCC_LTDC_RELEASE_RESET();
 }
 
 /**
@@ -587,7 +587,7 @@ static void LCD_LL_LayerInit(uint32_t LayerIndex)
 
 /**
   * @brief  Initialize the LCD Controller.
-  * @param  LayerIndex : layer Index.
+  * @param  None
   * @retval None
   */
 static void LCD_LL_Init(void) 
@@ -613,10 +613,10 @@ static void LCD_LL_Init(void)
   hltdc.Init.Backcolor.Red = 0;
   
   /* LCD clock configuration */
-  /* PLLSAI_VCO Input = HSE_VALUE/PLL_M = 1 Mhz */
-  /* PLLSAI_VCO Output = PLLSAI_VCO Input * PLLSAIN = 192 Mhz */
-  /* PLLLCDCLK = PLLSAI_VCO Output/PLLSAIR = 192/3 = 64 Mhz */
-  /* LTDC clock frequency = PLLLCDCLK / LTDC_PLLSAI_DIVR_4 = 64/4 = 16 Mhz */
+  /* PLLSAI_VCO Input = HSE_VALUE/PLL_M = 1 MHz */
+  /* PLLSAI_VCO Output = PLLSAI_VCO Input * PLLSAIN = 192 MHz */
+  /* PLLLCDCLK = PLLSAI_VCO Output/PLLSAIR = 192/3 = 64 MHz */
+  /* LTDC clock frequency = PLLLCDCLK / LTDC_PLLSAI_DIVR_4 = 64/4 = 16 MHz */
   PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_LTDC;
   PeriphClkInitStruct.PLLSAI.PLLSAIN = 192;
   PeriphClkInitStruct.PLLSAI.PLLSAIR = 3;

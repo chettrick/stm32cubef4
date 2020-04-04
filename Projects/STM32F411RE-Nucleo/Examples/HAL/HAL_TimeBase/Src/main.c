@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    HAL/HAL_TimeBase/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    26-June-2014
+  * @version V1.1.0
+  * @date    26-December-2014
   * @brief   This example describes how to configure HAL time base using
   *          the STM32F4xx HAL API.
   ******************************************************************************
@@ -53,9 +53,11 @@
 /* Private variables ---------------------------------------------------------*/
 TIM_HandleTypeDef TimHandle;
 uint32_t uwIncrementState = 0;
+
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);
 static void Error_Handler(void);
+
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -80,16 +82,16 @@ int main(void)
      */
   HAL_Init();
   
-  /* Configure the system clock */
+  /* Configure the system clock to 100 MHz */
   SystemClock_Config();
   
-  /* Initialize LEDs mounted on Nucleo board */
+  /* Configure LED2 */
   BSP_LED_Init(LED2);
   
-  /* Configure BUTTON_KEY */
+  /* Configure USER Button */
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_EXTI);
   
-  /* Insert a Delay of 1000 ms and toggle LED2 (PA.5), in an infinite loop */  
+  /* Infinite loop */
   while (1)
   {
     /* Insert a 1s delay */
@@ -259,7 +261,7 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
   
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -307,7 +309,6 @@ static void Error_Handler(void)
 }
 
 #ifdef  USE_FULL_ASSERT
-
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.

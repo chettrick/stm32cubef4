@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BSP/Src/audio_record.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This example code shows how to use AUDIO features for the record.
   ******************************************************************************
   * @attention
@@ -83,7 +83,7 @@ extern uint32_t AudioTest;
 /* Variable used for play in infinite loop */
 extern __IO uint8_t UserPressButton;
 
-/* Variables used in norma mode to manage audio file during DMA transfer */
+/* Variables used in normal mode to manage audio file during DMA transfer */
 extern uint32_t AudioTotalSize; /* This variable holds the total size of the audio file */
 extern uint32_t AudioRemSize;   /* This variable holds the remaining data in audio file */
 extern uint16_t *CurrentPos ;   /* This variable holds the current position of audio pointer */

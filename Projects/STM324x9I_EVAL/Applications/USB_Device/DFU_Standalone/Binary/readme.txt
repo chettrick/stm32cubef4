@@ -5,9 +5,9 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    USB_Device/DFU_Standalone/Binary/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
-  * @brief   Description of the binary template example.
+  * @version V1.2.0
+  * @date    26-December-2014
+  * @brief   Description of the binary template application.
   ******************************************************************************
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
@@ -25,10 +25,10 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description 
+@par Application Description 
 
 This directory contains a binary template (in DFU format) to be loaded into Flash memory using Device 
-Firmware Upgrade example.
+Firmware Upgrade application.
 This file was converted to the DFU format using the "DFU File Manager Tool" included in the "DfuSe" PC
 software install.
 For more details on how to convert a .bin file to DFU format please refer to the UM0412 user manual 
@@ -44,9 +44,9 @@ The offset address of this binary is 0x0800C000 which matches the definition in 
 
 @par Hardware and Software environment
 
-  - This example runs on STM32F42xxx/STM32F43xxx devices
+  - This application runs on STM32F42xxx/STM32F43xxx devices
     
-  - This example has been tested with STM324x9I-EVAL RevB evaluation board and can be
+  - This application has been tested with STM324x9I-EVAL RevB evaluation board and can be
     easily tailored to any other supported device and development board.
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>

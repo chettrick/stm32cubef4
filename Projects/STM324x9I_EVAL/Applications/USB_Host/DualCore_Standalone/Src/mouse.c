@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Host/DualCore_Standalone/Src/mouse.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014 
+  * @version V1.2.0
+  * @date    26-December-2014 
   * @brief   This file implements Functions for mouse menu
   ******************************************************************************
   * @attention
@@ -98,7 +98,7 @@ void HID_MouseMenuProcess(void)
   case HID_MOUSE_WAIT:
     if(demo.select != prev_select)
     {
-      prev_select = demo.select ;
+      prev_select = demo.select;
       Demo_SelectItem(DEMO_MOUSE_menu, demo.select & 0x7F);
       
       /* Handle select item */

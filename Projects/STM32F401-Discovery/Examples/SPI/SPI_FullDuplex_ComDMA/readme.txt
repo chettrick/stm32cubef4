@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    SPI/SPI_FullDuplex_ComDMA/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Description of the SPI Full Duplex DMA example.
   ******************************************************************************
   *
@@ -59,9 +59,9 @@ This example guides you through the different configuration steps by mean of HAL
 to ensure SPI Data buffer transmission and reception with DMA.
 
 HAL architecture allows user to easily change code to move to Polling or IT 
-mode. To see others communication modes please check following examples:
-SPI\SPI_FullDuplex_ComPolling
-SPI\SPI_FullDuplex_ComIT
+mode. To see other communication modes please check following examples:
+SPI/SPI_FullDuplex_ComPolling
+SPI/SPI_FullDuplex_ComIT
 
 At the beginning of the main program the HAL_Init() function is called to reset 
 all the peripherals, initialize the Flash interface and the systick.
@@ -111,7 +111,7 @@ STM32 Discovery board's LEDs can be used to monitor the transfer status:
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 @par Directory contents 

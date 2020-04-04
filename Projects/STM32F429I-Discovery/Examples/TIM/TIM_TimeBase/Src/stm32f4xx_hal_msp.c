@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    TIM/TIM_TimeBase/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   HAL MSP module.    
   ******************************************************************************
   * @attention
@@ -58,7 +58,6 @@
   * @{
   */
 
-
 /**
   * @brief TIM MSP Initialization 
   *        This function configures the hardware resources used in this example: 
@@ -73,15 +72,13 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef *htim)
   /* TIMx Peripheral clock enable */
   TIMx_CLK_ENABLE();
 
-  /*##-2- Configure the NVIC for TIMx #########################################*/
+  /*##-2- Configure the NVIC for TIMx ########################################*/
   /* Set the TIMx priority */
   HAL_NVIC_SetPriority(TIMx_IRQn, 0, 1);
   
   /* Enable the TIMx global Interrupt */
   HAL_NVIC_EnableIRQ(TIMx_IRQn);
 }
-
-
 
 /**
   * @}

@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    DAC/DAC_SignalsGeneration/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Description of the DAC Signals generation example.
   ******************************************************************************
   *
@@ -46,7 +46,7 @@ the DAC channel one:
     - Triangle waveform (Channel 1).
     - Escalator waveform (Channel 1).
 
-STM32 Eval board's LEDs can be used to monitor the transfer status:
+STM32 Discovery board's LEDs can be used to monitor the transfer status:
   - LED4 is ON when there are an error in initialization.
     
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
@@ -55,7 +55,7 @@ STM32 Eval board's LEDs can be used to monitor the transfer status:
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 @par Directory contents 

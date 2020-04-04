@@ -1,13 +1,13 @@
 /**
-  @page FatFs_RAMDisk   FatFs with RAM disk drive example
+  @page FatFs_RAMDisk   FatFs with RAM disk drive application
  
   @verbatim
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
-  * @brief   Description of the FatFs with RAM disk drive example
+  * @version V1.2.0
+  * @date    26-December-2014
+  * @brief   Description of the FatFs with RAM disk drive application
   ******************************************************************************
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
@@ -25,9 +25,9 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Application Description
 
-This example provides a description on how to use STM32Cube firmware with FatFs 
+This application provides a description on how to use STM32Cube firmware with FatFs 
 middleware component as a generic FAT file system module, in order to develop an
 application exploiting FatFs offered features with RAM disk (SDRAM) drive 
 configuration. 
@@ -60,8 +60,8 @@ It is possible to fine tune needed FatFs features by modifying defines values
 in FatFs configuration file “ffconf.h” available under the project includes 
 directory, in a way to fit the application requirements. 
  
-STM32 Eval board's LEDs can be used to monitor the example status:
-  - LED3 is ON when the example runs successfully.
+STM32 Discovery board's LEDs can be used to monitor the application status:
+  - LED3 is ON when the application runs successfully.
   - LED4 is ON when any error occurs. 
 
 
@@ -71,7 +71,7 @@ STM32 Eval board's LEDs can be used to monitor the example status:
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 For more details about FatFs implementation on STM32Cube, please refer to UM1721 "Developing Applications 
@@ -91,9 +91,9 @@ on STM32Cube with FatFs".
  
 @par Hardware and Software environment
 
-  - This example runs on STM32F429xx Devices.
+  - This application runs on STM32F429xx Devices.
     
-  - This example has been tested with STM32F429I-Discovery RevB board and can be
+  - This application has been tested with STM32F429I-Discovery RevB board and can be
     easily tailored to any other supported device and development board.  
 
 
@@ -102,7 +102,7 @@ on STM32Cube with FatFs".
 In order to make the program work, you must do the following :
  - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
- - Run the example
+ - Run the application
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

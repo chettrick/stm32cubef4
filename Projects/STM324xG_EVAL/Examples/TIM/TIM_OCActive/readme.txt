@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    TIM/TIM_OCActive/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This example shows how to configure the Timer to generate four 
   *          delayed signals.
   ******************************************************************************
@@ -45,7 +45,7 @@
   to get TIM3 counter clock at 2 KHz so the Prescaler is computed as following:
      - Prescaler = (TIM3CLK / TIM3 counter clock) - 1
    
-  SystemCoreClock is set to 168 MHz..
+  SystemCoreClock is set to 168 MHz.
 
   The TIM3 CCR1 register value is equal to 1000:
   TIM3_CH1 delay = CCR1_Val/TIM3 counter clock  = 500 ms
@@ -73,8 +73,10 @@
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
+      
+@note LED4 is turned ON, because it's sharing the same GPIO pin with the TIM3 channel 2.
 
 
 @par Directory contents 

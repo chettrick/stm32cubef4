@@ -627,10 +627,25 @@
               <FileName>usbh_diskio.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src\drivers\usbh_diskio.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
+              
+                        </File></Files>
+        </Group><Group>
+          <GroupName>Middlewares/FatFs/Options</GroupName>
+          
+          <Files>
+          
+          <File>
+              <FileName>syscall.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src\option\syscall.c</FilePath>
+              
+            </File><File>
+              <FileName>unicode.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src\option\unicode.c</FilePath>
+              
+            </File></Files>
+        </Group><Group>
           <GroupName>Middlewares/PDM</GroupName>
           <Files>
             <File>

@@ -1,13 +1,13 @@
 /**
-  @page FatFs_USBDisk_RTOS   FatFs with USB disk drive in RTOS mode example
+  @page FatFs_USBDisk_RTOS   FatFs with USB disk drive in RTOS mode application
  
   @verbatim
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
-  * @file    readme.txt 
+  * @file    FatFs/FatFs_USBDisk_RTOS/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
-  * @brief   Description of the FatFs with USB disk drive in RTOS mode example
+  * @version V1.2.0
+  * @date    26-December-2014
+  * @brief   Description of the FatFs with USB disk drive in RTOS mode application
   ******************************************************************************
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
@@ -25,9 +25,9 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description
+@par Application Description
 
-This example provides a description on how to use STM32Cube firmware with FatFs 
+This application provides a description on how to use STM32Cube firmware with FatFs 
 middleware component as a generic FAT file system module, FreeRTOS as an RTOS
 module based on using CMSIS-OS wrapping layer common APIs, and also STM32 USB 
 On-The-Go (OTG) host library, in Full Speed (FS), High Speed (HS) and High Speed 
@@ -63,8 +63,8 @@ It is possible to fine tune needed FatFs features by modifying defines values
 in FatFs configuration file “ffconf.h” available under the project includes 
 directory, in a way to fit the application requirements. 
 
-STM32 Eval board's LEDs can be used to monitor the example status:
-  - LED1 is ON when the example runs successfully.
+STM32 Eval board's LEDs can be used to monitor the application status:
+  - LED1 is ON when the application runs successfully.
   - LED3 is ON when any error occurs.
 
 
@@ -74,7 +74,7 @@ STM32 Eval board's LEDs can be used to monitor the example status:
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 For more details about FatFs implementation on STM32Cube, please refer to UM1721 "Developing Applications 
@@ -94,9 +94,9 @@ on STM32Cube with FatFs".
  
 @par Hardware and Software environment
 
-  - This example runs on STM32F429xx/STM32F439xx devices.
+  - This application runs on STM32F429xx/STM32F439xx devices.
     
-  - This example has been tested with STMicroelectronics STM324x9I-EVAL RevB 
+  - This application has been tested with STMicroelectronics STM324x9I-EVAL RevB 
     evaluation boards and can be easily tailored to any other supported device 
     and development board.
 
@@ -121,7 +121,7 @@ In order to make the program work, you must do the following :
    - STM324x9I-EVAL_USBH-FS: to configure the project for STM32F4xx devices using USB OTG FS peripheral
    - STM324x9I-EVAL_USBH-HS-IN-FS: to configure the project for STM32F4xx devices and use USB OTG HS 
                                    peripheral In FS (using embedded PHY).
- - Run the example
+ - Run the application
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

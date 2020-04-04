@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Display/LTDC_Paint/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Main program body
   ******************************************************************************
   * @attention
@@ -27,9 +27,9 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "save.h"
 #include "color.h"
 #include "color2.h"
-#include "save.h"
 
 /** @addtogroup STM32F4xx_HAL_Applications
   * @{
@@ -37,15 +37,21 @@
 
 /** @addtogroup LTDC_Paint
   * @{
-  */
+  */ 
 
 /* Private typedef -----------------------------------------------------------*/
+typedef enum {
+  APPLICATION_IDLE = 0,  
+  APPLICATION_RUNNIG    
+}MSC_ApplicationTypeDef;
+
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-FATFS SDFatFs;   /* File system object for SD card logical drive */
-FIL MyFile;      /* File object */
-char SDPath[4];  /* SD card logical drive path */
+USBH_HandleTypeDef  hUSB_Host;
+FATFS USBDISK_FatFs;  /* File system object for USB Disk logical drive */
+FIL MyFile;           /* File object */
+char USB_Path[4];     /* USB Disk logical drive path */
 
 static uint32_t Radius = 2;
 static uint32_t x = 0, y = 0;
@@ -58,8 +64,12 @@ const uint32_t aBMPHeader1[14]=
 const uint32_t aBMPHeader2[14]=         
 {0x13A64D42, 0x00000004, 0x00360000, 0x00280000, 0x01A40000, 0x00D40000, 0x00010000, 
  0x00000018, 0xF5400000, 0x00000006, 0x00000000, 0x00000000, 0x00000000, 0x0000};
-  
+
+/* Variable to save the state of USB */
+MSC_ApplicationTypeDef Appli_state = APPLICATION_IDLE;
+
 /* Private function prototypes -----------------------------------------------*/
+static void USBH_UserProcess(USBH_HandleTypeDef *phost, uint8_t id);
 static void Draw_Menu(void);
 static void GetPosition(void);
 static void SystemClock_Config(void);
@@ -86,9 +96,9 @@ int main(void)
      */
   HAL_Init();
   
-  /* Configure the system clock to 175 Mhz */
+  /* Configure the system clock to 168 MHz */
   SystemClock_Config(); 
-    
+  
   /* Configure LED1 and LED3 */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED3);
@@ -96,7 +106,7 @@ int main(void)
   /*##-1- LCD Initialization #################################################*/ 
   /* Initialize the LCD */
   BSP_LCD_Init();
-
+  
   /* Foreground Layer Initialization */
   BSP_LCD_LayerDefaultInit(1, LCD_FRAME_BUFFER_LAYER1);
   /* Set Foreground Layer */
@@ -112,41 +122,83 @@ int main(void)
   
   /* Set Foreground Layer */
   BSP_LCD_SelectLayer(0);
- 
+  
   /* Enable the LCD */
   BSP_LCD_DisplayOn();
-
+  
   /* Clear the LCD Background layer */
   BSP_LCD_Clear(LCD_COLOR_WHITE);
-
+  
   /*##-2- Touch screen initialization ########################################*/
   Touchscreen_Calibration();
   BSP_TS_Init(BSP_LCD_GetXSize(), BSP_LCD_GetYSize());
- 
-  /*##-3- Link the SD Card disk I/O driver ###################################*/
-  if(FATFS_LinkDriver(&SD_Driver, SDPath) != 0) 
+  
+  /*##-3- USB Initialization #################################################*/ 
+  /* Init Host Library */
+  if (USBH_Init(&hUSB_Host, USBH_UserProcess, 0) != USBH_OK)
+  {
+    /* USB Initialization Error */
+    Error_Handler();
+  }
+  
+  /* Add Supported Class */
+  USBH_RegisterClass(&hUSB_Host, USBH_MSC_CLASS);
+  
+  /* Start Host Process */
+  if (USBH_Start(&hUSB_Host) != USBH_OK)
+  {
+    /* USB Initialization Error */
+    Error_Handler();
+  }
+  
+  /*##-4- Link the USB Mass Storage disk I/O driver ##########################*/
+  if(FATFS_LinkDriver(&USBH_Driver, USB_Path) != 0) 
   {
     /* FatFs Initialization Error */
     Error_Handler();
   }
   
-  /* Create a FAT file system (format) on the logical drive */
-  f_mkfs((TCHAR const*)SDPath, 0, 0);
-  
-  /*##-4- Register the file system object to the FatFs module ################*/
-  if(f_mount(&SDFatFs, (TCHAR const*)SDPath, 0) != FR_OK)
+  /*##-5- Register the file system object to the FatFs module ################*/
+  if(f_mount(&USBDISK_FatFs, (TCHAR const*)USB_Path, 0) != FR_OK)
   {
     /* FatFs Initialization Error */
     Error_Handler();
-  }  
+  }
   
-  /*##-5- Draw the menu ######################################################*/
+  /*##-6- Draw the menu ######################################################*/
   Draw_Menu();  
   
+  /* Infinite loop */  
   while (1)
   { 
-  /*##-6- Configure the touch screen and Get the position ####################*/    
+    /*##-7- Configure the touch screen and Get the position ##################*/    
     GetPosition();
+    
+    USBH_Process(&hUSB_Host);
+  }
+}
+
+/**
+  * @brief  User Process
+  * @param  None
+  * @retval None
+  */
+static void USBH_UserProcess(USBH_HandleTypeDef *phost, uint8_t id)
+{  
+  switch (id)
+  { 
+  case HOST_USER_DISCONNECTION:
+    Appli_state = APPLICATION_IDLE;
+    if (f_mount(&USBDISK_FatFs, "", 0) != FR_OK)
+    {
+      /* FatFs Initialization Error */
+      Error_Handler();
+    }
+    break;
+    
+  case HOST_USER_CLASS_ACTIVE:
+    Appli_state = APPLICATION_RUNNIG;
+    break;
   }
 }
 
@@ -348,45 +400,35 @@ static void Draw_Menu(void)
 }
 
 /**
-  * @brief  Saves the picture in microSD.
+  * @brief  Save the picture in USB Disk.
   * @param  None
   * @retval None
   */
 void Save_Picture(void)
 { 
-  FRESULT res1, res2;            /* FatFs function common result code */
-  uint32_t byteswritten = 0;     /* File write count */
-  static uint32_t counter = 0;
-  uint8_t str[30];  
+  FRESULT res1, res2;    /* FatFs function common result code */
+  uint32_t byteswritten; /* File write count */
   
   BSP_LCD_SetLayerVisible(1, ENABLE);
   BSP_LCD_SetColorKeying(1, LCD_COLOR_WHITE);
   /* Set foreground Layer */
   BSP_LCD_SelectLayer(1);
   BSP_LCD_SetTextColor(LCD_COLOR_DARKRED);
-  BSP_LCD_SetFont(&Font24);
+  BSP_LCD_SetFont(&Font20);
   
-  /* Initialize IOE */
-  BSP_IO_Init();
+  /* Turn LED1 and LED3 Off */
+  BSP_LED_Off(LED1);
+  BSP_LED_Off(LED3);
   
-  /* Check if the SD card is plugged in the slot */
-  if(BSP_SD_IsDetected() != SD_PRESENT)
+  if (Appli_state == APPLICATION_RUNNIG)
   {
-    BSP_LCD_DisplayStringAt(20, (BSP_LCD_GetYSize()-125),   (uint8_t *)"SD Not Connected", RIGHT_MODE);
-    BSP_LCD_DisplayStringAt(20, (BSP_LCD_GetYSize()-100),   (uint8_t *)"Please inser SDCard", RIGHT_MODE);
-  }
-  else 
-  {
-    BSP_LCD_DisplayStringAt(20, (BSP_LCD_GetYSize()-100), (uint8_t *)"Saving ..", RIGHT_MODE);
+    BSP_LCD_DisplayStringAt(10, (BSP_LCD_GetYSize()-100), (uint8_t *)"Saving ... ", RIGHT_MODE);
     
-    /* Format the string */
-    sprintf((char *)str,"image_%d.bmp", (int)counter);
-    
-    /*##-1- Prepare the image to be saved ######################################*/
+    /*##-1- Prepare the image to be saved ####################################*/
     Prepare_Picture();
     
     /*##-2- Create and Open a new bmp file object with write access ##########*/
-    if(f_open(&MyFile, (const char*)str, FA_CREATE_ALWAYS | FA_WRITE) != FR_OK)
+    if(f_open(&MyFile, "image.bmp", FA_CREATE_ALWAYS | FA_WRITE) != FR_OK)
     {
       /* 'image.bmp' file Open for write Error */
       Error_Handler();
@@ -411,34 +453,48 @@ void Save_Picture(void)
       if((res1 != FR_OK) || (res2 != FR_OK) || (byteswritten == 0))
       {
         /* 'image' file Write or EOF Error */
-        Error_Handler();
+        BSP_LED_On(LED3);
+        BSP_LCD_DisplayStringAt(10, (BSP_LCD_GetYSize()-100), (uint8_t *)" Aborted...", RIGHT_MODE);
+        /* Wait for 2s */
+        HAL_Delay(2000);
+        /* Disable the Layer 2 */
+        BSP_LCD_SetLayerVisible(1, DISABLE);
+        /* Select Layer 1 */
+        BSP_LCD_SelectLayer(0);
       }
       else
       {
-        /*##-4- Close the open bmp file ######################################*/
+        /*##-4- Close the open text file #####################################*/
         f_close(&MyFile);
         
         /* Success of the demo: no error occurrence */
         BSP_LED_On(LED1);
         BSP_LCD_SetTextColor(LCD_COLOR_DARKGREEN);
-        BSP_LCD_DisplayStringAt(20, (BSP_LCD_GetYSize()-100), (uint8_t *)"   Saved  ", RIGHT_MODE);
+        BSP_LCD_DisplayStringAt(10, (BSP_LCD_GetYSize()-100), (uint8_t *)" Saved     ", RIGHT_MODE);
+        /* Wait for 2s */
+        HAL_Delay(2000);
+        /* Disable the Layer 2 */
+        BSP_LCD_SetLayerVisible(1, DISABLE);
         /* Select Layer 1 */
-        BSP_LED_Off(LED1);
-        counter++;      
+        BSP_LCD_SelectLayer(0);
       }
     }
   }
-  /* Wait for 2s */
-  HAL_Delay(2000);
-  /* Disable the Layer 2 */
-  BSP_LCD_SetLayerVisible(1, DISABLE);
-  /* Clear the LCD Foreground layer */
-  BSP_LCD_Clear(LCD_COLOR_WHITE);  
-  BSP_LCD_SelectLayer(0);
+  else
+  {
+    /* USB not connected */
+    BSP_LCD_DisplayStringAt(10, (BSP_LCD_GetYSize()-100), (uint8_t *)"USB KO... ", RIGHT_MODE);
+    /* Wait for 2s */
+    HAL_Delay(2000);
+    /* Disable the Layer 2 */
+    BSP_LCD_SetLayerVisible(1, DISABLE);
+    /* Select Layer 1 */
+    BSP_LCD_SelectLayer(0);
+  }
 }
 
 /**
-  * @brief  Prepares the picture to be Saved in microSD.
+  * @brief  Prepares the picture to be Saved in USB Disk.
   * @param  None
   * @retval None
   */
@@ -461,12 +517,12 @@ static void Prepare_Picture(void)
   hdma2d_eval.LayerCfg[1].InputOffset = 60;
   
   hdma2d_eval.Instance = DMA2D; 
-  
+
   /* Bypass the bitmap header */
   address2 += ((BSP_LCD_GetXSize() * (BSP_LCD_GetYSize() - 61) + 60) * 4);  
   
   /* Convert picture to RGB888 pixel format */
-  for(index = 0; index < (BSP_LCD_GetYSize() - 60); index++)
+  for(index=0; index < (BSP_LCD_GetYSize() - 60); index++)
   { 
     /* DMA2D Initialization */
     if(HAL_DMA2D_Init(&hdma2d_eval) == HAL_OK) 
@@ -483,6 +539,20 @@ static void Prepare_Picture(void)
     /* Increment the source and destination buffers */
     address1 += ((BSP_LCD_GetXSize() - 60)*3);
     address2 -= BSP_LCD_GetXSize()*4;
+  }
+}
+
+/**
+  * @brief  This function is executed in case of error occurrence.
+  * @param  None
+  * @retval None
+  */
+static void Error_Handler(void)
+{
+  /* Turn LED3 on */
+  BSP_LED_On(LED3);
+  while(1)
+  {
   }
 }
 
@@ -526,31 +596,17 @@ static void Update_Size(uint8_t size)
 }
 
 /**
-  * @brief  This function is executed in case of error occurrence.
-  * @param  None
-  * @retval None
-  */
-static void Error_Handler(void)
-{
-  /* Turn LED3 on */
-  BSP_LED_On(LED3);
-  while(1)
-  {
-  }
-}
-
-/**
   * @brief  System Clock Configuration
   *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
-  *            SYSCLK(Hz)                     = 175000000
-  *            HCLK(Hz)                       = 175000000
+  *            SYSCLK(Hz)                     = 168000000
+  *            HCLK(Hz)                       = 168000000
   *            AHB Prescaler                  = 1
   *            APB1 Prescaler                 = 4
   *            APB2 Prescaler                 = 2
   *            HSE Frequency(Hz)              = 25000000
   *            PLL_M                          = 25
-  *            PLL_N                          = 350
+  *            PLL_N                          = 336
   *            PLL_P                          = 2
   *            PLL_Q                          = 7
   *            VDD(V)                         = 3.3
@@ -565,29 +621,25 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
 
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
-  /* Enable HSE Oscillator and activate PLL with HSE as source */
+  /* Enable HSE Oscillator and Activate PLL with HSE ad source */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
   RCC_OscInitStruct.PLL.PLLM = 25;
-  RCC_OscInitStruct.PLL.PLLN = 350;
+  RCC_OscInitStruct.PLL.PLLN = 336;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
-
-  /* Activate the Over-Drive mode */
-  HAL_PWREx_ActivateOverDrive();
   
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
-     clocks dividers */
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
@@ -620,5 +672,8 @@ void assert_failed(uint8_t* file, uint32_t line)
   * @}
   */
 
+/**
+  * @}
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

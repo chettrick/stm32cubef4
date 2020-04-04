@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f429i_discovery_ts.h
   * @author  MCD Application Team
-  * @version V2.1.0
-  * @date    19-June-2014
+  * @version V2.1.1
+  * @date    10-December-2014
   * @brief   This file contains all the functions prototypes for the
   *          stm32f429i_discovery_ts.c driver.
   ******************************************************************************
@@ -47,7 +47,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f429i_discovery.h"
 /* Include TouchScreen component driver */
-#include "..\Components\stmpe811\stmpe811.h"   
+#include "../Components/stmpe811/stmpe811.h"   
    
 /** @addtogroup BSP
   * @{

@@ -10,7 +10,7 @@
 *                                                                    *
 **********************************************************************
 
-** emWin V5.24 - Graphical user interface for embedded applications **
+** emWin V5.26 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -86,6 +86,7 @@ Purpose     : LISTVIEW include
 */
 #define LISTVIEW_CF_AUTOSCROLLBAR_H   (1 << 0)
 #define LISTVIEW_CF_AUTOSCROLLBAR_V   (1 << 1)
+#define LISTVIEW_CF_CELL_SELECT       (1 << 2)                     // Create Flag used to enable cell selection
 #define LISTVIEW_SF_AUTOSCROLLBAR_H   LISTVIEW_CF_AUTOSCROLLBAR_H
 #define LISTVIEW_SF_AUTOSCROLLBAR_V   LISTVIEW_CF_AUTOSCROLLBAR_V
 
@@ -147,11 +148,13 @@ void             LISTVIEW_DeleteRow           (LISTVIEW_Handle hObj, unsigned In
 void             LISTVIEW_DeleteRowSorted     (LISTVIEW_Handle hObj, int Row);
 void             LISTVIEW_DisableRow          (LISTVIEW_Handle hObj, unsigned Row);
 void             LISTVIEW_DisableSort         (LISTVIEW_Handle hObj);
+void             LISTVIEW_EnableCellSelect    (LISTVIEW_Handle hObj, unsigned OnOff);  // Enables/disables cell selection
 void             LISTVIEW_EnableRow           (LISTVIEW_Handle hObj, unsigned Row);
 void             LISTVIEW_EnableSort          (LISTVIEW_Handle hObj);
 GUI_COLOR        LISTVIEW_GetBkColor          (LISTVIEW_Handle hObj, unsigned Index);
-const GUI_FONT * LISTVIEW_GetFont(LISTVIEW_Handle hObj);
+const GUI_FONT * LISTVIEW_GetFont             (LISTVIEW_Handle hObj);
 HEADER_Handle    LISTVIEW_GetHeader           (LISTVIEW_Handle hObj);
+void             LISTVIEW_GetItemRect         (LISTVIEW_Handle hObj, U32 Col, U32 Row, GUI_RECT * pRect);
 void             LISTVIEW_GetItemText         (LISTVIEW_Handle hObj, unsigned Column, unsigned Row, char * pBuffer, unsigned MaxSize);
 unsigned         LISTVIEW_GetItemTextLen      (LISTVIEW_Handle hObj, unsigned Column, unsigned Row);
 void             LISTVIEW_GetItemTextSorted   (LISTVIEW_Handle hObj, unsigned Column, unsigned Row, char * pBuffer, unsigned MaxSize);
@@ -160,6 +163,7 @@ unsigned         LISTVIEW_GetNumColumns       (LISTVIEW_Handle hObj);
 unsigned         LISTVIEW_GetNumRows          (LISTVIEW_Handle hObj);
 unsigned         LISTVIEW_GetRBorder          (LISTVIEW_Handle hObj);
 int              LISTVIEW_GetSel              (LISTVIEW_Handle hObj);
+int              LISTVIEW_GetSelCol           (LISTVIEW_Handle hObj);
 int              LISTVIEW_GetSelUnsorted      (LISTVIEW_Handle hObj);
 int              LISTVIEW_GetTextAlign        (LISTVIEW_Handle hObj, unsigned ColIndex);
 GUI_COLOR        LISTVIEW_GetTextColor        (LISTVIEW_Handle hObj, unsigned Index);
@@ -183,6 +187,7 @@ void             LISTVIEW_SetHeaderHeight     (LISTVIEW_Handle hObj, unsigned He
 void             LISTVIEW_SetItemBkColor      (LISTVIEW_Handle hObj, unsigned Column, unsigned Row, unsigned int Index, GUI_COLOR Color);
 void             LISTVIEW_SetItemText         (LISTVIEW_Handle hObj, unsigned Column, unsigned Row, const char * s);
 void             LISTVIEW_SetItemTextColor    (LISTVIEW_Handle hObj, unsigned Column, unsigned Row, unsigned int Index, GUI_COLOR Color);
+void             LISTVIEW_SetItemTextSorted   (LISTVIEW_Handle hObj, unsigned Column, unsigned Row, const char * pText);
 void             LISTVIEW_SetLBorder          (LISTVIEW_Handle hObj, unsigned BorderSize);
 void             LISTVIEW_SetOwnerDraw        (LISTVIEW_Handle hObj, WIDGET_DRAW_ITEM_FUNC * pfDrawItem);
 void             LISTVIEW_SetRBorder          (LISTVIEW_Handle hObj, unsigned BorderSize);

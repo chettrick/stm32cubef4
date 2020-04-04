@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    DCMI/DCMI_SnapShotMode/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This example describes how to configure the camera in snapshot.
   ******************************************************************************
   * @attention
@@ -72,7 +72,7 @@ int main(void)
      */
   HAL_Init();
   
-  /* Configure the system clock */
+  /* Configure the system clock to 180 MHz */
   SystemClock_Config();
 
   /*##-1- Disable SAI1_SDA signal ############################################*/  
@@ -88,10 +88,10 @@ int main(void)
   AUDIO_IO_Write(AUDIO_I2C_ADDRESS, 0x200, 0);
   AUDIO_IO_Write(AUDIO_I2C_ADDRESS, 0x300, 0x6010); 
   
-  /*##-2- Initialise the LCD #################################################*/
+  /*##-2- Initialize the LCD #################################################*/
   BSP_LCD_Init();
   
-  /*##-3- Initialise the LCD Layers ##########################################*/
+  /*##-3- Initialize the LCD Layers ##########################################*/
   BSP_LCD_LayerDefaultInit(1, LCD_FRAME_BUFFER);
   
   /* Enable the LCD */
@@ -100,7 +100,7 @@ int main(void)
   /* Select the LCD Foreground layer */
   BSP_LCD_SelectLayer(1);
 
-  /*##-4- Camera Initialisation and start capture ############################*/
+  /*##-4- Camera Initialization and start capture ############################*/
   /* Initialize the Camera */
   BSP_CAMERA_Init(RESOLUTION_R480x272);
   
@@ -110,6 +110,7 @@ int main(void)
   /* Start the Camera Capture */
   BSP_CAMERA_SnapshotStart((uint8_t *)CAMERA_FRAME_BUFFER);
 
+  /* Infinite loop */
   while (1)
   {
   }
@@ -150,7 +151,7 @@ void BSP_CAMERA_LineEventCallback(void)
 static void LCD_LL_ConvertLineToARGB8888(void *pSrc, void *pDst)
 { 
   /* Enable DMA2D clock */
-  __DMA2D_CLK_ENABLE();
+  __HAL_RCC_DMA2D_CLK_ENABLE();
   
   /* Configure the DMA2D Mode, Color Mode and output offset */
   hdma2d_eval.Init.Mode         = DMA2D_M2M_PFC;
@@ -191,11 +192,11 @@ static void LCD_LL_ConvertLineToARGB8888(void *pSrc, void *pDst)
   */
 static void Error_Handler(void)
 {
-    /* Turn LED3 on */
-    BSP_LED_On(LED3);
-    while(1)
-    {
-    }
+  /* Turn LED3 on */
+  BSP_LED_On(LED3);
+  while(1)
+  {
+  }
 }
 
 /**
@@ -224,7 +225,7 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
 
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -243,7 +244,7 @@ static void SystemClock_Config(void)
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
 
   /* Activate the Over-Drive mode */
-  HAL_PWREx_ActivateOverDrive();
+  HAL_PWREx_EnableOverDrive();
   
   /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
@@ -256,7 +257,6 @@ static void SystemClock_Config(void)
 }
 
 #ifdef  USE_FULL_ASSERT
-
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.
@@ -283,6 +283,5 @@ void assert_failed(uint8_t* file, uint32_t line)
 /**
   * @}
   */
-
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

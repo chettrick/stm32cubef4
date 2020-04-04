@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    k_log.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014   
+  * @version V1.2.0
+  * @date    26-December-2014   
   * @brief   This file provides the kernel log functions    
   ******************************************************************************
   * @attention
@@ -81,7 +81,7 @@ PUTCHAR_PROTOTYPE
    if( LOG_IN_ptr++ >= LOG_DEPTH)
    {
      
-    for (cnt = 1 ; cnt <  LOG_DEPTH ; cnt ++)
+    for (cnt = 1; cnt <  LOG_DEPTH; cnt ++)
     {
       pLOG_CacheBuffer[cnt -1 ] = pLOG_CacheBuffer[cnt];
     }

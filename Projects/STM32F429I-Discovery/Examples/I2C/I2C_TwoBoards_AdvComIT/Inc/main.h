@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    I2C/I2C_TwoBaords_ComIT/Inc/main.h
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
@@ -49,12 +49,12 @@
    resources */
 /* Definition for I2Cx clock resources */
 #define I2Cx                             I2C3
-#define I2Cx_CLK_ENABLE()                __I2C3_CLK_ENABLE()
-#define I2Cx_SDA_GPIO_CLK_ENABLE()       __GPIOC_CLK_ENABLE()
-#define I2Cx_SCL_GPIO_CLK_ENABLE()       __GPIOA_CLK_ENABLE()
+#define I2Cx_CLK_ENABLE()                __HAL_RCC_I2C3_CLK_ENABLE()
+#define I2Cx_SDA_GPIO_CLK_ENABLE()       __HAL_RCC_GPIOC_CLK_ENABLE()
+#define I2Cx_SCL_GPIO_CLK_ENABLE()       __HAL_RCC_GPIOA_CLK_ENABLE()
 
-#define I2Cx_FORCE_RESET()               __I2C3_FORCE_RESET()
-#define I2Cx_RELEASE_RESET()             __I2C3_RELEASE_RESET()
+#define I2Cx_FORCE_RESET()               __HAL_RCC_I2C3_FORCE_RESET()
+#define I2Cx_RELEASE_RESET()             __HAL_RCC_I2C3_RELEASE_RESET()
 
 /* Definition for I2Cx Pins */
 #define I2Cx_SCL_PIN                    GPIO_PIN_8

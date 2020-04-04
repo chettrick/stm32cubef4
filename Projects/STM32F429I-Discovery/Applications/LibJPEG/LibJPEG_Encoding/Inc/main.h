@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LibJPEG/LibJPEG_Encoding/Inc/main.h
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014 
+  * @version V1.2.0
+  * @date    26-December-2014 
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
@@ -32,7 +32,6 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
 
-/* EVAL includes component */
 #include "stm32f429i_discovery.h"
 #include "stm32f429i_discovery_lcd.h"
 #include "stm32f429i_discovery_sdram.h"

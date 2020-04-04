@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    RTC/RTC_TimeStamp/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Description of the RTC Time Stamp example.
   ******************************************************************************
   *
@@ -74,7 +74,7 @@ The program behaves as follows:
    timeStamp. LED1 is on means that the RTC is configured and the time is displayed.
 
 2. Applying a low level on the Time Stamp pin (PC13) by pressing to Tamper button, 
-   a time stamp event is detedced and the calendar is saved in the time stamp structures.
+   a time stamp event is detected and the calendar is saved in the time stamp structures.
    Each time the user presses on tamper button, LED4 toggles.
 
 The time stamp and the current time are displayed on the LCD integrated on the eval board
@@ -91,7 +91,7 @@ LED1 is turned ON when the RTC configuration is done correctly.
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 

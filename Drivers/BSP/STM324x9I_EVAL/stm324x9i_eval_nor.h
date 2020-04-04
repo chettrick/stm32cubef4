@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324x9i_eval_nor.h
   * @author  MCD Application Team
-  * @version V2.0.2
-  * @date    19-June-2014
+  * @version V2.0.3
+  * @date    10-December-2014
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm324x9i_eval_nor.c driver.
   ******************************************************************************
@@ -69,8 +69,8 @@
 /** 
   * @brief  NOR status structure definition  
   */     
-#define   NOR_OK         0x00
-#define   NOR_ERROR      0x01
+#define   NOR_STATUS_OK         0x00
+#define   NOR_STATUS_ERROR      0x01
 
 /** @defgroup STM324x9I_EVAL_NOR_Exported_Constants
   * @{

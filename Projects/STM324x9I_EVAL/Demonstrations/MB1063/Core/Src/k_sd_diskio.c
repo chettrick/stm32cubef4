@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    k_sd_diskio.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014   
+  * @version V1.2.0
+  * @date    26-December-2014   
   * @brief   kernel SD Disk I/O driver
   ******************************************************************************
   * @attention
@@ -39,14 +39,14 @@
 static volatile DSTATUS Stat = STA_NOINIT;
 
 /* Private function prototypes -----------------------------------------------*/
-DSTATUS SD_initialize (void);
-DSTATUS SD_status (void);
-DRESULT SD_read (BYTE*, DWORD, BYTE);
+DSTATUS SD_initialize(void);
+DSTATUS SD_status(void);
+DRESULT SD_read(BYTE*, DWORD, UINT);
 #if _USE_WRITE == 1
-  DRESULT SD_write (const BYTE*, DWORD, BYTE);
+  DRESULT SD_write(const BYTE*, DWORD, UINT);
 #endif /* _USE_WRITE == 1 */
 #if _USE_IOCTL == 1
-  DRESULT SD_ioctl (BYTE, void*);
+  DRESULT SD_ioctl(BYTE, void*);
 #endif  /* _USE_IOCTL == 1 */
   
 Diskio_drvTypeDef  SD_Driver =
@@ -107,7 +107,7 @@ DSTATUS SD_status(void)
   * @param  count: Number of sectors to read (1..128)
   * @retval DRESULT: Operation result
   */
-DRESULT SD_read(BYTE *buff, DWORD sector, BYTE count)
+DRESULT SD_read(BYTE *buff, DWORD sector, UINT count)
 {
   DRESULT res = RES_OK;
   __disable_irq();
@@ -131,7 +131,7 @@ DRESULT SD_read(BYTE *buff, DWORD sector, BYTE count)
   * @retval DRESULT: Operation result
   */
 #if _USE_WRITE == 1
-DRESULT SD_write(const BYTE *buff, DWORD sector, BYTE count)
+DRESULT SD_write(const BYTE *buff, DWORD sector, UINT count)
 {
   DRESULT res = RES_OK;
   __disable_irq();
@@ -197,4 +197,3 @@ DRESULT SD_ioctl(BYTE cmd, void *buff)
 #endif /* _USE_IOCTL == 1 */
   
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
-

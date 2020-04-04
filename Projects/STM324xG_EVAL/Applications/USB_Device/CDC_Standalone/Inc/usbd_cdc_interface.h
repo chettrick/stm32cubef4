@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Device/CDC_Standalone/Inc/usbd_cdc_interface.h
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Header for usbd_cdc_interface.c file.
   ******************************************************************************
   * @attention
@@ -38,13 +38,13 @@
    resources */
 /* Definition for USARTx clock resources */
 #define USARTx                           USART3
-#define USARTx_CLK_ENABLE()              __USART3_CLK_ENABLE();
-#define DMAx_CLK_ENABLE()                __DMA1_CLK_ENABLE()
-#define USARTx_RX_GPIO_CLK_ENABLE()      __GPIOC_CLK_ENABLE()
-#define USARTx_TX_GPIO_CLK_ENABLE()      __GPIOC_CLK_ENABLE() 
+#define USARTx_CLK_ENABLE()              __HAL_RCC_USART3_CLK_ENABLE();
+#define DMAx_CLK_ENABLE()                __HAL_RCC_DMA1_CLK_ENABLE()
+#define USARTx_RX_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOC_CLK_ENABLE()
+#define USARTx_TX_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOC_CLK_ENABLE() 
 
-#define USARTx_FORCE_RESET()             __USART3_FORCE_RESET()
-#define USARTx_RELEASE_RESET()           __USART3_RELEASE_RESET()
+#define USARTx_FORCE_RESET()             __HAL_RCC_USART3_FORCE_RESET()
+#define USARTx_RELEASE_RESET()           __HAL_RCC_USART3_RELEASE_RESET()
 
 /* Definition for USARTx Pins */
 #define USARTx_TX_PIN                    GPIO_PIN_10
@@ -66,9 +66,9 @@
 
 /* Definition for TIMx clock resources */
 #define TIMx                             TIM3
-#define TIMx_CLK_ENABLE                  __TIM3_CLK_ENABLE
-#define TIMx_FORCE_RESET()               __USART3_FORCE_RESET()
-#define TIMx_RELEASE_RESET()             __USART3_RELEASE_RESET()
+#define TIMx_CLK_ENABLE                  __HAL_RCC_TIM3_CLK_ENABLE
+#define TIMx_FORCE_RESET()               __HAL_RCC_USART3_FORCE_RESET()
+#define TIMx_RELEASE_RESET()             __HAL_RCC_USART3_RELEASE_RESET()
 
 /* Definition for TIMx's NVIC */
 #define TIMx_IRQn                        TIM3_IRQn

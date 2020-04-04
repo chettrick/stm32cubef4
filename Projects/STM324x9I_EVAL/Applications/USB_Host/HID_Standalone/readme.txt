@@ -1,13 +1,13 @@
 /**
-  @page HID_Standalone USB Host Humain Interface (HID) example
+  @page HID_Standalone USB Host Human Interface (HID) application
   
   @verbatim
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    USB_Host/HID_Standalone/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
-  * @brief   Description of the USB Host HID example.
+  * @version V1.2.0
+  * @date    26-December-2014
+  * @brief   Description of the USB Host HID application.
   ******************************************************************************
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
@@ -25,12 +25,12 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description 
+@par Application Description 
 
-This example is a part of the USB Host Library package using STM32Cube firmware. It describes how to use
-USB host application based on the Humain Interface Class (HID) on the STM32F4xx devices.
+This application is a part of the USB Host Library package using STM32Cube firmware. It describes how to use
+USB host application based on the Human Interface Class (HID) on the STM32F4xx devices.
 
-This is a typical example on how to use the STM32F4xx USB OTG Host peripheral to interact with an USB 
+This is a typical application on how to use the STM32F4xx USB OTG Host peripheral to interact with an USB 
 HID Device such as a Mouse or a Keyboard.
 
 At the beginning of the main program the HAL_Init() function is called to reset all the peripherals,
@@ -48,14 +48,14 @@ It's worth noting that the system clock (SYSCLK) can be configured, depending on
 When the application is started, the connected HID device (Mouse/Keyboard) is detected in HID mode and 
 gets initialized. The STM32 MCU behaves as a HID Host, it enumerates the device and extracts VID, PID, 
 manufacturer name, Serial no and product name information and displays it on the LCD screen. 
-This example is based on interacting with a HID device (Mouse/Keyboard) trough a HID routine.
+This application is based on interacting with a HID device (Mouse/Keyboard) trough a HID routine.
 
 A menu is displayed and the user can select any operation from the menu using the Joystick buttons:
  - "Start HID" operation starts the appropriate HID application to the attached HID Device.
-   - "Start Mouse / Re-Initialize" operation starts Mouse HID example. Moving the mouse will move
+   - "Start Mouse / Re-Initialize" operation starts Mouse HID application. Moving the mouse will move
     the pointer in the display rectangle and if a button is pressed, the corresponding rectangle will be
     highlighted in Blue.
-   - "Start Keyboard / Clear" operation starts Keyboard HID example. Taped Keyboard characters are 
+   - "Start Keyboard / Clear" operation starts Keyboard HID application. Taped Keyboard characters are 
    displayed on the LCD screen.
  - "Re-Enumerate" operation performs a new Enumeration of the device.
 
@@ -75,7 +75,7 @@ For more details about the STM32Cube USB Host library, please refer to UM1720
 @par USB Library Configuration
 
 To select the appropriate USB Core to work with, user must add the following macro defines within the
-compiler preprocessor (already done in the preconfigured projects provided with this example):
+compiler preprocessor (already done in the preconfigured projects provided with this application):
       - "USE_USB_HS" when using USB High Speed (HS) Core
       - "USE_USB_FS" when using USB Full Speed (FS) Core 
       - "USE_USB_HS" and "USE_USB_HS_IN_FS" when using USB High Speed (HS) Core in FS mode
@@ -110,9 +110,9 @@ requirements, such as:
 
 @par Hardware and Software environment
 
-  - This example runs on STM32F429xx/STM32F439xx devices.
+  - This application runs on STM32F429xx/STM32F439xx devices.
     
-  - This example has been tested with STMicroelectronics STM324x9I-EVAL RevB 
+  - This application has been tested with STMicroelectronics STM324x9I-EVAL RevB 
     evaluation boards and can be easily tailored to any other supported device 
     and development board.
 
@@ -137,7 +137,7 @@ In order to make the program work, you must do the following :
    - STM324x9I-EVAL_USBH-FS: to configure the project for STM32F4xx devices using USB OTG FS peripheral
    - STM324x9I-EVAL_USBH-HS-IN-FS: to configure the project for STM32F4xx devices and use USB OTG HS 
                                    peripheral In FS (using embedded PHY).
- - Run the example
+ - Run the application
  
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

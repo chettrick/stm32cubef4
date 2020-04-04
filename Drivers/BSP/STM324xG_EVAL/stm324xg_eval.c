@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324xg_eval.c
   * @author  MCD Application Team
-  * @version V2.0.3
-  * @date    26-June-2014
+  * @version V2.0.4
+  * @date    10-December-2014
   * @brief   This file provides a set of firmware functions to manage LEDs, 
   *          push-buttons and COM ports available on STM324xG-EVAL evaluation 
   *          board(MB786) RevB from STMicroelectronics.
@@ -546,7 +546,7 @@ static void I2Cx_Init(void)
   if(HAL_I2C_GetState(&heval_I2c) == HAL_I2C_STATE_RESET)
   {
     heval_I2c.Instance = EVAL_I2Cx;
-    heval_I2c.Init.ClockSpeed      = I2C_SPEED;
+    heval_I2c.Init.ClockSpeed      = BSP_I2C_SPEED;
     heval_I2c.Init.DutyCycle       = I2C_DUTYCYCLE_2;
     heval_I2c.Init.OwnAddress1     = 0;
     heval_I2c.Init.AddressingMode  = I2C_ADDRESSINGMODE_7BIT;

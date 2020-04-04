@@ -3,11 +3,11 @@
  
   @verbatim
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
-  * @file    STemWin_HelloWorld/readme.txt 
+  * @file    STemWin/STemWin_HelloWorld/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014    
-  * @brief   
+  * @version V1.2.0
+  * @date    26-December-2014    
+  * @brief   Description of STemWin Hello World application.
   ******************************************************************************
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
@@ -28,14 +28,14 @@
 @par Description
 
 This directory contains a set of source files that implement a simple "Hello
-Wolrd" example based on STemWin for STM32F4xx devices.
+World" application based on STemWin for STM32F4xx devices.
 
-The example allows also to run the different Segger samples that can be
+The application allows also to run the different Segger samples that can be
 downloaded from here:
 http://www.segger.com/emwin-samples.html
 To do this, user has only to replace the file "Basic_HelloWorld.c" into the
 project workspace by the downloaded one.
-As example, two sample source files are provided (but not linked to the project):
+As application, two sample source files are provided (but not linked to the project):
 	STemWin/HelloWorld/Src/MEMDEV_WM_Ticker.c
 	STemWin/HelloWorld/Src/MOVIE_ShowFeatures.c
 
@@ -50,7 +50,7 @@ Note that the following user files may need to be updated:
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 @par Directory contents 
@@ -69,9 +69,9 @@ Note that the following user files may need to be updated:
  
 @par Hardware and Software environment 
 
-  - This example runs on STM32F42xxx/STM32F43xxx devices.
+  - This application runs on STM32F42xxx/STM32F43xxx devices.
     
-  - This example has been tested with STM324xG-EVAL evaluation board and can be
+  - This application has been tested with STM324xG-EVAL evaluation board and can be
     easily tailored to any other supported device and development board.
 
 @par How to use it ? 
@@ -79,7 +79,7 @@ Note that the following user files may need to be updated:
 In order to make the program work, you must do the following :
   - Open your preferred toolchain 
   - Rebuild all files and load your image into target memory
-  - Run the example
+  - Run the application
  
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

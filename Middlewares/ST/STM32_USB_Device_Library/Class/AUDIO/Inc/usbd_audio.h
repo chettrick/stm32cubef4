@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    usbd_audio.h
   * @author  MCD Application Team
-  * @version V2.2.0
-  * @date    13-June-2014
+  * @version V2.3.0
+  * @date    04-November-2014
   * @brief   header file for the usbd_audio.c file.
   ******************************************************************************
   * @attention
@@ -23,13 +23,17 @@
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
+ 
+/* Define to prevent recursive inclusion -------------------------------------*/
+#ifndef __USB_AUDIO_H
+#define __USB_AUDIO_H
+
+#ifdef __cplusplus
+ extern "C" {
+#endif
 
 /* Includes ------------------------------------------------------------------*/
-
-#ifndef __USB_AUDIO_CORE_H_
-#define __USB_AUDIO_CORE_H_
-
 #include  "usbd_ioreq.h"
 
 /** @addtogroup STM32_USB_DEVICE_LIBRARY
@@ -37,7 +41,7 @@
   */
   
 /** @defgroup USBD_AUDIO
-  * @brief This file is the Header file for USBD_msc.c
+  * @brief This file is the Header file for usbd_audio.c
   * @{
   */ 
 
@@ -92,11 +96,11 @@
     
 /* Number of sub-packets in the audio transfer buffer. You can modify this value but always make sure
   that it is an even number and higher than 3 */
-#define AUDIO_OUT_PACKET_NUM                            80
+#define AUDIO_OUT_PACKET_NUM                          80
 /* Total size of the audio transfer buffer */
-#define AUDIO_TOTAL_BUF_SIZE                           ((uint32_t)(AUDIO_OUT_PACKET * AUDIO_OUT_PACKET_NUM))
+#define AUDIO_TOTAL_BUF_SIZE                          ((uint32_t)(AUDIO_OUT_PACKET * AUDIO_OUT_PACKET_NUM))
     
-    /* Audio Commands enmueration */
+    /* Audio Commands enumeration */
 typedef enum
 {
   AUDIO_CMD_START = 1,
@@ -190,7 +194,11 @@ void  USBD_AUDIO_Sync (USBD_HandleTypeDef *pdev, AUDIO_OffsetTypeDef offset);
   * @}
   */ 
 
-#endif  // __USB_AUDIO_CORE_H_
+#ifdef __cplusplus
+}
+#endif
+
+#endif  /* __USB_AUDIO_H */
 /**
   * @}
   */ 

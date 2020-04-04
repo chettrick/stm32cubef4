@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    camera_app.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Camera application functions source file
   ******************************************************************************
   * @attention
@@ -84,11 +84,11 @@ static void RGB16toRGB24(uint8_t *pDestBuffer, uint8_t *pSrcBuffer);
   * @param  brightness_level: Brightness level
   * @retval None
   */
-void CAMERA_Set_ContrastBrightness(uint32_t contrast_Level, uint32_t brightness_level)
+void CAMERA_Set_ContrastBrightness(uint32_t contrast_level, uint32_t brightness_level)
 {
-  uint32_t contrast = 0, brithness = 0;
+  uint32_t contrast = 0, brightness = 0;
   
-  switch (contrast_Level)
+  switch (contrast_level)
   {
   case 1:
     contrast = CAMERA_CONTRAST_LEVEL0;
@@ -109,22 +109,22 @@ void CAMERA_Set_ContrastBrightness(uint32_t contrast_Level, uint32_t brightness_
   switch (brightness_level)
   {
   case 1:
-    brithness = CAMERA_BRIGHTNESS_LEVEL0;
+    brightness = CAMERA_BRIGHTNESS_LEVEL0;
     break;
   case 2:
-    brithness = CAMERA_BRIGHTNESS_LEVEL1;
+    brightness = CAMERA_BRIGHTNESS_LEVEL1;
     break;
   case 3:
-    brithness = CAMERA_BRIGHTNESS_LEVEL2;
+    brightness = CAMERA_BRIGHTNESS_LEVEL2;
     break;
   case 4:
-    brithness = CAMERA_BRIGHTNESS_LEVEL3;
+    brightness = CAMERA_BRIGHTNESS_LEVEL3;
     break;
   case 5:
-    brithness = CAMERA_BRIGHTNESS_LEVEL4;
+    brightness = CAMERA_BRIGHTNESS_LEVEL4;
     break;
   } 
-  BSP_CAMERA_ContrastBrightnessConfig(contrast, brithness);
+  BSP_CAMERA_ContrastBrightnessConfig(contrast, brightness);
 }
 
 /**
@@ -176,7 +176,6 @@ void CAMERA_Init(void)
   CameraError = BSP_CAMERA_Init(RESOLUTION_R320x240);
   if( CameraError != CAMERA_ERROR)
   {
-    
     GUI_Delay(100);
     /* Start the capture */
     BSP_CAMERA_ContinuousStart((uint8_t *)CAMERA_FRAME_BUFFER);
@@ -199,7 +198,6 @@ void CAMERA_Suspend(void)
   }
 }
 
-
 /**
   * @brief  Resume the camera capture.
   * @param  None
@@ -214,7 +212,6 @@ void CAMERA_Resume(void)
   }
 }
 
-
 /**
   * @brief  Stop the camera capture.
   * @param  None
@@ -227,10 +224,13 @@ void CAMERA_Stop(void)
     /* Disable Camera request and Disable DCMI capture */
     BSP_CAMERA_Stop(); 
   }
+  
+  /* After SD disconnection, a SD Init is required */
+  BSP_SD_Init();  
+  
   /* Restore Audio configuration */
   k_BspAudioInit();
 }
-
 
 /**
   * @brief  Return Camera State
@@ -260,7 +260,7 @@ void BSP_CAMERA_ErrorCallback(void)
   * @param  path: pointer to the saving path
   * @retval File saved
   */
-uint8_t  CAMERA_SaveToFile(uint8_t *path)
+uint8_t CAMERA_SaveToFile(uint8_t *path)
 {
   RTC_TimeTypeDef   Time;
   RTC_DateTypeDef   Date;
@@ -271,41 +271,42 @@ uint8_t  CAMERA_SaveToFile(uint8_t *path)
   char filename[FILEMGR_FILE_NAME_SIZE];
   char fullpath[FILEMGR_FILE_NAME_SIZE];
   
-    /* Create filename */
-    k_GetTime(&Time);
-    k_GetDate(&Date);
-    sprintf((char *)filename, "/Camera_%02d%02d%04d_%02d%02d%02d.bmp", 
-            Date.Date,
-            Date.Month,
-            Date.Year + 2014,
-            Time.Hours,
-            Time.Minutes,
-            Time.Seconds);
-    strcpy((char *)fullpath, (char *)path);
-    strcat ((char *)fullpath, (char *)filename);
-    
-    BSP_CAMERA_Suspend();
-    /* Can not create file */
-    if (f_open(&file, (char *)fullpath, FA_CREATE_NEW | FA_WRITE) == FR_OK)
+  /* Create filename */
+  k_GetTime(&Time);
+  k_GetDate(&Date);
+  sprintf((char *)filename, "/Camera_%02d%02d%04d_%02d%02d%02d.bmp", 
+          Date.Date,
+          Date.Month,
+          Date.Year + 2014,
+          Time.Hours,
+          Time.Minutes,
+          Time.Seconds);
+  strcpy((char *)fullpath, (char *)path);
+  strcat ((char *)fullpath, (char *)filename);
+  
+  BSP_CAMERA_Suspend();
+  
+  /* Can not create file */
+  if (f_open(&file, (char *)fullpath, FA_CREATE_NEW | FA_WRITE) == FR_OK)
+  {
+    /* Write the received data into the file */
+    if (f_write(&file, (char *)BMPHeader_QQVGA24Bit, RGB_HEADER_SIZE, (UINT *)&NumWrittenData) == FR_OK)
     {
-      /* Write the received data into the file */
-      if (f_write(&file, (char *)BMPHeader_QQVGA24Bit, RGB_HEADER_SIZE, (UINT *)&NumWrittenData) == FR_OK)
+      f_sync(&file);
+      /* Convert RGB16 image to RGB24 */
+      RGB16toRGB24((uint8_t *)CAMERA_CVRT_BUFFER, (uint8_t *)CAMERA_FRAME_BUFFER);
+      
+      if (f_write(&file, (char *)CAMERA_CVRT_BUFFER, MAX_IMAGE_SIZE, (UINT*)&NumWrittenData)== FR_OK)
       {
-        f_sync(&file);
-        /* Convert RGB16 image to RGB24 */
-        RGB16toRGB24((uint8_t *)CAMERA_CVRT_BUFFER, (uint8_t *)CAMERA_FRAME_BUFFER);
-        
-        if (f_write(&file, (char *)CAMERA_CVRT_BUFFER, MAX_IMAGE_SIZE, (UINT*)&NumWrittenData)== FR_OK)
-        {
-          /*File Written correctly */
-          ret = 0;
-        }
-        
+        /*File Written correctly */
+        ret = 0;
       }
-      f_close(&file);
+      
     }
-    
-    BSP_CAMERA_Resume();
+    f_close(&file);
+  }
+  
+  BSP_CAMERA_Resume();
   return ret;
 }
 
@@ -322,7 +323,7 @@ static void RGB16toRGB24(uint8_t *pDestBuffer, uint8_t *pSrcBuffer)
   uint32_t i = 0, j = 0;
   uint16_t value;
   
-  pSrc = (uint16_t*) & pSrcBuffer[IMAGE_BUFFER_SIZE] - IMAGE_LINE_SIZE ;
+  pSrc = (uint16_t*) & pSrcBuffer[IMAGE_BUFFER_SIZE] - IMAGE_LINE_SIZE;
   pDest = (uint8_t*) & pDestBuffer[0];
   
   for (i = IMAGE_COLUMN_SIZE; i > 0; i-- )

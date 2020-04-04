@@ -6,6 +6,7 @@
 
 
 
+
 <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
 <link rel="File-List" href="Release_Notes_for_STM32F2xx_StdPeriph_Driver_files/filelist.xml">
 <link rel="Edit-Time-Data" href="Release_Notes_for_STM32F2xx_StdPeriph_Driver_files/editdata.mso"><!--[if !mso]>
@@ -913,7 +914,56 @@ ul
   <table class="MsoNormalTable" style="width: 675pt;" border="0" cellpadding="0" width="900">
    <tbody><tr style="">
     <td style="padding: 0in;" valign="top">
-    <h2 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;"><a name="History"></a><span style="font-size: 12pt; color: white;">Update History</span></h2><br>
+    <h2 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;"><a name="History"></a><span style="font-size: 12pt; color: white;">Update History</span></h2>
+            <h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; margin-right: 500pt; width: 180px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V3.2.0 / 04-November-2014<br>
+</span></h3>
+
+
+
+
+
+
+
+            
+            
+            
+            
+            
+            
+            <p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">Main
+Changes</span></u></b><u><span style="font-size: 10pt; font-family: Verdana; color: black;"><o:p></o:p></span></u></p>
+
+
+
+
+
+
+
+
+
+            
+            
+            
+            
+            
+            
+            
+            
+            <ul style="margin-top: 0cm;" type="square">
+<li><span style="font-size: 10pt; font-family: Verdana;">Update all drivers to be C++ compliant<br>
+</span></li>
+              <li><span style="font-size: 10pt; font-family: Verdana;">Core driver</span></li>
+              <ul>
+                <li><span style="font-size: 10pt; font-family: Verdana;">usbh_core.c: remove </span><span style="font-size: 10pt; font-family: Verdana;">HOST_IDLE state in <span style="font-style: italic;">USBH_LL_Connect()</span> function<br>
+                  </span></li>
+              </ul>
+              <li><span style="font-size: 10pt; font-family: Verdana;">MSC class</span></li>
+              <ul>
+                <li><span style="font-size: 10pt; font-family: Verdana;">Update to manage correctly older USB Keys that do not support GetMaxLun request</span></li>
+              </ul>
+<li><span style="font-size: 10pt; font-family: Verdana;">Miscellaneous source code comments update</span></li>
+            </ul>
+
             <h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; margin-right: 500pt; width: 180px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V3.1.0 / 19-June-2014</span></h3>
 
 
@@ -967,7 +1017,7 @@ by omitting this define, the default stack size (2KB) is used</span><br>
 <li><span style="font-size: 10pt; font-family: Verdana;">Return mass storage device capacity in Bytes in the user log message instead of MBytes</span></li>
               </ul>
             </ul>
-            <br>
+            
 
             
             <h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; margin-right: 500pt; width: 180px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V3.0.0 / 18-February-2014</span></h3>

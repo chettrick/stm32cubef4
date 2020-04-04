@@ -1,13 +1,13 @@
 /**
-  @page LCD_Paint LCD Paint example
+  @page LCD_Paint LCD Paint application
   
   @verbatim
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
-  * @file    readme.txt 
+  * @file    Display/LCD_Paint/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
-  * @brief   Description of the LCD Paint example.
+  * @version V1.2.0
+  * @date    26-December-2014
+  * @brief   Description of the LCD Paint application.
   ******************************************************************************
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
@@ -25,9 +25,9 @@
   ******************************************************************************
    @endverbatim
 
-@par Example Description
+@par Application Description
 
- This example describe how to configure LCD touch screen and attribute 
+ This application describes how to configure LCD touch screen and attribute 
  an action related to configured touch zone and how to save BMP picture in SDCard.
  
  At the beginning of the main program the HAL_Init() function is called to reset 
@@ -81,7 +81,7 @@ Note: After save operation, the touch positions are not cleared from STMPE811 FI
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 @par Directory contents
@@ -92,7 +92,7 @@ Note: After save operation, the touch positions are not cleared from STMPE811 FI
     - Display/LCD_Paint/Inc/color.h                     Image used for LCD Validation
     - Display/LCD_Paint/Inc/save.h                      Image used for LCD Validation 
     - Display/LCD_Paint/Inc/fatfs_storage.h             Header for fatfs_storage.c
-    - Display/LCD_Paint/Inc/ffconf.h                    Configuration file for FatFs module.
+    - Display/LCD_Paint/Inc/ffconf.h                    FAT file system module configuration file
     - Display/LCD_Paint/Src/main.c                      Main program  
     - Display/LCD_Paint/Src/stm32f4xx_it.c              Interrupt handlers
     - Display/LCD_Paint/Src/system_stm32f4xx.c          STM32F4xx system clock configuration file
@@ -102,9 +102,9 @@ Note: After save operation, the touch positions are not cleared from STMPE811 FI
 
 @par Hardware and Software environment
 
-  - This example runs on STM32F40xxx/STM32F41xxx devices.
+  - This application runs on STM32F40xxx/STM32F41xxx devices.
 
-  - This example has been tested with STM324xG-EVAL evaluation board 
+  - This application has been tested with STM324xG-EVAL evaluation board 
     and can be easily tailored to any other supported device and development board.
 
   - STM324xG-EVAL RevC Set-up
@@ -117,7 +117,7 @@ Note: After save operation, the touch positions are not cleared from STMPE811 FI
 In order to make the program work, you must do the following :
  - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
- - Run the example
+ - Run the application
   
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

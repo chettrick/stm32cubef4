@@ -1,13 +1,13 @@
 /**
-  @page SSL_Server SSL Server example
+  @page SSL_Server SSL Server application
   
   @verbatim
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    PolarSSL/SSL_Server/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
-  * @brief   Description of SSL Server example.
+  * @version V1.2.0
+  * @date    26-December-2014
+  * @brief   Description of SSL Server application.
   ******************************************************************************
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
@@ -25,9 +25,9 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description 
+@par Application Description 
 
-This example guides STM32Cube HAL API users to run an SSL Server application 
+This application guides STM32Cube HAL API users to run an SSL Server application 
 based on PolarSSL crypto library and LwIP TCP/IP stack
 
 To off-load the CPU from encryption/decryption, hash and RNG, all these 
@@ -51,10 +51,10 @@ that the System tick increments while executing the Ethernet Link ISR.
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
-For more details about this application, refer to UM1723 "STM32Cube PolarSSL example".
+For more details about this application, refer to UM1723 "STM32Cube PolarSSL application".
 
 
 @par Directory contents 
@@ -79,9 +79,9 @@ For more details about this application, refer to UM1723 "STM32Cube PolarSSL exa
 
 @par Hardware and Software environment  
 
-  - This example runs on STM32F417xx Devices.
+  - This application runs on STM32F417xx Devices.
   
-  - This example has been tested with the following environments: 
+  - This application has been tested with the following environments: 
      - STM3241G-EVAL board
      - Http clients: Firefox Mozilla v24 
      - DHCP server:  PC utility TFTPD32 (http://tftpd32.jounin.net/) 
@@ -105,7 +105,7 @@ For more details about this application, refer to UM1723 "STM32Cube PolarSSL exa
 In order to make the program work, you must do the following :
  - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
- - Run the example
+ - Run the application
  
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

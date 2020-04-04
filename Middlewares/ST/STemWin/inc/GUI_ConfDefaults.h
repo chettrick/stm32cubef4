@@ -10,7 +10,7 @@
 *                                                                    *
 **********************************************************************
 
-** emWin V5.24 - Graphical user interface for embedded applications **
+** emWin V5.26 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -171,6 +171,10 @@ Attention : Do not modify this file ! If you do, you will not
   #define GUI_MEMSET GUI__memset
 #endif
 
+/* Optional custom drawing of memory devices */
+#ifndef   GUI_MEMDEV_SUPPORT_CUSTOMDRAW
+  #define GUI_MEMDEV_SUPPORT_CUSTOMDRAW 1
+#endif
 
 #endif   /* ifdef GUI_CONFDEFAULTS_H */
 

@@ -1,13 +1,13 @@
 /**
-  @page SDIO_EXAMPLES SDIO Example
+  @page I2C_EXAMPLES I2C Example
   
   @verbatim
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
-  * @file    SDIO/readme.txt 
+  * @file    I2C/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
-  * @brief   Description of SDIO example.
+  * @version V1.2.0
+  * @date    26-December-2014
+  * @brief   Description of I2C example.
   ******************************************************************************
   *
   * Redistribution and use in source and binary forms, with or without modification,
@@ -38,10 +38,10 @@
   The STM32CubeF4 firmware package provides a set of examples showing how to use the I2C
   in master/slave communication, based on polling, interrupt and DMA programming models.  
   These examples are provided for Discovery boards, below the examples set for STM32F4-Discovery:
-    - \Projects\STM32F4-Discovery\Examples\I2C\I2C_TwoBoards_ComPolling
-    - \Projects\STM32F4-Discovery\Examples\I2C\I2C_TwoBoards_ComIT
-    - \Projects\STM32F4-Discovery\Examples\I2C\I2C_TwoBoards_ComDMA
-    - \Projects\STM32F4-Discovery\Examples\I2C\I2C_TwoBoards_AdvComIT
+    - /Projects/STM32F4-Discovery/Examples/I2C/I2C_TwoBoards_ComPolling
+    - /Projects/STM32F4-Discovery/Examples/I2C/I2C_TwoBoards_ComIT
+    - /Projects/STM32F4-Discovery/Examples/I2C/I2C_TwoBoards_ComDMA
+    - /Projects/STM32F4-Discovery/Examples/I2C/I2C_TwoBoards_AdvComIT
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

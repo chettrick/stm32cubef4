@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    k_mem.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014   
+  * @version V1.2.0
+  * @date    26-December-2014   
   * @brief   Utilities for file handling
   ******************************************************************************
   * @attention
@@ -111,7 +111,7 @@ void * k_malloc(size_t size)
 /**
   * @brief  Free previously allocated memory
   * @param  Pointer to the allocated region.
-  * @retval None.
+  * @retval None
   */
 void k_free(void * p)
 {

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    FSMC/FSMC_SRAM/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   HAL MSP module.    
   ******************************************************************************
   * @attention
@@ -70,13 +70,13 @@ void HAL_SRAM_MspInit(SRAM_HandleTypeDef *hsram)
   GPIO_InitTypeDef GPIO_Init_Structure;
 
   /* Enable FSMC clock */
-  __FSMC_CLK_ENABLE();
+  __HAL_RCC_FSMC_CLK_ENABLE();
   
   /* Enable GPIOs clock */
-  __GPIOD_CLK_ENABLE();
-  __GPIOE_CLK_ENABLE();
-  __GPIOF_CLK_ENABLE();
-  __GPIOG_CLK_ENABLE();
+  __HAL_RCC_GPIOD_CLK_ENABLE();
+  __HAL_RCC_GPIOE_CLK_ENABLE();
+  __HAL_RCC_GPIOF_CLK_ENABLE();
+  __HAL_RCC_GPIOG_CLK_ENABLE();
   
   /* Common GPIO configuration */
   GPIO_Init_Structure.Mode      = GPIO_MODE_AF_PP;

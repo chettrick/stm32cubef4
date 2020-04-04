@@ -90,7 +90,7 @@ static int fs_open(char *name, struct fs_file *file);
   * @brief  callback function for handling connection errors
   * @param  arg: pointer to an argument to be passed to callback function
   * @param  err: LwIP error code   
-  * @retval none
+  * @retval None
   */
 static void conn_err(void *arg, err_t err)
 {
@@ -119,7 +119,7 @@ static void close_conn(struct tcp_pcb *pcb, struct http_state *hs)
   * @brief sends data found in  member "file" of a http_state struct
   * @param pcb: pointer to a tcp_pcb struct
   * @param hs: pointer to a http_state struct
-  * @retval none
+  * @retval None
   */
 static void send_data(struct tcp_pcb *pcb, struct http_state *hs)
 {
@@ -408,7 +408,7 @@ static err_t http_recv(void *arg, struct tcp_pcb *pcb,  struct pbuf *p, err_t er
            LCD_UsrLog("  State: Erasing...\n");
 #endif /* USE_LCD */
           
-           TotalData =0 ;
+           TotalData =0;
            /* init flash */
            FLASH_If_Init();
            /* erase user flash area */
@@ -543,7 +543,7 @@ static err_t http_accept(void *arg, struct tcp_pcb *pcb, err_t err)
 /**
   * @brief  intialize HTTP webserver  
   * @param  none
-  * @retval none
+  * @retval None
   */
 void IAP_httpd_init(void)
 {
@@ -631,7 +631,7 @@ static uint32_t Parse_Content_Length(char *data, uint32_t len)
   * @brief  writes received data in flash    
   * @param  ptr: data pointer
   * @param  len: data length
-  * @retval none 
+  * @retval None 
   */
 static void IAP_HTTP_writedata(char * ptr, uint32_t len)            
 {

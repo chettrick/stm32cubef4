@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    PWR/PWR_CurrentConsumption/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This sample code shows how to use STM32F4xx PWR HAL API to enter
   * and exit the stop mode.
   ******************************************************************************
@@ -72,15 +72,15 @@ int main(void)
      */
   HAL_Init();
 
-  /* Initialize LED3 and LED4 */
+  /* Configure LED3 and LED4 */
   BSP_LED_Init(LED3);
   BSP_LED_Init(LED4);
 
-  /* Configure the system clock to 180 Mhz */
+  /* Configure the system clock to 180 MHz */
   SystemClock_Config();
 
   /* Enable Power Clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
   
   /* Check and handle if the system was resumed from StandBy mode */ 
   if(__HAL_PWR_GET_FLAG(PWR_FLAG_SB) != RESET)
@@ -93,10 +93,10 @@ int main(void)
   {
     UserButtonStatus = 0;
     
-    /* Configure Key Button */
+    /* Configure USER Button */
     BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_EXTI);
     
-    /* Wait until Key button is pressed to enter the Low Power mode */
+    /* Wait until USER button is pressed to enter the Low Power mode */
     while(UserButtonStatus == 0x00)
     {
       /* Toggle LED3 */
@@ -106,7 +106,7 @@ int main(void)
       HAL_Delay(100);
     }
     
-    /* Loop while Key button is maintained pressed */
+    /* Loop while User button is maintained pressed */
     while(BSP_PB_GetState(BUTTON_KEY) != RESET)
     {
     }
@@ -119,7 +119,7 @@ int main(void)
     - Prefetch ON
     - Code running from Internal FLASH
     - All peripherals disabled.
-    - Wakeup using EXTI Line (User Button)
+    - Wake-up using EXTI Line (USER Button)
     */
     SleepMode_Measure();
 #elif defined (STOP_MODE)
@@ -129,14 +129,14 @@ int main(void)
     - HSI, HSE OFF and LSI OFF if not used as RTC Clock source  
     - No IWDG
     - FLASH in deep power down mode
-    - Automatic Wakeup using RTC clocked by LSI (after ~20s)
+    - Automatic Wake-up using RTC clocked by LSI (after ~20s)
     */
     StopMode_Measure();
 #elif defined (STANDBY_MODE)
     /* STANDBY Mode Entry 
     - Backup SRAM and RTC OFF
     - IWDG and LSI OFF
-    - Wakeup using WakeUp Pin (PA.00)
+    - Wake-up using WakeUp Pin (PA.00)
     */
     StandbyMode_Measure();
     
@@ -145,7 +145,7 @@ int main(void)
     - RTC Clocked by LSI
     - IWDG OFF and LSI OFF if not used as RTC Clock source
     - Backup SRAM OFF
-    - Automatic Wakeup using RTC clocked by LSI (after ~20s)
+    - Automatic Wake-up using RTC clocked by LSI (after ~20s)
     */
     StandbyRTCMode_Measure();
     
@@ -154,7 +154,7 @@ int main(void)
     - RTC Clocked by LSI
     - Backup SRAM ON
     - IWDG OFF
-    - Automatic Wakeup using RTC clocked by LSI (after ~20s)
+    - Automatic Wake-up using RTC clocked by LSI (after ~20s)
     */
     StandbyRTCBKPSRAMMode_Measure();
 #endif
@@ -187,7 +187,7 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
   
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -210,7 +210,7 @@ static void SystemClock_Config(void)
   }
   
   /* Activate the Over-Drive mode */
-  HAL_PWREx_ActivateOverDrive(); 
+  HAL_PWREx_EnableOverDrive(); 
     
   /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
@@ -257,7 +257,7 @@ void HAL_SYSTICK_Callback(void)
 void HAL_RTCEx_WakeUpTimerEventCallback(RTC_HandleTypeDef *hrtc)
 {
   /* NOTE : add the specific code to handle the RTC wake up interrupt */
-  /* Initialize LED3 on the EVAL board */
+  /* Configure LED3 */
   BSP_LED_Init(LED3);
 
   /* Turn LED3 On */
@@ -273,7 +273,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
   if(GPIO_Pin == KEY_BUTTON_PIN)
   {  
-    /* Initialize LED3 on the EVAL board */
+    /* Configure LED3 */
     BSP_LED_Init(LED3);
     
     /* Turn LED3 On */
@@ -283,7 +283,6 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 }
 
 #ifdef  USE_FULL_ASSERT
-
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.

@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    main.c
+  * @file    STemWin/STemWin_SampleDemo/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This file provides main program functions
   ******************************************************************************
   * @attention
@@ -50,7 +50,7 @@ extern void MainTask(void);
 /* Private functions ---------------------------------------------------------*/
 
 /**
-  * @brief  Main program.
+  * @brief  Main program
   * @param  None
   * @retval None
   */ 
@@ -64,7 +64,7 @@ int main(void)
      */
   HAL_Init();  
   
-  /* Configure the system clock to 180 Mhz */
+  /* Configure the system clock to 180 MHz */
   SystemClock_Config();
   
   /***********************************************************/
@@ -105,7 +105,7 @@ int main(void)
   
   /* Init the STemWin GUI Library */
   BSP_SDRAM_Init(); /* Initializes the SDRAM device */
-  __CRC_CLK_ENABLE(); /* Enable the CRC Module */
+  __HAL_RCC_CRC_CLK_ENABLE(); /* Enable the CRC Module */
   GUI_Init();
 
   GUI_DispStringAt("Starting...", 0, 0);
@@ -145,7 +145,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
 /**
   * @brief TIM MSP Initialization 
-  *        This function configures the hardware resources used in this example: 
+  *        This function configures the hardware resources used in this application: 
   *           - Peripheral's clock enable
   *           - Peripheral's GPIO Configuration  
   * @param htim: TIM handle pointer
@@ -155,9 +155,9 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef *htim)
 {
   /*##-1- Enable peripherals and GPIO Clocks #################################*/
   /* TIMx Peripheral clock enable */
-  __TIM3_CLK_ENABLE();
+  __HAL_RCC_TIM3_CLK_ENABLE();
 
-  /*##-2- Configure the NVIC for TIMx #########################################*/
+  /*##-2- Configure the NVIC for TIMx ########################################*/
   /* Set the TIMx priority */
   HAL_NVIC_SetPriority(TIM3_IRQn, 0, 1);
   
@@ -172,7 +172,7 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef *htim)
   */
 static void BSP_Config(void)
 {
-  /* Initialize STM324x9I-EVAL's LEDs */
+  /* Configure LED1, LED2, LED3 and LED4 */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED2);
   BSP_LED_Init(LED3);
@@ -283,7 +283,7 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
 
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -302,7 +302,7 @@ static void SystemClock_Config(void)
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
 
   /* Activate the Over-Drive mode */
-  HAL_PWREx_ActivateOverDrive();
+  HAL_PWREx_EnableOverDrive();
   
   /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
   clocks dividers */
@@ -317,7 +317,7 @@ static void SystemClock_Config(void)
 #ifdef  USE_FULL_ASSERT
 /**
   * @brief  Reports the name of the source file and the source line number
-  *   where the assert_param error has occurred.
+  *         where the assert_param error has occurred.
   * @param  file: pointer to the source file name
   * @param  line: assert_param error line source number
   * @retval None
@@ -329,7 +329,8 @@ void assert_failed(uint8_t* file, uint32_t line)
 
   /* Infinite loop */
   while (1)
-  {}
+  {
+  }
 }
 #endif
 

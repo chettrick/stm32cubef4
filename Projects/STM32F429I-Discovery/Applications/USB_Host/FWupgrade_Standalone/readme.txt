@@ -1,12 +1,12 @@
 /**
-  @page FWupgrade_Standalone FWupgrade_Standalone example
+  @page FWupgrade_Standalone FWupgrade_Standalone application
   
   @verbatim
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    USB_Host/FWupgrade_Standalone/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Description of the Upgrading STM32F429I-Discovery firmware using a USB key
   ******************************************************************************
   *
@@ -35,19 +35,19 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description 
+@par Application Description 
 
 The firmware upgrade application or In-Application programming (IAP) is a feature that 
 allows a user application to erase and write to on-chip flash memory. 
-This example describes how to perform it.
+This application describes how to perform it.
   
-This example uses The USB HOST to:
+This application uses The USB HOST to:
 	- Download a binary file (.bin) from a Flash disk (thumb drive) to the STM32F4xx's 
 	  internal flash memory.
 	- Upload all the STM32F4xx's internal Flash memory content into a binary file.
 	- Execute the user program.
 
-This example is based on the STM32 USB On-The-Go (OTG) Host library. 
+This application is based on the STM32 USB On-The-Go (OTG) Host library. 
 For more details about the USB Host stack and a mass storage demonstration,
 please refer to user manual.
 
@@ -80,7 +80,7 @@ For more details about the STM32Cube USB Host library, please refer to UM1720
   - USB_Host/FWupgrade_Standalone/Inc/flash_if.h              Flash layer functions header file
   - USB_Host/FWupgrade_Standalone/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - USB_Host/FWupgrade_Standalone/Inc/usbh_conf.h             USB Host driver Configuration file
-  - USB_Host/FWupgrade_Standalone/Inc/ffconf.h                FatFs Module Configuration file
+  - USB_Host/FWupgrade_Standalone/Inc/ffconf.h                FAT file system module configuration file
   
   - USB_Host/FWupgrade_Standalone/Binary/
     This folder contains images that can be loaded and executed by the FW upgrade application:
@@ -90,9 +90,9 @@ For more details about the STM32Cube USB Host library, please refer to UM1720
 
 @par Hardware and Software environment
 
-  - This example runs on STM32F429xx devices.
+  - This application runs on STM32F429xx devices.
     
-  - This example has been tested with STMicroelectronics STM32F429I-Discovery RevB
+  - This application has been tested with STMicroelectronics STM32F429I-Discovery RevB
     boards and can be easily tailored to any other supported device 
     and development board.    
      
@@ -109,11 +109,11 @@ In order to make the program work, you must do the following :
  - To run the firmware upgrade application, proceed as follows:
  
 1. Load the binary image of the user program to the root directory of a USB key. You can
-use the provided binary images under the USB_Host\FWupgrade_Standalone\binary folder. 
+use the provided binary images under the "USB_Host/FWupgrade_Standalone/Binary" folder. 
 The binary should be renamed to “image.bin”.
 
 2. Program the firmware upgrade application into the internal Flash memory.
-a) Open the project (under USB_Host\FWupgrade_Standalone) with your preferred toolchain.
+a) Open the project (under USB_Host/FWupgrade_Standalone) with your preferred toolchain.
 b) Compile and load the project into the target memory and run the project.
 
 + After the board reset and depending on the Key button state:

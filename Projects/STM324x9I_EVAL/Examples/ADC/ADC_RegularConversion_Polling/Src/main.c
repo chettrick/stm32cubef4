@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    ADC/ADC_RegularConversion_Polling/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This example describes how to use Polling mode to convert data.
   ******************************************************************************
   * @attention
@@ -64,7 +64,7 @@ static void Error_Handler(void);
 /* Private functions ---------------------------------------------------------*/
 
 /**
-  * @brief  Main program.
+  * @brief  Main program
   * @param  None
   * @retval None
   */
@@ -80,7 +80,7 @@ int main(void)
      */
   HAL_Init();
   
-  /* Configure the system clock to 144 Mhz */
+  /* Configure the system clock to 144 MHz */
   SystemClock_Config();
   
   /* Configure LED3 */
@@ -90,7 +90,7 @@ int main(void)
   AdcHandle.Instance          = ADCx;
   
   AdcHandle.Init.ClockPrescaler        = ADC_CLOCKPRESCALER_PCLK_DIV2;
-  AdcHandle.Init.Resolution            = ADC_RESOLUTION12b;
+  AdcHandle.Init.Resolution            = ADC_RESOLUTION_12B;
   AdcHandle.Init.ScanConvMode          = DISABLE;
   AdcHandle.Init.ContinuousConvMode    = DISABLE;
   AdcHandle.Init.DiscontinuousConvMode = DISABLE;
@@ -176,7 +176,7 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
 
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -219,7 +219,6 @@ static void Error_Handler(void)
 }
 
 #ifdef  USE_FULL_ASSERT
-
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.

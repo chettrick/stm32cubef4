@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    TIM/TIM_CascadeSynchro/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This example shows how to command 2 Timers as slaves (TIM3 & TIM4) 
   *          using a Timer as master (TIM2) example
   ******************************************************************************
@@ -68,7 +68,7 @@ The TIM2 counter clock is 84 MHz.
   and the duty cycle is equal to: TIM2_CCR1/(TIM2_ARR + 1) = 25%
 
   The TIM3 is running at: 
-  (TIM2 frequency)/ ((TIM3 period +1)* (TIM2_Repetition_Counter+1)) = 82.02 KHz KHz and
+  (TIM2 frequency)/ ((TIM3 period +1)* (TIM2_Repetition_Counter+1)) = 82.02 KHz and
   a duty cycle equal to TIM3_CCR1/(TIM3_ARR + 1) = 25%
 
   The TIM4 is running at:
@@ -84,7 +84,7 @@ The PWM waveform can be displayed using an oscilloscope.
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    TIM/TIM_Synchronization/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   HAL MSP module.    
   ******************************************************************************
   * @attention
@@ -72,14 +72,14 @@ void HAL_TIM_PWM_MspInit(TIM_HandleTypeDef *htim)
   GPIO_InitTypeDef   GPIO_InitStruct;
   
   /* Enable TIM1, TIM3 & TIM4 clocks */
-  __TIM1_CLK_ENABLE();
-  __TIM3_CLK_ENABLE();
-  __TIM4_CLK_ENABLE();    
+  __HAL_RCC_TIM1_CLK_ENABLE();
+  __HAL_RCC_TIM3_CLK_ENABLE();
+  __HAL_RCC_TIM4_CLK_ENABLE();    
     
   /* Enable GPIOA, GPIOB & GPIOC Clocks */
-  __GPIOA_CLK_ENABLE();
-  __GPIOB_CLK_ENABLE();
-  __GPIOC_CLK_ENABLE();
+  __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
+  __HAL_RCC_GPIOC_CLK_ENABLE();
 
   
   /* Configure PA.8 (TIM1_Channel1), PC.6 (TIM3_Channel1) and PB.6 (TIM4_Channel1),

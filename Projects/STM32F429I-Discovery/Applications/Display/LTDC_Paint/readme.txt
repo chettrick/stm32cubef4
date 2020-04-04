@@ -1,13 +1,13 @@
 /**
-  @page LTDC_Paint LTDC Paint example
+  @page LTDC_Paint LTDC Paint application
   
   @verbatim
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
-  * @file    TouchPanel/Paint/readme.txt 
+  * @file    Display/LTDC_Paint/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
-  * @brief   Description of the LTDC Paint example.
+  * @version V1.2.0
+  * @date    26-December-2014
+  * @brief   Description of the LTDC Paint application.
   ******************************************************************************
   * @attention
   *
@@ -28,9 +28,9 @@
   ******************************************************************************
    @endverbatim
 
-@par Example Description
+@par Application Description
 
- This example describe how to configure LCD touch screen and attribute 
+ This application describes how to configure LCD touch screen and attribute 
  an action related to configured touch zone.
  
  At the beginning of the main program the HAL_Init() function is called to reset 
@@ -53,31 +53,31 @@
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 
 @par Directory contents
 
-    - TouchPanel/Paint/Inc/main.h                 Main configuration file
-    - TouchPanel/Paint/Inc/stm32f4xx_it.h         Interrupt handlers header file
-    - TouchPanel/Paint/Inc/stm32f4xx_hal_conf.h   HAL Configuration file 
-    - TouchPanel/Paint/Inc/ffconf.h               Configuration file for FatFs module.
-    - TouchPanel/Paint/Inc/usbh_conf.h            Configuration file for USB module.
-    - TouchPanel/Paint/Inc/color2.h               Image used to display colored pens
-    - TouchPanel/Paint/Inc/save.h                 Image used to display save icon
-    - TouchPanel/Paint/Src/main.c                 Main program 
-    - TouchPanel/Paint/Src/stm32f4xx_it.c         Interrupt handlers
-    - TouchPanel/Paint/Src/usbh_conf.c            Main function to configure USB
-    - TouchPanel/Paint/Src/ts_calibration.c       Main function used to calibrate TS
-    - TouchPanel/Paint/Src/system_stm32f4xx.c     STM32F4xx system clock configuration file
+    - Display/LTDC_Paint/Inc/main.h                 Main configuration file
+    - Display/LTDC_Paint/Inc/stm32f4xx_it.h         Interrupt handlers header file
+    - Display/LTDC_Paint/Inc/stm32f4xx_hal_conf.h   HAL Configuration file 
+    - Display/LTDC_Paint/Inc/ffconf.h               FAT file system module configuration file
+    - Display/LTDC_Paint/Inc/usbh_conf.h            Configuration file for USB module
+    - Display/LTDC_Paint/Inc/color2.h               Image used to display colored pens
+    - Display/LTDC_Paint/Inc/save.h                 Image used to display save icon
+    - Display/LTDC_Paint/Src/main.c                 Main program 
+    - Display/LTDC_Paint/Src/stm32f4xx_it.c         Interrupt handlers
+    - Display/LTDC_Paint/Src/usbh_conf.c            Main function to configure USB
+    - Display/LTDC_Paint/Src/ts_calibration.c       Main function used to calibrate TS
+    - Display/LTDC_Paint/Src/system_stm32f4xx.c     STM32F4xx system clock configuration file
 
 
 @par Hardware and Software environment
 
-  - This example runs on STM32F429xx Devices.
+  - This application runs on STM32F429xx Devices.
     
-  - This example has been tested with STM32F429I-Discovery RevB board and can be
+  - This application has been tested with STM32F429I-Discovery RevB board and can be
     easily tailored to any other supported device and development board.  
 
   - STM32F429I-DISCO RevB Set-up
@@ -90,7 +90,7 @@
 In order to make the program work, you must do the following :
  - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
- - Run the example
+ - Run the application
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

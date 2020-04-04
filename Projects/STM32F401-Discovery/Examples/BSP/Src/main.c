@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BSP/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This example code shows how to use the STM324xG BSP Drivers
   ******************************************************************************
   * @attention
@@ -63,7 +63,7 @@ __IO uint8_t UserPressButton = 0;
 /* Wave Player Pause/Resume Status. Defined as external in waveplayer.c file */
 __IO uint32_t PauseResumeStatus = IDLE_STATUS;   
 
-/* Counter for User button presses*/
+/* Counter for User button presses */
 __IO uint32_t PressCount = 0;
 
 /* Private function prototypes -----------------------------------------------*/
@@ -86,13 +86,13 @@ int main(void)
      */
   HAL_Init();
   
-  /* Init All LEDs */
+  /* Configure LED3, LED4, LED5 and LED6 */
   BSP_LED_Init(LED3);
   BSP_LED_Init(LED4); 
   BSP_LED_Init(LED5);
   BSP_LED_Init(LED6); 
   
-  /* Configure the system clock to 84 Mhz */
+  /* Configure the system clock to 84 MHz */
   SystemClock_Config();
 
   /* Configure the User Button in GPIO Mode */
@@ -152,7 +152,7 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
   
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
   
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -211,7 +211,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 }
 
 /**
-  * @brief Toggle Leds
+  * @brief  Toggle LEDs
   * @param  None
   * @retval None
   */
@@ -234,7 +234,7 @@ void Toggle_Leds(void)
   */
 void Error_Handler(void)
 {
-  /* Turn LED5 (RED) on */
+  /* Turn LED5 on */
   BSP_LED_On(LED5);
   while(1)
   {
@@ -260,7 +260,7 @@ void assert_failed(uint8_t* file, uint32_t line)
   {
   }
 }
-#endif /* USE_FULL_ASSERT */ 
+#endif
 
 /**
   * @}

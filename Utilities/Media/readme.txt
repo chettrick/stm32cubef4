@@ -1,5 +1,9 @@
-This directory contains a set of images (*.jpg) and movies (*.emf) files to be used
-with the following demonstration:
-   - \Projects\STM324x9I_EVAL\Demonstrations
-   - \Projects\STM324xG_EVAL\Demonstrations
-   - \Projects\STM32F429I-Discovery\Demonstrations 
+This directory contains a set of media files to be used with the STM32Cube projects:
+
+- Audio: contains a set of audio (*.bin) and (*.wav) files
+- Pictures: contains a set of image (*.bmp) and (*.jpg) files
+- Video: contains a movie (*.emf) file
+
+The audio files provided within this package are based on a free music download
+from www.DanoSongs.com website. Licensed under the Creative Commons 0 License:
+http://creativecommons.org/publicdomain/zero/1.0/

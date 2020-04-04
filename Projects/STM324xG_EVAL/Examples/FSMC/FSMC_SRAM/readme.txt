@@ -5,8 +5,8 @@
   ******************* (C) COPYRIGHT 2014 STMicroelectronics ********************
   * @file    FSMC/FSMC_SRAM/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Description of the FSMC SRAM memory basic functionalities use example.
   ******************************************************************************
   *
@@ -59,7 +59,7 @@ undesired/desired configurations , for example, to enable Continuous clock featu
 uncomment the define for the configuration "FMC_CONTINUOUS_CLOCK_SYNC_ASYNC" in "main.h".
   
 If the data is read correctly from SRAM, the LED1 is ON, otherwise the LED2 is ON.   
-
+LED3 is ON when there is an error in initialization.
 
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
       based on variable incremented in SysTick ISR. This implies that if HAL_Delay() is called from
@@ -67,13 +67,13 @@ If the data is read correctly from SRAM, the LED1 is ON, otherwise the LED2 is O
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 
 @par Directory contents
                         
- - FSMC/FSMC_SRAM/Inc/stm32f4xx_hal_conf.h        Library Configuration file
+ - FSMC/FSMC_SRAM/Inc/stm32f4xx_hal_conf.h        HAL Configuration file
  - FSMC/FSMC_SRAM/Inc/main.h                      Main program header file 
  - FSMC/FSMC_SRAM/Inc/stm32f4xx_it.h              Interrupt handlers header file
  - FSMC/FSMC_SRAM/Src/main.c                      Main program  

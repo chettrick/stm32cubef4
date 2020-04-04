@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BSP/Src/sdram.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This example code shows how to use the SDRAM Driver
   ******************************************************************************
   * @attention
@@ -51,14 +51,17 @@
 #define BUFFER_SIZE            ((uint32_t)0x0100)
 #define WRITE_READ_ADDR        ((uint32_t)0x0800)
 #define SDRAM_WRITE_READ_ADDR  ((uint32_t)0xC0130000)
+    
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 uint32_t sdram_aTxBuffer[BUFFER_SIZE];
 uint32_t sdram_aRxBuffer[BUFFER_SIZE];
+
 /* Private function prototypes -----------------------------------------------*/
 static void SDRAM_SetHint(void);
 static void Fill_Buffer(uint32_t *pBuffer, uint32_t uwBufferLenght, uint32_t uwOffset);
 static uint8_t Buffercmp(uint32_t* pBuffer1, uint32_t* pBuffer2, uint16_t BufferLength);
+
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -66,11 +69,11 @@ static uint8_t Buffercmp(uint32_t* pBuffer1, uint32_t* pBuffer2, uint16_t Buffer
   * @param  None
   * @retval None
   */
-void SDRAM_demo (void)
+void SDRAM_demo(void)
 { 
   
   SDRAM_SetHint();
-
+  
   /* SDRAM device configuration */ 
   if(BSP_SDRAM_Init() != SDRAM_OK)
   {
@@ -115,7 +118,7 @@ void SDRAM_demo (void)
   {
     BSP_LCD_DisplayStringAt(20, 145, (uint8_t *)"SDRAM Test : OK.", LEFT_MODE);
   }
- 
+  
   while (1)
   {    
     if(CheckForUserInput() > 0)
@@ -145,15 +148,15 @@ static void SDRAM_SetHint(void)
   BSP_LCD_SetFont(&Font12);
   BSP_LCD_DisplayStringAt(0, 30, (uint8_t *)"This example shows how to write", CENTER_MODE);
   BSP_LCD_DisplayStringAt(0, 45, (uint8_t *)"and read data on SDRAM", CENTER_MODE);
-
-   /* Set the LCD Text Color */
+  
+  /* Set the LCD Text Color */
   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);  
   BSP_LCD_DrawRect(10, 90, BSP_LCD_GetXSize() - 20, BSP_LCD_GetYSize()- 100);
   BSP_LCD_DrawRect(11, 91, BSP_LCD_GetXSize() - 22, BSP_LCD_GetYSize()- 102);
   
   BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
   BSP_LCD_SetBackColor(LCD_COLOR_WHITE); 
- }
+}
 
 /**
   * @brief  Fills buffer with user predefined data.
@@ -165,7 +168,7 @@ static void SDRAM_SetHint(void)
 static void Fill_Buffer(uint32_t *pBuffer, uint32_t uwBufferLenght, uint32_t uwOffset)
 {
   uint32_t tmpIndex = 0;
-
+  
   /* Put in global buffer different values */
   for (tmpIndex = 0; tmpIndex < uwBufferLenght; tmpIndex++ )
   {
@@ -188,18 +191,19 @@ static uint8_t Buffercmp(uint32_t* pBuffer1, uint32_t* pBuffer2, uint16_t Buffer
     {
       return 1;
     }
-
+    
     pBuffer1++;
     pBuffer2++;
   }
-
   return 0;
 }
+
 /**
   * @}
   */ 
 
 /**
   * @}
-  */ 
+  */
+
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

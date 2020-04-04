@@ -10,7 +10,7 @@
 *                                                                    *
 **********************************************************************
 
-** emWin V5.24 - Graphical user interface for embedded applications **
+** emWin V5.26 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -83,6 +83,8 @@ Purpose     : Private MULTIPAGE include
 typedef struct {
   WM_HWIN hWin;
   U8      Status;
+  int     ItemWidth;
+  WM_HMEM hDrawObj[3];
   char    acText;
 } MULTIPAGE_PAGE;
 
@@ -102,6 +104,10 @@ typedef struct {
   GUI_COLOR                 aBkColor[MULTIPAGE_NUMCOLORS];
   GUI_COLOR                 aTextColor[MULTIPAGE_NUMCOLORS];
   MULTIPAGE_SKIN_PRIVATE    SkinPrivate;
+  int                       BorderSizeX;
+  int                       BorderSizeY;
+  unsigned                  TextAlign;
+  unsigned                  Scrollbar;
   int                    (* pfGetTouchedPage)(MULTIPAGE_Handle hObj, int x, int y);
 } MULTIPAGE_PROPS;
 
@@ -120,6 +126,8 @@ struct MULTIPAGE_Obj {
   MULTIPAGE_PROPS        Props;
   WIDGET_SKIN const    * pWidgetSkin;
   MULTIPAGE_SKIN_PROPS   SkinProps;
+  int                    ItemHeight;
+  int                    MaxHeight;
   #if GUI_DEBUG_LEVEL > 1
     U32 DebugId;
   #endif  
@@ -169,8 +177,10 @@ void MULTIPAGE__CalcBorderRect (MULTIPAGE_Obj * pObj, GUI_RECT * pRect);
 void MULTIPAGE__CalcClientRect (MULTIPAGE_Handle hObj, GUI_RECT * pRect);
 void MULTIPAGE__DrawTextItemH  (MULTIPAGE_Obj * pObj, const char * pText, unsigned Index, const GUI_RECT * pRect, int x0, int w, int ColorIndex);
 int  MULTIPAGE__GetPagePos     (MULTIPAGE_Handle hObj, unsigned Index);
-int  MULTIPAGE__GetPageSize    (MULTIPAGE_Handle hObj, unsigned Index);
-void MULTIPAGE__GetTextRect    (MULTIPAGE_Handle hObj, GUI_RECT * pRect);
+int  MULTIPAGE__GetPageWidth   (MULTIPAGE_Handle hObj, unsigned Index);
+void MULTIPAGE__GetItemRect    (MULTIPAGE_Handle hObj, GUI_RECT * pRect);
+void MULTIPAGE__GetBitmapRect  (MULTIPAGE_Handle hObj, GUI_RECT * pRect);
+int  MULTIPAGE__SetDrawObj     (MULTIPAGE_Handle hObj, GUI_DRAW_HANDLE hDrawObj, int Index, int State);
 void MULTIPAGE__UpdatePositions(MULTIPAGE_Handle hObj);
 
 /*********************************************************************

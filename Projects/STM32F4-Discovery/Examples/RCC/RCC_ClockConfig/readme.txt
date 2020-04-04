@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    RCC/RCC_ClockConfig/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Description of the RCC Clock Configuration example.
   ******************************************************************************
   *
@@ -41,7 +41,7 @@ This example describes how to use the RCC HAL API to configure the system clock 
 and modify the clock settings on run time.
 
 In this example, after startup SYSCLK is configured to the max frequency using the PLL with
-HSE as clock source, the EVAL board Key button (connected to EXTI Line15) will be 
+HSE as clock source, the USER Button (connected to EXTI Line15) will be 
 used to change the PLL source: from HSE to HSI, and vice versa. 
 Each time the Key button is pressed; EXTI_0 interrupt is generated and in the ISR
 the PLL oscillator source is checked using __HAL_RCC_GET_PLL_OSCSOURCE() macro:
@@ -76,7 +76,7 @@ Three LEDs are toggled with a timing defined by the HAL_Delay() API.
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
 
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 

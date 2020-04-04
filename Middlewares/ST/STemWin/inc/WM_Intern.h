@@ -10,7 +10,7 @@
 *                                                                    *
 **********************************************************************
 
-** emWin V5.24 - Graphical user interface for embedded applications **
+** emWin V5.26 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -146,6 +146,7 @@ extern WM_HWIN        WM__hCreateStatic;
 
 extern WM_CRITICAL_HANDLE     WM__aCHWinModal[GUI_NUM_LAYERS];
 extern WM_CRITICAL_HANDLE     WM__aCHWinLast[GUI_NUM_LAYERS];
+extern int                    WM__ModalLayer;
 
 #if GUI_SUPPORT_MOUSE
   extern WM_CRITICAL_HANDLE   WM__aCHWinMouseOver[GUI_NUM_LAYERS];

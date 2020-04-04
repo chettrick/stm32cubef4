@@ -10,7 +10,7 @@
 *                                                                    *
 **********************************************************************
 
-** emWin V5.24 - Graphical user interface for embedded applications **
+** emWin V5.26 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -203,7 +203,6 @@ int  GUIDRV_FlexColor__ControlCache   (GUI_DEVICE * pDevice, int Cmd);
 void GUIDRV_FlexColor__Refresh        (GUI_DEVICE * pDevice);
 
 void GUIDRV_FlexColor__AddCacheRect   (DRIVER_CONTEXT * pContext);
-void GUIDRV_FlexColor__IncrementCursor(DRIVER_CONTEXT * pContext);
 void GUIDRV_FlexColor__ManageRect     (DRIVER_CONTEXT * pContext, int Cmd);
 void GUIDRV_FlexColor__SetCacheAddr   (DRIVER_CONTEXT * pContext, int x, int y);
 void GUIDRV_FlexColor__SetCacheRect   (DRIVER_CONTEXT * pContext, int x0, int y0, int x1, int y1);

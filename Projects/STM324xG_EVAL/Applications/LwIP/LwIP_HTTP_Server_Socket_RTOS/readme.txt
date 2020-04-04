@@ -1,13 +1,13 @@
 /**
-  @page LwIP_HTTP_Server_Socket_RTOS LwIP HTTP Server Socket example
+  @page LwIP_HTTP_Server_Socket_RTOS LwIP HTTP Server Socket application
   
   @verbatim
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    LwIP/LwIP_HTTP_Server_Socket_RTOS/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
-  * @brief   Description of the LwIP http Server Socket example.
+  * @version V1.2.0
+  * @date    26-December-2014
+  * @brief   Description of the LwIP http Server Socket application.
   ******************************************************************************
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
@@ -25,9 +25,9 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description 
+@par Application Description 
 
-This example guides STM32Cube HAL API users to run a http server application 
+This application guides STM32Cube HAL API users to run a http server application 
 based on Socket API of LwIP TCP/IP stack
 The communication is done with a web browser application in a remote PC.
 
@@ -57,17 +57,17 @@ that the System tick increments while executing the Ethernet Link ISR.
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
       
-For more details about this application, refer to UM1713 "STM32Cube interfacing with LwIP and examples"
+For more details about this application, refer to UM1713 "STM32Cube interfacing with LwIP and applications"
 
 
 @par Directory contents 
 
   - LwIP/LwIP_HTTP_Server_Socket_RTOS/Inc/app_ethernet.h          header of app_ethernet.c file
   - LwIP/LwIP_HTTP_Server_Socket_RTOS/Inc/ethernetif.h            header for ethernetif.c file
-  - LwIP/LwIP_HTTP_Server_Socket_RTOS/Inc/lcd_log_conf.h          lcd_log configuration file
+  - LwIP/LwIP_HTTP_Server_Socket_RTOS/Inc/lcd_log_conf.h          LCD Log configuration file
   - LwIP/LwIP_HTTP_Server_Socket_RTOS/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - LwIP/LwIP_HTTP_Server_Socket_RTOS/Inc/stm32f4xx_it.h          STM32 interrupt handlers header file
   - LwIP/LwIP_HTTP_Server_Socket_RTOS/Inc/main.h                  Main program header file
@@ -77,7 +77,7 @@ For more details about this application, refer to UM1713 "STM32Cube interfacing 
   - LwIP/LwIP_HTTP_Server_Socket_RTOS/Inc/fs.h                    header for fs.c
   - LwIP/LwIP_HTTP_Server_Socket_RTOS/Inc/fsdata.h                header for fsdata.c
   - LwIP/LwIP_HTTP_Server_Socket_RTOS/Src/stm32f4xx_it.c          STM32 interrupt handlers
-  - LwIP/LwIP_HTTP_Server_Socket_RTOS/Src/app_ethernet.c          Ethernet specefic module
+  - LwIP/LwIP_HTTP_Server_Socket_RTOS/Src/app_ethernet.c          Ethernet specific module
   - LwIP/LwIP_HTTP_Server_Socket_RTOS/Src/main.c                  Main program
   - LwIP/LwIP_HTTP_Server_Socket_RTOS/Src/system_stm32f4xx.c      STM32F4xx system clock configuration file
   - LwIP/LwIP_HTTP_Server_Socket_RTOS/Src/ethernetif.c            Interfacing LwIP to ETH driver
@@ -88,9 +88,9 @@ For more details about this application, refer to UM1713 "STM32Cube interfacing 
 
 @par Hardware and Software environment
 
-  - This example runs on STM32F407xx/STM32F417xx Devices.
+  - This application runs on STM32F407xx/STM32F417xx Devices.
     
-  - This example has been tested with the following environments:
+  - This application has been tested with the following environments:
      - STM324xG-EVAL board
      - Http clients: Firefox Mozilla (v24) or Microsoft Internet Explorer (v8 and later)
      - DHCP server:  PC utility TFTPD32 (http://tftpd32.jounin.net/) is used as a DHCP server    
@@ -109,7 +109,7 @@ For more details about this application, refer to UM1713 "STM32Cube interfacing 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
- - Run the example
+ - Run the application
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

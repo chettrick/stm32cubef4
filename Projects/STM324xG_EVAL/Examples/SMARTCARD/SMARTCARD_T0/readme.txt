@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    SMARTCARD/T0/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Description of the Smart Card T0 protocol example.
   ******************************************************************************
   *
@@ -55,21 +55,21 @@ available on www.st.com
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 
 @par Directory contents 
 
-  - SMARTCARD/T0/Inc/stm32f4xx_hal_conf.h    HAL configuration file
-  - SMARTCARD/T0/Inc/stm32f4xx_it.h          Interrupt handlers header file
-  - SMARTCARD/T0/Inc/main.h                  Main program header file
-  - SMARTCARD/T0/Inc/smartcard.h             Header for smartcard.c module
-  - SMARTCARD/T0/Src/stm32f4xx_it.c          Interrupt handlers
-  - SMARTCARD/T0/Src/main.c                  Main program
-  - SMARTCARD/T0/Inc/smartcard.c             smartcard module
-  - SMARTCARD/T0/Src/stm32f4xx_hal_msp.c     HAL MSP module
-  - SMARTCARD/T0/Src/system_stm32f4xx.c      STM32F4xx system clock configuration file
+  - SMARTCARD/SMARTCARD_T0/Inc/stm32f4xx_hal_conf.h    HAL configuration file
+  - SMARTCARD/SMARTCARD_T0/Inc/stm32f4xx_it.h          Interrupt handlers header file
+  - SMARTCARD/SMARTCARD_T0/Inc/main.h                  Main program header file
+  - SMARTCARD/SMARTCARD_T0/Inc/smartcard.h             Header for smartcard.c module
+  - SMARTCARD/SMARTCARD_T0/Src/stm32f4xx_it.c          Interrupt handlers
+  - SMARTCARD/SMARTCARD_T0/Src/main.c                  Main program
+  - SMARTCARD/SMARTCARD_T0/Inc/smartcard.c             smartcard module
+  - SMARTCARD/SMARTCARD_T0/Src/stm32f4xx_hal_msp.c     HAL MSP module
+  - SMARTCARD/SMARTCARD_T0/Src/system_stm32f4xx.c      STM32F4xx system clock configuration file
 
 
 @par Hardware and Software environment
@@ -83,7 +83,7 @@ available on www.st.com
   - STM324xG-EVAL RevC Set-up
     - Use LED1, LED2, LED3 and LED4 connected respectively to PG.06, PG.08, PI.09
       and PC.07 pins.
-    - Please ensure that jumper JP21 is not fitted.
+    - Please ensure that jumper JP21 is fitted.
 
 
 @par How to use it ? 

@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    Audio_playback_and_record/Inc/main.h
+  * @file    Audio/Audio_playback_and_record/Inc/main.h
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Header for main.c module.
   ******************************************************************************
   * @attention
@@ -59,7 +59,7 @@ MSC_ApplicationTypeDef;
 
 
 /* You can change the Wave file name as you need, but do not exceed 11 characters */
-#define WAVE_NAME "0:audio.wav"
+#define WAVE_NAME "0:audio_sample.wav"
 #define REC_WAVE_NAME "0:rec.wav"
   
 /* State Machine for the USBH_USR_ApplicationState */

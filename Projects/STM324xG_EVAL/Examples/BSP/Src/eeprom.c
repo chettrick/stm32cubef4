@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BSP/Src/eeprom.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This example code shows how to manage an I2C M24C64 
   *          EEPROM memory
   ******************************************************************************
@@ -48,23 +48,27 @@
   */ 
 
 /* Private typedef -----------------------------------------------------------*/
-typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus; 
+typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
+
 /* Private define ------------------------------------------------------------*/
 #define EEPROM_FEATURES_NUM     2
 #define BUFFER_SIZE1            (countof(Tx1Buffer)-1 + 8)
 #define EEPROM_WRITE_ADDRESS1      0x50
 #define EEPROM_READ_ADDRESS1       0x50
+
 /* Private macro -------------------------------------------------------------*/
 #define countof(a) (sizeof(a) / sizeof(*(a)))
+
 /* Private variables ---------------------------------------------------------*/
+extern uint8_t NbLoop;
 static uint8_t EEPROMFeature = 0;
 __IO uint16_t NumDataRead = 0;
+
 /* Private function prototypes -----------------------------------------------*/
 static void EEPROM_SetHint(void);
 static void EEPROM_Show_Feature(uint8_t feature);
 static TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength);
 
-extern uint8_t NbLoop;
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -72,7 +76,7 @@ extern uint8_t NbLoop;
   * @param  None
   * @retval None
   */
-void EEPROM_demo (void)
+void EEPROM_demo(void)
 { 
   EEPROM_SetHint();
   EEPROMFeature = 0;
@@ -81,7 +85,6 @@ void EEPROM_demo (void)
 
   while (1)
   {
-    
     if(CheckForUserInput() > 0)
     {
       if(++EEPROMFeature < EEPROM_FEATURES_NUM)
@@ -118,31 +121,30 @@ static void EEPROM_SetHint(void)
   BSP_LCD_DisplayStringAt(0, 30, (uint8_t *)"This example shows the different", CENTER_MODE);
   BSP_LCD_DisplayStringAt(0, 45, (uint8_t *)"EEPROM Features, use BUTTON", CENTER_MODE);
   BSP_LCD_DisplayStringAt(0, 60, (uint8_t *)"to start EEPROM data transfer", CENTER_MODE);
-
-   /* Set the LCD Text Color */
+  
+  /* Set the LCD Text Color */
   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);  
   BSP_LCD_DrawRect(10, 90, BSP_LCD_GetXSize() - 20, BSP_LCD_GetYSize()- 100);
   BSP_LCD_DrawRect(11, 91, BSP_LCD_GetXSize() - 22, BSP_LCD_GetYSize()- 102);
- }
+}
 
 /**
   * @brief  Show EEPROM Features
-  * @param  feature : feature index
+  * @param  feature: feature index
   * @retval None
   */
 static void EEPROM_Show_Feature(uint8_t feature)
 {
   uint8_t Tx1Buffer[] = "STM324xG-EVAL EEPROM Ex.";
-  
   uint8_t Rx1Buffer[BUFFER_SIZE1] = {0}; 
   uint8_t Tx2Buffer[BUFFER_SIZE1] = {0}; 
   __IO TestStatus TransferStatus1 = FAILED;
-
+  
   BSP_LCD_SetBackColor(LCD_COLOR_WHITE);  
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);    
   BSP_LCD_FillRect(12, 92, BSP_LCD_GetXSize() - 24, BSP_LCD_GetYSize()- 104);
   BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
-
+  
   /* Initialize the I2C EEPROM driver ----------------------------------------*/
   if(BSP_EEPROM_Init() != EEPROM_OK)
   {
@@ -152,9 +154,6 @@ static void EEPROM_Show_Feature(uint8_t feature)
     BSP_LCD_DisplayStringAt(0, 145, (uint8_t *)"HW version not supported", CENTER_MODE);
     return;
   }
-  
-  /* Wait for EEPROM standby state */
-  BSP_EEPROM_WaitEepromStandbyState();  
   
   switch (feature)
   {
@@ -185,7 +184,7 @@ static void EEPROM_Show_Feature(uint8_t feature)
   case 1:
     /* Write new parameter in EEPROM */
     snprintf((char*)Tx2Buffer, BUFFER_SIZE1, "%s Test %d", Tx1Buffer, NbLoop);
-    /* First write in the memory followed by a read of the written data --------*/
+    /* First write in the memory followed by a read of the written data ------*/
     /* Write on I2C EEPROM to EEPROM_WRITE_ADDRESS1 */
     if(BSP_EEPROM_WriteBuffer(Tx2Buffer, EEPROM_WRITE_ADDRESS1, BUFFER_SIZE1) != EEPROM_OK)
     {
@@ -193,9 +192,6 @@ static void EEPROM_Show_Feature(uint8_t feature)
       BSP_LCD_DisplayStringAt(0, 115, (uint8_t *)"Init issue at write", CENTER_MODE);
       return;
     }
-    
-    /* Wait for EEPROM standby state */
-    BSP_EEPROM_WaitEepromStandbyState();  
     
     /* Set the Number of data to be read */
     NumDataRead = BUFFER_SIZE1;
@@ -249,7 +245,13 @@ static TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t Buffe
 
   return PASSED;  
 }
+
 /**
   * @}
   */ 
+
+/**
+  * @}
+  */ 
+
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

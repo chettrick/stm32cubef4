@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f429i_discovery.h
   * @author  MCD Application Team
-  * @version V2.1.0
-  * @date    19-June-2014
+  * @version V2.1.1
+  * @date    10-December-2014
   * @brief   This file contains definitions for STM32F429I-Discovery Kit LEDs,
   *          push-buttons hardware resources.
   ******************************************************************************
@@ -173,9 +173,9 @@ typedef enum
   WARNING: 
    Make sure that this define is not already declared in other files.
    It can be used in parallel by other modules. */
-#ifndef I2C_SPEED
- #define I2C_SPEED                          100000
-#endif /* I2C_SPEED */
+#ifndef BSP_I2C_SPEED
+ #define BSP_I2C_SPEED                          100000
+#endif /* BSP_I2C_SPEED */
 
 #define I2Cx_TIMEOUT_MAX                    0x3000 /*<! The value of the maximal timeout for I2C waiting loops */
 

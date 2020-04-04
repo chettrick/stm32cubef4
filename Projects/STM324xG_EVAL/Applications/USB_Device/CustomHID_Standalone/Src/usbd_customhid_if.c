@@ -27,13 +27,15 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "usbd_customhid_if.h"
+
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
-static int8_t CustomHID_Init     (void);
-static int8_t CustomHID_DeInit   (void);
-static int8_t CustomHID_OutEvent (uint8_t event_idx, uint8_t state);
+static int8_t CustomHID_Init(void);
+static int8_t CustomHID_DeInit(void);
+static int8_t CustomHID_OutEvent(uint8_t event_idx, uint8_t state);
+
 /* Private variables ---------------------------------------------------------*/
 ADC_HandleTypeDef  AdcHandle;
 uint32_t ADCConvertedValue = 0;
@@ -48,7 +50,7 @@ __ALIGN_BEGIN static uint8_t CustomHID_ReportDesc[USBD_CUSTOM_HID_REPORT_DESC_SI
   0xa1, 0x01,            /* COLLECTION (Application)       */            
   /* 6 */
   
-  /* Led 1 */        
+  /* LED1 */        
   0x85, LED1_REPORT_ID,  /*     REPORT_ID (1)		     */
   0x09, 0x01,            /*     USAGE (LED 1)	             */
   0x15, 0x00,            /*     LOGICAL_MINIMUM (0)        */          
@@ -62,7 +64,7 @@ __ALIGN_BEGIN static uint8_t CustomHID_ReportDesc[USBD_CUSTOM_HID_REPORT_DESC_SI
   0x91, 0x82,            /*     OUTPUT (Data,Var,Abs,Vol)  */
   /* 26 */
   
-  /* Led 2 */
+  /* LED2 */
   0x85, LED2_REPORT_ID,  /*     REPORT_ID 2		     */
   0x09, 0x02,            /*     USAGE (LED 2)	             */
   0x15, 0x00,            /*     LOGICAL_MINIMUM (0)        */          
@@ -76,7 +78,7 @@ __ALIGN_BEGIN static uint8_t CustomHID_ReportDesc[USBD_CUSTOM_HID_REPORT_DESC_SI
   0x91, 0x82,            /*     OUTPUT (Data,Var,Abs,Vol)  */
   /* 46 */
   
-  /* Led 3 */        
+  /* LED3 */        
   0x85, LED3_REPORT_ID,  /*     REPORT_ID (3)		     */
   0x09, 0x03,            /*     USAGE (LED 3)	             */
   0x15, 0x00,            /*     LOGICAL_MINIMUM (0)        */          
@@ -90,7 +92,7 @@ __ALIGN_BEGIN static uint8_t CustomHID_ReportDesc[USBD_CUSTOM_HID_REPORT_DESC_SI
   0x91, 0x82,            /*     OUTPUT (Data,Var,Abs,Vol)  */
   /* 66 */
   
-  /* Led 4 */
+  /* LED4 */
   0x85, LED4_REPORT_ID,  /*     REPORT_ID 4)		     */
   0x09, 0x04,            /*     USAGE (LED 4)	             */
   0x15, 0x00,            /*     LOGICAL_MINIMUM (0)        */          
@@ -184,7 +186,7 @@ static int8_t CustomHID_Init(void)
   AdcHandle.Instance = ADCx;
   
   AdcHandle.Init.ClockPrescaler = ADC_CLOCKPRESCALER_PCLK_DIV4;
-  AdcHandle.Init.Resolution = ADC_RESOLUTION12b;
+  AdcHandle.Init.Resolution = ADC_RESOLUTION_12B;
   AdcHandle.Init.ScanConvMode = DISABLE;
   AdcHandle.Init.ContinuousConvMode = ENABLE;
   AdcHandle.Init.DiscontinuousConvMode = DISABLE;
@@ -214,7 +216,7 @@ static int8_t CustomHID_Init(void)
   BSP_LED_Init(LED4);
   
   /* Enable GPIOC clock */
-  __GPIOC_CLK_ENABLE();
+  __HAL_RCC_GPIOC_CLK_ENABLE();
   
   /* Configure PG15 pin as input floating */
   GPIO_InitStructure.Mode = GPIO_MODE_IT_RISING_FALLING;

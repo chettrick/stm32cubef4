@@ -10,7 +10,7 @@
 *                                                                    *
 **********************************************************************
 
-** emWin V5.24 - Graphical user interface for embedded applications **
+** emWin V5.26 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -134,6 +134,7 @@ struct LISTVIEW_Obj {
   GUI_ARRAY                    hColumnArray;                                      // Each entry is a handle of LISTVIEW_COLUMN structure.
   LISTVIEW_PROPS               Props;
   int                          Sel;
+  int                          SelCol;
   int                          ShowGrid;
   int                          SortIndex;                                         // Column for sorting
   unsigned                     RowDistY;

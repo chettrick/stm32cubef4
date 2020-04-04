@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LTDC/LTDC_Display_2Layers/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This example describes how to configure the LTDC peripheral 
   *          to display two Layers at the same time.
   ******************************************************************************
@@ -80,7 +80,7 @@ int main(void)
      */
   HAL_Init();
   
-  /* Configure the system clock */
+  /* Configure the system clock to 180 MHz */
   SystemClock_Config();
 
   /* Configure LED3 */
@@ -96,6 +96,7 @@ int main(void)
   /*##-3- Enable CLUT For Layer 1 ############################################*/
   HAL_LTDC_EnableCLUT(&LtdcHandle, 0);   
 
+  /* Infinite loop */ 
   while (1)
   {
     for (tobuttom = 0; tobuttom < 32; tobuttom++)
@@ -250,14 +251,14 @@ static void LCD_Config(void)
     Error_Handler(); 
   }
 
-  /* Configure the Background Layer*/
+  /* Configure the Background Layer */
   if(HAL_LTDC_ConfigLayer(&LtdcHandle, &pLayerCfg, 0) != HAL_OK)
   {
     /* Initialization Error */
     Error_Handler(); 
   }
   
-  /* Configure the Foreground Layer*/
+  /* Configure the Foreground Layer */
   if(HAL_LTDC_ConfigLayer(&LtdcHandle, &pLayerCfg1, 1) != HAL_OK)
   {
     /* Initialization Error */
@@ -296,7 +297,7 @@ static void SystemClock_Config(void)
   RCC_PeriphCLKInitTypeDef  PeriphClkInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
 
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -316,7 +317,7 @@ static void SystemClock_Config(void)
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
 
   /* Activate the Over-Drive mode */
-  HAL_PWREx_ActivateOverDrive();
+  HAL_PWREx_EnableOverDrive();
   
   /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
@@ -329,10 +330,10 @@ static void SystemClock_Config(void)
 
   /*##-2- LTDC Clock Configuration ###########################################*/  
   /* LCD clock configuration */
-  /* PLLSAI_VCO Input = HSE_VALUE/PLL_M = 1 Mhz */
-  /* PLLSAI_VCO Output = PLLSAI_VCO Input * PLLSAIN = 192 Mhz */
-  /* PLLLCDCLK = PLLSAI_VCO Output/PLLSAIR = 192/5 = 38.4 Mhz */
-  /* LTDC clock frequency = PLLLCDCLK / LTDC_PLLSAI_DIVR_4 = 38.4/4 = 9.6Mhz */
+  /* PLLSAI_VCO Input = HSE_VALUE/PLL_M = 1 MHz */
+  /* PLLSAI_VCO Output = PLLSAI_VCO Input * PLLSAIN = 192 MHz */
+  /* PLLLCDCLK = PLLSAI_VCO Output/PLLSAIR = 192/5 = 38.4 MHz */
+  /* LTDC clock frequency = PLLLCDCLK / LTDC_PLLSAI_DIVR_4 = 38.4/4 = 9.6 MHz */
   PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_LTDC;
   PeriphClkInitStruct.PLLSAI.PLLSAIN = 192;
   PeriphClkInitStruct.PLLSAI.PLLSAIR = 5;
@@ -347,15 +348,14 @@ static void SystemClock_Config(void)
   */
 static void Error_Handler(void)
 {
-    /* Turn LED3 on */
-    BSP_LED_On(LED3);
-    while(1)
-    {
-    }
+  /* Turn LED3 on */
+  BSP_LED_On(LED3);
+  while(1)
+  {
+  }
 }
 
 #ifdef  USE_FULL_ASSERT
-
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    usbd_cdc_if_template.c
   * @author  MCD Application Team
-  * @version V2.2.0
-  * @date    13-June-2014
+  * @version V2.3.0
+  * @date    04-November-2014
   * @brief   Generic media access Layer.
   ******************************************************************************
   * @attention
@@ -92,7 +92,7 @@ USBD_AUDIO_ItfTypeDef USBD_AUDIO_Template_fops =
   * @brief  TEMPLATE_Init
   *         Initializes the AUDIO media low layer
   * @param  None
-  * @retval Result of the opeartion: USBD_OK if all operations are OK else USBD_FAIL
+  * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAIL
   */
 static int8_t TEMPLATE_Init(uint32_t  AudioFreq, uint32_t Volume, uint32_t options)
 {
@@ -106,7 +106,7 @@ static int8_t TEMPLATE_Init(uint32_t  AudioFreq, uint32_t Volume, uint32_t optio
   * @brief  TEMPLATE_DeInit
   *         DeInitializes the AUDIO media low layer
   * @param  None
-  * @retval Result of the opeartion: USBD_OK if all operations are OK else USBD_FAIL
+  * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAIL
   */
 static int8_t TEMPLATE_DeInit(uint32_t options)
 {
@@ -123,7 +123,7 @@ static int8_t TEMPLATE_DeInit(uint32_t options)
   * @param  Buf: Buffer of data to be sent
   * @param  size: Number of data to be sent (in bytes)
   * @param  cmd: command opcode
-  * @retval Result of the opeartion: USBD_OK if all operations are OK else USBD_FAIL
+  * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAIL
   */
 static int8_t TEMPLATE_AudioCmd (uint8_t* pbuf, uint32_t size, uint8_t cmd)
 {
@@ -134,7 +134,7 @@ static int8_t TEMPLATE_AudioCmd (uint8_t* pbuf, uint32_t size, uint8_t cmd)
 /**
   * @brief  TEMPLATE_VolumeCtl              
   * @param  vol: volume level (0..100)
-  * @retval Result of the opeartion: USBD_OK if all operations are OK else USBD_FAIL
+  * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAIL
   */
 static int8_t TEMPLATE_VolumeCtl (uint8_t vol)
 {
@@ -145,7 +145,7 @@ static int8_t TEMPLATE_VolumeCtl (uint8_t vol)
 /**
   * @brief  TEMPLATE_MuteCtl              
   * @param  cmd: vmute command
-  * @retval Result of the opeartion: USBD_OK if all operations are OK else USBD_FAIL
+  * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAIL
   */
 static int8_t TEMPLATE_MuteCtl (uint8_t cmd)
 {
@@ -156,7 +156,7 @@ static int8_t TEMPLATE_MuteCtl (uint8_t cmd)
 /**
   * @brief  TEMPLATE_PeriodicTC              
   * @param  cmd
-  * @retval Result of the opeartion: USBD_OK if all operations are OK else USBD_FAIL
+  * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAIL
   */
 static int8_t TEMPLATE_PeriodicTC (uint8_t cmd)
 {
@@ -167,7 +167,7 @@ static int8_t TEMPLATE_PeriodicTC (uint8_t cmd)
 /**
   * @brief  TEMPLATE_GetState              
   * @param  None
-  * @retval Result of the opeartion: USBD_OK if all operations are OK else USBD_FAIL
+  * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAIL
   */
 static int8_t TEMPLATE_GetState (void)
 {

@@ -2,10 +2,10 @@
   ******************************************************************************
   * @file    Display/LTDC_AnimatedPictureFromSDCard/Src/fatfs_storage.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This file includes the Storage (FatFs) driver for the STM324x9I-EVAL
-  *          example.
+  *          application.
   ******************************************************************************
   * @attention
   *
@@ -35,7 +35,7 @@
 
 /** @defgroup FATFS_STORAGE
   * @brief This file includes the Storage (FatFs) driver for the STM324x9I-EVAL
-  *        example.
+  *        application.
   * @{
   */
 
@@ -91,7 +91,7 @@ uint32_t BytesRead = 0;
   */
 
 /**
-  * @brief  SDCARD Initialisation for FatFs
+  * @brief  SDCARD Initialization for FatFs
   * @param  None
   * @retval err : Error status (0=> success, 1=> fail)
   */
@@ -99,7 +99,7 @@ uint32_t Storage_Init(void)
 {
   BSP_SD_Init();
   
-  /****************** FatFs Volume Acess ******************************/
+  /****************** FatFs Volume Access ******************************/
   if(f_mount(&fs, (TCHAR const*)"",0))
   {
     return 1;
@@ -112,7 +112,7 @@ uint32_t Storage_Init(void)
   * @param  DirName: the Directory name to open
   * @param  FileName: the file name to open
   * @param  BufferAddress: A pointer to a buffer to copy the file to
-  * @param  FileLen: the File lenght
+  * @param  FileLen: the File length
   * @retval err: Error status (0=> success, 1=> fail)
   */
 uint32_t Storage_OpenReadFile(uint8_t *Address, const char* BmpName)
@@ -183,7 +183,7 @@ uint32_t Storage_OpenReadFile(uint8_t *Address, const char* BmpName)
   * @param  DirName: the Directory name to open
   * @param  FileName: the file name to open
   * @param  BufferAddress: A pointer to a buffer to copy the file to
-  * @param  FileLen: the File lenght
+  * @param  FileLen: the File length
   * @retval err: Error status (0=> success, 1=> fail)
   */
 uint32_t Storage_CheckBitmapFile(const char* BmpName, uint32_t *FileLen)

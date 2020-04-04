@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    LwIP\LwIP_TCP_Echo_Client\Src\eth_app.c 
+  * @file    LwIP/LwIP_TCP_Echo_Client/Src/app_ethernet.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Ethernet specefic module
   ******************************************************************************
   * @attention
@@ -37,6 +37,7 @@
 /* Private variables ---------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
+
 /**
   * @brief  Notify the User about the nework interface config status 
   * @param  netif: the network interface
@@ -46,12 +47,12 @@ void User_notification(struct netif *netif)
 {
   if (netif_is_up(netif))
   {
-    /* Turn On LED 1 to indicate ETH and LwIP init success*/
+    /* Turn On LED1 to indicate ETH and LwIP init success */
     BSP_LED_On(LED1);
   }
   else
   {     
-    /* Turn On LED 2 to indicate ETH and LwIP init error */
+    /* Turn On LED2 to indicate ETH and LwIP init error */
     BSP_LED_On(LED2);
   } 
 }
@@ -70,7 +71,7 @@ void ethernetif_notify_conn_changed(struct netif *netif)
   if(netif_is_link_up(netif))
   {
     IP4_ADDR(&ipaddr, IP_ADDR0, IP_ADDR1, IP_ADDR2, IP_ADDR3);
-    IP4_ADDR(&netmask, NETMASK_ADDR0, NETMASK_ADDR1 , NETMASK_ADDR2, NETMASK_ADDR3);
+    IP4_ADDR(&netmask, NETMASK_ADDR0, NETMASK_ADDR1, NETMASK_ADDR2, NETMASK_ADDR3);
     IP4_ADDR(&gw, GW_ADDR0, GW_ADDR1, GW_ADDR2, GW_ADDR3);    
     
     netif_set_addr(netif, &ipaddr , &netmask, &gw);

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    usbh_hid_parser.c
   * @author  MCD Application Team
-  * @version V3.1.0
-  * @date    19-June-2014
+  * @version V3.2.0
+  * @date    04-November-2014
   * @brief   This file is the HID Layer Handlers for USB Host HID class.
   ******************************************************************************
   * @attention

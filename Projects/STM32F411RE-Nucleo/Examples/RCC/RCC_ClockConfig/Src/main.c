@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    RCC/RCC_ClockConfig/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    26-June-2014
+  * @version V1.1.0
+  * @date    26-December-2014
   * @brief   This example describes how to use the RCC HAL API to configure the
   *          system clock (SYSCLK) and modify the clock settings on run time.
   ******************************************************************************
@@ -78,13 +78,13 @@ int main(void)
 
   /* Configure LED2 */
   BSP_LED_Init(LED2);
-
-    /* Initialize Key button, will be used to trigger an interrupt each time it's pressed.
+  
+  /* Configure USER Button used to trigger an interrupt each time it's pressed.
      In the ISR the PLL source will be changed from HSI to HSE, and vice versa. */
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_EXTI);
-
+  
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
 
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -126,7 +126,7 @@ int main(void)
   /* Output SYSCLK divided by 2 on MCO2 pin(PC9) */ 
   HAL_RCC_MCOConfig(RCC_MCO2, RCC_MCO2SOURCE_SYSCLK, RCC_MCODIV_2);
 
-  /* Toggle LED2 in an infinite loop */  
+  /* Infinite loop */ 
   while (1)
   {
     /* Toggle LED2 */
@@ -166,7 +166,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
   *            AHB Prescaler                  = 1
   *            APB1 Prescaler                 = 2
   *            APB2 Prescaler                 = 1
-  *            HSI Frequency(Hz)              = 16000000
+  *            HSE Frequency(Hz)              = 16000000
   *            PLL_M                          = 16
   *            PLL_N                          = 400
   *            PLL_P                          = 4
@@ -183,7 +183,7 @@ void SystemClockHSE_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
   
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
   
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -266,7 +266,7 @@ void SystemClockHSI_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
   
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
   
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -327,15 +327,13 @@ void SystemClockHSI_Config(void)
 static void Error_Handler(void)
 {
   /* Turn LED2 on */
-  BSP_LED_On(LED2);
-  
+  BSP_LED_On(LED2); 
   while(1)
   {
   }
 }
 
 #ifdef  USE_FULL_ASSERT
-
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    FLASH/FLASH_EraseProgram/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This example provides a description of how to erase and program the 
   *          STM32F4xx FLASH.
   ******************************************************************************
@@ -43,7 +43,7 @@
   * @{
   */
 
-/** @addtogroup FLASH_Program
+/** @addtogroup FLASH_EraseProgram
   * @{
   */ 
 
@@ -85,13 +85,13 @@ int main(void)
      */
   HAL_Init();
 
-  /* Initialize LED3, LED4, LED5 &LED6*/
+  /* Configure LED3, LED4, LED5 and LED6 */
   BSP_LED_Init(LED3);
   BSP_LED_Init(LED4);
   BSP_LED_Init(LED5);
   BSP_LED_Init(LED6);
 
-  /* Configure the system clock to 168 Mhz */
+  /* Configure the system clock to 168 MHz */
   SystemClock_Config();
 
   /* Unlock the Flash to enable the flash control register access *************/ 
@@ -106,12 +106,16 @@ int main(void)
   NbOfSectors = GetSector(FLASH_USER_END_ADDR) - FirstSector + 1;
 
   /* Fill EraseInit structure*/
-  EraseInitStruct.TypeErase = TYPEERASE_SECTORS;
-  EraseInitStruct.VoltageRange = VOLTAGE_RANGE_3;
+  EraseInitStruct.TypeErase = FLASH_TYPEERASE_SECTORS;
+  EraseInitStruct.VoltageRange = FLASH_VOLTAGE_RANGE_3;
   EraseInitStruct.Sector = FirstSector;
   EraseInitStruct.NbSectors = NbOfSectors;
   
-  if (HAL_FLASHEx_Erase(&EraseInitStruct, &SectorError) != HAL_OK)
+  /* Note: If an erase operation in Flash memory also concerns data in the data or instruction cache,
+     you have to make sure that these data are rewritten before they are accessed during code
+     execution. If this cannot be done safely, it is recommended to flush the caches by setting the
+     DCRST and ICRST bits in the FLASH_CR register. */
+  if(HAL_FLASHEx_Erase(&EraseInitStruct, &SectorError) != HAL_OK)
   { 
     /* 
       Error occurred while sector erase. 
@@ -132,7 +136,7 @@ int main(void)
 
   while (Address < FLASH_USER_END_ADDR)
   {
-    if (HAL_FLASH_Program(TYPEPROGRAM_WORD, Address, DATA_32) == HAL_OK)
+    if (HAL_FLASH_Program(FLASH_TYPEPROGRAM_WORD, Address, DATA_32) == HAL_OK)
     {
       Address = Address + 4;
     }
@@ -169,15 +173,15 @@ int main(void)
     Address = Address + 4;
   }  
 
-  /*Check if there is an issue to program data*/
+  /* Check if there is an issue to program data */
   if (MemoryProgramStatus == 0)
   {
-    /* No error detected. Switch on LED4*/
+    /* No error detected. Switch on LED4 */
     BSP_LED_On(LED4);
   }
   else
   {
-    /* Error detected. Switch on LED5*/
+    /* Error detected. Switch on LED5 */
     Error_Handler();
   }
   
@@ -255,7 +259,7 @@ static uint32_t GetSector(uint32_t Address)
   */
 static void Error_Handler(void)
 {
-  /* Turn LED5 (RED) on */
+  /* Turn LED5 on */
   BSP_LED_On(LED5);
   while(1)
   {
@@ -288,7 +292,7 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
   
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -314,9 +318,17 @@ static void SystemClock_Config(void)
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
+
+  /* STM32F405x/407x/415x/417x Revision Z devices: prefetch is supported  */
+  if (HAL_GetREVID() == 0x1001)
+  {
+    /* Enable the Flash prefetch */
+    __HAL_FLASH_PREFETCH_BUFFER_ENABLE();
+  }
 }
 
 #ifdef  USE_FULL_ASSERT
+
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.
@@ -335,6 +347,7 @@ void assert_failed(uint8_t* file, uint32_t line)
   }
 }
 #endif
+
 /**
   * @}
   */

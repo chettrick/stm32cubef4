@@ -2,9 +2,9 @@
   ******************************************************************************
   * @file    usbd_msc_bot.h
   * @author  MCD Application Team
-  * @version V2.2.0
-  * @date    13-June-2014
-  * @brief   header for the usbd_msc_bot.c file
+  * @version V2.3.0
+  * @date    04-November-2014
+  * @brief   Header for the usbd_msc_bot.c file
   ******************************************************************************
   * @attention
   *
@@ -26,19 +26,18 @@
   */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-
-#include "usbd_core.h"
-
-/* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __USBD_MSC_BOT_H
 #define __USBD_MSC_BOT_H
+
+/* Includes ------------------------------------------------------------------*/
+#include "usbd_core.h"
 
 /** @addtogroup STM32_USB_DEVICE_LIBRARY
   * @{
   */
   
 /** @defgroup MSC_BOT
-  * @brief This file is the Header file for usbd_bot.c
+  * @brief This file is the Header file for usbd_msc_bot.c
   * @{
   */ 
 
@@ -138,6 +137,10 @@ void  MSC_BOT_CplClrFeature (USBD_HandleTypeDef  *pdev,
 /**
   * @}
   */ 
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __USBD_MSC_BOT_H */
 /**

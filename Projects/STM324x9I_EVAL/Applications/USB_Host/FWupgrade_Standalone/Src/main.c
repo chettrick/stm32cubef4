@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Host/FWupgrade_Standalone/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   USB host Firmware Upgrade demo main file
   ******************************************************************************
   * @attention
@@ -51,13 +51,13 @@ static void FW_InitApplication(void);
   */
 int main(void)
 {
-  /* Configure KEY Button */
+  /* Configure Key Button */
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_GPIO); 
   
   /* Unlock the Flash to enable the flash control register access */ 
   FLASH_If_FlashUnlock();
   
-  /* Test if User button on the STM324xG_EVAL is pressed */
+  /* Test if User button on the STM324x9I_EVAL is pressed */
   if (BSP_PB_GetState(BUTTON_KEY) != GPIO_PIN_RESET)
   {
     /* Check Vector Table: Test if user code is programmed starting from address 
@@ -82,7 +82,7 @@ int main(void)
      */
   HAL_Init();
   
-  /* Configure the system clock to 168 Mhz */
+  /* Configure the system clock to 168 MHz */
   SystemClock_Config();
   
   /* Init FW upgrade Application */
@@ -115,7 +115,7 @@ int main(void)
   */
 static void FW_InitApplication(void)
 {
-  /* Configure the LEDs */
+  /* Configure LED1, LED2, LED3 and LED4 */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED2);
   BSP_LED_Init(LED3);
@@ -178,7 +178,7 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
 
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 

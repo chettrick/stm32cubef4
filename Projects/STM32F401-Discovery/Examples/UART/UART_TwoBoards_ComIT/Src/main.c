@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    UART/UART_TwoBoards_ComIT/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This sample code shows how to use STM32F4xx UART HAL API to transmit 
   *          and receive a data buffer with a communication process based on
   *          IT transfer. 
@@ -73,7 +73,7 @@ static uint16_t Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferL
 /* Private functions ---------------------------------------------------------*/
 
 /**
-  * @brief  Main program.
+  * @brief  Main program
   * @param  None
   * @retval None
   */
@@ -88,13 +88,13 @@ int main(void)
      */
   HAL_Init();
   
-  /* Configure LED3, LED4, LED5 & LED6 */
+  /* Configure LED3, LED4, LED5 and LED6 */
   BSP_LED_Init(LED3);
   BSP_LED_Init(LED4);
   BSP_LED_Init(LED5);
   BSP_LED_Init(LED6);
 
-  /* Configure the system clock to 84 Mhz */
+  /* Configure the system clock to 84 MHz */
   SystemClock_Config();  
 
   /*##-1- Configure the UART peripheral ######################################*/
@@ -105,14 +105,16 @@ int main(void)
       - Parity = None
       - BaudRate = 9600 baud
       - Hardware flow control disabled (RTS and CTS signals) */
-  UartHandle.Instance        = USARTx;
-  UartHandle.Init.BaudRate   = 9600;
-  UartHandle.Init.WordLength = UART_WORDLENGTH_8B;
-  UartHandle.Init.StopBits   = UART_STOPBITS_1;
-  UartHandle.Init.Parity     = UART_PARITY_NONE;
-  UartHandle.Init.HwFlowCtl  = UART_HWCONTROL_NONE;
-  UartHandle.Init.Mode       = UART_MODE_TX_RX;
+  UartHandle.Instance          = USARTx;
   
+  UartHandle.Init.BaudRate     = 9600;
+  UartHandle.Init.WordLength   = UART_WORDLENGTH_8B;
+  UartHandle.Init.StopBits     = UART_STOPBITS_1;
+  UartHandle.Init.Parity       = UART_PARITY_NONE;
+  UartHandle.Init.HwFlowCtl    = UART_HWCONTROL_NONE;
+  UartHandle.Init.Mode         = UART_MODE_TX_RX;
+  UartHandle.Init.OverSampling = UART_OVERSAMPLING_16;
+    
   if(HAL_UART_Init(&UartHandle) != HAL_OK)
   {
     Error_Handler();
@@ -120,22 +122,22 @@ int main(void)
   
 #ifdef TRANSMITTER_BOARD
 
-  /* Configure Button Key */
+  /* Configure USER Button */
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_GPIO);
 	
-  /* Wait for Button Key press before starting the Communication */
+  /* Wait for USER Button press before starting the Communication */
   while (BSP_PB_GetState(BUTTON_KEY) == RESET)
   {
-    /* Toggle led3 waiting for user to press button */
+    /* Toggle LED3 waiting for user to press button */
     BSP_LED_Toggle(LED3);
     HAL_Delay(40);		
   }
-  /* Wait for Button Key to be release before starting the Communication */
+  /* Wait for USER Button to be release before starting the Communication */
   while (BSP_PB_GetState(BUTTON_KEY) == SET)
   {
   }
   
-  /* Turn led3 off */
+  /* Turn LED3 off */
   BSP_LED_Off(LED3);
 
   /* The board sends the message and expects to receive it back */
@@ -236,7 +238,7 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
   
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -279,7 +281,7 @@ static void SystemClock_Config(void)
   */
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *UartHandle)
 {
-  /* Set transmission flag: trasfer complete*/
+  /* Set transmission flag: transfer complete*/
   UartReady = SET;
 
   /* Turn LED6 on: Transfer in transmission process is correct */
@@ -295,7 +297,7 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *UartHandle)
   */
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *UartHandle)
 {
-  /* Set transmission flag: trasfer complete*/
+  /* Set transmission flag: transfer complete*/
   UartReady = SET;
   
   /* Turn LED4 on: Transfer in reception process is correct */
@@ -344,15 +346,14 @@ static uint16_t Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferL
   */
 static void Error_Handler(void)
 {
-    /* Turn LED5 (RED) on */
-    BSP_LED_On(LED5);
-    while(1)
-    {
-    }
+  /* Turn LED5 on */
+  BSP_LED_On(LED5);
+  while(1)
+  {
+  }
 }
 
 #ifdef  USE_FULL_ASSERT
-
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.

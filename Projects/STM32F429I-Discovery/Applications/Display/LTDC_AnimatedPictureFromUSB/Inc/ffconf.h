@@ -1,5 +1,5 @@
 /*---------------------------------------------------------------------------/
-/  FatFs - FAT file system module configuration file  R0.10  (C)ChaN, 2013
+/  FatFs - FAT file system module configuration file  R0.10b  (C)ChaN, 2014
 /----------------------------------------------------------------------------/
 /
 / CAUTION! Do not forget to make clean the project after any changes to
@@ -7,22 +7,12 @@
 /
 /----------------------------------------------------------------------------*/
 #ifndef _FFCONF
-#define _FFCONF 80960 /* Revision ID */
+#define _FFCONF 8051 /* Revision ID */
 
 /*-----------------------------------------------------------------------------/
 / Additional user header to be used  
 /-----------------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
-
-#ifdef USE_STM324x9I_EVAL
-  #include "stm324x9i_eval_sd.h"
-#elif USE_STM324xG_EVAL
-  #include "stm324xg_eval_sd.h"
-#elif USE_STM32F429I_DISCO
-  //#include "stm324x9i_eval_sd.h"
-#else
-  #error "Please select first the Board used in your application (in boardname_eval.h file)"
-#endif
 
 #include "usbh_core.h"
 #include "usbh_msc.h"
@@ -164,12 +154,13 @@
 / is tied to the partitions listed in VolToPart[]. */
 
 
-#define _MAX_SS    1024  /* 512, 1024, 2048 or 4096 */
-/* Maximum sector size to be handled.
-/  Always set 512 for memory card and hard disk but a larger value may be
-/  required for on-board flash memory, floppy disk and optical disk.
-/  When _MAX_SS is larger than 512, it configures FatFs to variable sector size
-/  and GET_SECTOR_SIZE command must be implemented to the disk_ioctl() function. */
+#define	_MIN_SS                 512
+#define	_MAX_SS                 512
+/* These options configure the range of sector size to be supported. (512, 1024, 2048 or
+/  4096) Always set both 512 for most systems, all memory card and harddisk. But a larger
+/  value may be required for on-board flash memory and some type of optical media.
+/  When _MAX_SS is larger than _MIN_SS, FatFs is configured to variable sector size and
+/  GET_SECTOR_SIZE command must be implemented to the disk_ioctl() function. */
 
 
 #define _USE_ERASE     0 /* 0:Disable or 1:Enable */
@@ -221,7 +212,7 @@
 /      function must be added to the project. */
 
 
-#define _FS_LOCK    2      /* 0:Disable or >=1:Enable */
+#define _FS_LOCK    4      /* 0:Disable or >=1:Enable */
 /* To enable file lock control feature, set _FS_LOCK to 1 or greater.
    The value defines how many files can be opened simultaneously. */
 

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324xg_eval_audio.h
   * @author  MCD Application Team
-  * @version V2.0.3
-  * @date    26-June-2014
+  * @version V2.0.4
+  * @date    10-December-2014
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm324xg_eval_audio.c driver.
   ******************************************************************************
@@ -45,7 +45,7 @@
 #endif 
 
 /* Includes ------------------------------------------------------------------*/
-#include "..\Components\cs43l22\cs43l22.h"
+#include "../Components/cs43l22/cs43l22.h"
 #include "stm324xg_eval.h"
 
 /** @addtogroup BSP

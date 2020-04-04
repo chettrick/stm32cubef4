@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BSP/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This example code shows how to use the STM32429I-Discovery BSP Drivers
   ******************************************************************************
   * @attention
@@ -51,15 +51,11 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-static uint8_t  DemoIndex       = 0;
+static uint8_t DemoIndex = 0;
 #ifdef EE_M24LR64
-uint8_t         NbLoop          = 1;
+uint8_t NbLoop = 1;
 #endif /* EE_M24LR64 */
-__IO uint8_t    ubKeyPressed    = RESET; 
-
-/* Private function prototypes -----------------------------------------------*/
-static void SystemClock_Config(void);
-static void Display_DemoDescription(void);
+__IO uint8_t ubKeyPressed = RESET; 
 
 BSP_DemoTypedef BSP_examples[]=
 {
@@ -71,6 +67,11 @@ BSP_DemoTypedef BSP_examples[]=
   {EEPROM_demo, "EEPROM", 0}, 
 #endif /* EE_M24LR64 */
 };
+
+/* Private function prototypes -----------------------------------------------*/
+static void SystemClock_Config(void);
+static void Display_DemoDescription(void);
+
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -92,19 +93,19 @@ int main(void)
   BSP_LED_Init(LED3);
   BSP_LED_Init(LED4); 
   
-  /* Configure the system clock to 180 Mhz */
+  /* Configure the system clock to 180 MHz */
   SystemClock_Config();
   
-  /* Configure the User Button in EXTI Mode */
+  /* Configure USER Button */
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_EXTI);
-
+  
   /*##-1- Initialize the LCD #################################################*/
   /* Initialize the LCD */
   BSP_LCD_Init();
-
-  /* Initialise the LCD Layers */
+  
+  /* Initialize the LCD Layers */
   BSP_LCD_LayerDefaultInit(1, LCD_FRAME_BUFFER);
-
+  
   Display_DemoDescription();
   
   /* Wait For User inputs */
@@ -155,7 +156,7 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
   
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -174,7 +175,7 @@ static void SystemClock_Config(void)
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
 
   /* Activate the Over-Drive mode */
-  HAL_PWREx_ActivateOverDrive();
+  HAL_PWREx_EnableOverDrive();
     
   /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
@@ -223,7 +224,7 @@ static void Display_DemoDescription(void)
   BSP_LCD_FillRect(0, BSP_LCD_GetYSize()/2 + 15, BSP_LCD_GetXSize(), 60);
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
   BSP_LCD_SetBackColor(LCD_COLOR_BLUE); 
-  BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/2 + 30, (uint8_t*)"Press User Button to start:", CENTER_MODE);
+  BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/2 + 30, (uint8_t*)"Press USER Button to start:", CENTER_MODE);
   sprintf((char *)desc,"%s example", BSP_examples[DemoIndex].DemoName);
   BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/2 + 45, (uint8_t *)desc, CENTER_MODE);   
 }
@@ -238,7 +239,7 @@ uint8_t CheckForUserInput(void)
   if(BSP_PB_GetState(BUTTON_KEY) == RESET)
   {
     while (BSP_PB_GetState(BUTTON_KEY) == RESET);
-    return 1 ;
+    return 1;
   }
   return 0;
 }
@@ -264,7 +265,7 @@ void Toggle_Leds(void)
   * @brief  EXTI line detection callbacks.
   * @param  GPIO_Pin: Specifies the pins connected EXTI line
   * @retval None
-*/
+  */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
  if (GPIO_Pin == KEY_BUTTON_PIN)
@@ -273,8 +274,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
  }
 }
 
-#ifdef USE_FULL_ASSERT
-
+#ifdef  USE_FULL_ASSERT
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.
@@ -292,7 +292,7 @@ void assert_failed(uint8_t* file, uint32_t line)
   {
   }
 }
-#endif /* USE_FULL_ASSERT */ 
+#endif
 
 /**
   * @}

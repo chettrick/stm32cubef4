@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    I2S/I2S_Audio/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Main program body
   ******************************************************************************
   * @attention
@@ -52,20 +52,10 @@
 #define MESSAGE2   " Device running on  " 
 #define MESSAGE3   "   STM324xG-EVAL    "
 
-/* Audio file size and start offset address are defined here since the audio wave file is 
-   stored in Flash memory as a constant table of 16-bit data */
-#define AUDIO_FILE_SIZE               147500       /* Size of audio file */
-#define AUDIO_START_OFFSET_ADDRESS    44           /* Offset relative to audio file header size */
-#define AUDIO_FILE_ADDRESS            0x08080000   /* Audio file address */
-
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 __IO uint32_t uwCommand = AUDIO_PAUSE;
-__IO uint32_t uwVolume = 70;
-
-uint32_t AudioTotalSize = 0xFFFF; /* This variable holds the total size of the audio file */
-uint32_t AudioRemSize   = 0xFFFF; /* This variable holds the remaining data in audio file */
-uint16_t* CurrentPos;              /* This variable holds the current position address of audio data */
+__IO uint32_t uwVolume = AUDIO_DEFAULT_VOLUME;
 
 /* Variable to indicate that push buttons will be used for switching between 
    Headphone and Speaker output modes. */
@@ -91,16 +81,16 @@ int main(void)
      */
   HAL_Init();
   
-  /* Configure the system clock to 168 Mhz */
+  /* Configure the system clock to 168 MHz */
   SystemClock_Config();
   
-  /* Initialize LEDs, Push buttons and LCD available on EVAL board ************/
+  /* Configure LEDs, Push buttons and LCD available on EVAL board ************/
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED2);
   BSP_LED_Init(LED3);
   BSP_LED_Init(LED4);
 
-  /* Initialize the Push buttons */
+  /* Configure push Buttons */
   /* Key button used for Pause/Resume */
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_GPIO); 
   /* Wakeup button used for Volume High */    
@@ -131,7 +121,7 @@ int main(void)
   BSP_LED_On(LED4);
 
   /* Initialize the Audio codec and all related peripherals (I2S, I2C, IOExpander, IOs...) */  
-  if(BSP_AUDIO_OUT_Init(OUTPUT_DEVICE_AUTO, uwVolume, I2S_AUDIOFREQ_8K) == 0)
+  if(AUDIO_Init() == AUDIO_ERROR_NONE)
   {
     BSP_LCD_DisplayStringAtLine(3, (uint8_t *)"====================");
     BSP_LCD_DisplayStringAtLine(4, (uint8_t *)"Key   : Play/Pause ");
@@ -147,32 +137,12 @@ int main(void)
   }
   
   /* 
-  Normal mode description:
-      Start playing the audio file (using DMA stream).
-      Using this mode, the application can run other tasks in parallel since 
-      the DMA is handling the Audio Transfer instead of the CPU.
-      The only task remaining for the CPU will be the management of the DMA 
-      Transfer Complete interrupt or the Half Transfer Complete interrupt in 
-      order to load again the buffer and to calculate the remaining data.  
-  Circular mode description:
-     Start playing the file from a circular buffer, once the DMA is enabled it 
-     always run. User has to fill periodically the buffer with the audio data 
-     using Transfer complete and/or half transfer complete interrupts callbacks 
-     (EVAL_AUDIO_TransferComplete_CallBack() or EVAL_AUDIO_HalfTransfer_CallBack()...
-     In this case the audio data file is smaller than the DMA max buffer 
-     size 65535 so there is no need to load buffer continuously or manage the 
-     transfer complete or Half transfer interrupts callbacks. */
-    /* Set the total number of data to be played (count in half-word) */
- 
-  AudioTotalSize = (AUDIO_FILE_SIZE - AUDIO_START_OFFSET_ADDRESS); /* Data Stereo */  
-  /* Set the current audio pointer position */
-  CurrentPos = (uint16_t*)(AUDIO_FILE_ADDRESS + AUDIO_START_OFFSET_ADDRESS);
-  /* Start the audio player */
-  BSP_AUDIO_OUT_Play((uint16_t*)CurrentPos, AudioTotalSize); 
-  /* Update the remaining number of data to be played */
-  AudioRemSize = AudioTotalSize - AUDIODATA_SIZE * DMA_MAX(AudioTotalSize);   
-  /* Update the current audio pointer position */
-  CurrentPos += DMA_MAX(AudioTotalSize);
+  Start playing the file from a circular buffer, once the DMA is enabled, it is 
+  always in running state. Application has to fill the buffer with the audio data 
+  using Transfer complete and/or half transfer complete interrupts callbacks 
+  (EVAL_AUDIO_TransferComplete_CallBack() or EVAL_AUDIO_HalfTransfer_CallBack()...
+  */
+  AUDIO_Start();
   
   /* Display the state on the screen */
   BSP_LCD_DisplayStringAtLine(8, (uint8_t *)"       PLAYING      ");
@@ -312,7 +282,7 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
 
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -338,90 +308,19 @@ static void SystemClock_Config(void)
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
-}
 
-/*------------------------------------------------------------------------------
-       Callbacks implementation:
-           the callbacks API are defined __weak in the stm324xg_eval_audio.c file
-           and their implementation should be done the user code if they are needed.
-           Below some examples of callback implementations.
-  ----------------------------------------------------------------------------*/
-/**
-  * @brief  Manages the full Transfer complete event.
-  * @param  None
-  * @retval None
-  */
-void BSP_AUDIO_OUT_TransferComplete_CallBack(void)
-{
-  /* Calculate the remaining audio data in the file and the new size 
-     for the DMA transfer. If the Audio files size is less than the DMA max 
-     data transfer size, so there is no calculation to be done, just restart 
-     from the beginning of the file ... */
-  /* Check if the end of file has been reached */
-  if(AudioRemSize > 0)
-  { 
-    /* Replay from the current position */
-    BSP_AUDIO_OUT_ChangeBuffer((uint16_t*)CurrentPos, DMA_MAX(AudioRemSize/AUDIODATA_SIZE));
-    
-    /* Update the current pointer position */
-    CurrentPos += DMA_MAX(AudioRemSize);        
-    
-    /* Update the remaining number of data to be played */
-    AudioRemSize -= AUDIODATA_SIZE * DMA_MAX(AudioRemSize/AUDIODATA_SIZE);  
-  }
-  else
+  /* STM32F405x/407x/415x/417x Revision Z devices: prefetch is supported  */
+  if (HAL_GetREVID() == 0x1001)
   {
-    /* Set the current audio pointer position */
-    CurrentPos = (uint16_t*)(AUDIO_FILE_ADDRESS + AUDIO_START_OFFSET_ADDRESS);
-    /* Replay from the beginning */
-    BSP_AUDIO_OUT_Play((uint16_t*)CurrentPos, AudioTotalSize);
-    /* Update the remaining number of data to be played */
-    AudioRemSize = AudioTotalSize - AUDIODATA_SIZE * DMA_MAX(AudioTotalSize);  
-    /* Update the current audio pointer position */
-    CurrentPos += DMA_MAX(AudioTotalSize);
+    /* Enable the Flash prefetch */
+    __HAL_FLASH_PREFETCH_BUFFER_ENABLE();
   }
-}
-
-/**
-  * @brief  Manages the DMA Half Transfer complete event.
-  * @param  None
-  * @retval None
-  */
-void BSP_AUDIO_OUT_HalfTransfer_CallBack(void)
-{  
-  /* Generally this interrupt routine is used to load the buffer when 
-  a streaming scheme is used: When first Half buffer is already transferred load 
-  the new data to the first half of buffer while DMA is transferring data from 
-  the second half. And when Transfer complete occurs, load the second half of 
-  the buffer while the DMA is transferring from the first half ... */
-  /* 
-    ...........
-                   */
-}
-
-/**
-  * @brief  Manages the DMA FIFO error event.
-  * @param  None
-  * @retval None
-  */
-void BSP_AUDIO_OUT_Error_CallBack(void)
-{
-  /* Display message on the LCD screen */
-  BSP_LCD_SetBackColor(LCD_COLOR_RED);
-  BSP_LCD_DisplayStringAtLine(8, (uint8_t *)"     DMA  ERROR     ");
-  
-  /* Stop the program with an infinite loop */
-  while (1)
-  {}
-  
-  /* could also generate a system reset to recover from the error */
-  /* .... */
 }
 
 #ifdef  USE_FULL_ASSERT
 /**
   * @brief  Reports the name of the source file and the source line number
-  *   where the assert_param error has occurred.
+  *         where the assert_param error has occurred.
   * @param  file: pointer to the source file name
   * @param  line: assert_param error line source number
   * @retval None

@@ -1,5 +1,5 @@
 /*
-    FreeRTOS V7.6.0 - Copyright (C) 2013 Real Time Engineers Ltd. 
+    FreeRTOS V8.1.2 - Copyright (C) 2014 Real Time Engineers Ltd.
     All rights reserved
 
     VISIT http://www.FreeRTOS.org TO ENSURE YOU ARE USING THE LATEST VERSION.
@@ -24,10 +24,10 @@
     the terms of the GNU General Public License (version 2) as published by the
     Free Software Foundation >>!AND MODIFIED BY!<< the FreeRTOS exception.
 
-    >>! NOTE: The modification to the GPL is included to allow you to distribute
-    >>! a combined work that includes FreeRTOS without being obliged to provide
-    >>! the source code for proprietary components outside of the FreeRTOS
-    >>! kernel.
+    >>!   NOTE: The modification to the GPL is included to allow you to     !<<
+    >>!   distribute a combined work that includes FreeRTOS without being   !<<
+    >>!   obliged to provide the source code for proprietary components     !<<
+    >>!   outside of the FreeRTOS kernel.                                   !<<
 
     FreeRTOS is distributed in the hope that it will be useful, but WITHOUT ANY
     WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
@@ -76,11 +76,11 @@
 #endif
 
 /* Constants required to manipulate the NVIC. */
-#define portNVIC_SYSTICK_CTRL		( *( ( volatile unsigned long *) 0xe000e010 ))
-#define portNVIC_SYSTICK_LOAD		( *( ( volatile unsigned long *) 0xe000e014 ))
-#define portNVIC_SYSTICK_CURRENT_VALUE	( * ( ( volatile unsigned long * ) 0xe000e018 ) )
-#define portNVIC_INT_CTRL			( ( volatile unsigned long *) 0xe000ed04 )
-#define portNVIC_SYSPRI2			( ( volatile unsigned long *) 0xe000ed20 )
+#define portNVIC_SYSTICK_CTRL		( *( ( volatile uint32_t *) 0xe000e010 ))
+#define portNVIC_SYSTICK_LOAD		( *( ( volatile uint32_t *) 0xe000e014 ))
+#define portNVIC_SYSTICK_CURRENT_VALUE	( * ( ( volatile uint32_t * ) 0xe000e018 ) )
+#define portNVIC_INT_CTRL			( ( volatile uint32_t *) 0xe000ed04 )
+#define portNVIC_SYSPRI2			( ( volatile uint32_t *) 0xe000ed20 )
 #define portNVIC_SYSTICK_CLK		0x00000004
 #define portNVIC_SYSTICK_INT		0x00000002
 #define portNVIC_SYSTICK_ENABLE		0x00000001
@@ -106,7 +106,7 @@ calculations. */
 
 /* Each task maintains its own interrupt status in the critical nesting
 variable. */
-static unsigned portBASE_TYPE uxCriticalNesting = 0xaaaaaaaa;
+static UBaseType_t uxCriticalNesting = 0xaaaaaaaa;
 
 /*
  * Setup the timer to generate the tick interrupts.
@@ -158,18 +158,18 @@ static void prvTaskExitError( void );
 /*
  * See header file for description.
  */
-portSTACK_TYPE *pxPortInitialiseStack( portSTACK_TYPE *pxTopOfStack, pdTASK_CODE pxCode, void *pvParameters )
+StackType_t *pxPortInitialiseStack( StackType_t *pxTopOfStack, TaskFunction_t pxCode, void *pvParameters )
 {
 	/* Simulate the stack frame as it would be created by a context switch
 	interrupt. */
 	pxTopOfStack--; /* Offset added to account for the way the MCU uses the stack on entry/exit of interrupts. */
 	*pxTopOfStack = portINITIAL_XPSR;	/* xPSR */
 	pxTopOfStack--;
-	*pxTopOfStack = ( portSTACK_TYPE ) pxCode;	/* PC */
+	*pxTopOfStack = ( StackType_t ) pxCode;	/* PC */
 	pxTopOfStack--;
-	*pxTopOfStack = ( portSTACK_TYPE ) prvTaskExitError;	/* LR */
+	*pxTopOfStack = ( StackType_t ) prvTaskExitError;	/* LR */
 	pxTopOfStack -= 5;	/* R12, R3, R2 and R1. */
-	*pxTopOfStack = ( portSTACK_TYPE ) pvParameters;	/* R0 */
+	*pxTopOfStack = ( StackType_t ) pvParameters;	/* R0 */
 	pxTopOfStack -= 8; /* R11..R4. */
 
 	return pxTopOfStack;
@@ -179,20 +179,20 @@ portSTACK_TYPE *pxPortInitialiseStack( portSTACK_TYPE *pxTopOfStack, pdTASK_CODE
 static void prvTaskExitError( void )
 {
 	/* A function that implements a task must not exit or attempt to return to
-	its caller as there is nothing to return to.  If a task wants to exit it 
+	its caller as there is nothing to return to.  If a task wants to exit it
 	should instead call vTaskDelete( NULL ).
-	
-	Artificially force an assert() to be triggered if configASSERT() is 
+
+	Artificially force an assert() to be triggered if configASSERT() is
 	defined, then stop here so application writers can catch the error. */
 	configASSERT( uxCriticalNesting == ~0UL );
-	portDISABLE_INTERRUPTS();	
+	portDISABLE_INTERRUPTS();
 	for( ;; );
 }
 /*-----------------------------------------------------------*/
 
 void vPortSVCHandler( void )
 {
-	/* This function is no longer used, but retained for backward 
+	/* This function is no longer used, but retained for backward
 	compatibility. */
 }
 /*-----------------------------------------------------------*/
@@ -200,15 +200,15 @@ void vPortSVCHandler( void )
 __asm void prvPortStartFirstTask( void )
 {
 	extern pxCurrentTCB;
-	
+
 	PRESERVE8
-	
+
 	/* The MSP stack is not reset as, unlike on M3/4 parts, there is no vector
 	table offset register that can be used to locate the initial stack value.
 	Not all M0 parts have the application vector table at address 0. */
-	
+
 	ldr	r3, =pxCurrentTCB	/* Obtain location of pxCurrentTCB. */
-	ldr r1, [r3]			
+	ldr r1, [r3]
 	ldr r0, [r1]			/* The first item in pxCurrentTCB is the task top of stack. */
 	adds r0, #32			/* Discard everything up to r0. */
 	msr psp, r0				/* This is now the new top of stack to use in the task. */
@@ -226,7 +226,7 @@ __asm void prvPortStartFirstTask( void )
 /*
  * See header file for description.
  */
-portBASE_TYPE xPortStartScheduler( void )
+BaseType_t xPortStartScheduler( void )
 {
 	/* Make PendSV, CallSV and SysTick the same priroity as the kernel. */
 	*(portNVIC_SYSPRI2) |= portNVIC_PENDSV_PRI;
@@ -249,8 +249,9 @@ portBASE_TYPE xPortStartScheduler( void )
 
 void vPortEndScheduler( void )
 {
-  /* It is unlikely that the CM0 port will require this function as there
-    is nothing to return to.  */
+	/* Not implemented in ports where there is nothing to return to.
+	Artificially force an assert. */
+	configASSERT( uxCriticalNesting == 1000UL );
 }
 /*-----------------------------------------------------------*/
 
@@ -277,6 +278,7 @@ void vPortEnterCritical( void )
 
 void vPortExitCritical( void )
 {
+	configASSERT( uxCriticalNesting );
     uxCriticalNesting--;
     if( uxCriticalNesting == 0 )
     {
@@ -285,7 +287,7 @@ void vPortExitCritical( void )
 }
 /*-----------------------------------------------------------*/
 
-__asm unsigned long ulSetInterruptMaskFromISR( void )
+__asm uint32_t ulSetInterruptMaskFromISR( void )
 {
 	mrs r0, PRIMASK
 	cpsid i
@@ -293,7 +295,7 @@ __asm unsigned long ulSetInterruptMaskFromISR( void )
 }
 /*-----------------------------------------------------------*/
 
-__asm void vClearInterruptMaskFromISR( unsigned long ulMask )
+__asm void vClearInterruptMaskFromISR( uint32_t ulMask )
 {
 	msr PRIMASK, r0
 	bx lr
@@ -348,7 +350,7 @@ __asm void xPortPendSVHandler( void )
 
 void xPortSysTickHandler( void )
 {
-unsigned long ulPreviousMask;
+uint32_t ulPreviousMask;
 
 	ulPreviousMask = portSET_INTERRUPT_MASK_FROM_ISR();
 	{
@@ -365,10 +367,10 @@ unsigned long ulPreviousMask;
 
 #if configUSE_TICKLESS_IDLE == 1
 
-	__weak void vPortSuppressTicksAndSleep( portTickType xExpectedIdleTime )
+	__weak void vPortSuppressTicksAndSleep( TickType_t xExpectedIdleTime )
 	{
-	unsigned long ulReloadValue, ulCompleteTickPeriods, ulCompletedSysTickDecrements;
-	portTickType xModifiableIdleTime;
+	uint32_t ulReloadValue, ulCompleteTickPeriods, ulCompletedSysTickDecrements, ulSysTickCTRL;
+	TickType_t xModifiableIdleTime;
 
 		/* Make sure the SysTick reload value does not overflow the counter. */
 		if( xExpectedIdleTime > xMaximumPossibleSuppressedTicks )
@@ -380,7 +382,7 @@ unsigned long ulPreviousMask;
 		is accounted for as best it can be, but using the tickless mode will
 		inevitably result in some tiny drift of the time maintained by the
 		kernel with respect to calendar time. */
-		portNVIC_SYSTICK_CTRL = portNVIC_SYSTICK_CLK | portNVIC_SYSTICK_INT;
+		portNVIC_SYSTICK_CTRL &= ~portNVIC_SYSTICK_ENABLE;
 
 		/* Calculate the reload value required to wait xExpectedIdleTime
 		tick periods.  -1 is used because this code will execute part way
@@ -402,10 +404,10 @@ unsigned long ulPreviousMask;
 			/* Restart from whatever is left in the count register to complete
 			this tick period. */
 			portNVIC_SYSTICK_LOAD = portNVIC_SYSTICK_CURRENT_VALUE;
-			
+
 			/* Restart SysTick. */
-			portNVIC_SYSTICK_CTRL = portNVIC_SYSTICK_CLK | portNVIC_SYSTICK_INT | portNVIC_SYSTICK_ENABLE;
-			
+			portNVIC_SYSTICK_CTRL |= portNVIC_SYSTICK_ENABLE;
+
 			/* Reset the reload register to the value required for normal tick
 			periods. */
 			portNVIC_SYSTICK_LOAD = ulTimerCountsForOneTick - 1UL;
@@ -424,7 +426,7 @@ unsigned long ulPreviousMask;
 			portNVIC_SYSTICK_CURRENT_VALUE = 0UL;
 
 			/* Restart SysTick. */
-			portNVIC_SYSTICK_CTRL = portNVIC_SYSTICK_CLK | portNVIC_SYSTICK_INT | portNVIC_SYSTICK_ENABLE;
+			portNVIC_SYSTICK_CTRL |= portNVIC_SYSTICK_ENABLE;
 
 			/* Sleep until something happens.  configPRE_SLEEP_PROCESSING() can
 			set its parameter to 0 to indicate that its implementation contains
@@ -445,32 +447,33 @@ unsigned long ulPreviousMask;
 			accounted for as best it can be, but using the tickless mode will
 			inevitably result in some tiny drift of the time maintained by the
 			kernel with respect to calendar time. */
-			portNVIC_SYSTICK_CTRL = portNVIC_SYSTICK_CLK | portNVIC_SYSTICK_INT;
+			ulSysTickCTRL = portNVIC_SYSTICK_CTRL;
+			portNVIC_SYSTICK_CTRL = ( ulSysTickCTRL & ~portNVIC_SYSTICK_ENABLE );
 
 			/* Re-enable interrupts - see comments above __disable_irq() call
 			above. */
 			__enable_irq();
 
-			if( ( portNVIC_SYSTICK_CTRL & portNVIC_SYSTICK_COUNT_FLAG ) != 0 )
+			if( ( ulSysTickCTRL & portNVIC_SYSTICK_COUNT_FLAG ) != 0 )
 			{
-				unsigned long ulCalculatedLoadValue;
-				
+				uint32_t ulCalculatedLoadValue;
+
 				/* The tick interrupt has already executed, and the SysTick
 				count reloaded with ulReloadValue.  Reset the
-				portNVIC_SYSTICK_LOAD_REG with whatever remains of this tick
+				portNVIC_SYSTICK_LOAD with whatever remains of this tick
 				period. */
 				ulCalculatedLoadValue = ( ulTimerCountsForOneTick - 1UL ) - ( ulReloadValue - portNVIC_SYSTICK_CURRENT_VALUE );
 
-				/* Don't allow a tiny value, or values that have somehow 
-				underflowed because the post sleep hook did something 
+				/* Don't allow a tiny value, or values that have somehow
+				underflowed because the post sleep hook did something
 				that took too long. */
 				if( ( ulCalculatedLoadValue < ulStoppedTimerCompensation ) || ( ulCalculatedLoadValue > ulTimerCountsForOneTick ) )
 				{
 					ulCalculatedLoadValue = ( ulTimerCountsForOneTick - 1UL );
 				}
-				
+
 				portNVIC_SYSTICK_LOAD = ulCalculatedLoadValue;
-				
+
 				/* The tick interrupt handler will already have pended the tick
 				processing in the kernel.  As the pending tick will be
 				processed as soon as this function exits, the tick value
@@ -495,15 +498,15 @@ unsigned long ulPreviousMask;
 				portNVIC_SYSTICK_LOAD = ( ( ulCompleteTickPeriods + 1 ) * ulTimerCountsForOneTick ) - ulCompletedSysTickDecrements;
 			}
 
-			/* Restart SysTick so it runs from portNVIC_SYSTICK_LOAD_REG
-			again, then set portNVIC_SYSTICK_LOAD_REG back to its standard
+			/* Restart SysTick so it runs from portNVIC_SYSTICK_LOAD
+			again, then set portNVIC_SYSTICK_LOAD back to its standard
 			value.  The critical section is used to ensure the tick interrupt
 			can only execute once in the case that the reload register is near
 			zero. */
 			portNVIC_SYSTICK_CURRENT_VALUE = 0UL;
 			portENTER_CRITICAL();
 			{
-				portNVIC_SYSTICK_CTRL = portNVIC_SYSTICK_CLK | portNVIC_SYSTICK_INT | portNVIC_SYSTICK_ENABLE;
+				portNVIC_SYSTICK_CTRL |= portNVIC_SYSTICK_ENABLE;
 				vTaskStepTick( ulCompleteTickPeriods );
 				portNVIC_SYSTICK_LOAD = ulTimerCountsForOneTick - 1UL;
 			}

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    FMC/FMC_SDRAM_LowPower/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This sample code shows how to use STM32F4xx FMC HAL API to access 
   *          by read and write operation the SDRAM external memory device.
   ******************************************************************************
@@ -95,14 +95,14 @@ int main(void)
      */
   HAL_Init();
   
-  /* Initialize LEDs on STM324x9I-EVAL board */
+  /* Configure LED3 and LED4 */
   BSP_LED_Init(LED3);
   BSP_LED_Init(LED4); 
   
-  /* Configure the system clock to 180 Mhz */
+  /* Configure the system clock to 180 MHz */
   SystemClock_Config();
   
-  /* User button (EXTI_Line0) will be used to wakeup the system from STOP mode */
+  /* Configure USER Button(EXTI_Line0) used to wake-up the system from STOP mode */
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_EXTI);
   
   /*##-1- Configure the SDRAM device #########################################*/
@@ -116,7 +116,7 @@ int main(void)
   /* Write data to the SDRAM memory */
   BSP_SDRAM_WriteData(SDRAM_DEVICE_ADDR + WRITE_READ_ADDR, aTxBuffer, BUFFER_SIZE);
   
-  /* Wait for Usser Button to be pushed to enter stop mode */
+  /* Wait for USER Button to be pushed to enter stop mode */
   while(BSP_PB_GetState(BUTTON_KEY) == RESET)
   {
   }  
@@ -134,20 +134,20 @@ int main(void)
   }
    
   /*##-4- Enter CPU power stop mode ##########################################*/   
-  /* Put LED3 & LED4 on to indicate entering to STOP mode */
+  /* Turn LED3 and LED4 on to indicate entering to STOP mode */
   BSP_LED_On(LED3);  
   BSP_LED_On(LED4);  
                         
   /* Request to enter STOP mode */
   HAL_PWR_EnterSTOPMode(PWR_MAINREGULATOR_ON, PWR_STOPENTRY_WFI);
   
-  /*##-5- Wakeup CPU from  power stop mode ###################################*/  
-  /* Configure the system clock after wakeup from STOP: enable HSE, PLL and select 
+  /*##-5- Wake-up CPU from  power stop mode ##################################*/  
+  /* Configure the system clock after wake-up from STOP: enable HSE, PLL and select 
        PLL as system clock source (HSE and PLL are disabled in STOP mode) */
   SystemClock_Config();
   
-  /*##-6- Exit CPU power stop mode ##########################################*/   
-  /* Put LED3 & LED4 Off to indicate entering NORMAL mode */
+  /*##-6- Exit CPU power stop mode ###########################################*/   
+  /* Turn LED3 and LED4 Off to indicate entering NORMAL mode */
   BSP_LED_Off(LED3);  
   BSP_LED_Off(LED4);  
   
@@ -211,7 +211,7 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
   
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -230,7 +230,7 @@ static void SystemClock_Config(void)
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
 
   /* Activate the Over-Drive mode */
-  HAL_PWREx_ActivateOverDrive();
+  HAL_PWREx_EnableOverDrive();
   
   /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
@@ -249,11 +249,11 @@ static void SystemClock_Config(void)
   */
 static void Error_Handler(void)
 {
-    /* Turn LED3 on */
-    BSP_LED_On(LED3);
-    while(1)
-    {
-    }
+  /* Turn LED3 on */
+  BSP_LED_On(LED3);
+  while(1)
+  {
+  }
 }
 
 /**
@@ -298,7 +298,6 @@ static TestStatus Buffercmp(uint32_t* pBuffer1, uint32_t* pBuffer2, uint16_t Buf
 }
 
 #ifdef  USE_FULL_ASSERT
-
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.

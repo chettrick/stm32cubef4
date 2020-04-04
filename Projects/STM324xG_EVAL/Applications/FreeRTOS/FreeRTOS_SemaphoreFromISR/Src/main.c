@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    FreeRTOS/FreeRTOS_SemaphoreFromISR/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Main program body
   ******************************************************************************
   * @attention
@@ -38,13 +38,13 @@
 osSemaphoreId osSemaphore;
 
 /* Private function prototypes -----------------------------------------------*/
-static void SemaphoreTest (void const *argument);
+static void SemaphoreTest(void const *argument);
 static void SystemClock_Config(void);
 
 /* Private functions ---------------------------------------------------------*/
 
 /**
-  * @brief  Main program.
+  * @brief  Main program
   * @param  None
   * @retval None
   */
@@ -58,11 +58,13 @@ int main(void)
      */
   HAL_Init();  
   
-  /* Configure the system clock to 168 Mhz */
+  /* Configure the system clock to 168 MHz */
   SystemClock_Config();
   
-  /* Initialize LEDs and buttons */
+  /* Configure LED1, LED2, LED3 and LED4 */
   BSP_LED_Init(LED1);
+  
+  /* Configure Key Button */
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_EXTI);  
   
   /* Define used semaphore */
@@ -76,7 +78,7 @@ int main(void)
   osThreadCreate(osThread(SEM_Thread), (void *) osSemaphore);
   
   /* Start scheduler */
-  osKernelStart (NULL, NULL);
+  osKernelStart();
 
   /* We should never get here as control is now taken by the scheduler */
   for(;;);
@@ -87,13 +89,13 @@ int main(void)
   * @param  argument: Not used
   * @retval None
   */
-static void SemaphoreTest (void const *argument)
+static void SemaphoreTest(void const *argument)
 { 
   for(;;)
   {
     if (osSemaphore != NULL)
     {
-      /* Try to obtain the semaphore. */
+      /* Try to obtain the semaphore */
       if(osSemaphoreWait(osSemaphore , 0) == osOK)
       {
         BSP_LED_Toggle(LED1);
@@ -128,7 +130,7 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
 
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -154,6 +156,13 @@ static void SystemClock_Config(void)
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
+
+  /* STM32F405x/407x/415x/417x Revision Z devices: prefetch is supported  */
+  if (HAL_GetREVID() == 0x1001)
+  {
+    /* Enable the Flash prefetch */
+    __HAL_FLASH_PREFETCH_BUFFER_ENABLE();
+  }
 }
 
 /**
@@ -167,10 +176,9 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 }
 
 #ifdef  USE_FULL_ASSERT
-
 /**
   * @brief  Reports the name of the source file and the source line number
-  *   where the assert_param error has occurred.
+  *         where the assert_param error has occurred.
   * @param  file: pointer to the source file name
   * @param  line: assert_param error line source number
   * @retval None
@@ -182,7 +190,8 @@ void assert_failed(uint8_t* file, uint32_t line)
 
   /* Infinite loop */
   while (1)
-  {}
+  {
+  }
 }
 #endif
 

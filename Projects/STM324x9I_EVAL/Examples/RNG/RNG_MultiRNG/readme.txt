@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    RNG/RNG_MultiRNG/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Description of Multiple Random Number Generator example.
   ******************************************************************************
   *
@@ -51,7 +51,7 @@ the configuration of the needed RNG resources according to the used hardware (CL
 GPIO, DMA and NVIC). You may update this function to change RNG configuration.
 
 After startup, user is asked to press key button.
-Multiple Random 32bit numbers are genrerated as soon as the key is pressed.
+Multiple Random 32bit numbers are generated as soon as the key is pressed.
 The Random numbers are updated and displayed on the debugger in aRandom32bit variable.
 
 LED3 will turn ON, if any error is occurred.
@@ -63,7 +63,7 @@ LED3 will turn ON, if any error is occurred.
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 

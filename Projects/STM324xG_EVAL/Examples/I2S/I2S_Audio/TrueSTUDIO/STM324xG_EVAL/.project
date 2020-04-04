@@ -212,6 +212,10 @@
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/startup_stm32f407xx.s</locationURI>
 		</link><link>
+			<name>Example/User/audio_if.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Src/audio_if.c</locationURI>
+    </link><link>
 			<name>Example/User/main.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/Src/main.c</locationURI>

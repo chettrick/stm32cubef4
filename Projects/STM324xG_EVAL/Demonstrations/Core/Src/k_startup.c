@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    k_startup.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014   
+  * @version V1.2.0
+  * @date    26-December-2014   
   * @brief   This file provides the startup functions
   ******************************************************************************
   * @attention
@@ -982,7 +982,7 @@ static GUI_CONST_STORAGE GUI_BITMAP _bmWhiteCircle_10x10 = {
 };
 
 /* Private function prototypes -----------------------------------------------*/
-static void BackGroundCallback(WM_MESSAGE * pMsg) ;
+static void BackGroundCallback(WM_MESSAGE * pMsg);
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -1023,12 +1023,12 @@ static void BackGroundCallback(WM_MESSAGE * pMsg)
   */
 void k_StartUp(void)
 {
-  uint8_t loop ;
+  uint8_t loop;
   GUI_RECT Rect = {100, 160, 220, 210}; 
 
   WM_SetCallback(WM_HBKWIN, BackGroundCallback);
 
-  loop = 16 ;
+  loop = 16;
   while (loop--)
   {
     idx = (16- loop) % 5;

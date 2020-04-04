@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    RCC/RCC_ClockConfig/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This example describes how to use the RCC HAL API to configure the
   *          system clock (SYSCLK) and modify the clock settings on run time.
   ******************************************************************************
@@ -80,12 +80,12 @@ int main(void)
   BSP_LED_Init(LED3);
   BSP_LED_Init(LED4);
   
-  /* Initialize Key button, will be used to trigger an interrupt each time it's pressed.
+  /* Initialize User button, will be used to trigger an interrupt each time it's pressed.
     In the ISR the PLL source will be changed from HSE to HSI, and vice versa. */
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_EXTI);  
 
     /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
 
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -109,7 +109,7 @@ int main(void)
   }
 
   /* Activate the Over Drive feature (available only for STM32F42xxx/43xxx devices)*/
-  if(HAL_PWREx_ActivateOverDrive() != HAL_OK)
+  if(HAL_PWREx_EnableOverDrive() != HAL_OK)
   {
     /* Initialization Error */
     Error_Handler();
@@ -133,7 +133,7 @@ int main(void)
   /* Output SYSCLK divided by 2 on MCO2 pin(PC9) */ 
   HAL_RCC_MCOConfig(RCC_MCO2, RCC_MCO2SOURCE_SYSCLK, RCC_MCODIV_2);
   
-  /* Toggle LED3/LED4 in an infinite loop */  
+  /* Toggle LED3 and LED4 in an infinite loop */  
   while (1)
   {
     /* Toggle LED3 */
@@ -215,7 +215,7 @@ void SystemClockHSE_Config(void)
   
   /* -3- Activate the Over Drive feature to reach 180 MHz as system clock frequency 
          (this feature is only available for STM32F42xxx/43xxx devices) */
-  if(HAL_PWREx_ActivateOverDrive() != HAL_OK)
+  if(HAL_PWREx_EnableOverDrive() != HAL_OK)
   {
     /* Initialization Error */
     Error_Handler();
@@ -290,7 +290,7 @@ void SystemClockHSI_Config(void)
   
   /* -3- Activate the Over Drive feature to reach 180 MHz as system clock frequency
         (this feature is only available for STM32F42xxx/43xxx devices) */
-  if(HAL_PWREx_ActivateOverDrive() != HAL_OK)
+  if(HAL_PWREx_EnableOverDrive() != HAL_OK)
   {
     /* Initialization Error */
     Error_Handler();
@@ -333,7 +333,6 @@ static void Error_Handler(void)
 }
 
 #ifdef  USE_FULL_ASSERT
-
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.

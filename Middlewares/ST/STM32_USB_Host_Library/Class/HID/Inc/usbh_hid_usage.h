@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    usbh_hid_keybd.c 
+  * @file    usbh_hid_usage.c 
   * @author  MCD Application Team
-  * @version V3.1.0
-  * @date    19-June-2014
+  * @version V3.2.0
+  * @date    04-November-2014
   * @brief   This file contain the USAGE page codes              
   ******************************************************************************
   * @attention
@@ -23,9 +23,14 @@
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
-#ifndef _HID_USAGE_H_
-#define _HID_USAGE_H_
+  */
+/* Define to prevent recursive  ----------------------------------------------*/
+#ifndef __USDH_HID_USAGE_H
+#define __USDH_HID_USAGE_H
+
+#ifdef __cplusplus
+ extern "C" {
+#endif
 
 /** @addtogroup USBH_LIB
   * @{
@@ -40,7 +45,7 @@
   */
   
 /** @defgroup USBH_HID_USAGE
-  * @brief This file is the Header file for USBH_HID_USAGE.c
+  * @brief This file is the Header file for usbh_hid_usage.c
   * @{
   */ 
 
@@ -89,7 +94,7 @@
 #define HID_USAGE_PAGE_ARCADE     uint16_t (0x91)   /* Arcade Page */
 
 /****************************************************/
-/* Usage definitions for the "Generic Decktop" page */
+/* Usage definitions for the "Generic Desktop" page */
 /****************************************************/
 #define HID_USAGE_UNDEFINED     uint16_t (0x00)   /* Undefined */
 #define HID_USAGE_POINTER       uint16_t (0x01)   /* Pointer (Physical Collection) */
@@ -171,7 +176,11 @@
   * @}
   */ 
 
-#endif /* _HID_USAGE_H_ */
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* __USDH_HID_USAGE_H */
 
 /**
   * @}

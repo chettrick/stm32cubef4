@@ -2,9 +2,9 @@
   ******************************************************************************
   * @file    Camera/Camera_To_USBDisk/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
-  * @brief   This example describes how to configure the camera in continuous mode
+  * @version V1.2.0
+  * @date    26-December-2014
+  * @brief   This application describes how to configure the camera in continuous mode
              and save picture under USBDisk.
   ******************************************************************************
   * @attention
@@ -80,7 +80,7 @@ int main(void)
      */
   HAL_Init();
   
-  /* Configure the system clock to 168 Mhz */
+  /* Configure the system clock to 168 MHz */
   SystemClock_Config();
   
   /* Configure LED1 and LED3 */
@@ -108,8 +108,8 @@ int main(void)
   /* ADCDAT1 is tri-stated */
   AUDIO_IO_Write(AUDIO_I2C_ADDRESS, 0x200, 0);
   AUDIO_IO_Write(AUDIO_I2C_ADDRESS, 0x300, 0x6010);  
-  
-  /*##-3- TAMPER button will be used #########################################*/
+
+  /*##-3- Configure TAMPER Button ############################################*/
   BSP_PB_Init(BUTTON_TAMPER, BUTTON_MODE_GPIO);
   
   /*##-4- Link the USB Host disk I/O driver ##################################*/
@@ -330,7 +330,7 @@ static void LCD_LL_ConvertLineToARGB8888(void *pSrc, void *pDst)
   static DMA2D_HandleTypeDef hdma2d_eval;  
   
   /* Enable DMA2D clock */
-  __DMA2D_CLK_ENABLE();
+  __HAL_RCC_DMA2D_CLK_ENABLE();
   
   /* Configure the DMA2D Mode, Color Mode and output offset */
   hdma2d_eval.Init.Mode         = DMA2D_M2M_PFC;
@@ -433,7 +433,7 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
 
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 

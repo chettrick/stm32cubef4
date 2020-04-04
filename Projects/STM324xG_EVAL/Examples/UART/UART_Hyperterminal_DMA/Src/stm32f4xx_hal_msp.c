@@ -2,9 +2,9 @@
   ******************************************************************************
   * @file    UART/UART_HyperTerminal_DMA/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
-  * @brief   HAL MSP module.    
+  * @version V1.2.0
+  * @date    26-December-2014
+  * @brief   HAL MSP module.
   ******************************************************************************
   * @attention
   *
@@ -83,7 +83,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef *huart)
   /* Enable DMA2 clock */
   DMAx_CLK_ENABLE();   
   
-  /*##-2- Configure peripheral GPIO ##########################################*/  
+  /*##-2- Configure peripheral GPIO ##########################################*/
   /* UART TX GPIO pin configuration  */
   GPIO_InitStruct.Pin       = USARTx_TX_PIN;
   GPIO_InitStruct.Mode      = GPIO_MODE_AF_PP;
@@ -111,7 +111,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef *huart)
   hdma_tx.Init.MemDataAlignment    = DMA_MDATAALIGN_BYTE;
   hdma_tx.Init.Mode                = DMA_NORMAL;
   hdma_tx.Init.Priority            = DMA_PRIORITY_LOW;
-  hdma_tx.Init.FIFOMode            = DMA_FIFOMODE_DISABLE;         
+  hdma_tx.Init.FIFOMode            = DMA_FIFOMODE_DISABLE;
   hdma_tx.Init.FIFOThreshold       = DMA_FIFO_THRESHOLD_FULL;
   hdma_tx.Init.MemBurst            = DMA_MBURST_INC4;
   hdma_tx.Init.PeriphBurst         = DMA_PBURST_INC4;
@@ -132,7 +132,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef *huart)
   hdma_rx.Init.MemDataAlignment    = DMA_MDATAALIGN_BYTE;
   hdma_rx.Init.Mode                = DMA_NORMAL;
   hdma_rx.Init.Priority            = DMA_PRIORITY_HIGH;
-  hdma_rx.Init.FIFOMode            = DMA_FIFOMODE_DISABLE;         
+  hdma_rx.Init.FIFOMode            = DMA_FIFOMODE_DISABLE;
   hdma_rx.Init.FIFOThreshold       = DMA_FIFO_THRESHOLD_FULL;
   hdma_rx.Init.MemBurst            = DMA_MBURST_INC4;
   hdma_rx.Init.PeriphBurst         = DMA_PBURST_INC4; 
@@ -142,7 +142,7 @@ void HAL_UART_MspInit(UART_HandleTypeDef *huart)
   /* Associate the initialized DMA handle to the the UART handle */
   __HAL_LINKDMA(huart, hdmarx, hdma_rx);
     
-  /*##-4- Configure the NVIC for DMA #########################################*/   
+  /*##-4- Configure the NVIC for DMA #########################################*/
   /* NVIC configuration for DMA transfer complete interrupt (USARTx_TX) */
   HAL_NVIC_SetPriority(USARTx_DMA_TX_IRQn, 0, 1);
   HAL_NVIC_EnableIRQ(USARTx_DMA_TX_IRQn);
@@ -150,6 +150,10 @@ void HAL_UART_MspInit(UART_HandleTypeDef *huart)
   /* NVIC configuration for DMA transfer complete interrupt (USARTx_RX) */
   HAL_NVIC_SetPriority(USARTx_DMA_RX_IRQn, 0, 0);   
   HAL_NVIC_EnableIRQ(USARTx_DMA_RX_IRQn);
+  
+  /* NVIC configuration for USART TC interrupt */
+  HAL_NVIC_SetPriority(USARTx_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(USARTx_IRQn);
 }
 
 /**

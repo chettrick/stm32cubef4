@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324x9i_eval_lcd.c
   * @author  MCD Application Team
-  * @version V2.0.2
-  * @date    19-June-2014
+  * @version V2.0.3
+  * @date    10-December-2014
   * @brief   This file includes the driver for Liquid Crystal Display (LCD) module
   *          mounted on STM324x9I-EVAL evaluation board.
   ******************************************************************************
@@ -76,12 +76,12 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm324x9i_eval_lcd.h"
-#include "..\..\..\Utilities\Fonts\fonts.h"
-#include "..\..\..\Utilities\Fonts\font24.c"
-#include "..\..\..\Utilities\Fonts\font20.c"
-#include "..\..\..\Utilities\Fonts\font16.c"
-#include "..\..\..\Utilities\Fonts\font12.c"
-#include "..\..\..\Utilities\Fonts\font8.c"
+#include "../../../Utilities/Fonts/fonts.h"
+#include "../../../Utilities/Fonts/font24.c"
+#include "../../../Utilities/Fonts/font20.c"
+#include "../../../Utilities/Fonts/font16.c"
+#include "../../../Utilities/Fonts/font12.c"
+#include "../../../Utilities/Fonts/font8.c"
 
 /** @addtogroup BSP
   * @{

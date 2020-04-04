@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    usbd_template.c
   * @author  MCD Application Team
-  * @version V2.2.0
-  * @date    13-June-2014
+  * @version V2.3.0
+  * @date    04-November-2014
   * @brief   This file provides the HID core functions.
   *
   * @verbatim
@@ -159,7 +159,7 @@ static uint8_t USBD_TEMPLATE_CfgDesc[USB_TEMPLATE_CONFIG_DESC_SIZ] =
   0x01,         /*bNumInterfaces: 1 interface*/
   0x01,         /*bConfigurationValue: Configuration value*/
   0x02,         /*iConfiguration: Index of string descriptor describing the configuration*/
-  0xC0,         /*bmAttributes: bus powered and Supprts Remote Wakeup */
+  0xC0,         /*bmAttributes: bus powered and Supports Remote Wakeup */
   0x32,         /*MaxPower 100 mA: this current is used for detecting Vbus*/
   /* 09 */
   

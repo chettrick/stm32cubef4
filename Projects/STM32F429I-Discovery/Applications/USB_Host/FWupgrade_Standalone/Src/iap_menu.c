@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Host/FWupgrade_Standalone/Src/iap_menu.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   COMMAND IAP Execute Application
   ******************************************************************************
   * @attention
@@ -90,13 +90,13 @@ void FW_UPGRADE_Process(void)
       BSP_LED_Off(LED3); 
       BSP_LED_Off(LED4); 
       
-      /* KEY Button pressed Delay */
+      /* USER Button pressed Delay */
       IAP_UploadTimeout();
       
       /* Writes Flash memory */
       COMMAND_Download();
       
-      /* Check if KEY Button is already pressed */
+      /* Check if USER Button is already pressed */
       if((UploadCondition == 0x01))
       {
         /* Reads all flash memory */
@@ -110,15 +110,15 @@ void FW_UPGRADE_Process(void)
         BSP_LED_On(LED3); 
       }
       
-      /* Waiting KEY Button Released */
+      /* Waiting USER Button Released */
       while((BSP_PB_GetState(BUTTON_KEY) == GPIO_PIN_RESET) && (Appli_state == APPLICATION_READY))
       {}
       
-      /* Waiting KEY Button Pressed */
+      /* Waiting USER Button Pressed */
       while((BSP_PB_GetState(BUTTON_KEY) != GPIO_PIN_RESET) && (Appli_state == APPLICATION_READY))
       {}
       
-      /* Waiting KEY Button Released */
+      /* Waiting USER Button Released */
       while((BSP_PB_GetState(BUTTON_KEY) == GPIO_PIN_RESET) && (Appli_state == APPLICATION_READY))
       {}
       
@@ -166,7 +166,7 @@ static void IAP_UploadTimeout(void)
       BSP_LED_On(LED3);
       BSP_LED_On(LED4);
       
-      /* Waiting KEY Button Pressed */
+      /* Waiting USER Button Pressed */
       while(BSP_PB_GetState(BUTTON_KEY) == GPIO_PIN_SET)
       {}
       

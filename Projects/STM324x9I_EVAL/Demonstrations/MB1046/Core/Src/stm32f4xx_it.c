@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f4xx_it.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
@@ -53,13 +53,12 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-extern HCD_HandleTypeDef             hhcd;
-extern PCD_HandleTypeDef             hpcd;
-extern LTDC_HandleTypeDef            hltdc;  
-extern SAI_HandleTypeDef             haudio_out_sai;
+extern HCD_HandleTypeDef  hhcd;
+extern PCD_HandleTypeDef  hpcd;
+extern LTDC_HandleTypeDef hltdc;  
+extern SAI_HandleTypeDef  haudio_out_sai;
 
 /* Private function prototypes -----------------------------------------------*/
-extern void xPortSysTickHandler(void);
 #if defined (STM32F429xx)
 extern void LTDC_ISR_Handler(void);
 #endif
@@ -148,10 +147,7 @@ void DebugMon_Handler(void)
 void SysTick_Handler(void)
 {
   HAL_IncTick();
-  if (xTaskGetSchedulerState() != taskSCHEDULER_NOT_STARTED)
-  {
-    xPortSysTickHandler();
-  }
+  osSystickHandler();
 }
 
 /******************************************************************************/

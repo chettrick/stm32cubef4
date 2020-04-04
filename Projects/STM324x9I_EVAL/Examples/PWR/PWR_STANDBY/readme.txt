@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    PWR/PWR_STANDBY/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Description of the PWR STANDBY example.
   ******************************************************************************
   *
@@ -56,10 +56,10 @@ After wake-up from STANDBY mode, program execution restarts in the same way as a
 a RESET, the RTC configuration (clock source, prescaler,...) is kept and LED1 restarts
 toggling. As result there is no need to configure the RTC.
 
-Two leds LED1 and LED2 are used to monitor the system state as following:
+Two LEDs LED1 and LED2 are used to monitor the system state as following:
  - LED2 ON: configuration failed (system will go to an infinite loop)
  - LED1 toggling: system in RUN mode
- - LED1 off : system in STANDBY mode
+ - LED1 OFF: system in STANDBY mode
 
 These Steps are repeated in an infinite loop.
 
@@ -68,7 +68,7 @@ These Steps are repeated in an infinite loop.
 
 @note This example can not be used in DEBUG mode, this is due to the fact 
       that the Cortex-M4 core is no longer clocked during low power mode 
-      so debugging features are disbaled
+      so debugging features are disabled
 
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
       based on variable incremented in SysTick ISR. This implies that if HAL_Delay() is called from
@@ -76,7 +76,7 @@ These Steps are repeated in an infinite loop.
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
       
 @note  Care must be taken when HAL_RCCEx_PeriphCLKConfig() is used to select the RTC clock source; in this 

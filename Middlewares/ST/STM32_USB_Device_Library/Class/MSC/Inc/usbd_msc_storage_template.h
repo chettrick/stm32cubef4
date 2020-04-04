@@ -2,9 +2,9 @@
   ******************************************************************************
   * @file    usbd_msc_storage.h
   * @author  MCD Application Team
-  * @version V2.2.0
-  * @date    13-June-2014
-  * @brief   header file for the usbd_msc_storage.c file
+  * @version V2.3.0
+  * @date    04-November-2014
+  * @brief   Header file for the usbd_msc_storage.c file
   ******************************************************************************
   * @attention
   *
@@ -26,9 +26,12 @@
   */ 
 
 /* Define to prevent recursive inclusion -------------------------------------*/
+#ifndef __USBD_MSC_STORAGE_H
+#define __USBD_MSC_STORAGE_H
 
-#ifndef __USBD_MSC_STORAGE_H_
-#define __USBD_MSC_STORAGE_H_
+#ifdef __cplusplus
+ extern "C" {
+#endif
 
 /* Includes ------------------------------------------------------------------*/
 #include "usbd_msc.h"
@@ -38,7 +41,7 @@
   */
   
 /** @defgroup USBD_STORAGE
-  * @brief header file for the USBD_STORAGE.c file
+  * @brief header file for the usbd_msc_storage.c file
   * @{
   */ 
 
@@ -86,7 +89,11 @@ extern USBD_StorageTypeDef  USBD_MSC_Template_fops;
   * @}
   */ 
 
-#endif /* __USBD_MSC_STORAGE_H_ */
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* __USBD_MSC_STORAGE_H */
 
 /**
   * @}

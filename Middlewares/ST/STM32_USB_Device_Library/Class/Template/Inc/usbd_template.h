@@ -2,9 +2,9 @@
   ******************************************************************************
   * @file    usbd_template_core.h
   * @author  MCD Application Team
-  * @version V2.2.0
-  * @date    13-June-2014
-  * @brief   header file for the usbd_template_core.c file.
+  * @version V2.3.0
+  * @date    04-November-2014
+  * @brief   Header file for the usbd_template_core.c file.
   ******************************************************************************
   * @attention
   *
@@ -23,13 +23,17 @@
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  */
+
+/* Define to prevent recursive inclusion -------------------------------------*/ 
+#ifndef __USB_TEMPLATE_CORE_H
+#define __USB_TEMPLATE_CORE_H
+
+#ifdef __cplusplus
+ extern "C" {
+#endif
 
 /* Includes ------------------------------------------------------------------*/
-
-#ifndef __USB_TEMPLATE_CORE_H_
-#define __USB_TEMPLATE_CORE_H_
-
 #include  "usbd_ioreq.h"
 
 /** @addtogroup STM32_USB_DEVICE_LIBRARY
@@ -37,7 +41,7 @@
   */
   
 /** @defgroup USBD_TEMPLATE
-  * @brief This file is the Header file for USBD_msc.c
+  * @brief This file is the header file for usbd_template_core.c
   * @{
   */ 
 
@@ -89,7 +93,11 @@ extern USBD_ClassTypeDef  USBD_TEMPLATE_ClassDriver;
   * @}
   */ 
 
-#endif  // __USB_TEMPLATE_CORE_H_
+#ifdef __cplusplus
+}
+#endif
+
+#endif  /* __USB_TEMPLATE_CORE_H */
 /**
   * @}
   */ 

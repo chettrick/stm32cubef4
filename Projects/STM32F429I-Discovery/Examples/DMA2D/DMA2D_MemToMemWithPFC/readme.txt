@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    DMA2D/DMA2D_MemToMemWithPFC/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Description of the DMA2D Memory to Memory with PFC example.
   ******************************************************************************
   *
@@ -87,7 +87,7 @@
     0xAB35 --> 0b1 01010 11001 10101   -------> 0b11111111 01010010 11001110 10101101     
                  A   R     G     B          --> 0xFF       52       CE       AD
 
-STM32 Eval board's LEDs can be used to monitor the transfer status:
+STM32 Discovery board's LEDs can be used to monitor the transfer status:
  - LED3 is ON when the transfer is complete.
  - LED4 is ON when there is a transfer error.
  - LED3/LED4 are ON when there is an error in transfer/Init process.
@@ -98,7 +98,7 @@ STM32 Eval board's LEDs can be used to monitor the transfer status:
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 

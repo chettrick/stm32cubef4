@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LwIP/LwIP_IAP/Inc/main.h
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This file contains all the functions prototypes for the main.c 
   *          file.
   ******************************************************************************
@@ -52,7 +52,7 @@
    Based on this result four sectors of 16 Kbytes and a sector of 64 Kbytes will be used to store
    the IAP code, so the user Flash address will start from Sector5.
 
-   In this example the define USER_FLASH_FIRST_PAGE_ADDRESS is set to 128K boundary,
+   In this application the define USER_FLASH_FIRST_PAGE_ADDRESS is set to 128K boundary,
    but it can be changed to any other address outside the 1st 128 Kbytes of the Flash.
    */
 #define USER_FLASH_FIRST_PAGE_ADDRESS 0x08020000 /* Only as example see comment */

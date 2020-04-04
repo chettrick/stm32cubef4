@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Device/CDC_Standalone/Src/usbd_cdc_interface.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Source file for USBD CDC interface
   ******************************************************************************
   * @attention
@@ -90,13 +90,15 @@ static int8_t CDC_Itf_Init(void)
       - Parity      = No parity
       - BaudRate    = 115200 baud
       - Hardware flow control disabled (RTS and CTS signals) */
-  UartHandle.Instance        = USARTx;
-  UartHandle.Init.BaudRate   = 115200;
-  UartHandle.Init.WordLength = UART_WORDLENGTH_8B;
-  UartHandle.Init.StopBits   = UART_STOPBITS_1;
-  UartHandle.Init.Parity     = UART_PARITY_NONE;
-  UartHandle.Init.HwFlowCtl  = UART_HWCONTROL_NONE;
-  UartHandle.Init.Mode       = UART_MODE_TX_RX;
+  UartHandle.Instance          = USARTx;
+  UartHandle.Init.BaudRate     = 115200;
+  UartHandle.Init.WordLength   = UART_WORDLENGTH_8B;
+  UartHandle.Init.StopBits     = UART_STOPBITS_1;
+  UartHandle.Init.Parity       = UART_PARITY_NONE;
+  UartHandle.Init.HwFlowCtl    = UART_HWCONTROL_NONE;
+  UartHandle.Init.Mode         = UART_MODE_TX_RX;
+  UartHandle.Init.OverSampling = UART_OVERSAMPLING_16;
+  
   if(HAL_UART_Init(&UartHandle) != HAL_OK)
   {
     /* Initialization Error */
@@ -299,7 +301,7 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
   * @brief  ComPort_Config
   *         Configure the COM Port with the parameters received from host.
   * @param  None.
-  * @retval None.
+  * @retval None
   * @note   When a configuration is not supported, a default value is used.
   */
 static void ComPort_Config(void)
@@ -364,9 +366,10 @@ static void ComPort_Config(void)
     break;
   }
   
-  UartHandle.Init.BaudRate = LineCoding.bitrate;
-  UartHandle.Init.HwFlowCtl  = UART_HWCONTROL_NONE;
-  UartHandle.Init.Mode       = UART_MODE_TX_RX;
+  UartHandle.Init.BaudRate     = LineCoding.bitrate;
+  UartHandle.Init.HwFlowCtl    = UART_HWCONTROL_NONE;
+  UartHandle.Init.Mode         = UART_MODE_TX_RX;
+  UartHandle.Init.OverSampling = UART_OVERSAMPLING_16;
   
   if(HAL_UART_Init(&UartHandle) != HAL_OK)
   {
@@ -381,7 +384,7 @@ static void ComPort_Config(void)
 /**
   * @brief  TIM_Config: Configure TIMx timer
   * @param  None.
-  * @retval None.
+  * @retval None
   */
 static void TIM_Config(void)
 {  

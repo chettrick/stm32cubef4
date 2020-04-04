@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    SPI/SPI_FullDuplex_AdvComIT/Slave/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This sample code shows how to use STM32F4xx SPI HAL API to transmit
   *          and receive a data buffer with a communication process based on
   *          IT transfer.
@@ -61,7 +61,7 @@
 #define SPI_MASTER_SYNBYTE        0xAC
 #define SPI_TIMEOUT_MAX           0x1000
 
-/* Defines used for tranfer communication*/
+/* Defines used for transfer communication */
 #define ADDRCMD_MASTER_READ                         ((uint16_t)0x1234)
 #define ADDRCMD_MASTER_WRITE                        ((uint16_t)0x5678)
 #define CMD_LENGTH                                  ((uint16_t)0x0004)
@@ -108,12 +108,12 @@ int main(void)
      */
   HAL_Init();
 
-  /* Configure the system clock to 168 Mhz */
+  /* Configure the system clock to 168 MHz */
   SystemClock_Config();
 
-  /* Configure LED6 and LED5 */
-  BSP_LED_Init(LED6);
+  /* Configure LED5 and LED6 */
   BSP_LED_Init(LED5);
+  BSP_LED_Init(LED6);
 
   /*##-1- Configure the SPI peripheral #######################################*/
   /* Set the SPI parameters */
@@ -122,12 +122,12 @@ int main(void)
   SpiHandle.Init.Direction         = SPI_DIRECTION_2LINES;
   SpiHandle.Init.CLKPhase          = SPI_PHASE_2EDGE;
   SpiHandle.Init.CLKPolarity       = SPI_POLARITY_LOW;
-  SpiHandle.Init.CRCCalculation    = SPI_CRCCALCULATION_DISABLED;
+  SpiHandle.Init.CRCCalculation    = SPI_CRCCALCULATION_DISABLE;
   SpiHandle.Init.CRCPolynomial     = 7;
   SpiHandle.Init.DataSize          = SPI_DATASIZE_8BIT;
   SpiHandle.Init.FirstBit          = SPI_FIRSTBIT_MSB;
   SpiHandle.Init.NSS               = SPI_NSS_SOFT;
-  SpiHandle.Init.TIMode            = SPI_TIMODE_DISABLED;
+  SpiHandle.Init.TIMode            = SPI_TIMODE_DISABLE;
   SpiHandle.Init.Mode              = SPI_MODE_SLAVE;
 
   if(HAL_SPI_Init(&SpiHandle) != HAL_OK)
@@ -136,7 +136,7 @@ int main(void)
     Error_Handler();
   }
 
-  /* enter while loop too keep treating new request from Master */
+  /* Enter while loop too keep treating new request from Master */
   while(1)
   {
     /* Synchronization between Master and Slave */
@@ -335,7 +335,7 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
 
   /* The voltage scaling allows optimizing the power consumption when the device is
      clocked below the maximum system frequency, to update the voltage scaling value
@@ -361,6 +361,13 @@ static void SystemClock_Config(void)
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
+
+  /* STM32F405x/407x/415x/417x Revision Z devices: prefetch is supported  */
+  if (HAL_GetREVID() == 0x1001)
+  {
+    /* Enable the Flash prefetch */
+    __HAL_FLASH_PREFETCH_BUFFER_ENABLE();
+  }
 }
 
 /**
@@ -370,7 +377,7 @@ static void SystemClock_Config(void)
   */
 static void Error_Handler(void)
 {
-  /* Turn LED5 (RED) on */
+  /* Turn LED5 on */
   BSP_LED_On(LED5);
   while(1)
   {

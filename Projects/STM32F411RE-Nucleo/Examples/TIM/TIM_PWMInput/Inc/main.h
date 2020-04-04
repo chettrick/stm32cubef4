@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    TIM/TIM_PWMInput/Inc/main.h 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    26-June-2014
+  * @version V1.1.0
+  * @date    26-December-2014
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
@@ -50,10 +50,10 @@
    resources */
 /* Definition for TIMx clock resources */
 #define TIMx                           TIM4
-#define TIMx_CLK_ENABLE()              __TIM4_CLK_ENABLE()
+#define TIMx_CLK_ENABLE()              __HAL_RCC_TIM4_CLK_ENABLE()
 
 /* Definition for TIMx Pins */
-#define TIMx_CHANNEL_GPIO_PORT()       __GPIOB_CLK_ENABLE()
+#define TIMx_CHANNEL_GPIO_PORT()       __HAL_RCC_GPIOB_CLK_ENABLE()
 #define GPIO_PORT                      GPIOB
 #define GPIO_PIN_CHANNEL2              GPIO_PIN_7
 #define GPIO_AF_TIMx                   GPIO_AF2_TIM4

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    camera_app.h
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014   
+  * @version V1.2.0
+  * @date    26-December-2014   
   * @brief   Camera application header file
   ******************************************************************************
   * @attention
@@ -24,7 +24,6 @@
   *
   ******************************************************************************
   */
-
 
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __CAMERA_APP_H
@@ -64,10 +63,11 @@ void    CAMERA_Init(void);
 void    CAMERA_Suspend(void);
 void    CAMERA_Resume(void);
 void    CAMERA_Stop(void);
-void    CAMERA_Set_ContrastBrightness(uint32_t contrast_Level, uint32_t brightness_level);
+void    CAMERA_Set_ContrastBrightness(uint32_t contrast_level, uint32_t brightness_level);
 void    CAMERA_SelectEffect(uint32_t effect);
 uint8_t CAMERA_SaveToFile(uint8_t *path);
 uint8_t CAMERA_GetState(void);
+
 #ifdef __cplusplus
 }
 #endif

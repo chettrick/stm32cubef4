@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    LwIP/LwIP_UDPTCP_Echo_Server_Netconn_RTOS/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Description of the LwIP UDP/TCP Echo Server Netconn API Application.
   ******************************************************************************
   *
@@ -25,9 +25,9 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description 
+@par Application Description 
 
-This example guides STM32Cube HAL API users to run a UDP/TCP Echo Server application 
+This application guides STM32Cube HAL API users to run a UDP/TCP Echo Server application 
 based on Netconn API of LwIP TCP/IP stack
 
 To run this application, On the remote PC, open a command prompt window.
@@ -61,10 +61,10 @@ that the System tick increments while executing the Ethernet Link ISR.
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
       
-For more details about this application, refer to UM1713 "STM32Cube interfacing with LwIP and examples"
+For more details about this application, refer to UM1713 "STM32Cube interfacing with LwIP and applications"
 
 
 @par Directory contents
@@ -77,7 +77,7 @@ For more details about this application, refer to UM1713 "STM32Cube interfacing 
   - LwIP/LwIP_UDPTCP_Echo_Server_Netconn/Inc/lwipopts.h              LwIP stack configuration options
   - LwIP/LwIP_UDPTCP_Echo_Server_Netconn/Inc/FreeRTOSConfig.h        FreeRTOS configuration options
   - LwIP/LwIP_UDPTCP_Echo_Server_Netconn/Src/stm32f4xx_it.c          STM32 interrupt handlers
-  - LwIP/LwIP_UDPTCP_Echo_Server_Netconn/Src/app_ethernet.c          Ethernet specefic module
+  - LwIP/LwIP_UDPTCP_Echo_Server_Netconn/Src/app_ethernet.c          Ethernet specific module
   - LwIP/LwIP_UDPTCP_Echo_Server_Netconn/Src/main.c                  Main program
   - LwIP/LwIP_UDPTCP_Echo_Server_Netconn/Src/system_stm32f4xx.c      STM32F4xx system clock configuration file
   - LwIP/LwIP_UDPTCP_Echo_Server_Netconn/Src/ethernetif.c            Interfacing LwIP to ETH driver
@@ -87,9 +87,9 @@ For more details about this application, refer to UM1713 "STM32Cube interfacing 
 
 @par Hardware and Software environment
 
-  - This example runs on STM32F407xx/STM32F417xx Devices.
+  - This application runs on STM32F407xx/STM32F417xx Devices.
     
-  - This example has been tested with the following environments:
+  - This application has been tested with the following environments:
      - STM324xG-EVAL board   
      - echotool: (http://bansky.net/echotool/) is used as echo client that sends
        data to the server and checking whether they came back  
@@ -108,7 +108,7 @@ For more details about this application, refer to UM1713 "STM32Cube interfacing 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
- - Run the example 
+ - Run the application 
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

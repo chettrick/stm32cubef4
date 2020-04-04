@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    usbd_dfu_media_template.h
   * @author  MCD Application Team
-  * @version V2.2.0
-  * @date    13-June-2014
+  * @version V2.3.0
+  * @date    04-November-2014
   * @brief   header file for the usbd_dfu_media_template.c file
   ******************************************************************************
   * @attention
@@ -26,9 +26,12 @@
   */ 
 
 /* Define to prevent recursive inclusion -------------------------------------*/
+#ifndef __USBD_DFU_MEDIA_TEMPLATE_H
+#define __USBD_DFU_MEDIA_TEMPLATE_H
 
-#ifndef __USBD_DFU_MEDIA_H_
-#define __USBD_DFU_MEDIA_H_
+#ifdef __cplusplus
+ extern "C" {
+#endif
 
 /* Includes ------------------------------------------------------------------*/
 #include "usbd_dfu.h"
@@ -38,7 +41,7 @@
   */
   
 /** @defgroup USBD_MEDIA
-  * @brief header file for the USBD_MEDIA.c file
+  * @brief header file for the usbd_dfu_media_template.c file
   * @{
   */ 
 
@@ -86,7 +89,11 @@ extern USBD_DFU_MediaTypeDef  USBD_DFU_MEDIA_Template_fops;
   * @}
   */ 
 
-#endif /* __USBD_DFU_MEDIA_H_ */
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* __USBD_DFU_MEDIA_TEMPLATE_H */
 
 /**
   * @}

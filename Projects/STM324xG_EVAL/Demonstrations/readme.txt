@@ -3,10 +3,10 @@
  
   @verbatim
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
-  * @file    readme.txt 
+  * @file    Demonstrations/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Description of STM324xG-EVAL Demonstration
   ******************************************************************************
   *
@@ -39,7 +39,7 @@ STemWin and the FreeRTOS real time operating system and uses almost the whole ST
 capability to offer a large scope of usage based on the STM32Cube HAL BSP and several
 middleware components.
   
-Below you find an overview of the diffrent offred module in the demonstration:
+Below you find an overview of the different offered module in the demonstration:
 
  + System
  --------
@@ -76,17 +76,20 @@ Below you find an overview of the diffrent offred module in the demonstration:
  The audio player module provides a complete audio solution based on the STM32F4xx and
  delivers a high-quality music experience. It supports playing music in WAV format but may
  be extended to support other compressed formats such as MP3 and WMA audio formats.
- 
+ You can use the *.wav audio provided under "Utilities/Media/Audio" or any other ones.
+  
  + Video
  -------
  The video player module provides a video solution based on the STM32F4xx and STemWin
  movie API. It supports playing movie in emf format.
+ You can use the *.emf video file provided under "Utilities/Media/Video".
  
  + USB Mass storage Device
  -------------------------
  The USB device module includes mass storage device application using the MicroSD
  memory. It uses the USB OTG FS peripheral as the USB OTG HS is used for the USB disk
  Flash storage unit.
+ 
 
  + Camera
  --------
@@ -104,6 +107,7 @@ Below you find an overview of the diffrent offred module in the demonstration:
  created, navigation between pictures can be done either via Next and previous buttons or by
  enabling the slide show mode. The slide show timer can be changed on the fly (there is no
  need to restart the module).
+ You can use the *.jpg image files provided under "Utilities/Media/Pictures/JPG" or any other ones.
  
  For more details about the demonstration modules please refers to  STM32CubeF4 demonstration (UM1743)
 
@@ -113,14 +117,14 @@ Below you find an overview of the diffrent offred module in the demonstration:
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 @par Hardware and Software environment
 
-  - This example runs on STM32F407xx/417xx devices.
+  - This demonstration runs on STM32F407xx/417xx devices.
     
-  - This example has been tested with STM324xG-EVAL RevC evaluation board and can be
+  - This demonstration has been tested with STM324xG-EVAL RevC evaluation board and can be
     easily tailored to any other supported device and development board. 
 
 @par How to use it ? 
@@ -128,7 +132,7 @@ Below you find an overview of the diffrent offred module in the demonstration:
 In order to make the program work, you must do the following :
  - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
- - Run the example
+ - Run the demonstration
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

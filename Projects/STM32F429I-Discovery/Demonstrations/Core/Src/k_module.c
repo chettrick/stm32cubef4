@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    k_module.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014   
+  * @version V1.2.0
+  * @date    26-December-2014   
   * @brief   This file provides the kernel module functions 
   ******************************************************************************
   * @attention
@@ -49,13 +49,13 @@ K_ModuleOpenTypedef        open_link   [MAX_MODULES_NUM];
 uint16_t module_num = 0;
 uint16_t openlink_num = 0;
 /* Private function prototypes -----------------------------------------------*/
-static uint8_t k_ModuleVerify(K_ModuleItem_Typedef *module) ;
+static uint8_t k_ModuleVerify(K_ModuleItem_Typedef *module);
 /* Private functions ---------------------------------------------------------*/
 
 /**
   * @brief  Module Initialization.
   * @param  None.
-  * @retval None.
+  * @retval None
   */
 void k_ModuleInit(void) 
 {
@@ -68,7 +68,7 @@ void k_ModuleInit(void)
 /**
   * @brief  Get the module number.
   * @param  None.
-  * @retval None.
+  * @retval None
   */
 uint8_t k_ModuleGetNumber(void) 
 {

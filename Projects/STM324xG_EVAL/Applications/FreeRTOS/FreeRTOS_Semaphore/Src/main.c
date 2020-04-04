@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    FreeRTOS/FreeRTOS_Semaphore/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Main program body
   ******************************************************************************
   * @attention
@@ -32,20 +32,20 @@
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
-#define semtstSTACK_SIZE        configMINIMAL_STACK_SIZE
+#define semtstSTACK_SIZE  configMINIMAL_STACK_SIZE
 
 /* Private variables ---------------------------------------------------------*/
 osThreadId SemThread1Handle, SemThread2Handle;
 osSemaphoreId osSemaphore;
 
 /* Private function prototypes -----------------------------------------------*/
-static void SemaphoreThread1 (void const *argument);
-static void SemaphoreThread2 (void const *argument);
+static void SemaphoreThread1(void const *argument);
+static void SemaphoreThread2(void const *argument);
 static void SystemClock_Config(void);
 
 /* Private functions ---------------------------------------------------------*/
 /**
-  * @brief  Main program.
+  * @brief  Main program
   * @param  None
   * @retval None
   */
@@ -59,17 +59,17 @@ int main(void)
      */
   HAL_Init();  
   
-  /* Configure the system clock to 168 Mhz */
+  /* Configure the system clock to 168 MHz */
   SystemClock_Config();
   
-  /* Initialize LEDs */
+  /* Configure LED1 and LED2 */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED2);
 
   /* Define used semaphore */
   osSemaphoreDef(SEM);
   
-  /* Create the semaphore used by the two threads. */
+  /* Create the semaphore used by the two threads */
   osSemaphore = osSemaphoreCreate(osSemaphore(SEM) , 1);
   
   /* Create the first Thread */
@@ -81,11 +81,10 @@ int main(void)
   SemThread2Handle = osThreadCreate(osThread(SEM_Thread2), (void *) osSemaphore);
   
   /* Start scheduler */
-  osKernelStart(NULL, NULL);
+  osKernelStart();
   
   /* We should never get here as control is now taken by the scheduler */
   for(;;);
-  
 }
 
 /**
@@ -93,14 +92,13 @@ int main(void)
   * @param  argument: shared semaphore
   * @retval None
   */
-static void SemaphoreThread1 (void const *argument)
+static void SemaphoreThread1(void const *argument)
 {  
   uint32_t count = 0;
   osSemaphoreId semaphore = (osSemaphoreId) argument;
   
   for(;;)
   {
-    
     if (semaphore != NULL)
     {
       /* Try to obtain the semaphore. */
@@ -113,17 +111,17 @@ static void SemaphoreThread1 (void const *argument)
           /* Toggle LED1 */
           BSP_LED_Toggle(LED1);
           
-          /* Delay 200 ms */
+          /* Delay 200ms */
           osDelay(200);
         }
         
-        /* Turn off LED1*/
+        /* Turn off LED1 */
         BSP_LED_Off(LED1);
-
-        /* Release the semaphore. */
+        
+        /* Release the semaphore */
         osSemaphoreRelease(semaphore);
-
-        /* Suspend ourseleves to execute thread 2 (lower priority)  */
+        
+        /* Suspend ourselves to execute thread 2 (lower priority)  */
         osThreadSuspend(NULL); 
       }
     }
@@ -162,7 +160,7 @@ static void SemaphoreThread2 (void const *argument)
         
         /* Turn off LED2 */
         BSP_LED_Off(LED2);
-
+        
         /* Release the semaphore to unblock Thread 1 (higher priority)  */
         osSemaphoreRelease(semaphore);
       }
@@ -196,7 +194,7 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
 
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -222,13 +220,19 @@ static void SystemClock_Config(void)
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
+
+  /* STM32F405x/407x/415x/417x Revision Z devices: prefetch is supported  */
+  if (HAL_GetREVID() == 0x1001)
+  {
+    /* Enable the Flash prefetch */
+    __HAL_FLASH_PREFETCH_BUFFER_ENABLE();
+  }
 }
 
 #ifdef  USE_FULL_ASSERT
-
 /**
   * @brief  Reports the name of the source file and the source line number
-  *   where the assert_param error has occurred.
+  *         where the assert_param error has occurred.
   * @param  file: pointer to the source file name
   * @param  line: assert_param error line source number
   * @retval None
@@ -236,13 +240,13 @@ static void SystemClock_Config(void)
 void assert_failed(uint8_t* file, uint32_t line)
 {
   /* User can add his own implementation to report the file name and line number,
-  ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
   
   /* Infinite loop */
   while (1)
-  {}
+  {
+  }
 }
 #endif
-
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

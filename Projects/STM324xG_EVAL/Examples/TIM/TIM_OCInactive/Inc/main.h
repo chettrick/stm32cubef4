@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    TIM/TIM_OCInactive/Inc/main.h 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
@@ -49,10 +49,10 @@
    resources */
 /* Definition for TIMx clock resources */
 #define TIMx                           TIM2
-#define TIMx_CLK_ENABLE()                __TIM2_CLK_ENABLE()
+#define TIMx_CLK_ENABLE()                __HAL_RCC_TIM2_CLK_ENABLE()
 
 /* Definition for TIMx Pins */
-#define TIMx_CHANNEL_GPIO_PORT()       __GPIOA_CLK_ENABLE()
+#define TIMx_CHANNEL_GPIO_PORT()       __HAL_RCC_GPIOA_CLK_ENABLE()
 #define GPIO_PIN_CHANNEL1              GPIO_PIN_0
 #define GPIO_PIN_CHANNEL2              GPIO_PIN_2
 #define GPIO_PIN_CHANNEL3              GPIO_PIN_3

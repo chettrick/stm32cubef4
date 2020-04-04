@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    FLASH/FLASH_DualBoot/readme.txt
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Description of the FLASH Dual boot example.
   ******************************************************************************
   *
@@ -54,7 +54,7 @@ Below are the steps to run this example:
    
 @note:
  - You can avoid step 1 by directly loading the binary file provided with the example
- - You have to configure your prefered toolchain in order to generate the binary
+ - You have to configure your preferred toolchain in order to generate the binary
    file after compiling the project.
    
  - You can use STM32 ST-LINK Utilities or any similar tool to initially reset the 
@@ -77,7 +77,7 @@ Below are the steps to run this example:
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 

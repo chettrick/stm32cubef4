@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Audio/Audio_playback_and_record/Src/menu.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This file implements Menu Functions
   ******************************************************************************
   * @attention
@@ -26,15 +26,16 @@
   */
 
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
+#include "waveplayer.h"
+#include "waverecorder.h" 
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-AUDIO_DEMO_StateMachine       AudioDemo;
-uint8_t                       PrevSelect = 0;
-AUDIO_DEMO_SelectMode         AudioSeletMode;
+AUDIO_DEMO_StateMachine     AudioDemo;
+uint8_t                     PrevSelect = 0;
+AUDIO_DEMO_SelectMode       AudioSelectMode;
 AUDIO_PLAYBACK_StateTypeDef AudioState;
 
 uint8_t *AUDIO_main_menu[] = 
@@ -49,6 +50,7 @@ static void AUDIO_SelectItem(uint8_t **menu, uint8_t item);
 static void AUDIO_MenuProbeKey(JOYState_TypeDef state);
 static void AUDIO_ChangeSelectMode(AUDIO_DEMO_SelectMode select_mode);
 static void LCD_ClearTextZone(void);
+
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -59,7 +61,7 @@ static void LCD_ClearTextZone(void);
 void AUDIO_MenuInit(void)
 {
   AudioDemo.state = AUDIO_DEMO_IDLE;
-  AudioSeletMode = AUDIO_SELECT_MENU;
+  AudioSelectMode = AUDIO_SELECT_MENU;
   AUDIO_SelectItem(AUDIO_main_menu, 0); 
 }
 
@@ -70,6 +72,8 @@ void AUDIO_MenuInit(void)
   */
 void AUDIO_MenuProcess(void)
 {
+  AUDIO_ErrorTypeDef  status;
+  
   if(AppliState == APPLICATION_READY)
   { 
     switch(AudioDemo.state)
@@ -112,11 +116,11 @@ void AUDIO_MenuProcess(void)
           case 1:         
             /* Display HMI messages */
             BSP_LCD_SetTextColor(LCD_COLOR_GREEN);          
-            BSP_LCD_DisplayStringAtLine(14 ,(uint8_t *)"                                                      ");
-            BSP_LCD_DisplayStringAtLine(15 ,(uint8_t *)"                                                      ");
-            BSP_LCD_DisplayStringAtLine(16 ,(uint8_t *)"                                                      ");
-            BSP_LCD_DisplayStringAtLine(17 ,(uint8_t *)"                                                      ");
-            BSP_LCD_DisplayStringAtLine(18 ,(uint8_t *)"Use [User Key] To Stop and return from player/recorder");
+            BSP_LCD_DisplayStringAtLine(14 ,(uint8_t *)"                                                               ");
+            BSP_LCD_DisplayStringAtLine(15 ,(uint8_t *)"                                                               ");
+            BSP_LCD_DisplayStringAtLine(16 ,(uint8_t *)"                                                               ");
+            BSP_LCD_DisplayStringAtLine(17 ,(uint8_t *)"                                                               ");
+            BSP_LCD_DisplayStringAtLine(18 ,(uint8_t *)"Use [User Key] To Stop and return from player/recorder         ");
             BSP_LCD_SetTextColor(LCD_COLOR_WHITE); 
             
             /* Set PLAYBACK state and start playing 1st file */ 
@@ -128,11 +132,11 @@ void AUDIO_MenuProcess(void)
           case 2:
             /* Display HMI messages */
             BSP_LCD_SetTextColor(LCD_COLOR_GREEN);          
-            BSP_LCD_DisplayStringAtLine(14 ,(uint8_t *)"                                                      ");
-            BSP_LCD_DisplayStringAtLine(15 ,(uint8_t *)"                                                      ");
-            BSP_LCD_DisplayStringAtLine(16 ,(uint8_t *)"                                                      ");
-            BSP_LCD_DisplayStringAtLine(17 ,(uint8_t *)"                                                      ");
-            BSP_LCD_DisplayStringAtLine(18 ,(uint8_t *)"Use [User Key] To Stop and return from player/recorder");
+            BSP_LCD_DisplayStringAtLine(14 ,(uint8_t *)"                                                               ");
+            BSP_LCD_DisplayStringAtLine(15 ,(uint8_t *)"                                                               ");
+            BSP_LCD_DisplayStringAtLine(16 ,(uint8_t *)"                                                               ");
+            BSP_LCD_DisplayStringAtLine(17 ,(uint8_t *)"                                                               ");
+            BSP_LCD_DisplayStringAtLine(18 ,(uint8_t *)"Use [User Key] To Stop and return from player/recorder         ");
             BSP_LCD_SetTextColor(LCD_COLOR_WHITE); 
             
             /* Set PLAYBACK state and start playing 1st file */ 
@@ -175,7 +179,7 @@ void AUDIO_MenuProcess(void)
         {
           /* Start Playing */
           AudioState = AUDIO_STATE_INIT;
-          if(AUDIO_Start(0) == AUDIO_ERROR_IO)
+          if(AUDIO_PLAYER_Start(0) == AUDIO_ERROR_IO)
           {
             AUDIO_ChangeSelectMode(AUDIO_SELECT_MENU); 
             AudioDemo.state = AUDIO_DEMO_IDLE;
@@ -193,7 +197,7 @@ void AUDIO_MenuProcess(void)
         }
         else /* Not idle */
         {
-          if(AUDIO_Process() == AUDIO_ERROR_IO)
+          if(AUDIO_PLAYER_Process() == AUDIO_ERROR_IO)
           {
             AUDIO_ChangeSelectMode(AUDIO_SELECT_MENU);  
             AudioDemo.state = AUDIO_DEMO_IDLE;
@@ -230,7 +234,8 @@ void AUDIO_MenuProcess(void)
         }
         else /* Not idle */
         {
-          if(AUDIO_REC_Process() == AUDIO_ERROR_IO)
+          status = AUDIO_REC_Process();
+          if((status == AUDIO_ERROR_IO) || (status == AUDIO_ERROR_EOF))
           {
             AUDIO_ChangeSelectMode(AUDIO_SELECT_MENU);  
             AudioDemo.state = AUDIO_DEMO_IDLE;
@@ -255,6 +260,127 @@ void AUDIO_MenuProcess(void)
   }
   AudioDemo.select &= 0x7F;
 } 
+
+/**
+  * @brief  EXTI line detection callbacks.
+  * @param  GPIO_Pin: Specifies the pins connected EXTI line
+  * @retval None
+  */
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+  static JOYState_TypeDef JoyState = JOY_NONE;
+  static uint32_t debounce_time = 0;
+  
+  if(GPIO_Pin == GPIO_PIN_8)
+  {    
+    /* Get the Joystick State */
+    JoyState = BSP_JOY_GetState();
+    
+    /* Clear joystick interrupt pending bits */
+    BSP_IO_ITClear();
+    
+    if(AudioSelectMode == AUDIO_SELECT_MENU)
+    {  
+      AUDIO_MenuProbeKey(JoyState); 
+      
+      switch(JoyState)
+      {
+      case JOY_LEFT:
+        LCD_LOG_ScrollBack();
+        break;
+        
+      case JOY_RIGHT:
+        LCD_LOG_ScrollForward();
+        break;          
+        
+      default:
+        break;           
+      }
+    }
+    else if(AudioSelectMode == AUDIO_PLAYBACK_CONTROL)
+    {
+      AUDIO_PlaybackProbeKey(JoyState);
+    }
+  }
+  
+  if(AudioDemo.state == AUDIO_DEMO_PLAYBACK)
+  {
+    if(GPIO_Pin == KEY_BUTTON_PIN)
+    { 
+      /* Prevent debounce effect for user key */
+      if((HAL_GetTick() - debounce_time) > 50)
+      {
+        debounce_time = HAL_GetTick();
+      }
+      else
+      {
+        return;
+      }
+      
+      /* Change the selection type */
+      if(AudioSelectMode == AUDIO_SELECT_MENU)
+      {
+        AUDIO_ChangeSelectMode(AUDIO_PLAYBACK_CONTROL); 
+      }
+      else if(AudioSelectMode == AUDIO_PLAYBACK_CONTROL)
+      {       
+        AUDIO_PLAYER_Stop();
+      }
+    }
+  }
+  if(AudioDemo.state == AUDIO_DEMO_IN)
+  {
+    if(GPIO_Pin == KEY_BUTTON_PIN)
+    { 
+      /* Prevent debounce effect for user key */
+      if((HAL_GetTick() - debounce_time) > 50)
+      {
+        debounce_time = HAL_GetTick();
+      }
+      else
+      {
+        return;
+      }
+      
+      /* Change the selection type */
+      if(AudioSelectMode == AUDIO_SELECT_MENU)
+      {
+        AUDIO_ChangeSelectMode(AUDIO_PLAYBACK_CONTROL); 
+      }
+      else if(AudioSelectMode == AUDIO_PLAYBACK_CONTROL)
+      {       
+        AUDIO_PLAYER_Stop();
+      }
+    }
+  }
+}
+
+/*******************************************************************************
+                            Static Functions
+*******************************************************************************/
+
+/**
+  * @brief  Changes the selection mode.
+  * @param  select_mode: Selection mode
+  * @retval None
+  */
+static void AUDIO_ChangeSelectMode(AUDIO_DEMO_SelectMode select_mode)
+{
+  if(select_mode == AUDIO_SELECT_MENU)
+  {
+    AUDIO_SelectItem(AUDIO_main_menu, 0x00);
+    LCD_LOG_UpdateDisplay(); 
+    AudioDemo.state = AUDIO_DEMO_IDLE; 
+    AUDIO_PLAYER_Stop();
+  }
+  else if(select_mode == AUDIO_PLAYBACK_CONTROL)
+  {
+    LCD_ClearTextZone();
+    AUDIO_SelectItem(AUDIO_main_menu, 0xFF);     
+  }
+  AudioSelectMode = select_mode; 
+  AudioDemo.select = 0;
+}
 
 /**
   * @brief  Manages the menu on the screen.
@@ -292,7 +418,7 @@ static void AUDIO_SelectItem(uint8_t **menu, uint8_t item)
     BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);  
     BSP_LCD_DisplayStringAtLine(21, menu [2]); 
     break;
-     
+    
   default:
     BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
     BSP_LCD_DisplayStringAtLine(19, menu [0]);
@@ -326,127 +452,6 @@ static void AUDIO_MenuProbeKey(JOYState_TypeDef state)
 }
 
 /**
-  * @brief EXTI line detection callbacks.
-  * @param GPIO_Pin: Specifies the pins connected EXTI line
-  * @retval None
-  */
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
-{
-  static JOYState_TypeDef JoyState = JOY_NONE;
-  static uint32_t debounce_time = 0;
-  
-  if(GPIO_Pin == GPIO_PIN_8)
-  {    
-    /* Get the Joystick State */
-    JoyState = BSP_JOY_GetState();
-    
-    /* Clear joystick interrupt pending bits */
-    BSP_IO_ITClear();
-    
-    if(AudioSeletMode == AUDIO_SELECT_MENU)
-    {  
-      AUDIO_MenuProbeKey(JoyState); 
-      
-      switch(JoyState)
-      {
-      case JOY_LEFT:
-        LCD_LOG_ScrollBack();
-        break;
-             
-      case JOY_RIGHT:
-        LCD_LOG_ScrollForward();
-        break;          
-        
-      default:
-        break;           
-      }
-    }
-    else if(AudioSeletMode == AUDIO_PLAYBACK_CONTROL)
-    {
-      AUDIO_PlaybackProbeKey(JoyState);
-    }
-  }
-
-  if(AudioDemo.state == AUDIO_DEMO_PLAYBACK)
-  {
-    if(GPIO_Pin == KEY_BUTTON_PIN)
-    { 
-      /* Prevent debounce effect for user key */
-      if((HAL_GetTick() - debounce_time) > 50)
-      {
-        debounce_time = HAL_GetTick();
-      }
-      else
-      {
-        return;
-      }
-      
-      /* Change the selection type */
-      if(AudioSeletMode == AUDIO_SELECT_MENU)
-      {
-        AUDIO_ChangeSelectMode(AUDIO_PLAYBACK_CONTROL); 
-      }
-      else if(AudioSeletMode == AUDIO_PLAYBACK_CONTROL)
-      {       
-       AUDIO_Stop();
-      }
-    }
-  }
-  if(AudioDemo.state == AUDIO_DEMO_IN)
-  {
-    if(GPIO_Pin == KEY_BUTTON_PIN)
-    { 
-      /* Prevent debounce effect for user key */
-      if((HAL_GetTick() - debounce_time) > 50)
-      {
-        debounce_time = HAL_GetTick();
-      }
-      else
-      {
-        return;
-      }
-      
-      /* Change the selection type */
-      if(AudioSeletMode == AUDIO_SELECT_MENU)
-      {
-        AUDIO_ChangeSelectMode(AUDIO_PLAYBACK_CONTROL); 
-      }
-      else if(AudioSeletMode == AUDIO_PLAYBACK_CONTROL)
-      {       
-       AUDIO_Stop();
-      }
-    }
-  }
-}
-
-/******************************************************************************
-                            Static Function
-*******************************************************************************/
-
-/**
-  * @brief  Changes the selection mode.
-  * @param  select_mode: Selection mode
-  * @retval None
-  */
-static void AUDIO_ChangeSelectMode(AUDIO_DEMO_SelectMode select_mode)
-{
-  if(select_mode == AUDIO_SELECT_MENU)
-  {
-    AUDIO_SelectItem(AUDIO_main_menu, 0x00);
-    LCD_LOG_UpdateDisplay(); 
-    AudioDemo.state = AUDIO_DEMO_IDLE; 
-    AUDIO_Stop();
-  }
-  else if(select_mode == AUDIO_PLAYBACK_CONTROL)
-  {
-    LCD_ClearTextZone();
-    AUDIO_SelectItem(AUDIO_main_menu, 0xFF);     
-  }
-  AudioSeletMode = select_mode; 
-  AudioDemo.select = 0;
-}
-
-/**
   * @brief  Clears the text zone.
   * @param  None
   * @retval None
@@ -454,7 +459,7 @@ static void AUDIO_ChangeSelectMode(AUDIO_DEMO_SelectMode select_mode)
 static void LCD_ClearTextZone(void)
 {
   uint8_t i = 0;
-
+  
   for(i= 0; i < 13; i++)
   {
     BSP_LCD_ClearStringLine(i + 3);

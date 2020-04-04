@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    main.c 
+  * @file    LCD_Paint/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Main program body
   ******************************************************************************
   * @attention
@@ -81,10 +81,10 @@ int main(void)
      */
   HAL_Init();
   
-  /* Configure the system clock to 168 Mhz */
+  /* Configure the system clock to 168 MHz */
   SystemClock_Config(); 
     
-  /* Configure LED3 */
+  /* Configure LED1 and LED3 */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED3);
   
@@ -112,7 +112,7 @@ int main(void)
   /* Create a FAT file system (format) on the logical drive */
   f_mkfs((TCHAR const*)SDPath, 0, 0);
   
-  /*##-4- Register the file system object to the FatFs module ##############*/
+  /*##-4- Register the file system object to the FatFs module ################*/
   if(f_mount(&SDFatFs, (TCHAR const*)SDPath, 0) != FR_OK)
   {
     /* FatFs Initialization Error */
@@ -121,7 +121,8 @@ int main(void)
   
   /*##-5- Draw the menu ######################################################*/
   Draw_Menu();  
-  
+
+  /* Infinite loop */  
   while (1)
   { 
   /*##-6- Configure the touch screen and Get the position ####################*/    
@@ -247,7 +248,7 @@ static void GetPosition(void)
       Radius = 2;
       Update_Size(Radius);
     }  
-    else if((x > (BSP_LCD_GetXSize()-5) ) & (y > (12 * color_width)) & (y < (13 * color_width)) | ( x < 55) & (y < 5))
+    else if(((x > (BSP_LCD_GetXSize()-5) ) & (y > (12 * color_width)) & (y < (13 * color_width))) | ((x < 55) & (y < 5)))
     {    
       TS_State.x = 0;
       TS_State.y = 0;
@@ -319,7 +320,7 @@ void Save_Picture(void)
   else 
   {    
     /* Format the string */
-    sprintf((char *)str, "image_%d.bmp", counter);  
+    sprintf((char *)str, "image_%lu.bmp", counter);
     
     /*##-1- Prepare the image to be saved ####################################*/
     Prepare_Picture();
@@ -477,7 +478,7 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
 
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -503,6 +504,13 @@ static void SystemClock_Config(void)
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
+
+  /* STM32F405x/407x/415x/417x Revision Z devices: prefetch is supported  */
+  if (HAL_GetREVID() == 0x1001)
+  {
+    /* Enable the Flash prefetch */
+    __HAL_FLASH_PREFETCH_BUFFER_ENABLE();
+  }
 }
 
 #ifdef  USE_FULL_ASSERT

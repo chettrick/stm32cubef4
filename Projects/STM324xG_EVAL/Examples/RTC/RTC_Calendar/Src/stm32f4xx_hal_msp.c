@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    RTC/RTC_Calendar/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   HAL MSP module.    
   ******************************************************************************
   * @attention
@@ -75,7 +75,7 @@ void HAL_RTC_MspInit(RTC_HandleTypeDef *hrtc)
   RCC_PeriphCLKInitTypeDef  PeriphClkInitStruct;
   
   /* To change the source clock of the RTC feature (LSE, LSI), You have to:
-     - Enable the power clock using __PWR_CLK_ENABLE()
+     - Enable the power clock using __HAL_RCC_PWR_CLK_ENABLE()
      - Enable write access using HAL_PWR_EnableBkUpAccess() function before to 
        configure the RTC clock source (to be done once after reset).
      - Reset the Back up Domain using __HAL_RCC_BACKUPRESET_FORCE() and 

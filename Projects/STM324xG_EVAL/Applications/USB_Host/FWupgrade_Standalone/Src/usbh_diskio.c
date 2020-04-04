@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Host/FWupgrade_Standalone/Src/usbh_diskio.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   USB diskio interface
   ******************************************************************************
   * @attention
@@ -78,7 +78,7 @@ DSTATUS disk_status(BYTE pdrv)
   * @param  count: Number of sectors to read
   * @retval DRESULT: Operation result
   */
-DRESULT disk_read (BYTE pdrv, BYTE *buff, DWORD sector, BYTE count)
+DRESULT disk_read (BYTE pdrv, BYTE *buff, DWORD sector, UINT count)
 {
   DRESULT res = RES_ERROR;
   MSC_LUNTypeDef info;
@@ -140,7 +140,7 @@ DRESULT disk_read (BYTE pdrv, BYTE *buff, DWORD sector, BYTE count)
   * @retval DRESULT: Operation result
   */
 #if _USE_WRITE
-DRESULT disk_write (BYTE pdrv, const BYTE* buff, DWORD sector, BYTE count)
+DRESULT disk_write (BYTE pdrv, const BYTE* buff, DWORD sector, UINT count)
 {
   DRESULT res = RES_ERROR; 
   MSC_LUNTypeDef info;
@@ -153,7 +153,7 @@ DRESULT disk_write (BYTE pdrv, const BYTE* buff, DWORD sector, BYTE count)
     {
       memcpy (scratch, &buff[count * _MAX_SS], _MAX_SS);
       
-      status = USBH_MSC_Write(&hUSBHost, pdrv, sector + count, (BYTE *)scratch, 1) ;
+      status = USBH_MSC_Write(&hUSBHost, pdrv, sector + count, (BYTE *)scratch, 1);
       if(status == USBH_FAIL)
       {
         break;

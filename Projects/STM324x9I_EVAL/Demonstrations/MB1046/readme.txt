@@ -3,10 +3,10 @@
  
   @verbatim
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
-  * @file    readme.txt 
+  * @file    Demonstrations/MB1046/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Description of MB1046 Demonstration
   ******************************************************************************
   *
@@ -38,13 +38,8 @@ The STM32Cube Demonstration platform is built around the powerful graphical libr
 STemWin and the FreeRTOS real time operating system and uses almost the whole STM32
 capability to offer a large scope of usage based on the STM32Cube HAL BSP and several
 middleware components.
- 
- note: There are shared pins between the SDCard and the camera module so when 
-       the camera module is plugged the SDCard is not initialized and not detected 
-       by the “addfolder” and “addfile” of the video, audio, imagebrowser and filebrowser modules. 
-       and when the camera module is not plugged the SDCard is initialized and detected.
   
-Below you find an overview of the diffrent offred module in the demonstration:
+Below you find an overview of the different offered module in the demonstration:
 
  + System
  --------
@@ -62,7 +57,8 @@ Below you find an overview of the diffrent offred module in the demonstration:
  storage unit(s), to delete or to open a selected file. The file list structure 
  is built during the media connection and updated after a connection status change of one
  of the used media.
- 
+ User can use the images available under "Utilities/Pictures/JPG" or any other ones.
+  
  + Game
  -------
  The game coming in the STM32Cube demonstration is based on the Reversi game. It is a
@@ -81,12 +77,14 @@ Below you find an overview of the diffrent offred module in the demonstration:
  The audio player module provides a complete audio solution based on the STM32F4xx and
  delivers a high-quality music experience. It supports playing music in WAV format but may
  be extended to support other compressed formats such as MP3 and WMA audio formats.
- 
+ You can use the *.wav audio provided under "Utilities/Audio" or any other ones.
+  
  + Video
  -------
  The video player module provides a video solution based on the STM32F4xx and STemWin
  movie API. It supports playing movie in emf format.
- 
+ You can use the *.emf video file provided under "Utilities/Media/Video".
+  
  + USB Mass storage Device
  -------------------------
  The USB device module includes mass storage device application using the MicroSD
@@ -109,7 +107,8 @@ Below you find an overview of the diffrent offred module in the demonstration:
  created, navigation between pictures can be done either via Next and previous buttons or by
  enabling the slide show mode. The slide show timer can be changed on the fly (there is no
  need to restart the module).
- 
+ You can use the *.jpg image files provided under "Utilities/Media/Pictures/JPG" or any other ones.
+  
  For more details about the demonstration modules please refers to  STM32CubeF4 demonstration (UM1743)
 
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
@@ -118,14 +117,14 @@ Below you find an overview of the diffrent offred module in the demonstration:
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 @par Hardware and Software environment
 
   - This demonstration runs on STM32F429xx device.
     
-  - This example has been tested with STM32429I-EVAL RevB evaluation board and can be
+  - This demonstration has been tested with STM32429I-EVAL RevB evaluation board and can be
     easily tailored to any other supported device and development board. 
 
 @par How to use it ? 
@@ -133,7 +132,7 @@ Below you find an overview of the diffrent offred module in the demonstration:
 In order to make the program work, you must do the following :
  - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
- - Run the example
+ - Run the demonstration
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

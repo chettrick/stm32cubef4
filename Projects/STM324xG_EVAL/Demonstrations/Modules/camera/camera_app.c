@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    camera_app.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Camera application functions source file
   ******************************************************************************
   * @attention
@@ -315,7 +315,7 @@ static void RGB16toRGB24(uint8_t *pDestBuffer, uint8_t *pSrcBuffer)
   uint32_t i = 0, j = 0;
   uint16_t value;
   
-  pSrc = (uint16_t*) & pSrcBuffer[IMAGE_BUFFER_SIZE] - 1 ;
+  pSrc = (uint16_t*) & pSrcBuffer[IMAGE_BUFFER_SIZE] - 1;
   pDest = (uint8_t*) & pDestBuffer[0];
   
   for (i = IMAGE_COLUMN_SIZE; i > 0; i-- )

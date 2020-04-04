@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324x9i_eval_lcd.h
   * @author  MCD Application Team
-  * @version V2.0.2
-  * @date    19-June-2014
+  * @version V2.0.3
+  * @date    10-December-2014
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm324x9i_eval_lcd.c driver.
   ******************************************************************************
@@ -47,18 +47,18 @@
 /* Includes ------------------------------------------------------------------*/
 /* Include LCD component Driver */
 /* LCD integrated within MB1063 */   
-#include "..\Components\ampire640480\ampire640480.h"
+#include "../Components/ampire640480/ampire640480.h"
 /* LCD integrated within MB1046 */
-#include "..\Components\ampire480272\ampire480272.h"
+#include "../Components/ampire480272/ampire480272.h"
 
 /* Include IOExpander(STMPE811) component Driver */   
-#include "..\Components\stmpe811\stmpe811.h"
+#include "../Components/stmpe811/stmpe811.h"
    
 /* Include SDRAM Driver */
 #include "stm324x9i_eval_sdram.h"
  
 #include "stm324x9i_eval.h"   
-#include "..\..\..\Utilities\Fonts\fonts.h"
+#include "../../../Utilities/Fonts/fonts.h"
   
 /** @addtogroup BSP
   * @{

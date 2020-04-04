@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Host/HID_Standalone/Src/keyboard.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014 
+  * @version V1.2.0
+  * @date    26-December-2014 
   * @brief   This file implements the HID keyboard functions
   ******************************************************************************
   * @attention
@@ -69,7 +69,7 @@ void HID_KeyboardMenuProcess(void)
   case HID_KEYBOARD_WAIT:
     if(hid_demo.select != prev_select)
     {
-      prev_select = hid_demo.select ;
+      prev_select = hid_demo.select;
       HID_SelectItem(DEMO_KEYBOARD_menu, hid_demo.select & 0x7F);
       /* Handle select item */
       if(hid_demo.select & 0x80)

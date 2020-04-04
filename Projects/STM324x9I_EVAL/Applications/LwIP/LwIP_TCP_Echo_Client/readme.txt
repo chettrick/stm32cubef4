@@ -1,12 +1,12 @@
 /**
-  @page LwIP TCP Echo Client Application
+  @page LwIP_TCP_Echo_Client LwIP TCP Echo Client Application
   
   @verbatim
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    LwIP/LwIP_TCP_Echo_Client/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Description of the LwIP TCP Echo Client Application.
   ******************************************************************************
   *
@@ -25,9 +25,9 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description 
+@par Application Description 
 
-This example guides STM32Cube HAL API users to run TCP Echo Client application 
+This application guides STM32Cube HAL API users to run TCP Echo Client application 
 based on Raw API of LwIP TCP/IP stack
 
 To run this application, On the remote PC, open a command prompt window.
@@ -60,10 +60,10 @@ function in the ethernetif.c file
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
       
-For more details about this application, refer to UM1713 "STM32Cube interfacing with LwIP and examples"
+For more details about this application, refer to UM1713 "STM32Cube interfacing with LwIP and applications"
 
 
 @par Directory contents 
@@ -75,7 +75,7 @@ For more details about this application, refer to UM1713 "STM32Cube interfacing 
   - LwIP/LwIP_TCP_Echo_Client/Inc/main.h                  Main program header file
   - LwIP/LwIP_TCP_Echo_Client/Inc/lwipopts.h              LwIP stack configuration options
   - LwIP/LwIP_TCP_Echo_Client/Inc/tcp_echoclient.h        Header for tcp echoclient application
-  - LwIP/LwIP_TCP_Echo_Client/Src/app_ethernet.c          Ethernet specefic module
+  - LwIP/LwIP_TCP_Echo_Client/Src/app_ethernet.c          Ethernet specific module
   - LwIP/LwIP_TCP_Echo_Client/Src/stm32f4xx_it.c          STM32 interrupt handlers
   - LwIP/LwIP_TCP_Echo_Client/Src/main.c                  Main program
   - LwIP/LwIP_TCP_Echo_Client/Src/system_stm32f4xx.c      STM32F4xx system clock configuration file
@@ -85,9 +85,9 @@ For more details about this application, refer to UM1713 "STM32Cube interfacing 
 
 @par Hardware and Software environment
 
-  - This example runs on STM32F429x/STM32F439x Devices.
+  - This application runs on STM32F429x/STM32F439x Devices.
     
-  - This example has been tested with the following environments:
+  - This application has been tested with the following environments:
      - STM324x9I-EVAL board   
      - echotool: (http://bansky.net/echotool/) is used as echo server that sends
        back every incoming data.
@@ -106,7 +106,7 @@ For more details about this application, refer to UM1713 "STM32Cube interfacing 
 In order to make the program work, you must do the following :
  - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
- - Run the example
+ - Run the application
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

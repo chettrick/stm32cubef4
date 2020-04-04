@@ -1,13 +1,13 @@
 /**
-  @page CustomHID_Standalone USB Device Custom HID example
+  @page CustomHID_Standalone USB Device Custom HID application
   
   @verbatim
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    USB_Device/CustomHID_Standalone/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
-  * @brief   Description of the USB Custom HID example.
+  * @version V1.2.0
+  * @date    26-December-2014
+  * @brief   Description of the USB Custom HID application.
   ******************************************************************************
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
@@ -25,12 +25,12 @@
   ******************************************************************************
   @endverbatim
   
-@par Example Description
+@par Application Description
 
-This example is a part of the USB Device Library package using STM32Cube firmware. It describes how to 
+This application is a part of the USB Device Library package using STM32Cube firmware. It describes how to 
 use USB device application based on the Custom HID Class on the STM32F4xx devices.
 
-This is a typical example on how to use the STM32F4xx USB OTG Device peripheral, where the STM32 MCU is 
+This is a typical application on how to use the STM32F4xx USB OTG Device peripheral, where the STM32 MCU is 
 enumerated as a HID compliant device using the native PC Host HID driver to which the STM324xG-EVAL
 board is connected.
 
@@ -46,7 +46,8 @@ It's worth noting that the system clock (SYSCLK) can be configured, depending on
  - SYSCLK is set to 180 MHz: for only HS Core, since no embedded PHY is used.
 
 To test the application, user must proceed as follows:
- - Start the "USB HID Demonstrator" PC applet and connect STM32 USB to PC
+ - Start the "USB HID Demonstrator" PC applet, available for download from www.st.com, 
+   and connect STM32 USB to PC
  - The device should be detected and shown in the USB HID target box
  - Press Graphic View button
  - Select "use SET_FEATURE" or "use SET_REPORT" in order to use SET_REPORT request to send HID Report
@@ -63,7 +64,7 @@ To test the application, user must proceed as follows:
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
       
 For more details about the STM32Cube USB Device library, please refer to UM1734 
@@ -73,7 +74,7 @@ For more details about the STM32Cube USB Device library, please refer to UM1734
 @par USB Library Configuration
 
 To select the appropriate USB Core to work with, user must add the following macro defines within the
-compiler preprocessor (already done in the preconfigured projects provided with this example):
+compiler preprocessor (already done in the preconfigured projects provided with this application):
       - "USE_USB_HS" when using USB High Speed (HS) Core
       - "USE_USB_FS" when using USB Full Speed (FS) Core 
 
@@ -95,17 +96,17 @@ compiler preprocessor (already done in the preconfigured projects provided with 
 	
 @par Hardware and Software environment
 
-  - This example runs on STM32F407xx/STM32F417xx devices.
+  - This application runs on STM32F407xx/STM32F417xx devices.
     
-  - This example has been tested with STMicroelectronics STM324xG-EVAL RevC 
+  - This application has been tested with STMicroelectronics STM324xG-EVAL RevC 
     evaluation boards and can be easily tailored to any other supported device 
     and development board.
 
   - STM324xG-EVAL RevC Set-up
     - Connect the STM324xG-EVAL board to the PC through 'USB micro A-Male 
       to A-Male' cable to the connector:
-      - CN9 : to use USB High Speed (HS) 
-      - CN8 : to use USB Full Speed (FS)
+      - CN9: to use USB High Speed (HS) 
+      - CN8: to use USB Full Speed (FS)
 		  
     
 @par How to use it ?
@@ -116,7 +117,7 @@ In order to make the program work, you must do the following :
  - In the workspace toolbar select the project configuration:
    - STM324xG-EVAL_USBH-HS: to configure the project for STM32F4xx devices using USB OTG HS peripheral
    - STM324xG-EVAL_USBH-FS: to configure the project for STM32F4xx devices using USB OTG FS peripheral
- - Run the example
+ - Run the application
  
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

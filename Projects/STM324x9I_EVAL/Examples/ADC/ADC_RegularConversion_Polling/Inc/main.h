@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    ADC/ADC_RegularConversion_Polling/Inc/main.h 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
@@ -49,11 +49,11 @@
    resources */
 /* Definition for ADCx clock resources */
 #define ADCx                            ADC3
-#define ADCx_CLK_ENABLE()               __ADC3_CLK_ENABLE();
-#define ADCx_CHANNEL_GPIO_CLK_ENABLE()  __GPIOF_CLK_ENABLE()
+#define ADCx_CLK_ENABLE()               __HAL_RCC_ADC3_CLK_ENABLE();
+#define ADCx_CHANNEL_GPIO_CLK_ENABLE()  __HAL_RCC_GPIOF_CLK_ENABLE()
      
-#define ADCx_FORCE_RESET()              __ADC_FORCE_RESET()
-#define ADCx_RELEASE_RESET()            __ADC_RELEASE_RESET()
+#define ADCx_FORCE_RESET()              __HAL_RCC_ADC_FORCE_RESET()
+#define ADCx_RELEASE_RESET()            __HAL_RCC_ADC_RELEASE_RESET()
 
 /* Definition for ADCx Channel Pin */
 #define ADCx_CHANNEL_PIN                GPIO_PIN_10

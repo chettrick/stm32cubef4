@@ -351,7 +351,7 @@
               <MiscControls>--C99</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F407xx,USE_STM324xG_EVAL,</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Inc;..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\inc;..\..\..\..\..\..\Drivers\BSP\STM324xG_EVAL;..\..\..\..\..\..\Drivers\BSP\Common;..\..\..\..\..\..\Utilities;..\..\..\..\..\..\Utilities\fonts;..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src;..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src\drivers</IncludePath>
+              <IncludePath>..\Inc;..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\inc;..\..\..\..\..\..\Drivers\BSP\STM324xG_EVAL;..\..\..\..\..\..\Utilities;..\..\..\..\..\..\Utilities\fonts;..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src;..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src\drivers</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>

@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    RTC/RTC_TimeStamp/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Description of the RTC Time Stamp example.
   ******************************************************************************
   *
@@ -77,7 +77,7 @@ If the user comment USE_LCD, the current time and Time Stamp are updated and dis
 on the debugger in aShowTime and aShowTimeStamp variables.
 
 LED1 is turned ON when the RTC configuration is done correctly.
-LED4 is tured ON/OFF when the timestamp event is produced.
+LED4 is turned ON/OFF when the timestamp event is produced.
 LED3 is turned ON in  the case of error.
     
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
@@ -86,7 +86,7 @@ LED3 is turned ON in  the case of error.
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
       
 @note  Care must be taken when HAL_RCCEx_PeriphCLKConfig() is used to select the RTC clock source; in this 

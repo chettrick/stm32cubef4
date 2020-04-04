@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    imagebrowser_win.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Image Browser functions
   ******************************************************************************
   * @attention
@@ -133,7 +133,7 @@ static uint8_t              playlist_select = 0;
 static WM_HTIMER            hPlaylistTimer;
 
 static  FILELIST_FileTypeDef *pImageList;
-static  CHOOSEFILE_INFO      *pFileInfo ;
+static  CHOOSEFILE_INFO      *pFileInfo;
  
 /* Private function prototypes -----------------------------------------------*/
 static void Startup(WM_HWIN hWin, uint16_t xpos, uint16_t ypos);
@@ -765,7 +765,7 @@ static void _cbImageWindow(WM_MESSAGE * pMsg)
         GUI_DispStringAt("Error : Image cannot be displayed", 35,  100); 
         if(hTimerTime != 0)
         {
-          slideshow_state = OFF ;
+          slideshow_state = OFF;
           
           hItem = WM_GetDialogItem(IMAGE_hWin, ID_SLIDE_BUTTON);
           WM_InvalidateWindow(hItem);

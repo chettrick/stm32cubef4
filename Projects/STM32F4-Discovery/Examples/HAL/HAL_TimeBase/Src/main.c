@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    HAL/HAL_TimeBase/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This example describes how to configure HAL time base using
   *          the STM32F4xx HAL API.
   ******************************************************************************
@@ -82,16 +82,16 @@ int main(void)
      */
   HAL_Init();
   
-  /* Configure the system clock */
+  /* Configure the system clock to 168 MHz */
   SystemClock_Config();
   
-  /* Initialize LEDs mounted on Discovery board */
+  /* Configure LED3, LED4, LED5 and LED6 */
   BSP_LED_Init(LED3);
   BSP_LED_Init(LED4);
   BSP_LED_Init(LED5);
   BSP_LED_Init(LED6);
   
-  /* Configure BUTTON_KEY */
+  /* Configure USER Button */
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_EXTI);
   
   /* Infinite loop */  
@@ -99,7 +99,6 @@ int main(void)
   {
     /* Insert a 1s delay */
     HAL_Delay(1000);
-    
     /* Toggle LED3 */
     BSP_LED_Toggle(LED3);
     /* Toggle LED4 */
@@ -197,15 +196,15 @@ void HAL_SuspendTick(void)
   */
 void HAL_ResumeTick(void)
 {
-  /* Enable TIM6 Update interrupt */
+  /* Enable TIM6 update Interrupt */
   __HAL_TIM_ENABLE_IT(&TimHandle, TIM_IT_UPDATE);
 }
 
 /**
   * @brief  Period elapsed callback in non blocking mode
   * @note   This function is called  when TIM6 interrupt took place, inside
-  * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
-  * a global variable "uwTick" used as application time base.
+  *         HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
+  *         a global variable "uwTick" used as application time base.
   * @param  htim : TIM handle
   * @retval None
   */
@@ -215,8 +214,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 }
 
 /**
-  * @brief EXTI line detection callback.
-  * @param GPIO_Pin: Specifies the pins connected EXTI line
+  * @brief  EXTI line detection callback.
+  * @param  GPIO_Pin: Specifies the pins connected EXTI line
   * @retval None
   */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
@@ -268,7 +267,7 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
   
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -300,6 +299,13 @@ static void SystemClock_Config(void)
   {
     Error_Handler();
   }
+
+  /* STM32F405x/407x/415x/417x Revision Z devices: prefetch is supported  */
+  if (HAL_GetREVID() == 0x1001)
+  {
+    /* Enable the Flash prefetch */
+    __HAL_FLASH_PREFETCH_BUFFER_ENABLE();
+  }
 }
 
 /**
@@ -309,7 +315,7 @@ static void SystemClock_Config(void)
   */
 static void Error_Handler(void)
 {
-  /* Turn LED5 (RED) on */
+  /* Turn LED5 on */
   BSP_LED_On(LED5);
   while(1)
   {

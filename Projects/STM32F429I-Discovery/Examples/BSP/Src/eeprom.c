@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BSP/Src/eeprom.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This example code shows how to manage an I2C M24LR64 
   *          EEPROM memory
   *          =================================================================== 
@@ -63,13 +63,14 @@ typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
 /* Private define ------------------------------------------------------------*/
 #define EEPROM_FEATURES_NUM     2
 #define BUFFER_SIZE1            (countof(Tx1Buffer)-1 + 9)
-#define EEPROM_WRITE_ADDRESS1      0x50
-#define EEPROM_READ_ADDRESS1       0x50
+#define EEPROM_WRITE_ADDRESS1   0x50
+#define EEPROM_READ_ADDRESS1    0x50
 
 /* Private macro -------------------------------------------------------------*/
 #define countof(a) (sizeof(a) / sizeof(*(a)))
 
 /* Private variables ---------------------------------------------------------*/
+extern uint8_t NbLoop;
 static uint8_t EEPROMFeature = 0;
 uint8_t EEPROMConnected =1;
 
@@ -77,8 +78,6 @@ uint8_t EEPROMConnected =1;
 static void EEPROM_SetHint(void);
 static void EEPROM_Show_Feature(uint8_t feature);
 static TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength);
-
-extern uint8_t NbLoop;
 
 /* Private functions ---------------------------------------------------------*/
 
@@ -92,8 +91,7 @@ void EEPROM_demo(void)
   EEPROM_SetHint();
   EEPROMFeature = 0;
   
-  EEPROMFeature = 0;
-  EEPROM_Show_Feature (EEPROMFeature); 
+  EEPROM_Show_Feature(EEPROMFeature); 
   
   while (1)
   {
@@ -101,7 +99,7 @@ void EEPROM_demo(void)
     {
       if(++EEPROMFeature < EEPROM_FEATURES_NUM)
       {
-        EEPROM_Show_Feature (EEPROMFeature); 
+        EEPROM_Show_Feature(EEPROMFeature); 
       }
       else
       {
@@ -133,12 +131,12 @@ static void EEPROM_SetHint(void)
   BSP_LCD_DisplayStringAt(0, 30, (uint8_t*)"This example shows the different", CENTER_MODE);
   BSP_LCD_DisplayStringAt(0, 45, (uint8_t*)"EEPROM Features, use BUTTON", CENTER_MODE);
   BSP_LCD_DisplayStringAt(0, 60, (uint8_t*)"to start EEPROM data transfer", CENTER_MODE);
-
-   /* Set the LCD Text Color */
+  
+  /* Set the LCD Text Color */
   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);  
   BSP_LCD_DrawRect(10, 90, BSP_LCD_GetXSize() - 20, BSP_LCD_GetYSize()- 100);
   BSP_LCD_DrawRect(11, 91, BSP_LCD_GetXSize() - 22, BSP_LCD_GetYSize()- 102);
- }
+}
 
 /**
   * @brief  Show EEPROM Features
@@ -148,7 +146,6 @@ static void EEPROM_SetHint(void)
 static void EEPROM_Show_Feature(uint8_t feature)
 {
   uint8_t Tx1Buffer[] = "STM32F429I EEPROM Ex.";
-  
   uint8_t Rx1Buffer[BUFFER_SIZE1] = {0}; 
   uint8_t Tx2Buffer[BUFFER_SIZE1] = {0}; 
   __IO TestStatus TransferStatus1 = FAILED;
@@ -211,7 +208,6 @@ static void EEPROM_Show_Feature(uint8_t feature)
     
   case 1:
     /* Write new parameter in EEPROM */
-    
     if (EEPROMConnected == 1)
     {
       snprintf((char*)Tx2Buffer, BUFFER_SIZE1, "%s test %d", Tx1Buffer, NbLoop);
@@ -294,7 +290,7 @@ static TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t Buffe
     pBuffer1++;
     pBuffer2++;
   }
-
+  
   return PASSED;  
 }
 

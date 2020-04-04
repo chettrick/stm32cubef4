@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Device/HID_Standalone/Src/usbd_conf.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This file implements the USB Device library callbacks and MSP
   ******************************************************************************
   * @attention
@@ -54,7 +54,7 @@ void HAL_PCD_MspInit(PCD_HandleTypeDef *hpcd)
   if(hpcd->Instance == USB_OTG_FS)
   {
     /* Configure USB FS GPIOs */
-    __GPIOA_CLK_ENABLE();
+    __HAL_RCC_GPIOA_CLK_ENABLE();
     
     /* Configure DM DP Pins */
     GPIO_InitStruct.Pin = (GPIO_PIN_11 | GPIO_PIN_12);
@@ -78,7 +78,7 @@ void HAL_PCD_MspInit(PCD_HandleTypeDef *hpcd)
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
     
     /* Enable USB FS Clock */
-    __USB_OTG_FS_CLK_ENABLE();
+    __HAL_RCC_USB_OTG_FS_CLK_ENABLE();
     
     /* Set USBFS Interrupt priority */
     HAL_NVIC_SetPriority(OTG_FS_IRQn, 5, 0);
@@ -90,9 +90,9 @@ void HAL_PCD_MspInit(PCD_HandleTypeDef *hpcd)
     if(hpcd->Init.low_power_enable == 1)
     {
       /* Enable EXTI Line 18 for USB wakeup*/
-      __HAL_USB_FS_EXTI_CLEAR_FLAG();
-      __HAL_USB_FS_EXTI_SET_RISING_EGDE_TRIGGER();
-      __HAL_USB_FS_EXTI_ENABLE_IT();    
+      __HAL_USB_OTG_FS_WAKEUP_EXTI_CLEAR_FLAG();
+      __HAL_USB_OTG_FS_WAKEUP_EXTI_ENABLE_RISING_EDGE();
+      __HAL_USB_OTG_FS_WAKEUP_EXTI_ENABLE_IT();    
       
       /* Set EXTI Wakeup Interrupt priority*/
       HAL_NVIC_SetPriority(OTG_FS_WKUP_IRQn, 0, 0);
@@ -105,11 +105,11 @@ void HAL_PCD_MspInit(PCD_HandleTypeDef *hpcd)
   else if(hpcd->Instance == USB_OTG_HS)
   {
     /* Configure USB FS GPIOs */
-    __GPIOA_CLK_ENABLE();
-    __GPIOB_CLK_ENABLE();
-    __GPIOC_CLK_ENABLE();
-    __GPIOH_CLK_ENABLE();
-    __GPIOI_CLK_ENABLE();
+    __HAL_RCC_GPIOA_CLK_ENABLE();
+    __HAL_RCC_GPIOB_CLK_ENABLE();
+    __HAL_RCC_GPIOC_CLK_ENABLE();
+    __HAL_RCC_GPIOH_CLK_ENABLE();
+    __HAL_RCC_GPIOI_CLK_ENABLE();
     
     /* CLK */
     GPIO_InitStruct.Pin = GPIO_PIN_5;
@@ -157,8 +157,8 @@ void HAL_PCD_MspInit(PCD_HandleTypeDef *hpcd)
     HAL_GPIO_Init(GPIOI, &GPIO_InitStruct);
     
     /* Enable USB HS Clocks */
-    __USB_OTG_HS_CLK_ENABLE();
-    __USB_OTG_HS_ULPI_CLK_ENABLE();
+    __HAL_RCC_USB_OTG_HS_CLK_ENABLE();
+    __HAL_RCC_USB_OTG_HS_ULPI_CLK_ENABLE();
     
     /* Set USBHS Interrupt priority */
     HAL_NVIC_SetPriority(OTG_HS_IRQn, 5, 0);
@@ -169,9 +169,9 @@ void HAL_PCD_MspInit(PCD_HandleTypeDef *hpcd)
     if(hpcd->Init.low_power_enable == 1)
     {
       /* Enable EXTI Line 20 for USB wakeup*/
-      __HAL_USB_HS_EXTI_CLEAR_FLAG();
-      __HAL_USB_HS_EXTI_SET_RISING_EGDE_TRIGGER();
-      __HAL_USB_HS_EXTI_ENABLE_IT();    
+      __HAL_USB_OTG_HS_WAKEUP_EXTI_CLEAR_FLAG();
+      __HAL_USB_OTG_HS_WAKEUP_EXTI_ENABLE_RISING_EDGE();
+      __HAL_USB_OTG_HS_WAKEUP_EXTI_ENABLE_IT();    
       
       /* Set EXTI Wakeup Interrupt priority*/
       HAL_NVIC_SetPriority(OTG_HS_WKUP_IRQn, 0, 0);
@@ -192,14 +192,14 @@ void HAL_PCD_MspDeInit(PCD_HandleTypeDef *hpcd)
   if(hpcd->Instance == USB_OTG_FS)
   {  
     /* Disable USB FS Clock */
-    __USB_OTG_FS_CLK_DISABLE();
-    __SYSCFG_CLK_DISABLE();
+    __HAL_RCC_USB_OTG_FS_CLK_DISABLE();
+    __HAL_RCC_SYSCFG_CLK_DISABLE();
   }
   else if(hpcd->Instance == USB_OTG_HS)
   {  
     /* Disable USB HS Clocks */
-    __USB_OTG_HS_CLK_DISABLE();
-    __SYSCFG_CLK_DISABLE();
+    __HAL_RCC_USB_OTG_HS_CLK_DISABLE();
+    __HAL_RCC_SYSCFG_CLK_DISABLE();
   }  
 }
 
@@ -289,7 +289,7 @@ void HAL_PCD_SuspendCallback(PCD_HandleTypeDef *hpcd)
   
   if  (hpcd->Instance == USB_OTG_HS)
   { 	
-    __HAL_USB_HS_EXTI_DISABLE_IT();
+    __HAL_USB_OTG_HS_WAKEUP_EXTI_DISABLE_IT();
     
     __HAL_PCD_GATE_PHYCLOCK(hpcd);
     
@@ -301,8 +301,8 @@ void HAL_PCD_SuspendCallback(PCD_HandleTypeDef *hpcd)
     
     if (__HAL_PCD_IS_PHY_SUSPENDED(hpcd))  /* when set then false resume condition*/
     {
-      __HAL_USB_HS_EXTI_CLEAR_FLAG();
-      __HAL_USB_HS_EXTI_ENABLE_IT(); 
+      __HAL_USB_OTG_HS_WAKEUP_EXTI_CLEAR_FLAG();
+      __HAL_USB_OTG_HS_WAKEUP_EXTI_ENABLE_IT(); 
       
       USBD_LL_Suspend(hpcd->pData);
       
@@ -419,9 +419,9 @@ USBD_StatusTypeDef USBD_LL_Init(USBD_HandleTypeDef *pdev)
   /* Initialize LL Driver */
   HAL_PCD_Init(&hpcd);
   
-  HAL_PCD_SetRxFiFo(&hpcd, 0x80);
-  HAL_PCD_SetTxFiFo(&hpcd, 0, 0x40);
-  HAL_PCD_SetTxFiFo(&hpcd, 1, 0x80);
+  HAL_PCDEx_SetRxFiFo(&hpcd, 0x80);
+  HAL_PCDEx_SetTxFiFo(&hpcd, 0, 0x40);
+  HAL_PCDEx_SetTxFiFo(&hpcd, 1, 0x80);
 #endif
   
 #ifdef USE_USB_HS
@@ -449,9 +449,9 @@ USBD_StatusTypeDef USBD_LL_Init(USBD_HandleTypeDef *pdev)
   /* Initialize LL Driver */
   HAL_PCD_Init(&hpcd);
   
-  HAL_PCD_SetRxFiFo(&hpcd, 0x200);
-  HAL_PCD_SetTxFiFo(&hpcd, 0, 0x80);
-  HAL_PCD_SetTxFiFo(&hpcd, 1, 0x174);
+  HAL_PCDEx_SetRxFiFo(&hpcd, 0x200);
+  HAL_PCDEx_SetTxFiFo(&hpcd, 0, 0x80);
+  HAL_PCDEx_SetTxFiFo(&hpcd, 1, 0x174);
 #endif 
   
   return USBD_OK;
@@ -692,13 +692,13 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
       __HAL_PCD_UNGATE_PHYCLOCK((&hpcd));
       
       /* Activate Remote wakeup */
-      HAL_PCD_ActiveRemoteWakeup((&hpcd));
+      HAL_PCD_ActivateRemoteWakeup((&hpcd));
       
       /* Remote wakeup delay */
       HAL_Delay(10);
       
       /* Disable Remote wakeup */
-      HAL_PCD_DeActiveRemoteWakeup((&hpcd));
+      HAL_PCD_DeActivateRemoteWakeup((&hpcd));
       
       /* change state to configured */
       ((USBD_HandleTypeDef *)hpcd.pData)->dev_state = USBD_STATE_CONFIGURED;

@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    ADC/ADC_InjectedConversion_Interrupt/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Description of the ADC InjectedConversion Interrupt example.
   ******************************************************************************
   *
@@ -42,11 +42,11 @@ using ADC3 injected channel12 and how to get the converted value of this convers
 
 The ADC3 is configured to convert continuously regular channel8(for STM324x9I-EVAL RevB)
 and convert injected channel12 (connected to PC.2) when injected conversion starts
-(after one seconde of the start of regular channel).
+(after one second of the start of regular channel).
 
 Each time a regular channel end of conversion occurs an interrupt is generated 
 and the converted data of ADC3 DR register is affected to the uhADCxConvertedRegValue 
-variable in the ADC conversion complete callback function. After one seconde of
+variable in the ADC conversion complete callback function. After one second of
 the start of regular channel8 conversion the injected channel12 conversion starts 
 so regular conversion is temporary interrupted until the end of injected conversion. 
 When the injected conversion is finished, an interrupt is generated, and the  
@@ -67,7 +67,7 @@ STM32 Eval board's LEDs can be used to monitor the transfer status:
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 @par Directory contents 

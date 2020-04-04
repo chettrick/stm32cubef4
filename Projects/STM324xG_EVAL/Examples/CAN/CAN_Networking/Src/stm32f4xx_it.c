@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    CAN/CAN_Networking/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
@@ -39,8 +39,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "stm32f4xx_it.h"
-  
+#include "stm32f4xx_it.h"  
 
 /** @addtogroup STM32F4xx_HAL_Examples
   * @{
@@ -52,11 +51,10 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
+extern CAN_HandleTypeDef CanHandle;
 
-extern CAN_HandleTypeDef    CanHandle;
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -65,7 +63,7 @@ extern CAN_HandleTypeDef    CanHandle;
 /******************************************************************************/
 
 /**
-  * @brief   This function handles NMI exception.
+  * @brief  This function handles NMI exception.
   * @param  None
   * @retval None
   */
@@ -162,91 +160,86 @@ void SysTick_Handler(void)
   HAL_IncTick();
 }
 
-
 /******************************************************************************/
 /*                 STM32F4xx Peripherals Interrupt Handlers                   */
-/*  Add here the Interrupt Handler for the used peripheral(s) (CAN), for the  */
+/*  Add here the Interrupt Handler for the used peripheral(s) (PPP), for the  */
 /*  available peripheral interrupt handler's name please refer to the startup */
 /*  file (startup_stm32f4xx.s).                                               */
 /******************************************************************************/
 
 /**
-* @brief  This function handles DMA interrupt request.
-* @param  None
-* @retval None
-*/
+  * @brief  This function handles DMA interrupt request.
+  * @param  None
+  * @retval None
+  */
 void DMA1_Stream5_IRQHandler(void)
 {
-  
 }
 
 /**
-* @brief  This function handles DMA interrupt request.
-* @param  None
-* @retval None
-*/
+  * @brief  This function handles DMA interrupt request.
+  * @param  None
+  * @retval None
+  */
 void DMA1_Stream6_IRQHandler(void)
 {
-
 }
 
 /**
-* @brief  This function handles CAN1 RX0 interrupt request.
-* @param  None
-* @retval None
-*/
+  * @brief  This function handles CAN1 RX0 interrupt request.
+  * @param  None
+  * @retval None
+  */
 void CAN1_RX0_IRQHandler(void)
 {
   HAL_CAN_IRQHandler(&CanHandle);
 }
 
-
 /**
-* @brief  This function handles CAN2 RX0 interrupt request.
-* @param  None
-* @retval None
-*/
+  * @brief  This function handles CAN2 RX0 interrupt request.
+  * @param  None
+  * @retval None
+  */
 void CAN2_RX0_IRQHandler(void)
 {
   HAL_CAN_IRQHandler(&CanHandle);
 }
 
 /**
-* @brief  This function handles CAN1 RX1 interrupt request.
-* @param  None
-* @retval None
-*/
+  * @brief  This function handles CAN1 RX1 interrupt request.
+  * @param  None
+  * @retval None
+  */
 void CAN1_RX1_IRQHandler(void)
 {
   HAL_CAN_IRQHandler(&CanHandle);
 }
 
-
 /**
-* @brief  This function handles CAN2 RX1 interrupt request.
-* @param  None
-* @retval None
-*/
+  * @brief  This function handles CAN2 RX1 interrupt request.
+  * @param  None
+  * @retval None
+  */
 void CAN2_RX1_IRQHandler(void)
 {
   HAL_CAN_IRQHandler(&CanHandle);
 }
 
 /**
-* @brief  This function handles CAN1 TX interrupt request.
-* @param  None
-* @retval None
-*/
+  * @brief  This function handles CAN1 TX interrupt request.
+  * @param  None
+  * @retval None
+  */
 void CAN1_TX_IRQHandler(void)
 {
   HAL_CAN_IRQHandler(&CanHandle);
 }
 
 /**
-* @brief  This function handles CAN2 TX interrupt request.
-* @param  None
-* @retval None
-*/
+  * @brief  This function handles CAN2 TX interrupt request.
+  * @param  None
+  * @retval None
+  */
 void CAN2_TX_IRQHandler(void)
 {
  HAL_CAN_IRQHandler(&CanHandle);
@@ -265,5 +258,8 @@ void CAN2_TX_IRQHandler(void)
   * @}
   */ 
 
-
+/**
+  * @}
+  */
+  
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

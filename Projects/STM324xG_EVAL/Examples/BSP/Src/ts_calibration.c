@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BSP/Src/ts_calibration.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This example code shows how to calibrate the touchscreen.
   ******************************************************************************
   * @attention
@@ -54,10 +54,12 @@ static TS_StateTypeDef  TS_State;
 static uint8_t Calibration_Done = 0;
 static int16_t  A1, A2, B1, B2;
 static int16_t aPhysX[2], aPhysY[2], aLogX[2], aLogY[2];
+
 /* Private function prototypes -----------------------------------------------*/
 static void TouchscreenCalibration_SetHint(void);
-static void GetPhysValues(int16_t LogX, int16_t LogY, int16_t * pPhysX, int16_t * pPhysY) ;
-static void WaitForPressedState(uint8_t Pressed) ;
+static void GetPhysValues(int16_t LogX, int16_t LogY, int16_t * pPhysX, int16_t * pPhysY);
+static void WaitForPressedState(uint8_t Pressed);
+
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -65,11 +67,11 @@ static void WaitForPressedState(uint8_t Pressed) ;
   * @param  None
   * @retval None
   */
-void Touchscreen_Calibration (void)
+void Touchscreen_Calibration(void)
 { 
   uint8_t status = 0;
   uint8_t i = 0;
-
+  
   TouchscreenCalibration_SetHint();
   
   status = BSP_TS_Init(BSP_LCD_GetXSize(), BSP_LCD_GetYSize());
@@ -104,7 +106,7 @@ void Touchscreen_Calibration (void)
       Calibration_Done = 1;
       return;
     }
-   
+    
     HAL_Delay(5);
   }
 }
@@ -128,7 +130,6 @@ static void TouchscreenCalibration_SetHint(void)
   BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/2 - 12, (uint8_t *)"you need to calibrate it.", CENTER_MODE);
   BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/2 + 3, (uint8_t *)"Press on the black circles", CENTER_MODE);
 }
-
 
 /**
   * @brief  Get Physical position
@@ -160,7 +161,7 @@ static void GetPhysValues(int16_t LogX, int16_t LogY, int16_t * pPhysX, int16_t 
 }
 
 /**
-  * @brief  Main program
+  * @brief  Wait For Pressed State.
   * @param  None
   * @retval None
   */
@@ -185,9 +186,11 @@ static void WaitForPressedState(uint8_t Pressed)
         {
           return;
         }
-      } while (1);
+      } 
+      while (1);
     }
-  } while (1);
+  } 
+  while (1);
 }
 
 /**
@@ -202,7 +205,7 @@ uint16_t Calibration_GetX(uint16_t x)
 
 /**
   * @brief  Calibrate Y position
-  * @param  y : Y position
+  * @param  y: Y position
   * @retval calibrated y
   */
 uint16_t Calibration_GetY(uint16_t y)
@@ -210,9 +213,10 @@ uint16_t Calibration_GetY(uint16_t y)
   return (((A2 * y) + B2)/1000);
 }
 
-/**check if the TS is calibrated
+/**
+  * @brief  Check if the TS is calibrated
   * @param  None
-* @retval calibration state (1 : calibrated / 0: no)
+  * @retval calibration state (1 : calibrated / 0: no)
   */
 uint8_t IsCalibrationDone(void)
 {
@@ -225,5 +229,6 @@ uint8_t IsCalibrationDone(void)
   
 /**
   * @}
-  */ 
+  */
+
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324x9i_eval_ts.h
   * @author  MCD Application Team
-  * @version V2.0.2
-  * @date    19-June-2014
+  * @version V2.0.3
+  * @date    10-December-2014
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm324x9i_eval_ts.c driver.
   ******************************************************************************
@@ -47,9 +47,9 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm324x9i_eval.h"
 /* Include IOExpander(STMPE811) component Driver */ 
-#include "..\Components\stmpe811\stmpe811.h"
+#include "../Components/stmpe811/stmpe811.h"
 /* Include TouchScreen component driver */
-#include "..\Components\ts3510\ts3510.h"
+#include "../Components/ts3510/ts3510.h"
    
 /** @addtogroup BSP
   * @{

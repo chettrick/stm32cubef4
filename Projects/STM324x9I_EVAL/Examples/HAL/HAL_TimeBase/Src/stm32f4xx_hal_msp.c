@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    HAL/HAL_TimeBase/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   HAL MSP module.    
   ******************************************************************************
   * @attention
@@ -69,7 +69,7 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef *htim)
 {
   /*##-1- Enable peripherals and GPIO Clocks #################################*/
   /* Enable TIM6 clock */
-  __TIM6_CLK_ENABLE();
+  __HAL_RCC_TIM6_CLK_ENABLE();
 
   /*##-2- Configure the NVIC for TIMx ########################################*/
   /* Set the TIM6 priority */

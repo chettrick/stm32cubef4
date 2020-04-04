@@ -2,9 +2,9 @@
   ******************************************************************************
   * @file    usbd_conf_template.h
   * @author  MCD Application Team
-  * @version V2.2.0
-  * @date    13-June-2014
-  * @brief   USB device low level driver configuration
+  * @version V2.3.0
+  * @date    04-November-2014
+  * @brief   Header file for the usbd_conf_template.c file
   ******************************************************************************
   * @attention
   *
@@ -26,15 +26,18 @@
   */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __USBD_CONF__H__
-#define __USBD_CONF__H__
+#ifndef __USBD_CONF_TEMPLATE_H
+#define __USBD_CONF_TEMPLATE_H
 
+#ifdef __cplusplus
+ extern "C" {
+#endif
+
+/* Includes ------------------------------------------------------------------*/
 #include "stm32fxxx.h"  /* replace 'stm32xxx' with your HAL driver header filename, ex: stm32f4xx.h */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-/* Includes ------------------------------------------------------------------*/
 
 /** @addtogroup STM32_USB_DEVICE_LIBRARY
   * @{
@@ -148,8 +151,11 @@
   * @}
   */ 
 
+#ifdef __cplusplus
+}
+#endif
 
-#endif //__USBD_CONF__H__
+#endif /* __USBD_CONF_TEMPLATE_H */
 
 
 /**

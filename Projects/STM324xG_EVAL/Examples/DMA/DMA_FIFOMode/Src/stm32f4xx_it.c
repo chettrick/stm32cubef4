@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    DMA/DMA_FIFOMode/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
@@ -53,7 +53,7 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-extern DMA_HandleTypeDef   DmaHandle;
+extern DMA_HandleTypeDef DmaHandle;
 
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
@@ -63,7 +63,7 @@ extern DMA_HandleTypeDef   DmaHandle;
 /******************************************************************************/
 
 /**
-  * @brief   This function handles NMI exception.
+  * @brief  This function handles NMI exception.
   * @param  None
   * @retval None
   */
@@ -164,7 +164,7 @@ void SysTick_Handler(void)
 /*                 STM32F4xx Peripherals Interrupt Handlers                   */
 /*  Add here the Interrupt Handler for the used peripheral(s) (PPP), for the  */
 /*  available peripheral interrupt handler's name please refer to the startup */
-/*  file (startup_stm32f429x.s).    */
+/*  file (startup_stm32f4xx.s).                                               */
 /******************************************************************************/
 
 /**
@@ -174,9 +174,18 @@ void SysTick_Handler(void)
   */
 void DMA_STREAM_IRQHANDLER(void)
 {
-    /* Check the interrupt and clear flag */
-    HAL_DMA_IRQHandler(&DmaHandle);  
+  /* Check the interrupt and clear flag */
+  HAL_DMA_IRQHandler(&DmaHandle);  
 }
+
+/**
+  * @brief  This function handles PPP interrupt request.
+  * @param  None
+  * @retval None
+  */
+/*void PPP_IRQHandler(void)
+{
+}*/
 
 /**
   * @}

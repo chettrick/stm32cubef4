@@ -2,10 +2,10 @@
   ******************************************************************************
   * @file    Demonstrations/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    26-June-2014
-  * @brief   This demo describes how display bmp images from SD card on TFT using
-             STM32NUCLEO board Adafruit 1.8" TFT shield.
+  * @version V1.1.0
+  * @date    26-December-2014
+  * @brief   This demo describes how to display bmp images from SD card on TFT 
+             using STM32NUCLEO board Adafruit 1.8" TFT shield.
   ******************************************************************************
   * @attention
   *
@@ -38,8 +38,7 @@
   */ 
 
 /* Private typedef -----------------------------------------------------------*/
-typedef enum 
-{
+typedef enum {
   SHIELD_NOT_DETECTED = 0, 
   SHIELD_DETECTED
 }ShieldStatus;
@@ -140,7 +139,7 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
   
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -295,7 +294,7 @@ static void TFT_DisplayImages(void)
   {
     if(res == FR_NO_FILESYSTEM)
     {
-      /* Display message: SD card not FAT formated */
+      /* Display message: SD card not FAT formatted */
       TFT_DisplayErrorMessage(SD_CARD_NOT_FORMATTED);    
     }
     else
@@ -309,7 +308,8 @@ static void TFT_DisplayImages(void)
   filesnumbers = Storage_GetDirectoryBitmapFiles ("/", pDirectoryFiles);    
   /* Set bitmap counter to display first image */
   bmpcounter = 1; 
-  
+
+  /* Infinite loop */  
   while (1)
   {     
     /* Get JoyStick status */    
@@ -509,10 +509,10 @@ static void TFT_DisplayErrorMessage(uint8_t message)
   */
 static void LED2_Blink(void)
 {
-  /* Configure LED2 on Nucleo */
+  /* Configure LED2 */
   BSP_LED_Init(LED2);
 
-  /* Configure the User Button in EXTI Mode */
+  /* Configure USER Button */
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_EXTI);
   
   /* Initiate BlinkSpeed variable */ 
@@ -574,7 +574,7 @@ static ShieldStatus TFT_ShieldDetect(void)
   GPIO_InitTypeDef  GPIO_InitStruct; 
 
   /* Enable GPIO clock */
-  __GPIOB_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
   
   GPIO_InitStruct.Pin = GPIO_PIN_0;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;

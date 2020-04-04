@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    BSP/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Description of the BSP example.
   ******************************************************************************
   *
@@ -43,7 +43,7 @@ At the beginning of the main program the HAL_Init() function is called to reset
 all the peripherals, initialize the Flash interface and the systick.
 Then the SystemClock_Config() function is used to configure the system clock
 (SYSCLK) to run at 175 MHz and provide 50 MHz at the output PLL divided by PLL_Q. 
-This frequency permit to reach 25 Mhz clock needed for SD operation and in line 
+This frequency permit to reach 25 MHz clock needed for SD operation and in line 
 with microSD specification. 
 
 
@@ -79,7 +79,7 @@ ANT7-M24LR-A to CN3 connector of STM324x9I-EVAL board.
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 

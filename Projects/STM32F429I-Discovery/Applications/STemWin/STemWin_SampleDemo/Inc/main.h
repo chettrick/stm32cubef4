@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    main.h 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
@@ -36,11 +36,10 @@
 #include "GUI.h"
 #include "calibration.h"
 
-/* EVAL includes component */
 #include "stm32f429i_discovery.h"
 #include "stm32f429i_discovery_ts.h"
 #include "stm32f429i_discovery_sdram.h"
-#include "..\Components\ili9341\ili9341.h" 
+#include "../Components/ili9341/ili9341.h" 
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BSP/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
@@ -41,7 +41,6 @@
 #include "main.h"
 #include "stm32f4xx_it.h"
 
-
 /** @addtogroup STM32F4xx_HAL_Examples
   * @{
   */
@@ -55,6 +54,7 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 extern I2C_HandleTypeDef  heval_I2c;
+
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -63,7 +63,7 @@ extern I2C_HandleTypeDef  heval_I2c;
 /******************************************************************************/
 
 /**
-  * @brief   This function handles NMI exception.
+  * @brief  This function handles NMI exception.
   * @param  None
   * @retval None
   */
@@ -169,7 +169,7 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
-  * @brief  This function handles External line 1 interrupt request.
+  * @brief  This function handles External line 0 interrupt request.
   * @param  None
   * @retval None
   */
@@ -189,7 +189,7 @@ void EXTI2_IRQHandler(void)
 }
 
 /**
-  * @brief  This function handles External line 15_10 interrupt request.
+  * @brief  This function handles External lines 15 to 10 interrupt request.
   * @param  None
   * @retval None
   */
@@ -226,7 +226,6 @@ void EEPROM_I2C_DMA_RX_IRQHandler(void)
 /*void PPP_IRQHandler(void)
 {
 }*/
-
 
 /**
   * @}

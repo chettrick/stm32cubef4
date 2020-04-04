@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Host/FWupgrade_Standalone/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   USB host Firmware Upgrade demo main file
   ******************************************************************************
   * @attention
@@ -51,13 +51,13 @@ static void FW_InitApplication(void);
   */
 int main(void)
 {
-  /* Configure KEY Button */
+  /* Configure USER Button */
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_GPIO); 
   
   /* Unlock the Flash to enable the flash control register access */ 
   FLASH_If_FlashUnlock();
   
-  /* Test if User button on the STM324xG_EVAL is pressed */
+  /* Test if USER button is pressed */
   if (BSP_PB_GetState(BUTTON_KEY) != GPIO_PIN_RESET)
   {
     /* Check Vector Table: Test if user code is programmed starting from address 
@@ -82,7 +82,7 @@ int main(void)
      */
   HAL_Init();
   
-  /* Configure the system clock to 168 Mhz */
+  /* Configure the system clock to 168 MHz */
   SystemClock_Config();
   
   /* Init FW upgrade Application */
@@ -212,7 +212,8 @@ void assert_failed(uint8_t* file, uint32_t line)
 
   /* Infinite loop */
   while (1)
-  {}
+  {
+  }
 }
 #endif
 

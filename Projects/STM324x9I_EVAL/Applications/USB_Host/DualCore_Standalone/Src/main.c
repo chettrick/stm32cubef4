@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Host/DualCore_Standalone/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   USB host DUALCORE demo main file
   ******************************************************************************
   * @attention
@@ -60,7 +60,7 @@ int main(void)
      */
   HAL_Init();
   
-  /* Configure the system clock to 168 Mhz */
+  /* Configure the system clock to 168 MHz */
   SystemClock_Config();
   
   /* Init Dual Core Application */
@@ -105,13 +105,13 @@ int main(void)
   */
 static void DUAL_InitApplication(void)
 {
-  /* Configure KEY Button */
+  /* Configure Key Button */
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_GPIO);                
   
   /* Configure Joystick in EXTI mode */
   BSP_JOY_Init(JOY_MODE_EXTI);
   
-  /* Configure the LEDs */
+  /* Configure LED1, LED2, LED3 and LED4 */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED2);
   BSP_LED_Init(LED3);
@@ -120,16 +120,16 @@ static void DUAL_InitApplication(void)
   /* Initialize the LCD */
   BSP_LCD_Init();
   
-  /* LCD Layer Initialisation */
+  /* LCD Layer Initialization */
   BSP_LCD_LayerDefaultInit(1, LCD_FB_START_ADDRESS); 
   
-  /*Selects the LCD Layer*/
+  /* Selects the LCD Layer */
   BSP_LCD_SelectLayer(1);
   
-  /*Enables the display*/
+  /* Enables the display */
   BSP_LCD_DisplayOn();
   
-  /*Init the LCD Log module*/
+  /* Init the LCD Log module */
   LCD_LOG_Init();
   
   LCD_LOG_SetHeader((uint8_t *)" USB OTG DualCore Host");
@@ -197,7 +197,7 @@ static void USBH_HS_UserProcess(USBH_HandleTypeDef *phost, uint8_t id)
 }
 
 /**
-  * @brief  Toggles LEDs to shows user input state.
+  * @brief  Toggles LEDs to show user input state.
   * @param  None
   * @retval None
   */
@@ -241,7 +241,7 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
 
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 

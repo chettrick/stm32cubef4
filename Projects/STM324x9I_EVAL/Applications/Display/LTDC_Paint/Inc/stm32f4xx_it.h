@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Display/LTDC_Paint/Inc/stm32f4xx_it.h 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This file contains the headers of the interrupt handlers.
   ******************************************************************************
   * @attention
@@ -51,9 +51,11 @@ void DebugMon_Handler(void);
 void PendSV_Handler(void);
 void SysTick_Handler(void);
 void SysTick_Handler(void);
-void DMA2_Stream3_IRQHandler(void);
-void DMA2_Stream6_IRQHandler(void);
-void SDIO_IRQHandler(void);
+#ifdef USE_USB_OTG_FS
+void OTG_FS_IRQHandler(void);
+#else
+void OTG_HS_IRQHandler(void);
+#endif
 
 #ifdef __cplusplus
 }

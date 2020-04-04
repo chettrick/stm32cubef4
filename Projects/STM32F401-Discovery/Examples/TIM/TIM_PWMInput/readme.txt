@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    TIM/TIM_PWMInput/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Description of the TIM PWM_Input example.
   ******************************************************************************
   *
@@ -65,7 +65,7 @@ The minimum frequency value to measure is (TIM4 counter clock / CCR MAX)
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 @par Directory contents 
@@ -78,12 +78,13 @@ The minimum frequency value to measure is (TIM4 counter clock / CCR MAX)
   - TIM/TIM_PWMInput/Src/stm32f4xx_hal_msp.c     HAL MSP module
   - TIM/TIM_PWMInput/Src/system_stm32f4xx.c      STM32F4xx system clock configuration file
 
+
 @par Hardware and Software environment 
 
   - This example runs on STM32F401xCx devices. 
     
   - This example has been tested with STMicroelectronics STM32F401-Discovery RevB board (MB1115B)
-    evaluation boards and can be easily tailored to any other supported device and development board
+    and can be easily tailored to any other supported device and development board
 
   - STM32F401-Discovery RevB Set-up 
     - Connect the external signal to measure to the TIM4 CH2 pin (PB.07).

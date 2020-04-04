@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Audio/Audio_playback_and_record/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014 
+  * @version V1.2.0
+  * @date    26-December-2014 
   * @brief   Audio playback and record main file.
   ******************************************************************************
   * @attention
@@ -26,7 +26,8 @@
   */
 
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
+#include "waveplayer.h"
+#include "waverecorder.h"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -41,6 +42,7 @@ static void SystemClock_Config(void);
 static void AUDIO_InitApplication(void);
 
 /* Private functions ---------------------------------------------------------*/
+
 /**
   * @brief  Main program
   * @param  None
@@ -56,7 +58,7 @@ int main(void)
      */   
   HAL_Init();
   
-  /* Configure the system clock to 168 Mhz */
+  /* Configure the system clock to 168 MHz */
   SystemClock_Config();
 
   /* Init Audio Application */
@@ -83,8 +85,8 @@ int main(void)
 }
 
 /**
-  * @brief Toggles LEDs to shows user input state.
-  * @param None
+  * @brief  Toggles LEDs to show user input state.
+  * @param  None
   * @retval None
   */
 void Toggle_Leds(void)
@@ -101,24 +103,24 @@ void Toggle_Leds(void)
   }  
 }
 
-/******************************************************************************
+/*******************************************************************************
                             Static Function
 *******************************************************************************/
 
 /**
-  * @brief Audio Application Init.
-  * @param None
+  * @brief  Audio Application Init.
+  * @param  None
   * @retval None
   */
 static void AUDIO_InitApplication(void)
 {
-  /* Configure KEY Button */
+  /* Configure Key Button */
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_EXTI);              
   
   /* Configure Joystick in EXTI mode */
   BSP_JOY_Init(JOY_MODE_EXTI);
   
-  /* Configure the LEDs */
+  /* Configure the LED1, LED2, LED3 and LED4 */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED2);
   BSP_LED_Init(LED3);
@@ -127,29 +129,29 @@ static void AUDIO_InitApplication(void)
   /* Initialize the LCD */
   BSP_LCD_Init();
   
-  /* LCD Layer Initialisation */
+  /* LCD Layer Initialization */
   BSP_LCD_LayerDefaultInit(1, LCD_FB_START_ADDRESS); 
   
-  /* Selects the LCD Layer */
+  /* Select the LCD Layer */
   BSP_LCD_SelectLayer(1);
   
-  /* Enables the display */
+  /* Enable the display */
   BSP_LCD_DisplayOn();
   
   /* Init the LCD Log module */
   LCD_LOG_Init();
   
-  LCD_LOG_SetHeader((uint8_t *)"Audio PlayBack and Record Application");
+  LCD_LOG_SetHeader((uint8_t *)"Audio Playback and Record Application");
   
   LCD_UsrLog("USB Host library started.\n"); 
   
-  /* Start Audio Interface */
+  /* Start Audio interface */
   USBH_UsrLog("Starting Audio Demo");
   
   /* Init Audio interface */
-  AUDIO_Init();
+  AUDIO_PLAYER_Init();
   
-  /* Start Audio Interface */
+  /* Start Audio interface */
   AUDIO_MenuInit();
 }
 
@@ -205,7 +207,7 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
 
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 

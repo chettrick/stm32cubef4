@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    k_storage.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014   
+  * @version V1.2.0
+  * @date    26-December-2014   
   * @brief   This file provides the kernel storage functions
   ******************************************************************************
   * @attention
@@ -103,21 +103,14 @@ void k_StorageInit(void)
   
   /* Start Host Process */
   USBH_Start(&hUSB_Host);
-  BSP_IO_Init(); 
-  if(BSP_IO_ReadPin(CAM_PLUG_PIN))
-  {      
-    /* Enable SD Interrupt mode */
-    BSP_SD_Init();
-    BSP_SD_ITConfig();
-
-    /* Disconnect Camera signals because they are shared with the SD*/
-    BSP_IO_ConfigPin(IO_PIN_0, IO_MODE_INPUT);  
-    BSP_IO_ConfigPin(IO_PIN_2, IO_MODE_INPUT); 
-    
-    if(BSP_SD_IsDetected())
-    {
-      osMessagePut ( StorageEvent, MSDDISK_CONNECTION_EVENT, 0);
-    }
+  
+  /* Enable SD Interrupt mode */
+  BSP_SD_Init();
+  BSP_SD_ITConfig();
+  
+  if(BSP_SD_IsDetected())
+  {
+    osMessagePut ( StorageEvent, MSDDISK_CONNECTION_EVENT, 0);
   }
 }
 
@@ -206,7 +199,7 @@ uint32_t k_StorageGetCapacity (uint8_t unit)
 uint32_t k_StorageGetFree (uint8_t unit)
 { 
   uint32_t   fre_clust = 0;
-  FATFS *fs ;
+  FATFS *fs;
   FRESULT res = FR_INT_ERR;
   
   if(unit == 0)
@@ -258,14 +251,10 @@ static void USBH_UserProcess  (USBH_HandleTypeDef *phost, uint8_t id)
   */ 
 void BSP_SD_DetectCallback(void)
 {
-  if((BSP_SD_IsDetected()) && (BSP_IO_ReadPin(CAM_PLUG_PIN)))
-  {
+  if((BSP_SD_IsDetected()))
+  {  
     /* After sd disconnection, a SD Init is required */
     BSP_SD_Init();
-    
-    /* Disconnect Camera signals because they are shared with the SD*/
-    BSP_IO_ConfigPin(IO_PIN_0, IO_MODE_INPUT);  
-    BSP_IO_ConfigPin(IO_PIN_2, IO_MODE_INPUT); 
         
     osMessagePut ( StorageEvent, MSDDISK_CONNECTION_EVENT, 0);
   }
@@ -360,11 +349,11 @@ int k_GetData(CHOOSEFILE_INFO * pInfo)
     memset(tmp, 0, CHOOSEFILE_MAXLEN);
     strcpy(tmp, pInfo->pRoot);
     
-    for(i= CHOOSEFILE_MAXLEN; i > 0 ; i--)
+    for(i= CHOOSEFILE_MAXLEN; i > 0; i--)
     {
       if(tmp[i] == '/')
       {
-        tmp[i] = 0 ;
+        tmp[i] = 0;
         break;
       }
     }

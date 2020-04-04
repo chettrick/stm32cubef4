@@ -1,13 +1,13 @@
 /**
-  @page FWupgrade_Standalone USB Host Firmware Upgrade example
+  @page FWupgrade_Standalone USB Host Firmware Upgrade application
   
   @verbatim
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    USB_Host/FWupgrade_Standalone/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
-  * @brief   Description of the USB Host Firmware Upgrade example
+  * @version V1.2.0
+  * @date    26-December-2014
+  * @brief   Description of the USB Host Firmware Upgrade application
   ******************************************************************************
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
@@ -25,12 +25,12 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description 
+@par Application Description 
 
-This example is a part of the USB Host Library package using STM32Cube firmware. It describes how to use
+This application is a part of the USB Host Library package using STM32Cube firmware. It describes how to use
 USB host application based on the In-Application programming (IAP) on the STM32F4xx devices.
 
-This is a typical example on how to use the STM32F4xx USB OTG Host peripheral for firmware upgrade 
+This is a typical application on how to use the STM32F4xx USB OTG Host peripheral for firmware upgrade 
 application or IAP, allowing user to erase and write to on-chip flash memory.
 
 At the beginning of the main program the HAL_Init() function is called to reset all the peripherals,
@@ -45,7 +45,7 @@ It's worth noting that the system clock (SYSCLK) can be configured, depending on
                              is set to 168 MHz.
  - SYSCLK is set to 180 MHz: for only HS Core, since no embedded PHY is used.
 
-This example uses the USB Host to:
+This application uses the USB Host to:
  - DOWNLOAD: Reads the defined image (.bin) file “DOWNLOAD_FILENAME” from the thumb drive and writes it
              to the embedded Flash memory.
  - UPLOAD:   Reads the entire embedded Flash memory and saves the contents to the defined file name 
@@ -69,7 +69,7 @@ For more details about the STM32Cube USB Host library, please refer to UM1720
 @par USB Library Configuration
 
 To select the appropriate USB Core to work with, user must add the following macro defines within the
-compiler preprocessor (already done in the preconfigured projects provided with this example):
+compiler preprocessor (already done in the preconfigured projects provided with this application):
       - "USE_USB_HS" when using USB High Speed (HS) Core
       - "USE_USB_FS" when using USB Full Speed (FS) Core 
       - "USE_USB_HS" and "USE_USB_HS_IN_FS" when using USB High Speed (HS) Core in FS mode
@@ -77,7 +77,7 @@ compiler preprocessor (already done in the preconfigured projects provided with 
 The user application (binary file) to be loaded into the Flash memory using the firmware upgrade 
 application is built by the following configuration settings:
 	- Set the program load address to APPLICATION_ADDRESS in the toolchain linker file.
-	- Relocate the vector table to address APPLICATION_ADDRESS using the the VECT_TAB_OFFSET definition  
+	- Relocate the vector table to address APPLICATION_ADDRESS using the VECT_TAB_OFFSET definition  
 	  inside the system_stm32f4xx.c file.
 
 
@@ -97,7 +97,7 @@ application is built by the following configuration settings:
   - USB_Host/FWupgrade_Standalone/Inc/flash_if.h              Flash layer functions header file
   - USB_Host/FWupgrade_Standalone/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - USB_Host/FWupgrade_Standalone/Inc/usbh_conf.h             USB Host driver Configuration file
-  - USB_Host/FWupgrade_Standalone/Inc/ffconf.h                FatFs Module Configuration file
+  - USB_Host/FWupgrade_Standalone/Inc/ffconf.h                FAT file system module configuration file
   
   - USB_Host/FWupgrade_Standalone/Binary/
     This folder contains images that can be loaded and executed by the FW upgrade application:
@@ -108,9 +108,9 @@ application is built by the following configuration settings:
 
 @par Hardware and Software environment
 
-  - This example runs on STM32F429xx/STM32F439xx devices.
+  - This application runs on STM32F429xx/STM32F439xx devices.
     
-  - This example has been tested with STMicroelectronics STM324x9I-EVAL RevB 
+  - This application has been tested with STMicroelectronics STM324x9I-EVAL RevB 
     evaluation boards and can be easily tailored to any other supported device 
     and development board.
 
@@ -135,14 +135,14 @@ In order to make the program work, you must do the following :
    - STM324x9I-EVAL_USBH-FS: to configure the project for STM32F4xx devices using USB OTG FS peripheral
    - STM324x9I-EVAL_USBH-HS-IN-FS: to configure the project for STM32F4xx devices and use USB OTG HS 
                                    peripheral In FS (using embedded PHY).
- - To run the example, proceed as follows:
+ - To run the application, proceed as follows:
 
 1. Load the binary image of the user program to the root directory of a USB key. You can use the 
-   provided binary images under the USB_Host\FWupgrade_Standalone\Binary folder. 
+   provided binary images under the USB_Host/FWupgrade_Standalone/Binary folder. 
    The binary should be renamed to “image.bin”.
 
 2. Program the firmware upgrade application into the internal Flash memory.
-   a. Open the project (under USB_Host\FWupgrade_Standalone) with your preferred toolchain.
+   a. Open the project (under USB_Host/FWupgrade_Standalone) with your preferred toolchain.
    b. Compile and load the project into the target memory and run the project.
 
 After the board reset and depending on the Key button state:
@@ -159,7 +159,7 @@ state time. Depending on the state time of the Key button, one of the following 
  - If Key Button is pressed for less than< 3 seconds at firmware startup:
    Only the DOWNLOAD command is executed.
 
-STM32 Eval board's LEDs can be used to monitor the example status:
+STM32 Eval board's LEDs can be used to monitor the application status:
  - Red LED blinks in infinite loop 
 	 –> Error: USB key disconnected.
 

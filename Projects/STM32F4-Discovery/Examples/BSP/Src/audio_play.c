@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BSP/Src/audio_play.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This example code shows how to use AUDIO features for the play.
   ******************************************************************************
   * @attention
@@ -84,7 +84,7 @@ WAVE_FormatTypeDef *waveformat =  NULL;
 /* Variable used to replay audio sample (from play or record test)*/
 __IO uint32_t AudioTest = 0;
 
-/* Variables used in norma mode to manage audio file during DMA transfer */
+/* Variables used in normal mode to manage audio file during DMA transfer */
 uint32_t AudioTotalSize           = 0xFFFF; /* This variable holds the total size of the audio file */
 uint32_t AudioRemSize             = 0xFFFF; /* This variable holds the remaining data in audio file */
 uint16_t *CurrentPos ;             /* This variable holds the current position of audio pointer */

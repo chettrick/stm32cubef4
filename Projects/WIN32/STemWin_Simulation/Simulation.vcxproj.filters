@@ -342,15 +342,15 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Library Include="..\..\..\Middlewares\ST\STemWin\Lib\STemWin524b_WIN32.lib">
-      <Filter>GUI\Lib</Filter>
-    </Library>
     <Library Include="..\..\..\Middlewares\ST\STemWin\Simulation\GUISim.lib">
       <Filter>Simulation</Filter>
     </Library>
+    <Library Include="..\..\..\Middlewares\ST\STemWin\Lib\STemWin526_WIN32.lib">
+      <Filter>GUI\Lib</Filter>
+    </Library>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="..\..\..\Middlewares\ST\STemWin\Simulation\Simulation.res">
+    <Resource Include="..\..\..\Middlewares\ST\STemWin\Simulation\SimulationMinGW.res">
       <Filter>Simulation</Filter>
     </Resource>
   </ItemGroup>

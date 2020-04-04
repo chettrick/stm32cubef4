@@ -10,7 +10,7 @@
 *                                                                    *
 **********************************************************************
 
-** emWin V5.24 - Graphical user interface for embedded applications **
+** emWin V5.26 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -269,16 +269,19 @@ int  GUI_AA_Init_HiRes (int x0, int x1);
 void GUI_AA_Exit       (void);
 I16  GUI_AA_HiRes2Pixel(int HiRes);
 
-void GL_FillCircleAA_HiRes(int x0, int y0, int r);
+void GL_FillCircleAA_HiRes (int x0, int y0, int r);
+void GL_FillEllipseAA_HiRes(int x0, int y0, int rx, int ry);
 
 void GUI_AA__DrawCharAA2(int x0, int y0, int XSize, int YSize, int BytesPerLine, const U8 * pData);
 void GUI_AA__DrawCharAA4(int x0, int y0, int XSize, int YSize, int BytesPerLine, const U8 * pData);
 void GUI_AA__DrawCharAA8(int x0, int y0, int XSize, int YSize, int BytesPerLine, const U8 * pData);
 
 /* Alpha blending helper functions */
-int   GUI__GetAlphaBuffer  (U32 ** ppCurrent, U32 ** ppConvert, U32 ** ppData, int * pVXSizeMax);
-int   GUI__AllocAlphaBuffer(int AllocDataBuffer);
-U32 * GUI__DoAlphaBlending (int x, int y, U32 * pData, int xSize, tLCDDEV_Index2Color * pfIndex2Color_DEV, int * pDone);
+#define GUI_ALPHABLENDING_DONE  (1 << 0)
+
+int      GUI__GetAlphaBuffer    (U32 ** ppCurrent, U32 ** ppConvert, U32 ** ppData, int * pVXSizeMax);
+int      GUI__AllocAlphaBuffer  (int AllocDataBuffer);
+U32    * GUI__DoAlphaBlending   (int x, int y, U32 * pData, int xSize, tLCDDEV_Index2Color * pfIndex2Color_DEV, int * pDone);
 unsigned GUI__SetAlphaBufferSize(int xSize);
 
 /* System independent font routines */

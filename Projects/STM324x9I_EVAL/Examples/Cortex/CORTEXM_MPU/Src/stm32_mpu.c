@@ -1,10 +1,10 @@
 /**
   ******************************************************************************
-  * @file    CORTEXM/CORTEXM_MPU/Src/stm32_mpu.c 
+  * @file    Cortex/CORTEXM_MPU/Src/stm32_mpu.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
-  * @brief   Access rights configuration using Cortex-M3 MPU regions.
+  * @version V1.2.0
+  * @date    26-December-2014
+  * @brief   Access rights configuration using Cortex-M4 MPU regions.
   ******************************************************************************
   * @attention
   *
@@ -107,7 +107,7 @@ void MPU_Config(void)
 }
 
 /**
-  * @brief  This function configure the access right using Cortex-M3 MPU regions.
+  * @brief  This function configure the access right using Cortex-M4 MPU regions.
   * @param  None
   * @retval None
   */

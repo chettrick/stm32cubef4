@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Camera/Camera_To_USBDisk/Inc/main.h 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
@@ -33,7 +33,6 @@
 #include "stm324x9i_eval.h"
 #include "stm324x9i_eval_lcd.h"
 #include "stm324x9i_eval_camera.h"
-#include "fatfs_storage.h"
 #include "stm324x9i_eval_ts.h"
 #include "stm324x9i_eval_audio.h"
 
@@ -48,12 +47,10 @@
 #define LCD_FRAME_BUFFER                  0xC0130000
 #define LCD_FRAME_BUFFER_LAYER1           0xC0000000
 #define CONVERTED_FRAME_BUFFER            0xC0390000
+
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
-void Touchscreen_Calibration (void);
-uint16_t Calibration_GetX(uint16_t x);
-uint16_t Calibration_GetY(uint16_t y);
-uint8_t IsCalibrationDone(void);
+
 #endif /* __MAIN_H */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

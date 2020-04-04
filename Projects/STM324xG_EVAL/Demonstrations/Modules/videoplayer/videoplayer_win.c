@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    videoplayer_win.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014   
+  * @version V1.2.0
+  * @date    26-December-2014   
   * @brief   Video player functions
   ******************************************************************************
   * @attention
@@ -117,10 +117,10 @@ K_ModuleItem_Typedef  video_player =
 /* Private macros ------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 
-static uint8_t _StartPlay(char * filename) ;
-static void _StopPlay(void) ;
-static void _PausePlay(void) ;
-static void _ResumePlay(void) ;
+static uint8_t _StartPlay(char * filename);
+static void _StopPlay(void);
+static void _PausePlay(void);
+static void _ResumePlay(void);
 static uint8_t _ShowFullScreen(void);
 static uint8_t _CloseFullScreen(void);
 /* _aDialogCreate */
@@ -648,7 +648,7 @@ static uint8_t _StartPlay(char * filename)
       return 1;
     }
     
-    hMovie = GUI_MOVIE_CreateEx(_GetData, &Video_File, _cbNotify) ;
+    hMovie = GUI_MOVIE_CreateEx(_GetData, &Video_File, _cbNotify);
     VideoPlayer_State = VIDEO_PLAY;
     
     if (FullScreen == 0)

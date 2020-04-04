@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    TIM/TIM_ComplementarySignals/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   HAL MSP module.    
   ******************************************************************************
   * @attention
@@ -72,12 +72,12 @@ void HAL_TIM_PWM_MspInit(TIM_HandleTypeDef *htim)
   GPIO_InitTypeDef   GPIO_InitStruct;
   /*##-1- Enable peripherals and GPIO Clocks #################################*/
   /* TIMx Peripheral clock enable */
-  __TIM1_CLK_ENABLE();
+  __HAL_RCC_TIM1_CLK_ENABLE();
     
   /* Enable GPIO Channels Clock */
-  __GPIOA_CLK_ENABLE();
-  __GPIOB_CLK_ENABLE();
-  __GPIOE_CLK_ENABLE();  
+  __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
+  __HAL_RCC_GPIOE_CLK_ENABLE();  
   
   /* Configure (PA.08, TIM1_CH1), (PB.13, TIM1_CH1N), (PE.11, TIM1_CH2),
                (PB.14, TIM1_CH2N), (PA.10, TIM1_CH"), (PB.15, TIM1_CH3N),

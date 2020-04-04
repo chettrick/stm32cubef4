@@ -8,6 +8,8 @@
 
 
 
+
+
   
   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
@@ -107,7 +109,56 @@ Notes for STM32F4xx-Nucleo Board Drivers</span><span style="font-size: 20pt; fon
       <table class="MsoNormalTable" style="width: 675pt;" border="0" cellpadding="0" width="900">
         <tbody>
           <tr style="">
-            <td style="padding: 0cm;" valign="top"><span style="font-family: Arial;"><span style="font-style: italic;"><span style="font-weight: bold;"></span></span></span><h2 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;"><a name="History"></a><span style="font-size: 12pt; color: white;">Update History</span></h2><br>
+            <td style="padding: 0cm;" valign="top"><span style="font-family: Arial;"><span style="font-style: italic;"><span style="font-weight: bold;"></span></span></span><h2 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;"><a name="History"></a><span style="font-size: 12pt; color: white;">Update History</span></h2>
+            <h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; margin-right: 500pt; width: 180px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V1.2.0 / 26-December-2014<br>
+</span></h3>
+
+
+
+
+            
+            
+            
+            <p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">Main
+Changes<o:p></o:p></span></u></b></p>
+
+
+
+
+            
+            
+            
+            <ul style="list-style-type: square;">
+<li><span style="font-size: 10pt; font-family: Verdana;">stm32f4xx_nucleo.c</span></li>
+              <ul>
+                <li><span style="font-size: 10pt; font-family: Verdana;">Add LCD_IO_WriteMultipleData() LCD IO function, needed for ST7735 BSP component driver.</span></li>
+              </ul>
+              <li><span style="font-size: 10pt; font-family: Verdana;"><span style="font-style: italic; font-weight: bold;">Note:</span> This driver version V1.2.0 needs ST7735 </span><span style="font-size: 10pt; font-family: Verdana;">BSP </span><span style="font-size: 10pt; font-family: Verdana;">component driver V1.1.0 and later.<br>
+                </span></li>
+            </ul>
+
+            <h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; margin-right: 500pt; width: 180px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V1.1.1 / 10-December-2014<br>
+</span></h3>
+
+
+
+            
+            
+            <p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">Main
+Changes<o:p></o:p></span></u></b></p>
+
+
+
+            
+            
+            <ul style="list-style-type: square;">
+<li><span style="font-size: 10pt; font-family: Verdana;">stm32f4xx_nucleo.c</span></li>
+              <ul>
+                <li><span style="font-size: 10pt; font-family: Verdana;">BSP_BP_Init(): Fix limitation on button pin configuration (change EXTI polarity from rising to falling)<br>
+                  </span></li>
+              </ul>
+            </ul>
+
             <h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; margin-right: 500pt; width: 180px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V1.1.0 / 19-June-2014</span></h3>
 
 

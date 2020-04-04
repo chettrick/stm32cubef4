@@ -3,11 +3,11 @@
  
   @verbatim
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
-  * @file    readme.txt 
+  * @file    STemWin/STemWin_SampleDemo/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014    
-  * @brief   
+  * @version V1.2.0
+  * @date    26-December-2014    
+  * @brief   Description of STemWin Sample Demo application.   
   ******************************************************************************
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
@@ -25,7 +25,7 @@
   ******************************************************************************
    @endverbatim
 
-@par Description
+@par Application Description
 
 This directory contains a set of source files that implement demo based on STemWin 
 for STM32F4xx devices.
@@ -41,7 +41,7 @@ Note that the following user files may need to be updated:
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 	  
 @note Care must be taken when HAL_RCCEx_PeriphCLKConfig() is used to select the RTC clock source; in this 
@@ -69,9 +69,9 @@ Note that the following user files may need to be updated:
 
 @par Hardware and Software environment  
 
-  - This example runs on STM32F429xx devices.
+  - This application runs on STM32F429xx devices.
 
-  - This example has been tested with STMicroelectronics STM32F429I-Discovery RevB 
+  - This application has been tested with STMicroelectronics STM32F429I-Discovery RevB 
     boards and can be easily tailored to any other supported device 
     and development board.
 	
@@ -81,7 +81,7 @@ Note that the following user files may need to be updated:
 In order to make the program work, you must do the following :
   - Open your preferred toolchain 
   - Rebuild all files and load your image into target memory
-  - Run the example
+  - Run the application
  
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

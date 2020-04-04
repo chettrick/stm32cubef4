@@ -1,13 +1,13 @@
 /**
-  @page CDC_Standalone USB Device Communication (CDC) example
+  @page CDC_Standalone USB Device Communication (CDC) application
   
   @verbatim
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    USB_Device/CDC_Standalone/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
-  * @brief   Description of the USB Device CDC example.
+  * @version V1.2.0
+  * @date    26-December-2014
+  * @brief   Description of the USB Device CDC application.
   ******************************************************************************
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
@@ -25,13 +25,13 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description 
+@par Application Description 
 
-This example is a part of the USB Device Library package using STM32Cube firmware. It describes how to 
+This application is a part of the USB Device Library package using STM32Cube firmware. It describes how to 
 use USB device application based on the Device Communication Class (CDC) following the PSTN subprotocol
 in the STM32F4xx devices using the OTG-USB and UART peripherals.
 
-This is a typical example on how to use the STM32F4xx USB OTG Device peripheral where the STM32 MCU
+This is a typical application on how to use the STM32F4xx USB OTG Device peripheral where the STM32 MCU
 behaves as a USB-to-RS232 bridge following the Virtual COM Port (VCP) implementation.
  - On one side, the STM32 exchanges data with a PC host through USB interface in Device mode.
  - On the other side, the STM32 exchanges data with other devices (same host, other host,
@@ -83,7 +83,7 @@ download from www.st.com.
 @note The user has to check the list of the COM ports in Device Manager to find out the number of the
       COM ports that have been assigned (by OS) to the VCP interface.
 
-This example uses UART as a communication interface. The UART instance and associated resources
+This application uses UART as a communication interface. The UART instance and associated resources
 (GPIO, NVIC) can be tailored in "usbd_cdc_interface.h" header file according to your hardware 
 configuration. Moreover, this application can be customized to communicate with interfaces other than UART.
 For that purpose a template CDC interface is provided in: 
@@ -111,7 +111,7 @@ To run this application, the user can use one of the following configurations:
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
       
 For more details about the STM32Cube USB Device library, please refer to UM1734 
@@ -121,7 +121,7 @@ For more details about the STM32Cube USB Device library, please refer to UM1734
 @par USB Library Configuration
 
 To select the appropriate USB Core to work with, user must add the following macro defines within the
-compiler preprocessor (already done in the preconfigured projects provided with this example):
+compiler preprocessor (already done in the preconfigured projects provided with this application):
       - "USE_USB_HS" when using USB High Speed (HS) Core
       - "USE_USB_FS" when using USB Full Speed (FS) Core 
       
@@ -145,22 +145,22 @@ compiler preprocessor (already done in the preconfigured projects provided with 
 
 @par Hardware and Software environment
 
-  - This example runs on STM32F407xx/STM32F417xx devices.
+  - This application runs on STM32F407xx/STM32F417xx devices.
     
-  - This example has been tested with STMicroelectronics STM324xG-EVAL RevC 
+  - This application has been tested with STMicroelectronics STM324xG-EVAL RevC 
     evaluation boards and can be easily tailored to any other supported device 
     and development board.
 
   - STM324xG-EVAL RevC Set-up
     - Connect the STM324xG-EVAL board to the PC through 'USB micro A-Male 
       to A-Male' cable to the connector:
-      - CN9 : to use USB High Speed (HS) 
-      - CN8 : to use USB Full Speed (FS)
+      - CN9: to use USB High Speed (HS) 
+      - CN8: to use USB Full Speed (FS)
     - Connect the STM324xG-EVAL board to the PC (or to another evaluation board) through RS232 (USART)
-      serial cable CN8 connector. 
-    - Please ensure that jumper JP7 is in RS232_RX position.        
+      serial cable CN16 connector. 
+    - Please ensure that jumper JP22 is in RS232_RX position.        
     - For loopback mode test: remove RS232 cable on CN16 and connect directly USART TX and RX pins:
-      PA9 and PA10 (with a cable or a jumper)
+      PC10 and PC11 (with a cable or a jumper)
 
 
 @par How to use it ?
@@ -171,7 +171,7 @@ In order to make the program work, you must do the following :
  - In the workspace toolbar select the project configuration:
    - STM324xG-EVAL_USBH-HS: to configure the project for STM32F4xx devices using USB OTG HS peripheral
    - STM324xG-EVAL_USBH-FS: to configure the project for STM32F4xx devices using USB OTG FS peripheral
- - Run the example
+ - Run the application
  - Install the USB virtual COM port driver
  - Find out the number of the COM port assigned to the STM32 CDC device
  - Open a serial terminal application and start the communication

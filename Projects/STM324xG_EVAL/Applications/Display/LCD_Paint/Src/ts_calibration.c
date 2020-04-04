@@ -1,10 +1,10 @@
 /**
   ******************************************************************************
-  * @file    ts_calibration.c 
+  * @file    Display/LCD_Paint/Src/ts_calibration.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
-  * @brief   This example code shows how to calibrate the touchscreen.
+  * @version V1.2.0
+  * @date    26-December-2014
+  * @brief   This application code shows how to calibrate the touchscreen.
   ******************************************************************************
   * @attention
   *
@@ -46,8 +46,8 @@ static int16_t  A1, A2, B1, B2;
 static int16_t aPhysX[2], aPhysY[2], aLogX[2], aLogY[2];
 /* Private function prototypes -----------------------------------------------*/
 static void TouchscreenCalibration_SetHint(void);
-static void GetPhysValues(int16_t LogX, int16_t LogY, int16_t * pPhysX, int16_t * pPhysY) ;
-static void WaitForPressedState(uint8_t Pressed) ;
+static void GetPhysValues(int16_t LogX, int16_t LogY, int16_t * pPhysX, int16_t * pPhysY);
+static void WaitForPressedState(uint8_t Pressed);
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -55,7 +55,7 @@ static void WaitForPressedState(uint8_t Pressed) ;
   * @param  None
   * @retval None
   */
-void Touchscreen_Calibration (void)
+void Touchscreen_Calibration(void)
 { 
   uint8_t status = 0;
   uint8_t i = 0;
@@ -68,8 +68,8 @@ void Touchscreen_Calibration (void)
   {
     BSP_LCD_SetBackColor(LCD_COLOR_WHITE); 
     BSP_LCD_SetTextColor(LCD_COLOR_RED);
-    BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 95, "ERROR", CENTER_MODE);
-    BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 80, "Touchscreen cannot be initialized", CENTER_MODE);
+    BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 95, (uint8_t*)"ERROR", CENTER_MODE);
+    BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 80, (uint8_t*)"Touchscreen cannot be initialized", CENTER_MODE);
   }
   
   while (1)
@@ -114,9 +114,9 @@ static void TouchscreenCalibration_SetHint(void)
   BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
 
   BSP_LCD_SetFont(&Font12);
-  BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/2 - 27, "Before using the Touchscreen", CENTER_MODE);
-  BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/2 - 12, "you need to calibrate it.", CENTER_MODE); 
-  BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/2 + 3, "Press on the black circles", CENTER_MODE);
+  BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/2 - 27, (uint8_t*)"Before using the Touchscreen", CENTER_MODE);
+  BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/2 - 12, (uint8_t*)"you need to calibrate it.", CENTER_MODE);
+  BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/2 + 3, (uint8_t*)"Press on the black circles", CENTER_MODE);
 }
 
 

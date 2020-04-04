@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Device/CustomHID_Standalone/Src/usbd_desc.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This file provides the USBD descriptors and string formating method.
   ******************************************************************************
   * @attention
@@ -260,7 +260,7 @@ static void IntToUnicode (uint32_t value , uint8_t *pbuf , uint8_t len)
 {
   uint8_t idx = 0;
   
-  for( idx = 0 ; idx < len ; idx ++)
+  for( idx = 0; idx < len; idx ++)
   {
     if( ((value >> 28)) < 0xA )
     {

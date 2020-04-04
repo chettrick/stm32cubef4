@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    Audio_playback_and_record/Inc/usbh_conf.h
+  * @file    Audio/Audio_playback_and_record/Inc/usbh_conf.h
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   General low level driver configuration
   ******************************************************************************
   * @attention
@@ -26,8 +26,8 @@
   */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __USBH_CONF__H
-#define __USBH_CONF__H
+#ifndef __USBH_CONF_H
+#define __USBH_CONF_H
 
 #include "stm32f4xx.h"
 #include <stdio.h>
@@ -101,16 +101,10 @@
 /**
   * @}
   */ 
-                              
-                              
-
-    
-    
-    
+   
 /**
   * @}
   */ 
-
 
 /** @defgroup USBH_CONF_Exported_Types
   * @{
@@ -118,7 +112,6 @@
 /**
   * @}
   */ 
-
 
 /** @defgroup USBH_CONF_Exported_Macros
   * @{
@@ -141,9 +134,7 @@
   * @}
   */ 
 
-
-#endif //__USBH_CONF__H__
-
+#endif /* __USBH_CONF_H */
 
 /**
   * @}

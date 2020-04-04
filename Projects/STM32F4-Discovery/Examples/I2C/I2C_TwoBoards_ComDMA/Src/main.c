@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    I2C/I2C_TwoBoards_ComDMA/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This sample code shows how to use STM32F4xx I2C HAL API to transmit 
   *          and receive a data buffer with a communication process based on
   *          DMA transfer. 
@@ -88,12 +88,12 @@ int main(void)
      */
   HAL_Init();
   
-  /* Configure LED4, LED6 and LED5 */
+  /* Configure LED4, LED5 and LED6 */
   BSP_LED_Init(LED4);
-  BSP_LED_Init(LED6);
   BSP_LED_Init(LED5);
+  BSP_LED_Init(LED6);
 
-  /* Configure the system clock to 168 Mhz */
+  /* Configure the system clock to 168 MHz */
   SystemClock_Config();
 
   /*##-1- Configure the I2C peripheral ######################################*/
@@ -101,10 +101,10 @@ int main(void)
   
   I2cHandle.Init.AddressingMode  = I2C_ADDRESSINGMODE_10BIT;
   I2cHandle.Init.ClockSpeed      = 400000;
-  I2cHandle.Init.DualAddressMode = I2C_DUALADDRESS_DISABLED;
+  I2cHandle.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
   I2cHandle.Init.DutyCycle       = I2C_DUTYCYCLE_16_9;
-  I2cHandle.Init.GeneralCallMode = I2C_GENERALCALL_DISABLED;
-  I2cHandle.Init.NoStretchMode   = I2C_NOSTRETCH_DISABLED;
+  I2cHandle.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+  I2cHandle.Init.NoStretchMode   = I2C_NOSTRETCH_DISABLE;
   I2cHandle.Init.OwnAddress1     = I2C_ADDRESS;
   I2cHandle.Init.OwnAddress2     = 0xFE;
   
@@ -116,15 +116,15 @@ int main(void)
   
 #ifdef MASTER_BOARD
   
-  /* Configure User Button */
+  /* Configure USER Button */
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_GPIO);
   
-  /* Wait for User Button press before starting the Communication */
+  /* Wait for USER Button press before starting the Communication */
   while (BSP_PB_GetState(BUTTON_KEY) != 1)
   {
   }
   
-  /* Wait for User Button release before starting the Communication */
+  /* Wait for USER Button release before starting the Communication */
   while (BSP_PB_GetState(BUTTON_KEY) != 0)
   {
   }
@@ -136,8 +136,8 @@ int main(void)
      "aTxBuffer" buffer */
   while(HAL_I2C_Master_Transmit_DMA(&I2cHandle, (uint16_t)I2C_ADDRESS, (uint8_t*)aTxBuffer, TXBUFFERSIZE)!= HAL_OK)
   {
-    /* Error_Handler() function is called when Timout error occurs.
-       When Acknowledge failure ocucurs (Slave don't acknowledge it's address)
+    /* Error_Handler() function is called when Timeout error occurs.
+       When Acknowledge failure occurs (Slave don't acknowledge it's address)
        Master restarts communication */
     if (HAL_I2C_GetError(&I2cHandle) != HAL_I2C_ERROR_AF)
     {
@@ -156,12 +156,12 @@ int main(void)
   {
   } 
   
-  /* Wait for User Button press before starting the Communication */
+  /* Wait for USER Button press before starting the Communication */
   while (BSP_PB_GetState(BUTTON_KEY) != 1)
   {
   }
 
-  /* Wait for User Button release before starting the Communication */
+  /* Wait for USER Button release before starting the Communication */
   while (BSP_PB_GetState(BUTTON_KEY) != 0)
   {
   }
@@ -169,8 +169,8 @@ int main(void)
   /*##-4- Put I2C peripheral in reception process ###########################*/  
   while(HAL_I2C_Master_Receive_DMA(&I2cHandle, (uint16_t)I2C_ADDRESS, (uint8_t *)aRxBuffer, RXBUFFERSIZE) != HAL_OK)
   {
-    /* Error_Handler() function is called when Timout error occurs.
-       When Acknowledge failure ocucurs (Slave don't acknowledge it's address)
+    /* Error_Handler() function is called when Timeout error occurs.
+       When Acknowledge failure occurs (Slave don't acknowledge it's address)
        Master restarts communication */
     if (HAL_I2C_GetError(&I2cHandle) != HAL_I2C_ERROR_AF)
     {
@@ -275,7 +275,7 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
   
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -301,6 +301,13 @@ static void SystemClock_Config(void)
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
+
+  /* STM32F405x/407x/415x/417x Revision Z devices: prefetch is supported  */
+  if (HAL_GetREVID() == 0x1001)
+  {
+    /* Enable the Flash prefetch */
+    __HAL_FLASH_PREFETCH_BUFFER_ENABLE();
+  }
 }
 
 /**

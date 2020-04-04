@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    UART/UART_HyperTerminal_DMA/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
@@ -55,6 +55,7 @@
 /* Private variables ---------------------------------------------------------*/
 /* UART handler declared in "main.c" file */
 extern UART_HandleTypeDef UartHandle;
+
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -63,7 +64,7 @@ extern UART_HandleTypeDef UartHandle;
 /******************************************************************************/
 
 /**
-  * @brief   This function handles NMI exception.
+  * @brief  This function handles NMI exception.
   * @param  None
   * @retval None
   */
@@ -165,12 +166,11 @@ void SysTick_Handler(void)
 /*  available peripheral interrupt handler's name please refer to the startup */
 /*  file (startup_stm32f4xx.s).                                               */
 /******************************************************************************/
+
 /**
-  * @brief  This function handles DMA interrupt request.  
+  * @brief  This function handles DMA RX interrupt request.  
   * @param  None
-  * @retval None
-  * @Note   This function is redefined in "main.h" and related to DMA stream 
-  *         used for USART data transmission     
+  * @retval None    
   */
 void USARTx_DMA_RX_IRQHandler(void)
 {
@@ -178,18 +178,24 @@ void USARTx_DMA_RX_IRQHandler(void)
 }
 
 /**
-  * @brief  This function handles DMA interrupt request.
+  * @brief  This function handles DMA TX interrupt request.
   * @param  None
-  * @retval None
-  * @Note   This function is redefined in "main.h" and related to DMA stream 
-  *         used for USART data reception    
+  * @retval None   
   */
 void USARTx_DMA_TX_IRQHandler(void)
 {
   HAL_DMA_IRQHandler(UartHandle.hdmatx);
 }
 
-
+/**
+  * @brief  This function handles USARTx interrupt request.
+  * @param  None
+  * @retval None
+  */
+void USARTx_IRQHandler(void)
+{
+  HAL_UART_IRQHandler(&UartHandle);
+}
 
 /**
   * @brief  This function handles PPP interrupt request.
@@ -199,7 +205,6 @@ void USARTx_DMA_TX_IRQHandler(void)
 /*void PPP_IRQHandler(void)
 {
 }*/
-
 
 /**
   * @}

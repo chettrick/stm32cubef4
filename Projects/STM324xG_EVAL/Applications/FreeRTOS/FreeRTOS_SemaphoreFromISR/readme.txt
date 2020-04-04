@@ -1,13 +1,13 @@
 /**
-  @page FreeRTOS_SemaphoreFromISR FreeRTOS semaphore from ISR example
+  @page FreeRTOS_SemaphoreFromISR FreeRTOS semaphore from ISR application
  
   @verbatim
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    FreeRTOS/FreeRTOS_SemaphoreFromISR/readme.txt
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014 
-  * @brief   Description of the FreeRTOS semaphore from ISR example.
+  * @version V1.2.0
+  * @date    26-December-2014 
+  * @brief   Description of the FreeRTOS semaphore from ISR application.
   ******************************************************************************
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
@@ -27,10 +27,10 @@
 
 @par Description
 
-This directory contains a set of source files that implement an example that 
+This directory contains a set of source files that implement an application that 
 uses semaphore from ISR with CMSIS RTOS API 
 
-This example creates a thread that toggle LED through semaphore given from ISR.
+This application creates a thread that toggle LED through semaphore given from ISR.
  
 Each time the user pushes the key button of the EVAL board the semaphore 
 is given to the SemaphoreTest Thread to toggle the LED1  
@@ -42,7 +42,7 @@ is given to the SemaphoreTest Thread to toggle the LED1
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 For more details about FreeRTOS implementation on STM32Cube, please refer to UM1722 "Developing Applications 
@@ -61,9 +61,9 @@ on STM32Cube with RTOS".
 
 @par Hardware and Software environment
 
-  - This example runs on STM32F40xxx/STM32F41xxx devices.
+  - This application runs on STM32F40xxx/STM32F41xxx devices.
     
-  - This example has been tested with STM324xG-EVAL evaluation board and can be
+  - This application has been tested with STM324xG-EVAL evaluation board and can be
     easily tailored to any other supported device and development board.
 
 
@@ -72,7 +72,7 @@ on STM32Cube with RTOS".
 In order to make the program work, you must do the following :
  - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
- - Run the example
+ - Run the application
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

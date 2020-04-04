@@ -2,9 +2,9 @@
   ******************************************************************************
   * @file    usbd_core.h
   * @author  MCD Application Team
-  * @version V2.2.0
-  * @date    13-June-2014
-  * @brief   Header file for usbd_core.c
+  * @version V2.3.0
+  * @date    04-November-2014
+  * @brief   Header file for usbd_core.c file
   ******************************************************************************
   * @attention
   *
@@ -28,6 +28,10 @@
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __USBD_CORE_H
 #define __USBD_CORE_H
+
+#ifdef __cplusplus
+ extern "C" {
+#endif
 
 /* Includes ------------------------------------------------------------------*/
 #include "usbd_conf.h"
@@ -142,6 +146,10 @@ void  USBD_LL_Delay (uint32_t Delay);
 /**
   * @}
   */ 
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __USBD_CORE_H */
 

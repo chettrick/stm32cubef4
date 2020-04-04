@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    PWR/PWR_STOP/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This sample code shows how to use STM32F4xx PWR HAL API to enter
   * and exit the stop mode.
   ******************************************************************************
@@ -81,10 +81,10 @@ int main(void)
   BSP_LED_Init(LED3);
   BSP_LED_Init(LED4);
 
-  /* Configure the system clock to 168 Mhz */
+  /* Configure the system clock to 168 MHz */
   SystemClock_Config();
 
-  /* Key button (EXTI_Line15) will be used to wakeup the system from STOP mode */
+  /* Configure Key Button (EXTI_Line15) will be used to wakeup the system from STOP mode */
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_EXTI);
 
   /*## Configure the RTC peripheral #######################################*/
@@ -107,7 +107,8 @@ int main(void)
     /* Initialization Error */
     Error_Handler(); 
   }
-  
+
+  /* Infinite loop */  
   while (1)
   {
     /* Insert 5 second delay */
@@ -171,7 +172,7 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
 
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -203,6 +204,13 @@ static void SystemClock_Config(void)
   {
     Error_Handler();
   }
+
+  /* STM32F405x/407x/415x/417x Revision Z devices: prefetch is supported  */
+  if (HAL_GetREVID() == 0x1001)
+  {
+    /* Enable the Flash prefetch */
+    __HAL_FLASH_PREFETCH_BUFFER_ENABLE();
+  }
 }
 
 /**
@@ -217,7 +225,7 @@ static void SYSCLKConfig_STOP(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
 
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -311,7 +319,6 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 }
 
 #ifdef  USE_FULL_ASSERT
-
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.

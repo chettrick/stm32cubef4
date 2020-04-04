@@ -10,7 +10,7 @@
 *                                                                    *
 **********************************************************************
 
-** emWin V5.24 - Graphical user interface for embedded applications **
+** emWin V5.26 - Graphical user interface for embedded applications **
 All  Intellectual Property rights  in the Software belongs to  SEGGER.
 emWin is protected by  international copyright laws.  Knowledge of the
 source code may not be used to write a similar product.  This file may
@@ -480,6 +480,8 @@ void    WM_ValidateWindow            (WM_HWIN hWin);
 void WM_GESTURE_Enable  (int OnOff);
 int  WM_GESTURE_EnableEx(int OnOff, int MaxFactor);
 void WM_GESTURE_Exec    (void);
+I32  WM_GESTURE_SetThresholdAngle(I32 ThresholdAngle);
+I32  WM_GESTURE_SetThresholdDist (I32 ThresholdDist);
 
 /* Motion support */
 void     WM_MOTION_Enable          (int OnOff);
@@ -651,6 +653,8 @@ extern T_WM_EXEC_GESTURE WM__pExecGestures;
 /* ... */
 int WM_OnKey(int Key, int Pressed);
 void WM_MakeModal(WM_HWIN hWin);
+int WM_SetModalLayer(int LayerIndex);
+int WM_GetModalLayer(void);
 
 /*********************************************************************
 *

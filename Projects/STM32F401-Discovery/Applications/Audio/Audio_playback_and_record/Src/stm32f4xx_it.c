@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    Audio_playback_and_record/Src/stm32f4xx_it.c 
+  * @file    Audio/Audio_playback_and_record/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
@@ -30,21 +30,14 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
-/** @addtogroup STM32F4-Discovery_Audio_Player_Recorder
-  * @{
-  */
-
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-
-/* Timer used for LED blinking (defined in main.c */
+/* Timer used for LED blinking (defined in main.c) */
 extern TIM_HandleTypeDef hTimLed;
-
-extern I2S_HandleTypeDef       hAudioOutI2s;
-
-extern I2S_HandleTypeDef       hAudioInI2s;
+extern I2S_HandleTypeDef hAudioOutI2s;
+extern I2S_HandleTypeDef hAudioInI2s;
 __IO uint32_t TimeRecBase = 0;  /* Time Recording base variable */
 extern __IO uint32_t CmdIndex;
 extern HCD_HandleTypeDef hHCD;
@@ -152,11 +145,11 @@ void PendSV_Handler(void)
 void SysTick_Handler(void)
 {
   HAL_IncTick();
-
+  
   /* Test on the command: Recording */
   if (CmdIndex == CMD_RECORD)
   {
-    /* Increments the time recording base variable */
+    /* Increment the time recording base variable */
     TimeRecBase ++; 
   }
 }
@@ -229,7 +222,12 @@ void OTG_FS_IRQHandler(void)
 }
 
 /**
-  * @}
-  */ 
+  * @brief  This function handles PPP interrupt request.
+  * @param  None
+  * @retval None
+  */
+/*void PPP_IRQHandler(void)
+{
+}*/
   
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

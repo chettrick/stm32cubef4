@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Demonstrations/Src/usbd_desc.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This file provides the USBD descriptors and string formating method.
   ******************************************************************************
   * @attention
@@ -133,7 +133,7 @@ __ALIGN_BEGIN uint8_t hUSBDDeviceDesc[USB_LEN_DEV_DESC] __ALIGN_END =
     USBD_IDX_PRODUCT_STR,       /*Index of product string*/
     USBD_IDX_SERIAL_STR,        /*Index of serial number string*/
     USBD_MAX_NUM_CONFIGURATION  /*bNumConfigurations*/
-  } ; /* USB_DeviceDescriptor */
+  }; /* USB_DeviceDescriptor */
 
 /* USB Standard Device Descriptor */
 #if defined ( __ICCARM__ ) /*!< IAR Compiler */

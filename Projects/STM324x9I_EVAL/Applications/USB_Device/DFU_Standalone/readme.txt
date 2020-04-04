@@ -1,13 +1,13 @@
 /**
-  @page DFU_Standalone USB Device Firmware Upgrade (DFU) example
+  @page DFU_Standalone USB Device Firmware Upgrade (DFU) application
   
   @verbatim
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    USB_Device/DFU_Standalone/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
-  * @brief   Description of the USB DFU example.
+  * @version V1.2.0
+  * @date    26-December-2014
+  * @brief   Description of the USB DFU application.
   ******************************************************************************
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
@@ -25,12 +25,12 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description 
+@par Application Description 
 
-This example is a part of the USB Device Library package using STM32Cube firmware. It describes how to 
+This application is a part of the USB Device Library package using STM32Cube firmware. It describes how to 
 use USB device application based on the Device Firmware Upgrade (DFU) on the STM32F4xx devices.
 
-This is a typical example on how to use the STM32F4xx USB OTG Device peripheral to implement the DFU
+This is a typical application on how to use the STM32F4xx USB OTG Device peripheral to implement the DFU
 capability for programming the embedded flash memory of the STM32F4xx devices.
 
 At the beginning of the main program the HAL_Init() function is called to reset all the peripherals,
@@ -48,7 +48,7 @@ It's worth noting that the system clock (SYSCLK) can be configured, depending on
 The DFU transactions are based on Endpoint 0 (control endpoint) transfer. All requests and status 
 control are sent/received through this endpoint.
 
-The Internal flash memory memory is split as follows:
+The Internal flash memory is split as follows:
  - DFU area located in [0x08000000 : USBD_DFU_APP_DEFAULT_ADD-1]: Only read access
  - Application area located in [USBD_DFU_APP_DEFAULT_ADD : Device's end address]: Read, Write, and Erase
    access
@@ -87,7 +87,7 @@ on the driver installation and PC host user interface.
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
       
 For more details about the STM32Cube USB Device library, please refer to UM1734 
@@ -97,7 +97,7 @@ For more details about the STM32Cube USB Device library, please refer to UM1734
 @par USB Library Configuration
 
 To select the appropriate USB Core to work with, user must add the following macro defines within the
-compiler preprocessor (already done in the preconfigured projects provided with this example):
+compiler preprocessor (already done in the preconfigured projects provided with this application):
       - "USE_USB_HS" when using USB High Speed (HS) Core
       - "USE_USB_FS" when using USB Full Speed (FS) Core 
       - "USE_USB_HS" and "USE_USB_HS_IN_FS" when using USB High Speed (HS) Core in FS mode      
@@ -105,7 +105,7 @@ compiler preprocessor (already done in the preconfigured projects provided with 
 It is possible to fine tune needed USB Device features by modifying defines values in USBD configuration
 file “usbd_conf.h” available under the project includes directory, in a way to fit the application
 requirements, such as:      
- - USBD_DFU_APP_DEFAULT_ADD, specifing the address from where user's application will be downloaded.
+ - USBD_DFU_APP_DEFAULT_ADD, specifying the address from where user's application will be downloaded.
 
 Device's end address is the end address of the flash memory and it is dependent on the device in use.
 
@@ -128,9 +128,9 @@ Device's end address is the end address of the flash memory and it is dependent 
 
 @par Hardware and Software environment
 
-  - This example runs on STM32F429xx/STM32F439xx devices.
+  - This application runs on STM32F429xx/STM32F439xx devices.
     
-  - This example has been tested with STMicroelectronics STM324x9I-EVAL RevB 
+  - This application has been tested with STMicroelectronics STM324x9I-EVAL RevB 
     evaluation boards and can be easily tailored to any other supported device 
     and development board.
 
@@ -155,7 +155,7 @@ In order to make the program work, you must do the following :
    - STM324x9I-EVAL_USBH-FS: to configure the project for STM32F4xx devices using USB OTG FS peripheral
    - STM324x9I-EVAL_USBH-HS-IN-FS: to configure the project for STM32F4xx devices and use USB OTG HS 
                                    peripheral In FS (using embedded PHY).
- - To run the example, proceed as follows:
+ - To run the application, proceed as follows:
    - Install "DfuSe Demonstrator"
    - Install the DFU driver available in "DfuSe Demonstrator" installation directory  
    - Open "DfuSe Demo" and download the "STM324x9I_EVAL_SysTick_0x0800C000.dfu" provided in Binary

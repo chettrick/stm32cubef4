@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Device/DualCore_Standalone/Src/usbd_conf.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This file implements the USB Device library callbacks and MSP
   ******************************************************************************
   * @attention
@@ -54,7 +54,7 @@ void HAL_PCD_MspInit(PCD_HandleTypeDef *hpcd)
   if(hpcd->Instance == USB_OTG_FS)
   {
     /* Configure USB FS GPIOs */
-    __GPIOA_CLK_ENABLE();
+    __HAL_RCC_GPIOA_CLK_ENABLE();
     
     /* Configure DM DP Pins */
     GPIO_InitStruct.Pin = (GPIO_PIN_11 | GPIO_PIN_12);
@@ -78,7 +78,7 @@ void HAL_PCD_MspInit(PCD_HandleTypeDef *hpcd)
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
     
     /* Enable USB FS Clocks */
-    __USB_OTG_FS_CLK_ENABLE();
+    __HAL_RCC_USB_OTG_FS_CLK_ENABLE();
 
      /* Set USBFS Interrupt to the lowest priority */
     HAL_NVIC_SetPriority(OTG_FS_IRQn, 7, 0);
@@ -90,11 +90,11 @@ void HAL_PCD_MspInit(PCD_HandleTypeDef *hpcd)
   else if(hpcd->Instance == USB_OTG_HS)
   {
     /* Configure USB FS GPIOs */
-    __GPIOA_CLK_ENABLE();
-    __GPIOB_CLK_ENABLE();
-    __GPIOC_CLK_ENABLE();
-    __GPIOH_CLK_ENABLE();
-    __GPIOI_CLK_ENABLE();
+    __HAL_RCC_GPIOA_CLK_ENABLE();
+    __HAL_RCC_GPIOB_CLK_ENABLE();
+    __HAL_RCC_GPIOC_CLK_ENABLE();
+    __HAL_RCC_GPIOH_CLK_ENABLE();
+    __HAL_RCC_GPIOI_CLK_ENABLE();
     
     /* CLK */
     GPIO_InitStruct.Pin = GPIO_PIN_5;
@@ -142,8 +142,8 @@ void HAL_PCD_MspInit(PCD_HandleTypeDef *hpcd)
     HAL_GPIO_Init(GPIOI, &GPIO_InitStruct);
     
     /* Enable USB HS Clocks */
-    __USB_OTG_HS_CLK_ENABLE();
-    __USB_OTG_HS_ULPI_CLK_ENABLE();
+    __HAL_RCC_USB_OTG_HS_CLK_ENABLE();
+    __HAL_RCC_USB_OTG_HS_ULPI_CLK_ENABLE();
     
     /* Set USBHS Interrupt to the lowest priority */
     HAL_NVIC_SetPriority(OTG_HS_IRQn, 7, 0);
@@ -163,14 +163,14 @@ void HAL_PCD_MspDeInit(PCD_HandleTypeDef *hpcd)
   if(hpcd->Instance == USB_OTG_FS)
   {  
     /* Disable USB FS Clocks */
-    __USB_OTG_FS_CLK_DISABLE();
-    __SYSCFG_CLK_DISABLE();
+    __HAL_RCC_USB_OTG_FS_CLK_DISABLE();
+    __HAL_RCC_SYSCFG_CLK_DISABLE();
   }
   else if(hpcd->Instance == USB_OTG_HS)
   {  
     /* Disable USB HS Clocks */
-    __USB_OTG_HS_CLK_DISABLE();
-    __SYSCFG_CLK_DISABLE();
+    __HAL_RCC_USB_OTG_HS_CLK_DISABLE();
+    __HAL_RCC_SYSCFG_CLK_DISABLE();
   }  
 }
 
@@ -342,9 +342,9 @@ USBD_StatusTypeDef USBD_LL_Init(USBD_HandleTypeDef *pdev)
     /* Initialize LL Driver */
     HAL_PCD_Init(&hpcd_FS);
     
-    HAL_PCD_SetRxFiFo(&hpcd_FS, 0x80);
-    HAL_PCD_SetTxFiFo(&hpcd_FS, 0, 0x40);
-    HAL_PCD_SetTxFiFo(&hpcd_FS, 1, 0x80);
+    HAL_PCDEx_SetRxFiFo(&hpcd_FS, 0x80);
+    HAL_PCDEx_SetTxFiFo(&hpcd_FS, 0, 0x40);
+    HAL_PCDEx_SetTxFiFo(&hpcd_FS, 1, 0x80);
   }
   else /* pdev->id == 1*/
   {
@@ -372,9 +372,9 @@ USBD_StatusTypeDef USBD_LL_Init(USBD_HandleTypeDef *pdev)
     /* Initialize LL Driver */
     HAL_PCD_Init(&hpcd_HS);
     
-    HAL_PCD_SetRxFiFo(&hpcd_HS, 0x200);
-    HAL_PCD_SetTxFiFo(&hpcd_HS, 0, 0x80);
-    HAL_PCD_SetTxFiFo(&hpcd_HS, 1, 0x174);
+    HAL_PCDEx_SetRxFiFo(&hpcd_HS, 0x200);
+    HAL_PCDEx_SetTxFiFo(&hpcd_HS, 0, 0x80);
+    HAL_PCDEx_SetTxFiFo(&hpcd_HS, 1, 0x174);
   }
   return USBD_OK;
 }

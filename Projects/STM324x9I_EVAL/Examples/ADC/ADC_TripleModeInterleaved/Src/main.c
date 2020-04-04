@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    ADC/ADC_TripleModeInterleaved/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This example provides a short description of how to use the ADC 
   *          peripheral to convert a regular channel in Triple interleaved mode.
   ******************************************************************************
@@ -68,7 +68,7 @@ static void ADC_Config(void);
 /* Private functions ---------------------------------------------------------*/
 
 /**
-  * @brief  Main program.
+  * @brief  Main program
   * @param  None
   * @retval None
   */
@@ -81,7 +81,7 @@ int main(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-  /* Configure the system clock to 144 Mhz */
+  /* Configure the system clock to 144 MHz */
   SystemClock_Config();
   
   /* Configure LED1 and LED3 */
@@ -91,21 +91,21 @@ int main(void)
   /*##-1- Configure ADC1, ADC2 and ADC3 peripherals ##########################*/
   ADC_Config();
   
-  /*##-8- Start ADC3 conversion process ######################################*/
+  /*##-2- Start ADC3 conversion process ######################################*/
   if(HAL_ADC_Start(&AdcHandle3) != HAL_OK)
   {
     /* Start Error */
     Error_Handler();
   }
   
-  /*##-9- Start ADC2 conversion process ######################################*/
+  /*##-3- Start ADC2 conversion process ######################################*/
   if(HAL_ADC_Start(&AdcHandle2) != HAL_OK)
   {
     /* Start Error */
     Error_Handler();
   }
   
-  /*##-10- Start ADC1 conversion process and enable DMA #######################*/  
+  /*##-4- Start ADC1 conversion process and enable DMA #######################*/  
   if(HAL_ADCEx_MultiModeStart_DMA(&AdcHandle1, (uint32_t*)aADCTripleConvertedValue, 3) != HAL_OK)
   {
     /* Start Error */
@@ -144,7 +144,7 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
 
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -179,11 +179,11 @@ static void SystemClock_Config(void)
   */
 static void Error_Handler(void)
 {
-    /* Turn LED3 on */
-    BSP_LED_On(LED3);
-    while(1)
-    {
-    }
+  /* Turn LED3 on */
+  BSP_LED_On(LED3);
+  while(1)
+  {
+  }
 }
 
 /**
@@ -207,7 +207,7 @@ static void ADC_Config(void)
   AdcHandle3.Instance          = ADCz;
   
   AdcHandle3.Init.ClockPrescaler = ADC_CLOCKPRESCALER_PCLK_DIV2;
-  AdcHandle3.Init.Resolution = ADC_RESOLUTION12b;
+  AdcHandle3.Init.Resolution = ADC_RESOLUTION_12B;
   AdcHandle3.Init.ScanConvMode = DISABLE;
   AdcHandle3.Init.ContinuousConvMode = ENABLE;
   AdcHandle3.Init.DiscontinuousConvMode = DISABLE;
@@ -237,11 +237,11 @@ static void ADC_Config(void)
     Error_Handler();
   }
   
-  /*##-3- Configure the ADC2 peripheral #######################################*/
+  /*##-3- Configure the ADC2 peripheral ######################################*/
   AdcHandle2.Instance          = ADCy;
   
   AdcHandle2.Init.ClockPrescaler = ADC_CLOCKPRESCALER_PCLK_DIV2;
-  AdcHandle2.Init.Resolution = ADC_RESOLUTION12b;
+  AdcHandle2.Init.Resolution = ADC_RESOLUTION_12B;
   AdcHandle2.Init.ScanConvMode = DISABLE;
   AdcHandle2.Init.ContinuousConvMode = ENABLE;
   AdcHandle2.Init.DiscontinuousConvMode = DISABLE;
@@ -270,7 +270,7 @@ static void ADC_Config(void)
   AdcHandle1.Instance          = ADCx;
   
   AdcHandle1.Init.ClockPrescaler = ADC_CLOCKPRESCALER_PCLK_DIV2;
-  AdcHandle1.Init.Resolution = ADC_RESOLUTION12b;
+  AdcHandle1.Init.Resolution = ADC_RESOLUTION_12B;
   AdcHandle1.Init.ScanConvMode = DISABLE;
   AdcHandle1.Init.ContinuousConvMode = ENABLE;
   AdcHandle1.Init.DiscontinuousConvMode = DISABLE;
@@ -309,7 +309,7 @@ static void ADC_Config(void)
 
 /**
   * @brief  Conversion complete callback in non blocking mode 
-  * @param  hadc : hadc handle
+  * @param  hadc: ADC handle
   * @note   This example shows a simple way to report end of conversion, and 
   *         you can add your own implementation.    
   * @retval None
@@ -321,7 +321,6 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 }
 
 #ifdef  USE_FULL_ASSERT
-
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.
@@ -339,7 +338,6 @@ void assert_failed(uint8_t* file, uint32_t line)
   {
   }
 }
-
 #endif
 
 /**

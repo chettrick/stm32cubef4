@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32_adafruit_sd.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    22-April-2014
+  * @version V1.1.1
+  * @date    21-November-2014
   * @brief   This file provides a set of functions needed to manage the SD card
   *          mounted on the Adafruit 1.8" TFT LCD shield (reference ID 802),
   *          that is used with the STM32 Nucleo board through SPI interface.
@@ -70,7 +70,7 @@
 ---------------------
   + Initialization steps:
      o Initialize the micro SD card using the BSP_SD_Init() function. 
-     o Cheking the SD card presence is not managed because SD detection pin is
+     o Checking the SD card presence is not managed because SD detection pin is
        not physically mapped on the Adafruit shield.
      o The function BSP_SD_GetCardInfo() is used to get the micro SD card information 
        which is stored in the structure "SD_CardInfo".
@@ -214,7 +214,7 @@ uint8_t BSP_SD_GetCardInfo(SD_CardInfo *pCardInfo)
   pCardInfo->CardBlockSize = 1 << (pCardInfo->Csd.RdBlockLen);
   pCardInfo->CardCapacity *= pCardInfo->CardBlockSize;
 
-  /* Returns the reponse */
+  /* Returns the response */
   if (status == SD_RESPONSE_NO_ERROR)
   {
     return MSD_OK;
@@ -288,7 +288,7 @@ uint8_t BSP_SD_ReadBlocks(uint32_t* pData, uint32_t ReadAddr, uint16_t BlockSize
   /* Send dummy byte: 8 Clock pulses of delay */
   SD_IO_WriteDummy();
   
-  /* Return the reponse */
+  /* Return the response */
   return rvalue;
 }
 
@@ -355,8 +355,79 @@ uint8_t BSP_SD_WriteBlocks(uint32_t* pData, uint32_t WriteAddr, uint16_t BlockSi
   /* Send dummy byte: 8 Clock pulses of delay */
   SD_IO_WriteDummy();
 
-  /* Return the reponse */
+  /* Return the response */
   return rvalue;
+}
+
+/**
+  * @brief  Returns the SD status.
+  * @param  None
+  * @retval The SD status.
+  */
+uint8_t BSP_SD_GetStatus(void)
+{
+#if !defined (SD_GET_STATUS_WORKAROUND)
+  uint16_t status = 0;
+  
+  /* Send CMD13 (SD_SEND_STATUS) to get SD status */
+  SD_SendCmd(SD_CMD_SEND_STATUS, 0, 0xFF, SD_NO_RESPONSE_EXPECTED);
+  
+  status = SD_IO_ReadByte();
+  status |= (uint16_t)(SD_IO_ReadByte() << 8);
+  
+  /* Send Dummy Byte */
+  SD_IO_WriteDummy();
+  
+  /* Find SD status according to card state */
+  if (status == SD_RESPONSE_NO_ERROR)
+  {
+    return MSD_OK;
+  }
+  else
+  {
+    return MSD_ERROR;
+  }
+#else
+  /* This is a temporary workaround for this issue: on some STM32 Nucleo boards 
+     reading the SD card status will return an error */
+  return MSD_OK;
+#endif /* SD_GET_STATUS_WORKAROUND */
+}
+
+/**
+  * @brief  Erases the specified memory area of the given SD card. 
+  * @param  StartAddr: Start byte address
+  * @param  EndAddr: End byte address
+  * @retval SD status
+  */
+uint8_t BSP_SD_Erase(uint32_t StartAddr, uint32_t EndAddr)
+{
+  uint8_t rvalue = SD_RESPONSE_FAILURE;
+
+  /* Send CMD32 (Erase group start) and check if the SD acknowledged the erase command: R1 response (0x00: no errors) */
+  if (!SD_SendCmd(SD_CMD_SD_ERASE_GRP_START, StartAddr, 0xFF, SD_RESPONSE_NO_ERROR))
+  {
+    /* Send CMD33 (Erase group end) and Check if the SD acknowledged the erase command: R1 response (0x00: no errors) */
+    if (!SD_SendCmd(SD_CMD_SD_ERASE_GRP_END, EndAddr, 0xFF, SD_RESPONSE_NO_ERROR))
+    {
+      /* Send CMD38 (Erase) and Check if the SD acknowledged the erase command: R1 response (0x00: no errors) */
+      if (!SD_SendCmd(SD_CMD_ERASE, 0, 0xFF, SD_RESPONSE_NO_ERROR))
+      {
+        /* Verify that SD card is ready to use after the specific command ERASE */
+        rvalue = (uint8_t)SD_IO_WaitResponse(SD_RESPONSE_NO_ERROR);
+      }
+    }
+  }
+  
+  /* Return the response */
+  if (rvalue == SD_RESPONSE_NO_ERROR)
+  {
+    return MSD_OK;
+  }
+  else
+  {
+    return MSD_ERROR;
+  }
 }
 
 /**
@@ -474,7 +545,7 @@ static uint8_t SD_GetCSDRegister(SD_CSD* Csd)
     Csd->Reserved4 = 1;
   }
   
-  /* Return the reponse */
+  /* Return the response */
   return rvalue;
 }
 
@@ -566,7 +637,7 @@ static uint8_t SD_GetCIDRegister(SD_CID* Cid)
     Cid->CID_CRC = (CID_Tab[15] & 0xFE) >> 1;
     Cid->Reserved2 = 1;
   }
-  /* Return the reponse */
+  /* Return the response */
   return rvalue;
 }
 
@@ -644,34 +715,7 @@ static uint8_t SD_GetDataResponse(void)
   return response;
 }
 
-/**
-  * @brief  Returns the SD status.
-  * @param  None
-  * @retval The SD status.
-  */
-uint8_t BSP_SD_GetStatus(void)
-{
-  uint16_t status = 0;
-  
-  /* Send CMD13 (SD_SEND_STATUS) to get SD status */
-  SD_SendCmd(SD_CMD_SEND_STATUS, 0, 0xFF, SD_NO_RESPONSE_EXPECTED);
-  
-  status = SD_IO_ReadByte();
-  status |= (uint16_t)(SD_IO_ReadByte() << 8);
-  
-  /* Send Dummy Byte */
-  SD_IO_WriteDummy();
-  
-  /* Find SD status according to card state */
-  if (status == SD_RESPONSE_NO_ERROR)
-  {
-    return MSD_OK;
-  }
-  else
-  {
-    return MSD_ERROR;
-  }
-}
+
 
 /**
   * @brief  Put the SD in Idle state.
@@ -684,7 +728,7 @@ static uint8_t SD_GoIdleState(void)
      wait for In Idle State Response (R1 Format) equal to 0x01 */
   if (SD_SendCmd(SD_CMD_GO_IDLE_STATE, 0, 0x95, SD_IN_IDLE_STATE) != SD_RESPONSE_NO_ERROR)
   {
-    /* No Idle State Response: return response failue */
+    /* No Idle State Response: return response failure */
     return SD_RESPONSE_FAILURE;
   }
 
@@ -694,42 +738,6 @@ static uint8_t SD_GoIdleState(void)
   while (SD_SendCmd(SD_CMD_SEND_OP_COND, 0, 0xFF, SD_RESPONSE_NO_ERROR) != SD_RESPONSE_NO_ERROR);
   
   return SD_RESPONSE_NO_ERROR;
-}
-
-/**
-  * @brief  Erases the specified memory area of the given SD card. 
-  * @param  StartAddr: Start byte address
-  * @param  EndAddr: End byte address
-  * @retval SD status
-  */
-uint8_t BSP_SD_Erase(uint32_t StartAddr, uint32_t EndAddr)
-{
-  uint8_t rvalue = SD_RESPONSE_FAILURE;
-
-  /* Send CMD32 (Erase group start) and check if the SD acknowledged the erase command: R1 response (0x00: no errors) */
-  if (!SD_SendCmd(SD_CMD_SD_ERASE_GRP_START, StartAddr, 0xFF, SD_RESPONSE_NO_ERROR))
-  {
-    /* Send CMD33 (Erase group end) and Check if the SD acknowledged the erase command: R1 response (0x00: no errors) */
-    if (!SD_SendCmd(SD_CMD_SD_ERASE_GRP_END, EndAddr, 0xFF, SD_RESPONSE_NO_ERROR))
-    {
-      /* Send CMD38 (Erase) and Check if the SD acknowledged the erase command: R1 response (0x00: no errors) */
-      if (!SD_SendCmd(SD_CMD_ERASE, 0, 0xFF, SD_RESPONSE_NO_ERROR))
-      {
-        /* Verify that SD card is ready to use after the specific command ERASE */
-        rvalue = (uint8_t)SD_IO_WaitResponse(SD_RESPONSE_NO_ERROR);
-      }
-    }
-  }
-  
-  /* Return the reponse */
-  if (rvalue == SD_RESPONSE_NO_ERROR)
-  {
-    return MSD_OK;
-  }
-  else
-  {
-    return MSD_ERROR;
-  }
 }
 
 /**

@@ -1,13 +1,13 @@
 /**
-  @page AUDIO_Standalone USB Device AUDIO example
+  @page AUDIO_Standalone USB Device AUDIO application
   
   @verbatim
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    USB_Device/AUDIO_Standalone/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
-  * @brief   Description of the USB Device AUDIO example.
+  * @version V1.2.0
+  * @date    26-December-2014
+  * @brief   Description of the USB Device AUDIO application.
   ******************************************************************************
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
@@ -25,9 +25,9 @@
   ******************************************************************************
   @endverbatim
 
-@par Example Description 
+@par Application Description 
 
-This example is a part of the USB Device Library package using STM32Cube firmware. It describes how to 
+This application is a part of the USB Device Library package using STM32Cube firmware. It describes how to 
 use USB device application based on the AUDIO Class implementation of an audio streaming 
 (Out: Speaker/Headset) capability on the STM32F4xx devices.
 
@@ -36,14 +36,13 @@ It follows the "Universal Serial Bus Device Class Definition for Audio Devices R
 Following this specification, it is possible to manage only Full Speed USB mode (High Speed is not supported).
 This class is natively supported by most Operating Systems: no need for specific driver setup.
 
-This is a typical example on how to use the STM32F4xx USB OTG Device peripheral and SAI peripheral to 
+This is a typical application on how to use the STM32F4xx USB OTG Device peripheral and SAI peripheral to 
 stream audio data from USB Host to the audio codec implemented on the STM324xG-EVAL board.
 
 At the beginning of the main program the HAL_Init() function is called to reset all the peripherals,
 initialize the Flash interface and the systick. The user is provided with the SystemClock_Config()
 function to configure the system clock (SYSCLK) to run at 168 MHz. The Full Speed (FS) USB module uses
-internally a 48-MHz clock, which is generated from an integrated PLL. In the High Speed (HS) mode the
-USB clock (60 MHz) is driven by the ULPI.
+internally a 48-MHz clock, which is generated from an integrated PLL.
 
 It's worth noting that the system clock (SYSCLK) can be configured, depending on the used USB Core:
  - SYSCLK is set to 168 MHz: for FS Core because used embedded PHY requires 48 MHz clock,
@@ -70,7 +69,7 @@ the audio output process. This allows to resynchronize it with the input flow.
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
       
 For more details about the STM32Cube USB Device library, please refer to UM1734 
@@ -80,14 +79,13 @@ For more details about the STM32Cube USB Device library, please refer to UM1734
 @par USB Library Configuration
 
 To select the appropriate USB Core to work with, user must add the following macro defines within the
-compiler preprocessor (already done in the preconfigured projects provided with this example):
+compiler preprocessor (already done in the preconfigured projects provided with this application):
       - "USE_USB_FS" when using USB Full Speed (FS) Core 
-      - "USE_USB_HS" when using USB High Speed (HS) Core
 
 It is possible to fine tune needed USB Device features by modifying defines values in USBD configuration
 file “usbd_conf.h” available under the project includes directory, in a way to fit the application
 requirements, such as:      
- - USBD_AUDIO_FREQ, specifing the sampling rate conversion from original audio file sampling rate to the
+ - USBD_AUDIO_FREQ, specifying the sampling rate conversion from original audio file sampling rate to the
    sampling rate supported by the device.   
     
          
@@ -109,9 +107,9 @@ requirements, such as:
 
 @par Hardware and Software environment
 
-  - This example runs on STM32F407xx/STM32F417xx devices.
+  - This application runs on STM32F407xx/STM32F417xx devices.
     
-  - This example has been tested with STMicroelectronics STM324xG-EVAL RevC 
+  - This application has been tested with STMicroelectronics STM324xG-EVAL RevC 
     evaluation boards and can be easily tailored to any other supported device 
     and development board.
 
@@ -127,7 +125,7 @@ requirements, such as:
 In order to make the program work, you must do the following :
  - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
- - Run the example
+ - Run the application
  - Open an audio player application (Windows Media Player) and play music on the PC host
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>

@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    main.c 
+  * @file    LibJPEG/LibJPEG_Encoding/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014 
+  * @version V1.2.0
+  * @date    26-December-2014 
   * @brief   Main program body
   *          This sample code shows how to compress BMP file to JPEG file.
   ******************************************************************************
@@ -34,8 +34,7 @@ typedef enum
 {
   APPLICATION_IDLE = 0,  
   APPLICATION_START    
-}
-MSC_ApplicationTypeDef; 
+} MSC_ApplicationTypeDef; 
 
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
@@ -46,20 +45,20 @@ char USBDISKPath[4];  /* USB disk logical drive path */
 
 RGB_typedef *RGB_matrix;
   
-uint8_t   _aucLine[2048];
-uint32_t  counter = 0, bytesread;
-uint32_t  offset = 0;
+uint8_t  _aucLine[2048];
+uint32_t counter = 0, bytesread;
+uint32_t offset = 0;
 uint32_t line_counter = 0;
 
 USBH_HandleTypeDef  hUSB_Host;
 /* Variable to save the state of USB */
 MSC_ApplicationTypeDef Appli_state = APPLICATION_IDLE;
+DMA2D_HandleTypeDef DMA2DHandle;
 
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);
-DMA2D_HandleTypeDef hdma2d_eval;
 static uint8_t Jpeg_CallbackFunction(uint8_t* Row, uint32_t DataLength);
-static void USBH_UserProcess (USBH_HandleTypeDef *phost, uint8_t id );
+static void USBH_UserProcess(USBH_HandleTypeDef *phost, uint8_t id);
 static void LCD_Config(void);
 
 /* Private functions ---------------------------------------------------------*/
@@ -79,7 +78,7 @@ int main(void)
      */
   HAL_Init();
   
-  /* Configure the system clock to 180 Mhz */
+  /* Configure the system clock to 180 MHz */
   SystemClock_Config();
   
   /*##-1- LCD Configuration ##################################################*/
@@ -107,35 +106,33 @@ int main(void)
       switch(Appli_state)
       {
       case APPLICATION_START:
-
-        /*##-4- Create and Open a new jpg image file with write access ########*/
+        
+        /*##-4- Create and Open a new jpg image file with write access #######*/
         if(f_open(&MyFile1, "image.jpg", FA_CREATE_ALWAYS | FA_WRITE) == FR_OK)
         {
-        
-          /*##-5- Open the BMP image with read access ############################*/
+          /*##-5- Open the BMP image with read access ########################*/
           if(f_open(&MyFile, "image.bmp", FA_READ) == FR_OK)
           {
-          
-            /* Jpeg encoding */
+            /*##-6- Jpeg encoding ############################################*/
             jpeg_encode(&MyFile, &MyFile1, IMAGE_WIDTH, IMAGE_HEIGHT, IMAGE_QUALITY, _aucLine);
-          
+            
             /* Close the BMP and JPEG files */
             f_close(&MyFile1);
             f_close(&MyFile);
+            
+            /*##-7- Jpeg decoding ############################################*/
+            /* Open the BMP file for read */
+            if(f_open(&MyFile1, "image.jpg", FA_READ) == FR_OK)
+            {
+              /* Jpeg Decoding for display to LCD */
+              jpeg_decode(&MyFile1, IMAGE_WIDTH, _aucLine, Jpeg_CallbackFunction);
+              
+              /* Close the BMP file */
+              f_close(&MyFile1);  
+            }
           }
-        }   
+        }        
         
-        /* Open the BMP file for read */
-        if(f_open(&MyFile1, "image.jpg", FA_READ) == FR_OK)
-        {  
-        }
-  
-        /* Jpeg Decoding for display to LCD */
-        jpeg_decode(&MyFile1, IMAGE_WIDTH, _aucLine, Jpeg_CallbackFunction);
-  
-        /* Close the BMP file */
-        f_close(&MyFile1);  
-  
         Appli_state = APPLICATION_IDLE;
         break;
         
@@ -144,7 +141,7 @@ int main(void)
         break;      
       }
     }
-    }  
+  }  
   
   /* Infinite loop */
   while (1)
@@ -184,27 +181,27 @@ static uint8_t Jpeg_CallbackFunction(uint8_t* Row, uint32_t DataLength)
   offset = LCD_BUFFER + (IMAGE_WIDTH * (IMAGE_HEIGHT - line_counter - 1) * 4);
   
 /* Configure the DMA2D Mode, Color Mode and output offset */
-  hdma2d_eval.Init.Mode         = DMA2D_M2M_PFC;
-  hdma2d_eval.Init.ColorMode    = DMA2D_ARGB8888;
-  hdma2d_eval.Init.OutputOffset = 0;     
+  DMA2DHandle.Init.Mode         = DMA2D_M2M_PFC;
+  DMA2DHandle.Init.ColorMode    = DMA2D_ARGB8888;
+  DMA2DHandle.Init.OutputOffset = 0;     
   
   /* Foreground Configuration */
-  hdma2d_eval.LayerCfg[1].AlphaMode = DMA2D_NO_MODIF_ALPHA;
-  hdma2d_eval.LayerCfg[1].InputAlpha = 0xFF;
-  hdma2d_eval.LayerCfg[1].InputColorMode = CM_RGB888;
-  hdma2d_eval.LayerCfg[1].InputOffset = 0;
+  DMA2DHandle.LayerCfg[1].AlphaMode = DMA2D_NO_MODIF_ALPHA;
+  DMA2DHandle.LayerCfg[1].InputAlpha = 0xFF;
+  DMA2DHandle.LayerCfg[1].InputColorMode = CM_RGB888;
+  DMA2DHandle.LayerCfg[1].InputOffset = 0;
   
-  hdma2d_eval.Instance = DMA2D; 
+  DMA2DHandle.Instance = DMA2D; 
   
   /* DMA2D Initialization */
-  if(HAL_DMA2D_Init(&hdma2d_eval) == HAL_OK) 
+  if(HAL_DMA2D_Init(&DMA2DHandle) == HAL_OK) 
   {
-    if(HAL_DMA2D_ConfigLayer(&hdma2d_eval, 1) == HAL_OK) 
+    if(HAL_DMA2D_ConfigLayer(&DMA2DHandle, 1) == HAL_OK) 
     {
-      if (HAL_DMA2D_Start(&hdma2d_eval, (uint32_t)Row, (uint32_t)offset, IMAGE_WIDTH, 1) == HAL_OK)
+      if (HAL_DMA2D_Start(&DMA2DHandle, (uint32_t)Row, (uint32_t)offset, IMAGE_WIDTH, 1) == HAL_OK)
       {
         /* Polling For DMA transfer */  
-        HAL_DMA2D_PollForTransfer(&hdma2d_eval, 10);
+        HAL_DMA2D_PollForTransfer(&DMA2DHandle, 10);
       }
     }
   }   
@@ -230,11 +227,12 @@ static uint8_t Jpeg_CallbackFunction(uint8_t* Row, uint32_t DataLength)
 
 /**
   * @brief  LCD Configuration.
+  * @param  None
   * @retval None
   */
 static void LCD_Config(void)
 {
-  /* Initialize the LCD*/  
+  /* Initialize the LCD */  
   BSP_LCD_Init();
   
   /* Background Layer Initialization */
@@ -254,11 +252,11 @@ static void LCD_Config(void)
 }
 
 /**
-* @brief  User Process
-* @param  None
-* @retval None
-*/
-static void USBH_UserProcess  (USBH_HandleTypeDef *phost, uint8_t id)
+  * @brief  User Process
+  * @param  None
+  * @retval None
+  */
+static void USBH_UserProcess(USBH_HandleTypeDef *phost, uint8_t id)
 {  
   switch (id)
   { 
@@ -302,7 +300,7 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
   
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 

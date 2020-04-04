@@ -1,10 +1,10 @@
 /**
   ******************************************************************************
-  * @file    DCMI/DCMI_SnapShotMode/Src/main.c 
+  * @file    DCMI/DCMI_SnapshotMode/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
-  * @brief   This example discribe how to configure the camera in snapshot mode
+  * @version V1.2.0
+  * @date    26-December-2014
+  * @brief   This example describes how to configure the camera in snapshot mode
   *          and QVGA resolution.
   ******************************************************************************
   * @attention
@@ -43,7 +43,7 @@
   * @{
   */
 
-/** @addtogroup DCMI_SnapShotMode
+/** @addtogroup DCMI_SnapshotMode
   * @{
   */ 
 
@@ -57,7 +57,7 @@ static void SystemClock_Config(void);
 /* Private functions ---------------------------------------------------------*/
 
 /**
-  * @brief   Main program
+  * @brief  Main program
   * @param  None
   * @retval None
   */
@@ -71,16 +71,16 @@ int main(void)
      */
   HAL_Init();
   
-  /* Configure the system clock */
+  /* Configure the system clock to 168 MHz */
   SystemClock_Config();
   
-  /*##-1- Initialize the SRAM  ##############################################*/
+  /*##-1- Initialize the SRAM ################################################*/
   BSP_SRAM_Init();  
   
-  /*##-2- Initialise the LCD #################################################*/
+  /*##-2- Initialize the LCD #################################################*/
   BSP_LCD_Init(); 
 
-  /*##-3- Camera Initialisation and start capture ############################*/
+  /*##-3- Camera Initialization and start capture ############################*/
   /* Initialize the Camera */
   BSP_CAMERA_Init(CAMERA_R320x240);  
   
@@ -89,7 +89,8 @@ int main(void)
   
   /* Start the Camera Capture */
   BSP_CAMERA_SnapshotStart((uint8_t *)CAMERA_FRAME_BUFFER); 
-    
+
+  /* Infinite loop */    
   while (1)
   {
   }
@@ -99,7 +100,7 @@ int main(void)
   * @brief  Frame Event callback.
   * @param  None
   * @retval None
-*/
+  */
 void BSP_CAMERA_FrameEventCallback(void)
 {
   /* Display on LCD */
@@ -132,7 +133,7 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
 
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -157,10 +158,16 @@ static void SystemClock_Config(void)
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
+
+  /* STM32F405x/407x/415x/417x Revision Z devices: prefetch is supported  */
+  if (HAL_GetREVID() == 0x1001)
+  {
+    /* Enable the Flash prefetch */
+    __HAL_FLASH_PREFETCH_BUFFER_ENABLE();
+  }
 }
 
 #ifdef  USE_FULL_ASSERT
-
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.
@@ -187,6 +194,5 @@ void assert_failed(uint8_t* file, uint32_t line)
 /**
   * @}
   */
-
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

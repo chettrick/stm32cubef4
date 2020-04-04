@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    PWR/PWR_CurrentConsumption/stm32f4xx_lp_modes.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This file provides firmware functions to manage the following 
   *          functionalities of the STM32F4xx Low Power Modes:
   *           - Sleep Mode
@@ -75,7 +75,7 @@ static void SYSCLKConfig_STOP(void);
   *            - Prefetch ON   
   *            - Code running from Internal FLASH
   *            - All peripherals disabled.
-  *            - Wakeup using EXTI Line (Key Button)
+  *            - Wake-up using EXTI Line (Key Button)
   * @param  None
   * @retval None
   */
@@ -85,15 +85,15 @@ void SleepMode_Measure(void)
 
   /* Configure all GPIO as analog to reduce current consumption on non used IOs */
   /* Enable GPIOs clock */
-  __GPIOA_CLK_ENABLE();
-  __GPIOB_CLK_ENABLE();
-  __GPIOC_CLK_ENABLE();
-  __GPIOD_CLK_ENABLE();
-  __GPIOE_CLK_ENABLE();
-  __GPIOF_CLK_ENABLE();
-  __GPIOG_CLK_ENABLE();
-  __GPIOH_CLK_ENABLE();
-  __GPIOI_CLK_ENABLE();
+  __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
+  __HAL_RCC_GPIOC_CLK_ENABLE();
+  __HAL_RCC_GPIOD_CLK_ENABLE();
+  __HAL_RCC_GPIOE_CLK_ENABLE();
+  __HAL_RCC_GPIOF_CLK_ENABLE();
+  __HAL_RCC_GPIOG_CLK_ENABLE();
+  __HAL_RCC_GPIOH_CLK_ENABLE();
+  __HAL_RCC_GPIOI_CLK_ENABLE();
 
   GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
   GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
@@ -110,20 +110,20 @@ void SleepMode_Measure(void)
   HAL_GPIO_Init(GPIOI, &GPIO_InitStruct);
 
   /* Disable GPIOs clock */
-  __GPIOA_CLK_DISABLE();
-  __GPIOB_CLK_DISABLE();
-  __GPIOC_CLK_DISABLE();
-  __GPIOD_CLK_DISABLE();
-  __GPIOE_CLK_DISABLE();
-  __GPIOF_CLK_DISABLE();
-  __GPIOG_CLK_DISABLE();
-  __GPIOH_CLK_DISABLE();
-  __GPIOI_CLK_DISABLE();
+  __HAL_RCC_GPIOA_CLK_DISABLE();
+  __HAL_RCC_GPIOB_CLK_DISABLE();
+  __HAL_RCC_GPIOC_CLK_DISABLE();
+  __HAL_RCC_GPIOD_CLK_DISABLE();
+  __HAL_RCC_GPIOE_CLK_DISABLE();
+  __HAL_RCC_GPIOF_CLK_DISABLE();
+  __HAL_RCC_GPIOG_CLK_DISABLE();
+  __HAL_RCC_GPIOH_CLK_DISABLE();
+  __HAL_RCC_GPIOI_CLK_DISABLE();
   
   /* Configure Key Button */
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_EXTI);
   
-  /* Suspend Tick increment to prevent wakeup by Systick interrupt. 
+  /* Suspend Tick increment to prevent wake-up by Systick interrupt. 
      Otherwise the Systick interrupt will wake up the device within 1ms (HAL time base) */
   HAL_SuspendTick();
   
@@ -153,7 +153,7 @@ void SleepMode_Measure(void)
   *           - HSI, HSE OFF and LSI OFF if not used as RTC Clock source
   *           - No IWDG
   *           - FLASH in deep power down mode
-  *           - Automatic Wakeup using RTC clocked by LSE/LSI (~20s)
+  *           - Automatic Wake-up using RTC clocked by LSE/LSI (~20s)
   * @param  None
   * @retval None
   */
@@ -163,15 +163,15 @@ void StopMode_Measure(void)
   
   /* Configure all GPIO as analog to reduce current consumption on non used IOs */
   /* Enable GPIOs clock */
-  __GPIOA_CLK_ENABLE();
-  __GPIOB_CLK_ENABLE();
-  __GPIOC_CLK_ENABLE();
-  __GPIOD_CLK_ENABLE();
-  __GPIOE_CLK_ENABLE();
-  __GPIOF_CLK_ENABLE();
-  __GPIOG_CLK_ENABLE();
-  __GPIOH_CLK_ENABLE();
-  __GPIOI_CLK_ENABLE();
+  __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
+  __HAL_RCC_GPIOC_CLK_ENABLE();
+  __HAL_RCC_GPIOD_CLK_ENABLE();
+  __HAL_RCC_GPIOE_CLK_ENABLE();
+  __HAL_RCC_GPIOF_CLK_ENABLE();
+  __HAL_RCC_GPIOG_CLK_ENABLE();
+  __HAL_RCC_GPIOH_CLK_ENABLE();
+  __HAL_RCC_GPIOI_CLK_ENABLE();
 
   GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
   GPIO_InitStruct.Speed = GPIO_SPEED_HIGH;
@@ -188,15 +188,15 @@ void StopMode_Measure(void)
   HAL_GPIO_Init(GPIOI, &GPIO_InitStruct);
 
   /* Disable GPIOs clock */
-  __GPIOA_CLK_DISABLE();
-  __GPIOB_CLK_DISABLE();
-  __GPIOC_CLK_DISABLE();
-  __GPIOD_CLK_DISABLE();
-  __GPIOE_CLK_DISABLE();
-  __GPIOF_CLK_DISABLE();
-  __GPIOG_CLK_DISABLE();
-  __GPIOH_CLK_DISABLE();
-  __GPIOI_CLK_DISABLE();
+  __HAL_RCC_GPIOA_CLK_DISABLE();
+  __HAL_RCC_GPIOB_CLK_DISABLE();
+  __HAL_RCC_GPIOC_CLK_DISABLE();
+  __HAL_RCC_GPIOD_CLK_DISABLE();
+  __HAL_RCC_GPIOE_CLK_DISABLE();
+  __HAL_RCC_GPIOF_CLK_DISABLE();
+  __HAL_RCC_GPIOG_CLK_DISABLE();
+  __HAL_RCC_GPIOH_CLK_DISABLE();
+  __HAL_RCC_GPIOI_CLK_DISABLE();
   
   RTCHandle.Instance = RTC;
     
@@ -221,16 +221,16 @@ void StopMode_Measure(void)
   }
   
   /*## Configure the Wake up timer ###########################################*/
-  /*  RTC Wakeup Interrupt Generation:
-      Wakeup Time Base = (RTC_WAKEUPCLOCK_RTCCLK_DIV /(LSI))
-      Wakeup Time = Wakeup Time Base * WakeUpCounter 
+  /*  RTC Wake-up Interrupt Generation:
+      Wake-up Time Base = (RTC_WAKEUPCLOCK_RTCCLK_DIV /(LSI))
+      Wake-up Time = Wake-up Time Base * WakeUpCounter 
                   = (RTC_WAKEUPCLOCK_RTCCLK_DIV /(LSI)) * WakeUpCounter
-      ==> WakeUpCounter = Wakeup Time / Wakeup Time Base
+      ==> WakeUpCounter = Wake-up Time / Wake-up Time Base
 
       To configure the wake up timer to 20s the WakeUpCounter is set to 0xA017:
         RTC_WAKEUPCLOCK_RTCCLK_DIV = RTCCLK_Div16 = 16 
-        Wakeup Time Base = 16 /(~32.768KHz) = ~0,488 ms
-        Wakeup Time = ~20s = 0,488ms  * WakeUpCounter
+        Wake-up Time Base = 16 /(~32.768KHz) = ~0,488 ms
+        Wake-up Time = ~20s = 0,488ms  * WakeUpCounter
         ==> WakeUpCounter = ~20s/0,488ms = 40983 = 0xA017 */
   HAL_RTCEx_SetWakeUpTimer_IT(&RTCHandle, 0xA017, RTC_WAKEUPCLOCK_RTCCLK_DIV16);
 
@@ -259,14 +259,14 @@ void StopMode_Measure(void)
   *         ============
   *           - Backup SRAM and RTC OFF
   *           - IWDG and LSI OFF
-  *           - Wakeup using WakeUp Pin (PA.00)
+  *           - Wake-up using WakeUp Pin (PA.00)
   * @param  None
   * @retval None
   */
 void StandbyMode_Measure(void)
 {
   /* Enable Power Clock*/
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
   
   /* Allow access to Backup */
   HAL_PWR_EnableBkUpAccess();
@@ -275,13 +275,13 @@ void StandbyMode_Measure(void)
   __HAL_RCC_BACKUPRESET_FORCE();
   __HAL_RCC_BACKUPRESET_RELEASE();  
   
-  /* Disable all used wakeup sources: Pin1(PA.0) */
+  /* Disable all used wake-up sources: Pin1(PA.0) */
   HAL_PWR_DisableWakeUpPin(PWR_WAKEUP_PIN1);
   
-  /* Clear all related wakeup flags */
+  /* Clear all related wake-up flags */
   __HAL_PWR_CLEAR_FLAG(PWR_FLAG_WU);
   
-  /* Re-enable all used wakeup sources: Pin1(PA.0) */
+  /* Re-enable all used wake-up sources: Pin1(PA.0) */
   HAL_PWR_EnableWakeUpPin(PWR_WAKEUP_PIN1);
 
   /* Request to enter STANDBY mode  */
@@ -296,7 +296,7 @@ void StandbyMode_Measure(void)
   *           - RTC Clocked by LSE/LSI
   *           - IWDG OFF
   *           - Backup SRAM OFF
-  *           - Automatic Wakeup using RTC clocked by LSE/LSI (after ~20s)
+  *           - Automatic Wake-up using RTC clocked by LSE/LSI (after ~20s)
   * @param  None
   * @retval None
   */
@@ -324,16 +324,16 @@ void StandbyRTCMode_Measure(void)
   }
   
   /*## Configure the Wake up timer ###########################################*/
-  /*  RTC Wakeup Interrupt Generation:
-      Wakeup Time Base = (RTC_WAKEUPCLOCK_RTCCLK_DIV /(LSI))
-      Wakeup Time = Wakeup Time Base * WakeUpCounter 
+  /*  RTC Wake-up Interrupt Generation:
+      Wake-up Time Base = (RTC_WAKEUPCLOCK_RTCCLK_DIV /(LSI))
+      Wake-up Time = Wake-up Time Base * WakeUpCounter 
                   = (RTC_WAKEUPCLOCK_RTCCLK_DIV /(LSI)) * WakeUpCounter
-      ==> WakeUpCounter = Wakeup Time / Wakeup Time Base
+      ==> WakeUpCounter = Wake-up Time / Wake-up Time Base
 
       To configure the wake up timer to 20s the WakeUpCounter is set to 0xA017:
         RTC_WAKEUPCLOCK_RTCCLK_DIV = RTCCLK_Div16 = 16 
-        Wakeup Time Base = 16 /(~32.768KHz) = ~0,488 ms
-        Wakeup Time = ~20s = 0,488ms  * WakeUpCounter
+        Wake-up Time Base = 16 /(~32.768KHz) = ~0,488 ms
+        Wake-up Time = ~20s = 0,488ms  * WakeUpCounter
         ==> WakeUpCounter = ~20s/0,488ms = 40983 = 0xA017 */
   /* Disable Wake-up timer */
   if(HAL_RTCEx_DeactivateWakeUpTimer(&RTCHandle) != HAL_OK)
@@ -342,7 +342,7 @@ void StandbyRTCMode_Measure(void)
     Error_Handler(); 
   }
   
-  /*#### Clear all related wakeup flags ######################################*/
+  /*#### Clear all related wake-up flags ######################################*/
   /* Clear PWR wake up Flag */
   __HAL_PWR_CLEAR_FLAG(PWR_FLAG_WU);
   
@@ -366,7 +366,7 @@ void StandbyRTCMode_Measure(void)
   *           - RTC Clocked by LSE or LSI
   *           - Backup SRAM ON
   *           - IWDG OFF
-  *           - Automatic Wakeup using RTC clocked by LSE/LSI (after ~20s)
+  *           - Automatic Wake-up using RTC clocked by LSE/LSI (after ~20s)
   * @param  None
   * @retval None
   */
@@ -394,16 +394,16 @@ void StandbyRTCBKPSRAMMode_Measure(void)
   }
 
   /*## Configure the Wake up timer ###########################################*/
-  /*  RTC Wakeup Interrupt Generation:
-      Wakeup Time Base = (RTC_WAKEUPCLOCK_RTCCLK_DIV /(LSI))
-      Wakeup Time = Wakeup Time Base * WakeUpCounter 
+  /*  RTC Wake-up Interrupt Generation:
+      Wake-up Time Base = (RTC_WAKEUPCLOCK_RTCCLK_DIV /(LSI))
+      Wake-up Time = Wake-up Time Base * WakeUpCounter 
                   = (RTC_WAKEUPCLOCK_RTCCLK_DIV /(LSI)) * WakeUpCounter
-      ==> WakeUpCounter = Wakeup Time / Wakeup Time Base
+      ==> WakeUpCounter = Wake-up Time / Wake-up Time Base
 
       To configure the wake up timer to 20s the WakeUpCounter is set to 0xA017:
         RTC_WAKEUPCLOCK_RTCCLK_DIV = RTCCLK_Div16 = 16 
-        Wakeup Time Base = 16 /(~32.768KHz) = ~0,488 ms
-        Wakeup Time = ~20s = 0,488ms  * WakeUpCounter
+        Wake-up Time Base = 16 /(~32.768KHz) = ~0,488 ms
+        Wake-up Time = ~20s = 0,488ms  * WakeUpCounter
         ==> WakeUpCounter = ~20s/0,488ms = 40983 = 0xA017 */
   /* Disable Wake-up timer */
   if(HAL_RTCEx_DeactivateWakeUpTimer(&RTCHandle) != HAL_OK)
@@ -412,7 +412,7 @@ void StandbyRTCBKPSRAMMode_Measure(void)
     Error_Handler(); 
   }
   
-  /*#### Clear all related wakeup flags ######################################*/
+  /*#### Clear all related wake-up flags ######################################*/
   /* Clear PWR wake up Flag */
   __HAL_PWR_CLEAR_FLAG(PWR_FLAG_WU);
   
@@ -423,7 +423,7 @@ void StandbyRTCBKPSRAMMode_Measure(void)
   HAL_RTCEx_SetWakeUpTimer_IT(&RTCHandle, 0xA017, RTC_WAKEUPCLOCK_RTCCLK_DIV16);
 
   /* Enable BKPRAM Clock */
-  __BKPSRAM_CLK_ENABLE();
+  __HAL_RCC_BKPSRAM_CLK_ENABLE();
   
   /* Enable the Backup SRAM low power Regulator */
   HAL_PWREx_EnableBkUpReg();

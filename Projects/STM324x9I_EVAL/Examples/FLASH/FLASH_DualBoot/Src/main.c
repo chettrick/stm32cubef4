@@ -2,10 +2,10 @@
   ******************************************************************************
   * @file    FLASH/FLASH_WriteProtection/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This example provides a description of how to erase and program the 
-  *			 STM32F4xx FLASH.
+  *			     STM32F4xx FLASH.
   ******************************************************************************
   * @attention
   *
@@ -54,19 +54,21 @@
 
 #ifdef FLASH_BANK1
  #define MESSAGE3    "        FLASH BANK1        "
+ #define MESSAGE7     "         Swap BFB2         "
 #else
  #define MESSAGE3    "        FLASH BANK2        "
+ #define MESSAGE7     "         Swap BFB1         "
 #endif
 
 #define MESSAGE5     "      PUSH Key button      "
 
-#define MESSAGE7     "         Swap BFB2         "
 
 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 FLASH_OBProgramInitTypeDef    OBInit; 
 FLASH_AdvOBProgramInitTypeDef AdvOBInit;
+
 uint8_t Message[24];
 uint32_t VAR = 0;
 __IO uint32_t tmp = 0;
@@ -91,15 +93,15 @@ int main(void)
      */
   HAL_Init();
   
-  /* Configure the system clock to 180 Mhz */
+  /* Configure the system clock to 180 MHz */
   SystemClock_Config();
   
-  /* Configure TAMPER/KEY button */
+  /* Configure TAMPER Button */
   BSP_PB_Init(BUTTON_TAMPER, BUTTON_MODE_GPIO);
   
-  /* Initialize LEDs and LCD available on EVAL board **************************/
+  /* Configure LED3 and LED4 */
   BSP_LED_Init(LED3);
-  BSP_LED_Init(LED4);   
+  BSP_LED_Init(LED4);
 
   /*##-1- Initialize the LCD #################################################*/
   /* Initialize the LCD */
@@ -108,7 +110,7 @@ int main(void)
   /* Set LCD font */
   BSP_LCD_SetFont(&Font20);
    
-  /* LCD Layer Initialisation */
+  /* LCD Layer Initialization */
   BSP_LCD_LayerDefaultInit(1, 0xC0130000); 
   
   BSP_LCD_SelectLayer(1);
@@ -138,9 +140,6 @@ int main(void)
   /* Turn on LEDs */
   BSP_LED_On(LED3);
   BSP_LED_On(LED4);
-
-  /*## Add your application code here ########################################*/  
-
   
   /* Infinite loop */
   while (1)
@@ -148,11 +147,24 @@ int main(void)
     /*--- If Wake-up button is pushed, Set BFB2 bit to enable boot from Bank2
     (active after next reset, w/ Boot pins set in Boot from Flash memory position ---*/
     
-    /* Wait for User push-button is released */
+    /* Wait for TAMPER push-button is released */
     while (BSP_PB_GetState(BUTTON_TAMPER) != RESET)
     {
+      #ifdef FLASH_BANK1        
+    /* Toggle LED3 */
+    BSP_LED_Toggle(LED3);
+    
+    /* Insert 50 ms delay */
+    HAL_Delay(50);
+#else
+    /* Toggle LED4 */    
+    BSP_LED_Toggle(LED4);
+    
+    /* Insert 50 ms delay */
+    HAL_Delay(50);
+#endif    
     }
-      
+    
     /* Set BFB2 bit to enable boot from Flash Bank2 */
     /* Allow Access to Flash control registers and user Falsh */
     HAL_FLASH_Unlock();
@@ -161,9 +173,9 @@ int main(void)
     HAL_FLASH_OB_Unlock();
     
     /* Get the Dual boot configuration status */
-    AdvOBInit.OptionType = OBEX_BOOTCONFIG;
+    AdvOBInit.OptionType = OPTIONBYTE_BOOTCONFIG;
     HAL_FLASHEx_AdvOBGetConfig(&AdvOBInit);
-    
+
     /* Enable/Disable dual boot feature */
     if (((AdvOBInit.BootConfig) & (FLASH_OPTCR_BFB2)) == FLASH_OPTCR_BFB2)
     {
@@ -193,21 +205,7 @@ int main(void)
     HAL_FLASH_Lock();    
     
     /* Initiates a system reset request to reset the MCU */
-    HAL_NVIC_SystemReset();     
-      
-#ifdef FLASH_BANK1        
-    /* Toggle LD3 */
-    BSP_LED_Toggle(LED3);
-    
-    /* Insert 50 ms delay */
-    HAL_Delay(50);
-#else
-    /* Toggle LD4 */    
-    BSP_LED_Toggle(LED4);
-    
-    /* Insert 50 ms delay */
-    HAL_Delay(50);
-#endif    
+    HAL_NVIC_SystemReset();  
   }
 }
 
@@ -237,7 +235,7 @@ static void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
 
   /* Enable Power Control clock */
-  __PWR_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
 
   /* The voltage scaling allows optimizing the power consumption when the device is 
      clocked below the maximum system frequency, to update the voltage scaling value 
@@ -256,7 +254,7 @@ static void SystemClock_Config(void)
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
   
   /* Activate the Over-Drive mode */
-  HAL_PWREx_ActivateOverDrive();
+  HAL_PWREx_EnableOverDrive();
   
   /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
@@ -287,6 +285,7 @@ void assert_failed(uint8_t* file, uint32_t line)
   }
 }
 #endif
+
 /**
   * @}
   */ 

@@ -548,6 +548,11 @@
         <Group>
           <GroupName>Example/User</GroupName>
           <Files>
+           <File>
+              <FileName>audio_if.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\audio_if.c</FilePath>
+            </File>
             <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>

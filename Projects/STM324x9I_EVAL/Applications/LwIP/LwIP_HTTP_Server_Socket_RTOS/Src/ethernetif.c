@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LwIP/LwIP_HTTP_Server_Socket_RTOS/Src/ethernetif.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This file implements Ethernet network interface drivers for lwIP
   ******************************************************************************
   * @attention
@@ -89,13 +89,13 @@ void HAL_ETH_MspInit(ETH_HandleTypeDef *heth)
   GPIO_InitTypeDef GPIO_InitStructure;
   
   /* Enable GPIOs clocks */
-  __GPIOA_CLK_ENABLE();
-  __GPIOB_CLK_ENABLE();
-  __GPIOC_CLK_ENABLE();
-  __GPIOF_CLK_ENABLE();
-  __GPIOG_CLK_ENABLE();
-  __GPIOH_CLK_ENABLE();
-  __GPIOI_CLK_ENABLE(); 
+  __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
+  __HAL_RCC_GPIOC_CLK_ENABLE();
+  __HAL_RCC_GPIOF_CLK_ENABLE();
+  __HAL_RCC_GPIOG_CLK_ENABLE();
+  __HAL_RCC_GPIOH_CLK_ENABLE();
+  __HAL_RCC_GPIOI_CLK_ENABLE(); 
 
 /* Ethernet pins configuration ************************************************/
   /*
@@ -122,7 +122,7 @@ void HAL_ETH_MspInit(ETH_HandleTypeDef *heth)
   /* Configure PA1, PA2 and PA7 */
   GPIO_InitStructure.Speed = GPIO_SPEED_HIGH;
   GPIO_InitStructure.Mode = GPIO_MODE_AF_PP;
-  GPIO_InitStructure.Pull = GPIO_NOPULL ; 
+  GPIO_InitStructure.Pull = GPIO_NOPULL; 
   GPIO_InitStructure.Alternate = GPIO_AF11_ETH;
   GPIO_InitStructure.Pin = GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_7;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStructure);
@@ -182,7 +182,7 @@ void HAL_ETH_MspInit(ETH_HandleTypeDef *heth)
   HAL_NVIC_EnableIRQ(ETH_IRQn);
   
   /* Enable ETHERNET clock  */
-  __ETH_CLK_ENABLE();
+  __HAL_RCC_ETH_CLK_ENABLE();
 }
 
 /**
@@ -302,7 +302,7 @@ static void low_level_init(struct netif *netif)
   *
   * @note Returning ERR_MEM here if a DMA queue of your MAC is full can lead to
   *       strange results. You might consider waiting for space in the DMA queue
-  *       to become availale since the stack doesn't retry to send a packet
+  *       to become available since the stack doesn't retry to send a packet
   *       dropped because of memory failure (except for the TCP timers).
   */
 static err_t low_level_output(struct netif *netif, struct pbuf *p)
@@ -393,7 +393,7 @@ error:
 static struct pbuf * low_level_input(struct netif *netif)
 {
   struct pbuf *p = NULL, *q = NULL;
-  uint16_t len = 0 ;
+  uint16_t len = 0;
   uint8_t *buffer;
   __IO ETH_DMADescTypeDef *dmarxdesc;
   uint32_t bufferoffset = 0;
@@ -488,15 +488,17 @@ void ethernetif_input( void const * argument )
   {
     if (osSemaphoreWait( s_xSemaphore, TIME_WAITING_FOR_INPUT)==osOK)
     {
-      p = low_level_input( netif );
-      if   (p != NULL)
+      do
       {
-        if (netif->input( p, netif) != ERR_OK )
+        p = low_level_input( netif );
+        if (p != NULL)
         {
-          pbuf_free(p);
-          p = NULL;
+          if (netif->input( p, netif) != ERR_OK )
+          {
+            pbuf_free(p);
+          }
         }
-      }
+      }while(p!=NULL);
     }
   }
 }
@@ -667,7 +669,7 @@ void ethernetif_update_config(struct netif *netif)
   */
 __weak void ethernetif_notify_conn_changed(struct netif *netif)
 {
-  /* NOTE : This is function clould be implemented in user file 
+  /* NOTE : This is function could be implemented in user file 
             when the callback is needed,
   */  
 }

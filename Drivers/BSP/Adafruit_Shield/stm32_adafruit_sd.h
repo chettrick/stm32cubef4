@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32_adafruit_sd.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    22-April-2014
+  * @version V1.1.1
+  * @date    21-November-2014
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm32_adafruit_sd.c driver.
   ******************************************************************************
@@ -250,14 +250,13 @@ typedef struct
   * @{
   */   
 uint8_t BSP_SD_Init(void);
-uint8_t BSP_SD_IsDetected(void);
+uint8_t BSP_SD_GetCardInfo(SD_CardInfo *pCardInfo);
 uint8_t BSP_SD_ReadBlocks(uint32_t *pData, uint32_t ReadAddr, uint16_t BlockSize, uint32_t NumberOfBlocks);
 uint8_t BSP_SD_WriteBlocks(uint32_t *pData, uint32_t WriteAddr, uint16_t BlockSize, uint32_t NumberOfBlocks);
-uint8_t BSP_SD_Erase(uint32_t StartAddr, uint32_t EndAddr);
 uint8_t BSP_SD_GetStatus(void);
-uint8_t BSP_SD_GetCardInfo(SD_CardInfo *pCardInfo);
+uint8_t BSP_SD_Erase(uint32_t StartAddr, uint32_t EndAddr);
    
-/* Link functions for SD Card peripheral*/
+/* Link functions for SD Card peripheral */
 void    SD_IO_Init(void); 
 void    SD_IO_WriteByte(uint8_t Data);
 uint8_t SD_IO_ReadByte(void);

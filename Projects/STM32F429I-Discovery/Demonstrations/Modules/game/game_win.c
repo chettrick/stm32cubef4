@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    game_win.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014   
+  * @version V1.2.0
+  * @date    26-December-2014   
   * @brief   game functions
   ******************************************************************************
   * @attention
@@ -165,8 +165,8 @@ static void _InvalidateCell(int x, int y) {
 /**
   * @brief  Get Stone
   * @param  pBoard: pointer to the board stack
-  * @param  x:      X position     
-  * @param  y:      Y position
+  * @param  x: X position     
+  * @param  y: Y position
   * @retval stone
   */
 static char _GetStone(const BOARD * pBoard, int x, int y) {
@@ -180,8 +180,8 @@ static char _GetStone(const BOARD * pBoard, int x, int y) {
 /**
   * @brief  Set Stone
   * @param  pBoard: pointer to the board stack
-  * @param  x:      X position     
-  * @param  y:      Y position
+  * @param  x: X position     
+  * @param  y: Y position
   * @retval None
   */
 static void _SetStone(BOARD * pBoard, int x, int y) {
@@ -194,8 +194,8 @@ static void _SetStone(BOARD * pBoard, int x, int y) {
 /**
   * @brief  Is Valid Move
   * @param  pBoard: pointer to the board stack
-  * @param  x:      X position     
-  * @param  y:      Y position
+  * @param  x: X position     
+  * @param  y: Y position
   * @retval status
   */
 static char _IsValidMove(BOARD * pBoard, int x, int y) {
@@ -206,14 +206,13 @@ static char _IsValidMove(BOARD * pBoard, int x, int y) {
   return r;
 }
 
-
 /**
   * @brief  Check Direction
   * @param  pBoard: pointer to the board stack
-  * @param  x:      X position     
-  * @param  y:      Y position
-  * @param  dx      difference between current and previous X position
-  * @param  dy      difference between current and previous Y position
+  * @param  x: X position     
+  * @param  y: Y position
+  * @param  dx: difference between current and previous X position
+  * @param  dy: difference between current and previous Y position
   * @retval status
   */
 static char _CheckDirection(const BOARD * pBoard, int x, int y, int dx, int dy) {
@@ -268,10 +267,10 @@ static int _CalcValidMoves(BOARD * pBoard) {
 /**
   * @brief  Do Direction
   * @param  pBoard: pointer to the board stack
-  * @param  x:      X position     
-  * @param  y:      Y position
-  * @param  dx      difference between current and previous X position
-  * @param  dy      difference between current and previous Y position
+  * @param  x: X position     
+  * @param  y: Y position
+  * @param  dx: difference between current and previous X position
+  * @param  dy: difference between current and previous Y position
   * @retval None
   */ 
 static void _DoDirection(BOARD * pBoard, int x, int y, int dx, int dy) {
@@ -285,8 +284,8 @@ static void _DoDirection(BOARD * pBoard, int x, int y, int dx, int dy) {
 /**
   * @brief  Make Move
   * @param  pBoard: pointer to the board stack
-  * @param  x:      X position     
-  * @param  y:      Y position
+  * @param  x: X position     
+  * @param  y: Y position
   * @retval None
   */ 
 static void _MakeMove(BOARD * pBoard, int x, int y) {
@@ -322,13 +321,12 @@ static int _CalcScore(const BOARD * pBoard) {
   return r;
 }
 
-
 /**
-  * @brief Find the value of all the pieces belonging to the given player.
-  * @note  Positive value is good for this player.
-  *        The value can also be negative, if the player occupies tiles
-  *        next to free corner, which makes it easier for the opponent
-  *        to get to this corner.
+  * @brief  Find the value of all the pieces belonging to the given player.
+  * @note   Positive value is good for this player.
+  *         The value can also be negative, if the player occupies tiles
+  *         next to free corner, which makes it easier for the opponent
+  *         to get to this corner.
   * @param  pBoard: pointer to the board stack
   * @param  player: player index
   * @retval value
@@ -402,14 +400,14 @@ static I32 _valuePieces(BOARD * pBoard, int player) {
   }
   return sum;
 }
+
 /**
-  * @brief Evaluation function for Reversi board.
-  * @note  Positive value means player 1 is in the lead,
-  *        negative value means player 2 is in the lead.
+  * @brief  Evaluation function for Reversi board.
+  * @note   Positive value means player 1 is in the lead,
+  *         negative value means player 2 is in the lead.
   * @param  pBoard: pointer to the board stack
   * @retval value
   */ 
-
 static I32 _Eval(BOARD * pBoard) {
   int ActPlayer, movesA, movesB;
   I32 score, value;
@@ -442,12 +440,11 @@ static I32 _Eval(BOARD * pBoard) {
   return value;
 }
 
-
 /**
-  * @brief Minimax search for the best possible move with alpha-beta pruning
+  * @brief  Minimax search for the best possible move with alpha-beta pruning
   * @param  depth: board depth
   * @param  alpha: current Move
-  * @param  beta:  previous Move
+  * @param  beta: previous Move
   * @param  firstMove: first Move index
   * @retval best move
   */ 
@@ -511,10 +508,10 @@ end:
 }
 
 /**
-  * @brief _PlayerAI_SmartGecko
+  * @brief  PlayerAI_SmartGecko
   * @param  pBoard: pointer to the board stack
-  * @param  x:      X position     
-  * @param  y:      Y position
+  * @param  px: X position     
+  * @param  py: Y position
   * @retval char
   */ 
 static char _PlayerAI_SmartGecko(const BOARD * pBoard, int * px, int * py) {
@@ -552,9 +549,9 @@ static char _PlayerAI_SmartGecko(const BOARD * pBoard, int * px, int * py) {
 }
 
 /**
-  * @brief callback Message Box 
+  * @brief  Callback Message Box 
   * @param  pMsg : pointer to data structure
-  * @retval None.
+  * @retval None
   */
 static void _cbMessageBox(WM_MESSAGE* pMsg) {
   WM_HWIN hWin;
@@ -661,7 +658,7 @@ static void _SetPlayer(int Player) {
 /**
   * @brief  Next Player 
   * @param  None 
-  * @retval None.
+  * @retval None
   */
 static void _NextPlayer(void) {
   int x, y;
@@ -681,7 +678,7 @@ static void _NextPlayer(void) {
 /**
   * @brief  Start new Game 
   * @param  None
-  * @retval None.
+  * @retval None
   */
 static void _StartNewGame(void) {
   memset(&_Board, 0, sizeof(BOARD));
@@ -695,11 +692,11 @@ static void _StartNewGame(void) {
 }
 
 /**
-  * @brief Handle PID 
-  * @param  x:      X position     
-  * @param  y:      Y position
-  * @param Pressed: touch status
-  * @retval None.
+  * @brief  Handle PID 
+  * @param  x: X position     
+  * @param  y: Y position
+  * @param  Pressed: touch status
+  * @retval None
   */
 static void _HandlePID(int x, int y, int Pressed) {
   static int _IsInHandlePID;
@@ -727,9 +724,9 @@ EndHandlePID:
 }
 
 /**
-  * @brief _OnTouch 
-  * @param pMsg : pointer to data structure
-  * @retval None.
+  * @brief  OnTouch 
+  * @param  pMsg : pointer to data structure
+  * @retval None
   */
 static void _OnTouch(WM_MESSAGE* pMsg) {
   const GUI_PID_STATE* pState = (const GUI_PID_STATE*)pMsg->Data.p;
@@ -742,7 +739,7 @@ static void _OnTouch(WM_MESSAGE* pMsg) {
 /**
   * @brief  Paints callback 
   * @param  hWin: pointer to the parent handle
-  * @retval None.
+  * @retval None
   */
 static void _OnPaint(WM_HWIN hWin) {
   GUI_COLOR Color;
@@ -814,9 +811,9 @@ static void _OnPaint(WM_HWIN hWin) {
 }
 
 /**
-  * @brief  callback Reversi Win 
-  * @param pMsg: pointer to data structure 
-  * @retval None.
+  * @brief  Callback Reversi Win 
+  * @param  pMsg: pointer to data structure 
+  * @retval None
   */
 static void _cbReversiWin(WM_MESSAGE* pMsg) {
   WM_HWIN hWin = pMsg->hWin;

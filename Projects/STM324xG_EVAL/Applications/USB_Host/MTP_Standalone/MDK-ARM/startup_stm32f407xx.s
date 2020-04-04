@@ -1,8 +1,8 @@
 ;******************** (C) COPYRIGHT 2014 STMicroelectronics ********************
 ;* File Name          : startup_stm32f407xx.s
 ;* Author             : MCD Application Team
-;* Version            : V1.1.0
-;* Date               : 26-June-2014
+;* Version            : V1.2.0
+;* Date               : 26-December-2014
 ;* Description        : STM32F407xx devices vector table for MDK-ARM toolchain. 
 ;*                      This module performs:
 ;*                      - Set the initial SP
@@ -56,7 +56,7 @@ __initial_sp
 ;   <o>  Heap Size (in Bytes) <0x0-0xFFFFFFFF:8>
 ; </h>
 
-Heap_Size      EQU     0x1500;
+Heap_Size      EQU     0x3000;
 
                 AREA    HEAP, NOINIT, READWRITE, ALIGN=3
 __heap_base

@@ -6,8 +6,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    CRYP/CRYP_AES_DMA/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Description of the CRYP AES-128 Algo in ECB mode with DMA Example
   ******************************************************************************
   *
@@ -58,6 +58,8 @@ STM32 Eval board's LEDs can be used to monitor the transfer status:
  - LED2 is ON when encryption is wrong.
  - LED3 is ON when there is an initialization error occurred.
 
+@note To ensure right functionality of this example, please ensure that used 
+      buffers are 32-bit aligned, once enabling the DMA capability.
 
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
       based on variable incremented in SysTick ISR. This implies that if HAL_Delay() is called from
@@ -65,7 +67,7 @@ STM32 Eval board's LEDs can be used to monitor the transfer status:
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 

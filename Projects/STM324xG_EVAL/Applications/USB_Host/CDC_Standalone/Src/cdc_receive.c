@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Host/CDC_Standalone/Src/cdc_receive.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   CDC Receive state machine
   ******************************************************************************
   * @attention
@@ -72,7 +72,7 @@ void CDC_Handle_Receive_Menu(void)
   case CDC_RECEIVE_WAIT:
     if(CdcDemo.select != PrevSelect)
     {
-      PrevSelect = CdcDemo.select ;
+      PrevSelect = CdcDemo.select;
       CDC_SelectItem(DEMO_RECEIVE_menu, CdcDemo.select & 0x7F);
       /* Handle select item */
       if(CdcDemo.select & 0x80)

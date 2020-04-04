@@ -1930,7 +1930,7 @@
     </group>
   </group>
   <group>
-    <name>Docs</name>
+    <name>Doc</name>
     <file>
       <name>$PROJ_DIR$\..\readme.txt</name>
     </file>
@@ -2338,7 +2338,7 @@
       <group>
         <name>Lib</name>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STemWin\Lib\STemWin524b_CM4_IAR.a</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STemWin\Lib\STemWin526_CM4_IAR.a</name>
         </file>
       </group>
     </group>

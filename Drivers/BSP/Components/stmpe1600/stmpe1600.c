@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stmpe1600.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    18-February-2014
+  * @version V1.0.1
+  * @date    02-December-2014
   * @brief   This file provides a set of functions needed to manage the STMPE1600
   *          IO Expander devices.
   ******************************************************************************

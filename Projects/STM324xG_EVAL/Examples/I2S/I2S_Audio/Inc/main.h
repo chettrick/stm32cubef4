@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    I2S/I2S_Audio/Inc/main.h 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
@@ -46,12 +46,10 @@
 #include "stm324xg_eval_audio.h"
 #include <stdio.h>
 
+#include "audio_if.h"
+
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
-/* This is an audio file stored in the Flash memory as a constant table of 16-bit data.
-   The audio format should be WAV (raw / PCM) 16-bits, Stereo (sampling rate may be modified) */
-extern uint16_t AUDIO_SAMPLE[];
-
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 

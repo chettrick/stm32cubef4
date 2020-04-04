@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    I2S/I2S_Audio/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
@@ -41,7 +41,6 @@
 #include "main.h"
 #include "stm32f4xx_it.h"
 
-
 /** @addtogroup STM32F4xx_HAL_Examples
   * @{
   */
@@ -54,7 +53,8 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-extern I2S_HandleTypeDef  haudio_i2s;
+extern I2S_HandleTypeDef haudio_i2s;
+
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -63,7 +63,7 @@ extern I2S_HandleTypeDef  haudio_i2s;
 /******************************************************************************/
 
 /**
-  * @brief   This function handles NMI exception.
+  * @brief  This function handles NMI exception.
   * @param  None
   * @retval None
   */
@@ -158,23 +158,38 @@ void PendSV_Handler(void)
 void SysTick_Handler(void)
 {
   HAL_IncTick();
+  
+  /* Check periodically the buffer state and fill played buffer with new data 
+     following the state that has been updated by the BSP_AUDIO_OUT_TransferComplete_CallBack()
+     and BSP_AUDIO_OUT_HalfTransfer_CallBack() */
+  AUDIO_Process();
 }
 
 /******************************************************************************/
 /*                 STM32F4xx Peripherals Interrupt Handlers                   */
 /*  Add here the Interrupt Handler for the used peripheral(s) (PPP), for the  */
 /*  available peripheral interrupt handler's name please refer to the startup */
-/*  file (startup_stm32f40xx.s/startup_stm32f427x.s).                         */
+/*  file (startup_stm32f4xx.s).                                               */
 /******************************************************************************/
+
 /**
-* @brief  This function handles the audio DMA interrupt request.
-* @param  None
-* @retval None
-*/
+  * @brief  This function handles the audio DMA interrupt request.
+  * @param  None
+  * @retval None
+  */
 void AUDIO_I2Sx_DMAx_IRQHandler(void)
 {
   HAL_DMA_IRQHandler(haudio_i2s.hdmatx);
 }
+
+/**
+  * @brief  This function handles PPP interrupt request.
+  * @param  None
+  * @retval None
+  */
+/*void PPP_IRQHandler(void)
+{
+}*/
 
 /**
   * @}
@@ -183,5 +198,5 @@ void AUDIO_I2Sx_DMAx_IRQHandler(void)
 /**
   * @}
   */
-  
+
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

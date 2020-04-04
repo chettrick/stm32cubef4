@@ -6,7 +6,7 @@
   * @file    HAL/HAL_TimeBase/readme.txt 
   * @author  MCD Application Team
   * @version V1.2.0
-  * @date    12-May-2014
+  * @date    26-December-2014
   * @brief   Description of the HAL time base example.
   ******************************************************************************
   *
@@ -69,7 +69,7 @@ LED5 will turn ON, if any error is occurred.
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the TIM6 interrupt priority you have to use HAL_NVIC_SetPriority() function.
 
-@note The application need to ensure that the TIM6 time base is always set to 1 millisecond
+@note The application needs to ensure that the TIM6 time base is always set to 1 millisecond
       to have correct HAL operation.
 
 

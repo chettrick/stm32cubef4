@@ -1,13 +1,13 @@
 /**
-  @page SDIO_EXAMPLES SDIO Example
+  @page I2S_EXAMPLES I2S Example
   
   @verbatim
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
-  * @file    SDIO/readme.txt 
+  * @file    I2S/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
-  * @brief   Description of SDIO example.
+  * @version V1.2.0
+  * @date    26-December-2014
+  * @brief   Description of I2S example.
   ******************************************************************************
   *
   * Redistribution and use in source and binary forms, with or without modification,
@@ -37,10 +37,10 @@
 
   The STM32CubeF4 firmware package comes with the following Examples and Applications
   making use of I2S peripheral:
-    - \Projects\STM324xG_EVAL\Examples\I2S\I2S_Audio
-    - \Projects\STM324xG_EVAL\Applications\USB_Device\AUDIO_Standalone
-    - \Projects\STM32F401-Discovery\Applications\Audio\Audio_playback_and_record
-    - \Projects\STM32F4-Discovery\Applications\Audio\Audio_playback_and_record    
+    - /Projects/STM324xG_EVAL/Examples/I2S/I2S_Audio
+    - /Projects/STM324xG_EVAL/Applications/USB_Device/AUDIO_Standalone
+    - /Projects/STM32F401-Discovery/Applications/Audio/Audio_playback_and_record
+    - /Projects/STM32F4-Discovery/Applications/Audio/Audio_playback_and_record    
 
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */

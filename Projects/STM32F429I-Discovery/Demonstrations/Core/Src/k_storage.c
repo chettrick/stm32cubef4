@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    k_storage.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014   
+  * @version V1.2.0
+  * @date    26-December-2014   
   * @brief   This file provides the kernel storage functions
   ******************************************************************************
   * @attention
@@ -168,7 +168,7 @@ uint32_t k_StorageGetCapacity (uint8_t unit)
 uint32_t k_StorageGetFree (uint8_t unit)
 { 
   uint32_t   fre_clust = 0;
-  FATFS *fs ;
+  FATFS *fs;
   FRESULT res = FR_INT_ERR;
   
   if(unit == 0)
@@ -293,11 +293,11 @@ int k_GetData(CHOOSEFILE_INFO * pInfo)
     memset(tmp, 0, CHOOSEFILE_MAXLEN);
     strcpy(tmp, pInfo->pRoot);
     
-    for(i= CHOOSEFILE_MAXLEN; i > 0 ; i--)
+    for(i= CHOOSEFILE_MAXLEN; i > 0; i--)
     {
       if(tmp[i] == '/')
       {
-        tmp[i] = 0 ;
+        tmp[i] = 0;
         break;
       }
     }

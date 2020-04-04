@@ -2,9 +2,9 @@
   ******************************************************************************
   * @file    Display/LTDC_Paint/Inc/save.h 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
-  * @brief   This file contains image used for LTDC example.   
+  * @version V1.2.0
+  * @date    26-December-2014
+  * @brief   This file contains image used for LTDC application.   
   ******************************************************************************
   * @attention
   *
@@ -29,7 +29,7 @@
 #ifndef __SAVE_H
 #define __SAVE_H
 
-const unsigned char save[5054]=
+__ALIGN_BEGIN const unsigned char save[5054] __ALIGN_END =
 {
 0x42,0x4d,0xbe,0x13,0x00,0x00,0x00,0x00,0x00,0x00,0x36,0x00,0x00,0x00,0x28,0x00,
 0x00,0x00,0x32,0x00,0x00,0x00,0x32,0x00,0x00,0x00,0x01,0x00,0x10,0x00,0x03,0x00,

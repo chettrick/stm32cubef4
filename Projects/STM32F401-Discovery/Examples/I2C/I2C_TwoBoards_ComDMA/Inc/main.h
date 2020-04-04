@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    I2C/I2C_TwoBoards_ComDMA/Inc/main.h 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
@@ -49,13 +49,13 @@
    resources */
 /* Definition for I2Cx clock resources */
 #define I2Cx                             I2C1
-#define I2Cx_CLK_ENABLE()                __I2C1_CLK_ENABLE()
-#define DMAx_CLK_ENABLE()                __DMA1_CLK_ENABLE()
-#define I2Cx_SDA_GPIO_CLK_ENABLE()       __GPIOB_CLK_ENABLE()
-#define I2Cx_SCL_GPIO_CLK_ENABLE()       __GPIOB_CLK_ENABLE() 
+#define I2Cx_CLK_ENABLE()                __HAL_RCC_I2C1_CLK_ENABLE()
+#define DMAx_CLK_ENABLE()                __HAL_RCC_DMA1_CLK_ENABLE()
+#define I2Cx_SDA_GPIO_CLK_ENABLE()       __HAL_RCC_GPIOB_CLK_ENABLE()
+#define I2Cx_SCL_GPIO_CLK_ENABLE()       __HAL_RCC_GPIOB_CLK_ENABLE() 
 
-#define I2Cx_FORCE_RESET()               __I2C1_FORCE_RESET()
-#define I2Cx_RELEASE_RESET()             __I2C1_RELEASE_RESET()
+#define I2Cx_FORCE_RESET()               __HAL_RCC_I2C1_FORCE_RESET()
+#define I2Cx_RELEASE_RESET()             __HAL_RCC_I2C1_RELEASE_RESET()
 
 /* Definition for I2Cx Pins */
 #define I2Cx_SCL_PIN                    GPIO_PIN_6

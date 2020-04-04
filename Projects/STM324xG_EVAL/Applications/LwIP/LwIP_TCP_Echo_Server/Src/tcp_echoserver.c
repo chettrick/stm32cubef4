@@ -28,7 +28,7 @@
  *
  * Credits go to Adam Dunkels (and the current maintainers) of this software.
  *
- * Christiaan Simons rewrote this file to get a more stable echo example.
+ * Christiaan Simons rewrote this file to get a more stable echo application.
  *
  **/
 

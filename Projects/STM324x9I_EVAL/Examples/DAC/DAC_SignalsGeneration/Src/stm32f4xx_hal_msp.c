@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    DAC/DAC_SignalsGeneration/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   HAL MSP module.    
   ******************************************************************************
   * @attention
@@ -72,7 +72,7 @@ void HAL_DAC_MspInit(DAC_HandleTypeDef* hdac)
     
   /*##-1- Enable peripherals and GPIO Clocks #################################*/
   /* DAC Periph clock enable */
-  __DAC_CLK_ENABLE();
+  __HAL_RCC_DAC_CLK_ENABLE();
   /* Enable GPIO clock ****************************************/
   DACx_CHANNEL1_GPIO_CLK_ENABLE();
  /* DMA1 clock enable */
@@ -150,7 +150,7 @@ void HAL_DAC_MspDeInit(DAC_HandleTypeDef* hdac)
 void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* htim)
 {
   /* TIM6 Periph clock enable */
-  __TIM6_CLK_ENABLE();
+  __HAL_RCC_TIM6_CLK_ENABLE();
 }
 
 /**
@@ -165,8 +165,8 @@ void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef *htim)
 {
   
   /*##-1- Reset peripherals ##################################################*/
-  __TIM6_FORCE_RESET();
-  __TIM6_RELEASE_RESET();
+  __HAL_RCC_TIM6_FORCE_RESET();
+  __HAL_RCC_TIM6_RELEASE_RESET();
 }
 
 /**

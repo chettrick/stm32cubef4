@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
   * @file    GPIO/GPIO_IOToggle/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Description of the GPIO IO Toggle example.
   ******************************************************************************
   *
@@ -39,7 +39,7 @@
 
 This example describes how to configure and use GPIOs through the STM32F4xx HAL API. 
   
-PG6, PG7, PG10 and PG12 IOs (configured in output pushpull mode) toggles in a forever loop.
+PG6, PG7, PG10 and PG12 IOs (configured in output push-pull mode) toggles in a forever loop.
 On STM324x9I-EVAL RevB board these IOs are connected to LED1, LED2, LED3 and LED4.
 
 In this example, HCLK is configured at 180 MHz.
@@ -51,7 +51,7 @@ In this example, HCLK is configured at 180 MHz.
       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
       To change the SysTick interrupt priority you have to use HAL_NVIC_SetPriority() function.
       
-@note The application need to ensure that the SysTick time base is always set to 1 millisecond
+@note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
 

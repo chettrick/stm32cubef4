@@ -2,9 +2,9 @@
   ******************************************************************************
   * @file    usbd_msc_scsi.h
   * @author  MCD Application Team
-  * @version V2.2.0
-  * @date    13-June-2014
-  * @brief   header for the usbd_msc_scsi.c file
+  * @version V2.3.0
+  * @date    04-November-2014
+  * @brief   Header for the usbd_msc_scsi.c file
   ******************************************************************************
   * @attention
   *
@@ -29,6 +29,10 @@
 #ifndef __USBD_MSC_SCSI_H
 #define __USBD_MSC_SCSI_H
 
+#ifdef __cplusplus
+ extern "C" {
+#endif
+
 /* Includes ------------------------------------------------------------------*/
 #include "usbd_def.h"
 
@@ -45,7 +49,7 @@
   * @{
   */ 
 
-#define SENSE_LIST_DEEPTH                          4
+#define SENSE_LIST_DEEPTH                           4
 
 /* SCSI Commands */
 #define SCSI_FORMAT_UNIT                            0x04
@@ -88,10 +92,10 @@
 #define DATA_PROTECT                                7
 #define BLANK_CHECK                                 8
 #define VENDOR_SPECIFIC                             9
-#define COPY_ABORTED                               10
-#define ABORTED_COMMAND                            11
-#define VOLUME_OVERFLOW                            13
-#define MISCOMPARE                                 14
+#define COPY_ABORTED                                10
+#define ABORTED_COMMAND                             11
+#define VOLUME_OVERFLOW                             13
+#define MISCOMPARE                                  14
 
 
 #define INVALID_CDB                                 0x20
@@ -175,6 +179,10 @@ void   SCSI_SenseCode(USBD_HandleTypeDef  *pdev,
 /**
   * @}
   */ 
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __USBD_MSC_SCSI_H */
 /**

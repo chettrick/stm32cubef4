@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BSP/Src/sd.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This example code shows how to use the SD Driver
   ******************************************************************************
   * @attention
@@ -52,14 +52,17 @@
 #define BLOCKSIZE                512   /* Block Size in Bytes      */
 #define NUM_OF_BLOCKS            5     /* Total number of blocks   */
 #define BUFFER_WORDS_SIZE        ((BLOCKSIZE * NUM_OF_BLOCKS) >> 2) /* Total data size in bytes */
+
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 uint32_t aTxBuffer[BUFFER_WORDS_SIZE];
 uint32_t aRxBuffer[BUFFER_WORDS_SIZE];
+
 /* Private function prototypes -----------------------------------------------*/
 static void SD_SetHint(void);
 static void Fill_Buffer(uint32_t *pBuffer, uint32_t uwBufferLenght, uint32_t uwOffset);
 static uint8_t Buffercmp(uint32_t* pBuffer1, uint32_t* pBuffer2, uint16_t BufferLength);
+
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -67,11 +70,11 @@ static uint8_t Buffercmp(uint32_t* pBuffer1, uint32_t* pBuffer2, uint16_t Buffer
   * @param  None
   * @retval None
   */
-void SD_demo (void)
+void SD_demo(void)
 { 
   uint8_t SD_state = MSD_OK;
   static uint8_t prev_status = 0; 
-
+  
   SD_SetHint();
   SD_state = BSP_SD_Init();
   
@@ -171,7 +174,7 @@ void SD_demo (void)
 }
 
 /**
-  * @brief  Display SD Demo Hint
+  * @brief  Display SD Demo Hint.
   * @param  None
   * @retval None
   */
@@ -191,15 +194,15 @@ static void SD_SetHint(void)
   BSP_LCD_DisplayStringAt(0, 30, (uint8_t *)"This example shows how to write", CENTER_MODE);
   BSP_LCD_DisplayStringAt(0, 45, (uint8_t *)"and read data on the microSD and also", CENTER_MODE);
   BSP_LCD_DisplayStringAt(0, 60, (uint8_t *)"how to detect the presence of the card", CENTER_MODE);
-
-   /* Set the LCD Text Color */
+  
+  /* Set the LCD Text Color */
   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);  
   BSP_LCD_DrawRect(10, 90, BSP_LCD_GetXSize() - 20, BSP_LCD_GetYSize()- 100);
   BSP_LCD_DrawRect(11, 91, BSP_LCD_GetXSize() - 22, BSP_LCD_GetYSize()- 102);
   
   BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
   BSP_LCD_SetBackColor(LCD_COLOR_WHITE); 
- }
+}
 
 /**
   * @brief  Fills buffer with user predefined data.
@@ -211,7 +214,7 @@ static void SD_SetHint(void)
 static void Fill_Buffer(uint32_t *pBuffer, uint32_t uwBufferLenght, uint32_t uwOffset)
 {
   uint32_t tmpIndex = 0;
-
+  
   /* Put in global buffer different values */
   for (tmpIndex = 0; tmpIndex < uwBufferLenght; tmpIndex++ )
   {
@@ -234,13 +237,14 @@ static uint8_t Buffercmp(uint32_t* pBuffer1, uint32_t* pBuffer2, uint16_t Buffer
     {
       return 1;
     }
-
+    
     pBuffer1++;
     pBuffer2++;
   }
-
+  
   return 0;
 }
+
 /**
   * @}
   */ 

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    TIM/TIM_DMABurst/Inc/main.h 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
@@ -49,11 +49,11 @@
 #define TIMx                              TIM1
 
 /* Definition for TIMx clock resources */
-#define TIMx_CLK_ENABLE                  __TIM1_CLK_ENABLE
-#define DMAx_CLK_ENABLE                  __DMA2_CLK_ENABLE();
+#define TIMx_CLK_ENABLE                  __HAL_RCC_TIM1_CLK_ENABLE
+#define DMAx_CLK_ENABLE                  __HAL_RCC_DMA2_CLK_ENABLE();
 
 /* Definition for TIMx Pins */
-#define TIMx_CHANNEL1_GPIO_CLK_ENABLE    __GPIOA_CLK_ENABLE
+#define TIMx_CHANNEL1_GPIO_CLK_ENABLE    __HAL_RCC_GPIOA_CLK_ENABLE
 
 #define TIMx_GPIO_CHANNEL1_PORT          GPIOA
 #define GPIO_PIN_CHANNEL1                GPIO_PIN_8

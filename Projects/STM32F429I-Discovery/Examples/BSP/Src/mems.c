@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BSP/Src/mems.c  
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   This example code shows how to use MEMS features.
   ******************************************************************************
   * @attention
@@ -51,7 +51,6 @@
 #define  CIRCLE_RADIUS        30
 
 /* Private macro -------------------------------------------------------------*/
-
 #define CIRCLE_UP_X_POS (BSP_LCD_GetXSize()/2)
 #define CIRCLE_UP_Y_POS (90+CIRCLE_RADIUS+10)
 
@@ -63,7 +62,6 @@
 
 #define CIRCLE_RIGHT_X_POS (4*(BSP_LCD_GetXSize()/5))
 #define CIRCLE_RIGHT_Y_POS CIRCLE_LEFT_Y_POS
-
 
 #define CIRCLE_CENTRAL_X_POS CIRCLE_UP_X_POS
 #define CIRCLE_CENTRAL_Y_POS CIRCLE_LEFT_Y_POS
@@ -87,7 +85,7 @@ static void Gyroscope_DrawBackground(uint8_t state);
   * @param  None
   * @retval None
   */
-void MEMS_demo (void)
+void MEMS_demo(void)
 {
   MEMS_SetHint();
   

@@ -2,9 +2,9 @@
   ******************************************************************************
   * @file    Display/LTDC_Paint/Src/ts_calibration.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
-  * @brief   This example code shows how to calibrate the touchscreen.
+  * @version V1.2.0
+  * @date    26-December-2014
+  * @brief   This application code shows how to calibrate the touchscreen.
   ******************************************************************************
   * @attention
   *
@@ -47,7 +47,7 @@ static uint8_t Calibration_Done = 0;
 
 /* Private function prototypes -----------------------------------------------*/
 static void TouchscreenCalibration_SetHint(void);
-static void GetPhysValues(int16_t LogX, int16_t LogY, int16_t * pPhysX, int16_t * pPhysY) ;
+static void GetPhysValues(int16_t LogX, int16_t LogY, int16_t * pPhysX, int16_t * pPhysY);
 static void WaitForPressedState(uint8_t Pressed);
 uint8_t IsCalibrationDone(void);
 
@@ -58,7 +58,7 @@ uint8_t IsCalibrationDone(void);
   * @param  None
   * @retval None
   */
-void Touchscreen_Calibration (void)
+void Touchscreen_Calibration(void)
 { 
   uint8_t status = 0;
   uint8_t i = 0;
@@ -121,7 +121,6 @@ static void TouchscreenCalibration_SetHint(void)
   BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/2 - 12, (uint8_t *)"you need to calibrate it.", CENTER_MODE);
   BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/2 + 3, (uint8_t *)"Press on the black circles", CENTER_MODE);
 }
-
 
 /**
   * @brief  Gets Physical position

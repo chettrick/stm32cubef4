@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Audio/Audio_playback_and_record/Inc/waverecorder.h
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    26-June-2014
+  * @version V1.2.0
+  * @date    26-December-2014
   * @brief   Header for waverecorder.c module.
   ******************************************************************************
   * @attention
@@ -30,23 +30,23 @@
 #define __WAVERECORDER_H
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32f4xx_hal.h"
 #include "main.h"
 
 /* Exported Defines ----------------------------------------------------------*/
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 /* Defines for the Audio recording process */
-
 #define DEFAULT_TIME_REC                      30  /* Recording time in second (default: 30s) */
 
-#define WR_BUFFER_SIZE                        4*2304 /* buffer size in half-word */
-
 #define REC_WAVE_NAME "Wave.wav"
+
+#define REC_SAMPLE_LENGTH   (DEFAULT_TIME_REC * DEFAULT_AUDIO_IN_FREQ * DEFAULT_AUDIO_IN_CHANNEL_NBR * 2)
+
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 AUDIO_ErrorTypeDef AUDIO_REC_Process(void);
 AUDIO_ErrorTypeDef AUDIO_REC_Start(void);
+
 #endif /* __WAVERECORDER_H */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
