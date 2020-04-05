@@ -10,14 +10,14 @@
       <TargetName>STM32413H_DISCOVERY</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
+      <pCCUsed>5060528::V5.06 update 5 (build 528)::ARMCC</pCCUsed>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F413ZHTx</Device>
           <Vendor>STMicroelectronics</Vendor>
           <PackID>Keil.STM32F4xx_DFP.2.11.0</PackID>
           <PackURL>http://www.keil.com/pack</PackURL>
-          <Cpu>IRAM(0x20000000-0x2004FFFF) IROM(0x8000000-0x817FFFF) CLOCK(25000000) FPU2 CPUTYPE("Cortex-M4")</Cpu>
+          <Cpu>IROM(0x08000000-0x817FFFF) IRAM(0x20000000-0x2004FFFF) CLOCK(25000000) FPU2 CPUTYPE("Cortex-M4")</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
           <FlashDriverDll></FlashDriverDll>
@@ -47,8 +47,8 @@
             <NotGenerated>0</NotGenerated>
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
-          <OutputDirectory>STM32413H_DISCOVERY\</OutputDirectory>
-          <OutputName>STM32413H_DISCOVERY</OutputName>
+          <OutputDirectory>STM32413H_DISCOVERY\Exe\</OutputDirectory>
+          <OutputName>STM324xG-EVAL_USBH-FS</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
@@ -322,7 +322,7 @@
             <wLevel>2</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
-            <uC99>0</uC99>
+            <uC99>1</uC99>
             <useXO>0</useXO>
             <v6Lang>1</v6Lang>
             <v6LangP>1</v6LangP>
@@ -332,7 +332,7 @@
             <v6WtE>0</v6WtE>
             <v6Rtti>0</v6Rtti>
             <VariousControls>
-              <MiscControls>--C99</MiscControls>
+              <MiscControls> </MiscControls>
               <Define>USE_HAL_DRIVER,STM32F413xx,USE_STM32F413H_DISCOVERY,USE_USB_FS</Define>
               <Undefine></Undefine>
               <IncludePath>../Inc;../../../../../../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../../../../../../Drivers/STM32F4xx_HAL_Driver/Inc;../../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Inc;../../../../../../Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc;../../../../../../Middlewares/Third_Party/FatFs/src;../../../../../../Drivers/BSP/STM32F413H-Discovery;../../../../../../Utilities/Log</IncludePath>
@@ -387,6 +387,9 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>::CMSIS</GroupName>
+        </Group>
+        <Group>
           <GroupName>Drivers/BSP/Components</GroupName>
           <Files>
             <File>
@@ -435,6 +438,11 @@
               <FilePath>../Src/explorer.c</FilePath>
             </File>
             <File>
+              <FileName>usbh_diskio_dma.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Src/usbh_diskio_dma.c</FilePath>
+            </File>
+            <File>
               <FileName>ts_calibration.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Src/ts_calibration.c</FilePath>
@@ -464,11 +472,6 @@
               <FileType>1</FileType>
               <FilePath>../Src/usbh_conf.c</FilePath>
             </File>
-            <File>
-              <FileName>usbh_diskio.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Src/usbh_diskio.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -492,8 +495,18 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Middlewares/FatFs</GroupName>
+          <GroupName>Middlewares/FatFs/Core</GroupName>
           <Files>
+            <File>
+              <FileName>diskio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Middlewares/Third_Party/FatFs/src/diskio.c</FilePath>
+            </File>
+            <File>
+              <FileName>ff_gen_drv.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Middlewares/Third_Party/FatFs/src/ff_gen_drv.c</FilePath>
+            </File>
             <File>
               <FileName>ff.c</FileName>
               <FileType>1</FileType>
@@ -645,9 +658,6 @@
               <FilePath>../../../../../../Utilities/Log/lcd_log.c</FilePath>
             </File>
           </Files>
-        </Group>
-        <Group>
-          <GroupName>::CMSIS</GroupName>
         </Group>
       </Groups>
     </Target>

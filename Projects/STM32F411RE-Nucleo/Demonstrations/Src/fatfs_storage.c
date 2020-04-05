@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Demonstrations/Src/fatfs_storage.c
   * @author  MCD Application Team
-  * @version V1.2.6
-  * @date    17-February-2017
 
   * @brief   This file includes the Storage (FatFs) driver 
   ******************************************************************************
@@ -54,10 +52,17 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 uint8_t aBuffer[512];
+FATFS fs;
 FILINFO MyFileInfo;
 DIR MyDirectory;
 FIL MyFile;
 UINT BytesWritten, BytesRead;
+
+const uint8_t SlidesCheck[2] =
+  {
+    0x42, 0x4D
+  };
+
 
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
@@ -160,16 +165,33 @@ uint32_t Storage_OpenReadFile(uint8_t Xpoz, uint16_t Ypoz, const char *BmpName)
   */
 uint32_t Storage_CheckBitmapFile(const char* BmpName, uint32_t *FileLen)
 {
-  FRESULT res;
-  uint32_t err = 0;
+//  FRESULT res;
+//  uint32_t err = 0;
+//  
+//  res = f_open(&MyFile, BmpName, FA_READ);
+//  if(res != FR_OK)
+//  {
+//    err = 1;
+//  }
+//  
+//  return err;
   
-  res = f_open(&MyFile, BmpName, FA_READ);
-  if(res != FR_OK)
+  if(f_mount(&fs, (TCHAR const*)"",0))
   {
-    err = 1;
+    return 1;
+  }
+  if(f_open (&MyFile, (TCHAR const*)BmpName, FA_READ))
+  {
+    return 2;
   }
   
-  return err;
+  f_read (&MyFile, aBuffer, 6, (UINT *)&BytesRead);
+  
+  if (Buffercmp((uint8_t *)SlidesCheck, (uint8_t *) aBuffer, 2) != 0)
+  {
+    return 3;
+  }
+  return 0;
 }
 
 /**
@@ -180,43 +202,62 @@ uint32_t Storage_CheckBitmapFile(const char* BmpName, uint32_t *FileLen)
   */
 uint32_t Storage_GetDirectoryBitmapFiles(const char* DirName, char* Files[])
 {
-  uint32_t i = 0, j = 0;
   FRESULT res;
-
-  res = f_opendir(&MyDirectory, DirName);
+  uint32_t index = 0;
   
-  if(res == FR_OK)
+  /* Open filesystem */
+  if(f_mount(&fs, (TCHAR const*)"",0) != FR_OK)
   {
-    i = strlen(DirName);
-    for (;;)
+    return 0;
+  }
+  
+  /* Start to search for wave files */
+  res = f_findfirst(&MyDirectory, &MyFileInfo, DirName, "*.bmp");
+
+  /* Repeat while an item is found */
+  while (MyFileInfo.fname[0])
+  {
+    if(res == FR_OK)
     {
-      res = f_readdir(&MyDirectory, &MyFileInfo);
-      if(res != FR_OK || MyFileInfo.fname[0] == 0) break;
-      if(MyFileInfo.fname[0] == '.') continue;
-      
-      if(!(MyFileInfo.fattrib & AM_DIR))
+      if(index < MAX_BMP_FILES)
       {
-        do
-        {
-          i++;
-        }
-        while (MyFileInfo.fname[i] != 0x2E);
-        
-        
-        if(j < MAX_BMP_FILES)
-        {
-          if((MyFileInfo.fname[i + 1] == 'B') && (MyFileInfo.fname[i + 2] == 'M') && (MyFileInfo.fname[i + 3] == 'P'))
-          {
-            sprintf(Files[j], "%-11.11s", MyFileInfo.fname);
-            j++;
-          }
-        }
-        i = 0;
+        sprintf (Files[index++], "%s", MyFileInfo.fname);
       }
+      /* Search for next item */
+      res = f_findnext(&MyDirectory, &MyFileInfo);
+    }
+    else
+    {
+      index = 0;
+      break;
     }
   }
-    
-  return j;
+
+  f_closedir(&MyDirectory);
+
+  return index; 
 }
 
+/**
+  * @brief  Compares two buffers.
+  * @param  pBuffer1, pBuffer2: buffers to be compared.
+  * @param  BufferLength: buffer's length.
+  * @retval  0: pBuffer1 identical to pBuffer2
+  *          1: pBuffer1 differs from pBuffer2
+  */
+uint8_t Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength)
+{
+  while (BufferLength--)
+  {
+    if (*pBuffer1 != *pBuffer2)
+    {
+      return 1;
+    }
+
+    pBuffer1++;
+    pBuffer2++;
+  }
+
+  return 0;
+}
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

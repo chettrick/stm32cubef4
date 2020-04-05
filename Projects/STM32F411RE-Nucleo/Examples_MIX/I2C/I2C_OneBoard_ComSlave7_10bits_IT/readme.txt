@@ -6,8 +6,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    Examples_MIX/I2C/I2C_OneBoard_ComSlave7_10bits_IT/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017
   * @brief   Description of the I2C One Board Master Communication with 
   *          a Slave 10-Bit address then a Slave 7-Bit address example.
   ******************************************************************************

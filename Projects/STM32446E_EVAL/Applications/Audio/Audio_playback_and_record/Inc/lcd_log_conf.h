@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Audio/Audio_playback_and_record/Inc/lcd_log_conf.h
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    17-February-2017
   * @brief   LCD Log configuration file.
   ******************************************************************************
   * @attention
@@ -62,7 +60,7 @@
 /* Comment the line below to disable the scroll back and forward features */
 #define     LCD_SCROLL_ENABLED      1 
 
-#define     LCD_LOG_HEADER_FONT                   Font16
+#define     LCD_LOG_HEADER_FONT                   Font12
 #define     LCD_LOG_FOOTER_FONT                   Font12
 #define     LCD_LOG_TEXT_FONT                     Font12
             

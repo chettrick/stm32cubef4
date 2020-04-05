@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    FatFs/FatFs_MultiDrives/Src/main.c
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    17-February-2017
   * @brief   Main program body
   *          This sample code shows how to use FatFs with multi drives.
   ******************************************************************************
@@ -55,6 +53,7 @@
 FATFS RAMFatFs, SDFatFs;    /* File system objects logical drives */
 FIL RAMFile, SDFile;        /* File objects */
 char RAMpath[4], SDpath[4]; /* RAM disk and SD card logical drives paths */
+static uint8_t buffer[_MAX_SS]; /* a work buffer for the f_mkfs() */
 
 /* Private function prototypes -----------------------------------------------*/ 
 static void SystemClock_Config(void);
@@ -109,8 +108,8 @@ int main(void)
     {
       /*##-3- Create a FAT file system (format) on the logical drives ########*/
       /* WARNING: Formatting the uSD card will delete all content on the device */ 
-      res1 = f_mkfs((TCHAR const*)RAMpath, 0, 0);
-      res2 = f_mkfs((TCHAR const*)SDpath, 0, 0);
+      res1 = f_mkfs((TCHAR const*)RAMpath, FM_ANY, 0, buffer, sizeof(buffer));
+      res2 = f_mkfs((TCHAR const*)SDpath, FM_ANY, 0, buffer, sizeof(buffer));
       
       if((res1 != FR_OK) || (res2 != FR_OK))
       {

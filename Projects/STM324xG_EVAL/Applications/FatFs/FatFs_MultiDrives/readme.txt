@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    FatFs/FatFs_MultiDrives/readme.txt 
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   Description of the FatFs with multi drives application
   ******************************************************************************
   * @attention
@@ -108,9 +106,13 @@ on STM32Cube with FatFs".
   - FatFs/FatFs_MultiDrives/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - FatFs/FatFs_MultiDrives/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - FatFs/FatFs_MultiDrives/Inc/main.h                  Main program header file
+  - FatFs/FatFs_MultiDrives/Inc/sram_diskio.h           FatFS sram diskio driver header file
+  - FatFs/FatFs_MultiDrives/Inc/sd_diskio.h             FatFS sd diskio driver header file
   - FatFs/FatFs_MultiDrives/Inc/ffconf.h                FAT file system module configuration file   
   - FatFs/FatFs_MultiDrives/Src/stm32f4xx_it.c          Interrupt handlers
   - FatFs/FatFs_MultiDrives/Src/main.c                  Main program
+  - FatFs/FatFs_MultiDrives/Src/sram_diskio.c           FatFS sram diskio driver implementation
+  - FatFs/FatFs_MultiDrives/Src/sd_diskio.c             FatFS sd diskio driver implementation
   - FatFs/FatFs_MultiDrives/Src/system_stm32f4xx.c      STM32F4xx system clock configuration file
         
  

@@ -1,0 +1,823 @@
+$version 6.60
+
+// This is the root component of the entire GUI application.
+$rect <30,70,230,110>
+$output false
+class Application : Core::Root
+{
+  $rect <8,300,208,340>
+  inherited property Bounds = <0,0,320,240>;
+
+  $rect <660,460,860,500>
+  inherited method DriveCursorHitting()
+  {
+    /* each timer the user has touched the screen, the auto demo will be reset */
+    idlesignal ResetAutoDemo;
+
+    return super( aDown, aFinger, aPos );
+  }
+
+  $rect <20,20,160,60>
+  object Application::HomeScreen HomeScreen
+  {
+    preset Bounds = <0,0,320,240>;
+    preset OnAcceleratorDemo = goAccelerator;
+    preset OnWaveformGenerator = goWaveform;
+    preset OnAnimatedList = goAnimatedList;
+    preset OnClimateCabinet = goClima;
+    preset OnInfo = onShowInfo;
+    preset OnQuit = goQuit;
+  }
+
+  // This is a slot method.
+  $rect <218,300,418,340>
+  slot onShowInfo
+  {
+    sender; /* the method is called from the sender object */
+
+    /* create new info screen */
+    var MasterDemo::InfoScreen demo = new MasterDemo::InfoScreen;
+
+    /* configure the info screen */
+    demo.OnHome = onHideInfo;
+    demo.Bounds.origin.y = Bounds.h;
+
+    /* make the info screen visible */
+    Add( demo, 0 );
+    HomeScreen.Enabled = false;
+
+    /* store the currently running demo */
+    CurrentApp = demo;
+
+    /* start rect effect for show/hide of info panel */
+    RectEffect.Enabled = false;
+    RectEffect.Value1 = CurrentApp.Bounds;
+    RectEffect.Value2 = HomeScreen.Bounds;
+    RectEffect.Outlet = ^CurrentApp.Bounds;
+    RectEffect.Enabled = true;
+    RectEffect.OnFinished = null;
+
+
+  }
+
+  // This is a slot method.
+  $rect <218,340,418,380>
+  slot onHideInfo
+  {
+    sender; /* the method is called from the sender object */
+
+    if ((MasterDemo::InfoScreen)CurrentApp != null )
+    {
+      /* start rect effect for show/hide of info panel */
+      RectEffect.Enabled = false;
+      RectEffect.Value1 = CurrentApp.Bounds;
+      RectEffect.Value2 = Bounds + point( 0, Bounds.h );
+      RectEffect.Outlet = ^CurrentApp.Bounds;
+      RectEffect.Enabled = true;
+      RectEffect.OnFinished = goHome;
+    }
+  }
+
+  // This is a move and resize rectangle effect.
+  $rect <428,300,628,340>
+  object Effects::RectEffect RectEffect
+  {
+    preset Timing = Effects::Timing.EaseIn_EaseOut;
+    preset NoOfCycles = 1;
+    preset CycleDuration = 300;
+  }
+
+  // Variable that stores the currently running demo application.
+  $rect <420,120,620,160>
+  var Core::Group CurrentApp = null;
+
+  // Timer object to drive the auto demo mode.
+  $rect <660,370,860,410>
+  object Core::Timer AutoDemoTimer
+  {
+    preset OnTrigger = AutoDemoSlot;
+    preset Period = 1000;
+    preset Begin = 30000;
+    preset Enabled = true;
+  }
+
+  // Slot method to trigger the next phase of the auto demo.
+  $rect <860,370,1060,410>
+  slot AutoDemoSlot
+  {
+    sender; /* the method is called from the sender object */
+
+    /* reset all demo states */
+    if ( AutoDemoState == 0 )
+    {
+      postsignal goHome;
+      postsignal HomeScreen.OnReset;
+    }
+
+    else if ( AutoDemoState == 1 )
+      postsignal goClima;
+
+    /* let the climate cabinet run for 30 seconds... */
+
+    else if ( AutoDemoState == 31 )
+      postsignal goHome;
+
+    /* ---------------------------------------------*/
+
+    else if ( AutoDemoState == 32 )
+      postsignal HomeScreen.OnRight;
+
+    else if ( AutoDemoState == 33 )
+      postsignal goAnimatedList;
+
+    /* let the animated list run for 30 seconds... */
+
+    else if ( AutoDemoState == 63 )
+      postsignal goHome;
+
+    /* ---------------------------------------------*/
+
+    else if ( AutoDemoState == 64 )
+      postsignal HomeScreen.OnRight;
+
+    else if ( AutoDemoState == 65 )
+      postsignal goWaveform;
+
+    /* let the waveform generator run for 20 seconds... */
+
+    else if ( AutoDemoState == 85 )
+      postsignal goHome;
+
+    /* ---------------------------------------------*/
+
+    else if ( AutoDemoState == 86 )
+      postsignal HomeScreen.OnRight;
+
+    else if ( AutoDemoState == 87 )
+      postsignal goAccelerator;
+
+    /* let the graphics accelerator demo run for 30 seconds... */
+
+    else if ( AutoDemoState == 117 )
+      postsignal goHome;
+
+    /* ---------------------------------------------*/
+
+    else if ( AutoDemoState == 118 )
+      postsignal onShowInfo;
+
+    /* show the info for 6 seconds... */
+
+    if ( AutoDemoState > 124 )
+      AutoDemoState = -1;
+
+    AutoDemoState = AutoDemoState + 1;
+
+
+  }
+
+  // This is a variable.
+  $rect <860,410,1060,450>
+  var int32 AutoDemoState = 0;
+
+  // Slot method to reset the auto demo.
+  $rect <660,410,860,450>
+  slot ResetAutoDemo
+  {
+    sender; /* the method is called from the sender object */
+
+    /* clear the current auto demo state */
+    AutoDemoState = 0;
+
+    /* clear the auto demo state of the currently running demo */
+    var MasterDemo::DemoScreen demo = (MasterDemo::DemoScreen)CurrentApp;
+    if ( demo != null )
+      demo.AutoDemo = false;
+
+    /* restart the auto demo timer */
+    AutoDemoTimer.Enabled = false;
+    AutoDemoTimer.Enabled = true;
+
+
+  }
+
+  // This is the application class of the master demo.
+  // 
+  // It contains the home screen and is responsible to launch the different demo \
+  // application screens. For each demo application a slot method has to be provided, \
+  // that will be connected with the corresponding property of the home screen. Every \
+  // demo application is then created dynamically.
+  note legend Note
+  {
+    attr Bounds = <8,390,628,520>;
+  }
+
+  // Slot methods to forward demo selection.
+  note group Note1
+  {
+    attr Bounds = <640,0,880,290>;
+  }
+
+  // Auto demo timer and methods
+  note group Note2
+  {
+    attr Bounds = <640,320,1080,520>;
+  }
+
+  // This is the final slot method in case the master demo should be quit.
+  $rect <420,0,620,40>
+  slot goQuit
+  {
+    sender; /* the method is called from the sender object */
+
+    trace "Goodbye...";
+
+  }
+
+  // This is a slot method.
+  $rect <420,70,620,110>
+  slot goHome
+  {
+    sender; /* the method is called from the sender object */
+
+    if ( CurrentApp != null )
+      Remove( CurrentApp );
+
+    CurrentApp = null;
+    HomeScreen.Visible = true;
+    HomeScreen.Enabled = true;
+
+  }
+
+  // Slot method to launch the demo application.
+  $rect <660,70,860,110>
+  slot goClima
+  {
+    sender; /* the method is called from the sender object */
+
+    /* create new demo application */
+    var Application::ClimaticScreen demo = new Application::ClimaticScreen;
+
+    /* configure the demo */
+    demo.OnHome = goHome;
+    demo.AutoDemo = ( AutoDemoState > 0 );
+
+    /* make the demo visible on the screen */
+    Add( demo, 0 );
+    HomeScreen.Visible = false;
+    HomeScreen.Enabled = false;
+
+    /* store the currently running demo */
+    CurrentApp = demo;
+
+
+
+  }
+
+  // Slot method to launch the demo application.
+  $rect <660,110,860,150>
+  slot goAnimatedList
+  {
+    sender; /* the method is called from the sender object */
+
+    /* create new demo application */
+    var Application::AnimatedListScreen demo = new Application::AnimatedListScreen;
+
+    /* configure the demo */
+    demo.OnHome = goHome;
+    demo.AutoDemo = ( AutoDemoState > 0 );
+
+    /* make the demo visible on the screen */
+    Add( demo, 0 );
+    HomeScreen.Visible = false;
+    HomeScreen.Enabled = false;
+
+    /* store the currently running demo */
+    CurrentApp = demo;
+
+
+
+  }
+
+  // Slot method to launch the demo application.
+  $rect <660,150,860,190>
+  slot goWaveform
+  {
+    sender; /* the method is called from the sender object */
+
+    /* create new demo application */
+    var Application::WaveformScreen demo = new Application::WaveformScreen;
+
+    /* configure the demo */
+    demo.OnHome = goHome;
+    demo.AutoDemo = ( AutoDemoState > 0 );
+
+    /* make the demo visible on the screen */
+    Add( demo, 0 );
+    HomeScreen.Visible = false;
+    HomeScreen.Enabled = false;
+
+    /* store the currently running demo */
+    CurrentApp = demo;
+
+
+
+  }
+
+  // Slot method to launch the demo application.
+  $rect <660,190,860,230>
+  slot goAccelerator
+  {
+    sender; /* the method is called from the sender object */
+
+    /* create new demo application */
+    var Application::AcceleratorScreen demo = new Application::AcceleratorScreen;
+
+    /* configure the demo */
+    demo.OnHome = goHome;
+    demo.AutoDemo = ( AutoDemoState > 0 );
+
+    /* make the demo visible on the screen */
+    Add( demo, 0 );
+    HomeScreen.Visible = false;
+    HomeScreen.Enabled = false;
+
+    /* store the currently running demo */
+    CurrentApp = demo;
+
+
+
+  }
+}
+
+// The main menu of the master demo.
+$rect <230,70,430,110>
+$output false
+class HomeScreen : Core::Group
+{
+  $rect <200,290,400,330>
+  inherited property Bounds = <0,0,320,240>;
+
+  $rect <0,290,200,330>
+  inherited method Init()
+  {
+    postsignal onUpdatePage;
+
+
+
+  }
+
+  // This is a filled rectangle view.
+  $rect <20,20,160,60>
+  object Views::Rectangle Rectangle
+  {
+    preset Layout = Core::Layout[AlignToBottom, AlignToLeft, AlignToRight, AlignToTop, ResizeHorz, ResizeVert];
+    preset Bounds = <0,0,320,240>;
+    preset Color = MasterDemo::EmWiRed;
+  }
+
+  // This is a filled rectangle view.
+  $rect <20,20,160,60>
+  object Views::Rectangle RectangleBottom
+  {
+    preset Bounds = <0,200,320,240>;
+    preset Color = MasterDemo::EmWiGray;
+  }
+
+  // This is a filled rectangle view.
+  $rect <20,20,160,60>
+  object Views::Rectangle RectangleTop
+  {
+    preset Bounds = <0,0,320,40>;
+    preset Color = MasterDemo::EmWiGray;
+  }
+
+  $rect <20,20,160,60>
+  object Core::SlideTouchHandler SlideTouchHandler
+  {
+    preset Layout = Core::Layout[AlignToBottom, AlignToLeft, AlignToRight, AlignToTop, ResizeHorz, ResizeVert];
+    preset Bounds = <25,40,295,200>;
+    preset OnSlide = onUpdatePage;
+    preset OnEnd = onUpdatePage;
+    preset SnapNext = <90,0>;
+    preset SlideVert = false;
+    preset Friction = 0.5;
+  }
+
+  // This is a horizontal list component.
+  $rect <20,20,160,60>
+  object Core::HorizontalList HorizontalList
+  {
+    preset Bounds = <25,60,295,170>;
+    preset OnLoadItem = OnLoadItem;
+    preset PaddingRight = 90;
+    preset SlideHandler = SlideTouchHandler;
+    preset ScrollOffset = -90;
+    preset PaddingLeft = 90;
+    preset ItemWidth = 90;
+    preset NoOfItems = 4;
+    preset ItemClass = MasterDemo::ListItem;
+  }
+
+  // This method is called by 'HorizontalList' every time the list loads or updates \
+  // an item.
+  $rect <0,340,200,380>
+  slot OnLoadItem
+  {
+    var int32        itemNo   = HorizontalList.Item;
+    var MasterDemo::ListItem itemView = (MasterDemo::ListItem)HorizontalList.View;
+
+    // The implementation of this slot method does not match the item class
+    // specified in the associated list component. Or the slot method is not
+    // called in context of the OnLoadItem list operation.
+    if ( itemView == null )
+      return;
+
+    /* load the application specific button */
+    switch ( itemNo )
+    {
+      case 0:
+      {
+        itemView.Caption   = "Climate Cabinet";
+        itemView.IconIndex = 0;
+        itemView.OnAction  = OnClimateCabinet;
+      }
+      case 1:
+      {
+        itemView.Caption   = "Animated List";
+        itemView.IconIndex = 6;
+        itemView.OnAction  = OnAnimatedList;
+      }
+      case 2:
+      {
+        itemView.Caption   = "Waveform Generator";
+        itemView.IconIndex = 5;
+        itemView.OnAction  = OnWaveformGenerator;
+      }
+      case 3:
+      {
+        itemView.Caption   = "Graphics Accelerator";
+        itemView.IconIndex = 11;
+        itemView.OnAction  = OnAcceleratorDemo;
+      }
+      default:
+        ;
+    }
+
+  }
+
+  // Slot method to handle left navigation.
+  $rect <420,210,620,250>
+  slot OnLeft
+  {
+    var int32 scrollPos = HorizontalList.ScrollOffset;
+
+    scrollPos = scrollPos + SlideTouchHandler.SnapNext.x;
+
+    /* limit selection */
+    if ( scrollPos > 0 )
+      scrollPos = 0;
+
+    /* use move effect to make a smooth animation */
+    Int32Effect.Enabled = false;
+    Int32Effect.Value1  = HorizontalList.ScrollOffset;
+    Int32Effect.Value2  = scrollPos;
+    Int32Effect.Enabled = true;
+
+
+  }
+
+  // This is a slot method.
+  $rect <200,340,400,380>
+  slot onUpdatePage
+  {
+    sender;
+
+    /* determine the selection number */
+    var int32 selection = 0;
+    if ( SlideTouchHandler.SnapNext.x > 0 )
+      selection = -HorizontalList.ScrollOffset / SlideTouchHandler.SnapNext.x;
+
+    /* forward the selection to the pagination bar */
+    Indicator.Selection = selection;
+
+    /* show/hide left and right buttons */
+    IconButtonLeft.Enabled = (selection > 0 );
+    IconButtonRight.Enabled = (selection < HorizontalList.NoOfItems - 1 );
+
+  }
+
+  $rect <420,330,620,370>
+  object Effects::Int32Effect Int32Effect
+  {
+    preset OnFinished = onUpdatePage;
+    preset Timing = Effects::Timing.FastIn_EaseOut;
+    preset NoOfCycles = 1;
+    preset CycleDuration = 200;
+    preset Outlet = ^HorizontalList.ScrollOffset;
+  }
+
+  $rect <20,20,160,60>
+  object MasterDemo::NavigationButton IconButtonLeft
+  {
+    preset Bounds = <0,40,25,180>;
+    preset OnAction = OnLeft;
+    preset ImageIndex = 2;
+  }
+
+  $rect <20,20,160,60>
+  object MasterDemo::NavigationButton IconButtonRight
+  {
+    preset Bounds = <295,40,320,180>;
+    preset OnAction = OnRight;
+    preset ImageIndex = 3;
+  }
+
+  $rect <20,20,160,60>
+  object MasterDemo::PaginationBar Indicator
+  {
+    preset Bounds = <0,180,320,200>;
+    preset NoOfIndicators = 4;
+  }
+
+  // This is a generic touch handler.
+  $rect <20,20,160,60>
+  object Core::SimpleTouchHandler InfoTouchHandler
+  {
+    preset Point4 = <0,200>;
+    preset Point3 = <320,200>;
+    preset Point2 = <320,240>;
+    preset Point1 = <0,240>;
+    preset OnPress = onInfo;
+  }
+
+  // This is an image view.
+  $rect <20,20,160,60>
+  object Views::Image EmWiLogo
+  {
+    preset Bounds = <0,200,170,240>;
+    preset Bitmap = MasterDemo::Logo;
+  }
+
+  // This is an ordinary text view.
+  $rect <20,20,160,60>
+  object Views::Text InfoText
+  {
+    preset Bounds = <220,220,310,238>;
+    preset String = "INFO";
+    preset Font = MasterDemo::DescriptionFont;
+  }
+
+  // This is an image view.
+  $rect <20,20,160,60>
+  object Views::Image InfoNavigation
+  {
+    preset Bounds = <220,200,310,220>;
+    preset Bitmap = MasterDemo::Navigation;
+  }
+
+  // This is an ordinary text view.
+  $rect <20,20,160,60>
+  object Views::Text Caption
+  {
+    preset Bounds = <0,0,320,40>;
+    preset String = "Embedded Wizard GUI Demos";
+    preset Font = MasterDemo::CaptionFont;
+  }
+
+  $rect <20,20,160,60>
+  object MasterDemo::HomeButton HomeButton
+  {
+    preset Layout = Core::Layout[];
+    preset Bounds = <440,0,480,40>;
+    preset Enabled = false;
+    preset Visible = false;
+    preset OnChange = onQuit;
+    preset ImageIndex = 1;
+  }
+
+  // Slot method to handle touch event on info bar.
+  $rect <420,110,620,150>
+  slot onInfo
+  {
+    sender; /* the method is called from the sender object */
+    postsignal OnInfo;
+  }
+
+  // Slot method to be called when the user presses the home button.
+  $rect <420,10,620,50>
+  slot onQuit
+  {
+    sender; /* the method is called from the sender object */
+    postsignal OnQuit;
+  }
+
+  // Property to forward user selection.
+  $rect <660,200,860,240>
+  property slot OnAcceleratorDemo = null;
+
+  // Property to forward user selection.
+  $rect <660,160,860,200>
+  property slot OnWaveformGenerator = null;
+
+  // Property to forward user selection.
+  $rect <660,120,860,160>
+  property slot OnAnimatedList = null;
+
+  // Property to forward user selection.
+  $rect <660,80,860,120>
+  property slot OnClimateCabinet = null;
+
+  // Property to forward user selection.
+  $rect <420,150,620,190>
+  property slot OnInfo = null;
+
+  // Property to forward user selection.
+  $rect <420,50,620,90>
+  property slot OnQuit = null;
+
+  // Slot method to handle right navigation.
+  $rect <420,250,620,290>
+  slot OnRight
+  {
+    var int32 scrollPos = HorizontalList.ScrollOffset;
+
+    scrollPos = scrollPos - SlideTouchHandler.SnapNext.x;
+
+    /* limit selection */
+    if ( scrollPos < (-HorizontalList.NoOfItems + 1 ) * SlideTouchHandler.SnapNext.x )
+      scrollPos = (-HorizontalList.NoOfItems + 1 ) * SlideTouchHandler.SnapNext.x;
+
+    /* use move effect to make a smooth animation */
+    Int32Effect.Enabled = false;
+    Int32Effect.Value1 = HorizontalList.ScrollOffset;
+    Int32Effect.Value2 = scrollPos;
+    Int32Effect.Enabled = true;
+
+
+  }
+
+  // The class 'HomeScreen' contains the main menu of the master demo.
+  // 
+  // The single application buttons are organized within a horizontal list. The method \
+  // 'OnLoadItem' is called from the list in order to load the different application \
+  // buttons. When the user wants to launch an application by pressing an application \
+  // button, a signal will be sent from the list item to one of the application specific \
+  // slot methods.
+  // 
+  // In order to adapt or to enhance the main menu, please adapt the method 'OnLoadItem'.
+  note legend Note
+  {
+    attr Bounds = <0,400,810,570>;
+  }
+
+  // Slot methods to forward demo selection.
+  note group Note1
+  {
+    attr Bounds = <640,10,880,300>;
+  }
+
+  // Slot method to navigate to the left most item.
+  $rect <420,290,620,330>
+  slot OnReset
+  {
+    var int32 scrollPos = 0;
+
+    /* use move effect to make a smooth animation */
+    Int32Effect.Enabled = false;
+    Int32Effect.Value1 = HorizontalList.ScrollOffset;
+    Int32Effect.Value2 = scrollPos;
+    Int32Effect.Enabled = true;
+
+
+  }
+}
+
+// Master Demo Application and HomeScreen
+note group Note1
+{
+  attr Bounds = <10,20,450,130>;
+}
+
+// Demo Application Screens
+note group Note3
+{
+  attr Bounds = <460,20,700,290>;
+}
+
+// This is a GUI component.
+$rect <480,70,680,110>
+$output false
+class ClimaticScreen : MasterDemo::DemoScreen
+{
+  $rect <830,20,1030,60>
+  inherited onset AutoDemo
+  {
+    /* check for any news */
+    if ( value == pure AutoDemo )
+      return;
+
+    /* store the given value */
+    pure AutoDemo = value;
+
+    /* start/stop the auto demo timer of the embedded demo application */
+    Climate.AutoDemoTimer.Enabled = value;
+  }
+
+  $rect <20,20,160,60>
+  object Climate::Climate Climate
+  {
+    preset Bounds = <0,0,320,240>;
+  }
+
+  $reorder Climate 1
+}
+
+// This is a GUI component.
+$rect <480,110,680,150>
+$output false
+class AnimatedListScreen : MasterDemo::DemoScreen
+{
+  $rect <830,20,1030,60>
+  inherited onset AutoDemo
+  {
+    /* check for any news */
+    if ( value == pure AutoDemo )
+      return;
+
+    /* store the given value */
+    pure AutoDemo = value;
+
+    /* start/stop the auto demo timer of the embedded demo application */
+    AnimatedList.AutoDemoTimer.Enabled = value;
+  }
+
+  $rect <20,20,160,60>
+  object AnimatedList::AnimatedList AnimatedList
+  {
+    preset Bounds = <0,0,320,240>;
+  }
+
+  $reorder AnimatedList 1
+}
+
+// This is a GUI component.
+$rect <480,150,680,190>
+$output false
+class WaveformScreen : MasterDemo::DemoScreen
+{
+  $rect <830,20,1030,60>
+  inherited onset AutoDemo
+  {
+    /* check for any news */
+    if ( value == pure AutoDemo )
+      return;
+
+    /* store the given value */
+    pure AutoDemo = value;
+
+    /* start/stop the auto demo timer of the embedded demo application */
+    Waveform.AutoDemoTimer.Enabled = value;
+  }
+
+  $rect <20,20,160,60>
+  object Waveform::Waveform Waveform
+  {
+    preset Bounds = <0,0,320,240>;
+  }
+
+  $reorder Waveform 1
+}
+
+// This is a GUI component.
+$rect <480,190,680,230>
+$output false
+class AcceleratorScreen : MasterDemo::DemoScreen
+{
+  $rect <830,20,1030,60>
+  inherited onset AutoDemo
+  {
+    /* check for any news */
+    if ( value == pure AutoDemo )
+      return;
+
+    /* store the given value */
+    pure AutoDemo = value;
+
+    /* start/stop the auto demo timer of the embedded demo application */
+    Accelerator.AutoDemoTimer.Enabled = value;
+  }
+
+  $rect <20,20,160,60>
+  object Accelerator::Accelerator Accelerator
+  {
+    preset Bounds = <0,0,320,240>;
+    preset NoOfItemsRectCopy = $NoOfRectCopy;
+    preset NoOfItemsBmpCopy = $NoOfBmpCopy;
+    preset NoOfItemsRectBlend = $NoOfRectBlend;
+    preset NoOfItemsBmpBlend = $NoOfBmpBlend;
+    preset NoOfItemsAlpha8Blend = $NoOfAlpha8Blend;
+  }
+
+  $reorder Accelerator 1
+}

@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Cortex/CORTEXM_ModePrivilege/Src/main.c
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    17-February-2017
   * @brief   Description of the Cortex-M4 Mode Privilege example.
   ******************************************************************************
   * @attention

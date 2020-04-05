@@ -151,7 +151,10 @@ SAI_HandleTypeDef         haudio_out_sai;
 I2S_HandleTypeDef         haudio_in_i2s;
 TIM_HandleTypeDef         haudio_tim;
 
-PDMFilter_InitStruct Filter[2];
+/* PDM filters params */
+PDM_Filter_Handler_t  PDM_FilterHandler[2];
+PDM_Filter_Config_t   PDM_FilterConfig[2];
+
 uint8_t Channel_Demux[128] = {
     0x00, 0x01, 0x00, 0x01, 0x02, 0x03, 0x02, 0x03,
     0x00, 0x01, 0x00, 0x01, 0x02, 0x03, 0x02, 0x03,
@@ -188,7 +191,7 @@ static void TIMx_IC_MspInit(TIM_HandleTypeDef *htim);
 static void TIMx_IC_MspDeInit(TIM_HandleTypeDef *htim);
 static void TIMx_Init(void);
 static void TIMx_DeInit(void);
-static void PDMDecoder_Init(uint32_t AudioFreq, uint32_t ChnlNbr);
+static void PDMDecoder_Init(uint32_t AudioFreq, uint32_t ChnlNbrIn, uint32_t ChnlNbrOut);
 /**
   * @}
   */ 
@@ -784,7 +787,7 @@ uint8_t BSP_AUDIO_IN_Init(uint32_t AudioFreq, uint32_t BitRes, uint32_t ChnlNbr)
   BSP_AUDIO_IN_ClockConfig(&haudio_in_i2s, NULL);
   
   /* Configure the PDM library */
-  PDMDecoder_Init(AudioFreq, ChnlNbr);
+  PDMDecoder_Init(AudioFreq, ChnlNbr, ChnlNbr);
  
   /* Configure the I2S peripheral */
   haudio_in_i2s.Instance = AUDIO_I2Sx;
@@ -914,7 +917,7 @@ uint8_t BSP_AUDIO_IN_PDMToPCM(uint16_t* PDMBuf, uint16_t* PCMBuf)
   for(index = 0; index < DEFAULT_AUDIO_IN_CHANNEL_NBR; index++)
   {
     /* PDM to PCM filter */
-    PDM_Filter_64_LSB((uint8_t*)&app_pdm[index], (uint16_t*)&(PCMBuf[index]), AudioInVolume , (PDMFilter_InitStruct *)&Filter[index]);
+    PDM_Filter((uint8_t*)&app_pdm[index], (uint16_t*)&(PCMBuf[index]), &PDM_FilterHandler[index]);
   }
     
   /* Return AUDIO_OK when all operations are correctly done */
@@ -1115,25 +1118,33 @@ __weak void BSP_AUDIO_IN_ClockConfig(I2S_HandleTypeDef *hi2s, void *Params)
 /**
   * @brief  Initializes the PDM library.
   * @param  AudioFreq: Audio sampling frequency
-  * @param  ChnlNbr: Number of audio channels (1: mono; 2: stereo)
+  * @param  ChnlNbrIn: Number of input audio channels in the PDM buffer
+  * @param  ChnlNbrOut: Number of desired output audio channels in the  resulting PCM buffer
+  *         Number of audio channels (1: mono; 2: stereo)
   */
-static void PDMDecoder_Init(uint32_t AudioFreq, uint32_t ChnlNbr)
-{ 
-  uint32_t i = 0;
-  
+static void PDMDecoder_Init(uint32_t AudioFreq, uint32_t ChnlNbrIn, uint32_t ChnlNbrOut)
+{
+  uint32_t index = 0;
+
   /* Enable CRC peripheral to unlock the PDM library */
   __HAL_RCC_CRC_CLK_ENABLE();
-  
-  for(i = 0; i < ChnlNbr; i++)
+
+  for(index = 0; index < ChnlNbrIn; index++)
   {
-    /* Filter LP & HP Init */
-    Filter[i].LP_HZ = AudioFreq/2;
-    Filter[i].HP_HZ = 10;
-    Filter[i].Fs = AudioFreq;
-    Filter[i].Out_MicChannels = ChnlNbr;
-    Filter[i].In_MicChannels = ChnlNbr; 
-    PDM_Filter_Init((PDMFilter_InitStruct *)&Filter[i]);
-  }  
+    /* Init PDM filters */
+    PDM_FilterHandler[index].bit_order  = PDM_FILTER_BIT_ORDER_LSB;
+    PDM_FilterHandler[index].endianness = PDM_FILTER_ENDIANNESS_LE;
+    PDM_FilterHandler[index].high_pass_tap = 2122358088;
+    PDM_FilterHandler[index].out_ptr_channels = ChnlNbrOut;
+    PDM_FilterHandler[index].in_ptr_channels  = ChnlNbrIn;
+    PDM_Filter_Init((PDM_Filter_Handler_t *)(&PDM_FilterHandler[index]));
+
+    /* PDM lib config phase */
+    PDM_FilterConfig[index].output_samples_number = AudioFreq/1000;
+    PDM_FilterConfig[index].mic_gain = 24;
+    PDM_FilterConfig[index].decimation_factor = PDM_FILTER_DEC_FACTOR_64;
+    PDM_Filter_setConfig((PDM_Filter_Handler_t *)&PDM_FilterHandler[index], &PDM_FilterConfig[index]);
+  }
 }
 
 /**

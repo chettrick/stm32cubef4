@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    BSP/Inc/gauge3_128x126.h
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   This file contains icon definition for animation control.
   ******************************************************************************
   * @attention

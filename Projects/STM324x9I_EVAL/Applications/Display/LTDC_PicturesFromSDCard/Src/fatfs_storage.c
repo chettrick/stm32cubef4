@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Display/LTDC_PicturesFromSDCard/Src/fatfs_storage.c
   * @author  MCD Application Team
-  * @version V1.5.0
-  * @date    17-February-2017
   * @brief   This file includes the Storage (FatFs) driver for the STM324x9I-EVAL
   *          application.
   ******************************************************************************
@@ -116,8 +114,6 @@ uint32_t BytesRead = 0;
   */
 uint32_t Storage_Init(void)
 {
-  BSP_SD_Init();
-  
   /****************** FatFs Volume Acess ******************************/
   if(f_mount(&fs, (TCHAR const*)"",0))
   {

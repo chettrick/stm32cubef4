@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm32f4xx_hal_conf.h
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   HAL configuration file. 
   ******************************************************************************
   * @attention
@@ -77,7 +75,7 @@
 /* #define HAL_QSPI_MODULE_ENABLED    */
 #define HAL_RCC_MODULE_ENABLED 
 /* #define HAL_RNG_MODULE_ENABLED    */
-/* #define HAL_RTC_MODULE_ENABLED */
+#define HAL_RTC_MODULE_ENABLED
 /* #define HAL_SAI_MODULE_ENABLED    */
 #define HAL_SD_MODULE_ENABLED  
 /* #define HAL_SPI_MODULE_ENABLED    */

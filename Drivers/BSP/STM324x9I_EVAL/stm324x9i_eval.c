@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm324x9i_eval.c
   * @author  MCD Application Team
-  * @version V3.0.0
-  * @date    27-January-2017
   * @brief   This file provides a set of firmware functions to manage LEDs, 
   *          push-buttons and COM ports available on STM324x9I-EVAL evaluation 
   *          board(MB1045) RevB from STMicroelectronics.
@@ -64,11 +62,11 @@
   * @{
   */
 /**
- * @brief STM324x9I EVAL BSP Driver version number V3.0.0
+ * @brief STM324x9I EVAL BSP Driver version number V3.0.1
    */
 #define __STM324x9I_EVAL_BSP_VERSION_MAIN   (0x03) /*!< [31:24] main version */
 #define __STM324x9I_EVAL_BSP_VERSION_SUB1   (0x00) /*!< [23:16] sub1 version */
-#define __STM324x9I_EVAL_BSP_VERSION_SUB2   (0x00) /*!< [15:8]  sub2 version */
+#define __STM324x9I_EVAL_BSP_VERSION_SUB2   (0x01) /*!< [15:8]  sub2 version */
 #define __STM324x9I_EVAL_BSP_VERSION_RC     (0x00) /*!< [7:0]  release candidate */ 
 #define __STM324x9I_EVAL_BSP_VERSION         ((__STM324x9I_EVAL_BSP_VERSION_MAIN << 24)\
                                              |(__STM324x9I_EVAL_BSP_VERSION_SUB1 << 16)\

@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/CDC_Standalone/Src/main.c
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   USB host CDC File Exchange application
   ******************************************************************************
   * @attention

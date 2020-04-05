@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    GUI_AVI.c 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017   
   * @brief   This file provides routines for AVI decoding.
   ******************************************************************************
   * @attention

@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Display/LTDC_AnimatedPictureFromUSB/Src/main.c
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   Main program body
   ******************************************************************************
   * @attention
@@ -73,7 +71,7 @@ MSC_ApplicationTypeDef;
 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-USBH_HandleTypeDef  hUSB_Host;
+USBH_HandleTypeDef  hUSBHost;
 FATFS USBDISK_FatFs;
 uint8_t USBDISK_Driver_Num;  /* USB Host logical drive number */
 FIL file;
@@ -130,17 +128,17 @@ int main(void)
   USBDISK_Driver_Num = FATFS_LinkDriver(&USBH_Driver, "");
   
   /* Init Host Library */
-  if (USBH_Init(&hUSB_Host, USBH_UserProcess, 0) != USBH_OK)
+  if (USBH_Init(&hUSBHost, USBH_UserProcess, 0) != USBH_OK)
   {
     /* USB Initialization Error */
     Error_Handler();
   }
 
   /* Add Supported Class */
-  USBH_RegisterClass(&hUSB_Host, USBH_MSC_CLASS);
+  USBH_RegisterClass(&hUSBHost, USBH_MSC_CLASS);
   
   /* Start Host Process */
-  if (USBH_Start(&hUSB_Host) != USBH_OK)
+  if (USBH_Start(&hUSBHost) != USBH_OK)
   {
     /* USB Initialization Error */
     Error_Handler();
@@ -154,7 +152,7 @@ int main(void)
       MSC_Application();
     }
     Toggle_Leds();
-    USBH_Process(&hUSB_Host);
+    USBH_Process(&hUSBHost);
   }
 }
 
@@ -336,7 +334,7 @@ static uint8_t Explore_Disk(char* path , uint8_t recu_level)
       {
         LCD_DbgLog("   |   |__");
       }
-      if((fno.fattrib & AM_MASK) == AM_DIR)
+      if((fno.fattrib & AM_DIR) == AM_DIR)
       {
         strcat(tmp, "\n"); 
         LCD_UsrLog((void *)tmp);
@@ -347,7 +345,7 @@ static uint8_t Explore_Disk(char* path , uint8_t recu_level)
         LCD_DbgLog((void *)tmp);
       }
       
-      if(((fno.fattrib & AM_MASK) == AM_DIR)&&(recu_level == 1))
+      if(((fno.fattrib & AM_DIR) == AM_DIR)&&(recu_level == 1))
       {
         Explore_Disk(fn, 2);
       }

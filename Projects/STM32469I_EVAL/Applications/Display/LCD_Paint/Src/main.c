@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    LCD_Paint/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   This file provides main program functions
   ******************************************************************************
   * @attention
@@ -92,6 +90,7 @@ typedef struct
 FATFS SDFatFs;   /* File system object for SD card logical drive */
 FIL MyFile;      /* File object */
 char SDPath[4];  /* SD card logical drive path */
+static uint8_t buffer[_MAX_SS]; /* a work buffer for the f_mkfs() */
 
 /* BMP file information to save the drawing pad to file BMP in RGB888 format */
 static BitMapFileHeader_Typedef     bmpFileHeader;
@@ -211,7 +210,7 @@ int main(void)
     Error_Handler();
   }
   /* Create a FAT file system (format) on the logical drive */
-  if(f_mkfs((TCHAR const*)SDPath, 0, 0) != FR_OK)
+  if(f_mkfs((TCHAR const*)SDPath, FM_ANY, 0, buffer, sizeof(buffer)) != FR_OK)
   {
     BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/2 + 3, (uint8_t*)"FAT FS Error !!", CENTER_MODE);
     Error_Handler();

@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Examples_LL/TIM/TIM_DMA/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017
   * @brief   This example describes how to use DMA with TIM3 Update request to
   *          transfer Data from memory to TIM3 Capture Compare Register 3 (CCR3)
   *          using the STM32F4xx TIM LL API.

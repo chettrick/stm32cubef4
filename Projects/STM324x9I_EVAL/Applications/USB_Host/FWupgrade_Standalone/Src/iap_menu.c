@@ -1,44 +1,42 @@
 /**
   ******************************************************************************
-  * @file    USB_Host/FWupgrade_Standalone/Src/iap_menu.c 
+  * @file    USB_Host/FWupgrade_Standalone/Src/iap_menu.c
   * @author  MCD Application Team
-  * @version V1.5.0
-  * @date    17-February-2017
   * @brief   COMMAND IAP Execute Application
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V.
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without 
+  * Redistribution and use in source and binary forms, with or without
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice, 
+  * 1. Redistribution of source code must retain the above copyright notice,
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other 
-  *    contributors to this software may be used to endorse or promote products 
+  * 3. Neither the name of STMicroelectronics nor the names of other
+  *    contributors to this software may be used to endorse or promote products
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this 
+  * 4. This software, including modifications and/or derivative works of this
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under 
-  *    this license is void and will automatically terminate your rights under 
-  *    this license. 
+  * 5. Redistribution and use of this software other than as permitted under
+  *    this license is void and will automatically terminate your rights under
+  *    this license.
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
@@ -59,6 +57,7 @@ __IO uint32_t UploadCondition = 0x00;
 DIR dir;
 FILINFO fno;
 static uint8_t Demo_State = DEMO_INIT;
+extern char USBDISKPath[4];
 
 /* Private function prototypes ----------------------------------------------- */
 static void IAP_UploadTimeout(void);
@@ -67,7 +66,7 @@ static void USBH_USR_BufferSizeControl(void);
 /* Private functions --------------------------------------------------------- */
 
 /**
-  * @brief  Demo application for IAP through USB mass storage.   
+  * @brief  Demo application for IAP through USB mass storage.
   * @param  None
   * @retval None
   */
@@ -77,11 +76,14 @@ void FW_UPGRADE_Process(void)
   {
   case DEMO_INIT:
     /* Register the file system object to the FatFs module */
-    if (f_mount(&USBH_fatfs, "", 0) != FR_OK)
+	if (FATFS_LinkDriver(&USBH_Driver, USBDISKPath) == 0)
     {
-      /* FatFs initialization fails */
-      /* Toggle LED3 and LED4 in infinite loop */
-      FatFs_Fail_Handler();
+      if (f_mount(&USBH_fatfs, "", 0) != FR_OK)
+      {
+        /* FatFs initialization fails */
+        /* Toggle LED3 and LED4 in infinite loop */
+        FatFs_Fail_Handler();
+      }
     }
 
     /* Go to IAP menu */
@@ -119,22 +121,16 @@ void FW_UPGRADE_Process(void)
       }
 
       /* Waiting KEY Button Released */
-      while ((BSP_PB_GetState(BUTTON_KEY) == GPIO_PIN_RESET)
-             && (Appli_state == APPLICATION_READY))
-      {
-      }
-
+      while((BSP_PB_GetState(BUTTON_KEY) == GPIO_PIN_RESET) && (Appli_state == APPLICATION_READY))
+      {}
+      
       /* Waiting KEY Button Pressed */
-      while ((BSP_PB_GetState(BUTTON_KEY) != GPIO_PIN_RESET)
-             && (Appli_state == APPLICATION_READY))
-      {
-      }
-
+      while((BSP_PB_GetState(BUTTON_KEY) != GPIO_PIN_RESET) && (Appli_state == APPLICATION_READY))
+      {}
+      
       /* Waiting KEY Button Released */
-      while ((BSP_PB_GetState(BUTTON_KEY) == GPIO_PIN_RESET)
-             && (Appli_state == APPLICATION_READY))
-      {
-      }
+      while((BSP_PB_GetState(BUTTON_KEY) == GPIO_PIN_RESET) && (Appli_state == APPLICATION_READY))
+      {}
 
       if (Appli_state == APPLICATION_READY)
       {

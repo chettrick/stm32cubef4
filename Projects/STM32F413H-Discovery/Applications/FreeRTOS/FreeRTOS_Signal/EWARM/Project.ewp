@@ -314,7 +314,6 @@
           <name>CCIncludePath2</name>
           <state>$PROJ_DIR$\..\Inc</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include</state>
-          <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Include</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32F413H-Discovery</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\Common</state>
@@ -585,7 +584,6 @@
         </option>
         <option>
           <name>AUserIncludes</name>
-          <state></state>
           <state>$PROJ_DIR$\..\Inc</state>
         </option>
         <option>

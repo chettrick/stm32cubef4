@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    LCD_Paint/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   This file provides main program functions
   ******************************************************************************
   * @attention
@@ -93,6 +91,7 @@ typedef struct
 FATFS SDFatFs;   /* File system object for SD card logical drive */
 FIL MyFile;      /* File object */
 char SDPath[4];  /* SD card logical drive path */
+static uint8_t buffer[_MAX_SS]; /* a work buffer for the f_mkfs() */
 
 /* BMP file information to save the drawing pad to file BMP in RGB888 format */
 static BitMapFileHeader_Typedef     bmpFileHeader;
@@ -209,7 +208,7 @@ int main(void)
     Error_Handler();
    }
   /* Create a FAT file system (format) on the logical drive */
-  if(f_mkfs((TCHAR const*)SDPath, 0, 0) != FR_OK)
+  if(f_mkfs((TCHAR const*)SDPath, FM_ANY, 0, buffer, sizeof(buffer)) != FR_OK)
   {
     BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()/2 + 3, (uint8_t*)"FAT FS Error !!", CENTER_MODE);
     Error_Handler();
@@ -439,21 +438,21 @@ static void Save_Picture(void)
                          sizeof(BitMapFileInfoHeader_Typedef) - sizeof(uint32_t) - sizeof(uint16_t);
 
     /* BMP complete file size is size of pad in RGB888 : 24bpp = 3 bytes per pixel + complete header size */
-    bmpFileHeader.bfSize = ((BSP_LCD_GetXSize() - 80) * (BSP_LCD_GetYSize() - 80) * RGB888_BYTE_PER_PIXEL);
+    bmpFileHeader.bfSize = ((BSP_LCD_GetXSize() - 105) * (BSP_LCD_GetYSize() - 105 + 1) * RGB888_BYTE_PER_PIXEL);
     bmpFileHeader.bfSize += bmpFileHeader.bOffBits;
 
     bmpFileHeader.bfReserved1 = 0x0000;
     bmpFileHeader.bfReserved2 = 0x0000;
 
     bmpFileInfoHeader.biSize = 40; /* 40 bytes in bitmap info header */
-    bmpFileInfoHeader.biWidth = (BSP_LCD_GetXSize() - 80);
-    bmpFileInfoHeader.biHeight = (BSP_LCD_GetYSize() - 80);
+    bmpFileInfoHeader.biWidth = (BSP_LCD_GetXSize() - 105);
+    bmpFileInfoHeader.biHeight = (BSP_LCD_GetYSize() - 105);
     bmpFileInfoHeader.biPlanes = 1; /* one single plane */
     bmpFileInfoHeader.biBitCount = 24; /* RGB888 : 24 bits per pixel */
     bmpFileInfoHeader.biCompression = 0; /* no compression */
 
     /* This is number of pixel bytes in file : sizeX * sizeY * RGB888_BYTE_PER_PIXEL */
-    bmpFileInfoHeader.biSizeImage = ((BSP_LCD_GetXSize() - 80) * (BSP_LCD_GetYSize() - 80) * RGB888_BYTE_PER_PIXEL);
+    bmpFileInfoHeader.biSizeImage = ((BSP_LCD_GetXSize() - 105) * (BSP_LCD_GetYSize() - 105 + 1) * RGB888_BYTE_PER_PIXEL);
 
     bmpFileInfoHeader.biXPelsPerMeter = 0; /* not used */
     bmpFileInfoHeader.biYPelsPerMeter = 0; /* not used */
@@ -636,6 +635,10 @@ static void LTDC_Operation(uint32_t Enable_LTDC)
   */
 static void Prepare_Picture(void)
 {
+  const uint32_t x0 = 98;
+  const uint32_t x1 = BSP_LCD_GetXSize()- 7;
+  const uint32_t y0 = 7;
+  const uint32_t y1 = BSP_LCD_GetYSize()- 98;
   uint32_t addrSrc = LCD_FRAME_BUFFER;
   uint32_t addrDst = CONVERTED_FRAME_BUFFER;
   static DMA2D_HandleTypeDef hdma2d_eval;
@@ -651,33 +654,39 @@ static void Prepare_Picture(void)
   hdma2d_eval.LayerCfg[1].AlphaMode = DMA2D_NO_MODIF_ALPHA;
   hdma2d_eval.LayerCfg[1].InputAlpha = 0xFF;
   hdma2d_eval.LayerCfg[1].InputColorMode = DMA2D_INPUT_ARGB8888; /* DMA2D input format */
-  hdma2d_eval.LayerCfg[1].InputOffset = 70; /* skip 70 pixels on left when reading addrSrc : the left margin */
+  hdma2d_eval.LayerCfg[1].InputOffset = 0;
 
   hdma2d_eval.Instance = DMA2D;
-
+  
+  /* DMA2D Initialization */
+  if(HAL_DMA2D_Init(&hdma2d_eval) == HAL_OK)
+  {
+    if(HAL_DMA2D_ConfigLayer(&hdma2d_eval, 1) != HAL_OK)
+    {
+      Error_Handler();
+    }
+  }
+  else 
+  {
+    Error_Handler();
+  }
+  
   /* Go to start of last drawing pad useful line from LCD frame buffer */
-  addrSrc += ((BSP_LCD_GetYSize() - 70 - 1) * BSP_LCD_GetXSize() * ARGB8888_BYTE_PER_PIXEL);
-
+  addrSrc += (((y1 * BSP_LCD_GetXSize()) + x0) * ARGB8888_BYTE_PER_PIXEL);
+  
   /* Copy and Convert picture from LCD frame buffer in ARGB8888 to Converted frame buffer in
    * RGB888 pixel format for all the useful lines of the drawing pad */
-  for(lineCnt=0; lineCnt < (BSP_LCD_GetYSize() - 80); lineCnt++)
+  for(lineCnt = y0; lineCnt <= y1; lineCnt++)
   {
-    /* DMA2D Initialization */
-    if(HAL_DMA2D_Init(&hdma2d_eval) == HAL_OK)
+    if (HAL_DMA2D_Start(&hdma2d_eval, addrSrc, addrDst, (x1 - x0), 1) == HAL_OK)
     {
-      if(HAL_DMA2D_ConfigLayer(&hdma2d_eval, 1) == HAL_OK)
-      {
-        if (HAL_DMA2D_Start(&hdma2d_eval, addrSrc, addrDst, (BSP_LCD_GetXSize() - 80), 1) == HAL_OK)
-        {
-          /* Polling For DMA transfer */
-          HAL_DMA2D_PollForTransfer(&hdma2d_eval, 10);
-        }
-      }
+      /* Polling For DMA transfer */
+      HAL_DMA2D_PollForTransfer(&hdma2d_eval, 20);
     }
 
-    /* Increment the destination address by one line RGB888 */
-    addrDst += ((BSP_LCD_GetXSize() - 80) * RGB888_BYTE_PER_PIXEL);
-
+    /* Increment the destination address by one line RGB888, this will add one padding pixel */
+    addrDst += ((x1 - x0) * RGB888_BYTE_PER_PIXEL) + RGB888_BYTE_PER_PIXEL;
+    
     /* Decrement the source address by one line */
     addrSrc -= (BSP_LCD_GetXSize() * ARGB8888_BYTE_PER_PIXEL);
   }

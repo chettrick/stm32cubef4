@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Examples_LL/RCC/RCC_UseHSI_PLLasSystemClock/Inc/main.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention

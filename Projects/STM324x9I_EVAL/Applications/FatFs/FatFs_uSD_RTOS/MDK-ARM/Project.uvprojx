@@ -10,14 +10,15 @@
       <TargetName>STM324x9I_EVAL</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
+      <pCCUsed>5060528::V5.06 update 5 (build 528)::ARMCC</pCCUsed>
+      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F429NIHx</Device>
           <Vendor>STMicroelectronics</Vendor>
           <PackID>Keil.STM32F4xx_DFP.2.11.0</PackID>
           <PackURL>http://www.keil.com/pack</PackURL>
-          <Cpu>IRAM(0x20000000-0x2002FFFF) IRAM2(0x10000000-0x1000FFFF) IROM(0x8000000-0x81FFFFF) CLOCK(25000000) FPU2 CPUTYPE("Cortex-M4")</Cpu>
+          <Cpu>IROM(0x08000000-0x81FFFFF) IRAM(0x20000000-0x2002FFFF) IRAM2(0x10000000-0x1000FFFF) CLOCK(25000000) FPU2 CPUTYPE("Cortex-M4")</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
           <FlashDriverDll></FlashDriverDll>
@@ -47,8 +48,8 @@
             <NotGenerated>0</NotGenerated>
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
-          <OutputDirectory>STM324x9I_EVAL\</OutputDirectory>
-          <OutputName>STM324x9I_EVAL</OutputName>
+          <OutputDirectory>STM324x9I_EVAL\Exe\</OutputDirectory>
+          <OutputName>Project</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
@@ -335,7 +336,7 @@
               <MiscControls>--C99</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F429xx,USE_STM324x9I_EVAL</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../../../../../../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../../../../../../Drivers/STM32F4xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM324x9I_EVAL;../../../../../../Middlewares/Third_Party/FatFs/src;../../../../../../Middlewares/Third_Party/FatFs/src/drivers;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/include;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS</IncludePath>
+              <IncludePath>../Inc;../../../../../../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/STM32F4xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM324x9I_EVAL;../../../../../../Middlewares/Third_Party/FatFs/src;../../../../../../Middlewares/Third_Party/FatFs/src/drivers;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/include;../../../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -353,7 +354,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>ROJ_DIR$\..\Inc</IncludePath>
+              <IncludePath>../Inc</IncludePath>
             </VariousControls>
           </Aads>
           <LDads>
@@ -427,11 +428,6 @@
               <FileType>1</FileType>
               <FilePath>../Src/main.c</FilePath>
             </File>
-            <File>
-              <FileName>sd_diskio.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Src/sd_diskio.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -461,6 +457,16 @@
               <FileName>system_stm32f4xx.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Src/system_stm32f4xx.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Middlewares/FatFs/Drivers</GroupName>
+          <Files>
+            <File>
+              <FileName>sd_diskio_dma_rtos.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Src/sd_diskio_dma_rtos.c</FilePath>
             </File>
           </Files>
         </Group>

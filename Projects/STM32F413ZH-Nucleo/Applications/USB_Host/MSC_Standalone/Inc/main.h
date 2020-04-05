@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/MSC_Standalone/Inc/main.h 
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    17-February-2017
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
@@ -56,6 +54,8 @@
 #include "stm32_adafruit_lcd.h"
 #include "lcd_log.h"
 #include "ff.h"
+#include "ff_gen_drv.h"
+#include "usbh_diskio_dma.h"
 
 /* Exported types ------------------------------------------------------------*/
 typedef enum {

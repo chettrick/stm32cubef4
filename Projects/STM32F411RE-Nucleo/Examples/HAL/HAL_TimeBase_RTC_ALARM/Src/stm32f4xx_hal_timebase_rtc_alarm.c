@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm32f4xx_hal_timebase_rtc_alarm.c 
   * @author  MCD Application Team
-  * @version V1.1.5
-  * @date    17-February-2017
   * @brief   HAL time base based on the hardware RTC_ALARM.
   *
   *          This file override the native HAL time base functions (defined as weak)

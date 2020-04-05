@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    I2S/I2S_Audio/Src/audio_if.c 
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    17-February-2017
   * @brief   This file provides the Audio Out (playback) interface API
   ******************************************************************************
   * @attention

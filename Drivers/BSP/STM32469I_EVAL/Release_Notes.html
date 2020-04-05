@@ -83,7 +83,8 @@ div.Section1
 {page:Section1;}
 -->
   </style><!--[if gte mso 10]> <style> /* Style Definitions */ table.MsoNormalTable {mso-style-name:"Table Normal"; mso-tstyle-rowband-size:0; mso-tstyle-colband-size:0; mso-style-noshow:yes; mso-style-parent:""; mso-padding-alt:0in 5.4pt 0in 5.4pt; mso-para-margin:0in; mso-para-margin-bottom:.0001pt; mso-pagination:widow-orphan; font-size:10.0pt; font-family:"Times New Roman"; mso-ansi-language:#0400; mso-fareast-language:#0400; mso-bidi-language:#0400;} </style> <![endif]--><!--[if gte mso 9]><xml> <o:shapedefaults v:ext="edit" spidmax="5122"/> </xml><![endif]--><!--[if gte mso 9]><xml> <o:shapelayout v:ext="edit"> <o:idmap v:ext="edit" data="1"/> </o:shapelayout></xml><![endif]-->
-  <meta content="MCD Application Team" name="author"></head><body link="blue" vlink="blue">
+  <meta content="MCD Application Team" name="author"></head>
+<body link="blue" vlink="blue">
 <div class="Section1">
 <p class="MsoNormal"><span style="font-family: Arial;"><o:p><br>
 </o:p></span></p>
@@ -114,12 +115,89 @@ Notes for STM32469I_EVAL Evaluation Board Drivers</span><span style="font-size: 
       <table class="MsoNormalTable" style="width: 675pt;" border="0" cellpadding="0" width="900">
         <tbody>
           <tr>
-            <td style="padding: 0cm;" valign="top">
-            <span style="font-family: &quot;Times New Roman&quot;;">
-            </span>
-            <h2 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;"><a name="History"></a><span style="font-size: 12pt; color: white;">Update History</span></h2>
+            <td style="padding: 0cm;" valign="top"><span style="font-family: &quot;Times New Roman&quot;;"></span><p class="MsoListParagraph" style="text-align: left;"><span style="font-family: &quot;Arial&quot;,sans-serif; font-size: 11pt;">The
+BSP (Board Specific Package) drivers are parts of the STM32Cube package
+based on the HAL drivers and provide a set of high level APIs relative
+to the hardware components and features in the evaluation boards,
+discovery kits and nucleo boards coming with the STM32Cube package for
+a given STM32 serie.</span></p><p class="MsoListParagraph" style="text-align: left;"><span style="font-family: &quot;Arial&quot;,sans-serif; font-size: 11pt;">The
+BSP drivers allow a quick access to the boards&#8217; services using high
+level APIs and without any specific configuration as the link with the
+HAL and the external components is done in intrinsic within the
+drivers. <br></span></p><p class="MsoListParagraph" style="text-align: left;"><span style="font-family: &quot;Arial&quot;,sans-serif; font-size: 11pt;">From
+project settings points of view, user has only to add the necessary
+driver&#8217;s files in the workspace and call the needed functions from
+examples. However some low level configuration functions are weak and
+can be overridden by the applications if user wants to change some BSP
+drivers default behavior.</span></p><h2 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial;"><span style="font-size: 12pt; color: white;">Update History</span></h2>
             
-            <h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; margin-right: 500pt; width: 180px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V2.0.0 / 27-January-2017 <o:p></o:p></span></h3>
+            <h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial; margin-right: 500pt; width: 215px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V2.0.1 / 21-September-2017 <o:p></o:p></span></h3>
+            <p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">Main
+Changes<o:p></o:p></span></u></b></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+
+
+            
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+
+
+            
+            <span style="font-size: 10pt; font-family: Verdana;"></span><span style="font-size: 10pt; font-family: Verdana;"></span>
+
+
+
+
+
+
+            
+            
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+
+
+
+
+
+
+            
+            
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+
+
+
+
+
+            
+            
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+
+
+
+
+            
+            
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+            
+            
+            <ul style="list-style-type: square;"><li><span style="font-size: 10pt; font-family: Verdana;">Remove date &amp; version</span></li><li><span style="font-family: Verdana; font-size: 10pt;">Add general description of BSP drivers</span></li><li><span style="font-size: 10pt; font-family: Verdana;">stm32469i_eval_audio.c/.h:</span></li><ul><li><span style="font-size: 10pt; font-family: Verdana;">Aligned with PDM&nbsp;library v3.0.0&nbsp;</span></li></ul><li><span style="font-size: 10pt; font-family: Verdana;">stm32469i_eval</span><span style="font-size: 10pt; font-family: Verdana;">_lcd.c:</span></li><ul><li><span style="font-size: 10pt; font-family: Verdana;">Update &nbsp;BSP_LCD_DrawBitmap() API to fix functional misbehaviour with SW4STM32 Toolchain</span></li></ul><li><span style="font-family: Verdana; font-size: 10pt;"><span style="font-style: italic; font-weight: bold; text-decoration: underline;">Notes:</span> <br>
+  </span></li><ul><li><span style="font-family: Verdana; font-size: 10pt;">This version must be used with v3.0.0 of PDM library</span><span style="font-family: Verdana; font-size: 10pt;"></span><span style="font-family: Verdana; font-size: 10pt;"></span></li></ul></ul><h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial; margin-right: 500pt; width: 207px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V2.0.0 / 27-January-2017 <o:p></o:p></span></h3>
             <p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">Main
 Changes<o:p></o:p></span></u></b></p>
 
@@ -194,7 +272,7 @@ Changes<o:p></o:p></span></u></b></p>
 <li><span style="font-family: Verdana; font-size: 10pt;"><span style="font-style: italic; font-weight: bold; text-decoration: underline;">Notes:</span> <br>
   </span></li><ul><li><span style="font-family: Verdana; font-size: 10pt;">These</span><span style="font-family: Verdana; font-size: 10pt;"> BSP drivers</span><span style="font-family: Verdana; font-size: 10pt;"> break the compatibility with previous versions.</span></li></ul><ul><li><span style="font-family: Verdana; font-size: 10pt;">If FatFs is required, </span><span style="font-family: Verdana; font-size: 10pt; font-style: italic;">"FatFS R0.11<span class="Apple-converted-space"> </span> </span><span style="font-family: Verdana; font-size: 10pt;"><span style="font-style: italic;">ST modified 20161223"</span><span style="color: red;"><span style="color: black;"></span></span></span><span style="font-family: Verdana; font-size: 10pt;"> must be used with </span><span style="font-family: Verdana; font-size: 10pt;">this version of BSP drivers.</span></li></ul>
             </ul>
-            <h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; margin-right: 500pt; width: 180px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V1.0.4 / 04-August-2016 <o:p></o:p></span></h3>
+            <h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial; margin-right: 500pt; width: 213px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V1.0.4 / 04-August-2016 <o:p></o:p></span></h3>
 
             <p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt; font-size: medium; font-family: 'Times New Roman'; color: rgb(0, 0, 0); font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px;"><b><u><span style="font-size: 10pt; font-family: Verdana; color: black;">Main Changes</span></u></b><b><u><span style="font-size: 10pt; font-family: Verdana; color: black;"><o:p></o:p></span></u></b></p>
             <ul style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; margin-top: 0cm;" type="square">
@@ -204,26 +282,26 @@ Changes<o:p></o:p></span></u></b></p>
 </span></li>
 </ul>
             </ul>
-            <h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; margin-right: 500pt; width: 180px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V1.0.3 / 06-May-2016 <o:p></o:p></span></h3>
-<p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt; font-size: medium; font-family: 'Times New Roman'; color: rgb(0, 0, 0); font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px;"><b><u><span style="font-size: 10pt; font-family: Verdana; color: black;">Main Changes</span></u></b><b><u><span style="font-size: 10pt; font-family: Verdana; color: black;"><o:p></o:p></span></u></b></p><ul style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; margin-top: 0cm;" type="square"><li><span style="font-size: 10pt; font-family: Verdana;">stm32469i_eval_camera.h update BSP Camera driver to use the new HAL DCMI API's:<br></span></li><ul><li class="MsoNormal" style="margin: 4.5pt 0in; font-size: 12pt; font-family: 'Times New Roman'; color: black;"><span style="font-size: 10pt; font-family: Verdana;">Update BSP_CAMERA_Suspend() API to call HAL_DCMI_Suspend() API</span></li><li class="MsoNormal" style="margin: 4.5pt 0in; font-size: 12pt; font-family: 'Times New Roman'; color: black;"><span style="font-size: 10pt; font-family: Verdana;">Update BSP_CAMERA_Resume to call HAL_DCMI_Resume() API</span></li></ul></ul><h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; margin-right: 500pt; width: 180px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V1.0.2 / 12-January-2016 <o:p></o:p></span></h3><p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">Main
+            <h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial; margin-right: 500pt; width: 180px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V1.0.3 / 06-May-2016 <o:p></o:p></span></h3>
+<p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt; font-size: medium; font-family: 'Times New Roman'; color: rgb(0, 0, 0); font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px;"><b><u><span style="font-size: 10pt; font-family: Verdana; color: black;">Main Changes</span></u></b><b><u><span style="font-size: 10pt; font-family: Verdana; color: black;"><o:p></o:p></span></u></b></p><ul style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; margin-top: 0cm;" type="square"><li><span style="font-size: 10pt; font-family: Verdana;">stm32469i_eval_camera.h update BSP Camera driver to use the new HAL DCMI API's:<br></span></li><ul><li class="MsoNormal" style="margin: 4.5pt 0in; font-size: 12pt; font-family: 'Times New Roman'; color: black;"><span style="font-size: 10pt; font-family: Verdana;">Update BSP_CAMERA_Suspend() API to call HAL_DCMI_Suspend() API</span></li><li class="MsoNormal" style="margin: 4.5pt 0in; font-size: 12pt; font-family: 'Times New Roman'; color: black;"><span style="font-size: 10pt; font-family: Verdana;">Update BSP_CAMERA_Resume to call HAL_DCMI_Resume() API</span></li></ul></ul><h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial; margin-right: 500pt; width: 220px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V1.0.2 / 12-January-2016 <o:p></o:p></span></h3><p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">Main
 Changes</span></u></b><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;"><o:p></o:p></span></u></b></p>
 
 
 
             
             
-            <ul style="margin-top: 0cm;" type="square"><li class="MsoNormal" style="margin: 4.5pt 0in; font-size: 12pt; font-family: 'Times New Roman'; color: black;"><span style="color: rgb(0, 0, 0); font-family: Verdana,sans-serif; font-size: 13.3333px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; display: inline ! important; float: none;">General&nbsp;updates to fix&nbsp;doxygen errors</span><span style="font-size: 10pt; font-family: Verdana;"></span></li><li class="MsoNormal" style="margin: 4.5pt 0in; font-size: 12pt; font-family: 'Times New Roman'; color: black;"><span style="font-size: 10pt; font-family: Verdana;">Add STM32469I_EVAL_BSP_User_Manual.chm file</span></li><li><span style="font-size: 10pt; font-family: Verdana;">stm32469i_eval_audio.c</span></li><ul><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">Alignement with STM32F4xx_HAL_Driver V1.4.4</span><span style="font-size: 10pt; font-family: Verdana;">&nbsp;</span></li></ul><li><span style="font-size: 10pt; font-family: Verdana;">stm32469i_eval_qspi.c</span></li><ul><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">Desactivate Timeout in memory mapped mode</span></li><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">Rename BSP_QSPI_MemoryMappedMode() API to BSP_QSPI_EnableMemoryMappedMode() API&nbsp;</span></li></ul><li><span style="font-size: 10pt; font-family: Verdana;">stm32469i_eval_lcd.c</span></li><ul><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">BSP_LCD_InitEx() API updated to remove use of intermediate variable Clockratio and improve calculation granularity </span></li></ul></ul><h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; margin-right: 500pt; width: 200px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V1.0.1 / 29-September-2015</span></h3>
+            <ul style="margin-top: 0cm;" type="square"><li class="MsoNormal" style="margin: 4.5pt 0in; font-size: 12pt; font-family: 'Times New Roman'; color: black;"><span style="color: rgb(0, 0, 0); font-family: Verdana,sans-serif; font-size: 13.3333px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; display: inline ! important; float: none;">General&nbsp;updates to fix&nbsp;doxygen errors</span><span style="font-size: 10pt; font-family: Verdana;"></span></li><li class="MsoNormal" style="margin: 4.5pt 0in; font-size: 12pt; font-family: 'Times New Roman'; color: black;"><span style="font-size: 10pt; font-family: Verdana;">Add STM32469I_EVAL_BSP_User_Manual.chm file</span></li><li><span style="font-size: 10pt; font-family: Verdana;">stm32469i_eval_audio.c</span></li><ul><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">Alignement with STM32F4xx_HAL_Driver V1.4.4</span><span style="font-size: 10pt; font-family: Verdana;">&nbsp;</span></li></ul><li><span style="font-size: 10pt; font-family: Verdana;">stm32469i_eval_qspi.c</span></li><ul><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">Desactivate Timeout in memory mapped mode</span></li><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">Rename BSP_QSPI_MemoryMappedMode() API to BSP_QSPI_EnableMemoryMappedMode() API&nbsp;</span></li></ul><li><span style="font-size: 10pt; font-family: Verdana;">stm32469i_eval_lcd.c</span></li><ul><li class="MsoNormal" style="color: black; margin-top: 4.5pt; margin-bottom: 4.5pt;"><span style="font-size: 10pt; font-family: Verdana;">BSP_LCD_InitEx() API updated to remove use of intermediate variable Clockratio and improve calculation granularity </span></li></ul></ul><h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial; margin-right: 500pt; width: 224px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V1.0.1 / 29-September-2015</span></h3>
             <p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">Main
 Changes<o:p></o:p></span></u></b></p>
 
 
             
             <ul style="margin-top: 0cm;" type="square"><li class="MsoNormal"><span style="font-size: 10pt; font-family: Verdana;">stm32469i_eval_lcd.c update:</span></li><ul><li class="MsoNormal"><span style="font-size: 10pt; font-family: Verdana;">Add delay within&nbsp;BSP_LCD_Reset() function</span></li></ul><li class="MsoNormal"><span style="font-size: 10pt; font-family: Verdana;">stm32469i_eval_lcd.h update:</span></li><ul><li class="MsoNormal"><span style="font-size: 10pt; font-family: Verdana;">Replace "\" with "/"</span></li></ul></ul>
-            <h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; margin-right: 500pt; width: 186px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V1.0.0 / 14-August-2015</span></h3>
+            <h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial; margin-right: 500pt; width: 186px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V1.0.0 / 14-August-2015</span></h3>
             <p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">Main
 Changes<o:p></o:p></span></u></b></p>
 
-            <ul style="margin-top: 0cm;" type="square"><li class="MsoNormal"><span style="font-size: 10pt; font-family: Verdana;">First official version of the<span style="font-weight: bold; font-style: italic;"> STM32469I_EVAL Board&nbsp;Drivers</span></span></li></ul><h2 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;"><span style="font-size: 12pt; color: white;">License<o:p></o:p></span></h2>
+            <ul style="margin-top: 0cm;" type="square"><li class="MsoNormal"><span style="font-size: 10pt; font-family: Verdana;">First official version of the<span style="font-weight: bold; font-style: italic;"> STM32469I_EVAL Board&nbsp;Drivers</span></span></li></ul><h2 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial;"><span style="font-size: 12pt; color: white;">License<o:p></o:p></span></h2>
 
             <div style="text-align: justify;">
             <div style="text-align: justify;"><font size="-1"><span style="font-family: &quot;Verdana&quot;,&quot;sans-serif&quot;;">

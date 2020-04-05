@@ -229,13 +229,13 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LibJPEG/source/jccoefct.c</location>
 		</link><link>
+			<name>Middlewares/FatFs/Drivers/sd_diskio.c</name>
+			<type>1</type>
+			<location>PARENT-2-PROJECT_LOC/Src/sd_diskio.c</location>
+		</link><link>
 			<name>Middlewares/Lib_JPEG/jcapimin.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LibJPEG/source/jcapimin.c</location>
-		</link><link>
-			<name>Middlewares/FatFs/Drivers/sd_diskio.c</name>
-			<type>1</type>
-			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FatFs/src/drivers/sd_diskio.c</location>
 		</link><link>
 			<name>Drivers/BSP/Components/st7789h2.c</name>
 			<type>1</type>
@@ -357,10 +357,6 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LibJPEG/source/jdinput.c</location>
 		</link>
-		<link>
-			<name />
-			<type />
-			<location />
-		</link>
+		
 	</linkedResources>
 </projectDescription>

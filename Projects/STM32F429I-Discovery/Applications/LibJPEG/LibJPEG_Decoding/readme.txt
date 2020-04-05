@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics  *******************
   * @file    LibJPEG/LibJPEG_Decoding/readme.txt 
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   Description of the LibJPEG decoding application.
   ******************************************************************************
   * @attention
@@ -76,6 +74,7 @@ with CPU or with DMA2D. Uncomment "USE_DMA2D" define for DMA2D transfer and
 @par Directory contents
 
     - LibJPEG/LibJPEG_Decoding/Inc/main.h                      Main program header file
+    - LibJPEG/LibJPEG_Decoding/Inc/usbh_diskio_dma.h           FatFS usbh diskio driver header file
     - LibJPEG/LibJPEG_Decoding/Inc/stm32f4xx_it.h              Interrupt handlers header file
     - LibJPEG/LibJPEG_Decoding/Inc/stm32f4xx_hal_conf.h        HAL Configuration file 
     - LibJPEG/LibJPEG_Decoding/Inc/ffconf.h                    FAT file system module configuration file
@@ -84,6 +83,7 @@ with CPU or with DMA2D. Uncomment "USE_DMA2D" define for DMA2D transfer and
     - LibJPEG/LibJPEG_Decoding/Inc/jconfig.h                   Lib JPEG configuration file
     - LibJPEG/LibJPEG_Decoding/Inc/jdata_conf.h                Write/Read methods definition
     - LibJPEG/LibJPEG_Decoding/Src/main.c                      Main program  
+    - LibJPEG/LibJPEG_Decoding/Src/usbh_diskio_dma.c           FatFS usbh diskio driver implementation
     - LibJPEG/LibJPEG_Decoding/Src/stm32f4xx_it.c              Interrupt handlers
     - LibJPEG/LibJPEG_Decoding/Src/system_stm32f4xx.c          STM32F4xx system clock configuration file
     - LibJPEG/LibJPEG_Decoding/Src/decode.c                    Decoder file
@@ -94,12 +94,12 @@ with CPU or with DMA2D. Uncomment "USE_DMA2D" define for DMA2D transfer and
 
   - This application runs on STM32F429xx Devices.
     
-  - This application has been tested with STM32F429I-Discovery RevB board and can be
+  - This application has been tested with STM32F429I-Discovery RevC board and can be
     easily tailored to any other supported device and development board.  
 
   - STM32F429I-DISCO RevB Set-up
     - Plug the USB key into the STM32F429I-DISCO board through 'USB micro A-Male 
-      to A-Female' cable.
+      to A-Female' cable(CN6).
 
 
 @par How to use it ?

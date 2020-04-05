@@ -1,5 +1,5 @@
 /*
-    FreeRTOS V9.0.0 - Copyright (C) 2015 Real Time Engineers Ltd. 
+    FreeRTOS V9.0.0 - Copyright (C) 2015 Real Time Engineers Ltd.
     All rights reserved
 
     VISIT http://www.FreeRTOS.org TO ENSURE YOU ARE USING THE LATEST VERSION.
@@ -93,7 +93,7 @@
 #define configTICK_RATE_HZ          ( ( TickType_t ) 1000 )
 #define configMAX_PRIORITIES        (  7 )
 #define configMINIMAL_STACK_SIZE    ( ( uint16_t ) 128 )
-#define configTOTAL_HEAP_SIZE       ( ( size_t ) ( 15 * 1024 ) )          /* 15 Kbytes */
+#define configTOTAL_HEAP_SIZE       ( ( size_t ) ( 20 * 1024 ) )          /* 20 Kbytes */
 #define configMAX_TASK_NAME_LEN               ( 16 )
 #define configUSE_TRACE_FACILITY              1
 #define configUSE_16_BIT_TICKS                0
@@ -162,7 +162,7 @@ standard names. */
 #define vPortSVCHandler SVC_Handler
 #define xPortPendSVHandler PendSV_Handler
 
-/* IMPORTANT: This define MUST be commented when used with STM32Cube firmware, 
+/* IMPORTANT: This define MUST be commented when used with STM32Cube firmware,
               to prevent overwriting SysTick_Handler defined within STM32Cube HAL */
 /* #define xPortSysTickHandler SysTick_Handler */
 

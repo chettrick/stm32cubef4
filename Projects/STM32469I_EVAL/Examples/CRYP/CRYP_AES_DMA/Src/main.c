@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    CRYP/CRYP_AES_DMA/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   This example provides a short description of how to use the CRYPTO
   *          peripheral to encrypt and decrypt data using AES-128 Algorithm
   *          in DMA mode.

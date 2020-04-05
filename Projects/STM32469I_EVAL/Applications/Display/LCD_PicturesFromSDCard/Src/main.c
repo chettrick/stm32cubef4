@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Display/LCD_PicturesFromSDCard/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   This file provides main program functions
   ******************************************************************************
   * @attention
@@ -116,7 +114,7 @@ int main(void)
         BSP_LCD_SetTextColor(LCD_COLOR_RED);
 
         BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"  Cannot allocate memory ");
-        while(1) { ; }
+        Error_Handler();
       }
     }
 
@@ -130,7 +128,7 @@ int main(void)
         free(pDirectoryFiles[counter]);
       }
       BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"  No Bitmap files...      ");
-      while(1) { ; }
+      Error_Handler();
     }
   }
   else
@@ -243,7 +241,7 @@ int main(void)
 
           BSP_LCD_DisplayStringAtLine(7, (uint8_t *) str);
           BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"    File type not supported. ");
-          while(1) { ; }
+          Error_Handler();
         }
       }
     }
@@ -349,14 +347,14 @@ static void SystemClock_Config(void)
   ret = HAL_RCC_OscConfig(&RCC_OscInitStruct);
   if(ret != HAL_OK)
   {
-    while(1) { ; }
+    Error_Handler();
   }
 
   /* Activate the OverDrive to reach the 180 MHz Frequency */
   ret = HAL_PWREx_EnableOverDrive();
   if(ret != HAL_OK)
   {
-    while(1) { ; }
+    Error_Handler();
   }
 
   /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 clocks dividers */
@@ -369,7 +367,7 @@ static void SystemClock_Config(void)
   ret = HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
   if(ret != HAL_OK)
   {
-    while(1) { ; }
+    Error_Handler();
   }
 }
 

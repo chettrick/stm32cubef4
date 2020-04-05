@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    LibJPEG/LibJPEG_Decoding/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.5.0
-  * @date    17-February-2017
   * @brief   Main program body
   *          This sample code shows how to decompress JPEG file.
   ******************************************************************************
@@ -64,7 +62,8 @@ char SDPath[4]; /* SD card logical drive path */
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);
 static uint8_t Jpeg_CallbackFunction(uint8_t* Row, uint32_t DataLength);
-static void LCD_Config(void); 
+static void LCD_Config(void);
+static void Error_Handler(void);
 
 /* Private functions ---------------------------------------------------------*/
 
@@ -86,6 +85,9 @@ int main(void)
   /* Configure the system clock to 180 MHz */
   SystemClock_Config();
   
+  /* Configure LED3 */
+  BSP_LED_Init(LED3);
+  
   /*##-1- LCD Configuration ##################################################*/   
   LCD_Config();   
   
@@ -96,10 +98,19 @@ int main(void)
     if(f_mount(&SDFatFs, (TCHAR const*)SDPath, 0) == FR_OK)
     {
       /*##-4- Open the JPG image with read access ############################*/
-       if(f_open(&MyFile, "image.jpg", FA_READ) == FR_OK)
+       if(f_open(&MyFile, "image.jpg", FA_READ) != FR_OK)
        {
+         Error_Handler();
        }
      }
+     else
+     {
+       Error_Handler();
+     }
+   }
+   else
+   {
+     Error_Handler();
    }
   
   /*##-5- Decode the jpg image file ##########################################*/
@@ -215,6 +226,24 @@ static uint8_t Jpeg_CallbackFunction(uint8_t* Row, uint32_t DataLength)
 
   line_counter++;
   return 0;
+}
+
+/**
+  * @brief  This function is executed in case of error occurrence.
+  * @param  None
+  * @retval None
+  */
+static void Error_Handler(void)
+{
+  /* Stop the program with an infinite loop */
+  while(1)
+  {
+     /* Toggle LED3 */
+     BSP_LED_Toggle(LED3);
+     
+     /* Delay with 200ms */
+     HAL_Delay(200);
+  }
 }
 
 /**

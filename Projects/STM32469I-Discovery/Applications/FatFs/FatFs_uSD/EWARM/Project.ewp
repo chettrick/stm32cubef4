@@ -77,7 +77,7 @@
         </option>
         <option>
           <name>OGLastSavedByProductVersion</name>
-          <state>7.70.1.11471</state>
+          <state>7.80.4.12487</state>
         </option>
         <option>
           <name>GeneralEnableMisra</name>
@@ -320,10 +320,7 @@
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32469I-Discovery</state>
-          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Core\Inc</state>
-          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Class\MSC\Inc</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src</state>
-          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src\drivers</state>
         </option>
         <option>
           <name>CCStdIncCheck</name>
@@ -581,7 +578,7 @@
         </option>
         <option>
           <name>AUserIncludes</name>
-          <state>$PROJ_DIR$\..\Inc</state>
+          <state></state>
         </option>
         <option>
           <name>AExtraOptionsCheckV2</name>
@@ -607,7 +604,7 @@
         <option>
           <name>OOCOutputFormat</name>
           <version>3</version>
-          <state>0</state>
+          <state>1</state>
         </option>
         <option>
           <name>OCOutputOverride</name>
@@ -623,7 +620,7 @@
         </option>
         <option>
           <name>OOCObjCopyEnable</name>
-          <state>0</state>
+          <state>1</state>
         </option>
       </data>
     </settings>
@@ -653,7 +650,7 @@
       <name>ILINK</name>
       <archiveVersion>0</archiveVersion>
       <data>
-        <version>17</version>
+        <version>18</version>
         <wantNonLocal>1</wantNonLocal>
         <debug>1</debug>
         <option>
@@ -925,7 +922,7 @@
         </option>
         <option>
           <name>CrcAlgorithm</name>
-          <version>0</version>
+          <version>1</version>
           <state>1</state>
         </option>
         <option>
@@ -940,6 +937,10 @@
         <option>
           <name>IlinkLogCallGraph</name>
           <state>0</state>
+        </option>
+        <option>
+          <name>IlinkIcfFile_AltDefault</name>
+          <state></state>
         </option>
       </data>
     </settings>
@@ -1097,7 +1098,7 @@
       <group>
         <name>Drivers</name>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src\drivers\sd_diskio.c</name>
+          <name>$PROJ_DIR$\..\Src\sd_diskio.c</name>
         </file>
       </group>
     </group>

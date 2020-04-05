@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Examples_LL/DMA/DMA_CopyFromFlashToMemory_Init/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017
   * @brief   This example describes how to use a DMA channel to transfer
   *          a word data buffer from FLASH memory to embedded SRAM memory
   *          through the STM32F4xx DMA LL API.

@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Audio_playback_and_record/Src/usbh_conf.c
   * @author  MCD Application Team
-  * @version V1.0.4
-  * @date    17-February-2017
   * @brief   USB Host configuration file.
   ******************************************************************************
   * @attention

@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    FreeRTOS/FreeRTOS_Timers/Inc/main.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017
   * @brief   This file contains all the functions prototypes for the main.c
   *          file.
   ******************************************************************************
@@ -56,7 +54,7 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
-#include "stm32F413H_discovery.h"
+#include "stm32f413h_discovery.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/

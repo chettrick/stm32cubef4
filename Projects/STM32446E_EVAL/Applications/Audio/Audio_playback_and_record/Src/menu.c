@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Audio/Audio_playback_and_record/Src/menu.c 
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    17-February-2017
   * @brief   This file implements Menu Functions
   ******************************************************************************
   * @attention
@@ -110,7 +108,7 @@ void AUDIO_MenuProcess(void)
       AudioDemo.select = 0;
       BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
       BSP_LCD_DisplayStringAtLine(15, (uint8_t *)"Use [Joystick Left/Right] to scroll up/down");
-      BSP_LCD_DisplayStringAtLine(16, (uint8_t *)"Use [Joystick Up/Down] to scroll Audio Playback and Record menu");
+      BSP_LCD_DisplayStringAtLine(16, (uint8_t *)"Use [Joystick Up/Down] to scroll App Menu");
       break;    
       
     case AUDIO_DEMO_WAIT:

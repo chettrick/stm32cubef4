@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    FatFs/FatFs_USBDisk/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   Description of the FatFs with USB disk drive application
   ******************************************************************************
   * @attention
@@ -102,10 +100,14 @@ on STM32Cube with FatFs".
   - FatFs/FatFs_USBDisk/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - FatFs/FatFs_USBDisk/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - FatFs/FatFs_USBDisk/Inc/main.h                  Main program header file
+  - FatFs/FatFs_USBDisk/Inc/usbh_diskio_dma.h       FatFS usbh diskio driver header file
   - FatFs/FatFs_USBDisk/Inc/ffconf.h                FAT file system module configuration file   
+  - FatFs/FatFs_USBDisk/Inc/usbh_conf.h             USB Host low level configuration
   - FatFs/FatFs_USBDisk/Src/stm32f4xx_it.c          Interrupt handlers
   - FatFs/FatFs_USBDisk/Src/main.c                  Main program
+  - FatFs/FatFs_USBDisk/Src/usbh_diskio_dma.c       FatFS usbh diskio driver implementation
   - FatFs/FatFs_USBDisk/Src/system_stm32f4xx.c      STM32F4xx system clock configuration file
+  - FatFs/FatFs_USBDisk/Src/usbh_conf.c             USB Host configuration functions
          
  
 @par Hardware and Software environment
@@ -117,7 +119,7 @@ on STM32Cube with FatFs".
 
   - STM32F412G-Discovery Set-up
     - Plug the USB key into the STM32F412G-Discovery board through 'USB micro A-Male 
-      to A-Female' cable.
+      to A-Female' cable (CN3)
 
 @par How to use it ? 
 

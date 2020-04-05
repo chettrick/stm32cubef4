@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm324x9i_eval_camera.c
   * @author  MCD Application Team
-  * @version V3.0.0
-  * @date    27-January-2017
   * @brief   This file includes the driver for Camera modules mounted on
   *          STM324x9I-EVAL evaluation board.
   ******************************************************************************

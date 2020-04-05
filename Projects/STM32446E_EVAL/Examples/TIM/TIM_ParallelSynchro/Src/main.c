@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    TIM/TIM_ParallelSynchro/Src/main.c
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    17-February-2017
   * @brief   This example shows how to command 2 Timers as slaves (TIM3 & TIM4)
   *          using a Timer as master (TIM2)
   ******************************************************************************

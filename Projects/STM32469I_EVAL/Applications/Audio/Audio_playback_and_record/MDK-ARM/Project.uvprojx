@@ -10,14 +10,14 @@
       <TargetName>STM32469I_EVAL</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060061::V5.06 update 1 (build 61)::ARMCC</pCCUsed>
+      <pCCUsed>5060528::V5.06 update 5 (build 528)::ARMCC</pCCUsed>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F469NIHx</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32F4xx_DFP.2.8.0</PackID>
+          <PackID>Keil.STM32F4xx_DFP.2.11.0</PackID>
           <PackURL>http://www.keil.com/pack</PackURL>
-          <Cpu>IRAM(0x20000000-0x2004FFFF) IRAM2(0x10000000-0x2000FFFF) IROM(0x8000000-0x81FFFFF) CLOCK(25000000) CPUTYPE("Cortex-M4") FPU2</Cpu>
+          <Cpu>IRAM(0x20000000-0x2004FFFF) IRAM2(0x10000000-0x1000FFFF) IROM(0x8000000-0x81FFFFF) CLOCK(25000000) FPU2 CPUTYPE("Cortex-M4")</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
           <FlashDriverDll></FlashDriverDll>
@@ -47,8 +47,8 @@
             <NotGenerated>0</NotGenerated>
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
-          <OutputDirectory>STM32469I_EVAL\</OutputDirectory>
-          <OutputName>STM32469I_EVAL</OutputName>
+          <OutputDirectory>STM32469I_EVAL\Exe\</OutputDirectory>
+          <OutputName>Project</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
@@ -125,47 +125,6 @@
             <HexOffset>0</HexOffset>
             <Oh166RecLen>16</Oh166RecLen>
           </OPTHX>
-          <Simulator>
-            <UseSimulator>0</UseSimulator>
-            <LoadApplicationAtStartup>1</LoadApplicationAtStartup>
-            <RunToMain>1</RunToMain>
-            <RestoreBreakpoints>1</RestoreBreakpoints>
-            <RestoreWatchpoints>1</RestoreWatchpoints>
-            <RestoreMemoryDisplay>1</RestoreMemoryDisplay>
-            <RestoreFunctions>1</RestoreFunctions>
-            <RestoreToolbox>1</RestoreToolbox>
-            <LimitSpeedToRealTime>0</LimitSpeedToRealTime>
-            <RestoreSysVw>1</RestoreSysVw>
-          </Simulator>
-          <Target>
-            <UseTarget>1</UseTarget>
-            <LoadApplicationAtStartup>1</LoadApplicationAtStartup>
-            <RunToMain>1</RunToMain>
-            <RestoreBreakpoints>1</RestoreBreakpoints>
-            <RestoreWatchpoints>1</RestoreWatchpoints>
-            <RestoreMemoryDisplay>1</RestoreMemoryDisplay>
-            <RestoreFunctions>1</RestoreFunctions>
-            <RestoreToolbox>1</RestoreToolbox>
-            <RestoreTracepoints>1</RestoreTracepoints>
-            <RestoreSysVw>1</RestoreSysVw>
-          </Target>
-          <RunDebugAfterBuild>0</RunDebugAfterBuild>
-          <TargetSelection>11</TargetSelection>
-          <SimDlls>
-            <CpuDll></CpuDll>
-            <CpuDllArguments></CpuDllArguments>
-            <PeripheralDll></PeripheralDll>
-            <PeripheralDllArguments></PeripheralDllArguments>
-            <InitializationFile></InitializationFile>
-          </SimDlls>
-          <TargetDlls>
-            <CpuDll></CpuDll>
-            <CpuDllArguments></CpuDllArguments>
-            <PeripheralDll></PeripheralDll>
-            <PeripheralDllArguments></PeripheralDllArguments>
-            <InitializationFile></InitializationFile>
-            <Driver>STLink\ST-LINKIII-KEIL_SWO.dll</Driver>
-          </TargetDlls>
         </DebugOption>
         <Utilities>
           <Flash1>
@@ -343,8 +302,8 @@
               </OCR_RVCT9>
               <OCR_RVCT10>
                 <Type>0</Type>
-                <StartAddress>0x0</StartAddress>
-                <Size>0x0</Size>
+                <StartAddress>0x10000000</StartAddress>
+                <Size>0x10000</Size>
               </OCR_RVCT10>
             </OnChipMemories>
             <RvctStartVector></RvctStartVector>
@@ -363,17 +322,20 @@
             <wLevel>2</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
-            <uC99>0</uC99>
+            <uC99>1</uC99>
             <useXO>0</useXO>
-            <v6Lang>0</v6Lang>
-            <v6LangP>0</v6LangP>
-            <vShortEn>0</vShortEn>
-            <vShortWch>0</vShortWch>
+            <v6Lang>1</v6Lang>
+            <v6LangP>1</v6LangP>
+            <vShortEn>1</vShortEn>
+            <vShortWch>1</vShortWch>
+            <v6Lto>0</v6Lto>
+            <v6WtE>0</v6WtE>
+            <v6Rtti>0</v6Rtti>
             <VariousControls>
-              <MiscControls>--C99</MiscControls>
+              <MiscControls> </MiscControls>
               <Define>USE_HAL_DRIVER,STM32F469xx,USE_USB_FS,USE_IOEXPANDER</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../../../../../../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/STM32F4xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32469I_EVAL;../../../../../../Drivers/BSP/Components/Common;../../../../../../Utilities/Log;../../../../../../Utilities/Fonts;../../../../../../Utilities/CPU;../../../../../../Middlewares/ST/STM32_USB_Device_Library/Core/Inc;../../../../../../Middlewares/ST/STM32_USB_HOST_Library/Core/Inc;../../../../../../Middlewares/ST/STM32_USB_HOST_Library/Class/MSC/Inc;../../../../../../Middlewares/Third_Party/FatFs/src;../../../../../../Middlewares/Third_Party/FatFs/src/drivers</IncludePath>
+              <IncludePath>../Inc;../../../../../../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../../../../../../Drivers/STM32F4xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32469I_EVAL;../../../../../../Drivers/BSP/Components/Common;../../../../../../Utilities/Log;../../../../../../Utilities/Fonts;../../../../../../Utilities/CPU;../../../../../../Middlewares/ST/STM32_USB_Device_Library/Core/Inc;../../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Inc;../../../../../../Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc;../../../../../../Middlewares/Third_Party/FatFs/src</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -386,6 +348,7 @@
             <NoWarn>0</NoWarn>
             <uSurpInc>0</uSurpInc>
             <useXO>0</useXO>
+            <uClangAs>0</uClangAs>
             <VariousControls>
               <MiscControls></MiscControls>
               <Define></Define>
@@ -406,7 +369,7 @@
             <ScatterFile></ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
-            <Misc>--diag_suppress=L6329</Misc>
+            <Misc></Misc>
             <LinkerInputFile></LinkerInputFile>
             <DisabledWarnings></DisabledWarnings>
           </LDads>
@@ -582,14 +545,14 @@
               <FilePath>../Src/waveplayer.c</FilePath>
             </File>
             <File>
-              <FileName>usbh_diskio.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Src/usbh_diskio.c</FilePath>
-            </File>
-            <File>
               <FileName>menu.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Src/menu.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbh_diskio_dma.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Src/usbh_diskio_dma.c</FilePath>
             </File>
             <File>
               <FileName>usbh_conf.c</FileName>
@@ -610,6 +573,16 @@
               <FileName>ff.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../../Middlewares/Third_Party/FatFs/src/ff.c</FilePath>
+            </File>
+            <File>
+              <FileName>diskio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Middlewares/Third_Party/FatFs/src/diskio.c</FilePath>
+            </File>
+            <File>
+              <FileName>ff_gen_drv.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Middlewares/Third_Party/FatFs/src/ff_gen_drv.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -649,7 +622,7 @@
             <File>
               <FileName>libPDMFilter_CM4_Keil.lib</FileName>
               <FileType>4</FileType>
-              <FilePath>../../../../../../Middlewares/ST/STM32_Audio/Addons/PDM/libPDMFilter_CM4_Keil.lib</FilePath>
+              <FilePath>../../../../../../Middlewares/ST/STM32_Audio/Addons/PDM/Lib/libPDMFilter_CM4_Keil.lib</FilePath>
             </File>
           </Files>
         </Group>
@@ -692,24 +665,24 @@
           <GroupName>Middlewares/STM32_USBH_Library/Core</GroupName>
           <Files>
             <File>
-              <FileName>usbh_ctlreq.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ctlreq.c</FilePath>
-            </File>
-            <File>
-              <FileName>usbh_ioreq.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.c</FilePath>
-            </File>
-            <File>
               <FileName>usbh_pipes.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_pipes.c</FilePath>
             </File>
             <File>
+              <FileName>usbh_ctlreq.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ctlreq.c</FilePath>
+            </File>
+            <File>
               <FileName>usbh_core.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_core.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbh_ioreq.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -742,9 +715,9 @@
           <GroupName>Middlewares/STM32_USBH_Library/Class/MSC</GroupName>
           <Files>
             <File>
-              <FileName>usbh_msc_bot.c</FileName>
+              <FileName>usbh_msc_scsi.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c</FilePath>
+              <FilePath>../../../../../../Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_scsi.c</FilePath>
             </File>
             <File>
               <FileName>usbh_msc.c</FileName>
@@ -752,9 +725,9 @@
               <FilePath>../../../../../../Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc.c</FilePath>
             </File>
             <File>
-              <FileName>usbh_msc_scsi.c</FileName>
+              <FileName>usbh_msc_bot.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_scsi.c</FilePath>
+              <FilePath>../../../../../../Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c</FilePath>
             </File>
           </Files>
         </Group>

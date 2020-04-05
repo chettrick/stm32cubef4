@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    USB_Host/DualCore_Standalone/readme.txt 
   * @author  MCD Application Team
-  * @version V1.5.0
-  * @date    17-February-2017
   * @brief   Description of the USB Host Dual Core application.
   ******************************************************************************
   * @attention
@@ -101,7 +99,7 @@ compiler preprocessor (already done in the preconfigured projects provided with 
 It is possible to fine tune needed USB Host features by modifying defines values in USBH configuration
 file “usbh_conf.h” available under the project includes directory, in a way to fit the application
 requirements, such as:
-- Level of debug: USBH_DEBUG_LEVEL
+  - Level of debug: USBH_DEBUG_LEVEL
                   0: No debug messages
                   1: Only User messages are shown
                   2: User and Error messages are shown
@@ -113,6 +111,7 @@ requirements, such as:
 @par Directory contents
 
   - USB_Host/DualCore_Standalone/Src/main.c                  Main program
+  - USB_Host/DualCore_Standalone/Src/usbh_diskio_dma.c       FatFS usbh diskio driver implementation
   - USB_Host/DualCore_Standalone/Src/system_stm32f4xx.c      STM32F4xx system clock configuration file
   - USB_Host/DualCore_Standalone/Src/stm32f4xx_it.c          Interrupt handlers
   - USB_Host/DualCore_Standalone/Src/dual_menu.c             Main Menu State Machine
@@ -125,6 +124,7 @@ requirements, such as:
   - USB_Host/DualCore_Standalone/Src/mouse.c                 HID mouse functions  
   - USB_Host/DualCore_Standalone/Src/keyboard.c              HID keyboard functions
   - USB_Host/DualCore_Standalone/Inc/main.h                  Main program header file
+  - USB_Host/DualCore_Standalone/Inc/usbh_diskio_dma.h       FatFS usbh diskio driver header file
   - USB_Host/DualCore_Standalone/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - USB_Host/DualCore_Standalone/Inc/lcd_log_conf.h          LCD log configuration file
   - USB_Host/DualCore_Standalone/Inc/stm32f4xx_hal_conf.h    HAL configuration file
@@ -143,10 +143,10 @@ requirements, such as:
   - STM324x9I-EVAL RevB Set-up
     - Plug the USB key into the STM324x9I-EVAL board through 'USB micro A-Male 
       to A-Female' cable to the connector:
-      - CN9 : to use USB High Speed (HS) 
+      - CN9 : to use USB High Speed (HS) with embedded PHY(U7)
     - Plug the HID device(Mouse/Keyboard) into the STM324x9I-EVAL board through 'USB micro A-Male 
       to A-Female' cable to the connector:
-      - CN14: to use USB Full Speed (FS) with embedded PHY(U7)
+      - CN14: to use USB Full Speed (FS)
               Please ensure that jumper JP16 is not fitted.
 
 

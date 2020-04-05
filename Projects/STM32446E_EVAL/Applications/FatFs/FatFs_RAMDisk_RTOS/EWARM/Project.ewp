@@ -12,7 +12,7 @@
       <name>General</name>
       <archiveVersion>3</archiveVersion>
       <data>
-        <version>22</version>
+        <version>24</version>
         <wantNonLocal>1</wantNonLocal>
         <debug>1</debug>
         <option>
@@ -26,11 +26,6 @@
         <option>
           <name>ListPath</name>
           <state>STM32446E_EVAL\List</state>
-        </option>
-        <option>
-          <name>Variant</name>
-          <version>21</version>
-          <state>39</state>
         </option>
         <option>
           <name>GEndianMode</name>
@@ -59,11 +54,6 @@
           <state>0</state>
         </option>
         <option>
-          <name>FPU</name>
-          <version>3</version>
-          <state>5</state>
-        </option>
-        <option>
           <name>OGCoreOrChip</name>
           <state>1</state>
         </option>
@@ -87,7 +77,7 @@
         </option>
         <option>
           <name>OGLastSavedByProductVersion</name>
-          <state>7.30.3.8061</state>
+          <state>7.80.4.12487</state>
         </option>
         <option>
           <name>GeneralEnableMisra</name>
@@ -136,13 +126,8 @@
           <state>$TOOLKIT_DIR$\INC\c\DLib_Config_Full.h</state>
         </option>
         <option>
-          <name>GFPUCoreSlave</name>
-          <version>21</version>
-          <state>39</state>
-        </option>
-        <option>
           <name>GBECoreSlave</name>
-          <version>21</version>
+          <version>24</version>
           <state>39</state>
         </option>
         <option>
@@ -156,6 +141,34 @@
         <option>
           <name>GRuntimeLibThreads</name>
           <state>0</state>
+        </option>
+        <option>
+          <name>CoreVariant</name>
+          <version>24</version>
+          <state>39</state>
+        </option>
+        <option>
+          <name>GFPUDeviceSlave</name>
+          <state>STM32F446ZE	ST STM32F446ZE</state>
+        </option>
+        <option>
+          <name>FPU2</name>
+          <version>0</version>
+          <state>4</state>
+        </option>
+        <option>
+          <name>NrRegs</name>
+          <version>0</version>
+          <state>1</state>
+        </option>
+        <option>
+          <name>NEON</name>
+          <state>0</state>
+        </option>
+        <option>
+          <name>GFPUCoreSlave2</name>
+          <version>24</version>
+          <state>39</state>
         </option>
       </data>
     </settings>
@@ -305,11 +318,9 @@
           <name>CCIncludePath2</name>
           <state>$PROJ_DIR$\..\Inc</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include</state>
-<state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Include</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32446E_EVAL</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src</state>
-          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src\drivers</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\portable\IAR\ARM_CM4F</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\include</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS</state>
@@ -595,8 +606,8 @@
         <debug>1</debug>
         <option>
           <name>OOCOutputFormat</name>
-          <version>2</version>
-          <state>0</state>
+          <version>3</version>
+          <state>1</state>
         </option>
         <option>
           <name>OCOutputOverride</name>
@@ -604,7 +615,7 @@
         </option>
         <option>
           <name>OOCOutputFile</name>
-          <state>Project.srec</state>
+          <state>Project.hex</state>
         </option>
         <option>
           <name>OOCCommandLineProducer</name>
@@ -612,7 +623,7 @@
         </option>
         <option>
           <name>OOCObjCopyEnable</name>
-          <state>0</state>
+          <state>1</state>
         </option>
       </data>
     </settings>
@@ -642,7 +653,7 @@
       <name>ILINK</name>
       <archiveVersion>0</archiveVersion>
       <data>
-        <version>16</version>
+        <version>18</version>
         <wantNonLocal>1</wantNonLocal>
         <debug>1</debug>
         <option>
@@ -914,7 +925,7 @@
         </option>
         <option>
           <name>CrcAlgorithm</name>
-          <version>0</version>
+          <version>1</version>
           <state>1</state>
         </option>
         <option>
@@ -925,6 +936,14 @@
         <option>
           <name>IlinkThreadsSlave</name>
           <state>1</state>
+        </option>
+        <option>
+          <name>IlinkLogCallGraph</name>
+          <state>0</state>
+        </option>
+        <option>
+          <name>IlinkIcfFile_AltDefault</name>
+          <state></state>
         </option>
       </data>
     </settings>
@@ -969,10 +988,10 @@
         <name>$PROJ_DIR$\..\Src\main.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\Src\stm32f4xx_it.c</name>
+        <name>$PROJ_DIR$\..\Src\stm32f4xx_hal_timebase_tim.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\Src\stm32f4xx_hal_timebase_tim.c</name>
+        <name>$PROJ_DIR$\..\Src\stm32f4xx_it.c</name>
       </file>
     </group>
   </group>
@@ -1059,6 +1078,12 @@
         <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_sram.c</name>
       </file>
       <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim.c</name>
+      </file>
+      <file>
+        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim_ex.c</name>
+      </file>
+      <file>
         <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_uart.c</name>
       </file>
       <file>
@@ -1069,12 +1094,6 @@
       </file>
       <file>
         <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_sdmmc.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim_ex.c</name>
       </file>
     </group>
   </group>
@@ -1097,7 +1116,7 @@
       <group>
         <name>Drivers</name>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src\drivers\sdram_diskio.c</name>
+          <name>$PROJ_DIR$\..\Src\sdram_diskio.c</name>
         </file>
       </group>
       <group>

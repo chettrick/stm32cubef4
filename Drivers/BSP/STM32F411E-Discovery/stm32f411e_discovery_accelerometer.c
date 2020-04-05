@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm32f411e_discovery_accelerometer.c
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    27-January-2017
   * @brief   This file provides a set of functions needed to manage the
   *          MEMS accelerometer available on STM32F411E-Discovery Kit.
   ******************************************************************************

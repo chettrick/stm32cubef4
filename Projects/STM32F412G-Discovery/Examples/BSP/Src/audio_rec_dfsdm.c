@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    BSP/Src/audio_rec_dfsdm.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   This example code shows how to use the audio feature in the
   *          stm32412g_discovery driver
   ******************************************************************************

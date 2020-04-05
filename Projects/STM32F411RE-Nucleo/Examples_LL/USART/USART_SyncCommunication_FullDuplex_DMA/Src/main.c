@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Examples_LL/USART/USART_SyncCommunication_FullDuplex_DMA/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017
   * @brief   This example describes how to transfer bytes from/to an USART peripheral 
   *          to/from an SPI peripheral (in slave mode) using DMA mode 
   *          through the STM32F4xx USART LL API.

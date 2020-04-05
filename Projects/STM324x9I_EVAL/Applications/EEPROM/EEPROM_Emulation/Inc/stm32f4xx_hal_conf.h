@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    EEPROM/EEPROM_Emulation/inc/stm32f4xx_hal_conf.h
   * @author  MCD Application Team
-  * @version V1.5.0
-  * @date    17-February-2017
   * @brief   HAL configuration file.
   ******************************************************************************
   * @attention

@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Camera/Camera_To_USBDisk/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    17-February-2017
   * @brief   This application describes how to configure the camera in continuous mode
              and save picture under USBDisk.
   ******************************************************************************
@@ -68,7 +66,7 @@ uint8_t ubPressedButton = PRESSED_FIRST;
 FATFS MSC_FatFs;  /* File system object for USB disk logical drive */
 FIL MyFile;       /* File object */
 char MSC_Path[4]; /* USB Host logical drive path */
-USBH_HandleTypeDef  hUSB_Host;
+USBH_HandleTypeDef  hUSBHost;
 
 /* Image header */  
 const uint32_t aBMPHeader[14]=
@@ -126,13 +124,13 @@ int main(void)
   BSP_LED_Init(LED3);
   
   /*##-1- Init Host Library ##################################################*/
-  USBH_Init(&hUSB_Host, USBH_UserProcess, 0);
+  USBH_Init(&hUSBHost, USBH_UserProcess, 0);
   
   /* Add Supported Class */
-  USBH_RegisterClass(&hUSB_Host, USBH_MSC_CLASS);
+  USBH_RegisterClass(&hUSBHost, USBH_MSC_CLASS);
   
   /* Start Host Process */
-  USBH_Start(&hUSB_Host);
+  USBH_Start(&hUSBHost);
   
   /*##-2- Configure User button ############################################*/
   BSP_PB_Init(BUTTON_KEY, BUTTON_MODE_GPIO);
@@ -155,7 +153,7 @@ int main(void)
   while (1)
   { 
     /* USB Host Background task */
-    USBH_Process(&hUSB_Host);
+    USBH_Process(&hUSBHost);
 
     switch(Appli_state)
     {
@@ -177,8 +175,14 @@ int main(void)
 */
 void BSP_CAMERA_FrameEventCallback(void)
 {
+  /* Suspend camera streaming */
+  BSP_CAMERA_Suspend();
+
   /* Display on LCD */
   BSP_LCD_DrawRGBImage(0, 0, 320, 240, (uint8_t *)CAMERA_FRAME_BUFFER);
+
+  /* Resume camera streaming */
+  BSP_CAMERA_Resume();
 }
 
 /**

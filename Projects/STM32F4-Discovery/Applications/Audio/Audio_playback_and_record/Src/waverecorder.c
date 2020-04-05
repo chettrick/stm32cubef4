@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Audio/Audio_playback_and_record/Src/waverecorder.c 
   * @author  MCD Application Team
-  * @version V1.3.5
-  * @date    17-February-2017
   * @brief   I2S Audio recorder program.
   ******************************************************************************
   * @attention
@@ -49,7 +47,6 @@
 #include "main.h"
 #include "waverecorder.h" 
 #include "string.h"
-#include "pdm_filter.h"
 
 /* Private typedef -----------------------------------------------------------*/
 typedef struct {

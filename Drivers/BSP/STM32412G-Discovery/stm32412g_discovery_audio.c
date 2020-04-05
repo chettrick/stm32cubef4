@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm32412g_discovery_audio.c
   * @author  MCD Application Team
-  * @version V2.0.0
-  * @date    27-January-2017
   * @brief   This file provides the Audio driver for the STM32412G-DISCOVERY board.
   ******************************************************************************
   * @attention

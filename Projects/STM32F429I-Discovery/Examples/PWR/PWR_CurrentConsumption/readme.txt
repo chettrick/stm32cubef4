@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics  *******************
   * @file    PWR/PWR_CurrentConsumption/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.8
-  * @date    17-February-2017 
   * @brief   Description of the PWR Current Consumption example.
   ******************************************************************************
   *
@@ -161,11 +159,11 @@ Here below a detailed description of the example code:
 
   - This example runs on STM32F429xx devices.
     
-  - This example has been tested with STMicroelectronics STM32F429I-Discovery RevB
+  - This example has been tested with STMicroelectronics STM32F429I-Discovery RevC
     boards and can be easily tailored to any other supported device 
     and development board.
     
-  - STM32F429I-Discovery RevB Set-up
+  - STM32F429I-Discovery RevC Set-up
     - Use LED4, LED3,connected respectively to PG.13, PG14 pins.
       * LED4 (RED) will be ON if initialization fails.
       * LED3 (GREEN) will toggle waiting for user to launch test, then be turn OFF

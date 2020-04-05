@@ -767,9 +767,6 @@ extern uint32_t __FLASH_segment_end__[];
 extern uint32_t __privileged_data_start__[];
 extern uint32_t __privileged_data_end__[];
 
-	/* Check the expected MPU is present. */
-	if( portMPU_TYPE_REG == portEXPECTED_MPU_TYPE_VALUE )
-	{
 		/* First setup the entire flash for unprivileged read only access. */
 		portMPU_REGION_BASE_ADDRESS_REG =	( ( uint32_t ) __FLASH_segment_start__ ) | /* Base address. */
 											( portMPU_REGION_VALID ) |
@@ -818,7 +815,6 @@ extern uint32_t __privileged_data_end__[];
 
 		/* Enable the MPU with the background region configured. */
 		portMPU_CTRL_REG |= ( portMPU_ENABLE | portMPU_BACKGROUND_ENABLE );
-	}
 }
 /*-----------------------------------------------------------*/
 

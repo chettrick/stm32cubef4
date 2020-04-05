@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics  *******************
   * @file    DMA/DMA_FLASHToRAM/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.8
-  * @date    17-February-2017 
   * @brief   Description of the DMA FLASH to RAM example.
   ******************************************************************************
   *
@@ -91,7 +89,7 @@ Note that only DMA2 Streams are able to perform Memory-to-Memory transfers.
 
   - This example runs on STM32F429xx devices.
     
-  - This example has been tested with STMicroelectronics STM32F429I-Discovery RevB
+  - This example has been tested with STMicroelectronics STM32F429I-Discovery RevC
     boards and can be easily tailored to any other supported device 
     and development board.
 

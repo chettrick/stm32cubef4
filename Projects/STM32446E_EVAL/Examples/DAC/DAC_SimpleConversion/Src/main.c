@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    DAC/DAC_SimpleConversion/Src/main.c
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    17-February-2017
   * @brief   This example provides a short description of how to use the DAC
   *          peripheral to do a simple conversation.
   ******************************************************************************

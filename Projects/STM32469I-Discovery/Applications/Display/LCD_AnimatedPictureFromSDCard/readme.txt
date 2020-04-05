@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    Display/LCD_AnimatedPictureFromSDCard/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   Description of the LCD animated picture from SD card application.
   ******************************************************************************
   * @attention
@@ -96,17 +94,19 @@
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
--  LED3 is ON when the uSD disk I/O driver is not Linked;
+  -  LED3 is ON when the uSD disk I/O driver is not Linked;
 
 
 @par Directory contents
 
     - Display/LCD_AnimatedPictureFromSDCard/Inc/main.h                 Main configuration file
+    - Display/LCD_AnimatedPictureFromSDCard/Inc/sd_diskio.h            FatFS sd diskio driver header file
     - Display/LCD_AnimatedPictureFromSDCard/Inc/stm32f4xx_it.h         Interrupt handlers header file
     - Display/LCD_AnimatedPictureFromSDCard/Inc/stm32f4xx_hal_conf.h   HAL Configuration file 
     - Display/LCD_AnimatedPictureFromSDCard/Inc/ffconf.h               FAT file system module configuration file
     - Display/LCD_AnimatedPictureFromSDCard/Inc/fatfs_storage.h        Header for fatfs_storage.c
     - Display/LCD_AnimatedPictureFromSDCard/Src/main.c                 Main program 
+    - Display/LCD_AnimatedPictureFromSDCard/Src/sd_diskio.c            FatFS sd diskio driver implementation
     - Display/LCD_AnimatedPictureFromSDCard/Src/fatfs_storage.c        Storage (FatFs) driver
     - Display/LCD_AnimatedPictureFromSDCard/Src/stm32f4xx_it.c         Interrupt handlers
     - Display/LCD_AnimatedPictureFromSDCard/Src/system_stm32f4xx.c     STM32F4xx system clock configuration file
@@ -126,10 +126,10 @@
 In order to make the program work, you must do the following :
  - The two directories "BACK" and "TOP" from "./Media/Pictures/Animated" 
    folder must be copied at the micro SD card root.
+ - Connect a uSD Card to the Micro SD connector (CN9).
  - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
  - Run the application
   
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>
  */
-                                   

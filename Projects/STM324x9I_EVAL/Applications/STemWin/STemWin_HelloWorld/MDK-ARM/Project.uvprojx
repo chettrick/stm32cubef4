@@ -10,14 +10,14 @@
       <TargetName>STM324x9I_EVAL_MB1046</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060183::V5.06 update 2 (build 183)::ARMCC</pCCUsed>
+      <pCCUsed>5060528::V5.06 update 5 (build 528)::ARMCC</pCCUsed>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F429NIHx</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32F4xx_DFP.2.9.0</PackID>
+          <PackID>Keil.STM32F4xx_DFP.2.11.0</PackID>
           <PackURL>http://www.keil.com/pack</PackURL>
-          <Cpu>IRAM(0x20000000-0x2002FFFF) IRAM2(0x10000000-0x1000FFFF) IROM(0x8000000-0x81FFFFF) CLOCK(25000000) FPU2 CPUTYPE("Cortex-M4")</Cpu>
+          <Cpu>IROM(0x08000000-0x81FFFFF) IRAM(0x20000000-0x2002FFFF) IRAM2(0x10000000-0x1000FFFF) CLOCK(25000000) FPU2 CPUTYPE("Cortex-M4")</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
           <FlashDriverDll></FlashDriverDll>
@@ -47,8 +47,8 @@
             <NotGenerated>0</NotGenerated>
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
-          <OutputDirectory>STM324x9I_EVAL_MB1046\</OutputDirectory>
-          <OutputName>STM324x9I_EVAL_MB1046</OutputName>
+          <OutputDirectory>STM324x9I_EVAL_MB1046\Exe\</OutputDirectory>
+          <OutputName>Project</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
@@ -322,7 +322,7 @@
             <wLevel>2</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
-            <uC99>0</uC99>
+            <uC99>1</uC99>
             <useXO>0</useXO>
             <v6Lang>1</v6Lang>
             <v6LangP>1</v6LangP>
@@ -330,11 +330,12 @@
             <vShortWch>1</vShortWch>
             <v6Lto>0</v6Lto>
             <v6WtE>0</v6WtE>
+            <v6Rtti>0</v6Rtti>
             <VariousControls>
-              <MiscControls>--C99</MiscControls>
+              <MiscControls> </MiscControls>
               <Define>USE_HAL_DRIVER,STM32F429xx,USE_STM324x9I_EVAL,USE_MB1046</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../../../../../../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/STM32F4xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM324x9I_EVAL;../../../../../../Drivers/BSP/Components/Common;../../../../../../Drivers/BSP/Components;../../../../../../Middlewares/ST/STemWin/inc;../../../../../../Utilities;../../../../../../Utilities/Fonts</IncludePath>
+              <IncludePath>../Core/Inc;../STemWin/Target;../../../../../../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../../../../../../Drivers/STM32F4xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM324x9I_EVAL;../../../../../../Drivers/BSP/Components/Common;../../../../../../Drivers/BSP/Components;../../../../../../Middlewares/ST/STemWin/inc;../../../../../../Utilities;../../../../../../Utilities/Fonts</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -347,11 +348,12 @@
             <NoWarn>0</NoWarn>
             <uSurpInc>0</uSurpInc>
             <useXO>0</useXO>
+            <uClangAs>0</uClangAs>
             <VariousControls>
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>ROJ_DIR$\..\Inc</IncludePath>
+              <IncludePath></IncludePath>
             </VariousControls>
           </Aads>
           <LDads>
@@ -367,7 +369,7 @@
             <ScatterFile></ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
-            <Misc>--diag_suppress=L6329</Misc>
+            <Misc></Misc>
             <LinkerInputFile></LinkerInputFile>
             <DisabledWarnings></DisabledWarnings>
           </LDads>
@@ -385,17 +387,17 @@
             <File>
               <FileName>LCDConf_stm324x9i_eval_MB1046.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Src/LCDConf_stm324x9i_eval_MB1046.c</FilePath>
+              <FilePath>../STemWin/Target/LCDConf_stm324x9i_eval_MB1046.c</FilePath>
             </File>
             <File>
               <FileName>GUIConf.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Src/GUIConf.c</FilePath>
+              <FilePath>../STemWin/Target/GUIConf.c</FilePath>
             </File>
             <File>
               <FileName>LCDConf_stm324x9i_eval_MB1063.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Src/LCDConf_stm324x9i_eval_MB1063.c</FilePath>
+              <FilePath>../STemWin/Target/LCDConf_stm324x9i_eval_MB1063.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>2</UseCPPCompiler>
@@ -434,8 +436,9 @@
                     <v6LangP>0</v6LangP>
                     <vShortEn>2</vShortEn>
                     <vShortWch>2</vShortWch>
-                    <v6Lto>0</v6Lto>
-                    <v6WtE>0</v6WtE>
+                    <v6Lto>2</v6Lto>
+                    <v6WtE>2</v6WtE>
+                    <v6Rtti>2</v6Rtti>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -449,22 +452,25 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>::CMSIS</GroupName>
+        </Group>
+        <Group>
           <GroupName>Application/User</GroupName>
           <Files>
             <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Src/main.c</FilePath>
+              <FilePath>../Core/Src/main.c</FilePath>
             </File>
             <File>
               <FileName>BASIC_HelloWorld.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Src/BASIC_HelloWorld.c</FilePath>
+              <FilePath>../STemWin/App/BASIC_HelloWorld.c</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_it.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Src/stm32f4xx_it.c</FilePath>
+              <FilePath>../Core/Src/stm32f4xx_it.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -472,24 +478,24 @@
           <GroupName>Drivers/BSP/STM324x9I_EVAL</GroupName>
           <Files>
             <File>
-              <FileName>stm324x9i_eval.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/BSP/STM324x9I_EVAL/stm324x9i_eval.c</FilePath>
-            </File>
-            <File>
               <FileName>stm324x9i_eval_ts.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../../Drivers/BSP/STM324x9I_EVAL/stm324x9i_eval_ts.c</FilePath>
             </File>
             <File>
-              <FileName>stm324x9i_eval_sdram.c</FileName>
+              <FileName>stm324x9i_eval.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/BSP/STM324x9I_EVAL/stm324x9i_eval_sdram.c</FilePath>
+              <FilePath>../../../../../../Drivers/BSP/STM324x9I_EVAL/stm324x9i_eval.c</FilePath>
             </File>
             <File>
               <FileName>stm324x9i_eval_io.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Drivers\BSP\STM324x9I_EVAL\stm324x9i_eval_io.c</FilePath>
+              <FilePath>../../../../../../Drivers/BSP/STM324x9I_EVAL/stm324x9i_eval_io.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm324x9i_eval_sdram.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/BSP/STM324x9I_EVAL/stm324x9i_eval_sdram.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -507,9 +513,9 @@
           <GroupName>Middlewares/STemWin/Lib</GroupName>
           <Files>
             <File>
-              <FileName>STemWin532_CM4_Keil.lib</FileName>
+              <FileName>STemWin540_CM4_Keil.lib</FileName>
               <FileType>4</FileType>
-              <FilePath>../../../../../../Middlewares/ST/STemWin/Lib/STemWin532_CM4_Keil.lib</FilePath>
+              <FilePath>../../../../../../Middlewares/ST/STemWin/Lib/STemWin540_CM4_Keil.lib</FilePath>
             </File>
           </Files>
         </Group>
@@ -517,59 +523,9 @@
           <GroupName>Drivers/STM32F4xx_HAL_Driver</GroupName>
           <Files>
             <File>
-              <FileName>stm32f4xx_hal_i2c_ex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_hal_rcc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_hal_sdram.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sdram.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_hal_flash_ex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_hal_tim_ex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_hal_ltdc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_ltdc.c</FilePath>
-            </File>
-            <File>
               <FileName>stm32f4xx_hal_gpio.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_hal_dma2d.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma2d.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_hal_cortex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_hal_pwr.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_hal_rcc_ex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_hal_uart.c</FileName>
@@ -582,9 +538,49 @@
               <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c</FilePath>
             </File>
             <File>
+              <FileName>stm32f4xx_hal_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_dma2d.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma2d.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_tim_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_flash_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_i2c_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_cortex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_rcc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c</FilePath>
+            </File>
+            <File>
               <FileName>stm32f4xx_ll_fmc.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_fmc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_i2c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_hal_dma.c</FileName>
@@ -592,19 +588,29 @@
               <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c</FilePath>
             </File>
             <File>
+              <FileName>stm32f4xx_hal_rcc_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c</FilePath>
+            </File>
+            <File>
               <FileName>stm32f4xx_hal_pwr_ex.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f4xx_hal_flash.c</FileName>
+              <FileName>stm32f4xx_hal_sdram.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c</FilePath>
+              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sdram.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f4xx_hal_i2c.c</FileName>
+              <FileName>stm32f4xx_hal_pwr.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c</FilePath>
+              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_ltdc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_ltdc.c</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_hal_tim.c</FileName>
@@ -629,13 +635,18 @@
             <File>
               <FileName>system_stm32f4xx.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Src/system_stm32f4xx.c</FilePath>
+              <FilePath>../Core/Src/system_stm32f4xx.c</FilePath>
             </File>
           </Files>
         </Group>
         <Group>
           <GroupName>Drivers/BSP/Components</GroupName>
           <Files>
+            <File>
+              <FileName>stmpe1600.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/BSP/Components/stmpe1600/stmpe1600.c</FilePath>
+            </File>
             <File>
               <FileName>stmpe811.c</FileName>
               <FileType>1</FileType>
@@ -651,15 +662,7 @@
               <FileType>1</FileType>
               <FilePath>../../../../../../Drivers/BSP/Components/exc7200/exc7200.c</FilePath>
             </File>
-            <File>
-              <FileName>stmpe1600.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Drivers\BSP\Components\stmpe1600\stmpe1600.c</FilePath>
-            </File>
           </Files>
-        </Group>
-        <Group>
-          <GroupName>::CMSIS</GroupName>
         </Group>
       </Groups>
     </Target>
@@ -667,14 +670,14 @@
       <TargetName>STM324x9I_EVAL_MB1063</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060183::V5.06 update 2 (build 183)::ARMCC</pCCUsed>
+      <pCCUsed>5060528::V5.06 update 5 (build 528)::ARMCC</pCCUsed>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F429NIHx</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32F4xx_DFP.2.9.0</PackID>
+          <PackID>Keil.STM32F4xx_DFP.2.11.0</PackID>
           <PackURL>http://www.keil.com/pack</PackURL>
-          <Cpu>IRAM(0x20000000-0x2002FFFF) IRAM2(0x10000000-0x1000FFFF) IROM(0x8000000-0x81FFFFF) CLOCK(25000000) FPU2 CPUTYPE("Cortex-M4")</Cpu>
+          <Cpu>IROM(0x08000000-0x81FFFFF) IRAM(0x20000000-0x2002FFFF) IRAM2(0x10000000-0x1000FFFF) CLOCK(25000000) FPU2 CPUTYPE("Cortex-M4")</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
           <FlashDriverDll></FlashDriverDll>
@@ -704,8 +707,8 @@
             <NotGenerated>0</NotGenerated>
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
-          <OutputDirectory>STM324x9I_EVAL_MB1063\</OutputDirectory>
-          <OutputName>STM324x9I_EVAL_MB1063</OutputName>
+          <OutputDirectory>STM324x9I_EVAL_MB1063\Exe\</OutputDirectory>
+          <OutputName>Project</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
@@ -979,7 +982,7 @@
             <wLevel>2</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
-            <uC99>0</uC99>
+            <uC99>1</uC99>
             <useXO>0</useXO>
             <v6Lang>1</v6Lang>
             <v6LangP>1</v6LangP>
@@ -987,11 +990,12 @@
             <vShortWch>1</vShortWch>
             <v6Lto>0</v6Lto>
             <v6WtE>0</v6WtE>
+            <v6Rtti>0</v6Rtti>
             <VariousControls>
-              <MiscControls>--C99</MiscControls>
+              <MiscControls> </MiscControls>
               <Define>USE_HAL_DRIVER,STM32F429xx,USE_STM324x9I_EVAL,USE_MB1063</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../../../../../../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/STM32F4xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM324x9I_EVAL;../../../../../../Drivers/BSP/Components/Common;../../../../../../Drivers/BSP/Components;../../../../../../Middlewares/ST/STemWin/inc;../../../../../../Utilities;../../../../../../Utilities/Fonts</IncludePath>
+              <IncludePath>../Core/Inc;../STemWin/Target;../../../../../../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../../../../../../Drivers/STM32F4xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM324x9I_EVAL;../../../../../../Drivers/BSP/Components/Common;../../../../../../Drivers/BSP/Components;../../../../../../Middlewares/ST/STemWin/inc;../../../../../../Utilities;../../../../../../Utilities/Fonts</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1004,11 +1008,12 @@
             <NoWarn>0</NoWarn>
             <uSurpInc>0</uSurpInc>
             <useXO>0</useXO>
+            <uClangAs>0</uClangAs>
             <VariousControls>
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>ROJ_DIR$\..\Inc</IncludePath>
+              <IncludePath></IncludePath>
             </VariousControls>
           </Aads>
           <LDads>
@@ -1024,7 +1029,7 @@
             <ScatterFile></ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
-            <Misc>--diag_suppress=L6329</Misc>
+            <Misc></Misc>
             <LinkerInputFile></LinkerInputFile>
             <DisabledWarnings></DisabledWarnings>
           </LDads>
@@ -1042,7 +1047,7 @@
             <File>
               <FileName>LCDConf_stm324x9i_eval_MB1046.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Src/LCDConf_stm324x9i_eval_MB1046.c</FilePath>
+              <FilePath>../STemWin/Target/LCDConf_stm324x9i_eval_MB1046.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>2</UseCPPCompiler>
@@ -1081,8 +1086,9 @@
                     <v6LangP>0</v6LangP>
                     <vShortEn>2</vShortEn>
                     <vShortWch>2</vShortWch>
-                    <v6Lto>0</v6Lto>
-                    <v6WtE>0</v6WtE>
+                    <v6Lto>2</v6Lto>
+                    <v6WtE>2</v6WtE>
+                    <v6Rtti>2</v6Rtti>
                     <VariousControls>
                       <MiscControls></MiscControls>
                       <Define></Define>
@@ -1096,14 +1102,17 @@
             <File>
               <FileName>GUIConf.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Src/GUIConf.c</FilePath>
+              <FilePath>../STemWin/Target/GUIConf.c</FilePath>
             </File>
             <File>
               <FileName>LCDConf_stm324x9i_eval_MB1063.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Src/LCDConf_stm324x9i_eval_MB1063.c</FilePath>
+              <FilePath>../STemWin/Target/LCDConf_stm324x9i_eval_MB1063.c</FilePath>
             </File>
           </Files>
+        </Group>
+        <Group>
+          <GroupName>::CMSIS</GroupName>
         </Group>
         <Group>
           <GroupName>Application/User</GroupName>
@@ -1111,17 +1120,17 @@
             <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Src/main.c</FilePath>
+              <FilePath>../Core/Src/main.c</FilePath>
             </File>
             <File>
               <FileName>BASIC_HelloWorld.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Src/BASIC_HelloWorld.c</FilePath>
+              <FilePath>../STemWin/App/BASIC_HelloWorld.c</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_it.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Src/stm32f4xx_it.c</FilePath>
+              <FilePath>../Core/Src/stm32f4xx_it.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1129,24 +1138,24 @@
           <GroupName>Drivers/BSP/STM324x9I_EVAL</GroupName>
           <Files>
             <File>
-              <FileName>stm324x9i_eval.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/BSP/STM324x9I_EVAL/stm324x9i_eval.c</FilePath>
-            </File>
-            <File>
               <FileName>stm324x9i_eval_ts.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../../Drivers/BSP/STM324x9I_EVAL/stm324x9i_eval_ts.c</FilePath>
             </File>
             <File>
-              <FileName>stm324x9i_eval_sdram.c</FileName>
+              <FileName>stm324x9i_eval.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/BSP/STM324x9I_EVAL/stm324x9i_eval_sdram.c</FilePath>
+              <FilePath>../../../../../../Drivers/BSP/STM324x9I_EVAL/stm324x9i_eval.c</FilePath>
             </File>
             <File>
               <FileName>stm324x9i_eval_io.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Drivers\BSP\STM324x9I_EVAL\stm324x9i_eval_io.c</FilePath>
+              <FilePath>../../../../../../Drivers/BSP/STM324x9I_EVAL/stm324x9i_eval_io.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm324x9i_eval_sdram.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/BSP/STM324x9I_EVAL/stm324x9i_eval_sdram.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1164,9 +1173,9 @@
           <GroupName>Middlewares/STemWin/Lib</GroupName>
           <Files>
             <File>
-              <FileName>STemWin532_CM4_Keil.lib</FileName>
+              <FileName>STemWin540_CM4_Keil.lib</FileName>
               <FileType>4</FileType>
-              <FilePath>../../../../../../Middlewares/ST/STemWin/Lib/STemWin532_CM4_Keil.lib</FilePath>
+              <FilePath>../../../../../../Middlewares/ST/STemWin/Lib/STemWin540_CM4_Keil.lib</FilePath>
             </File>
           </Files>
         </Group>
@@ -1174,59 +1183,9 @@
           <GroupName>Drivers/STM32F4xx_HAL_Driver</GroupName>
           <Files>
             <File>
-              <FileName>stm32f4xx_hal_i2c_ex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_hal_rcc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_hal_sdram.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sdram.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_hal_flash_ex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_hal_tim_ex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_hal_ltdc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_ltdc.c</FilePath>
-            </File>
-            <File>
               <FileName>stm32f4xx_hal_gpio.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_hal_dma2d.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma2d.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_hal_cortex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_hal_pwr.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_hal_rcc_ex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_hal_uart.c</FileName>
@@ -1239,9 +1198,49 @@
               <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c</FilePath>
             </File>
             <File>
+              <FileName>stm32f4xx_hal_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_dma2d.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma2d.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_tim_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_flash_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_i2c_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_cortex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_rcc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c</FilePath>
+            </File>
+            <File>
               <FileName>stm32f4xx_ll_fmc.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_fmc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_i2c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_hal_dma.c</FileName>
@@ -1249,19 +1248,29 @@
               <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c</FilePath>
             </File>
             <File>
+              <FileName>stm32f4xx_hal_rcc_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c</FilePath>
+            </File>
+            <File>
               <FileName>stm32f4xx_hal_pwr_ex.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f4xx_hal_flash.c</FileName>
+              <FileName>stm32f4xx_hal_sdram.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c</FilePath>
+              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sdram.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f4xx_hal_i2c.c</FileName>
+              <FileName>stm32f4xx_hal_pwr.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c</FilePath>
+              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_ltdc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_ltdc.c</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_hal_tim.c</FileName>
@@ -1286,13 +1295,18 @@
             <File>
               <FileName>system_stm32f4xx.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Src/system_stm32f4xx.c</FilePath>
+              <FilePath>../Core/Src/system_stm32f4xx.c</FilePath>
             </File>
           </Files>
         </Group>
         <Group>
           <GroupName>Drivers/BSP/Components</GroupName>
           <Files>
+            <File>
+              <FileName>stmpe1600.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Drivers/BSP/Components/stmpe1600/stmpe1600.c</FilePath>
+            </File>
             <File>
               <FileName>stmpe811.c</FileName>
               <FileType>1</FileType>
@@ -1308,15 +1322,7 @@
               <FileType>1</FileType>
               <FilePath>../../../../../../Drivers/BSP/Components/exc7200/exc7200.c</FilePath>
             </File>
-            <File>
-              <FileName>stmpe1600.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Drivers\BSP\Components\stmpe1600\stmpe1600.c</FilePath>
-            </File>
           </Files>
-        </Group>
-        <Group>
-          <GroupName>::CMSIS</GroupName>
         </Group>
       </Groups>
     </Target>

@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    FatFs/FatFs_USBDisk_MultipleAccess_RTOS/Inc/main.h 
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    17-February-2017
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
@@ -58,7 +56,7 @@
 
 /* FatFs includes component */
 #include "ff_gen_drv.h"
-#include "usbh_diskio.h"
+#include "usbh_diskio_dma.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/

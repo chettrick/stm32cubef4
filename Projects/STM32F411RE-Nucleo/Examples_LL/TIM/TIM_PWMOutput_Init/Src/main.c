@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Examples_LL/TIM/TIM_PWMOutput_Init/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017
   * @brief   This example describes how to use a timer peripheral to generate a 
   *          PWM output signal and update PWM duty cycle
   *          using the STM32F4xx TIM LL API.

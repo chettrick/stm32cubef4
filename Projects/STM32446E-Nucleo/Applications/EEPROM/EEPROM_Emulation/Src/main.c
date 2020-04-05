@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    EEPROM/EEPROM_Emulation/src/main.c 
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    17-February-2017
   * @brief   Main program body
   ******************************************************************************
   * @attention

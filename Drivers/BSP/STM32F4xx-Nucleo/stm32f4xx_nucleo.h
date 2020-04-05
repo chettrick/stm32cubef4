@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm32f4xx_nucleo.h
   * @author  MCD Application Team
-  * @version V1.2.6
-  * @date    27-January-2017
   * @brief   This file contains definitions for:
   *          - LEDs and push-button available on STM32F4XX-Nucleo Kit 
   *            from STMicroelectronics

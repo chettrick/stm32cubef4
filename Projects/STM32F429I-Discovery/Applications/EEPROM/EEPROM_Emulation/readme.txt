@@ -5,8 +5,6 @@
   ******************* (C) COPYRIGHT 2017 STMicroelectronics  ********************
   * @file    EEPROM/EEPROM_Emulation/readme.txt 
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   Description of the EEPROM_Emulation application.
   ******************************************************************************
   * @attention
@@ -92,7 +90,7 @@ STM32F429I-DISCO's LED can be used to monitor the application status:
 
   - This application runs on STM32F429xx devices.
   
-  - This application has been tested with STMicroelectronics STM32F429I-Discovery RevB 
+  - This application has been tested with STMicroelectronics STM32F429I-Discovery RevC 
     evaluation boards and can be easily tailored to any other supported device 
     and development board.
 

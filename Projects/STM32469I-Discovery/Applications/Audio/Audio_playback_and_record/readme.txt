@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    Audio/Audio_playback_and_record/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   Description of the Audio Playback and Record application
   ******************************************************************************
   * @attention
@@ -61,7 +59,7 @@ Via the touchscreen the user can choose between playing (triangle) and recording
 In Audio Play mode any wave file stored under the USB Key can be opened using the FatFs 
 file system and transferred to the internal SRAM using the file system. All the wave
 files properties are read from the Wave File Header.
-Plug a headphone to ear the sound  /!\ Take care of yours ears. Default volume is 70%.
+Plug a headphone to hear the sound  /!\ Take care of yours ears (CN3). Default volume is 70%.
 
 To play the audio file, a buffer is used between USB and audio codec. This buffer 
 is used like a ping-pong buffer to be able to read regularly data from USB to be 
@@ -138,14 +136,17 @@ this application. For IAR EWARM toolchain, the library is labeled
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
+@note Master Volume Control ranges from -102db to +12db according to codec cs43l22 specification which means that
+      user may does not hear audio for volume lower than 50%.
+
 
 @par Directory contents 
 
   - Audio_playback_and_record/Src/main.c               Main program
+  - Audio_playback_and_record/Src/usbh_diskio_dma.c    FatFS usbh diskio driver implementation
   - Audio_playback_and_record/Src/stm32f4xx_it.c       Interrupt handlers
   - Audio_playback_and_record/Src/system_stm32f4xx.c   STM32F4xx system source file
   - Audio_playback_and_record/Src/usbh_conf.c          Board support package for the USB host library
-  - Audio_playback_and_record/Src/usbh_diskio.c        USB disk interface
   - Audio_playback_and_record/Src/ts_calibration.c     Calibration phase for the touchscreen
   - Audio_playback_and_record/Src/menu.c               Start page menu
   - Audio_playback_and_record/Src/explorer.c           Search and display the wave file on the mass storage
@@ -153,11 +154,13 @@ this application. For IAR EWARM toolchain, the library is labeled
   - Audio_playback_and_record/Src/waverecorder.c       Audio record file
   - Audio_playback_and_record/Inc/ffconf.h             FAT file system module configuration file   
   - Audio_playback_and_record/Inc/main.h               Main program header file
+  - Audio_playback_and_record/Inc/usbh_diskio_dma.h    FatFS usbh diskio driver header file
   - Audio_playback_and_record/Inc/stm32f4xx_hal_conf.h HAL configuration file
   - Audio_playback_and_record/Inc/stm32f4xx_it.h       Interrupt handlers header file
   - Audio_playback_and_record/Inc/usbh_conf.h          USB driver Configuration file
   - Audio_playback_and_record/Inc/waveplayer.h         Audio play header file
   - Audio_playback_and_record/Inc/waverecorder.h       Audio record header file
+  - Audio_playback_and_record/Inc/lcd_log_conf.h       LCD Log configuration file.
       
       
 @par Hardware and Software environment
@@ -168,8 +171,7 @@ this application. For IAR EWARM toolchain, the library is labeled
     easily tailored to any other supported device and development board.   
 
   - STM32469I-Discovery Set-up
-    - Please ensure that jumpers JP4 is in the position "AUDIO"
-    - Plug the USB key into the STM32469I-EVAL board through 'USB micro A-Male 
+    - Plug the USB key into the STM32469I-DISCO board through 'USB micro A-Male
       to A-Female' cable (FS mode: connector CN13).
     - Load .wav audio file (audio_sample.wav) available under "/Utilities/Media/Audio" to the root of USB mass storage
 

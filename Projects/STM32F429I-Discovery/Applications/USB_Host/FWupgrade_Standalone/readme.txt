@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics  *******************
   * @file    USB_Host/FWupgrade_Standalone/readme.txt 
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   Description of the Upgrading STM32F429I-Discovery firmware using a USB key
   ******************************************************************************
   * @attention
@@ -80,6 +78,7 @@ For more details about the STM32Cube USB Host library, please refer to UM1720
 @par Directory contents 
 
   - USB_Host/FWupgrade_Standalone/Src/main.c                  Main program
+  - USB_Host/FWupgrade_Standalone/Src/usbh_diskio_dma.c      FatFS usbh diskio driver implementation
   - USB_Host/FWupgrade_Standalone/Src/system_stm32f4xx.c      STM32F4xx system clock configuration file
   - USB_Host/FWupgrade_Standalone/Src/stm32f4xx_it.c          Interrupt handlers
   - USB_Host/FWupgrade_Standalone/Src/iap_menu.c              IAP State Machine   
@@ -88,6 +87,7 @@ For more details about the STM32Cube USB Host library, please refer to UM1720
   - USB_Host/FWupgrade_Standalone/Src/flash_if.c              Flash layer functions
   - USB_Host/FWupgrade_Standalone/Src/usbh_diskio.c           USB diskio interface for FatFs
   - USB_Host/FWupgrade_Standalone/Inc/main.h                  Main program header file
+  - USB_Host/FWupgrade_Standalone/Inc/usbh_diskio_dma.h      FatFS usbh diskio driver header file
   - USB_Host/FWupgrade_Standalone/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - USB_Host/FWupgrade_Standalone/Inc/command.h               IAP command functions header file
   - USB_Host/FWupgrade_Standalone/Inc/flash_if.h              Flash layer functions header file
@@ -105,11 +105,11 @@ For more details about the STM32Cube USB Host library, please refer to UM1720
 
   - This application runs on STM32F429xx devices.
     
-  - This application has been tested with STMicroelectronics STM32F429I-Discovery RevB
+  - This application has been tested with STMicroelectronics STM32F429I-Discovery RevC
     boards and can be easily tailored to any other supported device 
     and development board.    
      
-  - STM32F429I-Discovery RevB Set-up
+  - STM32F429I-Discovery RevC Set-up
     - Plug the USB key into the STM32F429I-Discovery board through 'USB micro A-Male 
       to A-Female' cable connector CN6. 
 

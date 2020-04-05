@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm324x9i_eval_audio.h
   * @author  MCD Application Team
-  * @version V3.0.0
-  * @date    27-January-2017
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm324x9i_eval_audio.c driver.
   ******************************************************************************
@@ -48,7 +46,7 @@
 /* Include audio component Driver */
 #include "../Components/wm8994/wm8994.h"
 #include "stm324x9i_eval.h"
-#include "../../../Middlewares/ST/STM32_Audio/Addons/PDM/pdm_filter.h"
+#include "../../../Middlewares/ST/STM32_Audio/Addons/PDM/Inc/pdm2pcm_glo.h"
 
 /** @addtogroup BSP
   * @{

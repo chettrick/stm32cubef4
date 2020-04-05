@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    FatFs/FatFs_USBDisk/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.0.4
-  * @date    17-February-2017
   * @brief   Main program body
   *          This sample code shows how to use FatFs with USB disk drive.
   ******************************************************************************
@@ -90,7 +88,7 @@ int main(void)
   
   /* Configure LED4 and LED5 */
   BSP_LED_Init(LED4);
-  BSP_LED_Init(LED5);  
+  BSP_LED_Init(LED5);
     
   /* Configure the system clock to 84 MHz */
   SystemClock_Config();

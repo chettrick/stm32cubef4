@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    BSP/Src/joystick.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   This example code shows how to use the joystick feature in the 
   *          STM32429ZI_Nucleo 144 driver
   ******************************************************************************

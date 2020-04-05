@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm32f429i_discovery.h
   * @author  MCD Application Team
-  * @version V2.1.5
-  * @date    27-January-2017
   * @brief   This file contains definitions for STM32F429I-Discovery Kit LEDs,
   *          push-buttons hardware resources.
   ******************************************************************************

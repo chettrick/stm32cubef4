@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    IWDG/IWDG_Example/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   This sample code shows how to use the STM32F413xx IWDG HAL API
   *          to update at regular period the IWDG counter and how to simulate a
   *          software fault generating an MCU IWDG reset on expiry of a

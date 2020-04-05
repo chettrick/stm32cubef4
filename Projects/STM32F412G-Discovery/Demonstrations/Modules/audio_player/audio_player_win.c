@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    audio_player_win.c
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    17-February-2017
   * @brief   Audio player functions
   ******************************************************************************
   * @attention
@@ -46,7 +44,7 @@
   */
 
 /* Includes ------------------------------------------------------------------*/
-#include "dialog.h"
+#include "DIALOG.h"
 #include "k_module.h"
 #include "audio_player_res.c"
 #include "../Common/audio_if.h" 
@@ -153,12 +151,6 @@ static void _AddEntireFolder(char *Foldername, int update)
   char *fn;
   static char tmp[FILEMGR_FILE_NAME_SIZE]; 
   
-#if _USE_LFN
-  static char lfn[_MAX_LFN];
-  fno.lfname = lfn;
-  fno.lfsize = sizeof(lfn);
-#endif
-  
   res = f_opendir(&dir, Foldername);
   
   if (res == FR_OK)
@@ -176,11 +168,8 @@ static void _AddEntireFolder(char *Foldername, int update)
       {
         continue;
       }
-#if _USE_LFN
-      fn = *fno.lfname ? fno.lfname : fno.fname;
-#else
+      
       fn = fno.fname;
-#endif
       
       if (WavList.ptr < FILEMGR_LIST_DEPDTH)
       {

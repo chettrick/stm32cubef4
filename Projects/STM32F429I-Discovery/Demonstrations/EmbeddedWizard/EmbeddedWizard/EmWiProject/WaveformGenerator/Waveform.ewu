@@ -1,0 +1,601 @@
+$version 6.60
+
+// This is the root component of the entire GUI application.
+$rect <30,60,230,100>
+$output false
+class Waveform : Core::Group
+{
+  $rect <10,290,210,330>
+  inherited property Bounds = <0,0,320,240>;
+
+  $rect <10,330,210,370>
+  inherited method Init()
+  {
+    /* take the initial settings */
+    signal SettingsChanged;
+  }
+
+  // This is a filled rectangle view.
+  $rect <20,20,160,60>
+  object Views::Rectangle Rectangle
+  {
+    preset Bounds = <0,0,480,272>;
+    preset Color = Flat::ColorOfBackground;
+  }
+
+  // This is a bitmap frame view.
+  $rect <20,20,160,60>
+  object Views::Frame Frame
+  {
+    preset Bounds = <5,30,175,235>;
+    preset Color = Flat::ColorOfTheme;
+    preset Bitmap = Waveform::PanelBorder;
+  }
+
+  // This is a slide gesture handler.
+  $rect <20,20,160,60>
+  object Core::SlideTouchHandler SlideTouchHandler
+  {
+    preset Bounds = <160,0,320,240>;
+    preset SnapNext = <0,210>;
+    preset SlideHorz = false;
+    preset ResetSpace = 50;
+  }
+
+  $rect <20,20,160,60>
+  object Charts::Graph Graph
+  {
+    preset Bounds = <10,35,170,230>;
+    preset LineColor = Flat::ColorOfTouch;
+    preset LineWidth = 3.0;
+    preset DotColor = Flat::ColorOfTouch;
+    preset DotWidth = 2.0;
+    preset CoordOrigin = <0,110>;
+    preset PixelPerUnit = <75,55>;
+    preset GridDistance = <75,55>;
+  }
+
+  // This is an outline view to group other views together.
+  $rect <20,20,160,60>
+  object Core::Outline Outline
+  {
+    preset Bounds = <180,30,320,240>;
+    preset SlideHandler = SlideTouchHandler;
+    preset Formation = Core::Formation.TopToBottom;
+  }
+
+  $rect <20,20,160,60>
+  object Waveform::ChannelPanel ChannelPanel1
+  {
+    preset Bounds = <180,30,320,240>;
+    preset Embedded = true;
+    preset Frequency = 100;
+    preset Amplitude = 14;
+    preset OnChanged = SettingsChanged;
+    preset Caption = "Channel 1";
+  }
+
+  $rect <20,20,160,60>
+  object Waveform::ChannelPanel ChannelPanel2
+  {
+    preset Bounds = <320,30,460,240>;
+    preset Embedded = true;
+    preset Frequency = 71;
+    preset Amplitude = 15;
+    preset Waveform = Waveform::WaveformType.Square;
+    preset OnChanged = SettingsChanged;
+    preset Caption = "Channel 2";
+  }
+
+  // The slot method 'SettingsChanged' is called when the user has changed the current \
+  // waveform gernator channel settings.
+  $rect <410,290,610,330>
+  slot SettingsChanged
+  {
+    /* recalculate all coordinates */
+    CalculateCoords();
+
+    /* update description of channel 1 */
+    TextCh1.String = "Ch1:\n" + string( ChannelPanel1.Frequency ) + " Hz\n" + string( ChannelPanel1.Amplitude ) + " mV\n";
+
+    if ( ChannelPanel1.Waveform == Waveform::WaveformType.Sinus )
+      TextCh1.String = TextCh1.String + "sine";
+    else if ( ChannelPanel1.Waveform == Waveform::WaveformType.Square )
+      TextCh1.String = TextCh1.String + "square";
+    else if ( ChannelPanel1.Waveform == Waveform::WaveformType.Ramp )
+      TextCh1.String = TextCh1.String + "ramp";
+
+    /* update description of channel 2 */
+    TextCh2.String = "Ch2:\n" + string( ChannelPanel2.Frequency ) + " Hz\n" + string( ChannelPanel2.Amplitude ) + " mV\n";
+
+    if ( ChannelPanel2.Waveform == Waveform::WaveformType.Sinus )
+      TextCh2.String = TextCh2.String + "sine";
+    else if ( ChannelPanel2.Waveform == Waveform::WaveformType.Square )
+      TextCh2.String = TextCh2.String + "square";
+    else if ( ChannelPanel2.Waveform == Waveform::WaveformType.Ramp )
+      TextCh2.String = TextCh2.String + "ramp";
+
+    /* if any noise waveform is selected, we need an continuous update... */
+    RecalcTimer.Enabled = ( ChannelPanel1.Waveform == Waveform::WaveformType.Noise
+                         || ChannelPanel2.Waveform == Waveform::WaveformType.Noise );
+
+
+
+  }
+
+  // The 'CoordList' object contains a list of X/Y coordinates used by the graph.
+  $rect <210,330,410,370>
+  object Charts::CoordList CoordList
+  {
+    preset MaxNoOfItems = 100;
+  }
+
+  // This is a timer object to trigger continuous recalculation of coordinates in \
+  // case of a noise waveform.
+  $rect <10,390,210,430>
+  object Core::Timer RecalcTimer
+  {
+    preset OnTrigger = TimerSlot;
+    preset Period = 250;
+  }
+
+  // This is an ordinary text view.
+  $rect <20,20,160,60>
+  object Views::Text TextCh1
+  {
+    preset Bounds = <10,140,80,230>;
+    preset Alignment = Views::TextAlignment[AlignHorzLeft, AlignVertBottom];
+    preset String = "Ch1:";
+    preset Font = Flat::FontS;
+    preset Color = Flat::ColorOfTheme;
+  }
+
+  // This is an ordinary text view.
+  $rect <20,20,160,60>
+  object Views::Text TextCh2
+  {
+    preset Bounds = <90,140,170,230>;
+    preset Alignment = Views::TextAlignment[AlignHorzRight, AlignVertBottom];
+    preset String = "Ch1:";
+    preset Font = Flat::FontS;
+    preset Color = Flat::ColorOfTheme;
+  }
+
+  // The method 'CalculateCoords' contains all the mathematics to calculate all graph \
+  // coordinates according the current waveform generator settings.
+  $rect <210,290,410,330>
+  method void CalculateCoords()
+  {
+    var float f1 = (float)ChannelPanel1.Frequency;
+    var float a1 = (float)ChannelPanel1.Amplitude / 20.0;
+
+    var float f2 = (float)ChannelPanel2.Frequency;
+    var float a2 = (float)ChannelPanel2.Amplitude / 20.0;
+
+    var float r1 = 0.0;
+    var float r2 = 0.0;
+
+    var float x = 0.0;
+
+    /* clear current list of coordinates */
+    CoordList.ClearList();
+
+    /* calculate values for four divisions in horizontal direction */
+    while ( x < 4.0 )
+    {
+      /* calculate result of channel 1 - according selected waveform */
+      if ( ChannelPanel1.Waveform == Waveform::WaveformType.Sinus )
+        r1 = math_sin( f1 * x * 360.0 / 100.0) * a1;
+      else if ( ChannelPanel1.Waveform == Waveform::WaveformType.Square )
+        r1 = ((float)((int32)( f1 * x * 2.0 / 100.0 ) & 0x01 ) * 2.0 - 1.0 ) * a1;
+      else if ( ChannelPanel1.Waveform == Waveform::WaveformType.Ramp )
+        r1 =  ((float)((int32)( f1 * x * 1.0 ) % 100 ) / 100.0 * (-2.0) + 1.0 ) * a1;
+      else
+        r1 = (float)math_rand( -100, 100 ) * a1 / 100.0;
+
+      /* calculate result of channel 2 - according selected waveform */
+      if ( ChannelPanel2.Waveform == Waveform::WaveformType.Sinus )
+        r2 = math_sin( f2 * x * 360.0 / 100.0) * a2;
+      else if ( ChannelPanel2.Waveform == Waveform::WaveformType.Square )
+        r2 = ((float)((int32)( f2 * x * 2.0 / 100.0 ) & 0x01 ) * 2.0 - 1.0 ) * a2;
+      else if ( ChannelPanel2.Waveform == Waveform::WaveformType.Ramp )
+        r2 =  ((float)((int32)( f2 * x * 1.0 ) % 100 ) / 100.0 * (-2.0) + 1.0 ) * a2;
+      else
+        r2 = (float)math_rand( -100, 100 ) * a2 / 100.0;
+
+      /* add the sum of both results to the list of coordinates */
+      CoordList.AddCoord( x, r1+r2 );
+
+      /* 20 points per division */
+      x = x + 0.05;
+    }
+
+    /* assign the coordinate list to the graph, in order to force an update */
+    Graph.Coordinates = CoordList;
+
+
+  }
+
+  // Slot method to force the recalculation of coordinates in case of a noise waveform.
+  $rect <210,390,410,430>
+  slot TimerSlot
+  {
+    /* just make the mathematics... */
+    CalculateCoords();
+  }
+
+  $rect <20,20,160,60>
+  object Flat::Label Caption
+  {
+    preset Bounds = <5,0,290,30>;
+    preset String = "Waveform Generator Demo";
+  }
+
+  // The application class contains a Charts::Graph object to display the resulting \
+  // waveform by adding the signals of channel 1 and 2. The method 'CalculateCoords' \
+  // is responsible to calculate the waveform and to store the resulting coordinates \
+  // within the 'CoordList'.
+  // The right part of the application contains an Outline object that arranges three \
+  // embedded panels: ChannelPanel1, ChannelPanel2 and InfoPanel. The attached SlideTouchHandler \
+  // makes it possible to shift the panels up and down by a simple up/down slide \
+  // gesture.
+  note legend Note
+  {
+    attr Bounds = <0,450,600,590>;
+  }
+
+  // This is a slot method.
+  $rect <610,330,810,370>
+  slot AnimateFrequency
+  {
+    sender; /* the method is called from the sender object */
+    notifyobservers ^ChannelPanel1.Frequency;
+    postsignal SettingsChanged;
+
+
+  }
+
+  // This is an int32 change effect.
+  $rect <610,290,810,330>
+  object Effects::Int32Effect AutoDemoTimer
+  {
+    preset OnAnimate = AnimateFrequency;
+    preset Symmetric = true;
+    preset CycleDuration = 12000;
+    preset InitialDelay = 0;
+    preset Value2 = 140;
+    preset Value1 = 60;
+    preset Outlet = ^ChannelPanel1.Frequency;
+  }
+}
+
+// The 'ChannelPanel' class implements a complete UI components for making all user \
+// settings of a waveform generator channel.
+$rect <30,180,230,220>
+$output false
+class ChannelPanel : Core::Group
+{
+  $rect <0,270,200,310>
+  inherited property Bounds = <0,0,140,210>;
+
+  // This is a bitmap frame view.
+  $rect <20,20,160,60>
+  object Views::Frame Frame
+  {
+    preset Bounds = <5,20,135,205>;
+    preset Color = Flat::ColorOfTheme;
+    preset Bitmap = Waveform::PanelBorder;
+  }
+
+  $rect <20,20,160,60>
+  object Flat::HorzSlider SliderFrequency
+  {
+    preset Bounds = <17,25,123,85>;
+    preset MinValue = 10;
+    preset MaxValue = 200;
+    preset Outlet = ^Frequency;
+    preset OnChange = OnSlider;
+  }
+
+  $rect <20,20,160,60>
+  object Flat::HorzSlider SliderAmplitude
+  {
+    preset Bounds = <17,90,123,150>;
+    preset MaxValue = 50;
+    preset Outlet = ^Amplitude;
+    preset OnChange = OnSlider;
+  }
+
+  // This is an ordinary text view.
+  $rect <20,20,160,60>
+  object Views::Text Text1
+  {
+    preset Bounds = <17,65,117,85>;
+    preset Alignment = Views::TextAlignment[AlignHorzLeft, AlignVertCenter];
+    preset String = "Freq. [Hz]";
+    preset Font = Flat::FontS;
+    preset Color = Flat::ColorOfTheme;
+  }
+
+  // This is an ordinary text view.
+  $rect <20,20,160,60>
+  object Views::Text Text2
+  {
+    preset Bounds = <17,130,117,150>;
+    preset Alignment = Views::TextAlignment[AlignHorzLeft, AlignVertCenter];
+    preset String = "Ampl. [mV]";
+    preset Font = Flat::FontS;
+    preset Color = Flat::ColorOfTheme;
+  }
+
+  // The property 'Frequency' stores the current frequency of the simulated waveform \
+  // generator channel.
+  $rect <200,50,400,90>
+  property int32 Frequency = 100;
+
+  // The property 'Amplitude' stores the current amplitude of the simulated waveform \
+  // generator channel.
+  $rect <200,120,400,160>
+  property int32 Amplitude = 10;
+
+  // The property 'Waveform' stores the currently selected waveform of the simulated \
+  // waveform generator channel.
+  $rect <200,270,400,310>
+  property Waveform::WaveformType Waveform = Waveform::WaveformType.Sinus;
+
+  // Slot method, called when the user changed a slider value.
+  $rect <400,90,600,130>
+  slot OnSlider
+  {
+    postsignal OnChanged;
+
+  }
+
+  // Slot method, called when the user pressed the corresponding waveform selection \
+  // button.
+  $rect <200,170,400,210>
+  slot OnSinus
+  {
+    /* select new waveform */
+    Waveform = Waveform::WaveformType.Sinus;
+
+    postsignal OnChanged;
+
+  }
+
+  // The slot method 'OnChanged' is called each time the user has changed one of \
+  // the current waveform generator channel settings.
+  $rect <400,270,600,310>
+  property slot OnChanged = null;
+
+  $rect <20,20,160,60>
+  object Flat::ToggleButton ButtonSinus
+  {
+    preset Bounds = <17,165,47,195>;
+    preset OnChange = OnSinus;
+    preset Active = true;
+    preset Icon = Waveform::WaveformIcons;
+    preset IconIndex = 0;
+    preset Caption = "";
+  }
+
+  $rect <20,20,160,60>
+  object Flat::ToggleButton ButtonSquare
+  {
+    preset Bounds = <53,165,83,195>;
+    preset OnChange = OnSquare;
+    preset Icon = Waveform::WaveformIcons;
+    preset IconIndex = 1;
+    preset Caption = "";
+  }
+
+  $rect <20,20,160,60>
+  object Flat::ToggleButton ButtonRamp
+  {
+    preset Bounds = <89,165,119,195>;
+    preset OnChange = OnRamp;
+    preset Icon = Waveform::WaveformIcons;
+    preset IconIndex = 2;
+    preset Caption = "";
+  }
+
+  $rect <400,0,600,40>
+  onset Caption
+  {
+    /* store the given value */
+    pure Caption = value;
+
+    /* and assign it to the text item */
+    CaptionText.String = value;
+  }
+
+  // The property 'Caption' stores the text to display within the item.
+  $rect <200,0,400,40>
+  property string Caption = "Channel";
+
+  // Slot method, called when the user pressed the corresponding waveform selection \
+  // button.
+  $rect <200,220,400,260>
+  slot OnSquare
+  {
+    /* select new waveform */
+    Waveform = Waveform::WaveformType.Square;
+
+    postsignal OnChanged;
+
+  }
+
+  // Slot method, called when the user pressed the corresponding waveform selection \
+  // button.
+  $rect <400,170,600,210>
+  slot OnRamp
+  {
+    /* select new waveform */
+    Waveform = Waveform::WaveformType.Ramp;
+
+    postsignal OnChanged;
+
+  }
+
+  $rect <200,310,400,350>
+  onset Waveform
+  {
+    pure Waveform = value;
+
+    /* set the buttons according given value */
+    ButtonSinus.Active  = value == Waveform::WaveformType.Sinus;
+    ButtonSquare.Active = value == Waveform::WaveformType.Square;
+    ButtonRamp.Active   = value == Waveform::WaveformType.Ramp;
+
+  }
+
+  $rect <20,20,160,60>
+  object Flat::Label CaptionText
+  {
+    preset Bounds = <5,0,145,30>;
+  }
+
+  // The ChannelPannel class contains all widgets to choose the current signal source \
+  // and to configure the waveform paramters.
+  // Each time the user has changed the waveform settings, a signal is sent to the \
+  // slot method 'OnChanged'.
+  note legend Note
+  {
+    attr Bounds = <0,360,600,460>;
+  }
+}
+
+// Bitmap resource containing the border (frame) of all panels used within the demo.
+$rect <280,180,480,220>
+$output false
+resource Resources::Bitmap PanelBorder
+{
+  attr bitmapfile FileName;
+  attr alphafile AlphaName = .\Res\Border.png;
+  attr framesize FrameSize;
+  attr framedelay FrameDelay;
+}
+
+// Enumeration definition of supported waveforms.
+$rect <280,60,480,100>
+$output false
+enum WaveformType
+{
+  $rect <10,10,150,50>
+  item Ground;
+
+  $rect <160,10,300,50>
+  item Sinus;
+
+  $rect <310,10,450,50>
+  item Square;
+
+  $rect <10,60,150,100>
+  item Ramp;
+
+  $rect <160,60,300,100>
+  item Pulse;
+
+  $rect <310,60,450,100>
+  item Noise;
+}
+
+// Bitmap resource containing the icons for the waveform selction buttons.
+$rect <280,260,480,300>
+$output false
+resource Resources::Bitmap WaveformIcons
+{
+  attr bitmapfile FileName;
+  attr alphafile AlphaName = .\Res\WaveformIcons.png;
+  attr framesize FrameSize = <24,24>;
+  attr framedelay FrameDelay;
+}
+
+// Bitmap resource to create a soft fade-out within scrollable channel list.
+$rect <280,220,480,260>
+$output false
+resource Resources::Bitmap Fader
+{
+  attr bitmapfile FileName;
+  attr alphafile AlphaName = .\Res\Fader.png;
+  attr framesize FrameSize;
+  attr framedelay FrameDelay;
+}
+
+// The class 'InfoPanel' implements a complete GUI component for displaying program \
+// information.
+$rect <30,220,230,260>
+$output false
+class InfoPanel : Core::Group
+{
+  $rect <0,300,200,340>
+  inherited property Bounds = <0,0,160,272>;
+
+  // This is a bitmap frame view.
+  $rect <20,20,160,60>
+  object Views::Frame Frame
+  {
+    preset Bounds = <5,20,155,237>;
+    preset Color = Flat::ColorOfTheme;
+    preset Bitmap = Waveform::PanelBorder;
+  }
+
+  // This is an ordinary text view.
+  $rect <20,20,160,60>
+  object Views::Text Text
+  {
+    preset Bounds = <10,30,150,233>;
+    preset WrapText = true;
+    preset Alignment = Views::TextAlignment[AlignHorzLeft, AlignVertTop];
+    preset String = "Embedded Wizard\n\"Waveform Generator\"\nSelect waveform, frequency and amplitude of the two units Ch1 and Ch2 - graph will show the sum Ch1 + Ch2.";
+    preset Font = Flat::FontS;
+    preset Color = Flat::ColorOfTheme;
+  }
+
+  $rect <20,20,160,60>
+  object Flat::Label CaptionText
+  {
+    preset Bounds = <5,0,145,30>;
+    preset String = "Info";
+  }
+}
+
+// Panels
+note group Note2
+{
+  attr Bounds = <10,130,250,320>;
+}
+
+// Type definition
+note group Note3
+{
+  attr Bounds = <260,10,500,120>;
+}
+
+// Waveform class
+note group Note4
+{
+  attr Bounds = <10,10,250,120>;
+}
+
+// Bitmaps
+note group Note5
+{
+  attr Bounds = <260,130,500,320>;
+}
+
+// The sample application 'WaveformGenerator' is focused on the calculation and presentation \
+// of dynamic data as graph diagramm by using the Charts::Graph class.
+// 
+// Within this example, two data sources ("Channel1" and "Channel2") can be configured \
+// to provide a sine, square, ramp or noise signal with a certain amplitude and frequency. \
+// These two signals are then added and used to calculate the list of coordinates \
+// for the graph. Each time the signal has changed, a complete set of coordinates \
+// is calulated and the graph is updated.
+// 
+// This waveform generator demo and the different assets are designed for a screen \
+// size of 320x240 pixels.
+note legend Note
+{
+  attr Bounds = <10,330,500,610>;
+}

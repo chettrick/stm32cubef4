@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    ADC/ADC_TriggerMode/Src/main.c
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    17-February-2017
   * @brief   This example describes how to use Timer to trig ADC conversion.
   ******************************************************************************
   * @attention

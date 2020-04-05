@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    USB_Host/AUDIO_Standalone/readme.txt 
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   Description of the USB Host AUDIO application.
   ******************************************************************************
   * @attention
@@ -101,7 +99,7 @@ compiler preprocessor (already done in the preconfigured projects provided with 
 It is possible to fine tune needed USB Host features by modifying defines values in USBH configuration
 file “usbh_conf.h” available under the project includes directory, in a way to fit the application
 requirements, such as:
-- Level of debug: USBH_DEBUG_LEVEL
+  - Level of debug: USBH_DEBUG_LEVEL
                   0: No debug messages
                   1: Only User messages are shown
                   2: User and Error messages are shown
@@ -113,6 +111,7 @@ requirements, such as:
 @par Directory contents
 
   - USB_Host/AUDIO_Standalone/Src/main.c                  Main program
+  - USB_Host/AUDIO_Standalone/Src/sd_diskio.c      FatFS sd diskio driver implementation
   - USB_Host/AUDIO_Standalone/Src/system_stm32f4xx.c      STM32F4xx system clock configuration file
   - USB_Host/AUDIO_Standalone/Src/stm32f4xx_it.c          Interrupt handlers
   - USB_Host/AUDIO_Standalone/Src/menu.c                  MSC State Machine
@@ -120,6 +119,7 @@ requirements, such as:
   - USB_Host/AUDIO_Standalone/Src/explorer.c              Explore the uSD content
   - USB_Host/AUDIO_Standalone/Src/audio.c                 Audio Out (playback) interface API
   - USB_Host/AUDIO_Standalone/Inc/main.h                  Main program header file
+  - USB_Host/AUDIO_Standalone/Inc/sd_diskio.h      FatFS sd diskio driver header file
   - USB_Host/AUDIO_Standalone/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - USB_Host/AUDIO_Standalone/Inc/lcd_log_conf.h          LCD log configuration file
   - USB_Host/AUDIO_Standalone/Inc/stm32f4xx_hal_conf.h    HAL configuration file

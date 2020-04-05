@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Examples_LL/CORTEX/CORTEX_MPU/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017
   * @brief   This example presents the MPU features through
   *          the STM32F4xx CORTEX LL API.
   ******************************************************************************

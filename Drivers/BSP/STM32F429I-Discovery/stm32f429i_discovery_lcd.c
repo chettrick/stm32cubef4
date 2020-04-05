@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm32f429i_discovery_lcd.c
   * @author  MCD Application Team
-  * @version V2.1.5
-  * @date    27-January-2017
   * @brief   This file includes the LCD driver for ILI9341 Liquid Crystal 
   *          Display Modules of STM32F429I-Discovery kit (MB1075).
   ******************************************************************************
@@ -907,19 +905,16 @@ void BSP_LCD_DrawBitmap(uint32_t X, uint32_t Y, uint8_t *pBmp)
   uint32_t inputcolormode = 0;
   
   /* Get bitmap data address offset */
-  index = *(__IO uint16_t *) (pBmp + 10);
-  index |= (*(__IO uint16_t *) (pBmp + 12)) << 16;
+  index = pBmp[10] + (pBmp[11] << 8) + (pBmp[12] << 16)  + (pBmp[13] << 24);
 
   /* Read bitmap width */
-  width = *(uint16_t *) (pBmp + 18);
-  width |= (*(uint16_t *) (pBmp + 20)) << 16;
+  width = pBmp[18] + (pBmp[19] << 8) + (pBmp[20] << 16)  + (pBmp[21] << 24);
 
   /* Read bitmap height */
-  height = *(uint16_t *) (pBmp + 22);
-  height |= (*(uint16_t *) (pBmp + 24)) << 16; 
- 
+  height = pBmp[22] + (pBmp[23] << 8) + (pBmp[24] << 16)  + (pBmp[25] << 24);
+
   /* Read bit/pixel */
-  bitpixel = *(uint16_t *) (pBmp + 28);   
+  bitpixel = pBmp[28] + (pBmp[29] << 8);   
  
   /* Set Address */
   address = LtdcHandler.LayerCfg[ActiveLayer].FBStartAdress + (((BSP_LCD_GetXSize()*Y) + X)*(4));

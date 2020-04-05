@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    BSP/Inc/audio_play.h 
   * @author  MCD Application Team
-  * @version V1.2.8
-  * @date    17-February-2017
   * @brief   Header for audio_play.c module
   ******************************************************************************
   * @attention

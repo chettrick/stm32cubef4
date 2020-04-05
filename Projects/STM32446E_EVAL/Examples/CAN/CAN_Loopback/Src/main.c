@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    CAN/CAN_LoopBack/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    17-February-2017
   * @brief   This example provides a description of how to set a communication 
   *          with the CAN in loopback mode.
   ******************************************************************************

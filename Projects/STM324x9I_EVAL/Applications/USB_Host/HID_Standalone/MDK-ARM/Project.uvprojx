@@ -365,7 +365,7 @@
               <MiscControls>--C99</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F429xx,USE_STM324x9I_EVAL,USE_USB_FS</Define>
               <Undefine></Undefine>
-              <IncludePath>..\inc;..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Core\Inc;..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Class\HID\Inc;..\..\..\..\..\..\Drivers\BSP\STM324x9I_EVAL;..\..\..\..\..\..\Utilities\Log</IncludePath>
+              <IncludePath>..\inc;..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Core\Inc;..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Class\HID\Inc;..\..\..\..\..\..\Drivers\BSP\STM324x9I_EVAL;..\..\..\..\..\..\Utilities\Log</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -474,22 +474,22 @@
             <File>
               <FileName>usbh_hid_keybd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Class\HID\Src\usbh_hid_keybd.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Class\HID\Src\usbh_hid_keybd.c</FilePath>
             </File>
             <File>
               <FileName>usbh_hid_mouse.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Class\HID\Src\usbh_hid_mouse.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Class\HID\Src\usbh_hid_mouse.c</FilePath>
             </File>
             <File>
               <FileName>usbh_hid.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Class\HID\Src\usbh_hid.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Class\HID\Src\usbh_hid.c</FilePath>
             </File>
             <File>
               <FileName>usbh_hid_parser.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Class\HID\Src\usbh_hid_parser.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Class\HID\Src\usbh_hid_parser.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -639,22 +639,22 @@
             <File>
               <FileName>usbh_core.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Core\Src\usbh_core.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Core\Src\usbh_core.c</FilePath>
             </File>
             <File>
               <FileName>usbh_pipes.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Core\Src\usbh_pipes.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Core\Src\usbh_pipes.c</FilePath>
             </File>
             <File>
               <FileName>usbh_ioreq.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Core\Src\usbh_ioreq.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Core\Src\usbh_ioreq.c</FilePath>
             </File>
             <File>
               <FileName>usbh_ctlreq.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Core\Src\usbh_ctlreq.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Core\Src\usbh_ctlreq.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1029,7 +1029,7 @@
               <MiscControls>--C99</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F429xx,USE_STM324x9I_EVAL,USE_USB_HS</Define>
               <Undefine></Undefine>
-              <IncludePath>..\inc;..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Core\Inc;..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Class\HID\Inc;..\..\..\..\..\..\Drivers\BSP\STM324x9I_EVAL;..\..\..\..\..\..\Utilities\Log</IncludePath>
+              <IncludePath>..\inc;..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Core\Inc;..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Class\HID\Inc;..\..\..\..\..\..\Drivers\BSP\STM324x9I_EVAL;..\..\..\..\..\..\Utilities\Log</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1138,22 +1138,22 @@
             <File>
               <FileName>usbh_hid_keybd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Class\HID\Src\usbh_hid_keybd.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Class\HID\Src\usbh_hid_keybd.c</FilePath>
             </File>
             <File>
               <FileName>usbh_hid_mouse.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Class\HID\Src\usbh_hid_mouse.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Class\HID\Src\usbh_hid_mouse.c</FilePath>
             </File>
             <File>
               <FileName>usbh_hid.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Class\HID\Src\usbh_hid.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Class\HID\Src\usbh_hid.c</FilePath>
             </File>
             <File>
               <FileName>usbh_hid_parser.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Class\HID\Src\usbh_hid_parser.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Class\HID\Src\usbh_hid_parser.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1303,22 +1303,22 @@
             <File>
               <FileName>usbh_core.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Core\Src\usbh_core.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Core\Src\usbh_core.c</FilePath>
             </File>
             <File>
               <FileName>usbh_pipes.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Core\Src\usbh_pipes.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Core\Src\usbh_pipes.c</FilePath>
             </File>
             <File>
               <FileName>usbh_ioreq.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Core\Src\usbh_ioreq.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Core\Src\usbh_ioreq.c</FilePath>
             </File>
             <File>
               <FileName>usbh_ctlreq.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Core\Src\usbh_ctlreq.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Core\Src\usbh_ctlreq.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1693,7 +1693,7 @@
               <MiscControls>--C99</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F429xx,USE_STM324x9I_EVAL,USE_USB_HS,USE_USB_HS_IN_FS</Define>
               <Undefine></Undefine>
-              <IncludePath>..\inc;..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Core\Inc;..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Class\HID\Inc;..\..\..\..\..\..\Drivers\BSP\STM324x9I_EVAL;..\..\..\..\..\..\Utilities\Log</IncludePath>
+              <IncludePath>..\inc;..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Core\Inc;..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Class\HID\Inc;..\..\..\..\..\..\Drivers\BSP\STM324x9I_EVAL;..\..\..\..\..\..\Utilities\Log</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1802,22 +1802,22 @@
             <File>
               <FileName>usbh_hid_keybd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Class\HID\Src\usbh_hid_keybd.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Class\HID\Src\usbh_hid_keybd.c</FilePath>
             </File>
             <File>
               <FileName>usbh_hid_mouse.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Class\HID\Src\usbh_hid_mouse.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Class\HID\Src\usbh_hid_mouse.c</FilePath>
             </File>
             <File>
               <FileName>usbh_hid.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Class\HID\Src\usbh_hid.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Class\HID\Src\usbh_hid.c</FilePath>
             </File>
             <File>
               <FileName>usbh_hid_parser.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Class\HID\Src\usbh_hid_parser.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Class\HID\Src\usbh_hid_parser.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1967,22 +1967,22 @@
             <File>
               <FileName>usbh_core.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Core\Src\usbh_core.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Core\Src\usbh_core.c</FilePath>
             </File>
             <File>
               <FileName>usbh_pipes.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Core\Src\usbh_pipes.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Core\Src\usbh_pipes.c</FilePath>
             </File>
             <File>
               <FileName>usbh_ioreq.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Core\Src\usbh_ioreq.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Core\Src\usbh_ioreq.c</FilePath>
             </File>
             <File>
               <FileName>usbh_ctlreq.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Core\Src\usbh_ctlreq.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Core\Src\usbh_ctlreq.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics  *******************
   * @file    FLASH/FLASH_EraseProgram/readme.txt
   * @author  MCD Application Team
-  * @version V1.2.8
-  * @date    17-February-2017 
   * @brief   Description of the FLASH Erase and Program example.
   ******************************************************************************
   *
@@ -42,7 +40,7 @@ the internal Flash memory.
 
 This example guides you through the different configuration steps by mean of HAL API
 how to erase and program the STM32F4xx internal Flash memory mounted on 
-STM32F429I-Discovery RevB board.
+STM32F429I-Discovery RevC board.
 
 At the beginning of the main program the HAL_Init() function is called to reset 
 all the peripherals, initialize the Flash interface and the systick.
@@ -91,7 +89,7 @@ STM32F429I-DISCO board's LEDs can be used to monitor the transfer status:
 
   - This example runs on STM32F429xx devices.
     
-  - This example has been tested with STMicroelectronics STM32F429I-Discovery RevB
+  - This example has been tested with STMicroelectronics STM32F429I-Discovery RevC
     boards and can be easily tailored to any other supported device 
     and development board.
 

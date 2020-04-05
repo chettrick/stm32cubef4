@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    es_wifi_io.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017
   * @brief   This file contains the functions prototypes for es_wifi IO operations.
   ******************************************************************************
   * @attention

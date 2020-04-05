@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm32f401_discovery_accelerometer.h
   * @author  MCD Application Team
-  * @version V2.2.2
-  * @date    27-January-2017
   * @brief   This file contains all the functions prototypes for the 
   *          stm32f401_discovery_accelerometer.c firmware driver.
   ******************************************************************************

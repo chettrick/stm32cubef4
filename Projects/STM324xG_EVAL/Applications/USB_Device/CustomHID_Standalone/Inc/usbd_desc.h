@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Device/CustomHID_Standalone/Inc/usbd_desc.h
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   Header for usbd_desc.c module
   ******************************************************************************
   * @attention

@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    I2C/FMPI2C_EEPROM/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    17-February-2017
   * @brief   Description of the I2C EEPROM DMA example.
   ******************************************************************************
   *

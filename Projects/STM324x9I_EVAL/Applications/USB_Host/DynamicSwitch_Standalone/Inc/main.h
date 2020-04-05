@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/DynamicSwitch_Standalone/Inc/main.h 
   * @author  MCD Application Team
-  * @version V1.5.0
-  * @date    17-February-2017
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
@@ -61,7 +59,7 @@
 #include "usbh_hid_parser.h"
 #include "ff_gen_drv.h"
 #include "sd_diskio.h"
-#include "usbh_diskio.h"
+#include "usbh_diskio_dma.h"
 
 /* Exported constants --------------------------------------------------------*/
 #define FILEMGR_LIST_DEPDTH                     24

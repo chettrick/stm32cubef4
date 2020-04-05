@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    USB_Device/MSC_Standalone/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    17-February-2017 
   * @brief   Description of the USB Device MSC application.
   ******************************************************************************
   * @attention

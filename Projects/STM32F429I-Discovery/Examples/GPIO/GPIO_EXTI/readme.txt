@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics  *******************
   * @file    GPIO/GPIO_EXTI/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.8
-  * @date    17-February-2017 
   * @brief   Description of the GPIO EXTI example.
   ******************************************************************************
   *
@@ -76,7 +74,7 @@ In this example, HCLK is configured at 180 MHz.
 
   - This example runs on STM32F429xx devices.
     
-  - This example has been tested with STMicroelectronics STM32F429I-Discovery RevB
+  - This example has been tested with STMicroelectronics STM32F429I-Discovery RevC
     boards and can be easily tailored to any other supported device 
     and development board.
 

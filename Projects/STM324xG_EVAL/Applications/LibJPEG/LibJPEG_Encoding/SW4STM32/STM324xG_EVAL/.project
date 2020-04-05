@@ -249,13 +249,13 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c</location>
 		</link><link>
+			<name>Middlewares/FatFs/Drivers/sd_diskio.c</name>
+			<type>1</type>
+			<location>PARENT-2-PROJECT_LOC/Src/sd_diskio.c</location>
+		</link><link>
 			<name>Middlewares/Lib_JPEG/jfdctint.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LibJPEG/source/jfdctint.c</location>
-		</link><link>
-			<name>Middlewares/FatFs/Drivers/sd_diskio.c</name>
-			<type>1</type>
-			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FatFs/src/drivers/sd_diskio.c</location>
 		</link><link>
 			<name>Middlewares/Lib_JPEG/jmemmgr.c</name>
 			<type>1</type>
@@ -300,10 +300,6 @@
 			<name>Middlewares/Lib_JPEG/jdatasrc.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LibJPEG/source/jdatasrc.c</location>
-		</link><link>
-			<name>Drivers/BSP/Components/stmpe1600.c</name>
-			<type>1</type>
-			<location>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/stmpe1600/stmpe1600.c</location>
 		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal.c</name>
 			<type>1</type>
@@ -497,10 +493,6 @@
 			<type>1</type>
 			<location>PARENT-2-PROJECT_LOC/Src/encode.c</location>
 		</link>
-		<link>
-			<name />
-			<type />
-			<location />
-		</link>
+		
 	</linkedResources>
 </projectDescription>

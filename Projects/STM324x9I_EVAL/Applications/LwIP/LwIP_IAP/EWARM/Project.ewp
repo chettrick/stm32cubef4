@@ -583,7 +583,7 @@
         </option>
         <option>
           <name>AUserIncludes</name>
-          <state>$PROJ_DIR$\..\Inc</state>
+          <state></state>
         </option>
         <option>
           <name>AExtraOptionsCheckV2</name>
@@ -609,7 +609,7 @@
         <option>
           <name>OOCOutputFormat</name>
           <version>3</version>
-          <state>0</state>
+          <state>1</state>
         </option>
         <option>
           <name>OCOutputOverride</name>
@@ -617,7 +617,7 @@
         </option>
         <option>
           <name>OOCOutputFile</name>
-          <state>Project.srec</state>
+          <state>Project.hex</state>
         </option>
         <option>
           <name>OOCCommandLineProducer</name>
@@ -625,7 +625,7 @@
         </option>
         <option>
           <name>OOCObjCopyEnable</name>
-          <state>0</state>
+          <state>1</state>
         </option>
       </data>
     </settings>

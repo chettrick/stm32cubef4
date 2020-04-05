@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    UART/UART_HyperTerminal_TxPolling_RxIT/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017
   * @brief   This sample code shows how to use UART HAL and LL APIs to transmit
   *          data in polling mode while receiving data in Interrupt mode, by mixing 
   *          use of LL and HAL APIs;

@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/MSC_Standalone/Src/main.c
   * @author  MCD Application Team
-  * @version V1.5.0
-  * @date    17-February-2017
   * @brief   USB host Mass storage demo main file
   ******************************************************************************
   * @attention
@@ -50,6 +48,7 @@
 /* Private typedef ----------------------------------------------------------- */
 USBH_HandleTypeDef hUSBHost;
 MSC_ApplicationTypeDef Appli_state = APPLICATION_IDLE;
+char USBDISKPath[4];            /* USB Host logical drive path */
 
 /* Private define ------------------------------------------------------------ */
 /* Private macro ------------------------------------------------------------- */
@@ -162,9 +161,12 @@ static void USBH_UserProcess(USBH_HandleTypeDef * phost, uint8_t id)
 
   case HOST_USER_DISCONNECTION:
     Appli_state = APPLICATION_DISCONNECT;
-    if(f_mount(NULL, "", 0) != FR_OK)
+    if (FATFS_UnLinkDriver(USBDISKPath) == 0)
     {
-      LCD_ErrLog("ERROR : Cannot DeInitialize FatFs! \n");
+      if(f_mount(NULL, "", 0) != FR_OK)
+      {
+        LCD_ErrLog("ERROR : Cannot DeInitialize FatFs! \n");
+      }
     }
     break;
 
@@ -173,9 +175,12 @@ static void USBH_UserProcess(USBH_HandleTypeDef * phost, uint8_t id)
     break;
 
   case HOST_USER_CONNECTION:
-    if(f_mount(&USBH_fatfs, "", 0) != FR_OK)
-    {  
-      LCD_ErrLog("ERROR : Cannot Initialize FatFs! \n");
+    if (FATFS_LinkDriver(&USBH_Driver, USBDISKPath) == 0)
+    {
+      if (f_mount(&USBH_fatfs, "", 0) != FR_OK)
+      {
+        LCD_ErrLog("ERROR : Cannot Initialize FatFs! \n");
+      }
     }
     break;
 

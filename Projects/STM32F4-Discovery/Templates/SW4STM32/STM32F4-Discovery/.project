@@ -326,9 +326,9 @@
 			<locationURI>PARENT-2-PROJECT_LOC/Src/stm32f4xx_it.c</locationURI>
 		</link>
 		<link>
-			<name>Middlewares/PDM/libPDMFilter_CM4F_GCC.a</name>
+			<name>Middlewares/PDM/Lib/libPDMFilter_CM4_GCC.a</name>
 			<type>1</type>
-			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_Audio/Addons/PDM/libPDMFilter_CM4_GCC.a</locationURI>
+			<locationURI>PARENT-5-PROJECT_LOC/Middlewares/ST/STM32_Audio/Addons/PDM/Lib/libPDMFilter_CM4_GCC.a</locationURI>
 		</link>
 		<link>
 			<name>Drivers/BSP/Components/cs43l22.c</name>

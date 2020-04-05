@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm32_adafruit_sd.c
   * @author  MCD Application Team
-  * @version V3.0.0
-  * @date    23-December-2016
   * @brief   This file provides a set of functions needed to manage the SD card
   *          mounted on the Adafruit 1.8" TFT LCD shield (reference ID 802),
   *          that is used with the STM32 Nucleo board through SPI interface.

@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    SPI/SPI_FullDuplex_ComDMA/Src/stm32f4xx_msp.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   HAL MSP module.
   ******************************************************************************
   * @attention

@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    FreeRTOS\FreeRTOS_LowPower\Inc\main.h
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   This file contains all the functions prototypes for the main.c
   *          file.
   ******************************************************************************

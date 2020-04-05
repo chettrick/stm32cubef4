@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    es_wifi_io.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017
   * @brief   This file implments the IO operations to deal with the es-wifi
   *          module. It mainly Inits and Deinits the SPI interface. Send and
   *          receive data over it.

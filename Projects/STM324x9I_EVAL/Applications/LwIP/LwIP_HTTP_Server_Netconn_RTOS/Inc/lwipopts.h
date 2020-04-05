@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    LwIP/LwIP_HTTP_Server_Netconn_RTOS/Inc/lwipopts.h
   * @author  MCD Application Team
-  * @version V1.5.0
-  * @date    17-February-2017
   * @brief   lwIP Options Configuration.
   ******************************************************************************
   * @attention

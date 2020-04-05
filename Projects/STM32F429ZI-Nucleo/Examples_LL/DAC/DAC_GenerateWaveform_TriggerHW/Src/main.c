@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Examples_LL/DAC/DAC_GenerateWaveform_TriggerHW/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017
   * @brief   This example describes how to use the DAC peripheral to generate
   *          a voltage waveform from digital data stream transfered by DMA.
   *          This example is based on the STM32F4xx DAC LL API;

@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    readme.txt
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   Description of the FatFs with uSD card drive application
   ******************************************************************************
   * @attention
@@ -101,9 +99,11 @@ STM32412G-DISCOVERY's LEDs can be used to monitor the application status:
   - FatFs/FatFs_uSD/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - FatFs/FatFs_uSD/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - FatFs/FatFs_uSD/Inc/main.h                  Header for main.c module
+  - FatFs/FatFs_uSD/Inc/sd_diskio.h             FatFS sd diskio driver header file
   - FatFs/FatFs_uSD/Inc/ffconf.h                FAT file system module configuration file   
   - FatFs/FatFs_uSD/Src/stm32f4xx_it.c          Interrupt handlers
   - FatFs/FatFs_uSD/Src/main.c                  Main program
+  - FatFs/FatFs_uSD/Src/sd_diskio.c             FatFS sd diskio driver implementation
   - FatFs/FatFs_uSD/Src/system_stm32f4xx.c      STM32F4xx system source file
 
 @par Hardware and Software environment

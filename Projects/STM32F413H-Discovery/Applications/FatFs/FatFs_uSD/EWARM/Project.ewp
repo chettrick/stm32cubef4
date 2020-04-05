@@ -322,7 +322,6 @@
           <state>$PROJ_DIR$\..\..\..\..\..\..\Utilities\Fonts</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Utilities\CPU</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src</state>
-          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src\drivers</state>
         </option>
         <option>
           <name>CCStdIncCheck</name>
@@ -1082,7 +1081,7 @@
       <group>
         <name>Drivers</name>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src\drivers\sd_diskio.c</name>
+          <name>$PROJ_DIR$\..\Src\sd_diskio.c</name>
         </file>
       </group>
       <group>

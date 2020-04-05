@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Audio/Audio_playback_and_record/Inc/lcd_log_conf.h
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   LCD Log configuration file.
   ******************************************************************************
   * @attention
@@ -60,9 +58,9 @@
 /* Comment the line below to disable the scroll back and forward features */
 #define     LCD_SCROLL_ENABLED      1 
 
-#define     LCD_LOG_HEADER_FONT                   Font16
-#define     LCD_LOG_FOOTER_FONT                   Font12
-#define     LCD_LOG_TEXT_FONT                     Font12
+#define     LCD_LOG_HEADER_FONT                   Font20
+#define     LCD_LOG_FOOTER_FONT                   Font16
+#define     LCD_LOG_TEXT_FONT                     Font16
             
 /* Define the LCD LOG Color  */
 #define     LCD_LOG_BACKGROUND_COLOR              LCD_COLOR_BLACK
@@ -73,9 +71,9 @@
 
 /* Define the cache depth */
 #define     CACHE_SIZE              100
-#define     YWINDOW_SIZE            13
+#define     YWINDOW_SIZE            21
 
-#if (YWINDOW_SIZE > 14)
+#if (YWINDOW_SIZE > 21)
   #error "Wrong YWINDOW SIZE"
 #endif
 

@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    HAL/HAL_TimeBase_RTC_WKUP/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.8
-  * @date    17-February-2017
   * @brief   Description of the HAL TimeBase RTC WKUP example.
   ******************************************************************************
   *                                  

@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    ADC/ADC_RegularConversion_Interrupt/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   This example describes how to use an Interrupt to convert
   *          continuously data
   ******************************************************************************

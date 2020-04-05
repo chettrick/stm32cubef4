@@ -2,16 +2,14 @@
   @page STemWin_Simulation Readme file
  
   @verbatim
-  ******************** (C) COPYRIGHT 2014 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    WIN32/STemWin_Simulation/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    14-August-2015  
   * @brief   Description of the STemWin Simulation project. 
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -83,7 +81,7 @@ by the downloaded one.
 
 @par Software environment 
   - This Simulation project runs on VS Express for Desktop on windows platform
-  - This project has been tested with Microsoft Visual Studio Express 2012 for Windows Desktop on Windows 7
+  - This project has been tested with Microsoft Visual Studio Express 2017 for Windows Desktop on Windows 7
 
 
 @par How to use it ? 

@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm324x9i_eval_nor.c
   * @author  MCD Application Team
-  * @version V3.0.0
-  * @date    27-January-2017
   * @brief   This file includes a standard driver for the M29W256GL70ZA6E NOR flash memory 
   *          device mounted on STM324x9I-EVAL evaluation board.
   ******************************************************************************

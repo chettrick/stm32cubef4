@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    USB_Host/HID_Standalone/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   Description of the USB Host HID application.
   ******************************************************************************
   * @attention
@@ -136,7 +134,7 @@ requirements, such as:
 
   - Make sure that the jumper JP4 is closed
 
-  - Adafruit 1.8" TFT shield must be connected on CN5,CN6, CN8 and CN9 Arduino connectors, 
+  - Adafruit 1.8" TFT shield must be connected on CN7, CN8, CN9 and CN10 Arduino connectors, 
     for more details please refer to UM1726.
 
   - Make sure the SB146, SB121 are closed and the SB174, SB165, SB122 are opened on the NUCLEO-F429ZI board (bottom side) 

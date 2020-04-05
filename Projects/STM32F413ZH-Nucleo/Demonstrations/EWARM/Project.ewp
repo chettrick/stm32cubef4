@@ -77,7 +77,7 @@
         </option>
         <option>
           <name>OGLastSavedByProductVersion</name>
-          <state>7.60.1.11206</state>
+          <state>7.80.4.12487</state>
         </option>
         <option>
           <name>GeneralEnableMisra</name>
@@ -581,7 +581,7 @@
         </option>
         <option>
           <name>AUserIncludes</name>
-          <state>$PROJ_DIR$\..\Inc</state>
+          <state></state>
         </option>
         <option>
           <name>AExtraOptionsCheckV2</name>
@@ -653,7 +653,7 @@
       <name>ILINK</name>
       <archiveVersion>0</archiveVersion>
       <data>
-        <version>17</version>
+        <version>18</version>
         <wantNonLocal>1</wantNonLocal>
         <debug>1</debug>
         <option>
@@ -925,7 +925,7 @@
         </option>
         <option>
           <name>CrcAlgorithm</name>
-          <version>0</version>
+          <version>1</version>
           <state>1</state>
         </option>
         <option>
@@ -940,6 +940,10 @@
         <option>
           <name>IlinkLogCallGraph</name>
           <state>0</state>
+        </option>
+        <option>
+          <name>IlinkIcfFile_AltDefault</name>
+          <state></state>
         </option>
       </data>
     </settings>
@@ -1094,7 +1098,7 @@
       <group>
         <name>Drivers</name>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\Middlewares\Third_Party\FatFs\src\drivers\sd_diskio.c</name>
+          <name>$PROJ_DIR$\..\Src\sd_diskio.c</name>
         </file>
       </group>
     </group>

@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Templates_LL/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017
   * @brief   Main program body through the LL API
   ******************************************************************************
   * @attention

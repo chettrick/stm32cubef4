@@ -33,6 +33,10 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c</location>
 		</link><link>
+			<name>Middlewares/STemWin/Config/GUIConf.c</name>
+			<type>1</type>
+			<location>PARENT-2-PROJECT_LOC/STemWin/Target/GUIConf.c</location>
+		</link><link>
 			<name>Drivers/BSP/Components/stmpe811.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/stmpe811/stmpe811.c</location>
@@ -57,6 +61,10 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/BSP/STM32F429I-Discovery/stm32f429i_discovery_io.c</location>
 		</link><link>
+			<name>Application/User/BASIC_HelloWorld.c</name>
+			<type>1</type>
+			<location>PARENT-2-PROJECT_LOC/STemWin/App/BASIC_HelloWorld.c</location>
+		</link><link>
 			<name>Drivers/BSP/STM324x9I_DISCO/stm32f429i_discovery_sdram.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/BSP/STM32F429I-Discovery/stm32f429i_discovery_sdram.c</location>
@@ -69,6 +77,10 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/BSP/STM32F429I-Discovery/stm32f429i_discovery.c</location>
 		</link><link>
+			<name>Middlewares/STemWin/Config/LCDConf_stm32f429i_disco_MB1075.c</name>
+			<type>1</type>
+			<location>PARENT-2-PROJECT_LOC/STemWin/Target/LCDConf_stm32f429i_disco_MB1075.c</location>
+		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_rcc_ex.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c</location>
@@ -77,21 +89,9 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c</location>
 		</link><link>
-			<name>Application/User/main.c</name>
-			<type>1</type>
-			<location>PARENT-2-PROJECT_LOC/Src/main.c</location>
-		</link><link>
-			<name>Drivers/CMSIS/system_stm32f4xx.c</name>
-			<type>1</type>
-			<location>PARENT-2-PROJECT_LOC/Src/system_stm32f4xx.c</location>
-		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c</location>
-		</link><link>
-			<name>Application/User/stm32f4xx_it.c</name>
-			<type>1</type>
-			<location>PARENT-2-PROJECT_LOC/Src/stm32f4xx_it.c</location>
 		</link><link>
 			<name>Application/SW4STM32/startup_stm32f429xx.s</name>
 			<type>1</type>
@@ -105,13 +105,9 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STemWin/OS/GUI_X.c</location>
 		</link><link>
-			<name>Middlewares/STemWin/Config/LCDConf_stm32f429i_disco_MB1075.c</name>
+			<name>Drivers/CMSIS/system_stm32f4xx.c</name>
 			<type>1</type>
-			<location>PARENT-2-PROJECT_LOC/Src/LCDConf_stm32f429i_disco_MB1075.c</location>
-		</link><link>
-			<name>Middlewares/STemWin/Config/GUIConf.c</name>
-			<type>1</type>
-			<location>PARENT-2-PROJECT_LOC/Src/GUIConf.c</location>
+			<location>PARENT-2-PROJECT_LOC/Core/Src/system_stm32f4xx.c</location>
 		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_i2s_ex.c</name>
 			<type>1</type>
@@ -124,6 +120,10 @@
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_gpio.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c</location>
+		</link><link>
+			<name>Application/User/stm32f4xx_it.c</name>
+			<type>1</type>
+			<location>PARENT-2-PROJECT_LOC/Core/Src/stm32f4xx_it.c</location>
 		</link><link>
 			<name>Drivers/BSP/STM324x9I_DISCO/stm32f429i_discovery_ts.c</name>
 			<type>1</type>
@@ -165,6 +165,10 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c</location>
 		</link><link>
+			<name>Application/User/main.c</name>
+			<type>1</type>
+			<location>PARENT-2-PROJECT_LOC/Core/Src/main.c</location>
+		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_uart.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c</location>
@@ -176,10 +180,6 @@
 			<name>Doc/readme.txt</name>
 			<type>1</type>
 			<location>PARENT-2-PROJECT_LOC/readme.txt</location>
-		</link><link>
-			<name>Application/User/BASIC_HelloWorld.c</name>
-			<type>1</type>
-			<location>PARENT-2-PROJECT_LOC/Src/BASIC_HelloWorld.c</location>
 		</link>
 		
 	</linkedResources>

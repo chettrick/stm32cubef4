@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm32f411e_discovery.c
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    27-January-2017
   * @brief   This file provides set of firmware functions to manage LEDs and
   *          push-button available on STM32F411-Discovery Kit from STMicroelectronics.
   ******************************************************************************
@@ -65,11 +63,11 @@
   */ 
   
 /**
-  * @brief STM32F411E DISCO BSP Driver version number V1.0.2
+  * @brief STM32F411E DISCO BSP Driver version number V1.0.3
   */
 #define __STM32F411E_DISCO_BSP_VERSION_MAIN   (0x01) /*!< [31:24] main version */
 #define __STM32F411E_DISCO_BSP_VERSION_SUB1   (0x00) /*!< [23:16] sub1 version */
-#define __STM32F411E_DISCO_BSP_VERSION_SUB2   (0x02) /*!< [15:8]  sub2 version */
+#define __STM32F411E_DISCO_BSP_VERSION_SUB2   (0x03) /*!< [15:8]  sub2 version */
 #define __STM32F411E_DISCO_BSP_VERSION_RC     (0x00) /*!< [7:0]  release candidate */ 
 #define __STM32F411E_DISCO_BSP_VERSION         ((__STM32F411E_DISCO_BSP_VERSION_MAIN << 24)\
                                              |(__STM32F411E_DISCO_BSP_VERSION_SUB1 << 16)\

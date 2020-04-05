@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    LibJPEG/LibJPEG_Decoding/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   Main program body
   *          This sample code shows how to decompress JPEG file.
   ******************************************************************************

@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    FreeRTOS/FreeRTOS_Mutexes/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    17-February-2017
   * @brief   Main program body
   ******************************************************************************
   * @attention

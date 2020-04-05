@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Examples_LL/RTC/RTC_ExitStandbyWithWakeUpTimer/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017
   * @brief   This code example shows how to configure the RTC in order to work 
   *          with the WUT through the STM32F4xx RTC LL API.
   *          Peripheral initialization done using LL unitary services functions.

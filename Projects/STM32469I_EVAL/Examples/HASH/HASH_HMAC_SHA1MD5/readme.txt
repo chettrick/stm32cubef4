@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    HASH/HASH_HMAC_SHA1MD5/readme.txt
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   Description of the digest calculation using HMAC SHA1 and HMAC MD5 Example.
   ******************************************************************************
   *

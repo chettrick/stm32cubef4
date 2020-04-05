@@ -1,9 +1,7 @@
 /**
   ******************************************************************************
-  * @file    FatFs/FatFs_USBDisk_RTOS/Src/usbh_conf.c
+  * @file    FatFs/FatFs_USBDisk_MultipleAccess_RTOS/Src/usbh_conf.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   USB Host configuration file.
   ******************************************************************************
   * @attention

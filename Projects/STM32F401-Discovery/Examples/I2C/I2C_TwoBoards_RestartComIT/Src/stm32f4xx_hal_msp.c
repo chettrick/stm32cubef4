@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    I2C/I2C_TwoBoards_RestartComIT/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.2.8
-  * @date    17-February-2017
   * @brief   HAL MSP module.
   ******************************************************************************
   * @attention

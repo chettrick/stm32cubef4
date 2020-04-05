@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    USB_Host/CDC_Standalone/readme.txt 
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   Description of the USB Host CDC application.
   ******************************************************************************
   * @attention
@@ -112,7 +110,7 @@ compiler preprocessor (already done in the preconfigured projects provided with 
 It is possible to fine tune needed USB Host features by modifying defines values in USBH configuration
 file “usbh_conf.h” available under the project includes directory, in a way to fit the application
 requirements, such as:
-- Level of debug: USBH_DEBUG_LEVEL
+  - Level of debug: USBH_DEBUG_LEVEL
                   0: No debug messages
                   1: Only User messages are shown
                   2: User and Error messages are shown
@@ -124,6 +122,7 @@ requirements, such as:
 @par Directory contents
 
   - USB_Host/CDC_Standalone/Src/main.c                  Main program
+  - USB_Host/CDC_Standalone/Src/sd_diskio.c      FatFS sd diskio driver implementation
   - USB_Host/CDC_Standalone/Src/system_stm32f4xx.c      STM32F4xx system clock configuration file
   - USB_Host/CDC_Standalone/Src/stm32f4xx_it.c          Interrupt handlers
   - USB_Host/CDC_Standalone/Src/menu.c                  CDC State Machine
@@ -133,6 +132,7 @@ requirements, such as:
   - USB_Host/CDC_Standalone/Src/cdc_receive.c           CDC Receive State Machine
   - USB_Host/CDC_Standalone/Src/cdc_send.c              CDC Send State Machine
   - USB_Host/CDC_Standalone/Inc/main.h                  Main program header file
+  - USB_Host/CDC_Standalone/Inc/sd_diskio.h      FatFS sd diskio driver header file
   - USB_Host/CDC_Standalone/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - USB_Host/CDC_Standalone/Inc/lcd_log_conf.h          LCD log configuration file
   - USB_Host/CDC_Standalone/Inc/stm32f4xx_hal_conf.h    HAL configuration file
@@ -152,10 +152,11 @@ requirements, such as:
     - Insert a microSD card into the STM324xG-EVAL uSD slot (CN6)
     - Plug the CDC device into the STM324xG-EVAL board through 'USB micro A-Male 
       to B-Male' cable to the connector:
-      - CN9: to use USB High Speed (HS) 
-      - CN8: to use USB Full Speed (FS) with embedded PHY(U2)
-             Please ensure that jumpers JP16 and JP22 are in position 1-2.
 
+     - CN9: to use USB High Speed (HS)  with embedded PHY(U8)
+             Please ensure that jumper JP31 is fitted.
+     - CN8: to use USB Full Speed (FS)
+             Please ensure that jumpers JP16 and JP22 are in position 1-2.
 
 @par How to use it ?
 
@@ -165,6 +166,7 @@ In order to make the program work, you must do the following :
  - In the workspace toolbar select the project configuration:
    - STM324xG-EVAL_USBH-HS: to configure the project for STM32F4xx devices using USB OTG HS peripheral
    - STM324xG-EVAL_USBH-FS: to configure the project for STM32F4xx devices using USB OTG FS peripheral
+   - STM324xG-EVAL_USBH-HS-IN-FS: to configure the project for STM32F4xx devices using USB OTG HS peripheral In FS (using embedded PHY)
  - Run the application
  
  * <h3><center>&copy; COPYRIGHT STMicroelectronics</center></h3>

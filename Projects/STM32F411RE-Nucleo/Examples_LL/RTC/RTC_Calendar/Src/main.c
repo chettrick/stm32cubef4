@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Examples_LL/RTC/RTC_Calendar/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017
   * @brief   This sample code shows how to use STM32F4xx RTC LL API to configure
   *          Time and Date.
   *          Peripheral initialization done using LL unitary services functions.

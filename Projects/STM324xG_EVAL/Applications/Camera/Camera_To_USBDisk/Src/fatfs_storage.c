@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Camera/Camera_To_USBDisk/Src/fatfs_storage.c
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   This file includes the Storage (FatFs) driver
   ******************************************************************************
   * @attention

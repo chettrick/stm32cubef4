@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    LwIP/LwIP_UDP_Echo_Server/Src/ethernetif.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   This file implements Ethernet network interface drivers for lwIP
   ******************************************************************************
   * @attention

@@ -10,14 +10,14 @@
       <TargetName>STM32F413H-Discovery_Demo</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
+      <pCCUsed>5060528::V5.06 update 5 (build 528)::ARMCC</pCCUsed>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F413ZHTx</Device>
           <Vendor>STMicroelectronics</Vendor>
           <PackID>Keil.STM32F4xx_DFP.2.11.0</PackID>
           <PackURL>http://www.keil.com/pack</PackURL>
-          <Cpu>IRAM(0x20000000-0x2004FFFF) IROM(0x8000000-0x817FFFF) CLOCK(25000000) FPU2 CPUTYPE("Cortex-M4")</Cpu>
+          <Cpu>IROM(0x08000000-0x817FBFF) IRAM(0x20000000-0x2004FFFF) CLOCK(25000000) FPU2 CPUTYPE("Cortex-M4")</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
           <FlashDriverDll></FlashDriverDll>
@@ -47,7 +47,7 @@
             <NotGenerated>0</NotGenerated>
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
-          <OutputDirectory>STM32F413H-Discovery_Demo\</OutputDirectory>
+          <OutputDirectory>STM32F413H-Discovery_Demo\Exe\</OutputDirectory>
           <OutputName>STM32F413H-Discovery_Demo</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
@@ -248,7 +248,7 @@
               <IROM>
                 <Type>1</Type>
                 <StartAddress>0x8000000</StartAddress>
-                <Size>0x180000</Size>
+                <Size>0x17fc00</Size>
               </IROM>
               <XRAM>
                 <Type>0</Type>
@@ -273,7 +273,7 @@
               <OCR_RVCT4>
                 <Type>1</Type>
                 <StartAddress>0x8000000</StartAddress>
-                <Size>0x180000</Size>
+                <Size>0x17fc00</Size>
               </OCR_RVCT4>
               <OCR_RVCT5>
                 <Type>1</Type>
@@ -322,7 +322,7 @@
             <wLevel>2</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
-            <uC99>0</uC99>
+            <uC99>1</uC99>
             <useXO>0</useXO>
             <v6Lang>1</v6Lang>
             <v6LangP>1</v6LangP>
@@ -332,10 +332,10 @@
             <v6WtE>0</v6WtE>
             <v6Rtti>0</v6Rtti>
             <VariousControls>
-              <MiscControls>--C99</MiscControls>
+              <MiscControls> </MiscControls>
               <Define>USE_HAL_DRIVER,STM32F413xx,USE_STM32F413H_DISCOVERY</Define>
               <Undefine></Undefine>
-              <IncludePath>../STemWin_Addons;../Config;../Core/inc;../../../../Utilities/CPU;../../../../Drivers/CMSIS/Include;../../../../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../../../../Drivers/STM32F4xx_HAL_Driver/Inc;../../../../Drivers/BSP/STM32F413H-Discovery;../../../../Drivers/BSP/Components;../../../../Drivers/BSP/Components/ls016b8uy;../../../../Drivers/BSP/Components/ft6x06;../../../../Drivers/BSP/Components/Common;../../../../Middlewares/ST/STM32_USB_Device_Library/Core/Inc;../../../../Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Inc;../../../../Middlewares/ST/STemWin/inc;../../../../Middlewares/Third_Party/FatFs/src;../../../../Middlewares/Third_Party/FatFs/src/drivers;../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../../../../Middlewares/Third_Party/FreeRTOS/Source/include;../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS</IncludePath>
+              <IncludePath>../STemWin_Addons;../Config;../Core/Inc;../../../../Utilities/CPU;../../../../Drivers/CMSIS/Include;../../../../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../../../../Drivers/STM32F4xx_HAL_Driver/Inc;../../../../Drivers/BSP/STM32F413H-Discovery;../../../../Drivers/BSP/Components;../../../../Drivers/BSP/Components/ls016b8uy;../../../../Drivers/BSP/Components/ft6x06;../../../../Drivers/BSP/Components/Common;../../../../Middlewares/ST/STM32_USB_Device_Library/Core/Inc;../../../../Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Inc;../../../../Middlewares/ST/STemWin/inc;../../../../Middlewares/Third_Party/FatFs/src;../../../../Middlewares/Third_Party/FatFs/src/drivers;../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../../../../Middlewares/Third_Party/FreeRTOS/Source/include;../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -353,7 +353,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>ROJ_DIR$\..\Config</IncludePath>
+              <IncludePath>../Config</IncludePath>
             </VariousControls>
           </Aads>
           <LDads>
@@ -366,7 +366,7 @@
             <TextAddressRange>0x08000000</TextAddressRange>
             <DataAddressRange>0x20000000</DataAddressRange>
             <pXoBase></pXoBase>
-            <ScatterFile>STM32F413H-Discovery_Demo\STM32F413H-Discovery_Demo.sct</ScatterFile>
+            <ScatterFile>STM32F413H-Discovery_Demo\Exe\STM32F413H-Discovery_Demo.sct</ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
             <Misc></Misc>
@@ -382,7 +382,7 @@
             <File>
               <FileName>libPDMFilter_CM4_Keil.lib</FileName>
               <FileType>4</FileType>
-              <FilePath>../../../../Middlewares/ST/STM32_Audio/Addons/PDM/libPDMFilter_CM4_Keil.lib</FilePath>
+              <FilePath>../../../../Middlewares/ST/STM32_Audio/Addons/PDM/Lib/libPDMFilter_CM4_Keil.lib</FilePath>
             </File>
           </Files>
         </Group>
@@ -1095,9 +1095,9 @@
           <GroupName>Middlewares/STemWin/ST_GUI_Addons</GroupName>
           <Files>
             <File>
-              <FileName>STM32F413H_DISCO_STemWin_Addons_Keil.lib</FileName>
+              <FileName>STM32F413H_DISCO_STemWin_Addons_KEIL.lib</FileName>
               <FileType>4</FileType>
-              <FilePath>../STemWin_Addons/STM32F413H_DISCO_STemWin_Addons_Keil.lib</FilePath>
+              <FilePath>../STemWin_Addons/STM32F413H_DISCO_STemWin_Addons_KEIL.lib</FilePath>
             </File>
           </Files>
         </Group>
@@ -1105,9 +1105,9 @@
           <GroupName>Middlewares/STemWin/Library</GroupName>
           <Files>
             <File>
-              <FileName>STemWin532_CM4_OS_Keil_ot.lib</FileName>
+              <FileName>STemWin540_CM4_OS_Keil_ot.lib</FileName>
               <FileType>4</FileType>
-              <FilePath>../../../../Middlewares/ST/STemWin/Lib/STemWin532_CM4_OS_Keil_ot.lib</FilePath>
+              <FilePath>..\..\..\..\Middlewares\ST\STemWin\Lib\STemWin540_CM4_OS_Keil_ot.lib</FilePath>
             </File>
           </Files>
         </Group>

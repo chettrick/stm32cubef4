@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    BSP/Inc/audio_record.h 
   * @author  MCD Application Team
-  * @version V1.2.7
-  * @date    17-February-2017
   * @brief   Header for audio_record.c module
   ******************************************************************************
   * @attention
@@ -41,7 +39,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "../../../../../Middlewares/ST/STM32_Audio/Addons/PDM/pdm_filter.h"
+#include "../../../Middlewares/ST/STM32_Audio/Addons/PDM/Inc/pdm2pcm_glo.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/

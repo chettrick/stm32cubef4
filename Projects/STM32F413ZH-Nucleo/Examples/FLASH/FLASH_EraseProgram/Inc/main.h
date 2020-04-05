@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    FLASH/FLASH_EraseProgram/Inc/main.h
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention

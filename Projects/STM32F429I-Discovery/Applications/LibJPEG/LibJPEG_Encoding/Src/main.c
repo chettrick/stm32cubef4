@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    LibJPEG/LibJPEG_Encoding/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017 
   * @brief   Main program body
   *          This sample code shows how to compress BMP file to JPEG file.
   ******************************************************************************
@@ -68,7 +66,7 @@ uint32_t counter = 0, bytesread;
 uint32_t offset = 0;
 uint32_t line_counter = 0;
 
-USBH_HandleTypeDef  hUSB_Host;
+USBH_HandleTypeDef  hUSBHost;
 /* Variable to save the state of USB */
 MSC_ApplicationTypeDef Appli_state = APPLICATION_IDLE;
 DMA2D_HandleTypeDef DMA2DHandle;
@@ -106,19 +104,19 @@ int main(void)
   if(FATFS_LinkDriver(&USBH_Driver, USBDISKPath) == 0)
   {
     /*##-3- Init Host Library ################################################*/
-    USBH_Init(&hUSB_Host, USBH_UserProcess, 0);
+    USBH_Init(&hUSBHost, USBH_UserProcess, 0);
 
     /*##-4- Add Supported Class ##############################################*/
-    USBH_RegisterClass(&hUSB_Host, USBH_MSC_CLASS);
+    USBH_RegisterClass(&hUSBHost, USBH_MSC_CLASS);
 
     /*##-5- Start Host Process ###############################################*/
-    USBH_Start(&hUSB_Host);
+    USBH_Start(&hUSBHost);
 
     /*##-6- Run Application (Blocking mode) ##################################*/
     while (1)
     {
       /* USB Host Background task */
-      USBH_Process(&hUSB_Host);
+      USBH_Process(&hUSBHost);
 
       /* Mass Storage Application State Machine */
       switch(Appli_state)

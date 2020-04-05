@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Device/DFU_Standalone/Src/usbd_dfu_flash.c
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    17-February-2017
   * @brief   Memory management layer
   ******************************************************************************
   * @attention

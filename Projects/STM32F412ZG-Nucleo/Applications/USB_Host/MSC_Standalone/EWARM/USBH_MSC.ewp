@@ -1005,7 +1005,7 @@
         <name>$PROJ_DIR$\..\Src\usbh_conf.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\Src\usbh_diskio.c</name>
+        <name>$PROJ_DIR$\..\Src\usbh_diskio_dma.c</name>
       </file>
     </group>
   </group>
@@ -1127,9 +1127,18 @@
     <name>Middlewares</name>
     <group>
       <name>FatFS</name>
+<group>
+<name>Core</name>
       <file>
         <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src\ff.c</name>
       </file>
+<file>
+<name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src\diskio.c</name>
+</file>
+<file>
+<name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src\ff_gen_drv.c</name>
+</file>
+</group>
     </group>
     <group>
       <name>STM32_USBH_Library</name>

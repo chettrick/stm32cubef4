@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/HID_RTOS/Src/usbh_conf.c
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    17-February-2017
   * @brief   USB Host configuration file.
   ******************************************************************************
   * @attention

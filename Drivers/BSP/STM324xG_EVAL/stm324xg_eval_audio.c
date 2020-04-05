@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm324xg_eval_audio.c
   * @author  MCD Application Team
-  * @version V3.0.0
-  * @date    27-January-2017
   * @brief   This file provides the Audio driver for the STM324xG-EVAL evaluation
   *          board.  
   ******************************************************************************

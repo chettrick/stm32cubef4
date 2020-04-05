@@ -10,14 +10,15 @@
       <TargetName>STM324x9I-EVAL_USBH-FS</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
+      <pCCUsed>5060528::V5.06 update 5 (build 528)::ARMCC</pCCUsed>
+      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F429NIHx</Device>
           <Vendor>STMicroelectronics</Vendor>
           <PackID>Keil.STM32F4xx_DFP.2.11.0</PackID>
           <PackURL>http://www.keil.com/pack</PackURL>
-          <Cpu>IRAM(0x20000000-0x2002FFFF) IRAM2(0x10000000-0x1000FFFF) IROM(0x8000000-0x81FFFFF) CLOCK(25000000) FPU2 CPUTYPE("Cortex-M4")</Cpu>
+          <Cpu>IROM(0x08000000-0x81FFFFF) IRAM(0x20000000-0x2002FFFF) IRAM2(0x10000000-0x1000FFFF) CLOCK(25000000) FPU2 CPUTYPE("Cortex-M4")</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
           <FlashDriverDll></FlashDriverDll>
@@ -47,7 +48,7 @@
             <NotGenerated>0</NotGenerated>
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
-          <OutputDirectory>STM324x9I-EVAL_USBH-FS\</OutputDirectory>
+          <OutputDirectory>STM324x9I-EVAL_USBH-FS\Exe\</OutputDirectory>
           <OutputName>STM324x9I-EVAL_USBH-FS</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
@@ -335,7 +336,7 @@
               <MiscControls>--C99</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F429xx,USE_STM324x9I_EVAL,USE_USB_FS</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../../../../../../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../../../../../../Drivers/STM32F4xx_HAL_Driver/Inc;../../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Inc;../../../../../../Middlewares/ST/STM32_USB_Host_Library/Class/AUDIO/Inc;../../../../../../Middlewares/Third_Party/FatFs/src;../../../../../../Middlewares/Third_Party/FatFs/src/drivers;../../../../../../Drivers/BSP/STM324x9I_EVAL;../../../../../../Utilities/Log</IncludePath>
+              <IncludePath>../Inc;../../../../../../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../../../../../../Drivers/STM32F4xx_HAL_Driver/Inc;../../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Inc;../../../../../../Middlewares/ST/STM32_USB_Host_Library/Class/AUDIO/Inc;../../../../../../Middlewares/Third_Party/FatFs/src;../../../../../../Drivers/BSP/STM324x9I_EVAL;../../../../../../Utilities/Log</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -377,6 +378,9 @@
       </TargetOption>
       <Groups>
         <Group>
+          <GroupName>::CMSIS</GroupName>
+        </Group>
+        <Group>
           <GroupName>Doc</GroupName>
           <Files>
             <File>
@@ -390,9 +394,9 @@
           <GroupName>Middlewares/STM32_USBH_Library/Core</GroupName>
           <Files>
             <File>
-              <FileName>usbh_ctlreq.c</FileName>
+              <FileName>usbh_core.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ctlreq.c</FilePath>
+              <FilePath>../../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_core.c</FilePath>
             </File>
             <File>
               <FileName>usbh_ioreq.c</FileName>
@@ -405,9 +409,9 @@
               <FilePath>../../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_pipes.c</FilePath>
             </File>
             <File>
-              <FileName>usbh_core.c</FileName>
+              <FileName>usbh_ctlreq.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_core.c</FilePath>
+              <FilePath>../../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ctlreq.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -423,11 +427,6 @@
               <FileName>usbh_conf.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Src/usbh_conf.c</FilePath>
-            </File>
-            <File>
-              <FileName>sd_diskio.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Src/sd_diskio.c</FilePath>
             </File>
             <File>
               <FileName>menu.c</FileName>
@@ -577,6 +576,16 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Middlewares/FatFs/Drivers</GroupName>
+          <Files>
+            <File>
+              <FileName>sd_diskio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Src/sd_diskio.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Utilities</GroupName>
           <Files>
             <File>
@@ -661,23 +670,21 @@
             </File>
           </Files>
         </Group>
-        <Group>
-          <GroupName>::CMSIS</GroupName>
-        </Group>
       </Groups>
     </Target>
     <Target>
       <TargetName>STM324x9I-EVAL_USBH-HS</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
+      <pCCUsed>5060528::V5.06 update 5 (build 528)::ARMCC</pCCUsed>
+      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F429NIHx</Device>
           <Vendor>STMicroelectronics</Vendor>
           <PackID>Keil.STM32F4xx_DFP.2.11.0</PackID>
           <PackURL>http://www.keil.com/pack</PackURL>
-          <Cpu>IRAM(0x20000000-0x2002FFFF) IRAM2(0x10000000-0x1000FFFF) IROM(0x8000000-0x81FFFFF) CLOCK(25000000) FPU2 CPUTYPE("Cortex-M4")</Cpu>
+          <Cpu>IROM(0x08000000-0x81FFFFF) IRAM(0x20000000-0x2002FFFF) IRAM2(0x10000000-0x1000FFFF) CLOCK(25000000) FPU2 CPUTYPE("Cortex-M4")</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
           <FlashDriverDll></FlashDriverDll>
@@ -707,7 +714,7 @@
             <NotGenerated>0</NotGenerated>
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
-          <OutputDirectory>STM324x9I-EVAL_USBH-HS\</OutputDirectory>
+          <OutputDirectory>STM324x9I-EVAL_USBH-HS\Exe\</OutputDirectory>
           <OutputName>STM324x9I-EVAL_USBH-HS</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
@@ -995,7 +1002,7 @@
               <MiscControls>--C99</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F429xx,USE_STM324x9I_EVAL,USE_USB_HS</Define>
               <Undefine></Undefine>
-              <IncludePath>../inc;../../../../../../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../../../../../../Drivers/STM32F4xx_HAL_Driver/Inc;../../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Inc;../../../../../../Middlewares/ST/STM32_USB_Host_Library/Class/AUDIO/Inc;../../../../../../Middlewares/Third_Party/FatFs/src;../../../../../../Middlewares/Third_Party/FatFs/src/drivers;../../../../../../Drivers/BSP/STM324x9I_EVAL;../../../../../../Utilities/Log</IncludePath>
+              <IncludePath>../inc;../../../../../../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../../../../../../Drivers/STM32F4xx_HAL_Driver/Inc;../../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Inc;../../../../../../Middlewares/ST/STM32_USB_Host_Library/Class/AUDIO/Inc;../../../../../../Middlewares/Third_Party/FatFs/src;../../../../../../Drivers/BSP/STM324x9I_EVAL;../../../../../../Utilities/Log</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1037,6 +1044,9 @@
       </TargetOption>
       <Groups>
         <Group>
+          <GroupName>::CMSIS</GroupName>
+        </Group>
+        <Group>
           <GroupName>Doc</GroupName>
           <Files>
             <File>
@@ -1050,9 +1060,9 @@
           <GroupName>Middlewares/STM32_USBH_Library/Core</GroupName>
           <Files>
             <File>
-              <FileName>usbh_ctlreq.c</FileName>
+              <FileName>usbh_core.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ctlreq.c</FilePath>
+              <FilePath>../../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_core.c</FilePath>
             </File>
             <File>
               <FileName>usbh_ioreq.c</FileName>
@@ -1065,9 +1075,9 @@
               <FilePath>../../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_pipes.c</FilePath>
             </File>
             <File>
-              <FileName>usbh_core.c</FileName>
+              <FileName>usbh_ctlreq.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_core.c</FilePath>
+              <FilePath>../../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ctlreq.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1083,11 +1093,6 @@
               <FileName>usbh_conf.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Src/usbh_conf.c</FilePath>
-            </File>
-            <File>
-              <FileName>sd_diskio.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Src/sd_diskio.c</FilePath>
             </File>
             <File>
               <FileName>menu.c</FileName>
@@ -1237,6 +1242,16 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Middlewares/FatFs/Drivers</GroupName>
+          <Files>
+            <File>
+              <FileName>sd_diskio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Src/sd_diskio.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Utilities</GroupName>
           <Files>
             <File>
@@ -1321,23 +1336,21 @@
             </File>
           </Files>
         </Group>
-        <Group>
-          <GroupName>::CMSIS</GroupName>
-        </Group>
       </Groups>
     </Target>
     <Target>
       <TargetName>STM324x9I-EVAL_USBH-HS-IN-FS</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
+      <pCCUsed>5060528::V5.06 update 5 (build 528)::ARMCC</pCCUsed>
+      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F429NIHx</Device>
           <Vendor>STMicroelectronics</Vendor>
           <PackID>Keil.STM32F4xx_DFP.2.11.0</PackID>
           <PackURL>http://www.keil.com/pack</PackURL>
-          <Cpu>IRAM(0x20000000-0x2002FFFF) IRAM2(0x10000000-0x1000FFFF) IROM(0x8000000-0x81FFFFF) CLOCK(25000000) FPU2 CPUTYPE("Cortex-M4")</Cpu>
+          <Cpu>IROM(0x08000000-0x81FFFFF) IRAM(0x20000000-0x2002FFFF) IRAM2(0x10000000-0x1000FFFF) CLOCK(25000000) FPU2 CPUTYPE("Cortex-M4")</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
           <FlashDriverDll></FlashDriverDll>
@@ -1367,7 +1380,7 @@
             <NotGenerated>0</NotGenerated>
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
-          <OutputDirectory>STM324x9I-EVAL_USBH-HS-IN-FS\</OutputDirectory>
+          <OutputDirectory>STM324x9I-EVAL_USBH-HS-IN-FS\Exe\</OutputDirectory>
           <OutputName>STM324x9I-EVAL_USBH-HS-IN-FS</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
@@ -1697,6 +1710,9 @@
       </TargetOption>
       <Groups>
         <Group>
+          <GroupName>::CMSIS</GroupName>
+        </Group>
+        <Group>
           <GroupName>Doc</GroupName>
           <Files>
             <File>
@@ -1710,9 +1726,9 @@
           <GroupName>Middlewares/STM32_USBH_Library/Core</GroupName>
           <Files>
             <File>
-              <FileName>usbh_ctlreq.c</FileName>
+              <FileName>usbh_core.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ctlreq.c</FilePath>
+              <FilePath>../../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_core.c</FilePath>
             </File>
             <File>
               <FileName>usbh_ioreq.c</FileName>
@@ -1725,9 +1741,9 @@
               <FilePath>../../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_pipes.c</FilePath>
             </File>
             <File>
-              <FileName>usbh_core.c</FileName>
+              <FileName>usbh_ctlreq.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_core.c</FilePath>
+              <FilePath>../../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ctlreq.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1743,11 +1759,6 @@
               <FileName>usbh_conf.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Src/usbh_conf.c</FilePath>
-            </File>
-            <File>
-              <FileName>sd_diskio.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Src/sd_diskio.c</FilePath>
             </File>
             <File>
               <FileName>menu.c</FileName>
@@ -1897,6 +1908,16 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Middlewares/FatFs/Drivers</GroupName>
+          <Files>
+            <File>
+              <FileName>sd_diskio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Src/sd_diskio.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Utilities</GroupName>
           <Files>
             <File>
@@ -1980,9 +2001,6 @@
               <FilePath>startup_stm32f429xx.s</FilePath>
             </File>
           </Files>
-        </Group>
-        <Group>
-          <GroupName>::CMSIS</GroupName>
         </Group>
       </Groups>
     </Target>

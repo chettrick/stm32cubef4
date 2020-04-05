@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm32f4_discovery.c
   * @author  MCD Application Team
-  * @version V2.1.2
-  * @date    27-January-2017
   * @brief   This file provides set of firmware functions to manage Leds and
   *          push-button available on STM32F4-Discovery Kit from STMicroelectronics.
   ******************************************************************************
@@ -64,11 +62,11 @@
   */
   
   /**
-  * @brief STM32F4 DISCO BSP Driver version number V2.1.2
+  * @brief STM32F4 DISCO BSP Driver version number V2.1.3
   */
 #define __STM32F4_DISCO_BSP_VERSION_MAIN   (0x02) /*!< [31:24] main version */
 #define __STM32F4_DISCO_BSP_VERSION_SUB1   (0x01) /*!< [23:16] sub1 version */
-#define __STM32F4_DISCO_BSP_VERSION_SUB2   (0x02) /*!< [15:8]  sub2 version */
+#define __STM32F4_DISCO_BSP_VERSION_SUB2   (0x03) /*!< [15:8]  sub2 version */
 #define __STM32F4_DISCO_BSP_VERSION_RC     (0x00) /*!< [7:0]  release candidate */ 
 #define __STM32F4_DISCO_BSP_VERSION         ((__STM32F4_DISCO_BSP_VERSION_MAIN << 24)\
                                              |(__STM32F4_DISCO_BSP_VERSION_SUB1 << 16)\

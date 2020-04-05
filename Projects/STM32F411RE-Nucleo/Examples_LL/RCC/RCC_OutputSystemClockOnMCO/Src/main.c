@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Examples_LL/RCC/RCC_OutputSystemClockOnMCO/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017
   * @brief   This example describes how to how to configure MCO pin to output 
   *          the system clock through the STM32F4xx RCC LL API.
   ******************************************************************************

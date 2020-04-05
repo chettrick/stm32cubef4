@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    FatFs/FatFs_USBDisk_MultipleAccess_RTOS/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    17-February-2017
   * @brief   Main program body
   *          This sample code shows how to use FatFs with USB disk drive with 
   *          mutliple access in RTOS mode.
@@ -56,7 +54,7 @@
 FATFS USBDISKFatFs;           /* File system object for USB disk logical drive */
 FIL MyFile1, MyFile2;         /* File objects */
 char USBDISKPath[4];          /* USB Host logical drive path */
-USBH_HandleTypeDef hUSB_Host; /* USB Host handle */
+USBH_HandleTypeDef hUSBHost; /* USB Host handle */
 uint8_t disk_op = 0;
 osSemaphoreId osLedSemaphore;
 
@@ -150,13 +148,13 @@ static void StartThread(void const *argument)
   if(FATFS_LinkDriver(&USBH_Driver, USBDISKPath) == 0)
   {
     /* Init Host Library */
-    USBH_Init(&hUSB_Host, USBH_UserProcess, 0);
+    USBH_Init(&hUSBHost, USBH_UserProcess, 0);
     
     /* Add Supported Class */
-    USBH_RegisterClass(&hUSB_Host, USBH_MSC_CLASS);
+    USBH_RegisterClass(&hUSBHost, USBH_MSC_CLASS);
     
     /* Start Host Process */
-    USBH_Start(&hUSB_Host);
+    USBH_Start(&hUSBHost);
     
     for( ;; )
     {

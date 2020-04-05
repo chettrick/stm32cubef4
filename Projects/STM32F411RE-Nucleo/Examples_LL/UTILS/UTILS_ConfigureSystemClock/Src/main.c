@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Examples_LL/UTILS/UTILS_ConfigureSystemClock/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017
   * @brief   This example describes how to configure system clock using PLL with 
   *          HSI as source clock through the STM32F4xx UTILS LL API.
   ******************************************************************************

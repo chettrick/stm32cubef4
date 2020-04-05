@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm32469i_discovery_sdram.c
   * @author  MCD Application Team
-  * @version V2.0.0
-  * @date    27-January-2017
   * @brief   This file includes the SDRAM driver for the MT48LC4M32B2B5-7 memory
   *          device mounted on STM32469I-Discovery board.
   ******************************************************************************

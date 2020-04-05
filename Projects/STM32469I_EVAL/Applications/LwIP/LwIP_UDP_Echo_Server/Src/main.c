@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    LwIP/LwIP_UDP_Echo_Server/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   This sample code implements a UDP Echo Server application based on 
   *          Raw API of LwIP stack. This application uses STM32F4xx the 
   *          ETH HAL API to transmit and receive data. 

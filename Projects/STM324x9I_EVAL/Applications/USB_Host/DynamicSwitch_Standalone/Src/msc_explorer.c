@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/DynamicSwitch_Standalone/Src/msc_explorer.c 
   * @author  MCD Application Team
-  * @version V1.5.0
-  * @date    17-February-2017
   * @brief   Explore the USB flash disk content
   ******************************************************************************
   * @attention
@@ -68,11 +66,6 @@ FRESULT Explore_Disk(char *path, uint8_t recu_level)
   char *fn;
   char tmp[14];
   uint8_t line_idx = 0;
-#if _USE_LFN
-  static char lfn[_MAX_LFN + 1];  /* Buffer to store the LFN */
-  fno.lfname = lfn;
-  fno.lfsize = sizeof lfn;
-#endif
 
   res = f_opendir(&dir, path);
   if (res == FR_OK)
@@ -89,11 +82,8 @@ FRESULT Explore_Disk(char *path, uint8_t recu_level)
         continue;
       }
 
-#if _USE_LFN
-      fn = *fno.lfname ? fno.lfname : fno.fname;
-#else
+ 
       fn = fno.fname;
-#endif
       strcpy(tmp, fn);
 
       line_idx++;
@@ -117,7 +107,7 @@ FRESULT Explore_Disk(char *path, uint8_t recu_level)
       {
         LCD_DbgLog("   |   |__");
       }
-      if ((fno.fattrib & AM_MASK) == AM_DIR)
+      if ((fno.fattrib & AM_DIR) == AM_DIR)
       {
         strcat(tmp, "\n");
         LCD_UsrLog((void *)tmp);
@@ -129,7 +119,7 @@ FRESULT Explore_Disk(char *path, uint8_t recu_level)
         LCD_DbgLog((void *)tmp);
       }
 
-      if (((fno.fattrib & AM_MASK) == AM_DIR) && (recu_level == 2))
+      if (((fno.fattrib & AM_DIR) == AM_DIR) && (recu_level == 2))
       {
         Explore_Disk(fn, 2);
       }

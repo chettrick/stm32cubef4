@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Examples_LL/I2C/I2C_OneBoard_Communication_IT/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017
   * @brief   This example describes how to send/receive bytes over I2C IP using
   *          the STM32F4xx I2C LL API.
   *          Peripheral initialization done using LL unitary services functions.

@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    STemWin/STemWin_HelloWorld/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017
   * @brief   Description of STemWin Hello World application.
   ******************************************************************************
   * @attention
@@ -68,17 +66,17 @@ Note that the following user files may need to be updated:
 
 @par Directory contents 
 
-  - STemWin/STemWin_HelloWorld/Inc/GUIConf.h                      Header for GUIConf_stm32412g_discovery.c
-  - STemWin/STemWin_HelloWorld/Inc/LCDConf.h                      Header for LCDConf_stm32412g_discovery.c
-  - STemWin/STemWin_HelloWorld/Inc/main.h                         Main program header file
-  - STemWin/STemWin_HelloWorld/Inc/stm32f4xx_hal_conf.h           Library Configuration file
-  - STemWin/STemWin_HelloWorld/Inc/stm32f4xx_it.h                 Interrupt handlers header file
-  - STemWin/STemWin_HelloWorld/Src/BASIC_HelloWorld.c             Simple demo drawing "Hello world"
-  - STemWin/STemWin_HelloWorld/Src/LCDConf_stm32f413h_discovery.c Display controller initialization
-  - STemWin/STemWin_HelloWorld/Src/GUIConf_stm32f413h_discovery.c Configuration file for the GUI library
-  - STemWin/STemWin_HelloWorld/Src/main.c                         Main program file
-  - STemWin/STemWin_HelloWorld/Src/stm32f4xx_it.c                 STM32F4xx Interrupt handlers
-  - STemWin/STemWin_HelloWorld/Src/system_stm32f4xx.c             STM32F4xx system file
+  - STemWin/STemWin_HelloWorld/STemWin/Target/GUIConf.h                      Header for GUIConf_stm32412g_discovery.c
+  - STemWin/STemWin_HelloWorld/STemWin/Target/LCDConf.h                      Header for LCDConf_stm32412g_discovery.c
+  - STemWin/STemWin_HelloWorld/Core/Inc/main.h                               Main program header file
+  - STemWin/STemWin_HelloWorld/Core/Inc/stm32f4xx_hal_conf.h                 Library Configuration file
+  - STemWin/STemWin_HelloWorld/Core/Inc/stm32f4xx_it.h                       Interrupt handlers header file
+  - STemWin/STemWin_HelloWorld/STemWin/App/BASIC_HelloWorld.c                Simple demo drawing "Hello world"
+  - STemWin/STemWin_HelloWorld/STemWin/Target/LCDConf_stm32f413h_discovery.c Display controller initialization
+  - STemWin/STemWin_HelloWorld/STemWin/Target/GUIConf_stm32f413h_discovery.c Configuration file for the GUI library
+  - STemWin/STemWin_HelloWorld/Core/Src/main.c                               Main program file
+  - STemWin/STemWin_HelloWorld/Core/Src/stm32f4xx_it.c                       STM32F4xx Interrupt handlers
+  - STemWin/STemWin_HelloWorld/Core/Src/system_stm32f4xx.c                   STM32F4xx system file
  
 @par Hardware and Software environment 
 

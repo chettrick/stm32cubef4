@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    LibJPEG/LibJPEG_Encoding/Inc/jdata_conf.h 
   * @author  MCD Application Team
-  * @version 
-  * @date    17-February-2017
   * @brief   
   ******************************************************************************
   * @attention
@@ -47,6 +45,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "ff.h"
+#include "stm32f4xx_hal.h"
 
 /* Private typedef -----------------------------------------------------------*/  
 /* Private define ------------------------------------------------------------*/
@@ -61,7 +60,7 @@
 #define JFREE     free  
 
 size_t read_file (JFILE  *file, uint8_t *buf, uint32_t sizeofbuf);
-size_t write_file (JFILE  *file, uint8_t *buf, uint32_t sizeofbuf) ;
+size_t write_file (JFILE  *file, uint8_t *buf, uint32_t sizeofbuf);
 
 #define JFREAD(file,buf,sizeofbuf)  \
    read_file (file,buf,sizeofbuf)

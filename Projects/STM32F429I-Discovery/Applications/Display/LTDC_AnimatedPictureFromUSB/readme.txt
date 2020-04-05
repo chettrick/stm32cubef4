@@ -5,8 +5,6 @@
   ******************************************************************************
   * @file    Display/LTDC_AnimatedPictureFromUSB/readme.txt 
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   Description of the LTDC Animated Picture From USB application.
   ******************************************************************************
   * @attention
@@ -68,12 +66,14 @@
 @par Directory contents
 
     - Display/LTDC_AnimatedPictureFromUSB/Inc/main.h                 Main configuration file
+    - Display/LTDC_AnimatedPictureFromUSB/Inc/usbh_diskio_dma.h      FatFS usbh diskio driver header file
     - Display/LTDC_AnimatedPictureFromUSB/Inc/stm32f4xx_it.h         Interrupt handlers header file
     - Display/LTDC_AnimatedPictureFromUSB/Inc/stm32f4xx_hal_conf.h   HAL Configuration file 
     - Display/LTDC_AnimatedPictureFromUSB/Inc/ffconf.h               FAT file system module configuration file
     - Display/LTDC_AnimatedPictureFromUSB/Inc/lcd_log_conf.h         Configuration file for LCD_Log module
     - Display/LTDC_AnimatedPictureFromUSB/Inc/usbh_conf.h            Configuration file for USB module
     - Display/LTDC_AnimatedPictureFromUSB/Src/main.c                 Main program 
+    - Display/LTDC_AnimatedPictureFromUSB/Src/usbh_diskio_dma.c      FatFS usbh diskio driver implementation
     - Display/LTDC_AnimatedPictureFromUSB/Src/stm32f4xx_it.c         Interrupt handlers
     - Display/LTDC_AnimatedPictureFromUSB/Src/usbh_conf.c            Main function to configure USB
     - Display/LTDC_AnimatedPictureFromUSB/Src/system_stm32f4xx.c     STM32F4xx system clock configuration file
@@ -83,12 +83,12 @@
 
   - This application runs on STM32F429xx Devices.
     
-  - This application has been tested with STM32F429I-Discovery RevB board and can be
+  - This application has been tested with STM32F429I-Discovery RevC board and can be
     easily tailored to any other supported device and development board.  
 
   - STM32F429I-DISCO RevB Set-up
     - Plug the USB key into the STM32F429I-DISCO board through 'USB micro A-Male 
-      to A-Female' cable. 
+      to A-Female' cable(CN6). 
  
  
 @par How to use it ? 

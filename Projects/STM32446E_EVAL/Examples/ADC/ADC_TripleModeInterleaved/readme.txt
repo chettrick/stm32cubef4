@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    ADC/ADC_TripleModeInterleaved/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    17-February-2017
   * @brief   Description of the Triple interleaved mode and DMA mode2 Example
   ******************************************************************************
   *

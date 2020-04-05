@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    HAL/HAL_TimeBase_RTC_ALARM/Inc/stm32f4xx_it.h 
   * @author  MCD Application Team
-  * @version V1.2.8
-  * @date    17-February-2017
   * @brief   This file contains the headers of the interrupt handlers.
   ******************************************************************************
   * @attention

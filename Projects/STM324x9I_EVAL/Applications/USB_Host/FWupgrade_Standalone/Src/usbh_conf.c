@@ -2,43 +2,41 @@
   ******************************************************************************
   * @file    USB_Host/FWupgrade_Standalone/Src/usbh_conf.c
   * @author  MCD Application Team
-  * @version V1.5.0
-  * @date    17-February-2017
   * @brief   USB Host configuration file.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V.
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without 
+  * Redistribution and use in source and binary forms, with or without
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice, 
+  * 1. Redistribution of source code must retain the above copyright notice,
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other 
-  *    contributors to this software may be used to endorse or promote products 
+  * 3. Neither the name of STMicroelectronics nor the names of other
+  *    contributors to this software may be used to endorse or promote products
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this 
+  * 4. This software, including modifications and/or derivative works of this
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under 
-  *    this license is void and will automatically terminate your rights under 
-  *    this license. 
+  * 5. Redistribution and use of this software other than as permitted under
+  *    this license is void and will automatically terminate your rights under
+  *    this license.
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
@@ -101,7 +99,10 @@ void HAL_HCD_MspInit(HCD_HandleTypeDef * hhcd)
   else if (hhcd->Instance == USB_OTG_HS)
   {
 #ifdef USE_USB_HS_IN_FS
-
+    
+    /* Initializes and configures the IO */
+    BSP_IO_Init();
+    
     /* Configure POWER_SWITCH IO pin */
     BSP_IO_ConfigPin(OTG_FS2_POWER_SWITCH_PIN, IO_MODE_OUTPUT);
 
@@ -237,7 +238,7 @@ void HAL_HCD_Disconnect_Callback(HCD_HandleTypeDef * hhcd)
 /**
   * @brief  Notify URB state change callback.
   * @param  hhcd: HCD handle
-  * @param  chnum: Channel number 
+  * @param  chnum: Channel number
   * @param  urb_state: URB State
   * @retval None
   */
@@ -278,7 +279,7 @@ USBH_StatusTypeDef USBH_LL_Init(USBH_HandleTypeDef * phost)
   /* Set the LL driver parameters */
   hhcd.Instance = USB_OTG_HS;
   hhcd.Init.Host_channels = 11;
-  hhcd.Init.dma_enable = 1;
+  hhcd.Init.dma_enable = 0;
   hhcd.Init.low_power_enable = 0;
 #ifdef USE_USB_HS_IN_FS
   hhcd.Init.phy_itface = HCD_PHY_EMBEDDED;
@@ -312,7 +313,7 @@ USBH_StatusTypeDef USBH_LL_DeInit(USBH_HandleTypeDef * phost)
 }
 
 /**
-  * @brief  Starts the Low Level portion of the Host driver.   
+  * @brief  Starts the Low Level portion of the Host driver.
   * @param  phost: Host handle
   * @retval USBH Status
   */
@@ -377,7 +378,7 @@ USBH_StatusTypeDef USBH_LL_ResetPort(USBH_HandleTypeDef * phost)
 /**
   * @brief  Returns the last transferred packet size.
   * @param  phost: Host handle
-  * @param  pipe: Pipe index   
+  * @param  pipe: Pipe index
   * @retval Packet Size
   */
 uint32_t USBH_LL_GetLastXferSize(USBH_HandleTypeDef * phost, uint8_t pipe)
@@ -391,9 +392,9 @@ uint32_t USBH_LL_GetLastXferSize(USBH_HandleTypeDef * phost, uint8_t pipe)
   * @param  pipe: Pipe index
   * @param  epnum: Endpoint Number
   * @param  dev_address: Device USB address
-  * @param  speed: Device Speed 
+  * @param  speed: Device Speed
   * @param  ep_type: Endpoint Type
-  * @param  mps: Endpoint Max Packet Size                 
+  * @param  mps: Endpoint Max Packet Size
   * @retval USBH Status
   */
 USBH_StatusTypeDef USBH_LL_OpenPipe(USBH_HandleTypeDef * phost,
@@ -410,7 +411,7 @@ USBH_StatusTypeDef USBH_LL_OpenPipe(USBH_HandleTypeDef * phost,
 /**
   * @brief  Closes a pipe of the Low Level Driver.
   * @param  phost: Host handle
-  * @param  pipe: Pipe index               
+  * @param  pipe: Pipe index
   * @retval USBH Status
   */
 USBH_StatusTypeDef USBH_LL_ClosePipe(USBH_HandleTypeDef * phost, uint8_t pipe)
@@ -422,11 +423,11 @@ USBH_StatusTypeDef USBH_LL_ClosePipe(USBH_HandleTypeDef * phost, uint8_t pipe)
 /**
   * @brief  Submits a new URB to the low level driver.
   * @param  phost: Host handle
-  * @param  pipe: Pipe index    
+  * @param  pipe: Pipe index
   *          This parameter can be a value from 1 to 15
   * @param  direction: Channel number
   *          This parameter can be one of these values:
-  *           0: Output 
+  *           0: Output
   *           1: Input
   * @param  ep_type: Endpoint Type
   *          This parameter can be one of these values:
@@ -442,8 +443,8 @@ USBH_StatusTypeDef USBH_LL_ClosePipe(USBH_HandleTypeDef * phost, uint8_t pipe)
   * @param  length: length of URB data
   * @param  do_ping: activate do ping protocol (for high speed only)
   *          This parameter can be one of these values:
-  *           0: do ping inactive 
-  *           1: do ping active 
+  *           0: do ping inactive
+  *           1: do ping active
   * @retval USBH Status
   */
 USBH_StatusTypeDef USBH_LL_SubmitURB(USBH_HandleTypeDef * phost,
@@ -454,9 +455,8 @@ USBH_StatusTypeDef USBH_LL_SubmitURB(USBH_HandleTypeDef * phost,
                                      uint8_t * pbuff,
                                      uint16_t length, uint8_t do_ping)
 {
-  HAL_HCD_HC_SubmitRequest(phost->pData,
-                           pipe,
-                           direction, ep_type, token, pbuff, length, do_ping);
+  HAL_HCD_HC_SubmitRequest(phost->pData, pipe, direction, ep_type,
+                           token, pbuff, length, do_ping);
   return USBH_OK;
 }
 
@@ -470,9 +470,9 @@ USBH_StatusTypeDef USBH_LL_SubmitURB(USBH_HandleTypeDef * phost,
   *            @arg URB_IDLE
   *            @arg URB_DONE
   *            @arg URB_NOTREADY
-  *            @arg URB_NYET 
-  *            @arg URB_ERROR  
-  *            @arg URB_STALL      
+  *            @arg URB_NYET
+  *            @arg URB_ERROR
+  *            @arg URB_STALL
   */
 USBH_URBStateTypeDef USBH_LL_GetURBState(USBH_HandleTypeDef * phost,
                                          uint8_t pipe)
@@ -485,7 +485,7 @@ USBH_URBStateTypeDef USBH_LL_GetURBState(USBH_HandleTypeDef * phost,
   * @param  phost: Host handle
   * @param  state: VBUS state
   *          This parameter can be one of these values:
-  *           0: VBUS Active 
+  *           0: VBUS Active
   *           1: VBUS Inactive
   * @retval USBH Status
   */
@@ -525,7 +525,7 @@ USBH_StatusTypeDef USBH_LL_DriverVBUS(USBH_HandleTypeDef * phost, uint8_t state)
 /**
   * @brief  Sets toggle for a pipe.
   * @param  phost: Host handle
-  * @param  pipe: Pipe index   
+  * @param  pipe: Pipe index
   * @param  toggle: toggle (0/1)
   * @retval USBH Status
   */

@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    TIM/TIM_TimeBase/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   This sample code shows how to use STM32F4xx TIM HAL API to generate
   *          a time base of one second with the corresponding Interrupt request.
   ******************************************************************************

@@ -85,13 +85,13 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c</location>
 		</link><link>
+			<name>Middlewares/FatFs/Drivers/sram_diskio.c</name>
+			<type>1</type>
+			<location>PARENT-2-PROJECT_LOC/Src/sram_diskio.c</location>
+		</link><link>
 			<name>Application/SW4STM32/startup_stm32f407xx.s</name>
 			<type>1</type>
 			<location>PARENT-1-PROJECT_LOC/startup_stm32f407xx.s</location>
-		</link><link>
-			<name>Middlewares/FatFs/Drivers/sram_diskio.c</name>
-			<type>1</type>
-			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FatFs/src/drivers/sram_diskio.c</location>
 		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_dma.c</name>
 			<type>1</type>

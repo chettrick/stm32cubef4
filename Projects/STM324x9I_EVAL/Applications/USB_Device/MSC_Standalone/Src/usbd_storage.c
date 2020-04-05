@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Device/MSC_Standalone/Src/usbd_storage.c
   * @author  MCD Application Team
-  * @version V1.5.0
-  * @date    17-February-2017
   * @brief   Memory management layer
   ******************************************************************************
   * @attention
@@ -46,7 +44,7 @@
   */
 /* Includes ------------------------------------------------------------------ */
 #include "usbd_storage.h"
-#include "stm324x9I_eval_sd.h"
+#include "stm324x9i_eval_sd.h"
 
 /* Private typedef ----------------------------------------------------------- */
 /* Private define ------------------------------------------------------------ */

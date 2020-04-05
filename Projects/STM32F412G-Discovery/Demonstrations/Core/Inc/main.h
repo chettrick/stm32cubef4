@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    main.h 
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    17-February-2017
   * @brief   Header for main.c file
   ******************************************************************************
   * @attention
@@ -72,8 +70,8 @@
 #include "usbd_core.h"
    
 /* GUI includes components */
-#include "gui.h"
-#include "dialog.h"
+#include "GUI.h"
+#include "DIALOG.h"
 #include "ST_GUI_Addons.h"
 
  /* Kernel includes components */

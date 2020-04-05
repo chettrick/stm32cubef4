@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Display/LCD_PicturesFromSDCard/Src/fatfs_storage.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   This file includes the Storage (FatFs) driver for the STM32412G-DISCOVERY
   *          application.
   ******************************************************************************

@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    hardware_rng.c
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   mbedtls alternate entropy data function.
   *          the mbedtls_hardware_poll() is customized to use the STM32 RNG
   *          to generate random data, required for TLS encryption algorithms.

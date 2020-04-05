@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/FWupgrade_Standalone/Inc/flash_if.h
   * @author  MCD Application Team
-  * @version V1.5.0
-  * @date    17-February-2017
   * @brief   Header file for flash_if.c
   ******************************************************************************
  * @attention
@@ -16,8 +14,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -35,21 +33,21 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
-   
+
 /* Exported types ------------------------------------------------------------*/
 typedef  void (*pFunction)(void);
 
 /* Exported constants --------------------------------------------------------*/
 /* Define the flash memory start address */
-#define USER_FLASH_STARTADDRESS    ((uint32_t)0x08000000) 
+#define USER_FLASH_STARTADDRESS    ((uint32_t)0x08000000)
 
 /* Define the address from where user application will be loaded.
-Note: the 1st and the second sectors 0x08000000-0x0800BFFF are reserved 
+Note: the 1st and the second sectors 0x08000000-0x0800BFFF are reserved
 for the Firmware upgrade code */
-#define APPLICATION_ADDRESS        (uint32_t)0x0800C000 
+#define APPLICATION_ADDRESS        (uint32_t)0x0800C000
 
 /* Last Page Adress */
-#define USER_FLASH_LAST_PAGE_ADDRESS  0x081FFFFF - 4    
+#define USER_FLASH_LAST_PAGE_ADDRESS  0x081FFFFF - 4
 
 /* Define the user application size */
 #define USER_FLASH_SIZE   (USER_FLASH_LAST_PAGE_ADDRESS - APPLICATION_ADDRESS + 1)
@@ -83,7 +81,7 @@ for the Firmware upgrade code */
 #define ADDR_FLASH_SECTOR_23     ((uint32_t)0x081E0000) /* Base @ of Sector 11, 128 Kbytes */
 
 /* Exported macros -----------------------------------------------------------*/
-/* Exported functions ------------------------------------------------------- */ 
+/* Exported functions ------------------------------------------------------- */
 void FLASH_If_FlashUnlock(void);
 FlagStatus FLASH_If_ReadOutProtectionStatus(void);
 uint32_t FLASH_If_EraseSectors(uint32_t Address);

@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    LibJPEG/LibJPEG_Encoding/Src/encode.c 
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   This file contain the compress method.
   ******************************************************************************
   * @attention
@@ -76,6 +74,7 @@ void jpeg_encode(JFILE *file, JFILE *file1, uint32_t width, uint32_t height, uin
   /* Pointer to a single row */
   JSAMPROW row_pointer;    
   uint32_t bytesread;
+  uint32_t index;
   
   /* Step 1: allocate and initialize JPEG compression object */
   /* Set up the error handler */
@@ -103,15 +102,17 @@ void jpeg_encode(JFILE *file, JFILE *file1, uint32_t width, uint32_t height, uin
   /* Step 4: start compressor */
   jpeg_start_compress(&cinfo_, TRUE);
   
-  /* Bypass the header bmp file */
-  f_read(file, buff, 54, (UINT*)&bytesread);
+  /* Get bitmap data address offset */
+  f_read(file, buff, 14, (UINT*)&bytesread);
+  index = *(__IO uint16_t *) (buff + 10);
+  index |= (*(__IO uint16_t *) (buff + 12)) << 16;
 
   while (cinfo_.next_scanline < cinfo_.image_height)
   {
     /* In this application, the input file is a BMP, which first encodes the bottom of the picture */
     /* JPEG encodes the highest part of the picture first. We need to read the lines upside down   */
     /* Move the read pointer to 'last line of the picture - next_scanline'    */
-    f_lseek(file, ((cinfo_.image_height-1-cinfo_.next_scanline)*width*3)+54);
+    f_lseek(file, ((cinfo_.image_height-1-cinfo_.next_scanline)*width*3)+index);
     if(f_read(file, buff, width*3, (UINT*)&bytesread) == FR_OK)
     {
       row_pointer = (JSAMPROW)buff;

@@ -1238,7 +1238,7 @@
   <group>
     <name>Middleware</name>
     <file>
-      <name>$PROJ_DIR$\..\..\..\..\Middlewares\ST\STM32_Audio\Addons\PDM\libPDMFilter_CM4_IAR.a</name>
+      <name>$PROJ_DIR$\..\..\..\..\Middlewares\ST\STM32_Audio\Addons\PDM\Lib\libPDMFilter_CM4_IAR.a</name>
     </file>
   </group>
 </project>

@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Device/HID_LPM_Standalone/Src/usbd_conf.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   This file implements the USB Device library callbacks and MSP
   ******************************************************************************
   * @attention

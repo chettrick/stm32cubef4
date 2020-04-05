@@ -314,7 +314,6 @@
           <name>CCIncludePath2</name>
           <state>$PROJ_DIR$\..\Inc</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include</state>
-<state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Include</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32F4xx_Nucleo_144</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\portable\IAR\ARM_CM4F</state>

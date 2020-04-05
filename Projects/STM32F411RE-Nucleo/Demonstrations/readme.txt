@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    Demonstrations/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.6
-  * @date    17-February-2017
   * @brief   Description of STM32F411RE-Nucleo Demo
   ******************************************************************************
   * @attention
@@ -148,7 +146,7 @@ access to uSD card to parse bmp images:
   - A SDSC microSD card (capacity up to 4GB), must contain the .bmp files
     available within the "BMP_128x160" folder under "Utilities/Media/Pictures" 
     
-  - Adafruit 1.8" TFT shield must be connected on CN5,CN6, CN8 and CN9 Arduino connectors, 
+  - Adafruit 1.8" TFT shield must be connected on CN7,CN8, CN9 and CN10 Arduino connectors, 
     for more details please refer to UM1726.
 
 For more details about the adafruit 1.8" TFT shield, please visit: 

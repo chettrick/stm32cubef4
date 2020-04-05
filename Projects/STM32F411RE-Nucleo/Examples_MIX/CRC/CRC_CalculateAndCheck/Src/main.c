@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Examples_MIX/CRC/CRC_CalculateAndCheck/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017
   * @brief   This sample code shows how to use the STM32F4xx CRC HAL API
   *          to compute a CRC code of a given buffer of data words (32-bit).
   ******************************************************************************

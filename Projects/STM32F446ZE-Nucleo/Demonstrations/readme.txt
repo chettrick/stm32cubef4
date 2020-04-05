@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    Demonstrations/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    17-February-2017
   * @brief   Description of STM32F446ZE-Nucleo-144 Demo
   ******************************************************************************
   * @attention
@@ -126,10 +124,12 @@ access to uSD card to parse bmp images:
   - Demonstrations/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - Demonstrations/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - Demonstrations/Inc/main.h                  Header for main.c module
+  - Demonstrations/Inc/sd_diskio.h             FatFS sd diskio driver header file
   - Demonstrations/Inc/fatfs_storage.h         Header for fatfs_storage.c module
   - Demonstrations/Inc/ffconf.h                FAT file system module configuration file   
   - Demonstrations/Src/stm32f4xx_it.c          Interrupt handlers
   - Demonstrations/Src/main.c                  Main program
+  - Demonstrations/Src/sd_diskio.c             FatFS sd diskio driver implementation
   - Demonstrations/Src/fatfs_storage.c         Storage (FatFs) driver
   - Demonstrations/Src/system_stm32f4xx.c      STM32F4xx system source file
 
@@ -142,10 +142,10 @@ access to uSD card to parse bmp images:
     boards and can be easily tailored to any other supported device 
     and development board.
     
-  - A SDSC microSD card (capacity up to 4GB), must contain the .bmp files
+  - A SDSC microSD card (capacity up to 8GB), must contain the .bmp files
     available within the "BMP_128x160" folder under "Utilities/Media/Pictures" 
     
-  - Adafruit 1.8" TFT shield must be connected on CN5,CN6, CN8 and CN9 Arduino connectors, 
+  - Adafruit 1.8" TFT shield must be connected on CN7,CN8, CN9 and CN10 Arduino connectors, 
     for more details please refer to UM1726.
     
   - Make sure the SB146, SB121 are closed and the SB174, SB165, SB122 are opened on the NUCLEO-446ZE board (bottom side) 

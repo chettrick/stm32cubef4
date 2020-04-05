@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm32_adafruit_sd.h
   * @author  MCD Application Team
-  * @version V3.0.0
-  * @date    23-December-2016
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm32_adafruit_sd.c driver.
   ******************************************************************************

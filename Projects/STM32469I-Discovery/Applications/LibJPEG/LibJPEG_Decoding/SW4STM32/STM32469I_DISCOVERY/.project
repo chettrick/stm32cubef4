@@ -233,6 +233,10 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c</location>
 		</link><link>
+			<name>Middlewares/FatFs/Drivers/sd_diskio.c</name>
+			<type>1</type>
+			<location>PARENT-2-PROJECT_LOC/Src/sd_diskio.c</location>
+		</link><link>
 			<name>Middlewares/LibJPEG/jcmainct.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LibJPEG/source/jcmainct.c</location>
@@ -353,10 +357,6 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/BSP/STM32469I-Discovery/stm32469i_discovery_sd.c</location>
 		</link><link>
-			<name>Middlewares/FatFs/Drivers/sd_diskio.c</name>
-			<type>1</type>
-			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FatFs/src/drivers/sd_diskio.c</location>
-		</link><link>
 			<name>Middlewares/LibJPEG/jcdctmgr.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LibJPEG/source/jcdctmgr.c</location>
@@ -381,10 +381,6 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c</location>
 		</link>
-		<link>
-			<name />
-			<type />
-			<location />
-		</link>
+		
 	</linkedResources>
 </projectDescription>

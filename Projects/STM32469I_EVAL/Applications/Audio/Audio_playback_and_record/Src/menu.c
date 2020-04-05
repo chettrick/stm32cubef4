@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Audio/Audio_playback_and_record/Src/menu.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   This file implements Menu Functions
   ******************************************************************************
   * @attention
@@ -63,9 +61,9 @@ AUDIO_PLAYBACK_StateTypeDef AudioState;
 
 uint8_t *AUDIO_main_menu[] = 
 {
-  (uint8_t *)"      1 - Explore Audio File                                         ",
-  (uint8_t *)"      2 - Start Audio Player                                         ",
-  (uint8_t *)"      3 - Start Audio Recorder                                       ",
+  (uint8_t *)"      1 - Explore Audio File                                             ",
+  (uint8_t *)"      2 - Start Audio Player                                             ",
+  (uint8_t *)"      3 - Start Audio Recorder                                           ",
 };
 
 /* Private function prototypes -----------------------------------------------*/
@@ -108,8 +106,8 @@ void AUDIO_MenuProcess(void)
       
       AudioDemo.state = AUDIO_DEMO_WAIT;
       BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
-      BSP_LCD_DisplayStringAtLine(17, (uint8_t *)"Use [Joystick Left/Right] to scroll up/down");
-      BSP_LCD_DisplayStringAtLine(18, (uint8_t *)"Use [Joystick Up/Down] to scroll Audio Playback and Record menu");
+      BSP_LCD_DisplayStringAtLine(24, (uint8_t *)"Use [Joystick Left/Right] to scroll up/down");
+      BSP_LCD_DisplayStringAtLine(25, (uint8_t *)"Use [Joystick Up/Down] to scroll Audio Playback and Record menu");
       break;    
       
     case AUDIO_DEMO_WAIT:
@@ -131,11 +129,11 @@ void AUDIO_MenuProcess(void)
           case 1:         
             /* Display HMI messages */
             BSP_LCD_SetTextColor(LCD_COLOR_GREEN);          
-            BSP_LCD_DisplayStringAtLine(14 ,(uint8_t *)"                                                               ");
-            BSP_LCD_DisplayStringAtLine(15 ,(uint8_t *)"                                                               ");
-            BSP_LCD_DisplayStringAtLine(16 ,(uint8_t *)"                                                               ");
-            BSP_LCD_DisplayStringAtLine(17 ,(uint8_t *)"                                                               ");
-            BSP_LCD_DisplayStringAtLine(18 ,(uint8_t *)"Use [Tamper Key] To Stop and return from player/recorder         ");
+            BSP_LCD_DisplayStringAtLine(22 ,(uint8_t *)"                                                               ");
+            BSP_LCD_DisplayStringAtLine(23 ,(uint8_t *)"                                                               ");
+            BSP_LCD_DisplayStringAtLine(24 ,(uint8_t *)"                                                               ");
+            BSP_LCD_DisplayStringAtLine(25 ,(uint8_t *)"                                                               ");
+            BSP_LCD_DisplayStringAtLine(26 ,(uint8_t *)"Use [Tamper Key] To Stop and return from player/recorder         ");
             BSP_LCD_SetTextColor(LCD_COLOR_WHITE); 
             
             /* Set PLAYBACK state and start playing 1st file */ 
@@ -147,11 +145,11 @@ void AUDIO_MenuProcess(void)
           case 2:
             /* Display HMI messages */
             BSP_LCD_SetTextColor(LCD_COLOR_GREEN);          
-            BSP_LCD_DisplayStringAtLine(14 ,(uint8_t *)"                                                               ");
-            BSP_LCD_DisplayStringAtLine(15 ,(uint8_t *)"                                                               ");
-            BSP_LCD_DisplayStringAtLine(16 ,(uint8_t *)"                                                               ");
-            BSP_LCD_DisplayStringAtLine(17 ,(uint8_t *)"                                                               ");
-            BSP_LCD_DisplayStringAtLine(18 ,(uint8_t *)"Use [Tamper Key] To Stop and return from player/recorder         ");
+            BSP_LCD_DisplayStringAtLine(22 ,(uint8_t *)"                                                               ");
+            BSP_LCD_DisplayStringAtLine(23 ,(uint8_t *)"                                                               ");
+            BSP_LCD_DisplayStringAtLine(24 ,(uint8_t *)"                                                               ");
+            BSP_LCD_DisplayStringAtLine(25 ,(uint8_t *)"                                                               ");
+            BSP_LCD_DisplayStringAtLine(26 ,(uint8_t *)"Use [Tamper Key] To Stop and return from player/recorder         ");
             BSP_LCD_SetTextColor(LCD_COLOR_WHITE); 
             
             /* Set PLAYBACK state and start playing 1st file */ 
@@ -211,11 +209,11 @@ void AUDIO_MenuProcess(void)
           else
           {
             BSP_LCD_SetTextColor(LCD_COLOR_YELLOW); 
-            BSP_LCD_DisplayStringAtLine(10, (uint8_t *)"[  UP   ] : Volume +");
-            BSP_LCD_DisplayStringAtLine(11, (uint8_t *)"[ DOWN  ] : Volume -");
-            BSP_LCD_DisplayStringAtLine(12, (uint8_t *)"[ LEFT  ] : Previous");
-            BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"[ RIGHT ] : Next   ");
-            BSP_LCD_DisplayStringAtLine(14, (uint8_t *)"[  SEL  ] : Pause/Resume");
+            BSP_LCD_DisplayStringAtLine(21, (uint8_t *)"[  UP   ] : Volume +                       ");
+            BSP_LCD_DisplayStringAtLine(22, (uint8_t *)"[ DOWN  ] : Volume -                       ");
+            BSP_LCD_DisplayStringAtLine(23, (uint8_t *)"[ LEFT  ] : Previous                       ");
+            BSP_LCD_DisplayStringAtLine(24, (uint8_t *)"[ RIGHT ] : Next                           ");
+            BSP_LCD_DisplayStringAtLine(25, (uint8_t *)"[  SEL  ] : Pause/Resume                   ");
             BSP_LCD_SetTextColor(LCD_COLOR_WHITE);           
           }
         }
@@ -252,9 +250,9 @@ void AUDIO_MenuProcess(void)
           else
           {
             BSP_LCD_SetTextColor(LCD_COLOR_YELLOW); 
-            BSP_LCD_DisplayStringAtLine(11, (uint8_t *)"[  UP   ] : Volume +");
-            BSP_LCD_DisplayStringAtLine(12, (uint8_t *)"[ DOWN  ] : Volume -");
-            BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"[  SEL  ] : Pause/Resume");
+            BSP_LCD_DisplayStringAtLine(23, (uint8_t *)"[  UP   ] : Volume +                      ");
+            BSP_LCD_DisplayStringAtLine(24, (uint8_t *)"[ DOWN  ] : Volume -                      ");
+            BSP_LCD_DisplayStringAtLine(25, (uint8_t *)"[  SEL  ] : Pause/Resume                  ");
             BSP_LCD_SetTextColor(LCD_COLOR_WHITE); 
           }
         }
@@ -457,34 +455,34 @@ static void AUDIO_SelectItem(uint8_t **menu, uint8_t item)
   {
   case 0: 
     BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
-    BSP_LCD_DisplayStringAtLine(19, menu [0]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);    
-    BSP_LCD_DisplayStringAtLine(20, menu [1]);
-    BSP_LCD_DisplayStringAtLine(21, menu [2]);
+    BSP_LCD_DisplayStringAtLine(27, menu [0]);
+    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
+    BSP_LCD_DisplayStringAtLine(28, menu [1]);
+    BSP_LCD_DisplayStringAtLine(29, menu [2]);
     break;
     
   case 1: 
     BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(19, menu [0]);
-    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);    
-    BSP_LCD_DisplayStringAtLine(20, menu [1]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);  
-    BSP_LCD_DisplayStringAtLine(21, menu [2]); 
+    BSP_LCD_DisplayStringAtLine(27, menu [0]);
+    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
+    BSP_LCD_DisplayStringAtLine(28, menu [1]);
+    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
+    BSP_LCD_DisplayStringAtLine(29, menu [2]); 
     break;
     
   case 2: 
     BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(19, menu [0]);  
-    BSP_LCD_DisplayStringAtLine(20, menu [1]);
+    BSP_LCD_DisplayStringAtLine(27, menu [0]);  
+    BSP_LCD_DisplayStringAtLine(28, menu [1]);
     BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);  
-    BSP_LCD_DisplayStringAtLine(21, menu [2]); 
+    BSP_LCD_DisplayStringAtLine(29, menu [2]); 
     break;
     
   default:
     BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(19, menu [0]);
-    BSP_LCD_DisplayStringAtLine(20, menu [1]);
-    BSP_LCD_DisplayStringAtLine(21, menu [2]); 
+    BSP_LCD_DisplayStringAtLine(27, menu [0]);
+    BSP_LCD_DisplayStringAtLine(28, menu [1]);
+    BSP_LCD_DisplayStringAtLine(29, menu [2]); 
     break; 
   }
   BSP_LCD_SetBackColor(LCD_COLOR_BLACK); 

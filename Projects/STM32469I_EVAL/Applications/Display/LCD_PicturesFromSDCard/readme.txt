@@ -5,8 +5,6 @@
   ******************************************************************************
   * @file    Display/LCD_PicturesFromSDCard/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   Description of the LCD pictures from SD card application.
   ******************************************************************************
   * @attention
@@ -103,17 +101,19 @@ copy the pictures stored in PC directory "./Media/".
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
--  LED3 is ON when the uSD disk I/O driver is not Linked;
+  -  LED3 is ON when the uSD disk I/O driver is not Linked;
 
 
 @par Directory contents
 
     - Display/LCD_PicturesFromSDCard/Inc/main.h                             Main configuration file
+    - Display/LCD_PicturesFromSDCard/Inc/sd_diskio.h                        FatFS sd diskio driver header file
     - Display/LCD_PicturesFromSDCard/Inc/stm32f4xx_it.h                     Interrupt handlers header file
     - Display/LCD_PicturesFromSDCard/Inc/stm32f4xx_hal_conf.h               HAL Configuration file 
     - Display/LCD_PicturesFromSDCard/Inc/ffconf.h                           FAT file system module configuration file
     - Display/LCD_PicturesFromSDCard/Inc/fatfs_storage.h                    Header for fatfs_storage.c
     - Display/LCD_PicturesFromSDCard/Src/main.c                             Main program 
+    - Display/LCD_PicturesFromSDCard/Src/sd_diskio.c                        FatFS sd diskio driver implementation
     - Display/LCD_PicturesFromSDCard/Src/fatfs_storage.c                    Storage (FatFs) driver
     - Display/LCD_PicturesFromSDCard/Src/stm32f4xx_it.c                     Interrupt handlers
     - Display/LCD_PicturesFromSDCard/Src/system_stm32f4xx.c                 STM32F4xx system clock configuration file

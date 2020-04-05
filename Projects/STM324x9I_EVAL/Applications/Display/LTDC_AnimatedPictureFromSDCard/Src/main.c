@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Display/LTDC_AnimatedPictureFromSDCard/Src/main.c
   * @author  MCD Application Team
-  * @version V1.5.0
-  * @date    17-February-2017
   * @brief   This file provides main program functions
   ******************************************************************************
   * @attention
@@ -102,103 +100,115 @@ int main(void)
   BSP_LED_Init(LED3);
   
   /*##-1- Configure LCD ######################################################*/
-  LCD_Config();  
-  
-  /*##-2- Link the SD Card disk I/O driver ###################################*/
-  if(FATFS_LinkDriver(&SD_Driver, SD_Path) != 0)
+  LCD_Config();
+
+  /*##-2- Initialization SD card ######################################################*/
+  if(BSP_SD_Init() != MSD_OK)
   {
-    Error_Handler();
+    /* SD Initialization Error */
+    /* Set the Text Color */
+    BSP_LCD_SetTextColor(LCD_COLOR_RED);
+
+    BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"  Please insert SD Card ");
   }
   else
   {
-    /*##-3- Initialize the Directory Files pointers (heap) ###################*/
-    for (counter = 0; counter < MAX_BMP_FILES; counter++)
+    /*##-3- Link the SD Card disk I/O driver ###################################*/
+    if(FATFS_LinkDriver(&SD_Driver, SD_Path) != 0)
     {
-      pDirectoryFiles[counter] = malloc(MAX_BMP_FILE_NAME);
-      if(pDirectoryFiles[counter] == NULL)
-      {
-        /* Set the Text Color */
-        BSP_LCD_SetTextColor(LCD_COLOR_RED);
-        
-        BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"  Cannot allocate memory ");
-        while(1)
-        {
-        }       
-      }
-    }
-    
-    /*##-4- Display Background picture #######################################*/
-    /* Select Background Layer  */
-    BSP_LCD_SelectLayer(0);
-    
-    /* Register the file system object to the FatFs module */
-    if(f_mount(&SD_FatFs, (TCHAR const*)SD_Path, 0) != FR_OK)
-    {
-      /* FatFs Initialization Error */
-      /* Set the Text Color */
-      BSP_LCD_SetTextColor(LCD_COLOR_RED);
-      
-      BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"  FatFs Initialization Error ");
-    }
-    else
-    {    
-      /* Open directory */
-      if (f_opendir(&directory, (TCHAR const*)"/BACK") != FR_OK)
-      {
-        /* Set the Text Color */
-        BSP_LCD_SetTextColor(LCD_COLOR_RED);
-        
-        BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"    Open directory.. fails");
-        while(1)
-        {
-        } 
-      }
-    }
-    
-    if (Storage_CheckBitmapFile("BACK/image.bmp", &uwBmplen) == 0)
-    {
-      /* Format the string */
-      Storage_OpenReadFile(uwInternelBuffer, "BACK/image.bmp");
-      /* Write bmp file on LCD frame buffer */
-      BSP_LCD_DrawBitmap(0, 0, uwInternelBuffer);
+      Error_Handler();
     }
     else
     {
-      /* Set the Text Color */
-      BSP_LCD_SetTextColor(LCD_COLOR_RED);
-      
-      BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"    File type not supported. "); 
-      while(1)
-      {
-      }  
-    }        
-    
-    /*##-5- Display Foreground picture #######################################*/
-    /* Select Foreground Layer  */
-    BSP_LCD_SelectLayer(1);
-    
-    /* Decrease the foreground transprency */
-    BSP_LCD_SetTransparency(1, 200); 
-    
-    /* Get the BMP file names on root directory */
-    ubNumberOfFiles = Storage_GetDirectoryBitmapFiles("/TOP", pDirectoryFiles);
-    
-    if (ubNumberOfFiles == 0)
-    {
+      /*##-4- Initialize the Directory Files pointers (heap) ###################*/
       for (counter = 0; counter < MAX_BMP_FILES; counter++)
       {
-        free(pDirectoryFiles[counter]);
+        pDirectoryFiles[counter] = malloc(MAX_BMP_FILE_NAME);
+        if(pDirectoryFiles[counter] == NULL)
+        {
+          /* Set the Text Color */
+          BSP_LCD_SetTextColor(LCD_COLOR_RED);
+
+          BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"  Cannot allocate memory ");
+          while(1)
+          {
+          }
+        }
       }
-      /* Set the Text Color */
-      BSP_LCD_SetTextColor(LCD_COLOR_RED);
-      
-      BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"    No Bitmap files...      ");
-      while(1)
+
+      /*##-5- Display Background picture #######################################*/
+      /* Select Background Layer  */
+      BSP_LCD_SelectLayer(0);
+
+      /* Register the file system object to the FatFs module */
+      if(f_mount(&SD_FatFs, (TCHAR const*)SD_Path, 0) != FR_OK)
       {
+        /* FatFs Initialization Error */
+        /* Set the Text Color */
+        BSP_LCD_SetTextColor(LCD_COLOR_RED);
+
+        BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"  FatFs Initialization Error ");
+      }
+      else
+      {    
+        /* Open directory */
+        if (f_opendir(&directory, (TCHAR const*)"/BACK") != FR_OK)
+        {
+          /* Set the Text Color */
+          BSP_LCD_SetTextColor(LCD_COLOR_RED);
+
+          BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"    Open directory.. fails");
+          while(1)
+          {
+          }
+        }
+      }
+
+      if (Storage_CheckBitmapFile("BACK/image.bmp", &uwBmplen) == 0)
+      {
+        /* Format the string */
+        Storage_OpenReadFile(uwInternelBuffer, "BACK/image.bmp");
+        /* Write bmp file on LCD frame buffer */
+        BSP_LCD_DrawBitmap(0, 0, uwInternelBuffer);
+      }
+      else
+      {
+        /* Set the Text Color */
+        BSP_LCD_SetTextColor(LCD_COLOR_RED);
+
+        BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"    File type not supported. "); 
+        while(1)
+        {
+        }  
+      }
+
+      /*##-6- Display Foreground picture #######################################*/
+      /* Select Foreground Layer  */
+      BSP_LCD_SelectLayer(1);
+
+      /* Decrease the foreground transprency */
+      BSP_LCD_SetTransparency(1, 200); 
+
+      /* Get the BMP file names on root directory */
+      ubNumberOfFiles = Storage_GetDirectoryBitmapFiles("/TOP", pDirectoryFiles);
+
+      if (ubNumberOfFiles == 0)
+      {
+        for (counter = 0; counter < MAX_BMP_FILES; counter++)
+        {
+          free(pDirectoryFiles[counter]);
+        }
+        /* Set the Text Color */
+        BSP_LCD_SetTextColor(LCD_COLOR_RED);
+
+        BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"    No Bitmap files...      ");
+        while(1)
+        {
+        }
       } 
-    } 
+    }
   }
-  
+
   /* Infinite loop */
   while(1)
   { 

@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    RTC/RTC_Tamper/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   This sample code shows how to use STM32F4xx RTC HAL API to write/read
   *          data to/from RTC Backup data registers and demonstrates the Tamper
   *          detection feature.
@@ -132,7 +130,7 @@ int main(void)
   RtcHandle.Init.OutPutPolarity = RTC_OUTPUT_POLARITY_HIGH;
   RtcHandle.Init.OutPutType     = RTC_OUTPUT_TYPE_OPENDRAIN;
   RtcHandle.Instance            = RTC;
-
+  __HAL_RTC_RESET_HANDLE_STATE(&RtcHandle);
   if (HAL_RTC_Init(&RtcHandle) != HAL_OK)
   {
     /* Initialization Error */

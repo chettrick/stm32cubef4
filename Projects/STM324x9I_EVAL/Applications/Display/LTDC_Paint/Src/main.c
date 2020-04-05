@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Display/LTDC_Paint/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.5.0
-  * @date    17-February-2017
   * @brief   Main program body
   ******************************************************************************
   * @attention
@@ -67,7 +65,7 @@ typedef enum {
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-USBH_HandleTypeDef  hUSB_Host;
+USBH_HandleTypeDef  hUSBHost;
 FATFS USBDISK_FatFs;  /* File system object for USB Disk logical drive */
 FIL MyFile;           /* File object */
 char USB_Path[4];     /* USB Disk logical drive path */
@@ -144,17 +142,17 @@ int main(void)
   
   /*##-3- USB Initialization #################################################*/ 
   /* Init Host Library */
-  if (USBH_Init(&hUSB_Host, USBH_UserProcess, 0) != USBH_OK)
+  if (USBH_Init(&hUSBHost, USBH_UserProcess, 0) != USBH_OK)
   {
     /* USB Initialization Error */
     Error_Handler();
   }
   
   /* Add Supported Class */
-  USBH_RegisterClass(&hUSB_Host, USBH_MSC_CLASS);
+  USBH_RegisterClass(&hUSBHost, USBH_MSC_CLASS);
   
   /* Start Host Process */
-  if (USBH_Start(&hUSB_Host) != USBH_OK)
+  if (USBH_Start(&hUSBHost) != USBH_OK)
   {
     /* USB Initialization Error */
     Error_Handler();
@@ -183,7 +181,7 @@ int main(void)
     /*##-7- Configure the touch screen and Get the position ##################*/    
     GetPosition();
     
-    USBH_Process(&hUSB_Host);
+    USBH_Process(&hUSBHost);
   }
 }
 
@@ -468,13 +466,24 @@ void Save_Picture(void)
       {
         /*##-4- Close the open text file #####################################*/
         f_close(&MyFile);
-        
+
         /* Success of the demo: no error occurrence */
         BSP_LED_On(LED1);
         BSP_LCD_SetTextColor(LCD_COLOR_DARKGREEN);
         BSP_LCD_DisplayStringAt(0, (BSP_LCD_GetYSize()-35), (uint8_t *)" Saved     ", RIGHT_MODE);
         /* Wait for 2s */
         HAL_Delay(2000);
+
+        /* Draw save image */
+        BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+        BSP_LCD_FillRect(310, (BSP_LCD_GetYSize() - 35), (BSP_LCD_GetXSize() - 310), 35);
+        BSP_LCD_DrawBitmap(310, (BSP_LCD_GetYSize() - 50), (uint8_t *)save);
+
+        /* Reset text color */
+        BSP_LCD_SetTextColor(color);
+
+        /* Update color box */
+        Update_Color();
       }
     }
   }

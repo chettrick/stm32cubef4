@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Examples_LL/TIM/TIM_BreakAndDeadtime/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017
   * @brief   This example shows how to configure the TIMER peripheral to generate  
   *          three center aligned PWM and complementary PWM signals, 
   *          to insert a defined dead time value, to use the break feature and 

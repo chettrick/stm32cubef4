@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    k_bsp.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017 
   * @brief   This file provides the kernel bsp functions
   ******************************************************************************
   * @attention
@@ -73,20 +71,27 @@ TS_StateTypeDef  TS_State = {0};
   */
 void k_BspInit(void)
 {  
+
   /* Initialize the QSPI */
   BSP_QSPI_Init();
   BSP_QSPI_MemoryMappedMode();  
-  
+
   TS_IO_Init();
-  
-  BSP_LCD_Init();
-  
+
+  /* Apply TS reset */
+  HAL_GPIO_WritePin(TS_RESET_GPIO_PORT, TS_RESET_PIN, GPIO_PIN_RESET);
+  HAL_Delay(5);   /* Reset signal asserted during 5ms  */
+  HAL_GPIO_WritePin(TS_RESET_GPIO_PORT, TS_RESET_PIN, GPIO_PIN_SET);
+
   HAL_Delay(120);
-    
-  BSP_TS_InitEx(240, 240, TS_ORIENTATION_LANDSCAPE_ROT180);  
-    
+
+//  BSP_TS_InitEx(240, 240, TS_ORIENTATION_LANDSCAPE_ROT180);
+//
+//  HAL_Delay(1200);
+  
   /* Enable CRC to Unlock GUI */
-  __HAL_RCC_CRC_CLK_ENABLE();  
+  __HAL_RCC_CRC_CLK_ENABLE();
+
 }
 
 /**
@@ -99,36 +104,36 @@ void k_TouchUpdate(void)
 {
   static GUI_PID_STATE TS_State = {0, 0, 0, 0};
   __IO TS_StateTypeDef  ts;
-
+  
   BSP_TS_GetState((TS_StateTypeDef *)&ts);
   
   ts.touchX[0] = TouchScreen_Get_Calibrated_X(ts.touchX[0]);
   ts.touchY[0] = TouchScreen_Get_Calibrated_Y(ts.touchY[0]);
   
-  if((ts.touchX[0] >= LCD_GetXSize()) ||(ts.touchY[0] >= LCD_GetYSize()) ) 
+  if((ts.touchX[0] >= LCD_GetXSize()) || (ts.touchY[0] >= LCD_GetYSize())) 
   {
     ts.touchX[0] = 0;
     ts.touchY[0] = 0;
   }
   
   if((TS_State.Pressed != ts.touchDetected )||
-    (TS_State.x != ts.touchX[0]) ||
-      (TS_State.y != ts.touchY[0]))
-{
-  TS_State.Pressed = ts.touchDetected;
-  if(ts.touchDetected) 
+     (TS_State.x != ts.touchX[0]) ||
+       (TS_State.y != ts.touchY[0]))
   {
-    TS_State.x = ts.touchX[0];
-    TS_State.y = ts.touchY[0];
-    GUI_TOUCH_StoreStateEx(&TS_State);
+    TS_State.Pressed = ts.touchDetected;
+    if(ts.touchDetected) 
+    {
+      TS_State.x = ts.touchX[0];
+      TS_State.y = ts.touchY[0];
+      GUI_TOUCH_StoreStateEx(&TS_State);
+    }
+    else
+    {
+      GUI_TOUCH_StoreStateEx(&TS_State);
+      TS_State.x = 0;
+      TS_State.y = 0;      
+    }
   }
-  else
-  {
-    GUI_TOUCH_StoreStateEx(&TS_State);
-    TS_State.x = 0;
-    TS_State.y = 0;      
-  }
-}
 }
 
 /**

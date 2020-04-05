@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    LibJPEG/LibJPEG_Decoding/Src/jdata_conf.c 
   * @author  MCD Application Team
-  * @version 
-  * @date    17-February-2017
   * @brief   
   ******************************************************************************
   * @attention

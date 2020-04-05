@@ -227,43 +227,41 @@ static err_t http_recv(void *arg, struct tcp_pcb *pcb,  struct pbuf *p, err_t er
       data = p->payload;
       len = p->tot_len;
       
-      /* process HTTP GET requests */
-      if (strncmp(data, "GET /", 5) == 0)
+      /* process HTTP GET Login page requests */
+      if (strncmp(data, "GET / HTTP", 10) == 0)
       {
-        if ((strncmp(data, "GET /resetmcu.cgi", 17) ==0)&&(htmlpage == UploadDonePage))
-        {
-          htmlpage = ResetDonePage;
-          fs_open("/reset.html", &file);
-          hs->file = file.data;
-          hs->left = file.len;
-          pbuf_free(p);
-          
-          /* send reset.html page */ 
-          send_data(pcb, hs);   
-          resetpage = 1;
-          
-          /* Tell TCP that we wish be to informed of data that has been
-          successfully sent by a call to the http_sent() function. */
-          tcp_sent(pcb, http_sent);
-        }     
-        else
-        {
-          /*send the login page (which is the index page) */
-          htmlpage = LoginPage;
-          fs_open("/index.html", &file);
-          hs->file = file.data;
-          hs->left = file.len;
-          pbuf_free(p);
-                  
-          /* send index.html page */ 
-          send_data(pcb, hs);
-          
-          /* Tell TCP that we wish be to informed of data that has been
-          successfully sent by a call to the http_sent() function. */
-          tcp_sent(pcb, http_sent);
-        }
+        /*send the login page (which is the index page) */
+        htmlpage = LoginPage;
+        fs_open("/index.html", &file);
+        hs->file = file.data;
+        hs->left = file.len;
+        pbuf_free(p);
+        
+        /* send index.html page */ 
+        send_data(pcb, hs);
+        
+        /* Tell TCP that we wish be to informed of data that has been
+        successfully sent by a call to the http_sent() function. */
+        tcp_sent(pcb, http_sent);
       }
-            
+      /* process HTTP GET reset mcu requests */
+      else if ((strncmp(data, "GET /resetmcu.cgi", 17) ==0)&&(htmlpage == UploadDonePage))
+      {
+        htmlpage = ResetDonePage;
+        fs_open("/reset.html", &file);
+        hs->file = file.data;
+        hs->left = file.len;
+        pbuf_free(p);
+        
+        /* send reset.html page */ 
+        send_data(pcb, hs);   
+        resetpage = 1;
+        
+        /* Tell TCP that we wish be to informed of data that has been
+        successfully sent by a call to the http_sent() function. */
+        tcp_sent(pcb, http_sent);
+      }
+      
       /* process POST request for checking login */
       else if ((strncmp(data, "POST /checklogin.cgi",20)==0)&&(htmlpage== LoginPage))
       {

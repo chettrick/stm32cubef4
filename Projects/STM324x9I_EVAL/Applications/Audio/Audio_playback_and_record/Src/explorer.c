@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Audio/Audio_playback_and_record/Src/explorer.c 
   * @author  MCD Application Team
-  * @version V1.5.0
-  * @date    17-February-2017 
   * @brief   This file provides USB Key drive configuration
   ******************************************************************************
   * @attention
@@ -48,7 +46,7 @@
 #include "main.h"
 
 /* Private typedef -----------------------------------------------------------*/
-FATFS USBH_FatFs;
+extern FATFS USBH_FatFs;
 char USBKey_Path[4] = "0:/"; 
 FILELIST_FileTypeDef FileList;
 uint16_t NumObs = 0;
@@ -92,11 +90,6 @@ FRESULT AUDIO_StorageParse(void)
   DIR dir;
   char *fn;
   
-#if _USE_LFN
-  static char lfn[_MAX_LFN];
-  fno.lfname = lfn;
-  fno.lfsize = sizeof(lfn);
-#endif
   
   res = f_opendir(&dir, USBKey_Path);
   FileList.ptr = 0;
@@ -115,11 +108,8 @@ FRESULT AUDIO_StorageParse(void)
       {
         continue;
       }
-#if _USE_LFN
-      fn = *fno.lfname ? fno.lfname : fno.fname;
-#else
+ 
       fn = fno.fname;
-#endif
       
       if(FileList.ptr < FILEMGR_LIST_DEPDTH)
       {

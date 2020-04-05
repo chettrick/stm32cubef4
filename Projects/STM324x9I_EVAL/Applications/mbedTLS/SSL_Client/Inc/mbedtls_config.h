@@ -6,8 +6,6 @@
   ******************************************************************************
   * @file    mbedtls_config.h 
   * @author  MCD Application Team
-  * @version V1.5.0
-  * @date    17-February-2017
   * @brief   the mbedtls custom config header file.
   ******************************************************************************
   * @attention

@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    TIM/TIM_PWMInput/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.5
-  * @date    17-February-2017
   * @brief   Description of the TIM PWM Input example.
   ******************************************************************************
   *

@@ -1,49 +1,48 @@
 /**
   ******************************************************************************
-  * @file    USB_Host/DynamicSwitch_Standalone/Src/hid_menu.c 
+  * @file    USB_Host/DynamicSwitch_Standalone/Src/hid_menu.c
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   This file implements HID Menu Functions
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V.
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without 
+  * Redistribution and use in source and binary forms, with or without
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice, 
+  * 1. Redistribution of source code must retain the above copyright notice,
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other 
-  *    contributors to this software may be used to endorse or promote products 
+  * 3. Neither the name of STMicroelectronics nor the names of other
+  *    contributors to this software may be used to endorse or promote products
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this 
+  * 4. This software, including modifications and/or derivative works of this
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under 
-  *    this license is void and will automatically terminate your rights under 
-  *    this license. 
+  * 5. Redistribution and use of this software other than as permitted under
+  *    this license is void and will automatically terminate your rights under
+  *    this license.
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
   */
+
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
@@ -54,19 +53,19 @@
 HID_DEMO_StateMachine hid_demo;
 extern uint8_t        prev_select;
 
-uint8_t *DEMO_KEYBOARD_menu[] = 
+uint8_t *DEMO_KEYBOARD_menu[] =
 {
   (uint8_t *)"      1 - Start Keyboard / Clear                                            ",
   (uint8_t *)"      2 - Return                                                            ",
-}; 
+};
 
-uint8_t *DEMO_MOUSE_menu[] = 
+uint8_t *DEMO_MOUSE_menu[] =
 {
   (uint8_t *)"      1 - Start Mouse / Re-Initialize                                       ",
   (uint8_t *)"      2 - Return                                                            ",
 };
 
-uint8_t *DEMO_HID_menu[] = 
+uint8_t *DEMO_HID_menu[] =
 {
   (uint8_t *)"      1 - Start HID                                                         ",
   (uint8_t *)"      2 - Re-Enumerate                                                      ",
@@ -90,21 +89,21 @@ void HID_MenuProcess(void)
   case HID_DEMO_IDLE:
     BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
     BSP_LCD_DisplayStringAtLine(14, (uint8_t *)"                                                 ");
-    BSP_LCD_DisplayStringAtLine(15, (uint8_t *)"Use [Buttons Left/Right] to scroll up/down       ");
+    BSP_LCD_DisplayStringAtLine(15, (uint8_t *)"Use [Joystick Left/Right] to scroll up/down       ");
     BSP_LCD_DisplayStringAtLine(16, (uint8_t *)"Use [Joystick Up/Down] to scroll HID menu        ");
-    BSP_LCD_DisplayStringAtLine(17, (uint8_t *)"                                                 "); 
+    BSP_LCD_DisplayStringAtLine(17, (uint8_t *)"                                                 ");
     BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-    HID_SelectItem(DEMO_HID_menu, 0); 
+    HID_SelectItem(DEMO_HID_menu, 0);
     hid_demo.state = HID_DEMO_WAIT;
     hid_demo.select = 0;
-    break;        
-    
+    break;
+
   case HID_DEMO_WAIT:
     if(hid_demo.select != prev_select)
     {
-      prev_select = hid_demo.select;        
-      
-      HID_SelectItem(DEMO_HID_menu, hid_demo.select & 0x7F); 
+      prev_select = hid_demo.select;
+
+      HID_SelectItem(DEMO_HID_menu, hid_demo.select & 0x7F);
       /* Handle select item */
       if(hid_demo.select & 0x80)
       {
@@ -112,32 +111,32 @@ void HID_MenuProcess(void)
         switch(hid_demo.select)
         {
         case 0:
-          hid_demo.state = HID_DEMO_START;  
+          hid_demo.state = HID_DEMO_START;
           break;
-          
+
         case 1:
-          hid_demo.state = HID_DEMO_REENUMERATE;  
+          hid_demo.state = HID_DEMO_REENUMERATE;
           break;
-          
+
         default:
           break;
         }
       }
     }
-    break; 
-    
+    break;
+
   case HID_DEMO_START:
     if(Appli_state == APPLICATION_HID)
     {
       if(USBH_HID_GetDeviceType(&hUSBHost) == HID_KEYBOARD)
       {
-        hid_demo.keyboard_state = HID_KEYBOARD_IDLE; 
+        hid_demo.keyboard_state = HID_KEYBOARD_IDLE;
         hid_demo.state = HID_DEMO_KEYBOARD;
       }
       else if(USBH_HID_GetDeviceType(&hUSBHost) == HID_MOUSE)
       {
-        hid_demo.mouse_state = HID_MOUSE_IDLE;  
-        hid_demo.state = HID_DEMO_MOUSE;        
+        hid_demo.mouse_state = HID_MOUSE_IDLE;
+        hid_demo.state = HID_DEMO_MOUSE;
       }
     }
     else
@@ -147,13 +146,10 @@ void HID_MenuProcess(void)
     }
 
     break;
-    
+
   case HID_DEMO_REENUMERATE:
     /* Force HID Device to re-enumerate */
-    if(Appli_state == APPLICATION_HID)
-    {
-      USBH_ReEnumerate(&hUSBHost); 
-    }
+    USBH_ReEnumerate(&hUSBHost);
     hid_demo.state = HID_DEMO_WAIT;
     break;
 
@@ -163,16 +159,16 @@ void HID_MenuProcess(void)
       HID_MouseMenuProcess();
       USBH_MouseDemo(&hUSBHost);
     }
-    break; 
-    
+    break;
+
   case HID_DEMO_KEYBOARD:
-    if( Appli_state == APPLICATION_HID)  
-    {    
+    if( Appli_state == APPLICATION_HID)
+    {
       HID_KeyboardMenuProcess();
       USBH_KeybdDemo(&hUSBHost);
-    }   
+    }
     break;
-    
+
   default:
     break;
   }
@@ -187,26 +183,26 @@ void HID_MenuProcess(void)
 void HID_SelectItem(uint8_t **menu , uint8_t item)
 {
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  
+
   switch(item)
   {
-  case 0: 
+  case 0:
     BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
     BSP_LCD_DisplayStringAtLine(18, menu[0]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);    
+    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
     BSP_LCD_DisplayStringAtLine(19, menu[1]);
     break;
-    
-  case 1: 
+
+  case 1:
     BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
     BSP_LCD_DisplayStringAtLine(18, menu[0]);
-    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);    
+    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
     BSP_LCD_DisplayStringAtLine(19, menu[1]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);   
-    break;   
+    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
+    break;
   }
-  BSP_LCD_SetBackColor(LCD_COLOR_BLACK); 
-  
+  BSP_LCD_SetBackColor(LCD_COLOR_BLACK);
+
 }
 
 /**
@@ -228,7 +224,7 @@ void HID_DEMO_ProbeKey(JOYState_TypeDef state)
   else if(state == JOY_SEL)
   {
     hid_demo.select |= 0x80;
-  }  
+  }
 }
 
 /**
@@ -238,14 +234,14 @@ void HID_DEMO_ProbeKey(JOYState_TypeDef state)
   */
 static void USBH_MouseDemo(USBH_HandleTypeDef *phost)
 {
-  HID_MOUSE_Info_TypeDef *m_pinfo;  
-  
+  HID_MOUSE_Info_TypeDef *m_pinfo;
+
   m_pinfo = USBH_HID_GetMouseInfo(phost);
   if(m_pinfo != NULL)
   {
     /* Handle Mouse data position */
     USR_MOUSE_ProcessData(&mouse_info);
-    
+
     if( m_pinfo->buttons[0])
     {
       HID_MOUSE_ButtonPressed(0);
@@ -254,7 +250,7 @@ static void USBH_MouseDemo(USBH_HandleTypeDef *phost)
     {
       HID_MOUSE_ButtonReleased(0);
     }
-    
+
     if( m_pinfo->buttons[1])
     {
       HID_MOUSE_ButtonPressed(2);
@@ -263,7 +259,7 @@ static void USBH_MouseDemo(USBH_HandleTypeDef *phost)
     {
       HID_MOUSE_ButtonReleased(2);
     }
-    
+
     if( m_pinfo->buttons[2])
     {
       HID_MOUSE_ButtonPressed(1);
@@ -282,10 +278,10 @@ static void USBH_MouseDemo(USBH_HandleTypeDef *phost)
   */
 static void USBH_KeybdDemo(USBH_HandleTypeDef *phost)
 {
-  HID_KEYBD_Info_TypeDef *k_pinfo; 
+  HID_KEYBD_Info_TypeDef *k_pinfo;
   char c;
   k_pinfo = USBH_HID_GetKeybdInfo(phost);
-  
+
   if(k_pinfo != NULL)
   {
     c = USBH_HID_GetASCIICode(k_pinfo);

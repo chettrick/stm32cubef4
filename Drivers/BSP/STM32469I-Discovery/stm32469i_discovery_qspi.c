@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm32469i_discovery_qspi.c
   * @author  MCD Application Team
-  * @version V2.0.0
-  * @date    27-January-2017
   * @brief   This file includes a standard driver for the N25Q128A QSPI
   *          memory mounted on STM32469I-Discovery board.
   @verbatim

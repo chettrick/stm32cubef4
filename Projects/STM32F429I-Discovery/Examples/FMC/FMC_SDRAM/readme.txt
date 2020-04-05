@@ -5,8 +5,6 @@
   ******************* (C) COPYRIGHT 2017 STMicroelectronics  ********************
   * @file    FMC/FMC_SDRAM/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.8
-  * @date    17-February-2017 
   * @brief   Description of the FMC SDRAM example.
   ******************************************************************************
   *
@@ -96,7 +94,7 @@ If the data is read correctly from SDRAM, the LED3 is on, otherwise the LED4 is 
  
   - This example runs on STM32F429xx devices.
     
-  - This example has been tested with STMicroelectronics STM32F429I-Discovery RevB
+  - This example has been tested with STMicroelectronics STM32F429I-Discovery RevC
     boards and can be easily tailored to any other supported device 
     and development board.
 

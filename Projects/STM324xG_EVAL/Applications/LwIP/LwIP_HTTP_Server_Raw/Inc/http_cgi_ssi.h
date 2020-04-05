@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    LwIP/LwIP_HTTP_Server_Raw/Inc/http_cgi_ssi.h 
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   Header for http_cgi_ssi.c module
   ******************************************************************************
   * @attention

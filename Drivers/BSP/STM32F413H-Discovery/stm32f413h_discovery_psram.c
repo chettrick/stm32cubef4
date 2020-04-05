@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm32f413h_discovery_psram.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    27-January-2017
   * @brief   This file includes the PSRAM driver for the IS61WV51216BLL-10MLI memory 
   *          device mounted on STM32F413H-DISCOVERY boards.
   @verbatim

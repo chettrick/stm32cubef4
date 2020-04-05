@@ -10,14 +10,14 @@
       <TargetName>STM32F429I_DISCO_MB1075</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
+      <pCCUsed>5060528::V5.06 update 5 (build 528)::ARMCC</pCCUsed>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F429ZITx</Device>
           <Vendor>STMicroelectronics</Vendor>
           <PackID>Keil.STM32F4xx_DFP.2.11.0</PackID>
           <PackURL>http://www.keil.com/pack</PackURL>
-          <Cpu>IRAM(0x20000000-0x2002FFFF) IRAM2(0x10000000-0x1000FFFF) IROM(0x8000000-0x81FFFFF) CLOCK(25000000) FPU2 CPUTYPE("Cortex-M4")</Cpu>
+          <Cpu>IROM(0x08000000-0x81FFFFF) IRAM(0x20000000-0x2002FFFF) IRAM2(0x10000000-0x1000FFFF) CLOCK(25000000) FPU2 CPUTYPE("Cortex-M4")</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
           <FlashDriverDll></FlashDriverDll>
@@ -47,8 +47,8 @@
             <NotGenerated>0</NotGenerated>
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
-          <OutputDirectory>STM32F429I_DISCO_MB1075\</OutputDirectory>
-          <OutputName>STM32F429I_DISCO_MB1075</OutputName>
+          <OutputDirectory>STM32F429I_DISCO_MB1075\Exe\</OutputDirectory>
+          <OutputName>Project</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
@@ -310,7 +310,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>4</Optim>
+            <Optim>1</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -322,7 +322,7 @@
             <wLevel>2</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
-            <uC99>0</uC99>
+            <uC99>1</uC99>
             <useXO>0</useXO>
             <v6Lang>1</v6Lang>
             <v6LangP>1</v6LangP>
@@ -332,10 +332,10 @@
             <v6WtE>0</v6WtE>
             <v6Rtti>0</v6Rtti>
             <VariousControls>
-              <MiscControls>--C99</MiscControls>
+              <MiscControls> </MiscControls>
               <Define>STM32F429xx,USE_STM32F429I_DISCO</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../Demo;../../../../../../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../../../../../../Drivers/STM32F4xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32F429I-Discovery;../../../../../../Middlewares/ST/STemWin/inc</IncludePath>
+              <IncludePath>../Core/Inc;../STemWin/Target;../STemWin/App;../../../../../../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../../../../../../Drivers/STM32F4xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32F429I-Discovery;../../../../../../Middlewares/ST/STemWin/inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -353,7 +353,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>ROJ_DIR$\..\Inc</IncludePath>
+              <IncludePath></IncludePath>
             </VariousControls>
           </Aads>
           <LDads>
@@ -387,82 +387,85 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>::CMSIS</GroupName>
+        </Group>
+        <Group>
           <GroupName>Application/Demo</GroupName>
           <Files>
             <File>
-              <FileName>GUIDEMO_Cursor.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Demo/GUIDEMO_Cursor.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDEMO_RadialMenu.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Demo/GUIDEMO_RadialMenu.c</FilePath>
-            </File>
-            <File>
               <FileName>GUIDEMO_Treeview.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Demo/GUIDEMO_Treeview.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDEMO_Start.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Demo/GUIDEMO_Start.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDEMO_ColorBar.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Demo/GUIDEMO_ColorBar.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDEMO_Intro.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Demo/GUIDEMO_Intro.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDEMO.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Demo/GUIDEMO.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDEMO_VScreen.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Demo/GUIDEMO_VScreen.c</FilePath>
+              <FilePath>../STemWin/App/GUIDEMO_Treeview.c</FilePath>
             </File>
             <File>
               <FileName>GUIDEMO_Conf.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Demo/GUIDEMO_Conf.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDEMO_Resource.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Demo/GUIDEMO_Resource.c</FilePath>
+              <FilePath>../STemWin/App/GUIDEMO_Conf.c</FilePath>
             </File>
             <File>
               <FileName>GUIDEMO_Bitmap.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Demo/GUIDEMO_Bitmap.c</FilePath>
+              <FilePath>../STemWin/App/GUIDEMO_Bitmap.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUIDEMO_ColorBar.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../STemWin/App/GUIDEMO_ColorBar.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUIDEMO_VScreen.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../STemWin/App/GUIDEMO_VScreen.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUIDEMO_Resource.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../STemWin/App/GUIDEMO_Resource.c</FilePath>
             </File>
             <File>
               <FileName>GUIDEMO_Speed.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Demo/GUIDEMO_Speed.c</FilePath>
+              <FilePath>../STemWin/App/GUIDEMO_Speed.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUIDEMO_Start.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../STemWin/App/GUIDEMO_Start.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUIDEMO_Cursor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../STemWin/App/GUIDEMO_Cursor.c</FilePath>
             </File>
             <File>
               <FileName>GUIDEMO_IconView.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Demo/GUIDEMO_IconView.c</FilePath>
+              <FilePath>../STemWin/App/GUIDEMO_IconView.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUIDEMO.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../STemWin/App/GUIDEMO.c</FilePath>
             </File>
             <File>
               <FileName>GUIDEMO_Listview.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Demo/GUIDEMO_Listview.c</FilePath>
+              <FilePath>../STemWin/App/GUIDEMO_Listview.c</FilePath>
             </File>
             <File>
               <FileName>GUIDEMO_Graph.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Demo/GUIDEMO_Graph.c</FilePath>
+              <FilePath>../STemWin/App/GUIDEMO_Graph.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUIDEMO_RadialMenu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../STemWin/App/GUIDEMO_RadialMenu.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUIDEMO_Intro.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../STemWin/App/GUIDEMO_Intro.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -470,9 +473,9 @@
           <GroupName>Middlewares/STemWin/Lib</GroupName>
           <Files>
             <File>
-              <FileName>STemWin532_CM4_Keil.lib</FileName>
+              <FileName>STemWin540_CM4_Keil.lib</FileName>
               <FileType>4</FileType>
-              <FilePath>../../../../../../Middlewares/ST/STemWin/Lib/STemWin532_CM4_Keil.lib</FilePath>
+              <FilePath>../../../../../../Middlewares/ST/STemWin/Lib/STemWin540_CM4_Keil.lib</FilePath>
             </File>
           </Files>
         </Group>
@@ -610,24 +613,24 @@
           <GroupName>Application/User</GroupName>
           <Files>
             <File>
-              <FileName>stm32f4xx_it.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Src/stm32f4xx_it.c</FilePath>
-            </File>
-            <File>
-              <FileName>rtc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Src/rtc.c</FilePath>
-            </File>
-            <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Src/main.c</FilePath>
+              <FilePath>../Core/Src/main.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_it.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Core/Src/stm32f4xx_it.c</FilePath>
             </File>
             <File>
               <FileName>calibration.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Src/calibration.c</FilePath>
+              <FilePath>../STemWin/Target/calibration.c</FilePath>
+            </File>
+            <File>
+              <FileName>rtc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../STemWin/Target/rtc.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -652,7 +655,7 @@
             <File>
               <FileName>system_stm32f4xx.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Src/system_stm32f4xx.c</FilePath>
+              <FilePath>../Core/Src/system_stm32f4xx.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -697,12 +700,12 @@
             <File>
               <FileName>LCDConf_stm32f429i_disco_MB1075.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Src/LCDConf_stm32f429i_disco_MB1075.c</FilePath>
+              <FilePath>../STemWin/Target/LCDConf_stm32f429i_disco_MB1075.c</FilePath>
             </File>
             <File>
               <FileName>GUIConf.c</FileName>
               <FileType>1</FileType>
-              <FilePath>../Src/GUIConf.c</FilePath>
+              <FilePath>../STemWin/Target/GUIConf.c</FilePath>
             </File>
             <File>
               <FileName>GUI_X.c</FileName>
@@ -710,9 +713,6 @@
               <FilePath>../../../../../../Middlewares/ST/STemWin/OS/GUI_X.c</FilePath>
             </File>
           </Files>
-        </Group>
-        <Group>
-          <GroupName>::CMSIS</GroupName>
         </Group>
       </Groups>
     </Target>

@@ -6,8 +6,6 @@
   ******************************************************************************
   * @file    ssl_server.c 
   * @author  MCD Application Team
-  * @version V1.5.0
-  * @date    17-February-2017
   * @brief   SSL server application 
   ******************************************************************************
   * @attention

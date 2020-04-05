@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    BSP/Src/mems.c 
   * @author  MCD Application Team
-  * @version V1.2.7
-  * @date    17-February-2017
   * @brief   This example code shows how to use MEMS features.
   ******************************************************************************
   * @attention

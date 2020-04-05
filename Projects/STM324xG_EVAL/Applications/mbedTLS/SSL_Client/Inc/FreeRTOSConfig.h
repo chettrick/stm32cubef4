@@ -7,8 +7,6 @@
   ******************************************************************************
   * @file   FreeRTOSConfig.h 
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   the FreeRTOS config header file.
   ******************************************************************************
   * @attention

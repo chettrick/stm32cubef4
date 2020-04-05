@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    Audio/Audio_playback_and_record/readme.txt 
   * @author  MCD Application Team
-  * @version V1.5.0
-  * @date    17-February-2017
   * @brief   Description of the Audio Playback and Record application
   ******************************************************************************
   * @attention
@@ -65,23 +63,23 @@ In this menu, the explorer wave files list stored in the USB Key will be display
 In Start Audio Play menu, any wave file stored under the USB Key can be opened using the FatFs 
 file system and transferred to the internal SRAM using the file system. All the wave
 files properties are read from the Wave File Header.
-Plug a headphone to ear the sound  /!\ Take care of yours ears. Default volume is 70%.
+Plug a headphone to hear the sound  /!\ Take care of yours ears. Default volume is 70%.
 
 To play the audio file, a buffer is used between USB and audio codec. This buffer 
 is used like a ping-pong buffer to be able to read regularly data from USB to be 
 sent to audio codec: 
-- Using FatFs driver, a 1st read of AUDIO_BUFFER_SIZE bytes is done
-- This buffer is sent to audio BSP which uses DMA mode to transfer data from MCU
+  - Using FatFs driver, a 1st read of AUDIO_BUFFER_SIZE bytes is done
+  - This buffer is sent to audio BSP which uses DMA mode to transfer data from MCU
 to audio codec (16 bits)
-- At DMA half transfer ISR, an indication is sent to application to indicate that
+  - At DMA half transfer ISR, an indication is sent to application to indicate that
 half of the buffer has been sent
-- At DMA half transfer ISR exit, application can read (AUDIO_BUFFER_SIZE/2) bytes from USB to fill
+  - At DMA half transfer ISR exit, application can read (AUDIO_BUFFER_SIZE/2) bytes from USB to fill
 the 1st part of the buffer
-- At DMA transfer complete ISR, DMA transfer is requested to send 1st part of the
+  - At DMA transfer complete ISR, DMA transfer is requested to send 1st part of the
 buffer
-- At DMA transfer complete ISR exit, application can read (AUDIO_BUFFER_SIZE/2) bytes from USB to fill
+  - At DMA transfer complete ISR exit, application can read (AUDIO_BUFFER_SIZE/2) bytes from USB to fill
 the 2nd part of the buffer
-- When file size is reached, audio codec is stopped and a new play is requested.
+  - When file size is reached, audio codec is stopped and a new play is requested.
 
 This menu also manages information display and control interface through push buttons: 
  - When the application is Playing audio file:
@@ -118,9 +116,9 @@ used to receive data from Audio samples. This process is repeated as long as the
 application is running.
 
 To avoid data corruption:
-- DMA ISR priority must be set at a Lower priority than USB interrupt sources,
+  - DMA ISR priority must be set at a Lower priority than USB interrupt sources,
   this priority order must be respected when managing other interrupts;
-- The processing time of converting/filtering samples from PDM to PCM 
+  - The processing time of converting/filtering samples from PDM to PCM 
   PDM_Filter_64_LSB()) should be lower than the time required to fill a
   single buffer.
 
@@ -145,6 +143,7 @@ this application. For IAR EWARM toolchain, the library is labeled
 @par Directory contents 
 
   - Audio_playback_and_record/Src/main.c               Main program
+  - Audio_playback_and_record/Src/usbh_diskio_dma.c    FatFS usbh diskio driver implementation
   - Audio_playback_and_record/Src/stm32f4xx_it.c       Interrupt handlers
   - Audio_playback_and_record/Src/system_stm32f4xx.c   STM32F4xx system clock configuration file
   - Audio_playback_and_record/Src/usbh_conf.c          Board support package for the USB host library 	
@@ -152,6 +151,7 @@ this application. For IAR EWARM toolchain, the library is labeled
   - Audio_playback_and_record/Src/waverecorder.c       Audio record file
   - Audio_playback_and_record/Inc/ffconf.h             FAT file system module configuration file   
   - Audio_playback_and_record/Inc/main.h               Main program header file
+  - Audio_playback_and_record/Inc/usbh_diskio_dma.h    FatFS usbh diskio driver header file
   - Audio_playback_and_record/Inc/stm32f4xx_hal_conf.h HAL configuration file
   - Audio_playback_and_record/Inc/stm32f4xx_it.h       Interrupt handlers header file
   - Audio_playback_and_record/Inc/usbh_conf.h          USB driver Configuration file

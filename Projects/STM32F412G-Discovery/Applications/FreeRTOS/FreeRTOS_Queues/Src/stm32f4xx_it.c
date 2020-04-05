@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    FreeRTOS/FreeRTOS_Queues/Inc/stm32f4xx_it.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   Main Interrupt Service Routines.
   ******************************************************************************
   *

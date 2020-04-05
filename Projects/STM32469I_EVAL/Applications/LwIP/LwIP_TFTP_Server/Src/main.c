@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    LwIP/LwIP_TFTP_Server/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   Main program body
   ******************************************************************************
   * @attention
@@ -133,7 +131,7 @@ int main(void)
   */
 static void BSP_Config(void)
 {
-  /* Configure LED1, LED2 */
+  /* Configure LED1, LED2 and LED3 */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED2);
   BSP_LED_Init(LED3);

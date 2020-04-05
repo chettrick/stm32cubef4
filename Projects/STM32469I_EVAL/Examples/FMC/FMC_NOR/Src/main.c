@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    FMC/FMC_NOR/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   This sample code shows how to use STM32F4xx FMC HAL API to access
   *          by read and write operation the NOR external memory device.
   ******************************************************************************

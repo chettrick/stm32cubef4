@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    FatFs/FatFs_USBDisk_RTOS/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017
   * @brief   Description of the FatFs with USB disk drive in RTOS mode application
   ******************************************************************************
   * @attention
@@ -113,10 +111,12 @@ on STM32Cube with FatFs".
   - FatFs/FatFs_USBDisk_RTOS/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - FatFs/FatFs_USBDisk_RTOS/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - FatFs/FatFs_USBDisk_RTOS/Inc/main.h                  Main program header file
+  - FatFs/FatFs_USBDisk_RTOS/Inc/usbh_diskio_dma.h       FatFS usbh diskio driver header file
   - FatFs/FatFs_USBDisk_RTOS/Inc/ffconf.h                FAT file system module configuration file   
   - FatFs/FatFs_USBDisk_RTOS/Inc/usbh_conf.h             USB Host driver Configuration file
   - FatFs/FatFs_USBDisk_RTOS/Src/stm32f4xx_it.c          Interrupt handlers
   - FatFs/FatFs_USBDisk_RTOS/Src/main.c                  Main program
+  - FatFs/FatFs_USBDisk_RTOS/Src/usbh_diskio_dma.c       FatFS usbh diskio driver implementation
   - FatFs/FatFs_USBDisk_RTOS/Src/system_stm32f4xx.c      STM32F4xx system clock configuration file
   - FatFs/FatFs_USBDisk_RTOS/Src/usbh_conf.c             General low level driver configuration
 

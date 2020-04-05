@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    LwIP/LwIP_TFTP_Server/Src/tftpserver.c
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017 
   * @brief   basic tftp server implementation for IAP (only Write Req supported)
   ******************************************************************************
   * @attention

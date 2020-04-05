@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    HAL/HAL_TimeBase_RTC_WKUP/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.2.7
-  * @date    17-February-2017
   * @brief   Main program body
   ******************************************************************************
   * @attention

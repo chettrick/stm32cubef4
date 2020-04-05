@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Demonstrations/Src/fatfs_storage.c
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    17-February-2017
   * @brief   This file includes the Storage (FatFs) driver 
   ******************************************************************************
   * @attention
@@ -59,6 +57,7 @@ uint8_t aBuffer[BITMAP_HEADER_SIZE + BITMAP_BUFFER_SIZE];
 FILINFO MyFileInfo;
 DIR MyDirectory;
 FIL MyFile;
+FATFS fs;
 UINT BytesWritten, BytesRead;
 
 /* Private function prototypes -----------------------------------------------*/
@@ -156,7 +155,7 @@ uint32_t Storage_CopyFile(const char* BmpName1, const char* BmpName2)
     f_write(&file2, aBuffer, _MAX_SS, &BytesWritten);  
     index+= _MAX_SS;
     
-  } while(index < file1.fsize);
+  } while(index < f_size(&file1));
   
   f_close(&file1);
   f_close(&file2);
@@ -199,46 +198,39 @@ uint32_t Storage_CheckBitmapFile(const char* BmpName, uint32_t *FileLen)
   */
 uint32_t Storage_GetDirectoryBitmapFiles(const char* DirName, char* Files[])
 {
-  uint32_t counter = 0, index = 0;
   FRESULT res;
+  uint32_t index = 0;
 
-  res = f_opendir(&MyDirectory, DirName);
-  
-  if(res == FR_OK)
+  /* Open filesystem */
+  if(f_mount(&fs, (TCHAR const*)"",0) != FR_OK)
   {
-    for (;;)
+    return 0;
+  }
+
+  /* Start to search for wave files */
+  res = f_findfirst(&MyDirectory, &MyFileInfo, DirName, "*.bmp");
+
+  /* Repeat while an item is found */
+  while (MyFileInfo.fname[0])
+  {
+    if(res == FR_OK)
     {
-      res = f_readdir(&MyDirectory, &MyFileInfo);
-      if(res != FR_OK || MyFileInfo.fname[0] == 0) 
-        break;
-      if(MyFileInfo.fname[0] == '.') 
-        continue;
-      
-      if(!(MyFileInfo.fattrib & AM_DIR))
+      if(index < MAX_BMP_FILES)
       {
-        do
-        {
-          counter++;
-        }
-        while (MyFileInfo.fname[counter] != 0x2E);
-        
-        
-        if(index < MAX_BMP_FILES)
-        {
-          if((MyFileInfo.fname[counter + 1] == 'B') && (MyFileInfo.fname[counter + 2] == 'M') && (MyFileInfo.fname[counter + 3] == 'P'))
-          {
-            if(sizeof(MyFileInfo.fname) <= (MAX_BMP_FILE_NAME + 2))
-            {
-              sprintf (Files[index], "%s", MyFileInfo.fname);
-              index++;
-            }
-          }
-        }
-        counter = 0;
+        sprintf (Files[index++], "%s", MyFileInfo.fname);
       }
+      /* Search for next item */
+      res = f_findnext(&MyDirectory, &MyFileInfo);
+    }
+    else
+    {
+      index = 0;
+      break;
     }
   }
-    
+
+  f_closedir(&MyDirectory);
+
   return index;
 }
 

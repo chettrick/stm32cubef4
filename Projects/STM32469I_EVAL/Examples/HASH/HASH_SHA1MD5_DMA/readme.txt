@@ -6,8 +6,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    HASH/HASH_SHA1MD5_DMA/readme.txt
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   Description of the HASH digest calculation using SHA1 and MD5 example.
   ******************************************************************************
   *

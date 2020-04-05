@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Examples_LL/EXTI/EXTI_ToggleLedOnIT_Init/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017
   * @brief   This example describes how to configure the EXTI and use 
   *          GPIOs using the STM32F4xx LL API to toggles the available 
   *          users Leds on the board when User button is pressed.

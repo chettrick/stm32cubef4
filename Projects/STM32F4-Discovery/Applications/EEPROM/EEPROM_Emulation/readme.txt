@@ -5,8 +5,6 @@
   ******************* (C) COPYRIGHT 2017 STMicroelectronics ********************
   * @file    EEPROM/EEPROM_Emulation/readme.txt 
   * @author  MCD Application Team
-  * @version V1.3.5
-  * @date    17-February-2017
   * @brief   Description of the EEPROM_Emulation application.
   ******************************************************************************
   * @attention

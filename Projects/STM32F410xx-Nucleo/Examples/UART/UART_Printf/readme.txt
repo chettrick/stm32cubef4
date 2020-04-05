@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    UART/UART_Printf/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.5
-  * @date    17-February-2017
   * @brief   Description of the UART Printf example.
   ******************************************************************************
   *

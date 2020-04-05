@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Examples_LL/CRC/CRC_CalculateAndCheck/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017
   * @brief   This example describes how to use CRC peripheral for generating CRC value
   *          for an input data Buffer using the STM32F4xx CRC LL API.
   *          Peripheral initialization done using LL unitary services functions.

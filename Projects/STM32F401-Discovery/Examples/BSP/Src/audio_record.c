@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    BSP/Src/audio_record.c 
   * @author  MCD Application Team
-  * @version V1.2.8
-  * @date    17-February-2017
   * @brief   This example code shows how to use AUDIO features for the record.
   ******************************************************************************
   * @attention

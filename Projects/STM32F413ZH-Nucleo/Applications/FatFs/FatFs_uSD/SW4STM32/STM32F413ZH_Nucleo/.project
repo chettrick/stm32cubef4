@@ -49,10 +49,6 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_sdmmc.c</location>
 		</link><link>
-			<name>Middlewares/FatFs/Drivers/sd_diskio.c</name>
-			<type>1</type>
-			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FatFs/src/drivers/sd_diskio.c</location>
-		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_flash.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c</location>
@@ -72,6 +68,10 @@
 			<name>Middlewares/FatFs/Core/diskio.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FatFs/src/diskio.c</location>
+		</link><link>
+			<name>Middlewares/FatFs/Drivers/sd_diskio.c</name>
+			<type>1</type>
+			<location>PARENT-2-PROJECT_LOC/Src/sd_diskio.c</location>
 		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_spi.c</name>
 			<type>1</type>
@@ -153,10 +153,6 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c</location>
 		</link>
-		<link>
-			<name />
-			<type />
-			<location />
-		</link>
+		
 	</linkedResources>
 </projectDescription>

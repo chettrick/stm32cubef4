@@ -365,7 +365,7 @@
               <MiscControls>--C99</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F429xx,USE_STM324x9I_EVAL,USE_USB_FS</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Inc;..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Core\Inc;..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Class\MTP\Inc;..\..\..\..\..\..\Drivers\BSP\STM324x9I_EVAL;..\..\..\..\..\..\Utilities\Log</IncludePath>
+              <IncludePath>..\Inc;..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Core\Inc;..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Class\MTP\Inc;..\..\..\..\..\..\Drivers\BSP\STM324x9I_EVAL;..\..\..\..\..\..\Utilities\Log</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -469,7 +469,7 @@
             <File>
               <FileName>libPDMFilter_CM4_Keil.lib</FileName>
               <FileType>4</FileType>
-              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_Audio\Addons\PDM\libPDMFilter_CM4_Keil.lib</FilePath>
+              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_Audio\Addons\PDM\Lib\libPDMFilter_CM4_Keil.lib</FilePath>
             </File>
           </Files>
         </Group>
@@ -1074,7 +1074,7 @@
               <MiscControls>--C99</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F429xx,USE_STM324x9I_EVAL,USE_USB_HS</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Inc;..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Core\Inc;..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Class\MTP\Inc;..\..\..\..\..\..\Drivers\BSP\STM324x9I_EVAL;..\..\..\..\..\..\Utilities\Log</IncludePath>
+              <IncludePath>..\Inc;..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Core\Inc;..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Class\MTP\Inc;..\..\..\..\..\..\Drivers\BSP\STM324x9I_EVAL;..\..\..\..\..\..\Utilities\Log</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1178,7 +1178,7 @@
             <File>
               <FileName>libPDMFilter_CM4_Keil.lib</FileName>
               <FileType>4</FileType>
-              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_Audio\Addons\PDM\libPDMFilter_CM4_Keil.lib</FilePath>
+              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_Audio\Addons\PDM\Lib\libPDMFilter_CM4_Keil.lib</FilePath>
             </File>
           </Files>
         </Group>
@@ -1783,7 +1783,7 @@
               <MiscControls>--C99</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F429xx,USE_STM324x9I_EVAL,USE_USB_HS,USE_USB_HS_IN_FS</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Inc;..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Core\Inc;..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Class\MTP\Inc;..\..\..\..\..\..\Drivers\BSP\STM324x9I_EVAL;..\..\..\..\..\..\Utilities\Log</IncludePath>
+              <IncludePath>..\Inc;..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Core\Inc;..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Class\MTP\Inc;..\..\..\..\..\..\Drivers\BSP\STM324x9I_EVAL;..\..\..\..\..\..\Utilities\Log</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1887,7 +1887,7 @@
             <File>
               <FileName>libPDMFilter_CM4_Keil.lib</FileName>
               <FileType>4</FileType>
-              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_Audio\Addons\PDM\libPDMFilter_CM4_Keil.lib</FilePath>
+              <FilePath>..\..\..\..\..\..\Middlewares\ST\STM32_Audio\Addons\PDM\Lib\libPDMFilter_CM4_Keil.lib</FilePath>
             </File>
           </Files>
         </Group>

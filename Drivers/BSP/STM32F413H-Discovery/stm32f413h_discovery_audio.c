@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    STM32f413h_discovery_audio.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    27-January-2017
   * @brief   This file provides the Audio driver for the STM32F413H-DISCOVERY board.
   ******************************************************************************
   * @attention

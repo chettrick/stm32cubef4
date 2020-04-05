@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    LibJPEG/LibJPEG_Decoding/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017 
   * @brief   Main program body
   *          This sample code shows how to decompress JPEG file.
   ******************************************************************************
@@ -66,7 +64,7 @@ uint32_t offset = 0xD0000000;
 RGB_typedef *RGB_matrix;
 uint8_t _aucLine[2048];
 
-USBH_HandleTypeDef  hUSB_Host;  
+USBH_HandleTypeDef  hUSBHost;  
 
 /* Variable to save the state of USB */
 MSC_ApplicationTypeDef Appli_state = APPLICATION_IDLE;
@@ -104,19 +102,19 @@ int main(void)
   if(FATFS_LinkDriver(&USBH_Driver, USBDISKPath) == 0)
   {
     /*##-3- Init Host Library ################################################*/
-    USBH_Init(&hUSB_Host, USBH_UserProcess, 0);
+    USBH_Init(&hUSBHost, USBH_UserProcess, 0);
     
     /*##-4- Add Supported Class ##############################################*/
-    USBH_RegisterClass(&hUSB_Host, USBH_MSC_CLASS);
+    USBH_RegisterClass(&hUSBHost, USBH_MSC_CLASS);
     
     /*##-5- Start Host Process ###############################################*/
-    USBH_Start(&hUSB_Host);
+    USBH_Start(&hUSBHost);
     
     /*##-6- Run Application (Blocking mode) ##################################*/
     while (1)
     {
       /* USB Host Background task */
-      USBH_Process(&hUSB_Host);
+      USBH_Process(&hUSBHost);
       
       /* Mass Storage Application State Machine */
       switch(Appli_state)

@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    CEC/CEC_ListenMode/Src/stm32f0xx_hal_msp.c 
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    17-February-2017
   * @brief   HAL MSP module.
   ******************************************************************************
   * @attention

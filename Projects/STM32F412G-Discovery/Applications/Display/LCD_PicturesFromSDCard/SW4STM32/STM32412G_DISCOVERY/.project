@@ -29,6 +29,10 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FatFs/src/ff.c</location>
 		</link><link>
+			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_i2c.c</name>
+			<type>1</type>
+			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c</location>
+		</link><link>
 			<name>Drivers/BSP/STM32412G-Discovery/stm32412g_discovery.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/BSP/STM32412G-Discovery/stm32412g_discovery.c</location>
@@ -36,10 +40,6 @@
 			<name>Doc/readme.txt</name>
 			<type>1</type>
 			<location>PARENT-2-PROJECT_LOC/readme.txt</location>
-		</link><link>
-			<name>Middlewares/FatFs/Drivers/sd_diskio.c</name>
-			<type>1</type>
-			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FatFs/src/drivers/sd_diskio.c</location>
 		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_sd.c</name>
 			<type>1</type>
@@ -144,6 +144,10 @@
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_uart.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c</location>
+		</link><link>
+			<name>Middlewares/FatFs/Drivers/sd_diskio.c</name>
+			<type>1</type>
+			<location>PARENT-2-PROJECT_LOC/Src/sd_diskio.c</location>
 		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_rcc.c</name>
 			<type>1</type>

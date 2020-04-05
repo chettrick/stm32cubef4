@@ -314,7 +314,6 @@
           <name>CCIncludePath2</name>
           <state>$PROJ_DIR$\..\Inc</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include</state>
-          <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Include</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32F413H-Discovery</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\Common</state>
@@ -322,7 +321,6 @@
           <state>$PROJ_DIR$\..\..\..\..\..\..\Utilities\Fonts</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Utilities\CPU</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src</state>
-          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src\drivers</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\portable\IAR\ARM_CM4F</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\include</state>
@@ -587,7 +585,6 @@
         </option>
         <option>
           <name>AUserIncludes</name>
-          <state></state>
           <state>$PROJ_DIR$\..\Inc</state>
         </option>
         <option>
@@ -1102,7 +1099,7 @@
       <group>
         <name>Drivers</name>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src\drivers\sd_diskio.c</name>
+          <name>$PROJ_DIR$\..\Src\sd_diskio_dma_rtos.c</name>
         </file>
       </group>
       <group>

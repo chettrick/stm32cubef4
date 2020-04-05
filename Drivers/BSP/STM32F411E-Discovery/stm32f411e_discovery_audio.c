@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm32f411e_discovery_audio.c
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    27-January-2017
   * @brief   This file provides the Audio driver for the STM32F411E-Discovery 
   *          board.  
   ******************************************************************************
@@ -182,7 +180,10 @@ I2S_HandleTypeDef                 hAudioOutI2s;
 /*### RECORDER ###*/
 I2S_HandleTypeDef                 hAudioInI2s;
 
-PDMFilter_InitStruct Filter[DEFAULT_AUDIO_IN_CHANNEL_NBR];
+/* PDM filters params */
+PDM_Filter_Handler_t  PDM_FilterHandler[2];
+PDM_Filter_Config_t   PDM_FilterConfig[2];
+
 __IO uint16_t AudioInVolume = DEFAULT_AUDIO_IN_VOLUME;
 /**
   * @}
@@ -193,7 +194,7 @@ __IO uint16_t AudioInVolume = DEFAULT_AUDIO_IN_VOLUME;
   */ 
 static uint8_t I2S3_Init(uint32_t AudioFreq);
 static uint8_t I2S2_Init(uint32_t AudioFreq);
-static void PDMDecoder_Init(uint32_t AudioFreq, uint32_t ChnlNbr);
+static void PDMDecoder_Init(uint32_t AudioFreq, uint32_t ChnlNbrIn, uint32_t ChnlNbrOut);
 /**
   * @}
   */ 
@@ -733,7 +734,9 @@ uint8_t BSP_AUDIO_IN_Init(uint32_t AudioFreq, uint32_t BitRes, uint32_t ChnlNbr)
   BSP_AUDIO_IN_ClockConfig(&hAudioInI2s, AudioFreq, NULL);
   
   /* Configure the PDM library */
-  PDMDecoder_Init(AudioFreq, ChnlNbr);
+  /* On STM32F411E-Discovery a single microphone is mounted, samples are duplicated
+     to make stereo audio streams */
+  PDMDecoder_Init(AudioFreq, ChnlNbr, 2);
 
   /* Configure the I2S peripheral */
   hAudioInI2s.Instance = I2S2;
@@ -846,7 +849,7 @@ uint8_t BSP_AUDIO_IN_PDMToPCM(uint16_t *PDMBuf, uint16_t *PCMBuf)
   for(index = 0; index < DEFAULT_AUDIO_IN_CHANNEL_NBR; index++)
   {
     /* PDM to PCM filter */
-    PDM_Filter_64_LSB((uint8_t*)&AppPDM[index], (uint16_t*)&(PCMBuf[index]), AudioInVolume , (PDMFilter_InitStruct *)&Filter[index]);
+    PDM_Filter((uint8_t*)&AppPDM[index], (uint16_t*)&(PCMBuf[index]), &PDM_FilterHandler[index]);
   }
   
   /* Duplicate samples since a single microphone in mounted on STM32F4-Discovery */
@@ -1053,29 +1056,35 @@ __weak void BSP_AUDIO_IN_Error_Callback(void)
 *******************************************************************************/
 
 /**
-  * @brief  Initialize the PDM library.
+  * @brief  Initializes the PDM library.
   * @param  AudioFreq: Audio sampling frequency
-  * @param  ChnlNbr: Number of audio channels (1: mono; 2: stereo)
+  * @param  ChnlNbrIn: Number of input audio channels in the PDM buffer
+  * @param  ChnlNbrOut: Number of desired output audio channels in the  resulting PCM buffer
+  *         Number of audio channels (1: mono; 2: stereo)
   */
-static void PDMDecoder_Init(uint32_t AudioFreq, uint32_t ChnlNbr)
-{ 
-  uint32_t i = 0;
-  
+static void PDMDecoder_Init(uint32_t AudioFreq, uint32_t ChnlNbrIn, uint32_t ChnlNbrOut)
+{
+  uint32_t index = 0;
+
   /* Enable CRC peripheral to unlock the PDM library */
-  __CRC_CLK_ENABLE();
-  
-  for(i = 0; i < ChnlNbr; i++)
+  __HAL_RCC_CRC_CLK_ENABLE();
+
+  for(index = 0; index < ChnlNbrIn; index++)
   {
-    /* Filter LP and HP Init */
-    Filter[i].LP_HZ = AudioFreq / 2;
-    Filter[i].HP_HZ = 10;
-    Filter[i].Fs = AudioFreq;
-	/* On STM32F411E-Discovery a single microphone is mounted, samples are duplicated
-       to make stereo audio streams */
-    Filter[i].Out_MicChannels = 2;
-    Filter[i].In_MicChannels = ChnlNbr; 
-    PDM_Filter_Init((PDMFilter_InitStruct *)&Filter[i]);
-  }  
+    /* Init PDM filters */
+    PDM_FilterHandler[index].bit_order  = PDM_FILTER_BIT_ORDER_LSB;
+    PDM_FilterHandler[index].endianness = PDM_FILTER_ENDIANNESS_LE;
+    PDM_FilterHandler[index].high_pass_tap = 2122358088;
+    PDM_FilterHandler[index].out_ptr_channels = ChnlNbrOut;
+    PDM_FilterHandler[index].in_ptr_channels  = ChnlNbrIn;
+    PDM_Filter_Init((PDM_Filter_Handler_t *)(&PDM_FilterHandler[index]));
+
+    /* PDM lib config phase */
+    PDM_FilterConfig[index].output_samples_number = AudioFreq/1000;
+    PDM_FilterConfig[index].mic_gain = 24;
+    PDM_FilterConfig[index].decimation_factor = PDM_FILTER_DEC_FACTOR_64;
+    PDM_Filter_setConfig((PDM_Filter_Handler_t *)&PDM_FilterHandler[index], &PDM_FilterConfig[index]);
+  }
 }
 
 /**

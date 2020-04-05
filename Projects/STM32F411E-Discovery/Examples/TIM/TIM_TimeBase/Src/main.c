@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    TIM/TIM_TimeBase/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.0.4
-  * @date    17-February-2017
   * @brief   This sample code shows how to use STM32F4xx TIM HAL API to generate
   *          4 signals in PWM.
   ******************************************************************************

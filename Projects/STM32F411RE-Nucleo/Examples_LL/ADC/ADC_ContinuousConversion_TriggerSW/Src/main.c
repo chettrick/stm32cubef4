@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Examples_LL/ADC/ADC_ContinuousConversion_TriggerSW/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017
   * @brief   This example describes how to use a ADC peripheral to perform
   *          continuous ADC conversions of a channel, from a SW start.
   *          This example is based on the STM32F4xx ADC LL API;

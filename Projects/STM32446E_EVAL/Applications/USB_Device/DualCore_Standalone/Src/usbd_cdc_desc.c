@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Device/DualCore_Standalone/Src/usbd_cdc_desc.c
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    17-February-2017
   * @brief   This file provides the USBD descriptors and string formating method.
   ******************************************************************************
   * @attention
@@ -97,8 +95,8 @@ __ALIGN_BEGIN uint8_t USBD_VCP_DeviceDesc[USB_LEN_DEV_DESC] __ALIGN_END = {
   USB_DESC_TYPE_DEVICE,       /* bDescriptorType */
   0x00,                       /* bcdUSB */
   0x02,
-  0x00,                       /* bDeviceClass */
-  0x00,                       /* bDeviceSubClass */
+  0x02,                       /* bDeviceClass */
+  0x02,                       /* bDeviceSubClass */
   0x00,                       /* bDeviceProtocol */
   USB_MAX_EP0_SIZE,           /* bMaxPacketSize */
   LOBYTE(USBD_VCP_VID),           /* idVendor */

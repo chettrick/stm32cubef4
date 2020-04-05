@@ -25,10 +25,6 @@
 		<nature>fr.ac6.mcu.ide.core.MCUProjectNature</nature>
 	</natures>
 	<linkedResources><link>
-			<name>Middlewares/FatFs/Drivers/sd_diskio.c</name>
-			<type>1</type>
-			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FatFs/src/drivers/sd_diskio.c</location>
-		</link><link>
 			<name>Middlewares/LibJPEG/jmemnobs.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LibJPEG/source/jmemnobs.c</location>
@@ -88,6 +84,10 @@
 			<name>Middlewares/LibJPEG/jdmaster.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LibJPEG/source/jdmaster.c</location>
+		</link><link>
+			<name>Middlewares/FatFs/Drivers/sd_diskio.c</name>
+			<type>1</type>
+			<location>PARENT-2-PROJECT_LOC/Src/sd_diskio.c</location>
 		</link><link>
 			<name>Middlewares/LibJPEG/jdpostct.c</name>
 			<type>1</type>
@@ -405,10 +405,6 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_usart.c</location>
 		</link>
-		<link>
-			<name />
-			<type />
-			<location />
-		</link>
+		
 	</linkedResources>
 </projectDescription>

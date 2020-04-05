@@ -77,6 +77,10 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sram.c</location>
 		</link><link>
+			<name>Application/User/sd_diskio_dma_rtos.c</name>
+			<type>1</type>
+			<location>PARENT-2-PROJECT_LOC/Src/sd_diskio_dma_rtos.c</location>
+		</link><link>
 			<name>Middlewares/FatFs/Options/unicode.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FatFs/src/option/unicode.c</location>
@@ -189,18 +193,10 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FatFs/src/option/syscall.c</location>
 		</link><link>
-			<name>Application/User/sd_diskio.c</name>
-			<type>1</type>
-			<location>PARENT-2-PROJECT_LOC/Src/sd_diskio.c</location>
-		</link><link>
 			<name>Application/User/main.c</name>
 			<type>1</type>
 			<location>PARENT-2-PROJECT_LOC/Src/main.c</location>
 		</link>
-		<link>
-			<name />
-			<type />
-			<location />
-		</link>
+		
 	</linkedResources>
 </projectDescription>

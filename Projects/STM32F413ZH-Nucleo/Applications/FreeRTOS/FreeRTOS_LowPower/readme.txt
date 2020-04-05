@@ -5,8 +5,6 @@
   ******************************************************************************
   * @file    FreeRTOS/FreeRTOS_LowPower/readme.txt
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    17-February-2017
   * @brief   Description of the FreeRTOS low power application.
   ******************************************************************************
   *

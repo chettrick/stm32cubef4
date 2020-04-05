@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    ST_Addons.h
   * @author  MCD Application Team
-  * @version V1.0.2RC1
-  * @date    17-February-2017
   * @brief   ST Graphical addons : Extension for STemWin
   ******************************************************************************
   * @attention
@@ -36,7 +34,7 @@
 /* Includes ------------------------------------------------------------------*/   
 #include "GUI.h"
 #include "WM.h"
-#include "Dialog.h"
+#include "DIALOG.h"
 #include "CHOOSEFILE.h"
    
 #ifndef GUI_CONST_STORAGE

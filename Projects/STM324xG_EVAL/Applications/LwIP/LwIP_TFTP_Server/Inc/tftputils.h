@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    LwIP/LwIP_TFTP_Server/Inc/tftputils.h
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   tftp utils header file.
   ******************************************************************************
   * @attention

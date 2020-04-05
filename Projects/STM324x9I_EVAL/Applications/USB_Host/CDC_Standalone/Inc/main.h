@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/CDC_Standalone/Src/main.h 
   * @author  MCD Application Team
-  * @version V1.5.0
-  * @date    17-February-2017
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention

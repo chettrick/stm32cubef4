@@ -1,9 +1,7 @@
 /**
   ******************************************************************************
-  * @file    FatFs/FatFs_uSD_RTOS/Inc/stm32f4xx_it.h 
+  * @file    FatFs/FatFs_uSD_RTOS/Inc/stm32f4xx_it.h
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    17-February-2017
   * @brief   This file contains the headers of the interrupt handlers.
   ******************************************************************************
   * @attention
@@ -16,8 +14,8 @@
   *
   *        http://www.st.com/software_license_agreement_liberty_v2
   *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
+  * Unless required by applicable law or agreed to in writing, software
+  * distributed under the License is distributed on an "AS IS" BASIS,
   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   * See the License for the specific language governing permissions and
   * limitations under the License.
@@ -31,7 +29,7 @@
 
 #ifdef __cplusplus
  extern "C" {
-#endif 
+#endif
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
@@ -53,6 +51,7 @@ void SysTick_Handler(void);
 void BSP_SD_DMA_Rx_IRQHandler(void);
 void BSP_SD_DMA_Tx_IRQHandler(void);
 void SDIO_IRQHandler(void);
+void EXTI0_IRQHandler(void);
 #ifdef __cplusplus
 }
 #endif

@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    main.c 
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    17-February-2017
   * @brief   This file provides main program functions
   ******************************************************************************
   * @attention
@@ -142,7 +140,7 @@ int main(void)
   k_CalendarBkupInit();  
   
   /* Create GUI task */
-  osThreadDef(GUI_Thread, GUIThread, osPriorityNormal, 0, 4096);
+  osThreadDef(GUI_Thread, GUIThread, osPriorityLow, 0, 4096);
   osThreadCreate (osThread(GUI_Thread), NULL); 
   
   /* Add Modules*/
@@ -155,15 +153,6 @@ int main(void)
   k_ModuleAdd(&analog_clock_board);
   k_ModuleAdd(&USB_Storage_board);
   k_ModuleAdd(&INFORMATION_board); 
-  
-  /* Initialize GUI */
-  GUI_Init();  
-
-  /* Enable memory devices */
-  WM_SetCreateFlags(WM_CF_MEMDEV);  
-  
-  /* Set General Graphical proprieties */
-  k_SetGuiProfile();
   
   /* Create Touch screen Timer */
   osTimerDef(TS_Timer, TimerCallback);
@@ -188,16 +177,25 @@ int main(void)
   */
 static void GUIThread(void const * argument)
 {    
+  /* Initialize Storage Units */
+  k_StorageInit(); 
+  
+  /* Initialize GUI */
+  GUI_Init(); 
+  
   if(TouchScreen_IsCalibrationDone() == 0)
   {
     Touchscreen_Calibration();
   }
   
   /* Demo Startup */
-  k_StartUp();   
+  k_StartUp();
   
-  /* Initialize Storage Units */
-  k_StorageInit(); 
+  /* Enable memory devices */
+  WM_SetCreateFlags(WM_CF_MEMDEV);  
+  
+  /* Set General Graphical proprieties */
+  k_SetGuiProfile();
   
   /* Show the main menu */
   k_InitMenu();
@@ -299,40 +297,6 @@ static void SystemClock_Config(void)
   }  
 }
 
-/**
-  * @brief  This function configures the DWT interface as a time base source. 
-  *         The time source is configured  to have 1ms time base without the need for an interrupt
-  * @note   This function is called  automatically at the beginning of program after
-  *         reset by HAL_Init() or at any time when clock is configured, by HAL_RCC_ClockConfig(). 
-  * @param  TickPriority: Tick interrupt priorty (Not Used).
-  * @retval HAL status
-  */
-HAL_StatusTypeDef HAL_InitTick (uint32_t TickPriority)
-{
-  CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
-  
-  /* Unlock DWT registers */
-  if ((*(uint32_t*)0xE0001FB4) & 1)
-  {
-    *(uint32_t*)0xE0001FB0 = 0xC5ACCE55;
-  }
-  
-  /* Enable DWT cycle count */
-  DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk;
-
-  return HAL_OK;
-}
-
-/**
-  * @brief Provides a tick value in millisecond.
-  * @note This function is declared as __weak to be overwritten in case of other 
-  *       implementations in user file.
-  * @retval tick value
-  */
-uint32_t HAL_GetTick(void)
-{
-  return (DWT->CYCCNT / (HAL_RCC_GetHCLKFreq() / 1000)) ;
-}
 #ifdef USE_FULL_ASSERT
 /**
 * @brief  assert_failed

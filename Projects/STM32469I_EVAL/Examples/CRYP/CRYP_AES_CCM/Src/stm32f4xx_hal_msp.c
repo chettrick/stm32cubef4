@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    CRYP/CRYP_AES_CCM/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   HAL MSP module.
   ******************************************************************************
   * @attention

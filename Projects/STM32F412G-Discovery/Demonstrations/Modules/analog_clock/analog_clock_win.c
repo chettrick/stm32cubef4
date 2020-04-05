@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    analog_clock_win.c
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    17-February-2017   
   * @brief   analog clcok functions
   ******************************************************************************
   * @attention
@@ -46,7 +44,7 @@
   */
 
 /* Includes ------------------------------------------------------------------*/
-#include "dialog.h"
+#include "DIALOG.h"
 #include "k_module.h"
 #include "k_rtc.h"
 #include "analog_clock_res.c"

@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    FatFs/FatFs_RAMDisk/readme.txt 
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   Description of the FatFs with RAM disk drive application
   ******************************************************************************
   * @attention
@@ -105,9 +103,11 @@ on STM32Cube with FatFs".
   - FatFs/FatFs_RAMDisk/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - FatFs/FatFs_RAMDisk/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - FatFs/FatFs_RAMDisk/Inc/main.h                  Main program header file
+  - FatFs/FatFs_RAMDisk/Inc/sram_diskio.h      FatFS sram diskio driver header file
   - FatFs/FatFs_RAMDisk/Inc/ffconf.h                FAT file system module configuration file   
   - FatFs/FatFs_RAMDisk/Src/stm32f4xx_it.c          Interrupt handlers
   - FatFs/FatFs_RAMDisk/Src/main.c                  Main program
+  - FatFs/FatFs_RAMDisk/Src/sram_diskio.c      FatFS sram diskio driver implementation
   - FatFs/FatFs_RAMDisk/Src/system_stm32f4xx.c      STM32F4xx system clock configuration file
 
  

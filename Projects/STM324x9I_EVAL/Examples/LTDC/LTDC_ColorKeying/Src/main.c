@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    LTDC/LTDC_ColorKeying/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   This example describes how to enable and use 
   *          the LTDC color keying functionality.
   ******************************************************************************

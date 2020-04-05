@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    USB_Host/MSC_RTOS/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   Description of the USB Host MSC RTOS application.
   ******************************************************************************
   * @attention
@@ -103,7 +101,7 @@ the RTOS is enabled by setting, #define USBH_USE_OS      1
 It is possible to fine tune needed USB Host features by modifying defines values in USBH configuration
 file “usbh_conf.h” available under the project includes directory, in a way to fit the application
 requirements, such as:
-- Level of debug: USBH_DEBUG_LEVEL
+  - Level of debug: USBH_DEBUG_LEVEL
                   0: No debug messages
                   1: Only User messages are shown
                   2: User and Error messages are shown
@@ -115,6 +113,7 @@ requirements, such as:
 @par Directory contents
 
   - USB_Host/MSC_RTOS/Src/main.c                  Main program
+  - USB_Host/MSC_RTOS/Src/usbh_diskio_dma.c      FatFS usbh diskio driver implementation
   - USB_Host/MSC_RTOS/Src/system_stm32f4xx.c      STM32F4xx system clock configuration file
   - USB_Host/MSC_RTOS/Src/stm32f4xx_it.c          Interrupt handlers
   - USB_Host/MSC_RTOS/Src/menu.c                  MSC State Machine
@@ -123,6 +122,7 @@ requirements, such as:
   - USB_Host/MSC_RTOS/Src/file_operations.c       Write/read file on the disk
   - USB_Host/MSC_RTOS/Src/usbh_diskio.c           USB diskio interface for FatFs
   - USB_Host/MSC_RTOS/Inc/main.h                  Main program header file
+  - USB_Host/MSC_RTOS/Inc/usbh_diskio_dma.h      FatFS usbh diskio driver header file
   - USB_Host/MSC_RTOS/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - USB_Host/MSC_RTOS/Inc/lcd_log_conf.h          LCD log configuration file
   - USB_Host/MSC_RTOS/Inc/stm32f4xx_hal_conf.h    HAL configuration file

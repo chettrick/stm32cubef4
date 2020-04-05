@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm324xg_eval_eeprom.c
   * @author  MCD Application Team
-  * @version V3.0.0
-  * @date    27-January-2017
   * @brief   This file provides a set of functions needed to manage an I2C M24C64 
   *          EEPROM memory.
   *          

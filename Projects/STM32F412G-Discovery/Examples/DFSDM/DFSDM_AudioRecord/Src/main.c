@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    DFSDM/DFSDM_AudioRecord/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   This example describes how to use DFSDM HAL API to realize
   *          audio recording.
   ******************************************************************************

@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm324xg_eval_camera.c
   * @author  MCD Application Team
-  * @version V3.0.0
-  * @date    27-January-2017
   * @brief   This file includes the driver for Camera module mounted on
   *          STM324xG-EVAL evaluation board(MB786).
   ******************************************************************************

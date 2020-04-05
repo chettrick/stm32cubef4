@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Audio/Audio_playback_and_record/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.3.5
-  * @date    17-February-2017
   * @brief   Main program body.
   ******************************************************************************
   * @attention
@@ -80,7 +78,7 @@ __IO uint32_t PbPressCheck = 0;
 
 FATFS USBDISKFatFs;          /* File system object for USB disk logical drive */
 char USBDISKPath[4];         /* USB Host logical drive path */
-USBH_HandleTypeDef hUSBHost; /* USB Host handle */
+USBH_HandleTypeDef hUSB_Host; /* USB Host handle */
 
 MSC_ApplicationTypeDef AppliState = APPLICATION_IDLE;
 static uint8_t  USBH_USR_ApplicationState = USBH_USR_FS_INIT;
@@ -146,13 +144,13 @@ int main(void)
   if(FATFS_LinkDriver(&USBH_Driver, USBDISKPath) == 0)
   { 
     /*##-2- Init Host Library ################################################*/
-    USBH_Init(&hUSBHost, USBH_UserProcess, 0);
+    USBH_Init(&hUSB_Host, USBH_UserProcess, 0);
     
     /*##-3- Add Supported Class ##############################################*/
-    USBH_RegisterClass(&hUSBHost, USBH_MSC_CLASS);
+    USBH_RegisterClass(&hUSB_Host, USBH_MSC_CLASS);
     
     /*##-4- Start Host Process ###############################################*/
-    USBH_Start(&hUSBHost);
+    USBH_Start(&hUSB_Host);
     
     /* Run Application (Blocking mode)*/
     while (1)
@@ -168,7 +166,7 @@ int main(void)
       }
       
       /* USBH_Background Process */
-      USBH_Process(&hUSBHost);
+      USBH_Process(&hUSB_Host);
     }
   }
   

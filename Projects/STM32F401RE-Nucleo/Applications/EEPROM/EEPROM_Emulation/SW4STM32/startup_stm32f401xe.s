@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file      startup_stm32f401xe.s
   * @author    MCD Application Team
-  * @version   V1.0.4
-  * @date      17-February-2017
   * @brief     STM32F401xExx Devices vector table for GCC based toolchains. 
   *            This module performs:
   *                - Set the initial SP

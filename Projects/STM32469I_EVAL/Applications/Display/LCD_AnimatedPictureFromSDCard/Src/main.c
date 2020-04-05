@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Display/LCD_AnimatedPictureFromSDCard/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   This file provides main program functions
   ******************************************************************************
   * @attention
@@ -99,7 +97,7 @@ int main(void)
      */
   HAL_Init();
   
-  /* Configure the system clock to 200 MHz */
+  /* Configure the system clock to 180 MHz */
   SystemClock_Config();
   
   /* Configure LED3 */
@@ -401,11 +399,11 @@ static uint8_t LCD_Init(void)
   
   /* LCD clock configuration */
   /* PLLSAI_VCO Input = HSE_VALUE/PLL_M = 1 Mhz */
-  /* PLLSAI_VCO Output = PLLSAI_VCO Input * PLLSAIN = 192 Mhz */
-  /* PLLLCDCLK = PLLSAI_VCO Output/PLLSAIR = 192 MHz / 5 = 38.4 MHz */
-  /* LTDC clock frequency = PLLLCDCLK / LTDC_PLLSAI_DIVR_2 = 38.4 MHz / 2 = 19.2 MHz */
+  /* PLLSAI_VCO Output = PLLSAI_VCO Input * PLLSAIN = 186 Mhz */
+  /* PLLLCDCLK = PLLSAI_VCO Output/PLLSAIR = 186 MHz / 5 = 37.2 MHz */
+  /* LTDC clock frequency = PLLLCDCLK / LTDC_PLLSAI_DIVR_2 = 37.2 MHz / 2 = 18.6 MHz */
   PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_LTDC;
-  PeriphClkInitStruct.PLLSAI.PLLSAIN = 192;
+  PeriphClkInitStruct.PLLSAI.PLLSAIN = 186;
   PeriphClkInitStruct.PLLSAI.PLLSAIR = 5;
   PeriphClkInitStruct.PLLSAIDivR = RCC_PLLSAIDIVR_2;
   HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct); 

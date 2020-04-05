@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Display/LTDC_Paint/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   Main program body
   ******************************************************************************
   * @attention
@@ -66,7 +64,7 @@ typedef enum {
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-USBH_HandleTypeDef  hUSB_Host;
+USBH_HandleTypeDef  hUSBHost;
 FATFS USBDISK_FatFs;  /* File system object for USB Disk logical drive */
 FIL MyFile;           /* File object */
 char USB_Path[4];     /* USB Disk logical drive path */
@@ -150,17 +148,17 @@ int main(void)
  
   /*##-3- USB Initialization #################################################*/ 
   /* Init Host Library */
-  if (USBH_Init(&hUSB_Host, USBH_UserProcess, 0) != USBH_OK)
+  if (USBH_Init(&hUSBHost, USBH_UserProcess, 0) != USBH_OK)
   {
     /* USB Initialization Error */
     Error_Handler();
   }
   
   /* Add Supported Class */
-  USBH_RegisterClass(&hUSB_Host, USBH_MSC_CLASS);
+  USBH_RegisterClass(&hUSBHost, USBH_MSC_CLASS);
   
   /* Start Host Process */
-  if (USBH_Start(&hUSB_Host) != USBH_OK)
+  if (USBH_Start(&hUSBHost) != USBH_OK)
   {
     /* USB Initialization Error */
     Error_Handler();
@@ -189,7 +187,7 @@ int main(void)
   /*##-7- Configure the touch screen and Get the position ####################*/    
     GetPosition();
     
-    USBH_Process(&hUSB_Host);
+    USBH_Process(&hUSBHost);
   }
 }
 

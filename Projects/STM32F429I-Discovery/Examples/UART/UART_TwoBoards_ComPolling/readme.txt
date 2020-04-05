@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics  *******************
   * @file    UART/UART_TwoBoards_ComPolling/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.8
-  * @date    17-February-2017 
   * @brief   Description of the UART TwoBoards Communication Polling example.
   ******************************************************************************
   *
@@ -103,11 +101,11 @@ position of the transmitted data.
 
   - This example runs on STM32F429xx devices.
     
-  - This example has been tested with STMicroelectronics STM32F429I-Discovery RevB
+  - This example has been tested with STMicroelectronics STM32F429I-Discovery RevC
     boards and can be easily tailored to any other supported device 
     and development board.
     
-  - STM32F429I-Discovery RevB set-up
+  - STM32F429I-Discovery RevC set-up
     - Connect a wire between 1st board PA09 pin (UART Tx) to 2nd board PA10 pin (UART Rx)
     - Connect a wire between 1st board PA10 pin (UART Rx) to 2nd board PA09 pin (UART Tx)
 

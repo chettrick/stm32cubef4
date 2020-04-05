@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm32f429i_discovery_io.h
   * @author  MCD Application Team
-  * @version V2.1.5
-  * @date    27-January-2017
   * @brief   This file contains all the functions prototypes for the
   *          stm32f429i_discovery_io.c driver.
   ******************************************************************************

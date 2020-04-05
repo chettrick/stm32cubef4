@@ -275,7 +275,7 @@
 		</link><link>
 			<name>Middlewares/FatFs/Drivers/sd_diskio.c</name>
 			<type>1</type>
-			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FatFs/src/drivers/sd_diskio.c</location>
+			<location>PARENT-2-PROJECT_LOC/Src/sd_diskio.c</location>
 		</link><link>
 			<name>Drivers/CMSIS/system_stm32f4xx.c</name>
 			<type>1</type>
@@ -324,10 +324,6 @@
 			<name>Middlewares/LibJPEG/jutils.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LibJPEG/source/jutils.c</location>
-		</link><link>
-			<name>Drivers/BSP/Components/stmpe1600.c</name>
-			<type>1</type>
-			<location>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/stmpe1600/stmpe1600.c</location>
 		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal.c</name>
 			<type>1</type>
@@ -497,10 +493,6 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LibJPEG/source/jdatadst.c</location>
 		</link>
-		<link>
-			<name />
-			<type />
-			<location />
-		</link>
+		
 	</linkedResources>
 </projectDescription>

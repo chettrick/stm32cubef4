@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    fatfs_storage.h
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    17-February-2017
   * @brief   This file contains all the functions prototypes for the storage
   *          firmware driver.
   ******************************************************************************

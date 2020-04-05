@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm32469i_discovery_eeprom.c
   * @author  MCD Application Team
-  * @version V2.0.0
-  * @date    27-January-2017
   * @brief   This file provides a set of functions needed to manage an I2C M24LR64 
   *          EEPROM memory.
   *          To be able to use this driver, the switch EE_M24LR64 must be defined

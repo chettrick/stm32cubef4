@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Examples_LL/TIM/TIM_OnePulse/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017
   * @brief   This example describes how to use a timer instance in one 
   *          pulse mode through the STM32F4xx TIM LL API.
   *          Peripheral initialization done using LL unitary services functions.

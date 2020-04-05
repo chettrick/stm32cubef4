@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Demonstrations/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.2.6
-  * @date    17-February-2017
 
   * @brief   This demo describes how to display bmp images from SD card on TFT 
              using STM32NUCLEO board Adafruit 1.8" TFT shield.
@@ -439,8 +437,8 @@ static void SDCard_Config(void)
   
   if(FATFS_LinkDriver(&SD_Driver, SD_Path) == 0)
   {
-    /* Initialize the SD mounted on adafruit 1.8" TFT shield */
-    BSP_SD_Init();
+//    /* Initialize the SD mounted on adafruit 1.8" TFT shield */
+//    BSP_SD_Init();
     
     /* Check the mounted device */
     if(f_mount(&SD_FatFs, (TCHAR const*)"/", 0) != FR_OK)

@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    DFSDM/DFSDM_PulseSkipper/Inc/pulse_skipper.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017
   * @brief   This file contains definitions for pulse skipper.
   ******************************************************************************
   * @attention

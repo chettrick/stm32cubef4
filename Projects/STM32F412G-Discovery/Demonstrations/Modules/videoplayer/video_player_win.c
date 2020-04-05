@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    video_player_win.c
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    17-February-2017  
   * @brief   video player functions
   ******************************************************************************
   * @attention
@@ -47,7 +45,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "GUI_AVI.h"
-#include "dialog.h"
+#include "DIALOG.h"
 #include "k_module.h"
 #include "video_player_res.c"
 
@@ -315,12 +313,6 @@ static void _AddEntireFolder(char *Foldername)
   char *fn;
   static char tmp[FILEMGR_FILE_NAME_SIZE]; 
   
-#if _USE_LFN
-  static char lfn[_MAX_LFN];
-  fno.lfname = lfn;
-  fno.lfsize = sizeof(lfn);
-#endif
-  
   res = f_opendir(&dir, Foldername);
   
   if (res == FR_OK)
@@ -338,11 +330,8 @@ static void _AddEntireFolder(char *Foldername)
       {
         continue;
       }
-#if _USE_LFN
-      fn = *fno.lfname ? fno.lfname : fno.fname;
-#else
+      
       fn = fno.fname;
-#endif
       
       if (VideoList.ptr < FILEMGR_LIST_DEPDTH)
       {

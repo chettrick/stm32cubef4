@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm32412g_discovery.c
   * @author  MCD Application Team
-  * @version V2.0.0
-  * @date    27-January-2017
   * @brief   This file provides a set of firmware functions to manage LEDs, 
   *          push-buttons and COM ports available on STM32412G-DISCOVERY board 
   *          (MB1209) from STMicroelectronics.
@@ -69,11 +67,11 @@ typedef struct
   * @{
   */
 /**
- * @brief STM32412G DISCOVERY BSP Driver version number V2.0.0
+ * @brief STM32412G DISCOVERY BSP Driver version number V2.0.1
    */
 #define __STM32412G_DISCOVERY_BSP_VERSION_MAIN   (0x02) /*!< [31:24] main version */
 #define __STM32412G_DISCOVERY_BSP_VERSION_SUB1   (0x00) /*!< [23:16] sub1 version */
-#define __STM32412G_DISCOVERY_BSP_VERSION_SUB2   (0x00) /*!< [15:8]  sub2 version */
+#define __STM32412G_DISCOVERY_BSP_VERSION_SUB2   (0x01) /*!< [15:8]  sub2 version */
 #define __STM32412G_DISCOVERY_BSP_VERSION_RC     (0x00) /*!< [7:0]  release candidate */
 #define __STM32412G_DISCOVERY_BSP_VERSION        ((__STM32412G_DISCOVERY_BSP_VERSION_MAIN << 24)\
                                                  |(__STM32412G_DISCOVERY_BSP_VERSION_SUB1 << 16)\

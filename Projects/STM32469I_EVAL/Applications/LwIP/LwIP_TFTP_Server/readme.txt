@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    LwIP/LwIP_TFTP_Server/readme.txt
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   Description of the tftp server demonstration.
   ******************************************************************************
   * @attention
@@ -86,6 +84,7 @@ For more details about this application, refer to UM1713 "STM32Cube interfacing 
     - LwIP/LwIP_TFTP_Server/Inc/lcd_log_conf.h           LCD Log configuration file
     - LwIP/LwIP_TFTP_Server/Inc/ffconf.h                 FAT file system module configuration file
     - LwIP/LwIP_TFTP_Server/Inc/main.h                   Main program header file
+    - LwIP/LwIP_TFTP_Server/Inc/sd_diskio.h              FatFS sd diskio driver header file
     - LwIP/LwIP_TFTP_Server/Inc/lwipopts.h               LwIP stack configuration options
     - LwIP/LwIP_TFTP_Server/Inc/stm32f4xx_hal_conf.h     HAL Configuration file
     - LwIP/LwIP_TFTP_Server/Inc/stm32f4xx_it.h           header for stm32f4xx_it.c
@@ -93,7 +92,8 @@ For more details about this application, refer to UM1713 "STM32Cube interfacing 
     - LwIP/LwIP_TFTP_Server/Inc/tftputils.h              header for tftputils.c
     - LwIP/LwIP_TFTP_Server/Src/app_ethernet.c           Ethernet specific module
     - LwIP/LwIP_TFTP_Server/Src/main.c                   Main program  
-    - LwIP/LwIP_TFTP_Server/Src/ethernetif.c         Interfacing LwIP to ETH driver
+    - LwIP/LwIP_TFTP_Server/Src/sd_diskio.c              FatFS sd diskio driver implementation
+    - LwIP/LwIP_TFTP_Server/Src/ethernetif.c             Interfacing LwIP to ETH driver
     - LwIP/LwIP_TFTP_Server/Src/system_stm32f4xx.c       STM32 system configuration file
     - LwIP/LwIP_TFTP_Server/Src/stm32f4xx_it.c           Interrupt handlers
     - LwIP/LwIP_TFTP_Server/Src/tftpserver.c             tftp server application

@@ -8,7 +8,7 @@
   <Extensions>
     <cExt>*.c</cExt>
     <aExt>*.s*; *.src; *.a*</aExt>
-    <oExt>*.obj</oExt>
+    <oExt>*.obj; *.o</oExt>
     <lExt>*.lib</lExt>
     <tExt>*.txt; *.h; *.inc</tExt>
     <pExt>*.plm</pExt>
@@ -159,11 +159,12 @@
       <LintExecutable></LintExecutable>
       <LintConfigFile></LintConfigFile>
       <bLintAuto>0</bLintAuto>
-      <Lin2Executable></Lin2Executable>
-      <Lin2ConfigFile></Lin2ConfigFile>
-      <bLin2Auto>0</bLin2Auto>
       <bAutoGenD>0</bAutoGenD>
-      <bAuto2GenD>0</bAuto2GenD>
+      <LntExFlags>0</LntExFlags>
+      <pMisraName></pMisraName>
+      <pszMrule></pszMrule>
+      <pSingCmds></pSingCmds>
+      <pMultCmds></pMultCmds>
       <DebugDescription>
         <Enable>1</Enable>
         <EnableLog>0</EnableLog>
@@ -186,8 +187,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../Demo/GUIDEMO_Cursor.c</PathWithFileName>
-      <FilenameWithoutPath>GUIDEMO_Cursor.c</FilenameWithoutPath>
+      <PathWithFileName>../STemWin/App/GUIDEMO_TransparentDialog.c</PathWithFileName>
+      <FilenameWithoutPath>GUIDEMO_TransparentDialog.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -198,8 +199,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../Demo/GUIDEMO_TransparentDialog.c</PathWithFileName>
-      <FilenameWithoutPath>GUIDEMO_TransparentDialog.c</FilenameWithoutPath>
+      <PathWithFileName>../STemWin/App/GUIDEMO_Start.c</PathWithFileName>
+      <FilenameWithoutPath>GUIDEMO_Start.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -210,8 +211,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../Demo/GUIDEMO_Intro.c</PathWithFileName>
-      <FilenameWithoutPath>GUIDEMO_Intro.c</FilenameWithoutPath>
+      <PathWithFileName>../STemWin/App/GUIDEMO_Treeview.c</PathWithFileName>
+      <FilenameWithoutPath>GUIDEMO_Treeview.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -222,8 +223,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../Demo/GUIDEMO_Speed.c</PathWithFileName>
-      <FilenameWithoutPath>GUIDEMO_Speed.c</FilenameWithoutPath>
+      <PathWithFileName>../STemWin/App/GUIDEMO_Intro.c</PathWithFileName>
+      <FilenameWithoutPath>GUIDEMO_Intro.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -234,8 +235,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../Demo/GUIDEMO_Conf.c</PathWithFileName>
-      <FilenameWithoutPath>GUIDEMO_Conf.c</FilenameWithoutPath>
+      <PathWithFileName>../STemWin/App/GUIDEMO_IconView.c</PathWithFileName>
+      <FilenameWithoutPath>GUIDEMO_IconView.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -246,8 +247,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../Demo/GUIDEMO_Start.c</PathWithFileName>
-      <FilenameWithoutPath>GUIDEMO_Start.c</FilenameWithoutPath>
+      <PathWithFileName>../STemWin/App/GUIDEMO_ColorBar.c</PathWithFileName>
+      <FilenameWithoutPath>GUIDEMO_ColorBar.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -258,8 +259,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../Demo/GUIDEMO_Graph.c</PathWithFileName>
-      <FilenameWithoutPath>GUIDEMO_Graph.c</FilenameWithoutPath>
+      <PathWithFileName>../STemWin/App/GUIDEMO_Listview.c</PathWithFileName>
+      <FilenameWithoutPath>GUIDEMO_Listview.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -270,8 +271,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../Demo/GUIDEMO_Listview.c</PathWithFileName>
-      <FilenameWithoutPath>GUIDEMO_Listview.c</FilenameWithoutPath>
+      <PathWithFileName>../STemWin/App/GUIDEMO_Bitmap.c</PathWithFileName>
+      <FilenameWithoutPath>GUIDEMO_Bitmap.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -282,8 +283,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../Demo/GUIDEMO_ColorBar.c</PathWithFileName>
-      <FilenameWithoutPath>GUIDEMO_ColorBar.c</FilenameWithoutPath>
+      <PathWithFileName>../STemWin/App/GUIDEMO.c</PathWithFileName>
+      <FilenameWithoutPath>GUIDEMO.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -294,8 +295,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../Demo/GUIDEMO_Treeview.c</PathWithFileName>
-      <FilenameWithoutPath>GUIDEMO_Treeview.c</FilenameWithoutPath>
+      <PathWithFileName>../STemWin/App/GUIDEMO_Graph.c</PathWithFileName>
+      <FilenameWithoutPath>GUIDEMO_Graph.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -306,7 +307,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../Demo/GUIDEMO_RadialMenu.c</PathWithFileName>
+      <PathWithFileName>../STemWin/App/GUIDEMO_RadialMenu.c</PathWithFileName>
       <FilenameWithoutPath>GUIDEMO_RadialMenu.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -318,8 +319,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../Demo/GUIDEMO_Resource.c</PathWithFileName>
-      <FilenameWithoutPath>GUIDEMO_Resource.c</FilenameWithoutPath>
+      <PathWithFileName>../STemWin/App/GUIDEMO_Automotive.c</PathWithFileName>
+      <FilenameWithoutPath>GUIDEMO_Automotive.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -330,8 +331,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../Demo/GUIDEMO_Bitmap.c</PathWithFileName>
-      <FilenameWithoutPath>GUIDEMO_Bitmap.c</FilenameWithoutPath>
+      <PathWithFileName>../STemWin/App/GUIDEMO_VScreen.c</PathWithFileName>
+      <FilenameWithoutPath>GUIDEMO_VScreen.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -342,8 +343,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../Demo/GUIDEMO.c</PathWithFileName>
-      <FilenameWithoutPath>GUIDEMO.c</FilenameWithoutPath>
+      <PathWithFileName>../STemWin/App/GUIDEMO_Cursor.c</PathWithFileName>
+      <FilenameWithoutPath>GUIDEMO_Cursor.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -354,8 +355,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../Demo/GUIDEMO_Automotive.c</PathWithFileName>
-      <FilenameWithoutPath>GUIDEMO_Automotive.c</FilenameWithoutPath>
+      <PathWithFileName>../STemWin/App/GUIDEMO_Resource.c</PathWithFileName>
+      <FilenameWithoutPath>GUIDEMO_Resource.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -366,8 +367,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../Demo/GUIDEMO_IconView.c</PathWithFileName>
-      <FilenameWithoutPath>GUIDEMO_IconView.c</FilenameWithoutPath>
+      <PathWithFileName>../STemWin/App/GUIDEMO_Conf.c</PathWithFileName>
+      <FilenameWithoutPath>GUIDEMO_Conf.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -378,8 +379,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../Demo/GUIDEMO_VScreen.c</PathWithFileName>
-      <FilenameWithoutPath>GUIDEMO_VScreen.c</FilenameWithoutPath>
+      <PathWithFileName>../STemWin/App/GUIDEMO_Speed.c</PathWithFileName>
+      <FilenameWithoutPath>GUIDEMO_Speed.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -707,7 +708,7 @@
 
   <Group>
     <GroupName>Middlewares/STemWin/Config</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -730,8 +731,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../Src/GUIConf_stm32469i_eval.c</PathWithFileName>
-      <FilenameWithoutPath>GUIConf_stm32469i_eval.c</FilenameWithoutPath>
+      <PathWithFileName>../STemWin/Target/LCDConf_stm32469i_eval.c</PathWithFileName>
+      <FilenameWithoutPath>LCDConf_stm32469i_eval.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -742,8 +743,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../Src/LCDConf_stm32469i_eval.c</PathWithFileName>
-      <FilenameWithoutPath>LCDConf_stm32469i_eval.c</FilenameWithoutPath>
+      <PathWithFileName>../STemWin/Target/GUIConf_stm32469i_eval.c</PathWithFileName>
+      <FilenameWithoutPath>GUIConf_stm32469i_eval.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -762,8 +763,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../Src/main.c</PathWithFileName>
-      <FilenameWithoutPath>main.c</FilenameWithoutPath>
+      <PathWithFileName>../STemWin/Target/calibration.c</PathWithFileName>
+      <FilenameWithoutPath>calibration.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -774,8 +775,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../Src/rtc.c</PathWithFileName>
-      <FilenameWithoutPath>rtc.c</FilenameWithoutPath>
+      <PathWithFileName>../Core/Src/stm32f4xx_it.c</PathWithFileName>
+      <FilenameWithoutPath>stm32f4xx_it.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -786,8 +787,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../Src/calibration.c</PathWithFileName>
-      <FilenameWithoutPath>calibration.c</FilenameWithoutPath>
+      <PathWithFileName>../Core/Src/main.c</PathWithFileName>
+      <FilenameWithoutPath>main.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -798,8 +799,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../Src/stm32f4xx_it.c</PathWithFileName>
-      <FilenameWithoutPath>stm32f4xx_it.c</FilenameWithoutPath>
+      <PathWithFileName>../STemWin/Target/rtc.c</PathWithFileName>
+      <FilenameWithoutPath>rtc.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -807,7 +808,7 @@
 
   <Group>
     <GroupName>Middlewares/STemWin/Lib</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -818,8 +819,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../../../../../../Middlewares/ST/STemWin/Lib/STemWin532_CM4_Keil.lib</PathWithFileName>
-      <FilenameWithoutPath>STemWin532_CM4_Keil.lib</FilenameWithoutPath>
+      <PathWithFileName>../../../../../../Middlewares/ST/STemWin/Lib/STemWin540_CM4_Keil.lib</PathWithFileName>
+      <FilenameWithoutPath>STemWin540_CM4_Keil.lib</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -827,7 +828,7 @@
 
   <Group>
     <GroupName>Doc</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -923,7 +924,7 @@
 
   <Group>
     <GroupName>Drivers/BSP/Components</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -978,7 +979,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../Src/system_stm32f4xx.c</PathWithFileName>
+      <PathWithFileName>../Core/Src/system_stm32f4xx.c</PathWithFileName>
       <FilenameWithoutPath>system_stm32f4xx.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>

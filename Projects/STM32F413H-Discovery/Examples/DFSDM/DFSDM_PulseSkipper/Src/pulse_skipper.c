@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file   DFSDM/DFSDM_PulseSkipper/Src/pulse_skipper.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017
   * @brief   This file provides a set of firmware functions to pulse skipper.
   ******************************************************************************
   * @attention

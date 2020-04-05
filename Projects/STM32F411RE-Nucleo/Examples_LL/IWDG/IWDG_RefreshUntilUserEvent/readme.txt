@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    Examples_LL/IWDG/IWDG_RefreshUntilUserEvent/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017
   * @brief   Description of the IWDG_RefreshUntilUserEvent example.
   ******************************************************************************
   *

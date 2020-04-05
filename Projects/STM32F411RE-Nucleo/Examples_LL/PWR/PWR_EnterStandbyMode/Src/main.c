@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Examples_LL/PWR/PWR_EnterStandbyMode/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017
   * @brief   This example describes how to enter and exit the standby mode with
   *          a wakeup pin or external reset through the STM32F4xx PWR LL API.
   ******************************************************************************

@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm32446e_eval.h
   * @author  MCD Application Team
-  * @version V2.0.0
-  * @date    27-January-2017
   * @brief   This file contains definitions for STM32446E_EVAL's LEDs,
   *          push-buttons and COM ports hardware resources.
   ******************************************************************************

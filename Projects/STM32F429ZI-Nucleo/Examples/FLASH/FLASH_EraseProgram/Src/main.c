@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    FLASH/FLASH_EraseProgram/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   This example provides a description of how to erase and program the
   *          STM32F4xx FLASH.
   ******************************************************************************

@@ -1,0 +1,892 @@
+$version 6.60
+
+$rect <230,320,430,360>
+$output false
+resource Resources::Bitmap AppIcons
+{
+  attr bitmapfile FileName;
+  attr alphafile AlphaName = .\Res\AppIcons.png;
+  attr framesize FrameSize = <42,42>;
+  attr framedelay FrameDelay;
+}
+
+$rect <230,480,430,520>
+$output false
+resource Resources::Bitmap Home
+{
+  attr bitmapfile FileName = .\Res\HomeButton.png;
+  attr alphafile AlphaName;
+  attr framesize FrameSize = <36,36>;
+  attr framedelay FrameDelay;
+}
+
+$rect <30,320,230,360>
+$output false
+const color EmWiRed = #D73D32FF;
+
+$rect <30,360,230,400>
+$output false
+const color EmWiGray = #404348FF;
+
+$rect <230,560,430,600>
+$output false
+resource Resources::Bitmap Pagination
+{
+  attr bitmapfile FileName;
+  attr alphafile AlphaName = .\Res\Pagination.png;
+  attr framesize FrameSize = <9,9>;
+  attr framedelay FrameDelay;
+}
+
+$rect <230,520,430,560>
+$output false
+resource Resources::Bitmap Navigation
+{
+  attr bitmapfile FileName;
+  attr alphafile AlphaName = .\Res\Navigation.png;
+  attr framesize FrameSize = <20,20>;
+  attr framedelay FrameDelay;
+}
+
+$rect <230,400,430,440>
+$output false
+resource Resources::Bitmap Fader
+{
+  attr bitmapfile FileName;
+  attr alphafile AlphaName = .\Res\Fader.png;
+  attr framesize FrameSize = <30,150>;
+  attr framedelay FrameDelay;
+}
+
+// The info screen class to show the benefits.
+$rect <230,60,430,100>
+$output false
+class InfoScreen : Core::Group
+{
+  $rect <340,0,540,40>
+  inherited property Bounds = <0,0,320,240>;
+
+  // This is a generic touch handler.
+  $rect <20,20,160,60>
+  object Core::SimpleTouchHandler SimpleTouchHandler
+  {
+    preset Point4 = <0,0>;
+    preset Point3 = <320,0>;
+    preset Point2 = <320,240>;
+    preset Point1 = <0,240>;
+    preset OnPress = onInfo;
+  }
+
+  // This is a filled rectangle view.
+  $rect <20,20,160,60>
+  object Views::Rectangle Rectangle
+  {
+    preset Layout = Core::Layout[AlignToBottom, AlignToLeft, AlignToRight, AlignToTop, ResizeHorz, ResizeVert];
+    preset Bounds = <-310,-230,320,240>;
+    preset Color = MasterDemo::EmWiGray;
+  }
+
+  // This is a filled rectangle view.
+  $rect <20,20,160,60>
+  object Views::Rectangle RectangleTop
+  {
+    preset Bounds = <0,0,320,40>;
+    preset Color = MasterDemo::EmWiRed;
+  }
+
+  // This is an ordinary text view.
+  $rect <20,20,160,60>
+  object Views::Text Text
+  {
+    preset Bounds = <0,0,320,40>;
+    preset String = "GUI Development - Just Like Magic";
+    preset Font = MasterDemo::CaptionFont;
+  }
+
+  // Property to forward user selection.
+  $rect <340,90,540,130>
+  property slot OnHome = null;
+
+  // This is a slot method.
+  $rect <340,50,540,90>
+  slot onInfo
+  {
+    sender; /* the method is called from the sender object */
+    postsignal OnHome;
+  }
+
+  // This is an image view.
+  $rect <20,20,160,60>
+  object Views::Image Laptop
+  {
+    preset Bounds = <240,40,420,240>;
+    preset Alignment = Views::ImageAlignment[AlignHorzRight, AlignVertCenter];
+    preset Bitmap = MasterDemo::Laptop;
+  }
+
+  // This is an ordinary text view.
+  $rect <20,20,160,60>
+  object Views::Text InfoText
+  {
+    preset Bounds = <10,40,280,220>;
+    preset RowDistance = 20;
+    preset Alignment = Views::TextAlignment[AlignHorzLeft, AlignVertCenter];
+    preset String = MasterDemo::Benefits;
+    preset Font = MasterDemo::DescriptionFont;
+  }
+}
+
+$rect <230,440,430,480>
+$output false
+resource Resources::Bitmap Logo
+{
+  attr bitmapfile FileName = .\Res\EmWiLogo.png;
+  attr alphafile AlphaName;
+  attr framesize FrameSize;
+  attr framedelay FrameDelay;
+}
+
+$rect <30,520,230,560>
+$output false
+resource Resources::Font DescriptionFont
+{
+  attr fontname FontName = Roboto;
+  attr fontheight Height = 16;
+  attr fontquality Quality = High;
+  attr fontranges Ranges = 0x20-0xFF,0x2022,0x2122;
+  attr fontaspectratio AspectRatio = 1.0;
+  attr fontbold Bold = false;
+  attr fontitalic Italic = false;
+}
+
+$rect <30,560,230,600>
+$output false
+resource Resources::Font CaptionFont
+{
+  attr fontname FontName = Roboto;
+  attr fontheight Height = 24;
+  attr fontquality Quality = High;
+  attr fontranges Ranges = 0x20-0xFF;
+  attr fontaspectratio AspectRatio = 1.0;
+  attr fontbold Bold = false;
+  attr fontitalic Italic = false;
+}
+
+$rect <230,360,430,400>
+$output false
+resource Resources::Bitmap Laptop
+{
+  attr bitmapfile FileName = .\Res\Laptop.png;
+  attr alphafile AlphaName;
+  attr framesize FrameSize;
+  attr framedelay FrameDelay;
+}
+
+$rect <30,400,230,440>
+$output false
+const color EmWiWhite = #FFFFFFFF;
+
+// This is a constant.
+$rect <30,460,230,500>
+$output false
+const string Benefits = "\x2022 High-Performance GUIs\n\x2022 Extremley Low Memory Footprint\n\x2022 Pure ANSI-C Source Code Generation\n\x2022 Bare metal or any (RT)OS\n\x2022 Easy Workflow and Short Development Cycle\n\x2022 Simple Bussiness Model - No Royalties\n\x2022 25 Years of Experience in GUI Development";
+
+// Constants and Resources
+note group Note2
+{
+  attr Bounds = <10,280,450,620>;
+}
+
+// Master Demo Widgets
+note group Note
+{
+  attr Bounds = <10,130,450,270>;
+}
+
+// Master Demo Screens
+note group Note1
+{
+  attr Bounds = <10,20,450,120>;
+}
+
+// Base class to host demo applications.
+$rect <30,60,230,100>
+$output false
+class DemoScreen : Core::Group
+{
+  $rect <360,110,560,150>
+  inherited property Bounds = <0,0,320,240>;
+
+  // This is a slot method.
+  $rect <360,0,560,40>
+  slot onHome
+  {
+    sender; /* the method is called from the sender object */
+    signal OnHome;
+  }
+
+  // Property to forward user selection.
+  $rect <360,40,560,80>
+  property slot OnHome = null;
+
+  // The property 'AutoDemo' activates the auto demo mode of the embedded demo application.
+  $rect <360,160,560,200>
+  property bool AutoDemo = false;
+
+  $rect <360,200,560,240>
+  onset AutoDemo
+  {
+    /* check for any news */
+    if ( value == pure AutoDemo )
+      return;
+
+    /* store the given value */
+    pure AutoDemo = value;
+
+    /* further implementation is done in derived classes */
+
+  }
+
+  $rect <20,20,160,60>
+  object MasterDemo::HomeButton HomeButton
+  {
+    preset Layout = Core::Layout[];
+    preset Bounds = <280,0,320,40>;
+    preset OnChange = onHome;
+    preset ImageIndex = 1;
+  }
+
+  // This is the base class of all demo screens. It provides an empty area to host \
+  // the demo.
+  // 
+  // Every demo screen contains a home button and a slot property 'OnHome' to notify \
+  // the home screen about the request to close the demo.
+  // The property 'AutoDemo' is set by the application when the entire application \
+  // starts/stops the auto demo mode. The onset method 'OnSetAutoDemo' can be used \
+  // in derived classes to start/stop the autodemo of the demo.
+  note legend Note
+  {
+    attr Bounds = <0,270,710,430>;
+  }
+}
+
+// The class 'ListItem' implements a list item to select a certain application of \
+// the master demo.
+$rect <230,170,430,210>
+$output false
+class ListItem : Core::Group
+{
+  $rect <0,220,200,260>
+  inherited property Bounds = <0,0,90,110>;
+
+  $rect <0,260,200,300>
+  inherited method UpdateViewState()
+  {
+    if ( aState.contains( Core::ViewState[ Enabled ]))
+      Icon.Color = #FFFFFFFF;
+    else
+      Icon.Color = #444444FF;
+
+    Border.Color = Icon.Color;
+    Text.Color = Icon.Color;
+    Background.Color = MasterDemo::EmWiRed;
+
+  }
+
+  // This is a filled rectangle view.
+  $rect <20,20,160,60>
+  object Views::Rectangle Background
+  {
+    preset Bounds = <5,0,85,110>;
+    preset Color = MasterDemo::EmWiGray;
+  }
+
+  // This is a border view.
+  $rect <20,20,160,60>
+  object Views::Border Border
+  {
+    preset Layout = Core::Layout[AlignToBottom, AlignToLeft, AlignToRight, AlignToTop, ResizeHorz, ResizeVert];
+    preset Bounds = <5,0,85,110>;
+    preset Width = 2;
+  }
+
+  // This is an image view.
+  $rect <20,20,160,60>
+  object Views::Image Icon
+  {
+    preset Layout = Core::Layout[];
+    preset Bounds = <25,20,67,62>;
+    preset AutoSize = true;
+    preset Bitmap = MasterDemo::AppIcons;
+  }
+
+  // This is an ordinary text view.
+  $rect <20,20,160,60>
+  object Views::Text Text
+  {
+    preset Layout = Core::Layout[AlignToBottom, AlignToLeft, AlignToRight, ResizeHorz];
+    preset Bounds = <8,65,81,105>;
+    preset WrapText = true;
+    preset String = "Climate Cabinet";
+    preset Font = MasterDemo::DescriptionFont;
+  }
+
+  // This property 'Caption' contains the title of the button.
+  $rect <230,10,430,50>
+  property string Caption = "";
+
+  $rect <230,50,430,90>
+  onset Caption
+  {
+    /* store the given value */
+    pure Caption = value;
+
+    /* forward the new caption */
+    Text.String = value;
+  }
+
+  // The property 'IconIndex' contains the index of the icon that should be shown.
+  $rect <230,100,430,140>
+  property int32 IconIndex = 0;
+
+  $rect <230,140,430,180>
+  onset IconIndex
+  {
+    pure IconIndex = value;
+
+    Icon.FrameNumber = value;
+  }
+
+  // The class 'ListItem' implements a list item to select a certain application \
+  // of the master demo.
+  // The property 'IconIndex' is used to select the application image. The property \
+  // 'Caption' defines the text to be shown below the icon.
+  note legend Note
+  {
+    attr Bounds = <0,310,620,410>;
+  }
+
+  // This is a generic touch handler.
+  $rect <20,20,160,60>
+  object Core::SimpleTouchHandler SimpleTouchHandler
+  {
+    preset Point4 = <0,0>;
+    preset Point3 = <90,0>;
+    preset Point2 = <90,110>;
+    preset Point1 = <0,110>;
+    preset OnRelease = onSelect;
+    preset RetargetCondition = Core::RetargetReason[WipeLeft, WipeRight];
+  }
+
+  // Slot method to handle selection of a demo application.
+  $rect <230,200,430,240>
+  slot onSelect
+  {
+    /* check if touch is deflected - otherwise start the action */
+    if ( !SimpleTouchHandler.AutoDeflected )
+      postsignal OnAction;
+
+  }
+
+  // Property to forward user selection.
+  $rect <440,200,640,240>
+  property slot OnAction = null;
+}
+
+// The class 'HomeButton' implements a simple push button to close the currently \
+// running demo application.
+$rect <30,170,230,210>
+$output false
+class HomeButton : Core::Group
+{
+  $rect <0,80,200,120>
+  inherited property Bounds = <0,0,40,40>;
+
+  $rect <0,120,200,160>
+  inherited method UpdateViewState()
+  {
+    aState;
+
+    if ( TouchHandler.Down && TouchHandler.Inside )
+      Button.FrameNumber = ImageIndex ^ 1;
+    else
+      Button.FrameNumber = ImageIndex;
+
+  }
+
+  // This internal slot method is used to receive the corresponding signals form \
+  // the touch handler.
+  $rect <200,80,400,120>
+  slot enterLeaveSlot
+  {
+    InvalidateViewState();
+  }
+
+  // This internal slot method is used to receive the corresponding signals form \
+  // the touch handler.
+  $rect <200,120,400,160>
+  slot pressReleaseSlot
+  {
+    /* releasing the finger outside the button area is ignored */
+    if ( !TouchHandler.Down && TouchHandler.Inside )
+    {
+      /* inform the OnChange slot method */
+      idlesignal OnChange;
+    }
+  }
+
+  // The property 'OnChange' can refer to a slot method, which will receive a signal \
+  // as soon the user has pressed the button. Thereupon the method's logic will be \
+  // executed.
+  $rect <400,120,600,160>
+  property slot OnChange = null;
+
+  $rect <20,20,160,60>
+  object Core::SimpleTouchHandler TouchHandler
+  {
+    preset Layout = Core::Layout[AlignToRight, AlignToTop, ResizeHorz, ResizeVert];
+    preset Point4 = <10,30>;
+    preset Point3 = <40,40>;
+    preset Point2 = <40,0>;
+    preset Point1 = <0,0>;
+    preset OnLeave = enterLeaveSlot;
+    preset OnEnter = enterLeaveSlot;
+    preset OnRelease = pressReleaseSlot;
+    preset OnPress = pressReleaseSlot;
+  }
+
+  // This is an image view.
+  $rect <20,20,160,60>
+  object Views::Image Button
+  {
+    preset Layout = Core::Layout[AlignToRight, AlignToTop, ResizeHorz, ResizeVert];
+    preset Bounds = <0,0,40,40>;
+    preset AutoSize = true;
+    preset Alignment = Views::ImageAlignment[AlignHorzRight, AlignVertTop];
+    preset FrameNumber = 0;
+    preset Bitmap = MasterDemo::Home;
+  }
+
+  // The class 'HomeButton' implements a simple push button to close the currently \
+  // running demo application.
+  note legend Note
+  {
+    attr Bounds = <10,180,400,260>;
+  }
+
+  $rect <200,40,400,80>
+  onset ImageIndex
+  {
+    /* store the given value */
+    pure ImageIndex = value;
+
+    /* assign it to the image object */
+    Button.FrameNumber = value;
+
+  }
+
+  // The property 'ImageIndex' selects the style of the home button.
+  $rect <200,0,400,40>
+  property int32 ImageIndex = 0;
+}
+
+// The class 'PaginationBar' displays a horizontal row of indicators.
+$rect <230,210,430,250>
+$output false
+class PaginationBar : Core::Group
+{
+  $rect <10,90,210,130>
+  inherited property Bounds = <0,0,240,20>;
+
+  $rect <10,130,210,170>
+  inherited method UpdateViewState()
+  {
+    /* always invoke the inherited method */
+    super( aState );
+
+    var int32 w = PageInx0.Bounds.w;
+    var int32 x = ( Bounds.w - NoOfIndicators * w ) / 2;
+    var int32 y = ( Bounds.h - PageInx0.Bounds.h ) / 2;
+
+    /* arrange and show/hide all indicator members depending on the number of indicators */
+    PageInx0.Bounds.origin = point( x, y );
+    PageInx0.Visible = (NoOfIndicators > 0);
+    x = x + w;
+
+    PageInx1.Bounds.origin = point( x, y );
+    PageInx1.Visible = (NoOfIndicators > 1);
+    x = x + w;
+
+    PageInx2.Bounds.origin = point( x, y );
+    PageInx2.Visible = (NoOfIndicators > 2);
+    x = x + w;
+
+    PageInx3.Bounds.origin = point( x, y );
+    PageInx3.Visible = (NoOfIndicators > 3);
+    x = x + w;
+
+    PageInx4.Bounds.origin = point( x, y );
+    PageInx4.Visible = (NoOfIndicators > 4);
+    x = x + w;
+
+    PageInx5.Bounds.origin = point( x, y );
+    PageInx5.Visible = (NoOfIndicators > 5);
+    x = x + w;
+
+    PageInx6.Bounds.origin = point( x, y );
+    PageInx6.Visible = (NoOfIndicators > 6);
+    x = x + w;
+
+    PageInx7.Bounds.origin = point( x, y );
+    PageInx7.Visible = (NoOfIndicators > 7);
+    x = x + w;
+
+    PageInx8.Bounds.origin = point( x, y );
+    PageInx8.Visible = (NoOfIndicators > 8);
+    x = x + w;
+
+    PageInx9.Bounds.origin = point( x, y );
+    PageInx9.Visible = (NoOfIndicators > 9);
+    x = x + w;
+
+    PageInx10.Bounds.origin = point( x, y );
+    PageInx10.Visible = (NoOfIndicators > 10);
+    x = x + w;
+
+    PageInx11.Bounds.origin = point( x, y );
+    PageInx11.Visible = (NoOfIndicators > 11);
+    x = x + w;
+
+    PageInx12.Bounds.origin = point( x, y );
+    PageInx12.Visible = (NoOfIndicators > 12);
+    x = x + w;
+
+    PageInx13.Bounds.origin = point( x, y );
+    PageInx13.Visible = (NoOfIndicators > 13);
+    x = x + w;
+
+    PageInx14.Bounds.origin = point( x, y );
+    PageInx14.Visible = (NoOfIndicators > 14);
+
+    /* change indicator */
+    PageInx0.FrameNumber = 0;
+    PageInx1.FrameNumber = 0;
+    PageInx2.FrameNumber = 0;
+    PageInx3.FrameNumber = 0;
+    PageInx4.FrameNumber = 0;
+    PageInx5.FrameNumber = 0;
+    PageInx6.FrameNumber = 0;
+    PageInx7.FrameNumber = 0;
+    PageInx8.FrameNumber = 0;
+    PageInx9.FrameNumber = 0;
+    PageInx10.FrameNumber = 0;
+    PageInx11.FrameNumber = 0;
+    PageInx12.FrameNumber = 0;
+    PageInx13.FrameNumber = 0;
+    PageInx14.FrameNumber = 0;
+
+    switch ( Selection )
+    {
+      case 1: PageInx1.FrameNumber = 1;
+      case 2: PageInx2.FrameNumber = 1;
+      case 3: PageInx3.FrameNumber = 1;
+      case 4: PageInx4.FrameNumber = 1;
+      case 5: PageInx5.FrameNumber = 1;
+      case 6: PageInx6.FrameNumber = 1;
+      case 7: PageInx7.FrameNumber = 1;
+      case 8: PageInx8.FrameNumber = 1;
+      case 9: PageInx9.FrameNumber = 1;
+      case 10: PageInx10.FrameNumber = 1;
+      case 11: PageInx11.FrameNumber = 1;
+      case 12: PageInx12.FrameNumber = 1;
+      case 13: PageInx13.FrameNumber = 1;
+      case 14: PageInx14.FrameNumber = 1;
+      default: PageInx0.FrameNumber = 1;
+    }
+
+
+  }
+
+  // This is an image view.
+  $rect <20,20,160,60>
+  object Views::Image PageInx0
+  {
+    preset Bounds = <0,0,15,15>;
+    preset Alignment = Views::ImageAlignment[AlignHorzCenter, AlignVertCenter];
+    preset FrameNumber = 1;
+    preset Bitmap = MasterDemo::Pagination;
+  }
+
+  // This is an image view.
+  $rect <20,20,160,60>
+  object Views::Image PageInx1
+  {
+    preset Bounds = <25,0,40,15>;
+    preset Bitmap = MasterDemo::Pagination;
+  }
+
+  // This is an image view.
+  $rect <20,20,160,60>
+  object Views::Image PageInx2
+  {
+    preset Bounds = <50,0,65,15>;
+    preset Bitmap = MasterDemo::Pagination;
+  }
+
+  // This is an image view.
+  $rect <20,20,160,60>
+  object Views::Image PageInx3
+  {
+    preset Bounds = <75,0,90,15>;
+    preset Bitmap = MasterDemo::Pagination;
+  }
+
+  // This is an image view.
+  $rect <20,20,160,60>
+  object Views::Image PageInx4
+  {
+    preset Bounds = <100,0,115,15>;
+    preset Bitmap = MasterDemo::Pagination;
+  }
+
+  // This is an image view.
+  $rect <20,20,160,60>
+  object Views::Image PageInx5
+  {
+    preset Bounds = <125,0,140,15>;
+    preset Bitmap = MasterDemo::Pagination;
+  }
+
+  // This is an image view.
+  $rect <20,20,160,60>
+  object Views::Image PageInx6
+  {
+    preset Bounds = <150,0,165,15>;
+    preset Bitmap = MasterDemo::Pagination;
+  }
+
+  // The property 'NoOfIndicators' determines the total number of indicators within \
+  // the bar.
+  $rect <270,0,470,40>
+  property int32 NoOfIndicators = 15;
+
+  $rect <270,40,470,80>
+  onset NoOfIndicators
+  {
+    /* limit given value */
+    if ( value < 0 )
+      value = 0;
+    if ( value > 15 )
+      value = 15;
+
+    /* check for any news... */
+    if ( pure NoOfIndicators == value )
+      return;
+
+    /* store the new value */
+    pure NoOfIndicators = value;
+
+    /* finally, force an update of the component */
+    InvalidateViewState();
+
+  }
+
+  // This is an image view.
+  $rect <20,20,160,60>
+  object Views::Image PageInx7
+  {
+    preset Bounds = <175,0,190,15>;
+    preset Bitmap = MasterDemo::Pagination;
+  }
+
+  // This is an image view.
+  $rect <20,20,160,60>
+  object Views::Image PageInx8
+  {
+    preset Bounds = <200,0,215,15>;
+    preset Bitmap = MasterDemo::Pagination;
+  }
+
+  // This is an image view.
+  $rect <20,20,160,60>
+  object Views::Image PageInx9
+  {
+    preset Bounds = <225,0,240,15>;
+    preset Bitmap = MasterDemo::Pagination;
+  }
+
+  // This is an image view.
+  $rect <20,20,160,60>
+  object Views::Image PageInx10
+  {
+    preset Bounds = <250,0,265,15>;
+    preset Bitmap = MasterDemo::Pagination;
+  }
+
+  // This is an image view.
+  $rect <20,20,160,60>
+  object Views::Image PageInx11
+  {
+    preset Bounds = <275,0,290,15>;
+    preset Bitmap = MasterDemo::Pagination;
+  }
+
+  // This is an image view.
+  $rect <20,20,160,60>
+  object Views::Image PageInx12
+  {
+    preset Bounds = <300,0,315,15>;
+    preset Bitmap = MasterDemo::Pagination;
+  }
+
+  // This is an image view.
+  $rect <20,20,160,60>
+  object Views::Image PageInx13
+  {
+    preset Bounds = <325,0,340,15>;
+    preset Bitmap = MasterDemo::Pagination;
+  }
+
+  // This is an image view.
+  $rect <20,20,160,60>
+  object Views::Image PageInx14
+  {
+    preset Bounds = <350,0,365,15>;
+    preset Bitmap = MasterDemo::Pagination;
+  }
+
+  // The property 'Selection' determines the currently selected indicator.
+  $rect <270,90,470,130>
+  property int32 Selection = 0;
+
+  $rect <270,130,470,170>
+  onset Selection
+  {
+    /* limit given value */
+    if ( value < 0 )
+      value = 0;
+    if ( value > 15 )
+      value = 15;
+
+    /* check for any news... */
+    if ( pure Selection == value )
+      return;
+
+    /* store the new value */
+    pure Selection = value;
+
+    /* finally, force an update of the component */
+    InvalidateViewState();
+
+  }
+
+  // The class 'PaginationBar' displays a horizontal row of indicators. The property \
+  // 'Selection' defines the number of indicator that should appear selected.
+  note legend Note
+  {
+    attr Bounds = <10,200,510,290>;
+  }
+}
+
+// The class 'NavigationButton' implements a simple push button to start a certain \
+// navigation.
+$rect <30,210,230,250>
+$output false
+class NavigationButton : Core::Group
+{
+  $rect <0,100,200,140>
+  inherited property Bounds = <0,0,60,60>;
+
+  $rect <0,140,200,180>
+  inherited method UpdateViewState()
+  {
+    /* set color of frame and button according enabled state */
+    if ( aState.contains( Core::ViewState[ Enabled ]))
+    {
+      Button.Color      = MasterDemo::EmWiWhite;
+    }
+    else
+    {
+      Button.Color      = MasterDemo::EmWiGray;
+    }
+
+
+  }
+
+  // This internal slot method is used to receive the corresponding signals form \
+  // the touch handler.
+  $rect <200,100,400,140>
+  slot enterLeaveSlot
+  {
+    InvalidateViewState();
+  }
+
+  // This internal slot method is used to receive the corresponding signals form \
+  // the touch handler.
+  $rect <200,140,400,180>
+  slot pressReleaseSlot
+  {
+    /* releasing the finger outside the button area is ignored */
+    if ( !TouchHandler.Down && TouchHandler.Inside )
+    {
+      /* inform the connected slot method */
+      idlesignal OnAction;
+    }
+  }
+
+  // The property 'OnAction' can refer to a slot method, which will receive a signal \
+  // as soon the user has pressed the button. Thereupon the method's logic will be \
+  // executed.
+  $rect <410,140,610,180>
+  property slot OnAction = null;
+
+  $rect <20,20,160,60>
+  object Core::SimpleTouchHandler TouchHandler
+  {
+    preset Layout = Core::Layout[AlignToBottom, AlignToLeft, AlignToRight, AlignToTop, ResizeHorz, ResizeVert];
+    preset Point4 = <0,60>;
+    preset Point3 = <60,60>;
+    preset Point2 = <60,0>;
+    preset Point1 = <0,0>;
+    preset OnLeave = enterLeaveSlot;
+    preset OnEnter = enterLeaveSlot;
+    preset OnRelease = pressReleaseSlot;
+    preset OnPress = pressReleaseSlot;
+  }
+
+  // This is an image view.
+  $rect <20,20,160,60>
+  object Views::Image Button
+  {
+    preset Layout = Core::Layout[AlignToBottom, AlignToLeft, AlignToRight, AlignToTop, ResizeHorz, ResizeVert];
+    preset Bounds = <0,0,60,60>;
+    preset Color = MasterDemo::EmWiWhite;
+    preset FrameNumber = 0;
+    preset Bitmap = MasterDemo::Navigation;
+  }
+
+  $rect <200,40,400,80>
+  onset ImageIndex
+  {
+    /* store the given value */
+    pure ImageIndex = value;
+
+    /* assign it to the image object */
+    Button.FrameNumber = value;
+
+  }
+
+  // The property 'ImageIndex' selects the direction of the navigation button.
+  $rect <200,0,400,40>
+  property int32 ImageIndex = 0;
+
+  // The class 'NavigationButton' implements a simple push button to start a certain \
+  // navigation.
+  // The property 'ImageIndex' is used to select the navigation direction.
+  // Each time the user has pressed the button a signal is sent to the slot method \
+  // 'OnAction'.
+  note legend Note
+  {
+    attr Bounds = <0,200,620,300>;
+  }
+}

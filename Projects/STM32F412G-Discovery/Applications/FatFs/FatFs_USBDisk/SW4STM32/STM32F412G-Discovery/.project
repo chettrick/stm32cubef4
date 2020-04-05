@@ -25,10 +25,6 @@
 		<nature>fr.ac6.mcu.ide.core.MCUProjectNature</nature>
 	</natures>
 	<linkedResources><link>
-			<name>Middlewares/STM32_USBH_Library/Core/usbh_core.c</name>
-			<type>1</type>
-			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_core.c</location>
-		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c</location>
@@ -57,6 +53,10 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c</location>
 		</link><link>
+			<name>Middlewares/STM32_USBH_Library/Core/usbh_pipes.c</name>
+			<type>1</type>
+			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_pipes.c</location>
+		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_dma.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma.c</location>
@@ -73,25 +73,33 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_spi.c</location>
 		</link><link>
-			<name>Middlewares/STM32_USBH_Library/Core/usbh_pipes.c</name>
+			<name>Middlewares/FatFs/Drivers/usbh_diskio_dma.c</name>
 			<type>1</type>
-			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_pipes.c</location>
+			<location>PARENT-2-PROJECT_LOC/Src/usbh_diskio_dma.c</location>
 		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_dma_ex.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c</location>
 		</link><link>
+			<name>Middlewares/STM32_USBH_Library/Class/MSC/usbh_msc_scsi.c</name>
+			<type>1</type>
+			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_scsi.c</location>
+		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_ll_sdmmc.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_sdmmc.c</location>
 		</link><link>
-			<name>Middlewares/STM32_USBH_Library/Core/usbh_ioreq.c</name>
+			<name>Middlewares/STM32_USBH_Library/Core/usbh_ctlreq.c</name>
 			<type>1</type>
-			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.c</location>
+			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ctlreq.c</location>
 		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_ll_usb.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c</location>
+		</link><link>
+			<name>Middlewares/STM32_USBH_Library/Core/usbh_ioreq.c</name>
+			<type>1</type>
+			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.c</location>
 		</link><link>
 			<name>Drivers/CMSIS/system_stm32f4xx.c</name>
 			<type>1</type>
@@ -101,6 +109,10 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c</location>
 		</link><link>
+			<name>Middlewares/STM32_USBH_Library/Class/MSC/usbh_msc_bot.c</name>
+			<type>1</type>
+			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c</location>
+		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_rcc_ex.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c</location>
@@ -109,21 +121,13 @@
 			<type>1</type>
 			<location>PARENT-2-PROJECT_LOC/Src/usbh_conf.c</location>
 		</link><link>
-			<name>Middlewares/STM32_USBH_Library/Class/MSC/usbh_msc_scsi.c</name>
-			<type>1</type>
-			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_scsi.c</location>
-		</link><link>
-			<name>Middlewares/STM32_USBH_Library/Class/MSC/usbh_msc.c</name>
-			<type>1</type>
-			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc.c</location>
-		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_hcd.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_hcd.c</location>
 		</link><link>
-			<name>Middlewares/FatFs/Drivers/usbh_diskio.c</name>
+			<name>Middlewares/STM32_USBH_Library/Class/MSC/usbh_msc.c</name>
 			<type>1</type>
-			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FatFs/src/drivers/usbh_diskio.c</location>
+			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc.c</location>
 		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_sram.c</name>
 			<type>1</type>
@@ -132,10 +136,6 @@
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_uart.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c</location>
-		</link><link>
-			<name>Middlewares/STM32_USBH_Library/Core/usbh_ctlreq.c</name>
-			<type>1</type>
-			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ctlreq.c</location>
 		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_sdram.c</name>
 			<type>1</type>
@@ -153,6 +153,10 @@
 			<type>1</type>
 			<location>PARENT-1-PROJECT_LOC/startup_stm32f412zx.s</location>
 		</link><link>
+			<name>Middlewares/STM32_USBH_Library/Core/usbh_core.c</name>
+			<type>1</type>
+			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_core.c</location>
+		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_i2c_ex.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.c</location>
@@ -160,10 +164,6 @@
 			<name>Middlewares/FatFs/Core/diskio.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FatFs/src/diskio.c</location>
-		</link><link>
-			<name>Middlewares/STM32_USBH_Library/Class/MSC/usbh_msc_bot.c</name>
-			<type>1</type>
-			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c</location>
 		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_gpio.c</name>
 			<type>1</type>

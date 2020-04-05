@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    analog_clock_res.c
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    17-February-2017
   * @brief   resources define for analog clcok module
   ******************************************************************************
   * @attention

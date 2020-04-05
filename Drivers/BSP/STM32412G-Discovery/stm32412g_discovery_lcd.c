@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm32412g_discovery_lcd.c
   * @author  MCD Application Team
-  * @version V2.0.0
-  * @date    27-January-2017
   * @brief   This file includes the driver for Liquid Crystal Display (LCD) module
   *          mounted on STM32412G-DISCOVERY board.
   ******************************************************************************
@@ -699,14 +697,11 @@ void BSP_LCD_DrawBitmap(uint16_t Xpos, uint16_t Ypos, uint8_t *pbmp)
   uint32_t height = 0;
   uint32_t width  = 0;
   
-  
   /* Read bitmap width */
-  width = *(uint16_t *) (pbmp + 18);
-  width |= (*(uint16_t *) (pbmp + 20)) << 16;
-  
+  width = pbmp[18] + (pbmp[19] << 8) + (pbmp[20] << 16)  + (pbmp[21] << 24);
+
   /* Read bitmap height */
-  height = *(uint16_t *) (pbmp + 22);
-  height |= (*(uint16_t *) (pbmp + 24)) << 16; 
+  height = pbmp[22] + (pbmp[23] << 8) + (pbmp[24] << 16)  + (pbmp[25] << 24);
   
   SetDisplayWindow(Xpos, Ypos, width, height);
   

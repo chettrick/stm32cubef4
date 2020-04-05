@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    CRYP/CRYP_AESModes/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   This example provides a short description of how to use the CRYPTO
   *          peripheral to encrypt and decrypt data using AES in chaining modes
   *          (ECB, CBC, CTR) and all key sizes (128, 192, 256) Algorithm.

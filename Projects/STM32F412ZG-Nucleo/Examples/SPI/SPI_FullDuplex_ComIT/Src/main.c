@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    SPI/SPI_FullDuplex_ComIT/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   This sample code shows how to use STM32F4xx SPI HAL API to transmit
   *          and receive a data buffer with a communication process based on
   *          Interrupt transfer.

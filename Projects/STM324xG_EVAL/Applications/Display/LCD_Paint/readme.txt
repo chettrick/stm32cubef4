@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    Display/LCD_Paint/readme.txt 
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   Description of the LCD Paint application.
   ******************************************************************************
   * @attention
@@ -110,6 +108,7 @@ Note: After save operation, the touch positions are not cleared from STMPE811 FI
 @par Directory contents
 
     - Display/LCD_Paint/Inc/main.h                      Main program header file
+  - Display/LCD_Paint/Inc/sd_diskio.h      FatFS sd diskio driver header file
     - Display/LCD_Paint/Inc/stm32f4xx_it.h              Interrupt handlers header file
     - Display/LCD_Paint/Inc/stm32f4xx_hal_conf.h        HAL Configuration file 
     - Display/LCD_Paint/Inc/color.h                     Image used for LCD Validation
@@ -117,6 +116,7 @@ Note: After save operation, the touch positions are not cleared from STMPE811 FI
     - Display/LCD_Paint/Inc/fatfs_storage.h             Header for fatfs_storage.c
     - Display/LCD_Paint/Inc/ffconf.h                    FAT file system module configuration file
     - Display/LCD_Paint/Src/main.c                      Main program  
+  - Display/LCD_Paint/Src/sd_diskio.c      FatFS sd diskio driver implementation
     - Display/LCD_Paint/Src/stm32f4xx_it.c              Interrupt handlers
     - Display/LCD_Paint/Src/system_stm32f4xx.c          STM32F4xx system clock configuration file
     - Display/LCD_Paint/Src/ts_calibration.c            Touchscreen calibration driver

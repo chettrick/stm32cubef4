@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm32f401_discovery_accelerometer.c
   * @author  MCD Application Team
-  * @version V2.2.2
-  * @date    27-January-2017
   * @brief   This file provides a set of functions needed to manage the
   *          MEMS accelerometer available on STM32F401-Discovery Kit.
   ******************************************************************************

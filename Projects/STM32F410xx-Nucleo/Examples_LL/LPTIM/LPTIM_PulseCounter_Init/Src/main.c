@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Examples_LL/LPTIM/LPTIM_PulseCounter_Init/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017
   * @brief   This example describes how to use the LPTIM in counter mode
   *          using the STM32F4xx LPTIM LL API.
   *          Peripheral initialization done using LL initialization function.

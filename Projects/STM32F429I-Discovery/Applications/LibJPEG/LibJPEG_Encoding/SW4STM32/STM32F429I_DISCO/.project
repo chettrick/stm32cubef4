@@ -33,6 +33,10 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/stmpe1600/stmpe1600.c</location>
 		</link><link>
+			<name>Middlewares/STM32_USBH_Library/Core/usbh_core.c</name>
+			<type>1</type>
+			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_core.c</location>
+		</link><link>
 			<name>Application/User/main.c</name>
 			<type>1</type>
 			<location>PARENT-2-PROJECT_LOC/Src/main.c</location>
@@ -81,10 +85,6 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c</location>
 		</link><link>
-			<name>Middlewares/STM32_USBH_Library/Core/usbh_core.c</name>
-			<type>1</type>
-			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_core.c</location>
-		</link><link>
 			<name>Drivers/BSP/Components/stmpe811.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/stmpe811/stmpe811.c</location>
@@ -108,10 +108,6 @@
 			<name>Middlewares/Lib_JPEG/jcapistd.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LibJPEG/source/jcapistd.c</location>
-		</link><link>
-			<name>Middlewares/FatFs/Drivers/usbh_diskio.c</name>
-			<type>1</type>
-			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FatFs/src/drivers/usbh_diskio.c</location>
 		</link><link>
 			<name>Application/User/decode.c</name>
 			<type>1</type>
@@ -169,6 +165,10 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LibJPEG/source/jcinit.c</location>
 		</link><link>
+			<name>Middlewares/FatFs/Drivers/usbh_diskio_dma.c</name>
+			<type>1</type>
+			<location>PARENT-2-PROJECT_LOC/Src/usbh_diskio_dma.c</location>
+		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_flash_ex.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c</location>
@@ -197,6 +197,10 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_wwdg.c</location>
 		</link><link>
+			<name>Middlewares/STM32_USBH_Library/Class/MSC/usbh_msc_bot.c</name>
+			<type>1</type>
+			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c</location>
+		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_cryp.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cryp.c</location>
@@ -212,10 +216,6 @@
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_flash_ramfunc.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ramfunc.c</location>
-		</link><link>
-			<name>Middlewares/STM32_USBH_Library/Class/MSC/usbh_msc_scsi.c</name>
-			<type>1</type>
-			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_scsi.c</location>
 		</link><link>
 			<name>Application/User/jdata_conf.c</name>
 			<type>1</type>
@@ -245,13 +245,13 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LibJPEG/source/jutils.c</location>
 		</link><link>
-			<name>Middlewares/STM32_USBH_Library/Core/usbh_ctlreq.c</name>
-			<type>1</type>
-			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ctlreq.c</location>
-		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_tim_ex.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c</location>
+		</link><link>
+			<name>Middlewares/STM32_USBH_Library/Class/MSC/usbh_msc_scsi.c</name>
+			<type>1</type>
+			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_scsi.c</location>
 		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_ltdc.c</name>
 			<type>1</type>
@@ -264,10 +264,6 @@
 			<name>Middlewares/Lib_JPEG/jfdctfst.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LibJPEG/source/jfdctfst.c</location>
-		</link><link>
-			<name>Middlewares/STM32_USBH_Library/Class/MSC/usbh_msc.c</name>
-			<type>1</type>
-			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc.c</location>
 		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_hash_ex.c</name>
 			<type>1</type>
@@ -357,17 +353,9 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LibJPEG/source/jdcolor.c</location>
 		</link><link>
-			<name>Middlewares/STM32_USBH_Library/Core/usbh_pipes.c</name>
-			<type>1</type>
-			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_pipes.c</location>
-		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_adc.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c</location>
-		</link><link>
-			<name>Middlewares/STM32_USBH_Library/Core/usbh_ioreq.c</name>
-			<type>1</type>
-			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.c</location>
 		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_smartcard.c</name>
 			<type>1</type>
@@ -409,6 +397,10 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dac.c</location>
 		</link><link>
+			<name>Middlewares/STM32_USBH_Library/Class/MSC/usbh_msc.c</name>
+			<type>1</type>
+			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc.c</location>
+		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_hash.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_hash.c</location>
@@ -436,6 +428,10 @@
 			<name>Middlewares/FatFs/Core/ff_gen_drv.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FatFs/src/ff_gen_drv.c</location>
+		</link><link>
+			<name>Middlewares/STM32_USBH_Library/Core/usbh_ctlreq.c</name>
+			<type>1</type>
+			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ctlreq.c</location>
 		</link><link>
 			<name>Middlewares/Lib_JPEG/jdmerge.c</name>
 			<type>1</type>
@@ -497,10 +493,6 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LibJPEG/source/jcmainct.c</location>
 		</link><link>
-			<name>Middlewares/STM32_USBH_Library/Class/MSC/usbh_msc_bot.c</name>
-			<type>1</type>
-			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c</location>
-		</link><link>
 			<name>Middlewares/Lib_JPEG/jcomapi.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LibJPEG/source/jcomapi.c</location>
@@ -516,6 +508,10 @@
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_ll_sdmmc.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_sdmmc.c</location>
+		</link><link>
+			<name>Middlewares/STM32_USBH_Library/Core/usbh_pipes.c</name>
+			<type>1</type>
+			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_pipes.c</location>
 		</link><link>
 			<name>Middlewares/Lib_JPEG/jcapimin.c</name>
 			<type>1</type>
@@ -533,6 +529,10 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_crc.c</location>
 		</link><link>
+			<name>Middlewares/STM32_USBH_Library/Core/usbh_ioreq.c</name>
+			<type>1</type>
+			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.c</location>
+		</link><link>
 			<name>Middlewares/Lib_JPEG/jdtrans.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LibJPEG/source/jdtrans.c</location>
@@ -541,10 +541,6 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dac_ex.c</location>
 		</link>
-		<link>
-			<name />
-			<type />
-			<location />
-		</link>
+		
 	</linkedResources>
 </projectDescription>

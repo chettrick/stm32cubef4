@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    USB_Device/DFU_Standalone/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   Description of the USB DFU application.
   ******************************************************************************
   * @attention
@@ -183,7 +181,10 @@ In order to make the program work, you must do the following :
                                    peripheral In FS (using embedded PHY).
  - To run the application, proceed as follows:
    - Install "DfuSe Demonstrator"
-   - Install the DFU driver available in "DfuSe Demonstrator" installation directory  
+   - Install the DFU driver available in "DfuSe Demonstrator" installation directory
+   - For Windows 8.1 and later : Update STM32 DFU device driver manually from Windows Device Manager.
+     The install of required device driver is available under: 
+	 "Program Files\STMicroelectronics\Software\DfuSe v3.0.5\Bin\Driver\Win8.1" directory.   
    - Open "DfuSe Demo" and download the "STM32469I_EVAL_SysTick_0x08008000.dfu" provided in Binary
      directory.
    - To run the downloaded application, execute the command "leave the DFU mode" or simply reset the 

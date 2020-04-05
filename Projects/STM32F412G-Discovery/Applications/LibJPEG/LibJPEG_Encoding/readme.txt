@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    LibJPEG/LibJPEG_Encoding/readme.txt
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   Description of the LibJPEG encoding application.
   ******************************************************************************
   * @attention
@@ -72,6 +70,7 @@ in "main.h" file to decode other resolution than 240x240.
 @par Directory contents
 
     - LibJPEG/LibJPEG_Encoding/Inc/main.h                      Main program header file
+    - LibJPEG/LibJPEG_Encoding/Inc/sd_diskio.h                 FatFS sd diskio driver header file
     - LibJPEG/LibJPEG_Encoding/Inc/stm32f4xx_it.h              Interrupt handlers header file
     - LibJPEG/LibJPEG_Encoding/Inc/stm32f4xx_hal_conf.h        HAL Configuration file 
     - LibJPEG/LibJPEG_Encoding/Inc/ffconf.h                    FAT file system module configuration file
@@ -81,6 +80,7 @@ in "main.h" file to decode other resolution than 240x240.
     - LibJPEG/LibJPEG_Encoding/Inc/jconfig.h                   Lib JPEG configuration file.
     - LibJPEG/LibJPEG_Encoding/Inc/jdata_conf.h                Write/Read methods definition       
     - LibJPEG/LibJPEG_Encoding/Src/main.c                      Main program  
+    - LibJPEG/LibJPEG_Encoding/Src/sd_diskio.c                 FatFS sd diskio driver implementation
     - LibJPEG/LibJPEG_Encoding/Src/stm32f4xx_it.c              Interrupt handlers
     - LibJPEG/LibJPEG_Encoding/Src/system_stm32f4xx.c          STM32F4xx system clock configuration file
     - LibJPEG/LibJPEG_Encoding/Src/encode.c                    Encoder file

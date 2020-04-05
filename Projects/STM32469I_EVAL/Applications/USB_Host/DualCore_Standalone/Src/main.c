@@ -2,48 +2,47 @@
   ******************************************************************************
   * @file    USB_Host/DualCore_Standalone/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   USB host Dual core HID and MSC demo main file
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V.
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without 
+  * Redistribution and use in source and binary forms, with or without
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice, 
+  * 1. Redistribution of source code must retain the above copyright notice,
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other 
-  *    contributors to this software may be used to endorse or promote products 
+  * 3. Neither the name of STMicroelectronics nor the names of other
+  *    contributors to this software may be used to endorse or promote products
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this 
+  * 4. This software, including modifications and/or derivative works of this
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under 
-  *    this license is void and will automatically terminate your rights under 
-  *    this license. 
+  * 5. Redistribution and use of this software other than as permitted under
+  *    this license is void and will automatically terminate your rights under
+  *    this license.
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
   ******************************************************************************
   */
+
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
@@ -55,6 +54,7 @@ USBH_HandleTypeDef hUSBHost_FS;
 USBH_HandleTypeDef hUSBHost_HS;
 DUAL_ApplicationTypeDef Appli_FS_state = APPLICATION_IDLE;
 DUAL_ApplicationTypeDef Appli_HS_state = APPLICATION_IDLE;
+char USBDISKPath[4];            /* USB Host logical drive path */
 
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);
@@ -73,47 +73,39 @@ int main(void)
 {
   /* STM32F4xx HAL library initialization */
   HAL_Init();
-  
+
   /* Configure the system clock to 180 Mhz */
   SystemClock_Config();
-  
+
   /* Initialize IO expander */
   BSP_IO_Init();
 
   /* Init Dual Core Application */
   DUAL_InitApplication();
-  
+
   /* Init HS Core */
   USBH_Init(&hUSBHost_HS, USBH_HS_UserProcess, 1);
-  
+
   /* Init FS Core */
   USBH_Init(&hUSBHost_FS, USBH_FS_UserProcess, 0);
-  
+
   /* Add Supported Classes */
   USBH_RegisterClass(&hUSBHost_HS, USBH_MSC_CLASS);
   USBH_RegisterClass(&hUSBHost_FS, USBH_HID_CLASS);
-  
+
   /* Start Host Process */
   USBH_Start(&hUSBHost_FS);
   USBH_Start(&hUSBHost_HS);
- 
-  /* Register the file system object to the FatFs module */
-  if(f_mount(&USBH_fatfs, "", 0) != FR_OK)
-  {  
-    LCD_ErrLog("ERROR : Cannot Initialize FatFs! \n");
-  }
-  
+
   /* Run Application (Blocking mode)*/
   while (1)
   {
     /* USB Host Background tasks */
-    USBH_Process(&hUSBHost_FS); 
+    USBH_Process(&hUSBHost_FS);
     USBH_Process(&hUSBHost_HS);
-    
+
     /* DUAL Menu Process */
-    DUAL_MenuProcess(); 
-    
-    Toggle_Leds();
+    DUAL_MenuProcess();
   }
 }
 
@@ -129,26 +121,26 @@ static void DUAL_InitApplication(void)
   BSP_LED_Init(LED2);
   BSP_LED_Init(LED3);
   BSP_LED_Init(LED4);
-  
-  /* Configure KEY Button */
+
+  /* Configure TAMPER Button */
   BSP_PB_Init(BUTTON_TAMPER, BUTTON_MODE_GPIO);
-  
+
   /* Configure Joystick in EXTI mode */
   BSP_JOY_Init(JOY_MODE_EXTI);
 
   /* Initialize the LCD */
   BSP_LCD_Init();
   BSP_LCD_LayerDefaultInit(0, LCD_FB_START_ADDRESS);
-  BSP_LCD_SelectLayer(0); 
+  BSP_LCD_SelectLayer(0);
 
-  
+
   /* Init the LCD Log module */
   LCD_LOG_Init();
-  
+
   LCD_LOG_SetHeader((uint8_t *)" USB OTG DualCore Host");
-  
-  LCD_UsrLog("USB Host library started.\n"); 
-  
+
+  LCD_UsrLog("USB Host library started.\n");
+
   /* Start DualCore Interface */
   USBH_UsrLog("Initializing hardware....");
   DUAL_MenuInit();
@@ -161,21 +153,20 @@ static void DUAL_InitApplication(void)
   * @retval None
   */
 static void USBH_FS_UserProcess(USBH_HandleTypeDef *phost, uint8_t id)
-{  
+{
   switch(id)
-  { 
+  {
   case HOST_USER_SELECT_CONFIGURATION:
     break;
-    
+
   case HOST_USER_DISCONNECTION:
     Appli_FS_state = APPLICATION_FS_DISCONNECT;
-    
     break;
-    
+
   case HOST_USER_CLASS_ACTIVE:
     Appli_FS_state = APPLICATION_FS_READY;
     break;
-    
+
   case HOST_USER_CONNECTION:
     Appli_FS_state = APPLICATION_FS_START;
     break;
@@ -189,22 +180,37 @@ static void USBH_FS_UserProcess(USBH_HandleTypeDef *phost, uint8_t id)
   * @retval None
   */
 static void USBH_HS_UserProcess(USBH_HandleTypeDef *phost, uint8_t id)
-{  
-  switch(id)
-  { 
+{
+  switch (id)
+  {
   case HOST_USER_SELECT_CONFIGURATION:
     break;
-    
+
   case HOST_USER_DISCONNECTION:
     Appli_HS_state = APPLICATION_HS_DISCONNECT;
+    if(f_mount(NULL, "", 0) != FR_OK)
+    {
+      LCD_ErrLog("ERROR : Cannot DeInitialize FatFs! \n");
+    }
+    if (FATFS_UnLinkDriver(USBDISKPath) != 0)
+    {
+      LCD_ErrLog("ERROR : Cannot UnLink USB FatFS Driver! \n");
+    }
     break;
-    
+
   case HOST_USER_CLASS_ACTIVE:
     Appli_HS_state = APPLICATION_HS_READY;
     break;
-    
+
   case HOST_USER_CONNECTION:
     Appli_HS_state = APPLICATION_HS_START;
+    if (FATFS_LinkDriver(&USBH_Driver, USBDISKPath) == 0)
+    {
+      if (f_mount(&USBH_fatfs, "", 0) != FR_OK)
+      {
+        LCD_ErrLog("ERROR : Cannot Initialize FatFs! \n");
+      }
+    }
     break;
   }
 }
@@ -230,7 +236,7 @@ void Toggle_Leds(void)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow : 
+  *         The system Clock is configured as follow :
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 180000000
   *            HCLK(Hz)                       = 180000000
@@ -257,15 +263,15 @@ void SystemClock_Config(void)
   RCC_ClkInitTypeDef RCC_ClkInitStruct;
   RCC_OscInitTypeDef RCC_OscInitStruct;
   RCC_PeriphCLKInitTypeDef PeriphClkInitStruct;
-  
+
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is 
-     clocked below the maximum system frequency, to update the voltage scaling value 
+  /* The voltage scaling allows optimizing the power consumption when the device is
+     clocked below the maximum system frequency, to update the voltage scaling value
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
-    
+
   /* Enable HSE Oscillator and activate PLL with HSE as source */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
@@ -277,10 +283,10 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLQ = 7;
   RCC_OscInitStruct.PLL.PLLR = 2;
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
-  
-  /* Activate the OverDrive to reach the 180 MHz Frequency */  
+
+  /* Activate the OverDrive to reach the 180 MHz Frequency */
   HAL_PWREx_EnableOverDrive();
-  
+
   /* Select PLLSAI output as USB clock source */
   PeriphClkInitStruct.PLLSAI.PLLSAIQ = 7;
   PeriphClkInitStruct.PLLSAI.PLLSAIN = 384;
@@ -288,8 +294,8 @@ void SystemClock_Config(void)
   PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_CK48;
   PeriphClkInitStruct.Clk48ClockSelection = RCC_CK48CLKSOURCE_PLLSAIP;
   HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);
-  
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
+
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
@@ -308,7 +314,7 @@ void SystemClock_Config(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

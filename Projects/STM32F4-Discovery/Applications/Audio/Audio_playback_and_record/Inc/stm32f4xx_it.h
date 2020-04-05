@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Audio/Audio_playback_and_record/Inc/stm32f4xx_it.h
   * @author  MCD Application Team
-  * @version V1.3.5
-  * @date    17-February-2017
   * @brief   This file contains the headers of the interrupt handlers.
   ******************************************************************************
   * @attention

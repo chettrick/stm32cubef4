@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Examples_LL/ADC/ADC_AnalogWatchdog/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017
   * @brief   This example describes how to use a ADC peripheral
   *          with ADC analog watchdog to monitor a channel and detect 
   *          when the corresponding conversion data is out of window thresholds.

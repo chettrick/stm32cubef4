@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Audio/Audio_playback_and_record/Src/main.c
   * @author  MCD Application Team
-  * @version V1.5.0
-  * @date    17-February-2017 
   * @brief   Audio playback and record main file.
   ******************************************************************************
   * @attention
@@ -49,6 +47,7 @@
 #include "waverecorder.h"
 
 /* Private typedef -----------------------------------------------------------*/
+FATFS USBH_FatFs;
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
@@ -188,11 +187,27 @@ static void USBH_UserProcess(USBH_HandleTypeDef *phost, uint8_t id)
     break;
     
   case HOST_USER_DISCONNECTION:
+    if(f_mount(NULL, "", 0) != FR_OK)
+    {
+      LCD_ErrLog("ERROR : Cannot DeInitialize FatFs! \n");
+    }
     AppliState = APPLICATION_DISCONNECT;
     break;
 
   case HOST_USER_CLASS_ACTIVE:
     AppliState = APPLICATION_READY;
+    break;
+    
+  case HOST_USER_CONNECTION:
+    /* Link the USB Mass Storage disk I/O driver */
+    if(FATFS_LinkDriver(&USBH_Driver, (char*)"0:/") != 0)
+    {
+    }
+    if(f_mount(&USBH_FatFs, "", 0) != FR_OK)
+    {  
+      LCD_ErrLog("ERROR : Cannot Initialize FatFs! \n");
+    }
+    AppliState = APPLICATION_START;
     break;
     
   default:

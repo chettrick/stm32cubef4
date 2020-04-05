@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    FatFs/FatFs_USBDisk/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.3.5
-  * @date    17-February-2017
   * @brief   Main program body
   *          This sample code shows how to use FatFs with USB disk drive.
   ******************************************************************************

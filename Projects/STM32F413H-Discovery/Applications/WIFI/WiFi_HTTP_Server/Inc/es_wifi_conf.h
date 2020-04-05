@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Wifi/WiFi_HTTP_Server/Inc/es_wifi_conf.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017
   * @brief   es-wifi configuration file.
   ******************************************************************************
   * @attention

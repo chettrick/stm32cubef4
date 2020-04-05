@@ -48,7 +48,7 @@
 /* Include audio component Driver */
 #include "../Components/wm8994/wm8994.h"
 #include "stm32446e_eval.h"
-#include "../../../Middlewares/ST/STM32_Audio/Addons/PDM/pdm_filter.h"
+#include "../../../Middlewares/ST/STM32_Audio/Addons/PDM/Inc/pdm2pcm_glo.h"
 
 /** @addtogroup BSP
   * @{

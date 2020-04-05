@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Examples_LL/GPIO/GPIO_InfiniteLedToggling_Init/Src/stm32f4xx_it.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and
   *          peripherals interrupt service routine.

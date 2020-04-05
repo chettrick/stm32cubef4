@@ -2,8 +2,6 @@
  ******************************************************************************
  * @file    DMA2D/DMA2D_MemToMemWithPFC/Src/main.c
  * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
  * @brief   This example provides a description of how to configure DMA2D peripheral in
  *          Memory to Memory with pixel format conversion transfer mode and display the
  *          result on LCD.

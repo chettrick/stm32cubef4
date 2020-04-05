@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    USB_Host/HID_Standalone/readme.txt 
   * @author  MCD Application Team
-  * @version V1.5.0
-  * @date    17-February-2017
   * @brief   Description of the USB Host HID application.
   ******************************************************************************
   * @attention
@@ -145,8 +143,8 @@ requirements, such as:
   - STM324x9I-EVAL RevB Set-up
     - Plug the USB key into the STM324x9I-EVAL board through 'USB micro A-Male 
       to A-Female' cable to the connector:
-      - CN9 : to use USB High Speed (HS) 
-      - CN14: to use USB Full Speed (FS) with embedded PHY(U7)
+      - CN9 : to use USB High Speed (HS)  with embedded PHY(U7)
+      - CN14: to use USB Full Speed (FS) 
               Please ensure that jumper JP16 is not fitted.
       - CN15: to use USB HS-IN-FS.
               Note that some FS signals are shared with the HS ULPI bus, so some PCB rework is needed.

@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    k_storage.h
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    17-February-2017
   * @brief   Header for k_storage.c file
   ******************************************************************************
   * @attention
@@ -74,7 +72,8 @@ typedef enum
   USBDISK_DISCONNECTION_EVENT = 1,  
   USBDISK_CONNECTION_EVENT,  
   MSDDISK_DISCONNECTION_EVENT,  
-  MSDDISK_CONNECTION_EVENT,    
+  MSDDISK_CONNECTION_EVENT,  
+  MSDDISK_STATUS_EVENT,
 }   
 STORAGE_EventTypeDef;
 

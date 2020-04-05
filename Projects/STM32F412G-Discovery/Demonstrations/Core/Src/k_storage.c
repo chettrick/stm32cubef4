@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    k_storage.c
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    17-February-2017
   * @brief   This file provides the kernel storage functions
   ******************************************************************************
   * @attention
@@ -128,7 +126,21 @@ static void StorageThread(void const * argument)
       case MSDDISK_DISCONNECTION_EVENT:
         f_mount(0, mSDDISK_Drive, 0);
         StorageStatus[MSD_DISK_UNIT] = 0;        
-        break;         
+        break; 
+        
+      case  MSDDISK_STATUS_EVENT :
+        if((BSP_SD_IsDetected()))
+        {  
+          /* After sd disconnection, a SD Init is required */
+          BSP_SD_Init();
+          osMessagePut ( StorageEvent, MSDDISK_CONNECTION_EVENT, 0);
+        }
+        else
+        {
+          BSP_SD_DeInit();
+          osMessagePut ( StorageEvent, MSDDISK_DISCONNECTION_EVENT, 0);
+        }
+        break; 
       }
     }
   }
@@ -141,17 +153,7 @@ static void StorageThread(void const * argument)
   */ 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-  if((BSP_SD_IsDetected()))
-  {  
-    /* After sd disconnection, a SD Init is required */
-    BSP_SD_Init();
-        
-    osMessagePut ( StorageEvent, MSDDISK_CONNECTION_EVENT, 0);
-  }
-  else
-  {
-    osMessagePut ( StorageEvent, MSDDISK_DISCONNECTION_EVENT, 0);
-  }
+  osMessagePut ( StorageEvent, MSDDISK_STATUS_EVENT, 0);
 }
 
 /**

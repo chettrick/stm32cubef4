@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm32469i_eval_camera.c
   * @author  MCD Application Team
-  * @version V2.0.0
-  * @date    27-January-2017
   * @brief   This file includes the driver for Camera modules mounted on
   *          STM32469I-EVAL evaluation board.
   ******************************************************************************

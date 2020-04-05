@@ -2,43 +2,41 @@
   ******************************************************************************
   * @file    USB_Host/MSC_Standalone/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    17-February-2017
   * @brief   USB host Mass storage demo main file
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V.
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without 
+  * Redistribution and use in source and binary forms, with or without
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice, 
+  * 1. Redistribution of source code must retain the above copyright notice,
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other 
-  *    contributors to this software may be used to endorse or promote products 
+  * 3. Neither the name of STMicroelectronics nor the names of other
+  *    contributors to this software may be used to endorse or promote products
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this 
+  * 4. This software, including modifications and/or derivative works of this
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under 
-  *    this license is void and will automatically terminate your rights under 
-  *    this license. 
+  * 5. Redistribution and use of this software other than as permitted under
+  *    this license is void and will automatically terminate your rights under
+  *    this license.
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
@@ -48,9 +46,9 @@
 #include "main.h"
 
 /* Private typedef -----------------------------------------------------------*/
-typedef enum 
+typedef enum
 {
-  SHIELD_NOT_DETECTED = 0, 
+  SHIELD_NOT_DETECTED = 0,
   SHIELD_DETECTED
 }ShieldStatus;
 
@@ -59,6 +57,7 @@ typedef enum
 /* Private variables ---------------------------------------------------------*/
 USBH_HandleTypeDef hUSBHost;
 MSC_ApplicationTypeDef Appli_state = APPLICATION_IDLE;
+char USBDISKPath[4];            /* USB Host logical drive path */
 
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);
@@ -78,40 +77,40 @@ int main(void)
 {
   /* STM32F412xx HAL library initialization */
   HAL_Init();
-  
+
   /* Configure the System clock to have a frequency of 100 MHz */
   SystemClock_Config();
 
   /* Check the availability of adafruit 1.8" TFT shield on top of STM32NUCLEO
      board. This is done by reading the state of IO PC.01 pin (mapped to JoyStick
      available on adafruit 1.8" TFT shield). If the state of PC.01 is high then
-     the adafruit 1.8" TFT shield is available. */  
+     the adafruit 1.8" TFT shield is available. */
   if(TFT_ShieldDetect() != SHIELD_DETECTED)
   {
     Error_Handler();
-  }  
-  
+  }
+
   /* Init MSC Application */
   MSC_InitApplication();
-  
+
   /* Init Host Library */
   USBH_Init(&hUSBHost, USBH_UserProcess, 0);
-  
+
   /* Add Supported Class */
   USBH_RegisterClass(&hUSBHost, USBH_MSC_CLASS);
-  
+
   /* Start Host Process */
   USBH_Start(&hUSBHost);
-  
+
   /* Run Application (Blocking mode) */
   while (1)
   {
     /* USB Host Background task */
     USBH_Process(&hUSBHost);
-    
+
     /* MSC Menu Process */
     MSC_MenuProcess();
-  } 
+  }
 }
 
 /**
@@ -123,16 +122,16 @@ static void MSC_InitApplication(void)
 {
   /* Configure KEY Button */
   BSP_PB_Init(BUTTON_USER, BUTTON_MODE_GPIO);
-  
+
   /* Initialize the LCD */
   BSP_LCD_Init();
-  
+
   /* Init the LCD Log module */
   LCD_LOG_Init();
-  
+
   LCD_LOG_SetHeader((uint8_t *)"OTG FS MSC Host");
-  LCD_UsrLog("USBH library started.\n"); 
-  
+  LCD_UsrLog("USBH library started.\n");
+
   /* Initialize menu and MSC process */
   USBH_UsrLog("Starting MSC Demo");
   Menu_Init();
@@ -147,36 +146,43 @@ static void MSC_InitApplication(void)
 static void USBH_UserProcess(USBH_HandleTypeDef *phost, uint8_t id)
 {
   switch(id)
-  { 
+  {
   case HOST_USER_SELECT_CONFIGURATION:
     break;
-    
+
   case HOST_USER_DISCONNECTION:
     Appli_state = APPLICATION_DISCONNECT;
-    if(f_mount(NULL, "", 0) != FR_OK)
+	  if(f_mount(NULL, "", 0) != FR_OK)
     {
       LCD_ErrLog("ERROR : Cannot DeInitialize FatFs! \n");
     }
+    if (FATFS_UnLinkDriver(USBDISKPath) != 0)
+    {
+      LCD_ErrLog("ERROR : Cannot UnLink USB FatFS Driver! \n");
+    }
     break;
-    
+
   case HOST_USER_CLASS_ACTIVE:
     Appli_state = APPLICATION_READY;
     break;
-    
+
   case HOST_USER_CONNECTION:
-    if(f_mount(&USBH_fatfs, "", 0) != FR_OK)
-    {  
-      LCD_ErrLog("ERROR : Cannot Initialize FatFs! \n");
+    if (FATFS_LinkDriver(&USBH_Driver, USBDISKPath) == 0)
+    {
+      if (f_mount(&USBH_fatfs, "", 0) != FR_OK)
+      {
+        LCD_ErrLog("ERROR : Cannot Initialize FatFs! \n");
+      }
     }
     break;
 
   default:
-    break; 
+    break;
   }
 }
 
 /**
-  * @brief This function provides accurate delay (in milliseconds) based 
+  * @brief This function provides accurate delay (in milliseconds) based
   *        on SysTick counter flag.
   * @note This function is declared as __weak to be overwritten in case of other
   *       implementations in user file.
@@ -186,9 +192,9 @@ static void USBH_UserProcess(USBH_HandleTypeDef *phost, uint8_t id)
 
 void HAL_Delay(__IO uint32_t Delay)
 {
-  while(Delay) 
+  while(Delay)
   {
-    if (SysTick->CTRL & SysTick_CTRL_COUNTFLAG_Msk) 
+    if (SysTick->CTRL & SysTick_CTRL_COUNTFLAG_Msk)
     {
       Delay--;
     }
@@ -198,7 +204,7 @@ void HAL_Delay(__IO uint32_t Delay)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow : 
+  *         The system Clock is configured as follow :
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 100000000
   *            HCLK(Hz)                       = 100000000
@@ -231,8 +237,8 @@ static void SystemClock_Config(void)
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is 
-     clocked below the maximum system frequency, to update the voltage scaling value 
+  /* The voltage scaling allows optimizing the power consumption when the device is
+     clocked below the maximum system frequency, to update the voltage scaling value
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
@@ -247,7 +253,7 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLQ = 7;
   RCC_OscInitStruct.PLL.PLLR = 2;
   ret = HAL_RCC_OscConfig(&RCC_OscInitStruct);
-  
+
   if(ret != HAL_OK)
   {
     Error_Handler();
@@ -260,14 +266,14 @@ static void SystemClock_Config(void)
   PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_CK48;
   PeriphClkInitStruct.Clk48ClockSelection = RCC_CK48CLKSOURCE_PLLI2SQ;
   HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);
-  
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
+
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;  
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;  
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
   ret = HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_3);
   if(ret != HAL_OK)
   {
@@ -277,8 +283,8 @@ static void SystemClock_Config(void)
 
 /**
   * @brief  Check the availability of adafruit 1.8" TFT shield on top of STM32NUCLEO
-  *         board. This is done by reading the state of IO PC.01 pin (mapped to 
-  *         JoyStick available on adafruit 1.8" TFT shield). If the state of PC.01 
+  *         board. This is done by reading the state of IO PC.01 pin (mapped to
+  *         JoyStick available on adafruit 1.8" TFT shield). If the state of PC.01
   *         is high then the adafruit 1.8" TFT shield is available.
   * @param  None
   * @retval SHIELD_DETECTED: 1.8" TFT shield is available
@@ -286,16 +292,16 @@ static void SystemClock_Config(void)
   */
 static ShieldStatus TFT_ShieldDetect(void)
 {
-  GPIO_InitTypeDef  GPIO_InitStruct; 
+  GPIO_InitTypeDef  GPIO_InitStruct;
 
   /* Enable GPIO clock */
   __HAL_RCC_GPIOC_CLK_ENABLE();
-  
+
   GPIO_InitStruct.Pin = GPIO_PIN_1;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
-  
+
   if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_1) != 0)
   {
     return SHIELD_DETECTED;
@@ -328,7 +334,7 @@ static void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
+{
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 

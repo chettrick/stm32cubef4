@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics  *******************
   * @file    STemWin/STemWin_SampleDemo/readme.txt 
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017    
   * @brief   Description of STemWin Sample Demo application.   
   ******************************************************************************
   * @attention
@@ -74,28 +72,28 @@ Note that the following user files may need to be updated:
      
 @par Directory contents 
 
-  - STemWin/STemWin_SampleDemo/Inc/GUIConf.h                        Header for GUIConf.c
-  - STemWin/STemWin_SampleDemo/Inc/LCDConf.h                        Header for LCDConf*.c
-  - STemWin/STemWin_SampleDemo/Inc/rtc.h                            Header for rtc.c
-  - STemWin/STemWin_SampleDemo/Inc/calibration.h                    Header for calibration.c
-  - STemWin/STemWin_SampleDemo/Inc/main.h                           Main program header file
-  - STemWin/STemWin_SampleDemo/Inc/stm32f4xx_hal_conf.h             Library Configuration file
-  - STemWin/STemWin_SampleDemo/Inc/stm32f4xx_it.h                   Interrupt handlers header file
-  - STemWin/SampleDemo/Demo/GUIDEMO.h                               DEMO modules configuration file
-  - STemWin/STemWin_SampleDemo/Src/rtc.c                            Main file to configure RTC clock
-  - STemWin/STemWin_SampleDemo/Src/calibration.c                    Main file to calibrate TS
-  - STemWin/STemWin_SampleDemo/Src/GUIConf.c                        Display controller initialization file
-  - STemWin/STemWin_SampleDemo/Src/LCDConf_stm32f429i_disco_MB1075.c  Configuration file for the GUI library (MB1075 LCD)
-  - STemWin/STemWin_SampleDemo/Src/main.c                           Main program file
-  - STemWin/STemWin_SampleDemo/Src/stm32f4xx_it.c                   STM32F4xx Interrupt handlers
-  - STemWin/STemWin_SampleDemo/Src/system_stm32f4xx.c               STM32F4xx system file
-  - STemWin/STemWin_SampleDemo/Demo/GUIDEMO.c                       All the sources files provided for SEGGER DEMO
+  - STemWin/STemWin_SampleDemo/STemWin/Target/Inc/GUIConf.h                      Header for GUIConf.c
+  - STemWin/STemWin_SampleDemo/STemWin/Target/LCDConf.h                          Header for LCDConf*.c
+  - STemWin/STemWin_SampleDemo/Core/Inc/rtc.h                                    Header for rtc.c
+  - STemWin/STemWin_SampleDemo/Core/Inc/calibration.h                            Header for calibration.c
+  - STemWin/STemWin_SampleDemo/Core/Inc/main.h                                   Main program header file
+  - STemWin/STemWin_SampleDemo/Core/Inc/stm32f4xx_hal_conf.h                     Library Configuration file
+  - STemWin/STemWin_SampleDemo/Core/Inc/stm32f4xx_it.h                           Interrupt handlers header file
+  - STemWin/STemWin_SampleDemo/STemWin/App/GUIDEMO.h                             DEMO modules configuration file
+  - STemWin/STemWin_SampleDemo/Core/Src/rtc.c                                    Main file to configure RTC clock
+  - STemWin/STemWin_SampleDemo/Core/Src/calibration.c                            Main file to calibrate TS
+  - STemWin/STemWin_SampleDemo/STemWin/Target/GUIConf.c                          Display controller initialization file
+  - STemWin/STemWin_SampleDemo/STemWin/Target/LCDConf_stm32f429i_disco_MB1075.c  Configuration file for the GUI library (MB1075 LCD)
+  - STemWin/STemWin_SampleDemo/Core/Src/main.c                                   Main program file
+  - STemWin/STemWin_SampleDemo/Core/Src/stm32f4xx_it.c                           STM32F4xx Interrupt handlers
+  - STemWin/STemWin_SampleDemo/Core/Src/system_stm32f4xx.c                       STM32F4xx system file
+  - STemWin/STemWin_SampleDemo/Demo/GUIDEMO*.c                                   All the sources files provided for SEGGER DEMO
 
 @par Hardware and Software environment  
 
   - This application runs on STM32F429xx devices.
 
-  - This application has been tested with STMicroelectronics STM32F429I-Discovery RevB 
+  - This application has been tested with STMicroelectronics STM32F429I-Discovery RevC 
     boards and can be easily tailored to any other supported device 
     and development board.
 	

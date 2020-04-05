@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    HAL/HAL_TimeBase_RTC_ALARM/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017 
   * @brief   Description of The HAL TimeBase RTC Alarm example.
   ******************************************************************************
   *                                  

@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm32469i_discovery_ts.c
   * @author  MCD Application Team
-  * @version V2.0.0
-  * @date    27-January-2017
   * @brief   This file provides a set of functions needed to manage the Touch
   *          Screen on STM32469I-Discovery board.
   ******************************************************************************

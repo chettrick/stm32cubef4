@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics  *******************
   * @file    ADC/ADC_RegularConversion_DMA/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.8
-  * @date    17-February-2017 
   * @brief   Description of the ADC RegularConversion DMA example.
   ******************************************************************************
   *
@@ -44,7 +42,7 @@ converted data from ADC to memory.
 This example describes how to use the ADC3 and DMA to transfer continuously 
 converted data from ADC3 to memory.
 The ADC3 is configured to convert continuously channel7(for STM32F429I-DISCOVERY)
-/channel8(for STM32F429I-DISCOVERY RevB).
+/channel8(for STM32F429I-Discovery RevC).
 Each time an end of conversion occurs the DMA transfers, in circular mode, the
 converted data from ADC3 DR register to the uhADCxConvertedValue variable.
 
@@ -83,7 +81,7 @@ STM32 Discovery board's LEDs can be used to monitor the transfer status:
  
   - This example runs on STM32F429xx devices.
     
-  - This example has been tested with STMicroelectronics STM32F429I-Discovery RevB
+  - This example has been tested with STMicroelectronics STM32F429I-Discovery RevC
     boards and can be easily tailored to any other supported device 
     and development board.
 

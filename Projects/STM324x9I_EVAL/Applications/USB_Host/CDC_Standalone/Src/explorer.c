@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/CDC_Standalone/Src/explorer.c
   * @author  MCD Application Team
-  * @version V1.5.0
-  * @date    17-February-2017
   * @brief   This file provides uSD Card drive configuration
   ******************************************************************************
   * @attention
@@ -106,11 +104,6 @@ FRESULT SD_StorageParse(void)
   DIR dir;
   char *fn;
 
-#if _USE_LFN
-  static char lfn[_MAX_LFN];
-  fno.lfname = lfn;
-  fno.lfsize = sizeof(lfn);
-#endif
 
   res = f_opendir(&dir, SD_Path);
   FileList.ptr = 0;
@@ -129,11 +122,8 @@ FRESULT SD_StorageParse(void)
       {
         continue;
       }
-#if _USE_LFN
-      fn = *fno.lfname ? fno.lfname : fno.fname;
-#else
+ 
       fn = fno.fname;
-#endif
 
       if (FileList.ptr < FILEMGR_LIST_DEPDTH)
       {

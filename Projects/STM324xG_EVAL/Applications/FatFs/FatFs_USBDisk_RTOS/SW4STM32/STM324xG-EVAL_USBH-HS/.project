@@ -27,11 +27,11 @@
 	<linkedResources><link>
 			<name>Middlewares/STM32_USBH_Library/Class/MSC/usbh_msc_scsi.c</name>
 			<type>1</type>
-			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_HOST_Library/Class/MSC/Src/usbh_msc_scsi.c</location>
+			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_scsi.c</location>
 		</link><link>
 			<name>Middlewares/STM32_USBH_Library/Class/MSC/usbh_msc.c</name>
 			<type>1</type>
-			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_HOST_Library/Class/MSC/Src/usbh_msc.c</location>
+			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc.c</location>
 		</link><link>
 			<name>Application/SW4STM32/startup_stm32f407xx.s</name>
 			<type>1</type>
@@ -43,7 +43,7 @@
 		</link><link>
 			<name>Middlewares/STM32_USBH_Library/Core/usbh_core.c</name>
 			<type>1</type>
-			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_HOST_Library/Core/Src/usbh_core.c</location>
+			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_core.c</location>
 		</link><link>
 			<name>Doc/readme.txt</name>
 			<type>1</type>
@@ -63,7 +63,7 @@
 		</link><link>
 			<name>Middlewares/STM32_USBH_Library/Core/usbh_ctlreq.c</name>
 			<type>1</type>
-			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_HOST_Library/Core/Src/usbh_ctlreq.c</location>
+			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ctlreq.c</location>
 		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_i2c.c</name>
 			<type>1</type>
@@ -91,7 +91,7 @@
 		</link><link>
 			<name>Middlewares/STM32_USBH_Library/Core/usbh_pipes.c</name>
 			<type>1</type>
-			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_HOST_Library/Core/Src/usbh_pipes.c</location>
+			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_pipes.c</location>
 		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_i2s.c</name>
 			<type>1</type>
@@ -105,17 +105,21 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr.c</location>
 		</link><link>
-			<name>Drivers/BSP/STM324xG_EVAL/STM324xG_eval.c</name>
-			<type>1</type>
-			<location>PARENT-7-PROJECT_LOC/Drivers/BSP/STM324xG_EVAL/STM324xG_eval.c</location>
-		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_rcc.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c</location>
 		</link><link>
+			<name>Drivers/BSP/STM324xG_EVAL/stm324xg_eval.c</name>
+			<type>1</type>
+			<location>PARENT-7-PROJECT_LOC/Drivers/BSP/STM324xG_EVAL/stm324xg_eval.c</location>
+		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_pcd.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pcd.c</location>
+		</link><link>
+			<name>Middlewares/FatFs/Drivers/usbh_diskio_dma.c</name>
+			<type>1</type>
+			<location>PARENT-2-PROJECT_LOC/Src/usbh_diskio_dma.c</location>
 		</link><link>
 			<name>Middlewares/FreeRTOS/timers.c</name>
 			<type>1</type>
@@ -127,7 +131,7 @@
 		</link><link>
 			<name>Middlewares/STM32_USBH_Library/Class/MSC/usbh_msc_bot.c</name>
 			<type>1</type>
-			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_HOST_Library/Class/MSC/Src/usbh_msc_bot.c</location>
+			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c</location>
 		</link><link>
 			<name>Middlewares/FatFs/Core/ff.c</name>
 			<type>1</type>
@@ -155,7 +159,7 @@
 		</link><link>
 			<name>Middlewares/STM32_USBH_Library/Core/usbh_ioreq.c</name>
 			<type>1</type>
-			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_HOST_Library/Core/Src/usbh_ioreq.c</location>
+			<location>PARENT-7-PROJECT_LOC/Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.c</location>
 		</link><link>
 			<name>Middlewares/FreeRTOS/CMSIS_RTOS/cmsis_os.c</name>
 			<type>1</type>
@@ -184,10 +188,6 @@
 			<name>Middlewares/FreeRTOS/portable/port.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/port.c</location>
-		</link><link>
-			<name>Middlewares/FatFs/Drivers/usbh_diskio.c</name>
-			<type>1</type>
-			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FatFs/src/drivers/usbh_diskio.c</location>
 		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_flash.c</name>
 			<type>1</type>

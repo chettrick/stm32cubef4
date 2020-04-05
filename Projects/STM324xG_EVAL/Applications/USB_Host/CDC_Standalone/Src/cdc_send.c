@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/CDC_Standalone/Src/cdc_send.c 
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   CDC Send state machine
   ******************************************************************************
   * @attention
@@ -330,7 +328,7 @@ void USBH_CDC_TransmitCallback(USBH_HandleTypeDef *phost)
   
   if(use_file == 1)
   {
-    if( MyFile.fptr >= MyFile.fsize)
+if( MyFile.fptr >= f_size(& MyFile))
     {
       f_close(&MyFile);
       LCD_DbgLog (">> File sent\n" );

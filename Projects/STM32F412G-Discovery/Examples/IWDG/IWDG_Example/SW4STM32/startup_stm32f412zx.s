@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file      startup_stm32f412zx.s
   * @author    MCD Application Team
-  * @version   V1.1.0
-  * @date      17-February-2017
   * @brief     STM32F412Zx Devices vector table for GCC based toolchains. 
   *            This module performs:
   *                - Set the initial SP

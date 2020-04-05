@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    sd_diskio.c
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    09-September-2016
   * @brief   SD Disk I/O driver
   ******************************************************************************
   * @attention
@@ -47,6 +45,8 @@
 /* Includes ------------------------------------------------------------------*/
 #include <string.h>
 #include "ff_gen_drv.h"
+#include "stm32f413h_discovery.h"
+#include "stm32f413h_discovery_sd.h"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/

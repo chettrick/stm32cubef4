@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    SPI/SPI_FullDuplex_AdvComIT/Slave/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.2.7
-  * @date    17-February-2017
   * @brief   HAL MSP module.
   ******************************************************************************
   * @attention

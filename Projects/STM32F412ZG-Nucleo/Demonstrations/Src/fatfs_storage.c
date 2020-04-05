@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Demonstrations/Src/fatfs_storage.c
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    17-February-2017
   * @brief   This file includes the Storage (FatFs) driver 
   ******************************************************************************
   * @attention
@@ -156,7 +154,7 @@ uint32_t Storage_CopyFile(const char* BmpName1, const char* BmpName2)
     f_write(&file2, aBuffer, _MAX_SS, &BytesWritten);  
     index+= _MAX_SS;
     
-  } while(index < file1.fsize);
+  } while(index < f_size(&file1));
   
   f_close(&file1);
   f_close(&file2);

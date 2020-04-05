@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/HID_RTOS/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   USB host HID Mouse and Keyboard demo main file
   ******************************************************************************
   * @attention

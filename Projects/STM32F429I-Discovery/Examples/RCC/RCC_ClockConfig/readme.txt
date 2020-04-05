@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics  *******************
   * @file    RCC/RCC_ClockConfig/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.8
-  * @date    17-February-2017 
   * @brief   Description of the RCC Clock Configuration example.
   ******************************************************************************
   *
@@ -96,11 +94,11 @@ Two LEDs are toggled with a timing defined by the HAL_Delay() API.
 
   - This example runs on STM32F429xx devices.
     
-  - This example has been tested with STMicroelectronics STM32F429I-Discovery RevB
+  - This example has been tested with STMicroelectronics STM32F429I-Discovery RevC
     boards and can be easily tailored to any other supported device 
     and development board.
     
-  - STM32F429I-Discovery RevB Set-up
+  - STM32F429I-Discovery RevC Set-up
     - Use LED3, LED4 connected respectively to PG.13 and PG.14 pins.
     - Use Key push button connected to PC.13 pin.
 

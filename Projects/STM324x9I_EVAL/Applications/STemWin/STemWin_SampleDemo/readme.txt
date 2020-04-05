@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    STemWin/STemWin_SampleDemo/readme.txt 
   * @author  MCD Application Team
-  * @version V1.5.0
-  * @date    17-February-2017    
   * @brief   Description of STemWin Sample Demo application.  
   ******************************************************************************
   * @attention
@@ -80,23 +78,23 @@ LEDs 1 to 4 are continuously toggling to indicate that the Demo runs properly.
      
 @par Directory contents 
 
-  - STemWin/SampleDemo/Inc/GUIConf.h                        Header for GUIConf.c
-  - STemWin/SampleDemo/Inc/LCDConf.h                        Header for LCDConf*.c
-  - STemWin/SampleDemo/Inc/rtc.h                            Header for rtc.c
-  - STemWin/SampleDemo/Inc/calibration.h                    Header for calibration.c
-  - STemWin/SampleDemo/Inc/main.h                           Main program header file
-  - STemWin/SampleDemo/Inc/stm32f4xx_hal_conf.h             Library Configuration file
-  - STemWin/SampleDemo/Inc/stm32f4xx_it.h                   Interrupt handlers header file
-  - STemWin/SampleDemo/Src/rtc.c                            Main file to configure RTC clock
-  - STemWin/SampleDemo/Src/calibration.c                    Main file to calibrate TS
-  - STemWin/SampleDemo/Src/GUIConf.c                        Display controller initialization file
-  - STemWin/SampleDemo/Src/LCDConf_stm324x9i_eval_MB1046.c  Configuration file for the GUI library (MB1046 LCD)
-  - STemWin/SampleDemo/Src/LCDConf_stm324x9i_eval_MB1063.c  Configuration file for the GUI library (MB1063 LCD)
-  - STemWin/SampleDemo/Src/main.c                           Main program file
-  - STemWin/SampleDemo/Src/stm32f4xx_it.c                   STM32F4xx Interrupt handlers
-  - STemWin/SampleDemo/Src/system_stm32f4xx.c               STM32F4xx system file
-  - STemWin/SampleDemo/Demo/GUIDEMO_*.c                     All the sources files provided for SEGGER DEMO
-  - STemWin/SampleDemo/Demo/GUIDEMO.h                       DEMO modules configuration file
+  - STemWin/STemWin_SampleDemo/STemWin/Target/GUIConf.h                        Header for GUIConf.c
+  - STemWin/STemWin_SampleDemo/STemWin/Target/LCDConf.h                        Header for LCDConf*.c
+  - STemWin/STemWin_SampleDemo/Core/Inc/rtc.h                                  Header for rtc.c
+  - STemWin/STemWin_SampleDemo/Core/Inc/calibration.h                          Header for calibration.c
+  - STemWin/STemWin_SampleDemo/Core/Inc/main.h                                 Main program header file
+  - STemWin/STemWin_SampleDemo/Core/Inc/stm32f4xx_hal_conf.h                   Library Configuration file
+  - STemWin/STemWin_SampleDemo/Core/Inc/stm32f4xx_it.h                         Interrupt handlers header file
+  - STemWin/STemWin_SampleDemo/Core/Src/rtc.c                                  Main file to configure RTC clock
+  - STemWin/STemWin_SampleDemo/Core/Src/calibration.c                          Main file to calibrate TS
+  - STemWin/STemWin_SampleDemo/STemWin/Target/GUIConf.c                        Display controller initialization file
+  - STemWin/STemWin_SampleDemo/STemWin/Target/LCDConf_stm324x9i_eval_MB1046.c  Configuration file for the GUI library (MB1046 LCD)
+  - STemWin/STemWin_SampleDemo/STemWin/Target/LCDConf_stm324x9i_eval_MB1063.c  Configuration file for the GUI library (MB1063 LCD)
+  - STemWin/STemWin_SampleDemo/Core/Src/main.c                                 Main program file
+  - STemWin/STemWin_SampleDemo/Core/Src/stm32f4xx_it.c                         STM32F4xx Interrupt handlers
+  - STemWin/STemWin_SampleDemo/Core/Src/system_stm32f4xx.c                     STM32F4xx system file
+  - STemWin/STemWin_SampleDemo/STemWin/App/GUIDEMO_*.c                         All the sources files provided for SEGGER DEMO
+  - STemWin/STemWin_SampleDemo/STemWin/App/GUIDEMO.h                           DEMO modules configuration file
 
 
 @par Hardware and Software environment 

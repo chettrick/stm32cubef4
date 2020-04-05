@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    FatFs/FatFs_USBDisk_RTOS/Inc/main.h 
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
@@ -52,11 +50,11 @@
 #include "stm32f4xx_hal.h"
 
 /* EVAL includes component */
-#include "stm324xG_eval.h"
+#include "stm324xg_eval.h"
 
 /* FatFs includes component */
 #include "ff_gen_drv.h"
-#include "usbh_diskio.h"
+#include "usbh_diskio_dma.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/

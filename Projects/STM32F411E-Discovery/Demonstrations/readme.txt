@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    Demonstrations/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.4
-  * @date    17-February-2017
   * @brief   Description STM32F411E Discovery Demo 
   ******************************************************************************
   * @attention

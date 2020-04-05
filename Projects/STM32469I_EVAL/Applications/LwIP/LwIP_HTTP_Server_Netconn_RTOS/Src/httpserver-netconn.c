@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    LwIP/LwIP_HTTP_Server_Netconn_RTOS/Src/httpser-netconn.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   Basic http server implementation using LwIP netconn API  
   ******************************************************************************
   * @attention

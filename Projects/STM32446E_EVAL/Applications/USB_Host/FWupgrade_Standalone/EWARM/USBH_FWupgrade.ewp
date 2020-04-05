@@ -77,7 +77,7 @@
         </option>
         <option>
           <name>OGLastSavedByProductVersion</name>
-          <state>7.70.1.11471</state>
+          <state>7.80.4.12487</state>
         </option>
         <option>
           <name>GeneralEnableMisra</name>
@@ -154,12 +154,12 @@
         <option>
           <name>FPU2</name>
           <version>0</version>
-          <state>0</state>
+          <state>4</state>
         </option>
         <option>
           <name>NrRegs</name>
           <version>0</version>
-          <state>0</state>
+          <state>1</state>
         </option>
         <option>
           <name>NEON</name>
@@ -318,16 +318,16 @@
         </option>
         <option>
           <name>CCIncludePath2</name>
-          <state>$PROJ_DIR$\..\inc</state>
+          <state>$PROJ_DIR$\..\Inc</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc</state>
-          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Core\Inc</state>
-          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Class\MSC\Inc</state>
+          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Core\Inc</state>
+          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Inc</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32446E_EVAL</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\mfxstm32l152</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\ili9325</state>
-          <state>Drivers\BSP\Components\Common</state>
+          <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\Common</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Utilities\Log</state>
         </option>
         <option>
@@ -612,15 +612,15 @@
         <option>
           <name>OOCOutputFormat</name>
           <version>3</version>
-          <state>3</state>
+          <state>1</state>
         </option>
         <option>
           <name>OCOutputOverride</name>
-          <state>0</state>
+          <state>1</state>
         </option>
         <option>
           <name>OOCOutputFile</name>
-          <state>USBH_MSC.bin</state>
+          <state>USBH_FWupgrade.hex</state>
         </option>
         <option>
           <name>OOCCommandLineProducer</name>
@@ -628,7 +628,7 @@
         </option>
         <option>
           <name>OOCObjCopyEnable</name>
-          <state>0</state>
+          <state>1</state>
         </option>
       </data>
     </settings>
@@ -658,7 +658,7 @@
       <name>ILINK</name>
       <archiveVersion>0</archiveVersion>
       <data>
-        <version>17</version>
+        <version>18</version>
         <wantNonLocal>1</wantNonLocal>
         <debug>1</debug>
         <option>
@@ -930,7 +930,7 @@
         </option>
         <option>
           <name>CrcAlgorithm</name>
-          <version>0</version>
+          <version>1</version>
           <state>1</state>
         </option>
         <option>
@@ -945,6 +945,10 @@
         <option>
           <name>IlinkLogCallGraph</name>
           <state>0</state>
+        </option>
+        <option>
+          <name>IlinkIcfFile_AltDefault</name>
+          <state></state>
         </option>
       </data>
     </settings>
@@ -976,7 +980,7 @@
     </settings>
   </configuration>
   <configuration>
-    <name>STM32446E-EVAL_USBD-HS</name>
+    <name>STM32446E-EVAL_USBH-HS</name>
     <toolchain>
       <name>ARM</name>
     </toolchain>
@@ -990,15 +994,15 @@
         <debug>1</debug>
         <option>
           <name>ExePath</name>
-          <state>STM32446E-EVAL_USBD-HS\Exe</state>
+          <state>STM32446E-EVAL_USBH-HS\Exe</state>
         </option>
         <option>
           <name>ObjPath</name>
-          <state>STM32446E-EVAL_USBD-HS\Obj</state>
+          <state>STM32446E-EVAL_USBH-HS\Obj</state>
         </option>
         <option>
           <name>ListPath</name>
-          <state>STM32446E-EVAL_USBD-HS\List</state>
+          <state>STM32446E-EVAL_USBH-HS\List</state>
         </option>
         <option>
           <name>GEndianMode</name>
@@ -1050,7 +1054,7 @@
         </option>
         <option>
           <name>OGLastSavedByProductVersion</name>
-          <state>7.70.1.11471</state>
+          <state>7.80.4.12487</state>
         </option>
         <option>
           <name>GeneralEnableMisra</name>
@@ -1127,12 +1131,12 @@
         <option>
           <name>FPU2</name>
           <version>0</version>
-          <state>0</state>
+          <state>4</state>
         </option>
         <option>
           <name>NrRegs</name>
           <version>0</version>
-          <state>0</state>
+          <state>1</state>
         </option>
         <option>
           <name>NEON</name>
@@ -1291,16 +1295,16 @@
         </option>
         <option>
           <name>CCIncludePath2</name>
-          <state>$PROJ_DIR$\..\inc</state>
+          <state>$PROJ_DIR$\..\Inc</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc</state>
-          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Core\Inc</state>
-          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Class\MSC\Inc</state>
+          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Core\Inc</state>
+          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Inc</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32446E_EVAL</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\mfxstm32l152</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\ili9325</state>
-          <state>Drivers\BSP\Components\Common</state>
+          <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\Common</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Utilities\Log</state>
         </option>
         <option>
@@ -1585,15 +1589,15 @@
         <option>
           <name>OOCOutputFormat</name>
           <version>3</version>
-          <state>3</state>
+          <state>1</state>
         </option>
         <option>
           <name>OCOutputOverride</name>
-          <state>0</state>
+          <state>1</state>
         </option>
         <option>
           <name>OOCOutputFile</name>
-          <state>USBH_MSC.bin</state>
+          <state>USBH_FWupgrade.hex</state>
         </option>
         <option>
           <name>OOCCommandLineProducer</name>
@@ -1601,7 +1605,7 @@
         </option>
         <option>
           <name>OOCObjCopyEnable</name>
-          <state>0</state>
+          <state>1</state>
         </option>
       </data>
     </settings>
@@ -1631,7 +1635,7 @@
       <name>ILINK</name>
       <archiveVersion>0</archiveVersion>
       <data>
-        <version>17</version>
+        <version>18</version>
         <wantNonLocal>1</wantNonLocal>
         <debug>1</debug>
         <option>
@@ -1648,7 +1652,7 @@
         </option>
         <option>
           <name>IlinkOutputFile</name>
-          <state>STM32446E-EVAL_USBD-HS.out</state>
+          <state>STM32446E-EVAL_USBH-HS.out</state>
         </option>
         <option>
           <name>IlinkDebugInfoEnable</name>
@@ -1903,7 +1907,7 @@
         </option>
         <option>
           <name>CrcAlgorithm</name>
-          <version>0</version>
+          <version>1</version>
           <state>1</state>
         </option>
         <option>
@@ -1918,6 +1922,10 @@
         <option>
           <name>IlinkLogCallGraph</name>
           <state>0</state>
+        </option>
+        <option>
+          <name>IlinkIcfFile_AltDefault</name>
+          <state></state>
         </option>
       </data>
     </settings>
@@ -1975,9 +1983,6 @@
       </file>
       <file>
         <name>$PROJ_DIR$\..\Src\usbh_conf.c</name>
-      </file>
-      <file>
-        <name>$PROJ_DIR$\..\Src\usbh_diskio.c</name>
       </file>
     </group>
   </group>
@@ -2084,9 +2089,24 @@
     <name>Middlewares</name>
     <group>
       <name>FatFs</name>
-      <file>
-        <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src\ff.c</name>
-      </file>
+      <group>
+        <name>Core</name>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src\diskio.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src\ff.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src\ff_gen_drv.c</name>
+        </file>
+      </group>
+      <group>
+        <name>Drivers</name>
+        <file>
+          <name>$PROJ_DIR$\..\Src\usbh_diskio_dma.c</name>
+        </file>
+      </group>
     </group>
     <group>
       <name>STM32_USBH_Library</name>

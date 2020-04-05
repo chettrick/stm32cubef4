@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    QSPI/QSPI_ReadWrite_IT/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   Description of the QSPI Read/Write in interrupt mode example.
   ******************************************************************************
   *

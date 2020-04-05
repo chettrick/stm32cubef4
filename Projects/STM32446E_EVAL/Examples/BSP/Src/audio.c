@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    BSP/Src/audio.c 
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    17-February-2017
   * @brief   This example code shows how to use the audio feature in the 
   *          stm32469i_eval driver
   ******************************************************************************
@@ -106,7 +104,6 @@ static JOYState_TypeDef JoyState = JOY_NONE;
 static void Audio_SetHint(void);
 static uint32_t GetData(void *pdata, uint32_t offset, uint8_t *pbuf, uint32_t NbrOfData);
 AUDIO_ErrorTypeDef AUDIO_Start(void);
-AUDIO_ErrorTypeDef AUDIO_Stop(void);
 
 /* Private functions ---------------------------------------------------------*/
 
@@ -187,25 +184,35 @@ void AudioPlay_demo (void)
       case JOY_UP:
         /* Increase volume by 5% */
         if (uwVolume < 95)
+        { 
           uwVolume += 5;
+        }
         else
+        {
           uwVolume = 100;
-          sprintf((char*)FreqStr,"       VOL:    %lu     ",uwVolume);
-          BSP_AUDIO_OUT_SetVolume(uwVolume);
-          BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 55, (uint8_t *)FreqStr, CENTER_MODE);
-          BSP_LCD_DisplayStringAt(0, LINE(14), (uint8_t *)"                      ", CENTER_MODE);
+        }
+        sprintf((char*)FreqStr,"       VOL:    %lu     ",uwVolume);
+        BSP_AUDIO_OUT_SetVolume(uwVolume);
+        BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 55, (uint8_t *)FreqStr, CENTER_MODE);
+        BSP_LCD_DisplayStringAt(0, LINE(14), (uint8_t *)"                      ", CENTER_MODE);
+
         break;
 
       case JOY_DOWN:
         /* Decrease volume by 5% */
         if (uwVolume > 5)
+        {
           uwVolume -= 5;
+        }
         else
+        {
           uwVolume = 0;
-          sprintf((char*)FreqStr,"       VOL:    %lu     ",uwVolume);
-          BSP_AUDIO_OUT_SetVolume(uwVolume);
-          BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 55, (uint8_t *)FreqStr, CENTER_MODE);
-          BSP_LCD_DisplayStringAt(0, LINE(14), (uint8_t *)"                      ", CENTER_MODE);
+        }
+        sprintf((char*)FreqStr,"       VOL:    %lu     ",uwVolume);
+        BSP_AUDIO_OUT_SetVolume(uwVolume);
+        BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 55, (uint8_t *)FreqStr, CENTER_MODE);
+        BSP_LCD_DisplayStringAt(0, LINE(14), (uint8_t *)"                      ", CENTER_MODE);
+
         break;
 
       case JOY_LEFT:

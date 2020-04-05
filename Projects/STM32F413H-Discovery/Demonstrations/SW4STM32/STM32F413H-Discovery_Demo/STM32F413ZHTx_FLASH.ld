@@ -41,10 +41,10 @@ _Min_Stack_Size = 0x2400; /* required amount of stack */
 /* Specify the memory areas */
 MEMORY
 {
-RAM (xrw)       : ORIGIN = 0x20000000, LENGTH = 320K
+RAM (xrw)      : ORIGIN = 0x20000000, LENGTH = 320K
 FLASH (rx)      : ORIGIN = 0x8000000, LENGTH = 1535K
-QSPI (rx)       : ORIGIN = 0x90000000, LENGTH = 16M
-calibration_region (rx) : ORIGIN = 0x0817FE00, LENGTH = 200K
+QSPI (rx)       : ORIGIN = 0x90000000, LENGTH = 32M
+calibration_region (rx)       : ORIGIN = 0x0817FE00, LENGTH = 512
 }
 
 /* Define output sections */
@@ -104,7 +104,6 @@ SECTIONS
     KEEP (*(.init_array*))
     PROVIDE_HIDDEN (__init_array_end = .);
   } >FLASH
-  
   .fini_array :
   {
     PROVIDE_HIDDEN (__fini_array_start = .);
@@ -113,8 +112,6 @@ SECTIONS
     PROVIDE_HIDDEN (__fini_array_end = .);
   } >FLASH
 
-
-  
   /* used by the startup to initialize data */
   _sidata = LOADADDR(.data);
 
@@ -130,7 +127,7 @@ SECTIONS
     _edata = .;        /* define a global symbol at data end */
   } >RAM AT> FLASH
 
-
+  
   /* Uninitialized data section */
   . = ALIGN(4);
   .bss :
@@ -170,6 +167,8 @@ SECTIONS
 
   .ARM.attributes 0 : { *(.ARM.attributes) }
   .ExtQSPIFlashSection : { *(.ExtQSPIFlashSection) } >QSPI
-  .calibration_data (NOLOAD) : { *(.calibration_data .data*) } >calibration_region
+  .calibration_data : { *(.calibration_data) } >calibration_region
 
 }
+
+

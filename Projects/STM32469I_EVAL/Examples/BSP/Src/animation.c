@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    BSP/Src/animation.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   This example code shows animation with LCD, DMA2D and DCMI for
   *          stm32469e_eval driver
   ******************************************************************************

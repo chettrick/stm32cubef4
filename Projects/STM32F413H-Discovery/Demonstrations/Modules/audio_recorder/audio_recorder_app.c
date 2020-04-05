@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    audio_recorder_app.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017   
   * @brief   Audio player application functions
   ******************************************************************************
   * @attention
@@ -642,7 +640,7 @@ uint32_t AUDIO_RECORDER_GetTotalTime(void)
 {
   uint32_t duration;
   
-  duration = (wav_file.fsize) / AudioInfo.ByteRate;    
+  duration = (f_size(&wav_file)) / AudioInfo.ByteRate;    
   return duration;
   
 }

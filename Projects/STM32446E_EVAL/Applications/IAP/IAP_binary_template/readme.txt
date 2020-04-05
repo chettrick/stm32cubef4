@@ -4,8 +4,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    IAP/IAP_Binary_Template/readme.txt 
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    17-February-2017
   * @brief   Description of the IAP_Binary_Template directory.
   ******************************************************************************
   * @attention
@@ -112,12 +110,6 @@ In order to load the SysTick application with the IAP, you must do the following
     - Rebuild all project files: Select the project in the "Project explorer" window 
       then click on Project->build project menu.
     - Load this image with the IAP application (Select option 1 in IAP_Main menu)
-
- - TrueSTUDIO:
-    - Open TrueSTUDIO toolchain 
-    - Browse to the TrueSTUDIO workspace directory, select the project (.project file in \IAP_Binary_Template\TrueStudio\STM32446E-EVAL directory). 
-    - Rebuild all project files: Select the project in the "Project explorer" window then click on Project->build project menu.
-    - A binary file "STM32446E-EVAL.elf.bin" will be generated under "STM32446E-EVAL/Debug" folder. 
 
  * <h2><center>&copy; COPYRIGHT 2016 STMicroelectronics </center></h2>
  */

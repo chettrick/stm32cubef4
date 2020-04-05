@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Device/DualCore_Standalone/Src/usbd_hid_desc.c
   * @author  MCD Application Team
-  * @version V1.5.0
-  * @date    17-February-2017
   * @brief   This file provides the USBD HID descriptors and string formating method.
   ******************************************************************************
   * @attention

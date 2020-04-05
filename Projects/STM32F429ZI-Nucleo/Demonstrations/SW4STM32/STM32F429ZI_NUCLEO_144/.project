@@ -99,7 +99,7 @@
 		</link><link>
 			<name>Middlewares/FatFs/Drivers/sd_diskio.c</name>
 			<type>1</type>
-			<location>PARENT-5-PROJECT_LOC/Middlewares/Third_Party/FatFs/src/drivers/sd_diskio.c</location>
+			<location>PARENT-2-PROJECT_LOC/Src/sd_diskio.c</location>
 		</link><link>
 			<name>Middlewares/FatFs/Core/ff_gen_drv.c</name>
 			<type>1</type>

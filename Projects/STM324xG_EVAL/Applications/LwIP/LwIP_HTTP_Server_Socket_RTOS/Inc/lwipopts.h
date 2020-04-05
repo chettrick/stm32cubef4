@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    LwIP/LwIP_HTTP_Server_Socket_RTOS/Inc/lwipopts.h
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   lwIP Options Configuration.
   *          This file is based on Utilities/lwip_v1.4.1/src/include/lwip/opt.h 
   *          and contains the lwIP configuration for the STM32F4x7 demonstration.

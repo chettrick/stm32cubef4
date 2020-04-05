@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Examples_LL/RCC/RCC_UseHSI_PLLasSystemClock/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017
   * @brief   This example describes how to change dynamically SYSCLK through
   *          the STM32F4xx RCC LL API.
   ******************************************************************************

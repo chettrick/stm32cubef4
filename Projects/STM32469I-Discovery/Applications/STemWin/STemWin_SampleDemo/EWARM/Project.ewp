@@ -316,10 +316,11 @@
         </option>
         <option>
           <name>CCIncludePath2</name>
-          <state>$PROJ_DIR$\..\Inc</state>
-          <state>$PROJ_DIR$\..\Demo</state>
+          <state>$PROJ_DIR$\..\Core\Inc</state>
+          <state>$PROJ_DIR$\..\STemWin\App</state>
+          <state>$PROJ_DIR$\..\STemWin\Target</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include</state>
-          
+
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM32469I-Discovery</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\otm8009a</state>
@@ -583,7 +584,7 @@
         </option>
         <option>
           <name>AUserIncludes</name>
-          <state>$PROJ_DIR$\..\Inc</state>
+          <state></state>
         </option>
         <option>
           <name>AExtraOptionsCheckV2</name>
@@ -977,55 +978,55 @@
     <group>
       <name>Demo</name>
       <file>
-        <name>$PROJ_DIR$\..\Demo\GUIDEMO.c</name>
+        <name>$PROJ_DIR$\..\STemWin\App\GUIDEMO.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\Demo\GUIDEMO_Automotive.c</name>
+        <name>$PROJ_DIR$\..\STemWin\App\GUIDEMO_Automotive.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\Demo\GUIDEMO_Bitmap.c</name>
+        <name>$PROJ_DIR$\..\STemWin\App\GUIDEMO_Bitmap.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\Demo\GUIDEMO_ColorBar.c</name>
+        <name>$PROJ_DIR$\..\STemWin\App\GUIDEMO_ColorBar.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\Demo\GUIDEMO_Conf.c</name>
+        <name>$PROJ_DIR$\..\STemWin\App\GUIDEMO_Conf.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\Demo\GUIDEMO_Cursor.c</name>
+        <name>$PROJ_DIR$\..\STemWin\App\GUIDEMO_Cursor.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\Demo\GUIDEMO_Graph.c</name>
+        <name>$PROJ_DIR$\..\STemWin\App\GUIDEMO_Graph.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\Demo\GUIDEMO_IconView.c</name>
+        <name>$PROJ_DIR$\..\STemWin\App\GUIDEMO_IconView.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\Demo\GUIDEMO_Intro.c</name>
+        <name>$PROJ_DIR$\..\STemWin\App\GUIDEMO_Intro.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\Demo\GUIDEMO_Listview.c</name>
+        <name>$PROJ_DIR$\..\STemWin\App\GUIDEMO_Listview.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\Demo\GUIDEMO_RadialMenu.c</name>
+        <name>$PROJ_DIR$\..\STemWin\App\GUIDEMO_RadialMenu.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\Demo\GUIDEMO_Resource.c</name>
+        <name>$PROJ_DIR$\..\STemWin\App\GUIDEMO_Resource.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\Demo\GUIDEMO_Speed.c</name>
+        <name>$PROJ_DIR$\..\STemWin\App\GUIDEMO_Speed.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\Demo\GUIDEMO_Start.c</name>
+        <name>$PROJ_DIR$\..\STemWin\App\GUIDEMO_Start.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\Demo\GUIDEMO_TransparentDialog.c</name>
+        <name>$PROJ_DIR$\..\STemWin\App\GUIDEMO_TransparentDialog.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\Demo\GUIDEMO_Treeview.c</name>
+        <name>$PROJ_DIR$\..\STemWin\App\GUIDEMO_Treeview.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\Demo\GUIDEMO_VScreen.c</name>
+        <name>$PROJ_DIR$\..\STemWin\App\GUIDEMO_VScreen.c</name>
       </file>
     </group>
     <group>
@@ -1037,16 +1038,16 @@
     <group>
       <name>User</name>
       <file>
-        <name>$PROJ_DIR$\..\Src\calibration.c</name>
+        <name>$PROJ_DIR$\..\STemWin\Target\calibration.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\Src\main.c</name>
+        <name>$PROJ_DIR$\..\Core\Src\main.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\Src\rtc.c</name>
+        <name>$PROJ_DIR$\..\STemWin\Target\rtc.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\Src\stm32f4xx_it.c</name>
+        <name>$PROJ_DIR$\..\Core\Src\stm32f4xx_it.c</name>
       </file>
     </group>
   </group>
@@ -1085,7 +1086,7 @@
     <group>
       <name>CMSIS</name>
       <file>
-        <name>$PROJ_DIR$\..\Src\system_stm32f4xx.c</name>
+        <name>$PROJ_DIR$\..\Core\Src\system_stm32f4xx.c</name>
       </file>
     </group>
     <group>
@@ -1180,16 +1181,16 @@
           <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STemWin\OS\GUI_X.c</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\Src\GUIConf.c</name>
+          <name>$PROJ_DIR$\..\STemWin\Target\GUIConf.c</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\Src\LCDConf_stm32469i_discovery.c</name>
+          <name>$PROJ_DIR$\..\STemWin\Target\LCDConf_stm32469i_discovery.c</name>
         </file>
       </group>
       <group>
         <name>Lib</name>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STemWin\Lib\STemWin532_CM4_IAR.a</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STemWin\Lib\STemWin540_CM4_IAR.a</name>
         </file>
       </group>
     </group>

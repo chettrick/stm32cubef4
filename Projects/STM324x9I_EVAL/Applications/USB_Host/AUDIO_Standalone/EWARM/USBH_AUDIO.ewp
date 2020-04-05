@@ -323,7 +323,6 @@
           <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Core\Inc</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Class\AUDIO\Inc</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src</state>
-          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src\drivers</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM324x9I_EVAL</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Utilities\Log</state>
         </option>
@@ -625,7 +624,7 @@
         </option>
         <option>
           <name>OOCObjCopyEnable</name>
-          <state>0</state>
+          <state>1</state>
         </option>
       </data>
     </settings>
@@ -1291,13 +1290,12 @@
         </option>
         <option>
           <name>CCIncludePath2</name>
-          <state>$PROJ_DIR$\..\inc</state>
+          <state>$PROJ_DIR$\..\Inc</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Core\Inc</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Class\AUDIO\Inc</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src</state>
-          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src\drivers</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM324x9I_EVAL</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Utilities\Log</state>
         </option>
@@ -1599,7 +1597,7 @@
         </option>
         <option>
           <name>OOCObjCopyEnable</name>
-          <state>0</state>
+          <state>1</state>
         </option>
       </data>
     </settings>
@@ -2076,7 +2074,7 @@
         <option>
           <name>GBECoreSlave</name>
           <version>24</version>
-          <state>40</state>
+          <state>39</state>
         </option>
         <option>
           <name>OGUseCmsis</name>
@@ -2266,7 +2264,7 @@
         </option>
         <option>
           <name>CCIncludePath2</name>
-          <state>$PROJ_DIR$\..\inc</state>
+          <state>$PROJ_DIR$\..\Inc</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Core\Inc</state>
@@ -2574,7 +2572,7 @@
         </option>
         <option>
           <name>OOCObjCopyEnable</name>
-          <state>0</state>
+          <state>1</state>
         </option>
       </data>
     </settings>
@@ -2948,9 +2946,6 @@
         <name>$PROJ_DIR$\..\Src\menu.c</name>
       </file>
       <file>
-        <name>$PROJ_DIR$\..\Src\sd_diskio.c</name>
-      </file>
-      <file>
         <name>$PROJ_DIR$\..\Src\stm32f4xx_it.c</name>
       </file>
       <file>
@@ -3080,6 +3075,12 @@
         </file>
         <file>
           <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src\ff_gen_drv.c</name>
+        </file>
+      </group>
+      <group>
+        <name>Drivers</name>
+        <file>
+          <name>$PROJ_DIR$\..\Src\sd_diskio.c</name>
         </file>
       </group>
     </group>

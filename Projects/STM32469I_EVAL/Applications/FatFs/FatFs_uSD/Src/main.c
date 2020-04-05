@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    FatFs/FatFs_uSD/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   Main program body
   *          This sample code shows how to use FatFs with SD disk drive.
   ******************************************************************************
@@ -55,6 +53,7 @@
 FATFS SDFatFs;  /* File system object for SD disk logical drive */
 FIL MyFile;     /* File object */
 char SDPath[4]; /* SD disk logical drive path */ 
+static uint8_t buffer[_MAX_SS]; /* a work buffer for the f_mkfs() */
 
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);
@@ -116,7 +115,7 @@ int main(void)
     else
     {
       /*##-3- Create a FAT file system (format) on the logical drive #########*/
-      if(f_mkfs((TCHAR const*)SDPath, 0, 0) != FR_OK)
+      if(f_mkfs((TCHAR const*)SDPath, FM_ANY, 0, buffer, sizeof(buffer)) != FR_OK)
       {     
         Error_Handler();
       }

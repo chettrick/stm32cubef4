@@ -8,7 +8,7 @@
   <Extensions>
     <cExt>*.c</cExt>
     <aExt>*.s*; *.src; *.a*</aExt>
-    <oExt>*.obj</oExt>
+    <oExt>*.obj; *.o</oExt>
     <lExt>*.lib</lExt>
     <tExt>*.txt; *.h; *.inc</tExt>
     <pExt>*.plm</pExt>
@@ -159,11 +159,12 @@
       <LintExecutable></LintExecutable>
       <LintConfigFile></LintConfigFile>
       <bLintAuto>0</bLintAuto>
-      <Lin2Executable></Lin2Executable>
-      <Lin2ConfigFile></Lin2ConfigFile>
-      <bLin2Auto>0</bLin2Auto>
       <bAutoGenD>0</bAutoGenD>
-      <bAuto2GenD>0</bAuto2GenD>
+      <LntExFlags>0</LntExFlags>
+      <pMisraName></pMisraName>
+      <pszMrule></pszMrule>
+      <pSingCmds></pSingCmds>
+      <pMultCmds></pMultCmds>
       <DebugDescription>
         <Enable>1</Enable>
         <EnableLog>0</EnableLog>
@@ -175,7 +176,7 @@
 
   <Group>
     <GroupName>Middlewares/PDM</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1811,7 +1812,7 @@
 
   <Group>
     <GroupName>Middlewares/STemWin/ST_GUI_Addons</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1822,8 +1823,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../STemWin_Addons/STM32F413H_DISCO_STemWin_Addons_Keil.lib</PathWithFileName>
-      <FilenameWithoutPath>STM32F413H_DISCO_STemWin_Addons_Keil.lib</FilenameWithoutPath>
+      <PathWithFileName>../STemWin_Addons/STM32F413H_DISCO_STemWin_Addons_KEIL.lib</PathWithFileName>
+      <FilenameWithoutPath>STM32F413H_DISCO_STemWin_Addons_KEIL.lib</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1831,7 +1832,7 @@
 
   <Group>
     <GroupName>Middlewares/STemWin/Library</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1842,8 +1843,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../../../../Middlewares/ST/STemWin/Lib/STemWin532_CM4_OS_Keil_ot.lib</PathWithFileName>
-      <FilenameWithoutPath>STemWin532_CM4_OS_Keil_ot.lib</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\..\Middlewares\ST\STemWin\Lib\STemWin540_CM4_OS_Keil_ot.lib</PathWithFileName>
+      <FilenameWithoutPath>STemWin540_CM4_OS_Keil_ot.lib</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1883,7 +1884,7 @@
 
   <Group>
     <GroupName>Application/MDK-ARM</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

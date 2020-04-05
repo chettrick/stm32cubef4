@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    LCD_Paint/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   Main program body
   ******************************************************************************
   * @attention
@@ -64,6 +62,7 @@
 FATFS SDFatFs;   /* File system object for SD card logical drive */
 FIL MyFile;      /* File object */
 char SDPath[4];  /* SD card logical drive path */
+static uint8_t buffer[_MAX_SS]; /* a work buffer for the f_mkfs() */
 
 static uint32_t Radius = 2;
 static uint32_t x = 0, y = 0;
@@ -129,7 +128,7 @@ int main(void)
   }
   
   /* Create a FAT file system (format) on the logical drive */
-  f_mkfs((TCHAR const*)SDPath, 0, 0);
+  f_mkfs((TCHAR const*)SDPath, FM_ANY, 0, buffer, sizeof(buffer));
   
   /*##-4- Register the file system object to the FatFs module ################*/
   if(f_mount(&SDFatFs, (TCHAR const*)SDPath, 0) != FR_OK)

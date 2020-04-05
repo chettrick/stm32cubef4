@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    LwIP/LwIP_UDP_Echo_Server/Src/udp_echoserver.c
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   UDP echo server
   ******************************************************************************
   * @attention

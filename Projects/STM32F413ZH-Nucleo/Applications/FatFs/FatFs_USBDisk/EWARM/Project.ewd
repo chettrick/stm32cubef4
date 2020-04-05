@@ -45,7 +45,7 @@
         </option>
         <option>
           <name>MemFile</name>
-          <state>$TOOLKIT_DIR$\CONFIG\debugger\ST\STM32F412CE.ddf</state>
+          <state>$TOOLKIT_DIR$\CONFIG\debugger\ST\STM32F413ZH.ddf</state>
         </option>
         <option>
           <name>RunToEnable</name>
@@ -89,7 +89,7 @@
         </option>
         <option>
           <name>OCLastSavedByProductVersion</name>
-          <state>7.60.1.11206</state>
+          <state>7.80.4.12487</state>
         </option>
         <option>
           <name>UseFlashLoader</name>
@@ -113,7 +113,7 @@
         </option>
         <option>
           <name>FlashLoadersV3</name>
-          <state>$TOOLKIT_DIR$\config\flashloader\ST\FlashSTM32F413xx.board</state>
+          <state>$TOOLKIT_DIR$\config\flashloader\ST\FlashSTM32F413xH.board</state>
         </option>
         <option>
           <name>OCImagesSuppressCheck1</name>
@@ -282,12 +282,45 @@
       </data>
     </settings>
     <settings>
+      <name>CADI_ID</name>
+      <archiveVersion>2</archiveVersion>
+      <data>
+        <version>0</version>
+        <wantNonLocal>1</wantNonLocal>
+        <debug>1</debug>
+        <option>
+          <name>CCadiMemory</name>
+          <state>1</state>
+        </option>
+        <option>
+          <name>Fast Model</name>
+          <state></state>
+        </option>
+        <option>
+          <name>CCADILogFileCheck</name>
+          <state>0</state>
+        </option>
+        <option>
+          <name>CCADILogFileEditB</name>
+          <state>$PROJ_DIR$\cspycomm.log</state>
+        </option>
+        <option>
+          <name>OCDriverInfo</name>
+          <state>1</state>
+        </option>
+      </data>
+    </settings>
+    <settings>
       <name>CMSISDAP_ID</name>
       <archiveVersion>2</archiveVersion>
       <data>
         <version>4</version>
         <wantNonLocal>1</wantNonLocal>
         <debug>1</debug>
+        <option>
+          <name>CatchSFERR</name>
+          <state>1</state>
+        </option>
         <option>
           <name>OCDriverInfo</name>
           <state>1</state>
@@ -532,6 +565,10 @@
         <wantNonLocal>1</wantNonLocal>
         <debug>1</debug>
         <option>
+          <name>CatchSFERR</name>
+          <state>1</state>
+        </option>
+        <option>
           <name>OCDriverInfo</name>
           <state>1</state>
         </option>
@@ -757,6 +794,10 @@
         <version>16</version>
         <wantNonLocal>1</wantNonLocal>
         <debug>1</debug>
+        <option>
+          <name>CCCatchSFERR</name>
+          <state>0</state>
+        </option>
         <option>
           <name>JLinkSpeed</name>
           <state>1000</state>
@@ -1154,9 +1195,17 @@
       <name>STLINK_ID</name>
       <archiveVersion>2</archiveVersion>
       <data>
-        <version>3</version>
+        <version>4</version>
         <wantNonLocal>1</wantNonLocal>
         <debug>1</debug>
+        <option>
+          <name>CCSTLinkCatchSFERR</name>
+          <state>0</state>
+        </option>
+        <option>
+          <name>CCSTLinkDAPNumber</name>
+          <state></state>
+        </option>
         <option>
           <name>OCDriverInfo</name>
           <state>1</state>
@@ -1171,8 +1220,8 @@
         </option>
         <option>
           <name>CCSTLinkResetList</name>
-          <version>1</version>
-          <state>0</state>
+          <version>3</version>
+          <state>4</state>
         </option>
         <option>
           <name>CCCpuClockEdit</name>
@@ -1249,6 +1298,10 @@
         <option>
           <name>CCSTLinkJtagSpeedList</name>
           <version>0</version>
+          <state>0</state>
+        </option>
+        <option>
+          <name>CCSTLinkDebugAccessPortRadio</name>
           <state>0</state>
         </option>
       </data>
@@ -1353,9 +1406,13 @@
       <name>XDS100_ID</name>
       <archiveVersion>2</archiveVersion>
       <data>
-        <version>5</version>
+        <version>6</version>
         <wantNonLocal>1</wantNonLocal>
         <debug>1</debug>
+        <option>
+          <name>CCXds100CatchSFERR</name>
+          <state>0</state>
+        </option>
         <option>
           <name>OCDriverInfo</name>
           <state>1</state>
@@ -1502,6 +1559,14 @@
           <name>CCXds100ProbeList</name>
           <version>0</version>
           <state>0</state>
+        </option>
+        <option>
+          <name>CCXds100SWOPortRadio</name>
+          <state>0</state>
+        </option>
+        <option>
+          <name>CCXds100SWOPort</name>
+          <state>1</state>
         </option>
       </data>
     </settings>

@@ -33,10 +33,6 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c</location>
 		</link><link>
-			<name>Application/User/sd_diskio.c</name>
-			<type>1</type>
-			<location>PARENT-2-PROJECT_LOC/Src/sd_diskio.c</location>
-		</link><link>
 			<name>Application/User/main.c</name>
 			<type>1</type>
 			<location>PARENT-2-PROJECT_LOC/Src/main.c</location>
@@ -185,6 +181,10 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c</location>
 		</link><link>
+			<name>Middlewares/FatFs/Drivers/sd_diskio_dma_rtos.c</name>
+			<type>1</type>
+			<location>PARENT-2-PROJECT_LOC/Src/sd_diskio_dma_rtos.c</location>
+		</link><link>
 			<name>Drivers/CMSIS/system_stm32f4xx.c</name>
 			<type>1</type>
 			<location>PARENT-2-PROJECT_LOC/Src/system_stm32f4xx.c</location>
@@ -217,10 +217,6 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FatFs/src/option/syscall.c</location>
 		</link>
-		<link>
-			<name />
-			<type />
-			<location />
-		</link>
+		
 	</linkedResources>
 </projectDescription>

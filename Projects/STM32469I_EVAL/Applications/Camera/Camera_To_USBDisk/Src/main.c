@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Camera/Camera_To_USBDisk/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   This application describes how to configure the camera in continuous mode
              and save picture under USBDisk.
   ******************************************************************************
@@ -87,7 +85,7 @@ uint8_t __IO cameraState = CAMERA_STATE_RESET;
 FATFS MSC_FatFs;  /* File system object for USB disk logical drive */
 FIL MyFile;       /* File object */
 char MSC_Path[4]; /* USB Host logical drive path */
-USBH_HandleTypeDef  hUSB_Host;
+USBH_HandleTypeDef  hUSBHost;
 
 /* Image header */
 const uint32_t aBMPHeader[14]=
@@ -196,13 +194,13 @@ int main(void)
   Display_WaitRefresh();
   /*##-2- Init Host Library ##################################################*/
 
-  USBH_Init(&hUSB_Host, USBH_UserProcess, 0);
+  USBH_Init(&hUSBHost, USBH_UserProcess, 0);
 
   /* Add Supported Class */
-  USBH_RegisterClass(&hUSB_Host, USBH_MSC_CLASS);
+  USBH_RegisterClass(&hUSBHost, USBH_MSC_CLASS);
 
   /* Start Host Process */
-  USBH_Start(&hUSB_Host);
+  USBH_Start(&hUSBHost);
 
   /*##-3- Configure TAMPER Button ############################################*/
   BSP_PB_Init(BUTTON_TAMPER, BUTTON_MODE_GPIO);
@@ -234,7 +232,7 @@ int main(void)
   while (1)
   {
     /* USB Host Background task */
-    USBH_Process(&hUSB_Host);
+    USBH_Process(&hUSBHost);
 
     switch(Appli_state)
     {

@@ -5,8 +5,6 @@
   ******************************************************************************
   * @file    net_sockets.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   TCP/IP or UDP/IP networking functions iplementation based on LwIP API
              see the file "mbedTLS/library/net_socket_template.c" for the standard
 			 implmentation

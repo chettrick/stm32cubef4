@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Audio/Audio_playback_and_record/Src/main.c
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    17-February-2017 
   * @brief   Audio playback and record main file.
   ******************************************************************************
   * @attention
@@ -52,7 +50,10 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
+FATFS USBH_FatFs;  /* FatFS object for the USB Host logical drive */
+char USBDISKPath[4]; /* USB Host logical drive path */
 USBH_HandleTypeDef hUSBHost;
+
 AUDIO_ApplicationTypeDef appli_state = APPLICATION_IDLE;
 static volatile uint32_t MfxToggleLed = 0;
 
@@ -192,24 +193,45 @@ static void AUDIO_InitApplication(void)
 static void USBH_UserProcess(USBH_HandleTypeDef *phost, uint8_t id)
 {
   switch(id)
-  { 
+  {
   case HOST_USER_SELECT_CONFIGURATION:
     break;
-    
+
   case HOST_USER_DISCONNECTION:
     appli_state = APPLICATION_DISCONNECT;
+    if(FATFS_UnLinkDriver(USBDISKPath) != 0)
+    {
+     LCD_ErrLog("ERROR : Cannot unlink FatFS driver! \n");
+    }
+    if(f_mount(NULL, "", 0) != FR_OK)
+    {
+      LCD_ErrLog("ERROR : Cannot DeInitialize FatFs! \n");
+    }
+
     break;
 
   case HOST_USER_CLASS_ACTIVE:
     appli_state = APPLICATION_READY;
     break;
- 
+
   case HOST_USER_CONNECTION:
+   /* Link the USB Mass Storage disk I/O driver */
+   if(FATFS_LinkDriver(&USBH_Driver, USBDISKPath) != 0)
+   {
+     LCD_ErrLog("ERROR : Cannot link FatFS driver! \n");
+    break;
+   }
+   if(f_mount(&USBH_FatFs, "", 0) != FR_OK)
+   {
+     LCD_ErrLog("ERROR : Cannot Initialize FatFs! \n");
+    break;
+   }
+
     appli_state = APPLICATION_START;
     break;
-   
+
   default:
-    break; 
+    break;
   }
 }
 

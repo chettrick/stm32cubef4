@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Examples_LL/GPIO/GPIO_InfiniteLedToggling_Init/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017
   * @brief   This example describes how to configure and use GPIOs through
   *          the STM32F4xx  GPIO LL API.
   *          Peripheral initialization done using LL initialization function.

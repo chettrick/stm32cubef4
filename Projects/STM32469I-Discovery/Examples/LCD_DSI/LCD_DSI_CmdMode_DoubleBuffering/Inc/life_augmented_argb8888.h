@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    LCD_DSI/LCD_DSI_CmdMode_DoubleBuffer/Inc/life_augmented_argb8888.h
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   This file contains ARGB8888 image 320x240.
   ******************************************************************************
   * @attention

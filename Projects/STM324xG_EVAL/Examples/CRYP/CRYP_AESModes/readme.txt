@@ -6,8 +6,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    CRYP/CRYP_AESModes/readme.txt 
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    17-February-2017
   * @brief   Description of the CRYP AES Algorithm in all modes and all key sizes
              example.
   ******************************************************************************

@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    Audio/Audio_playback_and_record/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.4
-  * @date    17-February-2017
   * @brief   Description of the Audio Playback and Record application.
   ******************************************************************************
   * @attention
@@ -64,14 +62,14 @@ using USER button.
 
 1) Play audio(Need headphone). Device: "CS43L22"
 Application plays an audio file (wave.wav) which is available on USB Mass Storage.
-Plug a headphone to earn a 48K sound  /!\ Take care of yours ears.
+Plug a headphone to hear a 48K sound  /!\ Take care of yours ears.
 Default volume is 50%.
 Click feature has been implemented only for RevB board. A click on the board
 will pause the audio file play (LED6 on). Another click resumes audio
 file play (LED6 toggle)
 
-- The player wave name can be customized through the define "WAVE_NAME" in main.h
-  (default name is audio_sample.wav) and if this file is not available on the 
+  - The player wave name can be customized through the define "WAVE_NAME" in main.h
+  (default name is wave.wav) and if this file is not available on the 
   USB Key the application switch on the record.
  
 To play the audio file, a buffer is used between USB and audio codec. This buffer 
@@ -95,7 +93,7 @@ When the User button is pressed the application starts recording in the USB Key 
 the recorded wave length is (~30secs) and user can interrupt the recording using the User button. 
  - The recorded wave name can be customized through the define "REC_WAVE_NAME" in main.h.
  - Once the recording is finished or interrupted, the recorded wave will start playing
-   automatically and LED6 start toggling, Plug a headphone to earn a 16K sound  /!\ Take care of yours ears.
+   automatically and LED6 start toggling, Plug a headphone to hear a 16K sound  /!\ Take care of yours ears.
  - If the define "PLAY_REPEAT_DISABLED" in main.h file is not enabled the play will start in infinity loop,
    on board RevB you can pause/resume the player using the MEMS click feature (LED6 on/Toggle) 
  - Default volume is 70%.
@@ -119,9 +117,9 @@ used to receive data from Audio samples. This process is repeated as long as the
 application is running.
 
 To avoid data corruption:
-- DMA ISR priority must be set at a Lower priority than USB interrupt sources,
+  - DMA ISR priority must be set at a Lower priority than USB interrupt sources,
   this priority order must be respected when managing other interrupts;
-- The processing time of converting/filtering samples from PDM to PCM 
+  - The processing time of converting/filtering samples from PDM to PCM 
   PDM_Filter_64_LSB()) should be lower than the time required to fill a
   single buffer.
 
@@ -139,6 +137,7 @@ to have correct HAL operation.
 @par Directory contents 
 
   - Audio_playback_and_record/Src/main.c               Main program
+  - Audio_playback_and_record/Src/usbh_diskio_dma.c      FatFS usbh diskio driver implementation
   - Audio_playback_and_record/Src/stm32f4xx_it.c       Interrupt handlers
   - Audio_playback_and_record/Src/system_stm32f4xx.c   STM32F4xx system clock configuration file
   - Audio_playback_and_record/Src/usbh_conf.c          Board support package for the USB host library 	
@@ -146,6 +145,7 @@ to have correct HAL operation.
   - Audio_playback_and_record/Src/waverecorder.c       Audio record file
   - Audio_playback_and_record/Inc/ffconf.h             FAT file system module configuration file   
   - Audio_playback_and_record/Inc/main.h               Main program header file
+  - Audio_playback_and_record/Inc/usbh_diskio_dma.h      FatFS usbh diskio driver header file
   - Audio_playback_and_record/Inc/stm32f4xx_hal_conf.h HAL configuration file
   - Audio_playback_and_record/Inc/stm32f4xx_it.h       Interrupt handlers header file
   - Audio_playback_and_record/Inc/usbh_conf.h          USB driver Configuration file

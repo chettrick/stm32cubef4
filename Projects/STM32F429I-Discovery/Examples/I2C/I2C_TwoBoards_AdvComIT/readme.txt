@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics  *******************
   * @file    I2C/I2C_TwoBoards_AdvComIT/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.8
-  * @date    17-February-2017 
   * @brief   Description of the I2C Two Boards Advanced Communication with 
   *          Interrupt example.
   ******************************************************************************
@@ -154,11 +152,11 @@ by pushing the user button of the Master board.
 
   - This example runs on STM32F429xx devices.
     
-  - This example has been tested with STMicroelectronics STM32F429I-Discovery RevB
+  - This example has been tested with STMicroelectronics STM32F429I-Discovery RevC
     boards and can be easily tailored to any other supported device 
     and development board.    
       
-  - STM32F429I-Discovery RevB Set-up
+  - STM32F429I-Discovery RevC Set-up
     - Connect Master board PA8 to Slave Board PA8
     - Connect Master board PC9 to Slave Board PC9
     - Connect Master board GND to Slave Board GND

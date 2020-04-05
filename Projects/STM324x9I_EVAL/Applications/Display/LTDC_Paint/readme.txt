@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    Display/LTDC_Paint/readme.txt 
   * @author  MCD Application Team
-  * @version V1.5.0
-  * @date    17-February-2017
   * @brief   Description of the LTDC Paint application.
   ******************************************************************************
   * @attention
@@ -103,6 +101,7 @@ Note: After save operation, the touch positions are not cleared from STMPE811 FI
 @par Directory contents
 
     - Display/LTDC_Paint/Inc/main.h                 Main configuration file
+    - Display/LTDC_Paint/Inc/usbh_diskio_dma.h      FatFS usbh diskio driver header file
     - Display/LTDC_Paint/Inc/stm32f4xx_it.h         Interrupt handlers header file
     - Display/LTDC_Paint/Inc/stm32f4xx_hal_conf.h   HAL Configuration file 
     - Display/LTDC_Paint/Inc/ffconf.h               FAT file system module configuration file
@@ -111,6 +110,7 @@ Note: After save operation, the touch positions are not cleared from STMPE811 FI
     - Display/LTDC_Paint/Inc/color2.h               Image used to display colored pens
     - Display/LTDC_Paint/Inc/save.h                 Image used to display save icon
     - Display/LTDC_Paint/Src/main.c                 Main program 
+    - Display/LTDC_Paint/Src/usbh_diskio_dma.c      FatFS usbh diskio driver implementation
     - Display/LTDC_Paint/Src/stm32f4xx_it.c         Interrupt handlers
     - Display/LTDC_Paint/Src/usbh_conf.c            Main function to configure USB
     - Display/LTDC_Paint/Src/ts_calibration.c       Main function used to calibrate TS

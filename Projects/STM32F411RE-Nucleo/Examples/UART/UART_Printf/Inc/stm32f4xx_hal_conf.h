@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    UART/UART_Printf/Inc/stm32f4xx_hal_conf.h
   * @author  MCD Application Team
-  * @version V1.1.5
-  * @date    17-February-2017
   * @brief   HAL configuration file
   ******************************************************************************
   * @attention

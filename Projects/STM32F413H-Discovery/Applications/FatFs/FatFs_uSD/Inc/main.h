@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    FatFs/FatFs_uSD/Inc/main.h 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017 
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
@@ -53,7 +51,7 @@
 #include "stm32f4xx_hal.h"
 
 /* EVAL includes component */
-#include "stm32F413H_discovery.h"
+#include "stm32f413h_discovery.h"
 
 /* FatFs includes component */
 #include "ff_gen_drv.h"

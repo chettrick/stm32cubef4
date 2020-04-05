@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    audio_player_app.c
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    17-February-2017
   * @brief   Audio player application functions
   ******************************************************************************
   * @attention
@@ -87,7 +85,6 @@ static void AUDIO_Error_CallBack(void);
   */
 AUDIOPLAYER_ErrorTypdef  AUDIOPLAYER_Init(uint8_t volume)
 {
-  portENTER_CRITICAL();
    /* Try to Init Audio interface in diffrent config in case of failure */
   BSP_AUDIO_OUT_Init(OUTPUT_DEVICE_AUTO, volume, I2S_AUDIOFREQ_48K);
   
@@ -109,7 +106,6 @@ AUDIOPLAYER_ErrorTypdef  AUDIOPLAYER_Init(uint8_t volume)
   osThreadDef(osAudio_Thread, Audio_Thread, osPriorityRealtime, 0, 512);
   AudioThreadId = osThreadCreate (osThread(osAudio_Thread), NULL);  
 
-   portEXIT_CRITICAL();
   return AUDIOPLAYER_ERROR_NONE;
 }
 
@@ -313,7 +309,7 @@ AUDIOPLAYER_ErrorTypdef  AUDIOPLAYER_SetPosition(uint32_t position)
 {
   long file_pos;
   
-  file_pos = wav_file.fsize / AUDIO_OUT_BUFFER_SIZE / 100; 
+  file_pos = f_size(&wav_file) / AUDIO_OUT_BUFFER_SIZE / 100; 
   file_pos *= (position * AUDIO_OUT_BUFFER_SIZE);
   AUDIOPLAYER_Pause(); 
   f_lseek(&wav_file, file_pos);

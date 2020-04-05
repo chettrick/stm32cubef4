@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    LwIP/LwIP_UDP_Echo_Server/Inc/app_ethernet.h 
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   Header for app_ethernet.c module
   ******************************************************************************
   * @attention

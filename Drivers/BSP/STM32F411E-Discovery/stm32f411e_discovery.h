@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm32f411e_discovery.h
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    27-January-2017
   * @brief   This file contains definitions for STM32F401-Discovery Kit's Leds and 
   *          push-button hardware resources.
   ******************************************************************************

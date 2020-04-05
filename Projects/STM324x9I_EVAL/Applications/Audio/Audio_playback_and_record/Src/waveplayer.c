@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Audio/Audio_playback_and_record/Src/waveplayer.c 
   * @author  MCD Application Team
-  * @version V1.5.0
-  * @date    17-February-2017
   * @brief   This file provides the Audio Out (playback) interface API
   ******************************************************************************
   * @attention
@@ -212,12 +210,14 @@ AUDIO_ErrorTypeDef AUDIO_PLAYER_Process(void)
     break;   
     
   case AUDIO_STATE_PAUSE:
+    BSP_LCD_ClearStringLine(LINE(14));
     BSP_LCD_DisplayStringAt(250, LINE(14), (uint8_t *)"  [PAUSE]", LEFT_MODE);
     BSP_AUDIO_OUT_Pause();
     AudioState = AUDIO_STATE_WAIT;
     break;
     
   case AUDIO_STATE_RESUME:
+    BSP_LCD_ClearStringLine(LINE(14));
     BSP_LCD_DisplayStringAt(250, LINE(14), (uint8_t *)"  [PLAY ]", LEFT_MODE);
     BSP_AUDIO_OUT_Resume();
     AudioState = AUDIO_STATE_PLAY;

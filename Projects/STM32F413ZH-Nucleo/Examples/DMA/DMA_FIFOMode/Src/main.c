@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    DMA/DMA_FIFOMode/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   This example provides a description of how to use a DMA channel
   *          to transfer a word data buffer from FLASH memory to embedded
   *          SRAM memory with FIFO mode enabled through the STM32F4xx HAL API.

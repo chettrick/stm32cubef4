@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    LwIP/LwIP_IAP/Inc/main.h
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   This file contains all the functions prototypes for the main.c 
   *          file.
   ******************************************************************************
@@ -47,8 +45,8 @@
    IMPORTANT NOTE:
    ==============
    Be sure that USER_FLASH_FIRST_PAGE_ADDRESS do not overlap with IAP code.
-   For example, with all option enabled the total readonly memory size using TrueSTUDIO
-   compiler v4.30, with high optimization for size, is 69840 bytes.
+   For example, with all option enabled the total readonly memory size using SW4STM32
+   IDE v2.1.0, with optimization for size, is 59784 bytes.
    Based on this result four sectors of 16 Kbytes and a sector of 64 Kbytes will be used to store
    the IAP code, so the user Flash address will start from Sector5.
 

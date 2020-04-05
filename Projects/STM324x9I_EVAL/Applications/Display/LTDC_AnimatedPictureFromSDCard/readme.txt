@@ -5,8 +5,6 @@
   ******************************************************************************
   * @file    Display/LTDC_AnimatedPictureFromSDCard/readme.txt 
   * @author  MCD Application Team
-  * @version V1.5.0
-  * @date    17-February-2017
   * @brief   Description of the LTDC animated picture from SD card application.
   ******************************************************************************
   * @attention
@@ -99,17 +97,19 @@
 @note The application needs to ensure that the SysTick time base is always set to 1 millisecond
       to have correct HAL operation.
 
--  LED3 is ON when the uSD disk I/O driver is not Linked;
+  -  LED3 is ON when the uSD disk I/O driver is not Linked;
 
 
 @par Directory contents
 
     - Display/LTDC_AnimatedPictureFromSDCard/Inc/main.h                 Main configuration file
+    - Display/LTDC_AnimatedPictureFromSDCard/Inc/sd_diskio.h            FatFS sd diskio driver header file
     - Display/LTDC_AnimatedPictureFromSDCard/Inc/stm32f4xx_it.h         Interrupt handlers header file
     - Display/LTDC_AnimatedPictureFromSDCard/Inc/stm32f4xx_hal_conf.h   HAL Configuration file 
     - Display/LTDC_AnimatedPictureFromSDCard/Inc/ffconf.h               FAT file system module configuration file
     - Display/LTDC_AnimatedPictureFromSDCard/Inc/fatfs_storage.h        Header for fatfs_storage.c
     - Display/LTDC_AnimatedPictureFromSDCard/Src/main.c                 Main program 
+    - Display/LTDC_AnimatedPictureFromSDCard/Src/sd_diskio.c            FatFS sd diskio driver implementation
     - Display/LTDC_AnimatedPictureFromSDCard/Src/fatfs_storage.c        Storage (FatFs) driver
     - Display/LTDC_AnimatedPictureFromSDCard/Src/stm32f4xx_it.c         Interrupt handlers
     - Display/LTDC_AnimatedPictureFromSDCard/Src/system_stm32f4xx.c     STM32F4xx system clock configuration file

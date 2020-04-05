@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    Demonstrations/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017
   * @brief   Description of STM32413H-DISCO Demonstration
   ******************************************************************************
   *
@@ -93,9 +91,9 @@ Below you find an overview of the different offered module in the demonstration:
 In order to make the program work, you must do the following :
  - Open your preferred toolchain 
  - Rebuild all files
- - Open STM32 ST-Link Utility V4.1.0, click on "External Loader" from the bar menu then check "N25Q128A_STM32413H-DISCO" box 
+ - Open STM32 ST-Link Utility V4.1.0 or later, click on "External Loader" from the bar menu then check "N25Q128A_STM32413H-DISCO" box 
  - Connect the STM32413H-DISCO board to PC with USB cable through CN2
- - Use "STM32CubeDemo_STM32F413H-DISCO_V1.0.0.hex" file with STM32 ST-Link Utility to program both internal Flash and external QSPI memory
+ - Use "STM32CubeDemo_STM32F413H-DISCO_V1.1.0.hex" file with STM32 ST-Link Utility to program both internal Flash and external QSPI memory
  - Run the demonstration
  - copy the audio and video files provided under "Utilities/Media/" in the SD Card
  - Plug SD Card on CN1 connector 

@@ -213,7 +213,12 @@
 		<link>
 			<name>Middlewares/FatFs/Drivers/sd_diskio.c</name>
 			<type>1</type>
-			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FatFs/src/drivers/sd_diskio.c</locationURI>
+			<locationURI>PARENT-2-PROJECT_LOC/Src/sd_diskio.c</locationURI>
+		</link>
+		<link>
+			<name>Middlewares/FatFs/Drivers/sd_diskio_dma.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Src/sd_diskio_dma.c</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/STM32_USBH_Library/Core/usbh_core.c</name>

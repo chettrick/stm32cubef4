@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm32f413h_discovery.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    27-January-2017
   * @brief   This file contains definitions for STM32F413H_DISCOVERY's LEDs,
   *          push-buttons and COM ports hardware resources.
   ******************************************************************************

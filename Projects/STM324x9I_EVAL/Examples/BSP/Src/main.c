@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    BSP/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   This example code shows how to use the STM324x9I BSP Drivers
   ******************************************************************************
   * @attention

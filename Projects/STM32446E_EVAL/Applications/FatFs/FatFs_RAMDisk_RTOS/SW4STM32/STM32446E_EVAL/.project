@@ -45,6 +45,10 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c</location>
 		</link><link>
+			<name>Middlewares/FatFs/Drivers/sdram_diskio.c</name>
+			<type>1</type>
+			<location>PARENT-2-PROJECT_LOC/Src/sdram_diskio.c</location>
+		</link><link>
 			<name>Middlewares/FatFs/Core/ff.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FatFs/src/ff.c</location>
@@ -184,10 +188,6 @@
 			<name>Middlewares/FatFs/Options/unicode.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FatFs/src/option/unicode.c</location>
-		</link><link>
-			<name>Middlewares/FatFs/Drivers/sdram_diskio.c</name>
-			<type>1</type>
-			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FatFs/src/drivers/sdram_diskio.c</location>
 		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_i2c.c</name>
 			<type>1</type>

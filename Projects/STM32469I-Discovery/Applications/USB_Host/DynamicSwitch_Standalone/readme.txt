@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    USB_Host/DynamicSwitch_Standalone/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   Description of the USB Host Dynamic Switch application.
   ******************************************************************************
   * @attention
@@ -92,7 +90,7 @@ For more details about the STM32Cube USB Host library, please refer to UM1720
 It is possible to fine tune needed USB Host features by modifying defines values in USBH configuration
 file “usbh_conf.h” available under the project includes directory, in a way to fit the application
 requirements, such as:
-- Level of debug: USBH_DEBUG_LEVEL
+  - Level of debug: USBH_DEBUG_LEVEL
                   0: No debug messages
                   1: Only User messages are shown
                   2: User and Error messages are shown
@@ -100,11 +98,12 @@ requirements, such as:
    By default debug messages are displayed on the debugger IO terminal; to redirect the Library
    messages on the LCD screen, lcd_log.c driver need to be added to the application sources.
 
-- Number of supported classes: USBH_MAX_NUM_SUPPORTED_CLASS  
+  - Number of supported classes: USBH_MAX_NUM_SUPPORTED_CLASS  
 
 @par Directory contents
 
   - USB_Host/DynamicSwitch_Standalone/Src/main.c                  Main program
+  - USB_Host/DynamicSwitch_Standalone/Src/usbh_diskio_dma.c      FatFS usbh diskio driver implementation
   - USB_Host/DynamicSwitch_Standalone/Src/system_stm32f4xx.c      STM32F4xx system clock configuration file
   - USB_Host/DynamicSwitch_Standalone/Src/stm32f4xx_it.c          Interrupt handlers
   - USB_Host/DynamicSwitch_Standalone/Src/menu.c                  Main Menu State Machine
@@ -117,6 +116,7 @@ requirements, such as:
   - USB_Host/DynamicSwitch_Standalone/Src/mouse.c                 HID mouse functions  
   - USB_Host/DynamicSwitch_Standalone/Src/keyboard.c              HID keyboard functions
   - USB_Host/DynamicSwitch_Standalone/Inc/main.h                  Main program header file
+  - USB_Host/DynamicSwitch_Standalone/Inc/usbh_diskio_dma.h      FatFS usbh diskio driver header file
   - USB_Host/DynamicSwitch_Standalone/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - USB_Host/DynamicSwitch_Standalone/Inc/lcd_log_conf.h          LCD log configuration file
   - USB_Host/DynamicSwitch_Standalone/Inc/stm32f4xx_hal_conf.h    HAL configuration file

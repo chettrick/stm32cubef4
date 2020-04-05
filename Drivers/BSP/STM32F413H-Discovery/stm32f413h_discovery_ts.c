@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm32f413h_discovery_ts.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    27-January-2017
   * @brief   This file provides a set of functions needed to manage the Touch
   *          Screen on STM32F413h-DISCOVERY evaluation board.
   ******************************************************************************

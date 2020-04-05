@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    FMC/FMC_SDRAM_LowPower/Src/main.c
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    17-February-2017
   * @brief   This example describes how to configure and use GPIOs through
   *          the STM32F4xx HAL API.
   ******************************************************************************

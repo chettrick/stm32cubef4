@@ -89,7 +89,7 @@
         </option>
         <option>
           <name>OCLastSavedByProductVersion</name>
-          <state>7.80.3.12143</state>
+          <state>7.80.4.12487</state>
         </option>
         <option>
           <name>UseFlashLoader</name>
@@ -1195,7 +1195,7 @@
       <name>STLINK_ID</name>
       <archiveVersion>2</archiveVersion>
       <data>
-        <version>3</version>
+        <version>4</version>
         <wantNonLocal>1</wantNonLocal>
         <debug>1</debug>
         <option>
@@ -1212,8 +1212,8 @@
         </option>
         <option>
           <name>CCSTLinkResetList</name>
-          <version>2</version>
-          <state>0</state>
+          <version>3</version>
+          <state>4</state>
         </option>
         <option>
           <name>CCCpuClockEdit</name>
@@ -1298,6 +1298,10 @@
         </option>
         <option>
           <name>CCSTLinkDAPNumber</name>
+          <state>0</state>
+        </option>
+        <option>
+          <name>CCSTLinkDebugAccessPortRadio</name>
           <state>0</state>
         </option>
       </data>

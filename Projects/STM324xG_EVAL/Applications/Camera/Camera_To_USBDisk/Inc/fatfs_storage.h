@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Camera/Camera_To_USBDisk/Inc/fatfs_storage.h
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   This file contains all the functions prototypes for the storage
   *          firmware driver.
   ******************************************************************************

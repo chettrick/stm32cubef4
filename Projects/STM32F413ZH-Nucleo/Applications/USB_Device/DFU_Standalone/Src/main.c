@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Device/DFU_Standalone/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    17-February-2017
   * @brief   USB device DFU demo main file
   ******************************************************************************
   * @attention
@@ -81,7 +79,7 @@ int main(void)
   if(BSP_PB_GetState(BUTTON_USER) == 0x00)
   {
     /* Test if user code is programmed starting from USBD_DFU_APP_DEFAULT_ADD address */
-    if(((*(__IO uint32_t*)USBD_DFU_APP_DEFAULT_ADD) & 0x2FFE0000 ) == 0x20000000)
+    if(((*(__IO uint32_t*)USBD_DFU_APP_DEFAULT_ADD) & 0x2FF80000 ) == 0x20000000)
     {
       /* Jump to user application */
       JumpAddress = *(__IO uint32_t*) (USBD_DFU_APP_DEFAULT_ADD + 4);

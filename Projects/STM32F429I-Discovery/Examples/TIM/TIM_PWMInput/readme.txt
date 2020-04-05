@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics  *******************
   * @file    TIM/TIM_PWMInput/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.8
-  * @date    17-February-2017 
   * @brief   Description of the TIM PWM_Input example.
   ******************************************************************************
   *
@@ -86,11 +84,11 @@ The minimum frequency value to measure is (TIM4 counter clock / CCR MAX)
 
   - This example runs on STM32F429xx devices.
     
-  - This example has been tested with STMicroelectronics STM32F429I-Discovery RevB
+  - This example has been tested with STMicroelectronics STM32F429I-Discovery RevC
     boards and can be easily tailored to any other supported device 
     and development board.
 
-  - STM32F429I-Discovery RevB Set-up 
+  - STM32F429I-Discovery RevC Set-up 
     - Connect the external signal to measure to the TIM4 CH2 pin (PB.07).
 
 

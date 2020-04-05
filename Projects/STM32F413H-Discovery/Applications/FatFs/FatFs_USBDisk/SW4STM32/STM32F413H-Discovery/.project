@@ -61,6 +61,14 @@
 			<type>1</type>
 			<location>PARENT-2-PROJECT_LOC/Src/main.c</location>
 		</link><link>
+			<name>Middlewares/FatFs/Drivers/usbh_diskio_dma.c</name>
+			<type>1</type>
+			<location>PARENT-2-PROJECT_LOC/Src/usbh_diskio_dma.c</location>
+		</link><link>
+			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_fmpi2c.c</name>
+			<type>1</type>
+			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_fmpi2c.c</location>
+		</link><link>
 			<name>Doc/readme.txt</name>
 			<type>1</type>
 			<location>PARENT-2-PROJECT_LOC/readme.txt</location>
@@ -68,10 +76,6 @@
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_ll_sdmmc.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_sdmmc.c</location>
-		</link><link>
-			<name>Drivers/BSP/STM32F413H-Discovery/stm32f413h_discovery.c</name>
-			<type>1</type>
-			<location>PARENT-7-PROJECT_LOC/Drivers/BSP/STM32F413h-Discovery/stm32f413h_discovery.c</location>
 		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_sram.c</name>
 			<type>1</type>
@@ -109,9 +113,17 @@
 			<type>1</type>
 			<location>PARENT-1-PROJECT_LOC/startup_stm32f413xx.s</location>
 		</link><link>
+			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_fmpi2c_ex.c</name>
+			<type>1</type>
+			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_fmpi2c_ex.c</location>
+		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_uart.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c</location>
+		</link><link>
+			<name>Drivers/BSP/STM32F413H-Discovery/stm32f413h_discovery.c</name>
+			<type>1</type>
+			<location>PARENT-7-PROJECT_LOC/Drivers/BSP/STM32F413H-Discovery/stm32f413h_discovery.c</location>
 		</link><link>
 			<name>Middlewares/STM32_USBH_Library/Class/MSC/usbh_msc_bot.c</name>
 			<type>1</type>
@@ -168,15 +180,7 @@
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_i2c_ex.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.c</location>
-		</link><link>
-			<name>Middlewares/FatFs/Drivers/usbh_diskio.c</name>
-			<type>1</type>
-			<location>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FatFs/src/drivers/usbh_diskio.c</location>
 		</link>
-		<link>
-			<name />
-			<type />
-			<location />
-		</link>
+		
 	</linkedResources>
 </projectDescription>

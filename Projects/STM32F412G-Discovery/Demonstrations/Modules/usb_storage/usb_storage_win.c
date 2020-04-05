@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    usb_storage_win.c
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    17-February-2017   
   * @brief   System information functions
   ******************************************************************************
   * @attention
@@ -46,7 +44,7 @@
   */
 
 /* Includes ------------------------------------------------------------------*/
-#include "dialog.h"
+#include "DIALOG.h"
 #include "k_module.h"
 #include "usb_storage_res.c"
 #include "k_storage.h"

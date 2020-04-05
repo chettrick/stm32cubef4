@@ -76,11 +76,6 @@
 			<locationURI>PARENT-2-PROJECT_LOC/Src/usbh_conf.c</locationURI>
 		</link>
 		<link>
-			<name>Application/User/usbh_diskio.c</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Src/usbh_diskio.c</locationURI>
-		</link>
-		<link>
 			<name>Drivers/CMSIS/system_stm32f4xx.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/Src/system_stm32f4xx.c</locationURI>
@@ -181,11 +176,6 @@
 			<locationURI>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usb.c</locationURI>
 		</link>
 		<link>
-			<name>Middlewares/FatFs/ff.c</name>
-			<type>1</type>
-			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FatFs/src/ff.c</locationURI>
-		</link>
-		<link>
 			<name>Drivers/BSP/Components/ili9325.c</name>
 			<type>1</type>
 			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/ili9325/ili9325.c</locationURI>
@@ -209,6 +199,26 @@
 			<name>Drivers/BSP/STM32446E_EVAL/stm32446e_eval_lcd.c</name>
 			<type>1</type>
 			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/STM32446E_EVAL/stm32446e_eval_lcd.c</locationURI>
+		</link>
+		<link>
+			<name>Middlewares/FatFs/Core/diskio.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FatFs/src/diskio.c</locationURI>
+		</link>
+		<link>
+			<name>Middlewares/FatFs/Core/ff.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FatFs/src/ff.c</locationURI>
+		</link>
+		<link>
+			<name>Middlewares/FatFs/Core/ff_gen_drv.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FatFs/src/ff_gen_drv.c</locationURI>
+		</link>
+		<link>
+			<name>Middlewares/FatFs/Drivers/usbh_diskio_dma.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Src/usbh_diskio_dma.c</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/STM32_USBH_Library/Core/usbh_core.c</name>

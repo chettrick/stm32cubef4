@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    k_calibration.c
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    17-February-2017
   * @brief   This example code shows how to calibrate the touchscreen.
   ******************************************************************************
   * @attention

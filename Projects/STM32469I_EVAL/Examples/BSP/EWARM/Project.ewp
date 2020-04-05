@@ -607,7 +607,7 @@
         <option>
           <name>OOCOutputFormat</name>
           <version>3</version>
-          <state>0</state>
+          <state>1</state>
         </option>
         <option>
           <name>OCOutputOverride</name>
@@ -615,7 +615,7 @@
         </option>
         <option>
           <name>OOCOutputFile</name>
-          <state>Project.srec</state>
+          <state>Project.hex</state>
         </option>
         <option>
           <name>OOCCommandLineProducer</name>
@@ -623,7 +623,7 @@
         </option>
         <option>
           <name>OOCObjCopyEnable</name>
-          <state>0</state>
+          <state>1</state>
         </option>
       </data>
     </settings>
@@ -1145,7 +1145,7 @@
       </file>
     </group>
     <file>
-      <name>$PROJ_DIR$\..\..\..\..\..\Middlewares\ST\STM32_Audio\Addons\PDM\libPDMFilter_CM4_IAR.a</name>
+      <name>$PROJ_DIR$\..\..\..\..\..\Middlewares\ST\STM32_Audio\Addons\PDM\Lib\libPDMFilter_CM4_IAR.a</name>
     </file>
   </group>
   <group>

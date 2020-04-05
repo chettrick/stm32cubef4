@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Display/LTDC_PicturesFromSDCard/Inc/fatfs_storage.h
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   This file contains all the functions prototypes for the storage
   *          firmware driver.
   ******************************************************************************
@@ -58,7 +56,8 @@ extern "C"
 #include <string.h>
 #include <stdio.h>
 #include "ff.h"
-
+#include "stm32f4xx_hal.h"
+#include "stm32469i_eval_sd.h"
 
 /** @addtogroup STM32756G_EVAL_FAT_FS
   * @{

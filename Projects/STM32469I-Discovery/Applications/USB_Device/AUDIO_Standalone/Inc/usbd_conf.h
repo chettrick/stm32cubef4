@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Device/AUDIO_Standalone/Inc/usbd_conf.h
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   General low level driver configuration
   ******************************************************************************
   * @attention

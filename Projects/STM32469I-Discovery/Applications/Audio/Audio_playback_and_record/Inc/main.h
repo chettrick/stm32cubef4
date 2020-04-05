@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Audio/Audio_playback_and_record/Inc/main.h 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
@@ -59,7 +57,7 @@
 #include "lcd_log.h"
 #include "ff.h"    
 #include "ff_gen_drv.h"
-#include "usbh_diskio.h"
+#include "usbh_diskio_dma.h"
 
 /* Exported Defines ----------------------------------------------------------*/
 #define AUDIO_OUT_BUFFER_SIZE                      8192

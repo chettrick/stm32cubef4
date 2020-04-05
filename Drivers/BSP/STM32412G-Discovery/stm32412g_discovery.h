@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm32412g_discovery.h
   * @author  MCD Application Team
-   * @version V2.0.0
-  * @date    27-January-2017
   * @brief   This file contains definitions for STM32412G_DISCOVERY's LEDs,
   *          push-buttons and COM ports hardware resources.
   ******************************************************************************

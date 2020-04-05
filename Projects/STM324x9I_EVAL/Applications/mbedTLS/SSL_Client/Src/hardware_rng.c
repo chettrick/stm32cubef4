@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    hardware_rng.c
   * @author  MCD Application Team
-  * @version V1.5.0
-  * @date    17-February-2017
   * @brief   mbedtls entropy data generator using the HAL_RNG API.
   ******************************************************************************
   * @attention

@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    FreeRTOS/FreeRTOS_Mutexes/readme.txt
   * @author  MCD Application Team
-  * @version V1.5.0
-  * @date    17-February-2017
   * @brief   Description of the FreeRTOS Mutexes application.
   ******************************************************************************
   * @attention

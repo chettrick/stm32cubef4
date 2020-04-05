@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    Demonstrations/readme.txt 
   * @author  MCD Application Team
-  * @version V1.4.4
-  * @date    17-February-2017
   * @brief   Description STM32F4 Discovery Demo 
   ******************************************************************************
   * @attention
@@ -60,7 +58,7 @@ through USB connector CN1 to power the board. Then red LED1 (COM) and
 LED2 (PWR) light up.
 - All 4 LEDs between B1 and B2 are blinking as chenillard.
 - Press User Button B1 (User) then MEMS sensor (LIS302DL for revB or LIS3DSCH 
-for revC) is enabled, move the board and observe the four Leds blinking according 
+for revC or LIS3DSH for revD) is enabled, move the board and observe the four Leds blinking according 
 to the motion direction.
 - Connect the board to a PC with a second USB'type A to micro-B cable through USB 
 connector CN5, this convert it to a standard mouse. Move the STM32F4-Discovery
@@ -90,16 +88,17 @@ board and see the mouse moves according to the motion direction.
   - Demonstrations/Src/usbd_desc.c             USB device HID descriptor   
   - Demonstrations/Src/usbd_conf.c             General low level driver configuration
   - Demonstrations/Src/system_stm32f4xx.c      STM32F4xx system clock configuration file
+  - Demonstrations/Src/stm32f4xx_hal_msp.c     HAL MSP module file 
 
 
 @par Hardware and Software environment
 
   - This Demo runs on STM32F407xx Devices.
   
-  - This example has been tested with STMicroelectronics STM32F4-Discovery RevB & RevC (MB997B & MB997C) 
+  - This example has been tested with STMicroelectronics STM32F4-Discovery RevB & RevC & RevD (MB997B & MB997C & MB997D) 
     and can be easily tailored to any other supported device and development board.
 
-  - STM32F4-Discovery RevB & RevC Set-up
+  - STM32F4-Discovery RevB & RevC & RevD Set-up
     - Connect the STM32F4-DISCO board through 'USB micro A-Male 
       A-Male' cable to the connector CN5.
 

@@ -33,9 +33,17 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/BSP/STM32469I_EVAL/stm32469i_eval_sdram.c</location>
 		</link><link>
-			<name>Application/User/stm32f4xx_it.c</name>
+			<name>Application/User/main.c</name>
 			<type>1</type>
-			<location>PARENT-2-PROJECT_LOC/Src/stm32f4xx_it.c</location>
+			<location>PARENT-2-PROJECT_LOC/Core/Src/main.c</location>
+		</link><link>
+			<name>Middlewares/STemWin/Config/GUIConf_stm32469i_eval.c</name>
+			<type>1</type>
+			<location>PARENT-2-PROJECT_LOC/STemWin/Target/GUIConf_stm32469i_eval.c</location>
+		</link><link>
+			<name>Middlewares/STemWin/Config/LCDConf_stm32469i_eval.c</name>
+			<type>1</type>
+			<location>PARENT-2-PROJECT_LOC/STemWin/Target/LCDConf_stm32469i_eval.c</location>
 		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_dsi.c</name>
 			<type>1</type>
@@ -56,6 +64,10 @@
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_sram.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sram.c</location>
+		</link><link>
+			<name>Application/User/stm32f4xx_it.c</name>
+			<type>1</type>
+			<location>PARENT-2-PROJECT_LOC/Core/Src/stm32f4xx_it.c</location>
 		</link><link>
 			<name>Application/SW4STM32/startup_stm32f469xx.s</name>
 			<type>1</type>
@@ -97,18 +109,6 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/BSP/STM32469I_EVAL/stm32469i_eval_io.c</location>
 		</link><link>
-			<name>Middlewares/STemWin/Config/LCDConf_stm32469i_eval.c</name>
-			<type>1</type>
-			<location>PARENT-2-PROJECT_LOC/Src/LCDConf_stm32469i_eval.c</location>
-		</link><link>
-			<name>Drivers/CMSIS/system_stm32f4xx.c</name>
-			<type>1</type>
-			<location>PARENT-2-PROJECT_LOC/Src/system_stm32f4xx.c</location>
-		</link><link>
-			<name>Application/User/BASIC_HelloWorld.c</name>
-			<type>1</type>
-			<location>PARENT-2-PROJECT_LOC/Src/BASIC_HelloWorld.c</location>
-		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c</location>
@@ -132,6 +132,10 @@
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_i2c_ex.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.c</location>
+		</link><link>
+			<name>Application/User/BASIC_HelloWorld.c</name>
+			<type>1</type>
+			<location>PARENT-2-PROJECT_LOC/STemWin/App/BASIC_HelloWorld.c</location>
 		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_ltdc.c</name>
 			<type>1</type>
@@ -157,10 +161,6 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_ltdc_ex.c</location>
 		</link><link>
-			<name>Middlewares/STemWin/Config/GUIConf_stm32469i_eval.c</name>
-			<type>1</type>
-			<location>PARENT-2-PROJECT_LOC/Src/GUIConf_stm32469i_eval.c</location>
-		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_gpio.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c</location>
@@ -169,13 +169,13 @@
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c</location>
 		</link><link>
-			<name>Application/User/main.c</name>
-			<type>1</type>
-			<location>PARENT-2-PROJECT_LOC/Src/main.c</location>
-		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_dma_ex.c</name>
 			<type>1</type>
 			<location>PARENT-7-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c</location>
+		</link><link>
+			<name>Drivers/CMSIS/system_stm32f4xx.c</name>
+			<type>1</type>
+			<location>PARENT-2-PROJECT_LOC/Core/Src/system_stm32f4xx.c</location>
 		</link>
 		
 	</linkedResources>

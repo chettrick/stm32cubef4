@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    BSP/Src/eeprom.c 
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    17-February-2017
   * @brief   This example code shows how to manage an I2C M24LR64 
   *          EEPROM memory
   *          =================================================================== 

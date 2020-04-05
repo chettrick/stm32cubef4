@@ -44,7 +44,7 @@
 								<option id="gnu.cpp.compiler.option.debugging.level.361899345" name="Debug Level" superClass="gnu.cpp.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated" />
 							</tool>
 							<tool id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.1605766976" name="MCU GCC Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker">
-								<option id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script.935385031" name="Linker Script (-T)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script" value="..\STM32F411VETx_FLASH.ld" valueType="string" />
+								<option id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script.935385031" name="Linker Script (-T)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script" value="../STM32F411VETx_FLASH.ld" valueType="string" />
 								<option id="gnu.c.link.option.libs.2041721018" name="Libraries (-l)" superClass="gnu.c.link.option.libs" />
 								<option id="gnu.c.link.option.paths.1089814524" name="Library search path (-L)" superClass="gnu.c.link.option.paths" />
 								<option id="gnu.c.link.option.ldflags.1112136688" superClass="gnu.c.link.option.ldflags" value="-specs=nosys.specs -specs=nano.specs" valueType="string" />

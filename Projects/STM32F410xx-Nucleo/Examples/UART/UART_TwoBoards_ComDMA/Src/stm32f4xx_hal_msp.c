@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    UART/UART_TwoBoards_ComDMA/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.0.5
-  * @date    17-February-2017
   * @brief   HAL MSP module.    
   ******************************************************************************
   * @attention

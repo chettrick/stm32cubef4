@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    USB_Host/MSC_Standalone/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    17-February-2017
   * @brief   Description of the USB Host MSC application.
   ******************************************************************************
   * @attention
@@ -91,8 +89,6 @@ User can start any operations using User button:
 For more details about the STM32Cube USB Host library, please refer to UM1720  
 "STM32Cube USB Host library".
 
-@note LED1 is turned ON, because it's sharing the same pin with the SPI CLK signal used to communicate with the Adafruit 1.8" TFT shield.
-
 @par USB Library Configuration
 
 It is possible to fine tune needed USB Host features by modifying defines values in USBH configuration
@@ -110,6 +106,7 @@ requirements, such as:
 @par Directory contents
 
   - USB_Host/MSC_Standalone/Src/main.c                  Main program
+  - USB_Host/MSC_Standalone/Src/usbh_diskio_dma.c       FatFS usbh diskio driver implementation
   - USB_Host/MSC_Standalone/Src/system_stm32f4xx.c      STM32F4xx system clock configuration file
   - USB_Host/MSC_Standalone/Src/stm32f4xx_it.c          Interrupt handlers
   - USB_Host/MSC_Standalone/Src/menu.c                  MSC State Machine
@@ -118,6 +115,7 @@ requirements, such as:
   - USB_Host/MSC_Standalone/Src/file_operations.c       Write/read file on the disk
   - USB_Host/MSC_Standalone/Src/usbh_diskio.c           USB diskio interface for FatFs
   - USB_Host/MSC_Standalone/Inc/main.h                  Main program header file
+  - USB_Host/MSC_Standalone/Inc/usbh_diskio_dma.h       FatFS usbh diskio driver header file
   - USB_Host/MSC_Standalone/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - USB_Host/MSC_Standalone/Inc/lcd_log_conf.h          LCD log configuration file
   - USB_Host/MSC_Standalone/Inc/stm32f4xx_hal_conf.h    HAL configuration file
@@ -134,11 +132,11 @@ requirements, such as:
 
   - NUCLEO-F446ZE Set-up
     - Plug the USB key into the NUCLEO-F446ZE board through 'USB micro A-Male 
-      to A-Female' cable to the connector:
+      to A-Female' cable to the connector CN13.
 
-  - Make sure that the jumper JP4 is closed
+  - Make sure that the jumper JP4 is closed.
 
-  - Adafruit 1.8" TFT shield must be connected on CN5,CN6, CN8 and CN9 Arduino connectors, 
+  - Adafruit 1.8" TFT shield must be connected on CN7,CN8, CN9 and CN10 Arduino connectors,
     for more details please refer to UM1726.
 
 - Make sure the SB146, SB121 are closed and the SB174, SB165, SB122 are opened on the NUCLEO-F446ZE board (bottom side)

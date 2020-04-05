@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Demonstrations/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    17-February-2017
   * @brief   This demo describes how display bmp images from SD card on LCD using
              the Adafruit 1.8" TFT shield with Joystick and microSD mounted on top
              of the STM32 Nucleo board.

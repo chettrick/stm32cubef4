@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    IAP/IAP_Main/Inc/common.h
   * @author  MCD Application Team
-  * @version V1.5.0
-  * @date    17-February-2017
   * @brief   This file provides all the headers of the common functions.
   ******************************************************************************
   * @attention

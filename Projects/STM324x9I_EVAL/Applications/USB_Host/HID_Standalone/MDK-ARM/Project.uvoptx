@@ -692,7 +692,7 @@
       <Focus>0</Focus>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Class\HID\Src\usbh_hid_keybd.c</PathWithFileName>
+      <PathWithFileName>..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Class\HID\Src\usbh_hid_keybd.c</PathWithFileName>
       <FilenameWithoutPath>usbh_hid_keybd.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -705,7 +705,7 @@
       <Focus>0</Focus>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Class\HID\Src\usbh_hid_mouse.c</PathWithFileName>
+      <PathWithFileName>..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Class\HID\Src\usbh_hid_mouse.c</PathWithFileName>
       <FilenameWithoutPath>usbh_hid_mouse.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -718,7 +718,7 @@
       <Focus>0</Focus>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Class\HID\Src\usbh_hid.c</PathWithFileName>
+      <PathWithFileName>..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Class\HID\Src\usbh_hid.c</PathWithFileName>
       <FilenameWithoutPath>usbh_hid.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -731,7 +731,7 @@
       <Focus>0</Focus>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Class\HID\Src\usbh_hid_parser.c</PathWithFileName>
+      <PathWithFileName>..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Class\HID\Src\usbh_hid_parser.c</PathWithFileName>
       <FilenameWithoutPath>usbh_hid_parser.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1101,7 +1101,7 @@
       <Focus>0</Focus>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Core\Src\usbh_core.c</PathWithFileName>
+      <PathWithFileName>..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Core\Src\usbh_core.c</PathWithFileName>
       <FilenameWithoutPath>usbh_core.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1114,7 +1114,7 @@
       <Focus>0</Focus>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Core\Src\usbh_pipes.c</PathWithFileName>
+      <PathWithFileName>..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Core\Src\usbh_pipes.c</PathWithFileName>
       <FilenameWithoutPath>usbh_pipes.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1127,7 +1127,7 @@
       <Focus>0</Focus>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Core\Src\usbh_ioreq.c</PathWithFileName>
+      <PathWithFileName>..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Core\Src\usbh_ioreq.c</PathWithFileName>
       <FilenameWithoutPath>usbh_ioreq.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1140,7 +1140,7 @@
       <Focus>0</Focus>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Core\Src\usbh_ctlreq.c</PathWithFileName>
+      <PathWithFileName>..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Core\Src\usbh_ctlreq.c</PathWithFileName>
       <FilenameWithoutPath>usbh_ctlreq.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>

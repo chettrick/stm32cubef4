@@ -5,8 +5,6 @@
   ******************************************************************************
   * @file    readme.txt
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017 
   * @brief   Description of the FatFs with uSD card drive in RTOS mode application
   ******************************************************************************
   *
@@ -104,9 +102,11 @@ on STM32Cube with RTOS".
   - FatFs/FatFs_uSD_RTOS/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - FatFs/FatFs_uSD_RTOS/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - FatFs/FatFs_uSD_RTOS/Inc/main.h                  Header for main.c module
+  - FatFs/FatFs_uSD_RTOS/Inc/sd_diskio_dma_rtos.h    FatFS sd diskio driver header file
   - FatFs/FatFs_uSD_RTOS/Inc/ffconf.h                FAT file system module configuration file   
   - FatFs/FatFs_uSD_RTOS/Src/stm32f4xx_it.c          Interrupt handlers
   - FatFs/FatFs_uSD_RTOS/Src/main.c                  Main program
+  - FatFs/FatFs_uSD_RTOS/Src/sd_diskio_dma_rtos.c    FatFS sd diskio driver implementation
   - FatFs/FatFs_uSD_RTOS/Src/system_stm32f4xx.c      STM32F4xx system source file
 
 @par Hardware and Software environment

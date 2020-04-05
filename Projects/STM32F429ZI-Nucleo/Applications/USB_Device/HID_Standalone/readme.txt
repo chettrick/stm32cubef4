@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    USB_Device/HID_Standalone/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   Description of the USB HID application.
   ******************************************************************************
   * @attention
@@ -55,7 +53,7 @@ use USB device application based on the Human Interface (HID) on the STM32F4xx d
 
 This is a typical application on how to use the STM32F429ZI USB OTG Device peripheral where the STM32 MCU is
 enumerated as a HID device using the native PC Host HID driver to which the NUCLEO-F429ZI 
-board is connected, in order to emulate the joystick by moving the host mouse pointer horizontally.
+board is connected, in order to emulate the mouse using user button mounted on nucleo board.
  
 This application supports remote wakeup (which is the ability of a USB device to bring a suspended bus back
 to the active condition), and the Key button is used as the remote wakeup source. 

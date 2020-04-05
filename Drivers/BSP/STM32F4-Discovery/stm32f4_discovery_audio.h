@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm32f4_discovery_audio.h
   * @author  MCD Application Team
-  * @version V2.1.2
-  * @date    27-January-2017
   * @brief   This file contains the common defines and functions prototypes for
   *          stm32f4_discovery_audio.c driver.
   ******************************************************************************
@@ -49,7 +47,7 @@
 #include "../Components/cs43l22/cs43l22.h"
 
 #include "stm32f4_discovery.h"
-#include "../../../Middlewares/ST/STM32_Audio/Addons/PDM/pdm_filter.h"
+#include "../../../Middlewares/ST/STM32_Audio/Addons/PDM/Inc/pdm2pcm_glo.h"
 
 /** @addtogroup BSP
   * @{
@@ -184,6 +182,7 @@ extern __IO uint16_t AudioInVolume;
   * @{
   */
 #define DMA_MAX(_X_)                (((_X_) <= DMA_MAX_SZE)? (_X_):DMA_MAX_SZE)
+#define HTONS(A)  ((((uint16_t)(A) & 0xff00) >> 8) | (((uint16_t)(A) & 0x00ff) << 8))
 /**
   * @}
   */

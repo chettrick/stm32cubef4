@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    SAI/SAI_Audio/Inc/audio_if.h 
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    17-February-2017
   * @brief   Header for audio_if.c module
   ******************************************************************************
   * @attention

@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    ADC/ADC_RegularConversion_DMA/Src/main.c
   * @author  MCD Application Team
-  * @version V1.2.0
-  * @date    17-February-2017
   * @brief   This example describes how to use the DMA to transfer
   *          continuously converted data.
   ******************************************************************************

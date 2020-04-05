@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/DynamicSwitch_Standalone/Src/audio_menu.c 
   * @author  MCD Application Team
-  * @version V1.5.0
-  * @date    17-February-2017
   * @brief   This file implements Audio Menu Functions
   ******************************************************************************
   * @attention
@@ -196,9 +194,18 @@ void AUDIO_MenuProcess(void)
     break;
 
   case AUDIO_REENUMERATE:
-    /* Force Audio Device to re-enumerate */
-    USBH_ReEnumerate(&hUSBHost);
+    
+    /* Stop Host */
+    USBH_Stop(&hUSBHost);
+
+    /* De-Initialize the Host */
+    USBH_DeInit(&hUSBHost);
+
+    /* Start again the host */
+    USBH_Start(&hUSBHost);
+
     audio_demo.state = AUDIO_DEMO_WAIT;
+
     break;
 
   default:

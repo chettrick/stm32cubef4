@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm32f413H_discovery_psram.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    27-January-2017
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm32f413h_discovery_psram.c driver.
   ******************************************************************************

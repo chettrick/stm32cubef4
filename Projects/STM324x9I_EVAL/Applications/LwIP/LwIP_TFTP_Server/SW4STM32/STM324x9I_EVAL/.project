@@ -233,7 +233,7 @@
 		<link>
 			<name>Middlewares/FatFs/Drivers/sd_diskio.c</name>
 			<type>1</type>
-			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/FatFs/src/drivers/sd_diskio.c</locationURI>
+			<locationURI>PARENT-2-PROJECT_LOC/Src/sd_diskio.c</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/LwIP/Api/api_lib.c</name>

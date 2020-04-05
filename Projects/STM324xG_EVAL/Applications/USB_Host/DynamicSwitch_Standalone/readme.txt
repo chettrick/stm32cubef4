@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    USB_Host/DynamicSwitch_Standalone/readme.txt 
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   Description of the USB Host Dynamic Switch application.
   ******************************************************************************
   * @attention
@@ -66,7 +64,7 @@ USB clock (60 MHz) is driven by the ULPI.
 It's worth noting that the system clock (SYSCLK) can be configured, depending on the used USB Core:
  - SYSCLK is set to 168 MHz: for FS Core because used embedded PHY requires 48 MHz clock,
                              achieved only when system clock is set to 168 MHz.                             
- - SYSCLK is set to 180 MHz: for only HS Core, since no embedded PHY is used.
+ - SYSCLK is set to 180 MHz: for only HS Core.
 
 When the application is started, the connected USB device is detected in the appropriate mode 
 (MSC/HID/AUDIO) and gets initialized. The STM32 MCU behaves as a (MSC/HID/AUDIO) Host, it enumerates the
@@ -99,7 +97,7 @@ compiler preprocessor (already done in the preconfigured projects provided with 
 It is possible to fine tune needed USB Host features by modifying defines values in USBH configuration
 file “usbh_conf.h” available under the project includes directory, in a way to fit the application
 requirements, such as:
-- Level of debug: USBH_DEBUG_LEVEL
+  - Level of debug: USBH_DEBUG_LEVEL
                   0: No debug messages
                   1: Only User messages are shown
                   2: User and Error messages are shown
@@ -107,12 +105,14 @@ requirements, such as:
    By default debug messages are displayed on the debugger IO terminal; to redirect the Library
    messages on the LCD screen, lcd_log.c driver need to be added to the application sources.
  
-- Number of supported classes: USBH_MAX_NUM_SUPPORTED_CLASS  
+  - Number of supported classes: USBH_MAX_NUM_SUPPORTED_CLASS  
 
 
 @par Directory contents
 
   - USB_Host/DynamicSwitch_Standalone/Src/main.c                  Main program
+  - USB_Host/DynamicSwitch_Standalone/Src/usbh_diskio_dma.c       FatFS usbh diskio driver implementation
+  - USB_Host/DynamicSwitch_Standalone/Src/sd_diskio.c             FatFS sd diskio driver implementation
   - USB_Host/DynamicSwitch_Standalone/Src/system_stm32f4xx.c      STM32F4xx system clock configuration file
   - USB_Host/DynamicSwitch_Standalone/Src/stm32f4xx_it.c          Interrupt handlers
   - USB_Host/DynamicSwitch_Standalone/Src/menu.c                  Main Menu State Machine
@@ -128,6 +128,8 @@ requirements, such as:
   - USB_Host/DynamicSwitch_Standalone/Src/mouse.c                 HID mouse functions  
   - USB_Host/DynamicSwitch_Standalone/Src/keyboard.c              HID keyboard functions
   - USB_Host/DynamicSwitch_Standalone/Inc/main.h                  Main program header file
+  - USB_Host/DynamicSwitch_Standalone/Inc/usbh_diskio_dma.h       FatFS usbh diskio driver header file
+  - USB_Host/DynamicSwitch_Standalone/Inc/sd_diskio.h             FatFS sd diskio driver header file
   - USB_Host/DynamicSwitch_Standalone/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - USB_Host/DynamicSwitch_Standalone/Inc/lcd_log_conf.h          LCD log configuration file
   - USB_Host/DynamicSwitch_Standalone/Inc/stm32f4xx_hal_conf.h    HAL configuration file
@@ -147,8 +149,9 @@ requirements, such as:
     - Insert a microSD card containing .Wav audio file into the STM324xG-EVAL uSD slot (CN6)
     - Plug the USB device into the STM324xG-EVAL board through 'USB micro A-Male 
       to A-Female' cable to the connector:
-      - CN9: to use USB High Speed (HS) 
-      - CN8: to use USB Full Speed (FS) with embedded PHY(U2)
+      - CN9: to use USB High Speed (HS) with embedded PHY(U8)
+            Please ensure that jumper JP31 is fit
+      - CN8: to use USB Full Speed (FS)
             Please ensure that jumpers JP16 and JP22 are in position 1-2.
 
 

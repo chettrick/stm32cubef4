@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Examples_LL/SPI/SPI_OneBoard_HalfDuplex_DMA/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017
   * @brief   This example describes how to send/receive bytes over SPI IP using
   *          the STM32F4xx SPI LL API.
   *          Peripheral initialization done using LL unitary services functions.

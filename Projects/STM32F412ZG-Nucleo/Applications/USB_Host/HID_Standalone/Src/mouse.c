@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/HID_Standalone/Src/mouse.c 
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    17-February-2017
   * @brief   This file implements Functions for mouse menu
   ******************************************************************************
   * @attention

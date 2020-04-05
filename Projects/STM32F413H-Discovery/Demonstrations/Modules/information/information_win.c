@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    information_win.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017   
   * @brief   System information functions
   ******************************************************************************
   * @attention
@@ -46,7 +44,7 @@
   */
 
 /* Includes ------------------------------------------------------------------*/
-#include "dialog.h"
+#include "DIALOG.h"
 #include "k_module.h"
 #include "information_res.c"
 
@@ -104,7 +102,7 @@ static const GUI_WIDGET_CREATE_INFO _aDialog[] =
   { TEXT_CreateIndirect, "STM32F413ZHT6",          ID_TEXT_CORE_1,   95,  90,  140,  15,  0, 0x0,  0 },  
   { TEXT_CreateIndirect, "STM32F413H-DISCO", ID_TEXT_BOARD_1,   100,  125, 135,  15,  0, 0x0,  0 },
   { TEXT_CreateIndirect, "100MHz",           ID_TEXT_CPU_1,     125,  160, 110,  15,  0, 0x0,  0 },
-  { TEXT_CreateIndirect, "V1.0.0",           ID_TEXT_VERSION_1, 115,  195, 120,  15,  0, 0x0,  0 }  
+  { TEXT_CreateIndirect, "V1.1.0",           ID_TEXT_VERSION_1, 115,  195, 120,  15,  0, 0x0,  0 }  
   
 };
 

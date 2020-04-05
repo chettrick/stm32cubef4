@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    USB_Host/MSC_RTOS/readme.txt 
   * @author  MCD Application Team
-  * @version V1.5.0
-  * @date    17-February-2017
   * @brief   Description of the USB Host MSC RTOS application.
   ******************************************************************************
   * @attention
@@ -108,7 +106,7 @@ compiler preprocessor (already done in the preconfigured projects provided with 
 It is possible to fine tune needed USB Host features by modifying defines values in USBH configuration
 file “usbh_conf.h” available under the project includes directory, in a way to fit the application
 requirements, such as:
-- Level of debug: USBH_DEBUG_LEVEL
+  - Level of debug: USBH_DEBUG_LEVEL
                   0: No debug messages
                   1: Only User messages are shown
                   2: User and Error messages are shown
@@ -123,6 +121,7 @@ the RTOS is enabled by setting, #define USBH_USE_OS      1
 @par Directory contents
 
   - USB_Host/MSC_RTOS/Src/main.c                  Main program
+  - USB_Host/MSC_RTOS/Src/usbh_diskio_dma.c       FatFS usbh diskio driver implementation
   - USB_Host/MSC_RTOS/Src/system_stm32f4xx.c      STM32F4xx system clock configuration file
   - USB_Host/MSC_RTOS/Src/stm32f4xx_it.c          Interrupt handlers
   - USB_Host/MSC_RTOS/Src/menu.c                  MSC State Machine
@@ -131,6 +130,7 @@ the RTOS is enabled by setting, #define USBH_USE_OS      1
   - USB_Host/MSC_RTOS/Src/file_operations.c       Write/read file on the disk
   - USB_Host/MSC_RTOS/Src/usbh_diskio.c           USB diskio interface for FatFs
   - USB_Host/MSC_RTOS/Inc/main.h                  Main program header file
+  - USB_Host/MSC_RTOS/Inc/usbh_diskio_dma.h       FatFS usbh diskio driver header file
   - USB_Host/MSC_RTOS/Inc/stm32f4xx_it.h          Interrupt handlers header file
   - USB_Host/MSC_RTOS/Inc/lcd_log_conf.h          LCD log configuration file
   - USB_Host/MSC_RTOS/Inc/stm32f4xx_hal_conf.h    HAL configuration file
@@ -150,8 +150,8 @@ the RTOS is enabled by setting, #define USBH_USE_OS      1
   - STM324x9I-EVAL RevB Set-up
     - Plug the USB key into the STM324x9I-EVAL board through 'USB micro A-Male 
       to A-Female' cable to the connector:
-      - CN9 : to use USB High Speed (HS) 
-      - CN14: to use USB Full Speed (FS) with embedded PHY(U7)
+      - CN9 : to use USB High Speed (HS)  with embedded PHY(U7)
+      - CN14: to use USB Full Speed (FS) 
               Please ensure that jumper JP16 is not fitted.
       - CN15: to use USB HS-IN-FS.
               Note that some FS signals are shared with the HS ULPI bus, so some PCB rework is needed.

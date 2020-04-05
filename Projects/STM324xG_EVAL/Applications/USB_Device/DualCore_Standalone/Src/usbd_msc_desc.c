@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Device/DualCore_Standalone/Src/usbd_msc_desc.c
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   This file provides the USBD MSC descriptors and string formating method.
   ******************************************************************************
   * @attention

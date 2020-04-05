@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    stm324x9i_eval_io.c
   * @author  MCD Application Team
-  * @version V3.0.0
-  * @date    27-January-2017
   * @brief   This file provides a set of functions needed to manage the IO pins
   *          on STM324x9I-EVAL evaluation board.
   ******************************************************************************

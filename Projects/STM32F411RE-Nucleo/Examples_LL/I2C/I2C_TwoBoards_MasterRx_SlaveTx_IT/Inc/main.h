@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Examples_LL/I2C/I2C_TwoBoards_MasterRx_SlaveTx_IT/Inc/main.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention

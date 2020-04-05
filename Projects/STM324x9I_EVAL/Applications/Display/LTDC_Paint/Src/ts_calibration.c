@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    Display/LTDC_Paint/Src/ts_calibration.c 
   * @author  MCD Application Team
-  * @version V1.5.0
-  * @date    17-February-2017
   * @brief   This application code shows how to calibrate the touchscreen.
   ******************************************************************************
   * @attention

@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    IAP/IAP_Main/Src/common.c 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   This file provides all the common functions.
   ******************************************************************************
   * @attention

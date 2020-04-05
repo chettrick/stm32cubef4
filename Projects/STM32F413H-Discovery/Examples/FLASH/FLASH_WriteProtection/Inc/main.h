@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    FLASH/FLASH_WriteProtection/Inc/main.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    17-February-2017
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
@@ -41,8 +39,8 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
-#include "stm32F413H_discovery.h"
-#include "stm32F413H_discovery_lcd.h"
+#include "stm32f413h_discovery.h"
+#include "stm32f413h_discovery_lcd.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/

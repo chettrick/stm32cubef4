@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics  *******************
   * @file    FreeRTOS/FreeRTOS_ThreadCreation/readme.txt
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017 
   * @brief   Description of the FreeRTOS Thread Creation application.
   ******************************************************************************
   * @attention
@@ -93,7 +91,7 @@ on STM32Cube with RTOS".
 
   - This application runs on STM32F429xx devices
     
-  - This application has been tested with STM32F429I-Discovery RevB board and can be
+  - This application has been tested with STM32F429I-Discovery RevC board and can be
     easily tailored to any other supported device and development board.
 
 

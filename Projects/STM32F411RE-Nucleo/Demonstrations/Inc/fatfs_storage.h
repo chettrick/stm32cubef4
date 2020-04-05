@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    fatfs_storage.h
   * @author  MCD Application Team
-  * @version V1.2.6
-  * @date    17-February-2017
 
   * @brief   This file contains all the functions prototypes for the storage
   *          firmware driver.
@@ -63,6 +61,7 @@ extern "C"
 uint32_t Storage_OpenReadFile(uint8_t Xpoz, uint16_t Ypoz, const char *BmpName);
 uint32_t Storage_GetDirectoryBitmapFiles(const char* DirName, char* Files[]);
 uint32_t Storage_CheckBitmapFile(const char *BmpName, uint32_t *FileLen);
+uint8_t Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint16_t BufferLength);
 
 #ifdef __cplusplus
 }

@@ -2,9 +2,7 @@
   ******************************************************************************
   * @file      startup_stm32f411xe.s
   * @author    MCD Application Team
-  * @version   V1.1.8
-  * @date      17-February-2017
-  * @brief     STM32F411xExx Devices vector table for Atollic TrueSTUDIO toolchain. 
+  * @brief     STM32F411xExx Devices vector table for GCC toolchain. 
   *            This module performs:
   *                - Set the initial SP
   *                - Set the initial PC == Reset_Handler,

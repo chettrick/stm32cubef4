@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    HAL/HAL_TimeBase_RTC_WKUP/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   Interrupt Service Routines.
   ******************************************************************************
   * @attention

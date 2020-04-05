@@ -5,8 +5,6 @@
   ******************************************************************************
   * @file    Camera/Camera_To_USBDisk/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   Description of the Camera to USB Disk application.
   ******************************************************************************
   * @attention
@@ -78,15 +76,15 @@ When the tamper button is pressed an image is saved under USBdisk.
 
     - Camera/Camera_To_USBDisk/Inc/stm32f4xx_hal_conf.h    HAL configuration file
     - Camera/Camera_To_USBDisk/Inc/main.h                  Main program header file
+    - Camera/Camera_To_USBDisk/Inc/usbh_diskio_dma.h       FatFS usbh diskio driver header file
     - Camera/Camera_To_USBDisk/Inc/stm32f4xx_it.h          Interrupt handlers header file
     - Camera/Camera_To_USBDisk/Inc/ffconf.h                FAT file system module configuration file 
-    - Camera/Camera_To_USBDisk/Inc/fatfs_storage.h         Header for fatfs_storage.c   
     - Camera/Camera_To_USBDisk/Inc/usbh_conf.h             Header for usbh_conf.c
     - Camera/Camera_To_USBDisk/Src/main.c                  Main program  
+    - Camera/Camera_To_USBDisk/Src/usbh_diskio_dma.c       FatFS usbh diskio driver implementation
     - Camera/Camera_To_USBDisk/Src/stm32f4xx_it.c          Interrupt handlers   
     - Camera/Camera_To_USBDisk/Src/system_stm32f4xx.c      STM32F4xx system clock configuration file
     - Camera/Camera_To_USBDisk/Src/usbh_conf.c             USB configuration file.
-    - Camera/Camera_To_USBDisk/Src/fatfs_storage.c         Storage (FatFs) driver
 
 
 @par Hardware and Software environment

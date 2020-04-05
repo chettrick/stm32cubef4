@@ -19,3 +19,4 @@ to be used with the following projects:
 - JPG
    - /Projects/STM324x9I_EVAL/Demonstrations
    - /Projects/STM324xG_EVAL/Demonstrations
+   - /Projects/STM32F429I-Discovery/Applications/LibJPEG/LibJPEG_Decoding

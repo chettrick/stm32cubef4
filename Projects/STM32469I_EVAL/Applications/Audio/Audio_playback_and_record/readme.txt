@@ -5,8 +5,6 @@
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    Audio/Audio_playback_and_record/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   Description of the Audio Playback and Record application
   ******************************************************************************
   * @attention
@@ -65,7 +63,7 @@ In this menu, the explorer wave files list stored in the USB Key will be display
 In Start Audio Play menu, any wave file stored under the USB Key can be opened using the FatFs 
 file system and transferred to the internal SRAM using the file system. All the wave
 files properties are read from the Wave File Header.
-Plug a headphone to ear the sound  /!\ Take care of yours ears. Default volume is 70%.
+Plug a headphone to hear the sound  /!\ Take care of yours ears. Default volume is 70%.
 
 To play the audio file, a buffer is used between USB and audio codec. This buffer 
 is used like a ping-pong buffer to be able to read regularly data from USB to be 
@@ -73,17 +71,17 @@ sent to audio codec:
 - Using FatFs driver, a 1st read of AUDIO_BUFFER_SIZE bytes is done
 - This buffer is sent to audio BSP which uses DMA mode to transfer data from MCU
 to audio codec (16 bits)
-- At DMA half transfer ISR, an indication is sent to application to indicate that
+  - At DMA half transfer ISR, an indication is sent to application to indicate that
 half of the buffer has been sent
 - At DMA half transfer ISR exit, application can read (AUDIO_BUFFER_SIZE/2) bytes from USB to fill
 the 1st part of the buffer
 - At DMA transfer complete ISR, DMA transfer is requested to send 1st part of the
 buffer
-- At DMA transfer complete ISR exit, application can read (AUDIO_BUFFER_SIZE/2) bytes from USB to fill
+  - At DMA transfer complete ISR exit, application can read (AUDIO_BUFFER_SIZE/2) bytes from USB to fill
 the 2nd part of the buffer
 - When file size is reached, audio codec is stopped and a new play is requested.
 
-This menu also manages information display and control interface through push buttons: 
+This menu also manages information display and control interface through Joystick button: 
  - When the application is Playing audio file:
      [UP]:   Volume+
      [DOWN]: Volume-
@@ -127,7 +125,7 @@ To avoid data corruption:
 In main loop of the application, when a buffer is full with PCM format it is written
 in USB key using the free file system FatFS.
 
-This menu also manages information display and control interface through push buttons: 
+This menu also manages information display and control interface through Joystick button: 
  - When the application is recording audio file:
      [UP]: Volume+
      [DOWN]: Volume-
@@ -145,13 +143,18 @@ this application. For IAR EWARM toolchain, the library is labeled
 @par Directory contents 
 
   - Audio_playback_and_record/Src/main.c               Main program
+  - Audio_playback_and_record/Src/usbh_diskio_dma.c    FatFS usbh diskio driver implementation
   - Audio_playback_and_record/Src/stm32f4xx_it.c       Interrupt handlers
   - Audio_playback_and_record/Src/system_stm32f4xx.c   STM32F4xx system source file
   - Audio_playback_and_record/Src/usbh_conf.c          Board support package for the USB host library
   - Audio_playback_and_record/Src/waveplayer.c         Audio play file
   - Audio_playback_and_record/Src/waverecorder.c       Audio record file
+  - Audio_playback_and_record/Src/explorer.c           USB Key drive configuration
+  - Audio_playback_and_record/Src/menu.c               Menu Functions file 
+  - Audio_playback_and_record/Inc/lcd_log_conf.h       LCD Log configuration file. 
   - Audio_playback_and_record/Inc/ffconf.h             FAT file system module configuration file   
   - Audio_playback_and_record/Inc/main.h               Main program header file
+  - Audio_playback_and_record/Inc/usbh_diskio_dma.h    FatFS usbh diskio driver header file
   - Audio_playback_and_record/Inc/stm32f4xx_hal_conf.h HAL configuration file
   - Audio_playback_and_record/Inc/stm32f4xx_it.h       Interrupt handlers header file
   - Audio_playback_and_record/Inc/usbh_conf.h          USB driver Configuration file

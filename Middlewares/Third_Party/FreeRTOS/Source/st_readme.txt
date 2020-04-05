@@ -47,6 +47,16 @@
   ******************************************************************************
   @endverbatim
 
+=======
+### 10-August-2017 ###
+=========================
+  Update FreeRTOS to support MPU feature with IAR compiler.
+  
+  + Add the following ports:
+    - IAR/ARM_CM4_MPU
+    - IAR/ARM_CM7_MPU
+    - RVDS/ARM_CM7_MPU
+
 ### 03-March-2017 ###
 =========================
   Update CMSIS-RTOS drivers to support both CMSIS Core V4.x and V5.x

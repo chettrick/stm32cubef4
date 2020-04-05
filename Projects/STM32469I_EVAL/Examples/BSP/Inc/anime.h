@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    BSP/Inc/anime.h
   * @author  MCD Application Team
-  * @version V1.1.0
-  * @date    17-February-2017
   * @brief   This file contains graphics definitions for animation control.
   ******************************************************************************
   * @attention

@@ -304,15 +304,14 @@
         </option>
         <option>
           <name>CCIncludePath2</name>
-          <state>$PROJ_DIR$\..\inc</state>
+          <state>$PROJ_DIR$\..\Inc</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM324x9I_EVAL</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\Common</state>
-          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Core\Inc</state>
-          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Class\MSC\Inc</state>
+          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Core\Inc</state>
+          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Inc</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src</state>
-          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src\drivers</state>
         </option>
         <option>
           <name>CCStdIncCheck</name>
@@ -603,7 +602,7 @@
         </option>
         <option>
           <name>OOCObjCopyEnable</name>
-          <state>0</state>
+          <state>1</state>
         </option>
       </data>
     </settings>
@@ -1247,15 +1246,14 @@
         </option>
         <option>
           <name>CCIncludePath2</name>
-          <state>$PROJ_DIR$\..\inc</state>
+          <state>$PROJ_DIR$\..\Inc</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM324x9I_EVAL</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\Common</state>
-          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Core\Inc</state>
-          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Class\MSC\Inc</state>
+          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Core\Inc</state>
+          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Inc</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src</state>
-          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src\drivers</state>
         </option>
         <option>
           <name>CCStdIncCheck</name>
@@ -1546,7 +1544,7 @@
         </option>
         <option>
           <name>OOCObjCopyEnable</name>
-          <state>0</state>
+          <state>1</state>
         </option>
       </data>
     </settings>
@@ -2191,13 +2189,13 @@
         </option>
         <option>
           <name>CCIncludePath2</name>
-          <state>$PROJ_DIR$\..\inc</state>
+          <state>$PROJ_DIR$\..\Inc</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM324x9I_EVAL</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\Common</state>
-          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Core\Inc</state>
-          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Class\MSC\Inc</state>
+          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Core\Inc</state>
+          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Inc</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src\drivers</state>
         </option>
@@ -2490,7 +2488,7 @@
         </option>
         <option>
           <name>OOCObjCopyEnable</name>
-          <state>0</state>
+          <state>1</state>
         </option>
       </data>
     </settings>
@@ -2977,7 +2975,7 @@
       <group>
         <name>Drivers</name>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src\drivers\usbh_diskio.c</name>
+          <name>$PROJ_DIR$\..\Src\usbh_diskio_dma.c</name>
         </file>
       </group>
     </group>
@@ -2988,13 +2986,13 @@
         <group>
           <name>MSC</name>
           <file>
-            <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Class\MSC\Src\usbh_msc.c</name>
+            <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Src\usbh_msc.c</name>
           </file>
           <file>
-            <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Class\MSC\Src\usbh_msc_bot.c</name>
+            <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Src\usbh_msc_bot.c</name>
           </file>
           <file>
-            <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Class\MSC\Src\usbh_msc_scsi.c</name>
+            <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Class\MSC\Src\usbh_msc_scsi.c</name>
           </file>
         </group>
       </group>
@@ -3004,17 +3002,15 @@
           <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Core\Src\usbh_core.c</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Core\Src\usbh_ctlreq.c</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Core\Src\usbh_ctlreq.c</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Core\Src\usbh_ioreq.c</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Core\Src\usbh_ioreq.c</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_HOST_Library\Core\Src\usbh_pipes.c</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Core\Src\usbh_pipes.c</name>
         </file>
       </group>
     </group>
   </group>
 </project>
-
-

@@ -1,8 +1,6 @@
 ;/******************** (C) COPYRIGHT 2017 STMicroelectronics ********************
 ;* File Name          : startup_stm32f411xe.s
 ;* Author             : MCD Application Team
-;* Version            : V1.1.5
-;* Date               : 17-February-2017
 
 ;* Description        : STM32F411xExx devices vector table for EWARM toolchain.
 ;*                      This module performs:

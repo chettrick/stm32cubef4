@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    FatFs/FatFs_USBDisk/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.3.0
-  * @date    17-February-2017
   * @brief   Main program body
   *          This sample code shows how to use FatFs with USB disk drive.
   ******************************************************************************
@@ -55,7 +53,7 @@
 FATFS USBDISKFatFs;           /* File system object for USB disk logical drive */
 FIL MyFile;                   /* File object */
 char USBDISKPath[4];          /* USB Host logical drive path */
-USBH_HandleTypeDef hUSB_Host; /* USB Host handle */
+USBH_HandleTypeDef hUSBHost; /* USB Host handle */
 
 typedef enum {
   APPLICATION_IDLE = 0,  
@@ -102,19 +100,19 @@ int main(void)
   if(FATFS_LinkDriver(&USBH_Driver, USBDISKPath) == 0)
   {
     /*##-2- Init Host Library ################################################*/
-    USBH_Init(&hUSB_Host, USBH_UserProcess, 0);
+    USBH_Init(&hUSBHost, USBH_UserProcess, 0);
     
     /*##-3- Add Supported Class ##############################################*/
-    USBH_RegisterClass(&hUSB_Host, USBH_MSC_CLASS);
+    USBH_RegisterClass(&hUSBHost, USBH_MSC_CLASS);
     
     /*##-4- Start Host Process ###############################################*/
-    USBH_Start(&hUSB_Host);
+    USBH_Start(&hUSBHost);
     
     /*##-5- Run Application (Blocking mode) ##################################*/
     while (1)
     {
       /* USB Host Background task */
-      USBH_Process(&hUSB_Host);
+      USBH_Process(&hUSBHost);
       
       /* Mass Storage Application State Machine */
       switch(Appli_state)

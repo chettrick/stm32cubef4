@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    USB_Host/CDC_Standalone/Src/cdc_receive.c 
   * @author  MCD Application Team
-  * @version V1.4.0
-  * @date    17-February-2017
   * @brief   CDC Receive state machine
   ******************************************************************************
   * @attention

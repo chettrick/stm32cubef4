@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    UART/UART_TwoBoards_ComIT/Inc/stm32f4xx_hal_conf.h
   * @author  MCD Application Team
-  * @version V1.0.4
-  * @date    17-February-2017
   * @brief   HAL configuration file
   ******************************************************************************
   * @attention
