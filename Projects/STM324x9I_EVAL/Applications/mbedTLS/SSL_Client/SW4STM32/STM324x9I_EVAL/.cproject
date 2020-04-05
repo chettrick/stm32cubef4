@@ -54,7 +54,7 @@
 									<listOptionValue builtIn="false" value="STM32F439xx"/>
 									<listOptionValue builtIn="false" value="USE_STM324x9I_EVAL"/>
 									<listOptionValue builtIn="false" value="USE_LCD"/>
-									<listOptionValue builtIn="false" value="MBEDTLS_CONFIG_FILE=&quot;&lt;mbedtls_config.h&gt;&quot;"/>
+									<listOptionValue builtIn="false" value="MBEDTLS_CONFIG_FILE=&lt;mbedtls_config.h&gt;"/>
 								</option>
 								<option id="fr.ac6.managedbuild.gnu.c.compiler.option.misc.other.1935125813" superClass="fr.ac6.managedbuild.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="-fmessage-length=0" valueType="string"/>
 								<option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.176971270" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="-fmessage-length=0 -Wno-uninitialized" valueType="string"/>
@@ -78,7 +78,7 @@
 							<tool id="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker.1098333242" name="MCU G++ Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker"/>
 							<tool id="fr.ac6.managedbuild.tool.gnu.archiver.107672922" name="MCU GCC Archiver" superClass="fr.ac6.managedbuild.tool.gnu.archiver"/>
 							<tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.1575032893" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler">
-								<option id="gnu.both.asm.option.include.paths.2139482819" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath"/>
+								<option id="gnu.both.asm.option.include.paths.2139482819" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths"/>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.393952766" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.assembler.input.786212831" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.input"/>
 							</tool>
