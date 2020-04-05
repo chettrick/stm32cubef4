@@ -2,16 +2,16 @@
   @page FreeRTOS_Mutexes FreeRTOS Mutexes application
  
   @verbatim
-  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    FreeRTOS/FreeRTOS_Mutexes/readme.txt
   * @author  MCD Application Team
-  * @version V1.0.6
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   Description of the FreeRTOS Mutexes application.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -119,7 +119,7 @@ on STM32Cube with RTOS".
 
   - This example runs on STM32F469xx and STM32F479xx devices.
   
-  - This example has been tested with STM32469I-EVAL revB board and can be
+  - This example has been tested with STM32469I-EVAL RevC board and can be
     easily tailored to any other supported device and development board.
 
 

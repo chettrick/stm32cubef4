@@ -2,16 +2,16 @@
   @page DCMI_SnapshotMode DCMI Capture Mode example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    DCMI/DCMI_SnapshotMode/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.5
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   Description of the STM32F4xx DCMI_SnapshotMode example.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -92,7 +92,7 @@ LED3 is ON in case of initialization error.
 
   - This example runs on STM32F469xx/STM32F479xx devices.
     
-  - This example has been tested and validated with STM32469I-EVAL revB board and can be
+  - This example has been tested and validated with STM32469I-EVAL RevC board and can be
     easily tailored to any other supported device and development board.      
 
 @par How to use it ? 

@@ -320,11 +320,8 @@
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\STM324x9I_EVAL</state>
-          <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components\Common</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Drivers\BSP\Components</state>
-          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\include</state>
-          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\include\lwip                                   </state>
-          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\include\netif</state>
+          <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\include\</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\system</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src</state>
           <state>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\FatFs\src\Drivers</state>
@@ -1162,9 +1159,6 @@
           <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\api\netifapi.c</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\api\pppapi.c</name>
-        </file>
-        <file>
           <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\api\sockets.c</name>
         </file>
         <file>
@@ -1182,6 +1176,9 @@
             <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\core\ipv4\dhcp.c</name>
           </file>
           <file>
+            <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\core\ipv4\etharp.c</name>
+          </file>
+          <file>
             <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\core\ipv4\icmp.c</name>
           </file>
           <file>
@@ -1194,7 +1191,7 @@
             <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\core\ipv4\ip4_addr.c</name>
           </file>
           <file>
-            <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\core\ipv4\ip_frag.c</name>
+            <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\core\ipv4\ip4_frag.c</name>
           </file>
         </group>
         <file>
@@ -1210,7 +1207,7 @@
           <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\core\init.c</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\core\lwip_timers.c</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\core\ip.c</name>
         </file>
         <file>
           <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\core\mem.c</name>
@@ -1243,13 +1240,16 @@
           <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\core\tcp_out.c</name>
         </file>
         <file>
+          <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\core\timeouts.c</name>
+        </file>
+        <file>
           <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\core\udp.c</name>
         </file>
       </group>
       <group>
         <name>Netif</name>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\netif\etharp.c</name>
+          <name>$PROJ_DIR$\..\..\..\..\..\..\Middlewares\Third_Party\LwIP\src\netif\ethernet.c</name>
         </file>
       </group>
     </group>

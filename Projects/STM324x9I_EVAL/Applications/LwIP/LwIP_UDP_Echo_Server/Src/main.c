@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LwIP/LwIP_UDP_Echo_Server/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.4.6
-  * @date    04-November-2016
+  * @version V1.5.0
+  * @date    17-February-2017
   * @brief   This sample code implements a UDP Echo Server application based on 
   *          Raw API of LwIP stack. This application uses STM32F4xx the 
   *          ETH HAL API to transmit and receive data. 
@@ -11,7 +11,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -49,14 +49,16 @@
   */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "lwip/opt.h"
 #include "lwip/init.h"
 #include "lwip/netif.h"
-#include "lwip/lwip_timers.h"
+#include "lwip/timeouts.h"
 #include "netif/etharp.h"
 #include "ethernetif.h"
 #include "app_ethernet.h"
 #include "udp_echoserver.h"
+#ifdef USE_LCD
+#include "lcd_log.h"
+#endif
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -92,7 +94,7 @@ int main(void)
   /* Configure the BSP */
   BSP_Config();
     
-  /* Initilaize the LwIP stack */
+  /* Initialize the LwIP stack */
   lwip_init();
   
   /* Configure the Network interface */
@@ -113,6 +115,11 @@ int main(void)
 
     /* Handle timeouts */
     sys_check_timeouts();
+
+#ifdef USE_DHCP
+    /* handle periodic timers for LwIP */
+    DHCP_Periodic_Handle(&gnetif);
+#endif 
   }
 }
 
@@ -123,11 +130,9 @@ int main(void)
   */
 static void BSP_Config(void)
 {
-  /* Configure LED1, LED2, LED3 and LED4 */
+  /* Configure LED1, LED2 */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED2);
-  BSP_LED_Init(LED3);
-  BSP_LED_Init(LED4);
   
   /* Set Systick Interrupt to the highest priority */
   HAL_NVIC_SetPriority(SysTick_IRQn, 0x0, 0x0);
@@ -136,6 +141,30 @@ static void BSP_Config(void)
   BSP_IO_Init();
   /* Enable IO Expander interrupt for ETH MII pin */
   BSP_IO_ConfigPin(MII_INT_PIN, IO_MODE_IT_FALLING_EDGE);
+  
+#ifdef USE_LCD
+
+  /* Initialize the LCD */
+  BSP_LCD_Init();
+  
+  /* Initialize the LCD Layers */
+  BSP_LCD_LayerDefaultInit(1, LCD_FB_START_ADDRESS);
+  
+  /* Set LCD Foreground Layer  */
+  BSP_LCD_SelectLayer(1);
+  
+  BSP_LCD_SetFont(&LCD_DEFAULT_FONT);
+  
+  /* Initialize LCD Log module */
+  LCD_LOG_Init();
+  
+  /* Show Header and Footer texts */
+  LCD_LOG_SetHeader((uint8_t *)"UDP Echo Server Application");
+  LCD_LOG_SetFooter((uint8_t *)"STM324x9I-EVAL board");
+  
+  LCD_UsrLog ("  State: Ethernet Initialization ...\n");
+
+#endif
 }
 
 /**
@@ -149,14 +178,20 @@ static void Netif_Config(void)
   ip_addr_t netmask;
   ip_addr_t gw;
   
-  IP4_ADDR(&ipaddr, IP_ADDR0, IP_ADDR1, IP_ADDR2, IP_ADDR3);
-  IP4_ADDR(&netmask, NETMASK_ADDR0, NETMASK_ADDR1 , NETMASK_ADDR2, NETMASK_ADDR3);
-  IP4_ADDR(&gw, GW_ADDR0, GW_ADDR1, GW_ADDR2, GW_ADDR3);
+#ifdef USE_DHCP
+  ip_addr_set_zero_ip4(&ipaddr);
+  ip_addr_set_zero_ip4(&netmask);
+  ip_addr_set_zero_ip4(&gw);
+#else
+  IP_ADDR4(&ipaddr,IP_ADDR0,IP_ADDR1,IP_ADDR2,IP_ADDR3);
+  IP_ADDR4(&netmask,NETMASK_ADDR0,NETMASK_ADDR1,NETMASK_ADDR2,NETMASK_ADDR3);
+  IP_ADDR4(&gw,GW_ADDR0,GW_ADDR1,GW_ADDR2,GW_ADDR3);
+#endif /* USE_DHCP */
   
-  /* add the network interface */    
+  /* Add the network interface */    
   netif_add(&gnetif, &ipaddr, &netmask, &gw, NULL, &ethernetif_init, &ethernet_input);
   
-  /*  Registers the default network interface */
+  /* Registers the default network interface */
   netif_set_default(&gnetif);
   
   if (netif_is_link_up(&gnetif))
@@ -170,12 +205,12 @@ static void Netif_Config(void)
     netif_set_down(&gnetif);
   }
   
-  /* Set the link callback function, this function is called on change of link status*/
+  /* Set the link callback function, this function is called on change of link status */
   netif_set_link_callback(&gnetif, ethernetif_update_config);
 }
 
 /**
-  * @brief  EXTI line detection callbacks
+  * @brief EXTI line detection callbacks
   * @param  GPIO_Pin: Specifies the pins connected EXTI line
   * @retval None
   */
@@ -235,7 +270,7 @@ static void SystemClock_Config(void)
   
   /* Activate the Over-Drive mode */
   HAL_PWREx_EnableOverDrive();
-
+ 
   /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);

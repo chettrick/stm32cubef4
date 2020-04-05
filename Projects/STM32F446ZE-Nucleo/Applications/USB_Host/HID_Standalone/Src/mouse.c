@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    USB_Host/HID_Standalone/Src/mouse.c 
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    06-May-2016
+  * @version V1.0.3
+  * @date    17-February-2017
   * @brief   This file implements Functions for mouse menu
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -131,6 +131,8 @@ void HID_MouseMenuProcess(void)
           
         case 1: /* Return */
           LCD_LOG_ClearTextZone();
+          BSP_LCD_ClearStringLine(12);
+          BSP_LCD_ClearStringLine(13);
           hid_demo.state = HID_DEMO_REENUMERATE;
           hid_demo.select = 0;
           break;
@@ -161,6 +163,8 @@ void HID_MouseMenuProcess(void)
 static void USR_MOUSE_Init(void)
 {
   LCD_LOG_ClearTextZone();
+  BSP_LCD_ClearStringLine(12);
+  BSP_LCD_ClearStringLine(13);
   BSP_LCD_SetTextColor(LCD_COLOR_YELLOW);
   BSP_LCD_DisplayStringAtLine(5, (uint8_t *)"USB HID Host Mouse Demo...                     ");  
   BSP_LCD_SetTextColor(LCD_LOG_DEFAULT_COLOR);

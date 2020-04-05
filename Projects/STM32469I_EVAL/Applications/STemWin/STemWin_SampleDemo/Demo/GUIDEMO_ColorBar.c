@@ -36,13 +36,13 @@ Purpose     : Draws color bars
   ******************************************************************************
   * @file    GUIDEMO_ColorBar.c
   * @author  MCD Application Team
-  * @version V1.0.6
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   Draws color bars
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 

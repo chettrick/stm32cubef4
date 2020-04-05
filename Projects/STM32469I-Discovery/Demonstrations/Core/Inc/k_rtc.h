@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    k_rtc.h
   * @author  MCD Application Team
-  * @version V1.1.4
-  * @date    03-June-2016
+  * @version V1.2.0
+  * @date    17-February-2017
   * @brief   Header for k_rtc.c file
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 

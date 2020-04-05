@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    LwIP/LwIP_HTTP_Server_Netconn_RTOS/Src/httpser-netconn.c 
   * @author  MCD Application Team
-  * @version V1.0.6
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   Basic http server implementation using LwIP netconn API  
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -46,8 +46,8 @@
   */
 /* Includes ------------------------------------------------------------------*/
 #include "lwip/opt.h"
-#include "lwip/arch.h"
-#include "fs.h"
+#include "lwip/api.h"
+#include "lwip/apps/fs.h"
 #include "string.h"
 #include "httpserver-netconn.h"
 #include "cmsis_os.h"
@@ -56,7 +56,7 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-#define WEBSERVER_THREAD_PRIO    ( tskIDLE_PRIORITY + 4 )
+#define WEBSERVER_THREAD_PRIO    ( osPriorityAboveNormal )
 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
@@ -173,13 +173,13 @@ static const unsigned char PAGE_START[] = {
   * @param conn: pointer on connection structure 
   * @retval None
   */
-void http_server_serve(struct netconn *conn) 
+static void http_server_serve(struct netconn *conn) 
 {
   struct netbuf *inbuf;
   err_t recv_err;
   char* buf;
   u16_t buflen;
-  struct fs_file * file;
+  struct fs_file file;
   
   /* Read the data from the port, blocking if nothing yet there. 
    We assume the request (the part we care about) is in one netbuf */
@@ -198,23 +198,23 @@ void http_server_serve(struct netconn *conn)
         /* Check if request to get ST.gif */ 
         if (strncmp((char const *)buf,"GET /STM32F4xx_files/ST.gif",27)==0)
         {
-          file = fs_open("/STM32F4xx_files/ST.gif"); 
-          netconn_write(conn, (const unsigned char*)(file->data), (size_t)file->len, NETCONN_NOCOPY);
-          fs_close(file);
+          fs_open(&file, "/STM32F4xx_files/ST.gif"); 
+          netconn_write(conn, (const unsigned char*)(file.data), (size_t)file.len, NETCONN_NOCOPY);
+          fs_close(&file);
         }   
         /* Check if request to get stm32.jpeg */
         else if (strncmp((char const *)buf,"GET /STM32F4xx_files/stm32.jpg",30)==0)
         {
-          file = fs_open("/STM32F4xx_files/stm32.jpg"); 
-          netconn_write(conn, (const unsigned char*)(file->data), (size_t)file->len, NETCONN_NOCOPY);
-          fs_close(file);
+          fs_open(&file, "/STM32F4xx_files/stm32.jpg"); 
+          netconn_write(conn, (const unsigned char*)(file.data), (size_t)file.len, NETCONN_NOCOPY);
+          fs_close(&file);
         }
         else if (strncmp((char const *)buf,"GET /STM32F4xx_files/logo.jpg", 29) == 0)                                           
         {
           /* Check if request to get ST logo.jpg */
-          file = fs_open("/STM32F4xx_files/logo.jpg"); 
-          netconn_write(conn, (const unsigned char*)(file->data), (size_t)file->len, NETCONN_NOCOPY);
-          fs_close(file);
+          fs_open(&file, "/STM32F4xx_files/logo.jpg"); 
+          netconn_write(conn, (const unsigned char*)(file.data), (size_t)file.len, NETCONN_NOCOPY);
+          fs_close(&file);
         }
         else if(strncmp(buf, "GET /STM32F4xxTASKS.html", 24) == 0)
         {
@@ -223,17 +223,17 @@ void http_server_serve(struct netconn *conn)
         }
         else if((strncmp(buf, "GET /STM32F4xx.html", 19) == 0)||(strncmp(buf, "GET / ", 6) == 0)) 
         {
-          /* Load STM32F4x7 page */
-          file = fs_open("/STM32F4xx.html"); 
-          netconn_write(conn, (const unsigned char*)(file->data), (size_t)file->len, NETCONN_NOCOPY);
-          fs_close(file);
+          /* Load STM32F4xx page */
+          fs_open(&file, "/STM32F4xx.html"); 
+          netconn_write(conn, (const unsigned char*)(file.data), (size_t)file.len, NETCONN_NOCOPY);
+          fs_close(&file);
         }
         else 
         {
           /* Load Error page */
-          file = fs_open("/404.html"); 
-          netconn_write(conn, (const unsigned char*)(file->data), (size_t)file->len, NETCONN_NOCOPY);
-          fs_close(file);
+          fs_open(&file, "/404.html"); 
+          netconn_write(conn, (const unsigned char*)(file.data), (size_t)file.len, NETCONN_NOCOPY);
+          fs_close(&file);
         }
       }      
     }

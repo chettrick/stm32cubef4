@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LwIP/LwIP_HTTP_Server_Socket_RTOS/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.3.6
-  * @date    04-November-2016
+  * @version V1.4.0
+  * @date    17-February-2017
   * @brief   This sample code implements a http server application based on 
   *          Netconn API of LwIP stack and FreeRTOS. This application uses 
   *          STM32F4xx the ETH HAL API to transmit and receive data. 
@@ -11,7 +11,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -49,13 +49,14 @@
   */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "cmsis_os.h"
 #include "ethernetif.h"
 #include "lwip/netif.h"
 #include "lwip/tcpip.h"
 #include "app_ethernet.h"
-#include "lcd_log.h"
 #include "httpserver-socket.h"
+#ifdef USE_LCD
+#include "lcd_log.h"
+#endif
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -110,12 +111,12 @@ int main(void)
 }
 
 /**
-  * @brief  Main task
-  * @param  pvParameters not used
+  * @brief  Start Thread
+  * @param  argument not used
   * @retval None
   */
 static void StartThread(void const * argument)
-{  
+{
   /* Initialize LCD and LEDs */
   BSP_Config();
   
@@ -124,7 +125,7 @@ static void StartThread(void const * argument)
   
   /* Initialize the LwIP stack */
   Netif_Config();
-    
+  
   /* Initialize webserver demo */
   http_server_socket_init();
   
@@ -133,17 +134,13 @@ static void StartThread(void const * argument)
   
 #ifdef USE_DHCP
   /* Start DHCPClient */
-#if defined(__GNUC__)
-  osThreadDef(DHCP, DHCP_thread, osPriorityBelowNormal, 0, configMINIMAL_STACK_SIZE * 5);
-#else
   osThreadDef(DHCP, DHCP_thread, osPriorityBelowNormal, 0, configMINIMAL_STACK_SIZE * 2);
-#endif
   osThreadCreate (osThread(DHCP), &gnetif);
 #endif
   
   /* Start toogleLed4 task : Toggle LED4  every 250ms */
   osThreadDef(LED4, ToggleLed4, osPriorityLow, 0, configMINIMAL_STACK_SIZE);
-  osThreadCreate (osThread(LED4), NULL);
+  osThreadCreate(osThread(LED4), NULL);
   
   for( ;; )
   {
@@ -161,18 +158,17 @@ static void Netif_Config(void)
 {
   ip_addr_t ipaddr;
   ip_addr_t netmask;
-  ip_addr_t gw;	
-  
+  ip_addr_t gw;
+	
 #ifdef USE_DHCP
-  ipaddr.addr = 0;
-  netmask.addr = 0;
-  gw.addr = 0;
+  ip_addr_set_zero_ip4(&ipaddr);
+  ip_addr_set_zero_ip4(&netmask);
+  ip_addr_set_zero_ip4(&gw);
 #else
-  /* IP address default setting */
-  IP4_ADDR(&ipaddr, IP_ADDR0, IP_ADDR1, IP_ADDR2, IP_ADDR3);
-  IP4_ADDR(&netmask, NETMASK_ADDR0, NETMASK_ADDR1 , NETMASK_ADDR2, NETMASK_ADDR3);
-  IP4_ADDR(&gw, GW_ADDR0, GW_ADDR1, GW_ADDR2, GW_ADDR3);
-#endif
+  IP_ADDR4(&ipaddr,IP_ADDR0,IP_ADDR1,IP_ADDR2,IP_ADDR3);
+  IP_ADDR4(&netmask,NETMASK_ADDR0,NETMASK_ADDR1,NETMASK_ADDR2,NETMASK_ADDR3);
+  IP_ADDR4(&gw,GW_ADDR0,GW_ADDR1,GW_ADDR2,GW_ADDR3);
+#endif /* USE_DHCP */
   
   /* - netif_add(struct netif *netif, struct ip_addr *ipaddr,
   struct ip_addr *netmask, struct ip_addr *gw,
@@ -230,8 +226,8 @@ static void BSP_Config(void)
 {
   GPIO_InitTypeDef GPIO_InitStructure;
    
-   /* Enable PB14 to IT mode: Ethernet Link interrupt */ 
-   __HAL_RCC_GPIOB_CLK_ENABLE();
+  /* Enable PB14 to IT mode: Ethernet Link interrupt */ 
+  __HAL_RCC_GPIOB_CLK_ENABLE(); 
   GPIO_InitStructure.Pin = GPIO_PIN_14;
   GPIO_InitStructure.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStructure.Pull = GPIO_NOPULL;
@@ -241,10 +237,9 @@ static void BSP_Config(void)
   HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0xF, 0);
   HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
   
-  /* Configure LED1, LED2, LED3 and LED4 */
+  /* Configure LED1, LED2, and LED4 */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED2);
-  BSP_LED_Init(LED3);
   BSP_LED_Init(LED4);
   
 #ifdef USE_LCD
@@ -266,7 +261,7 @@ static void BSP_Config(void)
 }
 
 /**
-  * @brief  Toggle LED4 task
+  * @brief  Toggle LED4 thread
   * @param  pvParameters not used
   * @retval None
   */
@@ -338,7 +333,7 @@ static void SystemClock_Config(void)
   HAL_RCC_OscConfig(&RCC_OscInitStruct);
  
   /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
-  clocks dividers */
+     clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;

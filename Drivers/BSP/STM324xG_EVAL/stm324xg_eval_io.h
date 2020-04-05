@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm324xg_eval_io.h
   * @author  MCD Application Team
-  * @version V2.2.2
-  * @date    22-April-2016
+  * @version V3.0.0
+  * @date    27-January-2017
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm324xg_eval_io.c driver.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -86,13 +86,6 @@ typedef enum
 #define IO_PIN_6                     0x40
 #define IO_PIN_7                     0x80
 #define IO_PIN_ALL                   0xFF
-/**
-  * @}
-  */ 
-
-/** @defgroup STM324xG_EVAL_IO_Exported_Macros STM324xG EVAL IO Exported Macros
-  * @{
-  */
 /**
   * @}
   */ 

@@ -2,16 +2,16 @@
   @page LCD_DSI_ImagesSlider : LCD DSI images slider application  
 
   @verbatim
-  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    Display/LCD_DSI_ImagesSlider/readme.txt
   * @author  MCD Application Team
-  * @version V1.0.6
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   Description of the LCD DSI images slider application.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -106,7 +106,7 @@ The program runs in infinite loop.
 In order to make the program work, you must do the following :
  - Open your preferred toolchain 
  - Rebuild all files and load your image into target memory
- - Open STM32 ST-Link Utility V3.7, click on "External Loader" from the bar menu then check "N25Q128A_STM32469I-DISCO" box 
+ - Open STM32 ST-Link Utility V4.1.0, click on "External Loader" from the bar menu then check "N25Q128A_STM32469I-DISCO" box 
  - Connect the STM32469I-DISCOVERY board to PC with USB cable through CN1
  - Use generated hex file with STM32 ST-Link Utility to program both internal Flash and external QSPI memory
  - Run the application 

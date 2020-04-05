@@ -2,16 +2,16 @@
   @page LwIP_HTTP_Server_Netconn_RTOS LwIP HTTP Server Netconn Application
   
   @verbatim
-  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    LwIP/LwIP_HTTP_Server_Netconn_RTOS/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.6
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   Description of the LwIP http server Netconn API.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -69,10 +69,10 @@ will be ensured by LEDs:
 If a DHCP server is available, a dynamic IP address can be allocated by enabling 
 the DHCP process (#define USE_DHCP in main.h)
 
-Note: In this application the Ethernet Link ISR need the System tick interrupt 
-to configure the Ethernet MAC, so the Ethernet Link interrupt priority must be 
-set lower (numerically greater) than the Systick interrupt priority to ensure 
-that the System tick increments while executing the Ethernet Link ISR.
+Note: In this application the Ethernet Link ISR need the HAL time base to configure 
+the Ethernet MAC, so the Ethernet Link interrupt priority must be set lower (numerically greater) 
+than the HAL tick interrupt priority to ensure that the System tick increments while executing 
+the Ethernet Link ISR.
 
 Note: By default, the Ethernet Half duplex mode is not supported in the 
 STM32469I-EVAL board, for more information refer to the HAL_ETH_MspInit() 
@@ -92,25 +92,23 @@ For more details about this application, refer to UM1713 "STM32Cube interfacing 
 
 @par Directory contents
 
-  - LwIP/LwIP_HTTP_Server_Netconn_RTOS/Inc/app_ethernet.h          header of app_ethernet.c file
-  - LwIP/LwIP_HTTP_Server_Netconn_RTOS/Inc/ethernetif.h            header for ethernetif.c file
-  - LwIP/LwIP_HTTP_Server_Netconn_RTOS/Inc/lcd_log_conf.h          LCD Log configuration file
-  - LwIP/LwIP_HTTP_Server_Netconn_RTOS/Inc/stm32f4xx_hal_conf.h    HAL configuration file
-  - LwIP/LwIP_HTTP_Server_Netconn_RTOS/Inc/stm32f4xx_it.h          STM32 interrupt handlers header file
-  - LwIP/LwIP_HTTP_Server_Netconn_RTOS/Inc/main.h                  Main program header file
-  - LwIP/LwIP_HTTP_Server_Netconn_RTOS/Inc/lwipopts.h              LwIP stack configuration options
-  - LwIP/LwIP_HTTP_Server_Netconn_RTOS/Inc/FreeRTOSConfig.h        FreeRTOS configuration options
-  - LwIP/LwIP_HTTP_Server_Netconn_RTOS/Inc/httpserver-netconn.h    header for httpserver-netconn.c
-  - LwIP/LwIP_HTTP_Server_Netconn_RTOS/Inc/fs.h                    header for fs.c
-  - LwIP/LwIP_HTTP_Server_Netconn_RTOS/Inc/fsdata.h                header for fsdata.c
-  - LwIP/LwIP_HTTP_Server_Netconn_RTOS/Src/app_ethernet.c          Ethernet specific module
-  - LwIP/LwIP_HTTP_Server_Netconn_RTOS/Src/stm32f4xx_it.c          STM32 interrupt handlers
-  - LwIP/LwIP_HTTP_Server_Netconn_RTOS/Src/main.c                  Main program
-  - LwIP/LwIP_HTTP_Server_Netconn_RTOS/Src/system_stm32f4xx.c      STM32F4xx system clock configuration file
-  - LwIP/LwIP_HTTP_Server_Netconn_RTOS/Src/ethernetif.c            Interfacing LwIP to ETH driver
-  - LwIP/LwIP_HTTP_Server_Netconn_RTOS/Src/httpserver-netconn.c    httpserver netconn main thread
-  - LwIP/LwIP_HTTP_Server_Netconn_RTOS/Src/fs.c                    file system functions
-  - LwIP/LwIP_HTTP_Server_Netconn_RTOS/Src/fsdata.c                ROM filesystem data (html pages)
+  - LwIP/LwIP_HTTP_Server_Netconn_RTOS/Inc/app_ethernet.h                  header of app_ethernet.c file
+  - LwIP/LwIP_HTTP_Server_Netconn_RTOS/Inc/ethernetif.h                    header for ethernetif.c file
+  - LwIP/LwIP_HTTP_Server_Netconn_RTOS/Inc/lcd_log_conf.h                  LCD Log configuration file
+  - LwIP/LwIP_HTTP_Server_Netconn_RTOS/Inc/stm32f4xx_hal_conf.h            HAL configuration file
+  - LwIP/LwIP_HTTP_Server_Netconn_RTOS/Inc/stm32f4xx_it.h                  STM32 interrupt handlers header file
+  - LwIP/LwIP_HTTP_Server_Netconn_RTOS/Inc/main.h                          Main program header file
+  - LwIP/LwIP_HTTP_Server_Netconn_RTOS/Inc/lwipopts.h                      LwIP stack configuration options
+  - LwIP/LwIP_HTTP_Server_Netconn_RTOS/Inc/FreeRTOSConfig.h                FreeRTOS configuration options
+  - LwIP/LwIP_HTTP_Server_Netconn_RTOS/Inc/httpserver-netconn.h            header for httpserver-netconn.c
+  - LwIP/LwIP_HTTP_Server_Netconn_RTOS/Src/app_ethernet.c                  Ethernet specific module
+  - LwIP/LwIP_HTTP_Server_Netconn_RTOS/Src/stm32f4xx_it.c                  STM32 interrupt handlers
+  - LwIP/LwIP_HTTP_Server_Netconn_RTOS/Src/main.c                          Main program
+  - LwIP/LwIP_HTTP_Server_Netconn_RTOS/Src/system_stm32f4xx.c              STM32F4xx system clock configuration file
+  - LwIP/LwIP_HTTP_Server_Netconn_RTOS/Src/ethernetif.c                    Interfacing LwIP to ETH driver
+  - LwIP/LwIP_HTTP_Server_Netconn_RTOS/Src/httpserver-netconn.c            httpserver netconn main thread
+  - LwIP/LwIP_HTTP_Server_Netconn_RTOS/Src/fsdata_custom                   ROM filesystem data (html pages)
+  - LwIP/LwIP_HTTP_Server_Netconn_RTOS/Src/stm32f4xx_hal_timebase_tim.c    HAL time base based on the hardware TIM
   
         
 @par Hardware and Software environment
@@ -118,7 +116,7 @@ For more details about this application, refer to UM1713 "STM32Cube interfacing 
   - This application runs on STM32F469x/STM32F479x Devices.
     
   - This application has been tested with the following environments:
-     - STM32469I-EVAL revB board
+     - STM32469I-EVAL RevC board
      - Http clients: Firefox Mozilla (v24) or Microsoft Internet Explorer (v8 and later)
      - DHCP server:  PC utility TFTPD32 (or TFTPD64) (http://tftpd32.jounin.net/) is used as a DHCP server    
       

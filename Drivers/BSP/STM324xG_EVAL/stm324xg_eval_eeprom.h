@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm324xg_eval_eeprom.h
   * @author  MCD Application Team
-  * @version V2.2.2
-  * @date    22-April-2016
+  * @version V3.0.0
+  * @date    27-January-2017
   * @brief   This file contains all the functions prototypes for 
   *          the stm32f4xg_eval_eeprom.c firmware driver.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -59,13 +59,6 @@
   * @brief This file includes the I2C EEPROM driver of STM32F4xG-EVAL evaluation board.
   * @{
   */
-
-/** @defgroup STM324xG_EVAL_EEPROM_Exported_Types STM324xG EVAL EEPROM Exported Types
-  * @{
-  */ 
-/**
-  * @}
-  */
   
 /** @defgroup STM324xG_EVAL_EEPROM_Exported_Constants STM324xG EVAL EEPROM Exported Constants
   * @{
@@ -86,13 +79,6 @@
 #define EEPROM_OK                   0
 #define EEPROM_FAIL                 1
 #define EEPROM_TIMEOUT              2
-/**
-  * @}
-  */ 
-  
-/** @defgroup STM324xG_EVAL_EEPROM_Exported_Macros STM324xG EVAL EEPROM Exported Macros
-  * @{
-  */    
 /**
   * @}
   */ 

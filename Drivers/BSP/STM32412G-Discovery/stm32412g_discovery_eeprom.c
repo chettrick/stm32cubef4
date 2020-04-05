@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32412g_discovery_eeprom.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    04-May-2016
+  * @version V2.0.0
+  * @date    27-January-2017
   * @brief   This file provides a set of functions needed to manage an I2C M24LR64 
   *          EEPROM memory.
   *          To be able to use this driver, the switch EE_M24LR64 must be defined
@@ -59,7 +59,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -101,27 +101,6 @@
   * @{
   */ 
 
-/** @defgroup STM32412G_DISCOVERY_EEPROM_Private_Types STM32412G Discovery Eeprom Private Types
-  * @{
-  */ 
-/**
-  * @}
-  */ 
-
-/** @defgroup STM32412G_DISCOVERY_EEPROM_Private_Defines STM32412G Discovery Eeprom Private Defines
-  * @{
-  */  
-/**
-  * @}
-  */ 
-
-/** @defgroup STM32412G_DISCOVERY_EEPROM_Private_Macros STM32412G Discovery Eeprom Private Macros
-  * @{
-  */
-/**
-  * @}
-  */ 
-  
 /** @defgroup STM32412G_DISCOVERY_EEPROM_Private_Variables STM32412G Discovery Eeprom Private Variables
   * @{
   */
@@ -132,21 +111,12 @@ __IO uint8_t  EEPROMDataWrite;
   * @}
   */ 
 
-/** @defgroup STM32412G_DISCOVERY_EEPROM_Private_Function_Prototypes STM32412G Discovery Eeprom Private Prototypes
-  * @{
-  */ 
-/**
-  * @}
-  */ 
-
 /** @defgroup STM32412G_DISCOVERY_EEPROM_Private_Functions STM32412G Discovery Eeprom Private Functions
   * @{
   */ 
 
 /**
   * @brief  Initializes peripherals used by the I2C EEPROM driver.
-  * @param  None
-  * 
   * @note   There are 2 different versions of M24LR64 (A01 & A02).
   *             Then try to connect on 1st one (EEPROM_I2C_ADDRESS_A01) 
   *             and if problem, check the 2nd one (EEPROM_I2C_ADDRESS_A02)
@@ -174,7 +144,6 @@ uint32_t BSP_EEPROM_Init(void)
 
 /**
   * @brief  DeInitializes the EEPROM.
-  * @param  None
   * @retval EEPROM state
   */
 uint8_t BSP_EEPROM_DeInit(void)
@@ -191,9 +160,9 @@ uint8_t BSP_EEPROM_DeInit(void)
   * @param  NumByteToRead: pointer to the variable holding number of bytes to 
   *         be read from the EEPROM.
   * 
-  *        @note The variable pointed by NumByteToRead is reset to 0 when all the 
-  *              data are read from the EEPROM. Application should monitor this 
-  *              variable in order know when the transfer is complete.
+  * @note   The variable pointed by NumByteToRead is reset to 0 when all the 
+  *         data are read from the EEPROM. Application should monitor this 
+  *         variable in order know when the transfer is complete.
   * 
   * @retval EEPROM_OK (0) if operation is correctly performed, else return value 
   *         different from EEPROM_OK (0) or the timeout user callback.
@@ -234,13 +203,13 @@ uint32_t BSP_EEPROM_ReadBuffer(uint8_t* pBuffer, uint16_t ReadAddr, uint16_t* Nu
   * @param  NumByteToWrite: pointer to the variable holding number of bytes to 
   *         be written into the EEPROM. 
   * 
-  *        @note The variable pointed by NumByteToWrite is reset to 0 when all the 
-  *              data are written to the EEPROM. Application should monitor this 
-  *              variable in order know when the transfer is complete.
+  * @note   The variable pointed by NumByteToWrite is reset to 0 when all the 
+  *         data are written to the EEPROM. Application should monitor this 
+  *         variable in order know when the transfer is complete.
   * 
-  *        @note This function just configure the communication and enable the DMA 
-  *              channel to transfer data. Meanwhile, the user application may perform 
-  *              other tasks in parallel.
+  * @note   This function just configure the communication and enable the DMA 
+  *         channel to transfer data. Meanwhile, the user application may perform 
+  *         other tasks in parallel.
   * 
   * @retval EEPROM_OK (0) if operation is correctly performed, else return value 
   *         different from EEPROM_OK (0) or the timeout user callback.
@@ -433,8 +402,6 @@ uint32_t BSP_EEPROM_WriteBuffer(uint8_t *pBuffer, uint16_t WriteAddr, uint16_t N
   *        perform the write operation. During this time, it doesn't answer to
   *        I2C packets addressed to it. Once the write operation is complete
   *        the EEPROM responds to its address.
-  * 
-  * @param  None
   * @retval EEPROM_OK (0) if operation is correctly performed, else return value 
   *         different from EEPROM_OK (0) or the timeout user callback.
   */
@@ -452,8 +419,6 @@ uint32_t BSP_EEPROM_WaitEepromStandbyState(void)
 
 /**
   * @brief  Basic management of the timeout situation.
-  * @param  None
-  * @retval None
   */
 __weak void BSP_EEPROM_TIMEOUT_UserCallback(void)
 {

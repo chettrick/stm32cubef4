@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324x9i_eval_eeprom.c
   * @author  MCD Application Team
-  * @version V2.2.3
-  * @date    22-April-2016
+  * @version V3.0.0
+  * @date    27-January-2017
   * @brief   This file provides a set of functions needed to manage an I2C M24LR64 
   *          EEPROM memory.
   *          To be able to use this driver, the switch EE_M24LR64 must be defined
@@ -59,7 +59,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -99,27 +99,6 @@
 /** @defgroup STM324x9I_EVAL_EEPROM STM324x9I EVAL EEPROM
   * @brief This file includes the I2C EEPROM driver of STM324x9I-EVAL evaluation board.
   * @{
-  */ 
-
-/** @defgroup STM324x9I_EVAL_EEPROM_Private_Types STM324x9I EVAL EEPROM Private Types
-  * @{
-  */ 
-/**
-  * @}
-  */ 
-
-/** @defgroup STM324x9I_EVAL_EEPROM_Private_Defines STM324x9I EVAL EEPROM Private Defines
-  * @{
-  */  
-/**
-  * @}
-  */ 
-
-/** @defgroup STM324x9I_EVAL_EEPROM_Private_Macros STM324x9I EVAL EEPROM Private Macros
-  * @{
-  */
-/**
-  * @}
   */ 
   
 /** @defgroup STM324x9I_EVAL_EEPROM_Private_Variables STM324x9I EVAL EEPROM Private Variables

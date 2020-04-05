@@ -2,11 +2,11 @@
   @page UART_TwoBoards_ComIT UART Two Boards Communication IT example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    UART/UART_TwoBoards_ComIT/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    06-May-2016  
+  * @version V1.1.0
+  * @date    17-February-2017  
   * @brief   Description of the UART Two Boards Communication IT example.
   ******************************************************************************
   *
@@ -37,7 +37,7 @@
 
 @par Example Description 
 
-This example describes a UART transmission (transmit/receive) in interrupt mode
+This example describes an UART transmission (transmit/receive) in interrupt mode
 between two boards.
 
 Board: NUCLEO-F412ZG Rev B(embeds a STM32F412ZG device)

@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    BSP/Src/audio_rec_dfsdm.c
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   This example code shows how to use the audio feature in the
   *          stm32412g_discovery driver
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -154,7 +154,7 @@ void AudioRecDfsdm_demo (void)
       BSP_AUDIO_OUT_Init(OUTPUT_DEVICE_HEADPHONE, uwVolume, *AudioFreq_ptr);
       
       /* Play the recorded buffer*/
-      AUDIO_Start((uint32_t)(&internal_buffer[0]), AUDIO_BLOCK_SIZE * 2);  /* Use Audio play demo to playback sound */
+      BSP_AUDIO_OUT_Play((uint16_t*)(&internal_buffer[0]), AUDIO_BLOCK_SIZE * 2);
       BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize() - 70, (uint8_t *)"Streaming to headphones", CENTER_MODE);
     }
     

@@ -2,15 +2,15 @@
   ******************************************************************************
   * @file    DMA/DMA_FLASHToRAM/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.5
-  * @date    04-November-2016
+  * @version V1.2.0
+  * @date    17-February-2017
   * @brief   This example provides a description of how to use a DMA channel
   *          to transfer a word data buffer from FLASH memory to embedded
   *          SRAM memory through the STM32F4xx HAL API.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -162,8 +162,8 @@ static void DMA_Config(void)
   DmaHandle.Init.MemDataAlignment = DMA_MDATAALIGN_WORD;    /* memory data alignment : Word     */
   DmaHandle.Init.Mode = DMA_NORMAL;                         /* Normal DMA mode                  */
   DmaHandle.Init.Priority = DMA_PRIORITY_HIGH;              /* priority level : high            */
-  DmaHandle.Init.FIFOMode = DMA_FIFOMODE_DISABLE;           /* FIFO mode disabled               */
-  DmaHandle.Init.FIFOThreshold = DMA_FIFO_THRESHOLD_FULL;
+  DmaHandle.Init.FIFOMode = DMA_FIFOMODE_ENABLE;            /* FIFO mode enabled                */
+  DmaHandle.Init.FIFOThreshold = DMA_FIFO_THRESHOLD_1QUARTERFULL; /* FIFO threshold: 1/4 full   */
   DmaHandle.Init.MemBurst = DMA_MBURST_SINGLE;              /* Memory burst                     */
   DmaHandle.Init.PeriphBurst = DMA_PBURST_SINGLE;           /* Peripheral burst                 */
 

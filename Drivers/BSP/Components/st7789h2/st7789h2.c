@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    st7789h2.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    10-May-2016
+  * @version V1.1.1
+  * @date    29-December-2016
   * @brief   This file includes the LCD driver for st7789h2 LCD.
   ******************************************************************************
   * @attention
@@ -260,16 +260,39 @@ void ST7789H2_Init(void)
 
 /**
   * @brief  Set the Display Orientation.
-  * @param  orientation: ST7789H2_ORIENTATION_PORTRAIT or ST7789H2_ORIENTATION_LANDSCAPE
+  * @param  orientation: ST7789H2_ORIENTATION_PORTRAIT, ST7789H2_ORIENTATION_LANDSCAPE
+  *                      or ST7789H2_ORIENTATION_LANDSCAPE_ROT180  
   * @retval None
   */
 void ST7789H2_SetOrientation(uint32_t orientation)
 {
-  uint8_t   parameter[1];
+  uint8_t   parameter[6];
 
   if(orientation == ST7789H2_ORIENTATION_LANDSCAPE)
   {
     parameter[0] = 0x00;     
+  }
+  else if(orientation == ST7789H2_ORIENTATION_LANDSCAPE_ROT180)
+  {
+    /* Vertical Scrolling Definition */
+    /* TFA describes the Top Fixed Area */
+    parameter[0] = 0x00;
+    parameter[1] = 0x00;
+    /* VSA describes the height of the Vertical Scrolling Area */
+    parameter[2] = 0x01;
+    parameter[3] = 0xF0;
+    /* BFA describes the Bottom Fixed Area */
+    parameter[4] = 0x00;
+    parameter[5] = 0x00; 
+    ST7789H2_WriteReg(ST7789H2_VSCRDEF, parameter, 6);
+
+    /* Vertical Scroll Start Address of RAM */
+    /* GRAM row nbr (320) - Display row nbr (240) = 80 = 0x50 */
+    parameter[0] = 0x00;
+    parameter[1] = 0x50;
+    ST7789H2_WriteReg(ST7789H2_VSCSAD, parameter, 2);
+    
+    parameter[0] = 0xC0; 
   }
   else
   {
@@ -287,8 +310,9 @@ void ST7789H2_DisplayOn(void)
 {
   /* Display ON command */
   ST7789H2_WriteReg(ST7789H2_DISPLAY_ON, (uint8_t*)NULL, 0);
-  /* Idle mode OFF command */
-  ST7789H2_WriteReg(ST7789H2_IDLE_MODE_OFF, (uint8_t*)NULL, 0); 
+
+  /* Sleep Out command */
+  ST7789H2_WriteReg(ST7789H2_SLEEP_OUT, (uint8_t*)NULL, 0);
 }
 
 /**
@@ -673,7 +697,7 @@ static void ST7789H2_DrawRGBHLine(uint16_t Xpos, uint16_t Ypos, uint16_t Xsize, 
     if ((posX >= WindowsXstart) && (Ypos >= WindowsYstart) &&     /* Check we are in the defined window */
         (posX <= WindowsXend) && (Ypos <= WindowsYend))
     {
-      if (posX != (Xsize + Xpos - 1))     /* When writing last pixel when size is odd, the third part is not written */
+      if (posX != (Xsize + Xpos))     /* When writing last pixel when size is odd, the third part is not written */
       {
         LCD_IO_WriteData(rgb565[i]);        
       }      

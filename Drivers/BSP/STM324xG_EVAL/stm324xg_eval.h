@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm324xg_eval.h
   * @author  MCD Application Team
-  * @version V2.2.2
-  * @date    22-April-2016
+  * @version V3.0.0
+  * @date    27-January-2017
   * @brief   This file contains definitions for STM324xG_EVAL's LEDs, 
   *          push-buttons and COM ports hardware resources.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -131,24 +131,24 @@ typedef enum
 
 #define LED1_PIN                         GPIO_PIN_6
 #define LED1_GPIO_PORT                   GPIOG
-#define LED1_GPIO_CLK_ENABLE()           __GPIOG_CLK_ENABLE()
-#define LED1_GPIO_CLK_DISABLE()          __GPIOG_CLK_DISABLE()
+#define LED1_GPIO_CLK_ENABLE()           __HAL_RCC_GPIOG_CLK_ENABLE()
+#define LED1_GPIO_CLK_DISABLE()          __HAL_RCC_GPIOG_CLK_DISABLE()
   
 #define LED2_PIN                         GPIO_PIN_8
 #define LED2_GPIO_PORT                   GPIOG
-#define LED2_GPIO_CLK_ENABLE()           __GPIOG_CLK_ENABLE()
-#define LED2_GPIO_CLK_DISABLE()          __GPIOG_CLK_DISABLE()
+#define LED2_GPIO_CLK_ENABLE()           __HAL_RCC_GPIOG_CLK_ENABLE()
+#define LED2_GPIO_CLK_DISABLE()          __HAL_RCC_GPIOG_CLK_DISABLE()
   
 #define LED3_PIN                         GPIO_PIN_9
 #define LED3_GPIO_PORT                   GPIOI
-#define LED3_GPIO_CLK_ENABLE()           __GPIOI_CLK_ENABLE()
-#define LED3_GPIO_CLK_DISABLE()          __GPIOI_CLK_DISABLE()
+#define LED3_GPIO_CLK_ENABLE()           __HAL_RCC_GPIOI_CLK_ENABLE()
+#define LED3_GPIO_CLK_DISABLE()          __HAL_RCC_GPIOI_CLK_DISABLE()
   
 #define LED4_PIN                         GPIO_PIN_7
 #define LED4_GPIO_PORT                   GPIOC
 #define LED4_GPIO_CLK                    RCC_AHB1Periph_GPIOC
-#define LED4_GPIO_CLK_ENABLE()           __GPIOC_CLK_ENABLE()
-#define LED4_GPIO_CLK_DISABLE()          __GPIOC_CLK_DISABLE()
+#define LED4_GPIO_CLK_ENABLE()           __HAL_RCC_GPIOC_CLK_ENABLE()
+#define LED4_GPIO_CLK_DISABLE()          __HAL_RCC_GPIOC_CLK_DISABLE()
 
 #define LEDx_GPIO_CLK_ENABLE(__INDEX__)  do{if((__INDEX__) == 0) LED1_GPIO_CLK_ENABLE(); else \
                                             if((__INDEX__) == 1) LED2_GPIO_CLK_ENABLE(); else \
@@ -175,8 +175,8 @@ typedef enum
   */
 #define WAKEUP_BUTTON_PIN                    GPIO_PIN_0
 #define WAKEUP_BUTTON_GPIO_PORT              GPIOA
-#define WAKEUP_BUTTON_GPIO_CLK_ENABLE()      __GPIOA_CLK_ENABLE()
-#define WAKEUP_BUTTON_GPIO_CLK_DISABLE()     __GPIOA_CLK_DISABLE()
+#define WAKEUP_BUTTON_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOA_CLK_ENABLE()
+#define WAKEUP_BUTTON_GPIO_CLK_DISABLE()     __HAL_RCC_GPIOA_CLK_DISABLE()
 #define WAKEUP_BUTTON_EXTI_IRQn              EXTI0_IRQn
 
 /**
@@ -184,8 +184,8 @@ typedef enum
   */
 #define TAMPER_BUTTON_PIN                    GPIO_PIN_13
 #define TAMPER_BUTTON_GPIO_PORT              GPIOC
-#define TAMPER_BUTTON_GPIO_CLK_ENABLE()      __GPIOC_CLK_ENABLE()
-#define TAMPER_BUTTON_GPIO_CLK_DISABLE()     __GPIOC_CLK_DISABLE()
+#define TAMPER_BUTTON_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOC_CLK_ENABLE()
+#define TAMPER_BUTTON_GPIO_CLK_DISABLE()     __HAL_RCC_GPIOC_CLK_DISABLE()
 #define TAMPER_BUTTON_EXTI_IRQn              EXTI15_10_IRQn
 
 /**
@@ -193,8 +193,8 @@ typedef enum
   */
 #define KEY_BUTTON_PIN                       GPIO_PIN_15
 #define KEY_BUTTON_GPIO_PORT                 GPIOG
-#define KEY_BUTTON_GPIO_CLK_ENABLE()         __GPIOG_CLK_ENABLE()
-#define KEY_BUTTON_GPIO_CLK_DISABLE()        __GPIOG_CLK_DISABLE()
+#define KEY_BUTTON_GPIO_CLK_ENABLE()         __HAL_RCC_GPIOG_CLK_ENABLE()
+#define KEY_BUTTON_GPIO_CLK_DISABLE()        __HAL_RCC_GPIOG_CLK_DISABLE()
 #define KEY_BUTTON_EXTI_IRQn                 EXTI15_10_IRQn
 
 #define BUTTONx_GPIO_CLK_ENABLE(__INDEX__)  do{if((__INDEX__) == 0) WAKEUP_BUTTON_GPIO_CLK_ENABLE(); else \
@@ -218,19 +218,19 @@ typedef enum
  * @brief Definition for COM port1, connected to USART3
  */ 
 #define EVAL_COM1                            USART3
-#define EVAL_COM1_CLK_ENABLE()               __USART3_CLK_ENABLE()
-#define EVAL_COM1_CLK_DISABLE()              __USART3_CLK_DISABLE()
+#define EVAL_COM1_CLK_ENABLE()               __HAL_RCC_USART3_CLK_ENABLE()
+#define EVAL_COM1_CLK_DISABLE()              __HAL_RCC_USART3_CLK_DISABLE()
 
 #define EVAL_COM1_TX_PIN                     GPIO_PIN_10
 #define EVAL_COM1_TX_GPIO_PORT               GPIOC
-#define EVAL_COM1_TX_GPIO_CLK_ENABLE()       __GPIOC_CLK_ENABLE()
-#define EVAL_COM1_TX_GPIO_CLK_DISABLE()      __GPIOC_CLK_DISABLE()
+#define EVAL_COM1_TX_GPIO_CLK_ENABLE()       __HAL_RCC_GPIOC_CLK_ENABLE()
+#define EVAL_COM1_TX_GPIO_CLK_DISABLE()      __HAL_RCC_GPIOC_CLK_DISABLE()
 #define EVAL_COM1_TX_AF                      GPIO_AF7_USART3
 
 #define EVAL_COM1_RX_PIN                     GPIO_PIN_11
 #define EVAL_COM1_RX_GPIO_PORT               GPIOC
-#define EVAL_COM1_RX_GPIO_CLK_ENABLE()       __GPIOC_CLK_ENABLE()
-#define EVAL_COM1_RX_GPIO_CLK_DISABLE()      __GPIOC_CLK_DISABLE()
+#define EVAL_COM1_RX_GPIO_CLK_ENABLE()       __HAL_RCC_GPIOC_CLK_ENABLE()
+#define EVAL_COM1_RX_GPIO_CLK_DISABLE()      __HAL_RCC_GPIOC_CLK_DISABLE()
 #define EVAL_COM1_RX_AF                      GPIO_AF7_USART3
 
 #define EVAL_COM1_IRQn                       USART3_IRQn
@@ -283,12 +283,12 @@ typedef enum
    resources */
 /* Definition for I2Cx clock resources */
 #define EVAL_I2Cx                            I2C1
-#define EVAL_I2Cx_CLK_ENABLE()               __I2C1_CLK_ENABLE()
-#define EVAL_DMAx_CLK_ENABLE()               __DMA1_CLK_ENABLE()
-#define EVAL_I2Cx_SCL_SDA_GPIO_CLK_ENABLE()  __GPIOB_CLK_ENABLE()
+#define EVAL_I2Cx_CLK_ENABLE()               __HAL_RCC_I2C1_CLK_ENABLE()
+#define EVAL_DMAx_CLK_ENABLE()               __HAL_RCC_DMA1_CLK_ENABLE()
+#define EVAL_I2Cx_SCL_SDA_GPIO_CLK_ENABLE()  __HAL_RCC_GPIOB_CLK_ENABLE()
 
-#define EVAL_I2Cx_FORCE_RESET()              __I2C1_FORCE_RESET()
-#define EVAL_I2Cx_RELEASE_RESET()            __I2C1_RELEASE_RESET()
+#define EVAL_I2Cx_FORCE_RESET()              __HAL_RCC_I2C1_FORCE_RESET()
+#define EVAL_I2Cx_RELEASE_RESET()            __HAL_RCC_I2C1_RELEASE_RESET()
 
 /* Definition for I2Cx Pins */
 #define EVAL_I2Cx_SCL_PIN                    GPIO_PIN_6
@@ -307,14 +307,6 @@ typedef enum
 /**
   * @}
   */ 
-  
-/** @defgroup STM324xG_EVAL_LOW_LEVEL_Exported_Macros STM324xG EVAL LOW LEVEL Exported Macros
-  * @{
-  */  
-/**
-  * @}
-  */ 
-
 
 /** @defgroup STM324xG_EVAL_LOW_LEVEL_Exported_Functions STM324xG EVAL LOW LEVEL Exported Functions
   * @{

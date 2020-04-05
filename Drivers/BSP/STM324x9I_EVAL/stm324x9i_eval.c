@@ -2,15 +2,15 @@
   ******************************************************************************
   * @file    stm324x9i_eval.c
   * @author  MCD Application Team
-  * @version V2.2.3
-  * @date    22-April-2016
+  * @version V3.0.0
+  * @date    27-January-2017
   * @brief   This file provides a set of firmware functions to manage LEDs, 
   *          push-buttons and COM ports available on STM324x9I-EVAL evaluation 
   *          board(MB1045) RevB from STMicroelectronics.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -60,34 +60,20 @@
   * @{
   */
 
-/** @defgroup STM324x9I_EVAL_LOW_LEVEL_Private_TypesDefinitions STM324x9I EVAL LOW LEVEL Private TypesDefinitions
-  * @{
-  */
-/**
-  * @}
-  */
-
 /** @defgroup STM324x9I_EVAL_LOW_LEVEL_Private_Defines STM324x9I EVAL LOW LEVEL Private Defines
   * @{
   */
 /**
- * @brief STM324x9I EVAL BSP Driver version number V2.2.3
+ * @brief STM324x9I EVAL BSP Driver version number V3.0.0
    */
-#define __STM324x9I_EVAL_BSP_VERSION_MAIN   (0x02) /*!< [31:24] main version */
-#define __STM324x9I_EVAL_BSP_VERSION_SUB1   (0x02) /*!< [23:16] sub1 version */
-#define __STM324x9I_EVAL_BSP_VERSION_SUB2   (0x03) /*!< [15:8]  sub2 version */
+#define __STM324x9I_EVAL_BSP_VERSION_MAIN   (0x03) /*!< [31:24] main version */
+#define __STM324x9I_EVAL_BSP_VERSION_SUB1   (0x00) /*!< [23:16] sub1 version */
+#define __STM324x9I_EVAL_BSP_VERSION_SUB2   (0x00) /*!< [15:8]  sub2 version */
 #define __STM324x9I_EVAL_BSP_VERSION_RC     (0x00) /*!< [7:0]  release candidate */ 
 #define __STM324x9I_EVAL_BSP_VERSION         ((__STM324x9I_EVAL_BSP_VERSION_MAIN << 24)\
                                              |(__STM324x9I_EVAL_BSP_VERSION_SUB1 << 16)\
                                              |(__STM324x9I_EVAL_BSP_VERSION_SUB2 << 8 )\
                                              |(__STM324x9I_EVAL_BSP_VERSION_RC))
-/**
-  * @}
-  */
-
-/** @defgroup STM324x9I_EVAL_LOW_LEVEL_Private_Macros STM324x9I EVAL LOW_LEVEL_Private_Macros
-  * @{
-  */
 /**
   * @}
   */
@@ -515,11 +501,11 @@ static void I2Cx_MspInit(void)
   EVAL_I2Cx_RELEASE_RESET(); 
   
   /* Enable and set I2Cx Interrupt to a lower priority */
-  HAL_NVIC_SetPriority(EVAL_I2Cx_EV_IRQn, 0x05, 0);
+  HAL_NVIC_SetPriority(EVAL_I2Cx_EV_IRQn, 0x0F, 0);
   HAL_NVIC_EnableIRQ(EVAL_I2Cx_EV_IRQn);
   
   /* Enable and set I2Cx Interrupt to a lower priority */
-  HAL_NVIC_SetPriority(EVAL_I2Cx_ER_IRQn, 0x05, 0);
+  HAL_NVIC_SetPriority(EVAL_I2Cx_ER_IRQn, 0x0F, 0);
   HAL_NVIC_EnableIRQ(EVAL_I2Cx_ER_IRQn);
 }
 

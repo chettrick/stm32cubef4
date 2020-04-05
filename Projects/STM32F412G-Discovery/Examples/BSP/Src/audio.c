@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    BSP/Src/audio.c 
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   This example code shows how to use the audio feature in the 
   *          stm32412g_discovery driver
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -109,7 +109,6 @@ AUDIO_ErrorTypeDef AUDIO_Stop(void);
 
 /**
   * @brief  Audio Play demo
-  * @param  None
   * @retval None
   */
 void AudioPlay_demo (void)
@@ -117,15 +116,15 @@ void AudioPlay_demo (void)
   uint32_t *AudioFreq_ptr;
   uint8_t status = 0;
   uint8_t FreqStr[25] = {0};
- 
+  
   AudioFreq_ptr = AudioFreq + 6; /*AF_48K*/
   uwPauseEnabledStatus = 1; /* 0 when audio is running, 1 when Pause is on */
   uwVolume = 50;
-
+  
   Audio_SetHint();
-    
+  
   status = BSP_JOY_Init(JOY_MODE_GPIO);
-
+  
   if (status != HAL_OK)
   {    
     BSP_LCD_SetBackColor(LCD_COLOR_WHITE); 
@@ -133,7 +132,7 @@ void AudioPlay_demo (void)
     BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 100, (uint8_t *)"ERROR", CENTER_MODE);
     BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 85, (uint8_t *)"Joystick init error", CENTER_MODE);
   }
-
+  
   if(BSP_AUDIO_OUT_Init(OUTPUT_DEVICE_HEADPHONE, uwVolume, *AudioFreq_ptr) == 0)
   {
     BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
@@ -147,7 +146,7 @@ void AudioPlay_demo (void)
     BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 100, (uint8_t *)"  AUDIO CODEC  FAIL ", CENTER_MODE);
     BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 85, (uint8_t *)" Try to reset board ", CENTER_MODE);
   }
-
+  
   /* 
   Start playing the file from a circular buffer, once the DMA is enabled, it is 
   always in running state. Application has to fill the buffer with the audio data 
@@ -155,122 +154,113 @@ void AudioPlay_demo (void)
   (DISCOVERY_AUDIO_TransferComplete_CallBack() or DISCOVERY_AUDIO_HalfTransfer_CallBack()...
   */
   AUDIO_Start(AUDIO_FILE_ADDRESS, AUDIO_FILE_SIZE);
-
+  
   /* Display the state on the screen */
   BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
   BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 85, (uint8_t *)"       PLAYING...     ", CENTER_MODE);
-
+  
   sprintf((char*)FreqStr,"       VOL:    %lu     ",uwVolume);
   BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 55, (uint8_t *)FreqStr, CENTER_MODE);
-
+  
   sprintf((char*)FreqStr,"      FREQ: %lu     ",*AudioFreq_ptr);
   BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 40, (uint8_t *)FreqStr, CENTER_MODE);
-
-  /* IMPORTANT:
-     AUDIO_Process() is called by the SysTick Handler, as it should be called 
-     within a periodic process */
-
+  
   /* Infinite loop */
   while(1)
   {
+    /* IMPORTANT: AUDIO_Process() should be called within a periodic process */    
+    AUDIO_Process();
+    
     BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
     BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
     /* Get the Joystick State */
     JoyState = BSP_JOY_GetState();
-
+    
     switch(JoyState)
     {
-      case JOY_UP:
-        /* Increase volume by 5% */
-        if (uwVolume < 95)
-          uwVolume += 5;
-        else
-          uwVolume = 100;
-          sprintf((char*)FreqStr,"       VOL:    %lu     ",uwVolume);
-          BSP_AUDIO_OUT_SetVolume(uwVolume);
-          BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 55, (uint8_t *)FreqStr, CENTER_MODE);
-          BSP_LCD_DisplayStringAt(0, LINE(14), (uint8_t *)"                      ", CENTER_MODE);
-        break;
-
-      case JOY_DOWN:
-        /* Decrease volume by 5% */
-        if (uwVolume > 5)
-          uwVolume -= 5;
-        else
-          uwVolume = 0;
-          sprintf((char*)FreqStr,"       VOL:    %lu     ",uwVolume);
-          BSP_AUDIO_OUT_SetVolume(uwVolume);
-          BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 55, (uint8_t *)FreqStr, CENTER_MODE);
-          BSP_LCD_DisplayStringAt(0, LINE(14), (uint8_t *)"                      ", CENTER_MODE);
-        break;
-
-      case JOY_LEFT:
-        /*Decrease Frequency */
-          if (*AudioFreq_ptr != 8000)
-          {
-            AudioFreq_ptr--;
-            BSP_AUDIO_OUT_SetFrequency(*AudioFreq_ptr);
-          }
-          sprintf((char*)FreqStr,"      FREQ: %lu     ", *AudioFreq_ptr);
-          BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 40, (uint8_t *)FreqStr, CENTER_MODE);
-          BSP_LCD_DisplayStringAt(0, LINE(14), (uint8_t *)"                      ", CENTER_MODE);
-        break;
-
-      case JOY_RIGHT:
-        /* Increase Frequency */
-          if (*AudioFreq_ptr != 96000)
-          {
-            AudioFreq_ptr++;
-            BSP_AUDIO_OUT_SetFrequency(*AudioFreq_ptr);
-          }
-          sprintf((char*)FreqStr,"      FREQ: %lu     ",*AudioFreq_ptr);
-          BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 40, (uint8_t *)FreqStr, CENTER_MODE);
-          BSP_LCD_DisplayStringAt(0, LINE(14), (uint8_t *)"                      ", CENTER_MODE);
-        break;
-
-      case JOY_SEL:
-        /* Set Pause / Resume or Exit */
+    case JOY_UP:
+      HAL_Delay(100);
+      /* Increase volume by 5% */
+      if (uwVolume < 95)
+        uwVolume += 5;
+      else
+        uwVolume = 100;
+      sprintf((char*)FreqStr,"       VOL:    %lu     ",uwVolume);
+      BSP_AUDIO_OUT_SetVolume(uwVolume);
+      BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 55, (uint8_t *)FreqStr, CENTER_MODE);
+      BSP_LCD_DisplayStringAt(0, LINE(14), (uint8_t *)"                      ", CENTER_MODE);
+      break;
+      
+    case JOY_DOWN:
+      HAL_Delay(100);
+      /* Decrease volume by 5% */
+      if (uwVolume > 5)
+        uwVolume -= 5;
+      else
+        uwVolume = 0;
+      sprintf((char*)FreqStr,"       VOL:    %lu     ",uwVolume);
+      BSP_AUDIO_OUT_SetVolume(uwVolume);
+      BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 55, (uint8_t *)FreqStr, CENTER_MODE);
+      BSP_LCD_DisplayStringAt(0, LINE(14), (uint8_t *)"                      ", CENTER_MODE);
+      break;
+      
+    case JOY_LEFT:
+      HAL_Delay(100);
+      /*Decrease Frequency */
+      if (*AudioFreq_ptr != 8000)
+      {
+        AudioFreq_ptr--;
+        BSP_AUDIO_OUT_SetFrequency(*AudioFreq_ptr);
+      }
+      sprintf((char*)FreqStr,"      FREQ: %lu     ", *AudioFreq_ptr);
+      BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 40, (uint8_t *)FreqStr, CENTER_MODE);
+      BSP_LCD_DisplayStringAt(0, LINE(14), (uint8_t *)"                      ", CENTER_MODE);
+      break;
+      
+    case JOY_RIGHT:
+      HAL_Delay(100);
+      /* Increase Frequency */
+      if (*AudioFreq_ptr != 96000)
+      {
+        AudioFreq_ptr++;
+        BSP_AUDIO_OUT_SetFrequency(*AudioFreq_ptr);
+      }
+      sprintf((char*)FreqStr,"      FREQ: %lu     ",*AudioFreq_ptr);
+      BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 40, (uint8_t *)FreqStr, CENTER_MODE);
+      BSP_LCD_DisplayStringAt(0, LINE(14), (uint8_t *)"                      ", CENTER_MODE);
+      break;
+      
+    case JOY_SEL:
+      /* Set Pause / Resume or Exit */
+      HAL_Delay(200);
+      if (BSP_JOY_GetState() == JOY_SEL)  /* Long press on joystick selection button : Pause/Resume */
+      {
+        if (uwPauseEnabledStatus == 1)
+        { /* Pause is enabled, call Resume */
+          BSP_AUDIO_OUT_Resume();
+          uwPauseEnabledStatus = 0;
+          BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 85, (uint8_t *)"       PLAYING...     ", CENTER_MODE);
+        } else
+        { /* Pause the playback */
+          BSP_AUDIO_OUT_Pause();
+          uwPauseEnabledStatus = 1;
+          BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 85, (uint8_t *)"       PAUSE  ...     ", CENTER_MODE);
+        }
+        BSP_LCD_DisplayStringAt(0, LINE(14), (uint8_t *)"                      ", CENTER_MODE);
         HAL_Delay(200);
-        if (BSP_JOY_GetState() == JOY_SEL)  /* Long press on joystick selection button : Pause/Resume */
-        {
-          if (uwPauseEnabledStatus == 1)
-          { /* Pause is enabled, call Resume */
-            BSP_AUDIO_OUT_Resume();
-            uwPauseEnabledStatus = 0;
-            BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 85, (uint8_t *)"       PLAYING...     ", CENTER_MODE);
-          } else
-          { /* Pause the playback */
-            BSP_AUDIO_OUT_Pause();
-            uwPauseEnabledStatus = 1;
-            BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 85, (uint8_t *)"       PAUSE  ...     ", CENTER_MODE);
-          }
-          BSP_LCD_DisplayStringAt(0, LINE(14), (uint8_t *)"                      ", CENTER_MODE);
-          HAL_Delay(200);
-        }
-        else  /* Short press on joystick selection button : exit */
-        {
-          BSP_AUDIO_OUT_Stop(CODEC_PDWN_SW);
-          BSP_AUDIO_OUT_DeInit();
-          return;
-        }
-        break;
-        
-      default:
-        break;
+      }
+      else  /* Short press on joystick selection button : exit */
+      {
+        BSP_AUDIO_OUT_Stop(CODEC_PDWN_SW);
+        BSP_AUDIO_OUT_DeInit();
+        return;
+      }
+      break;
+      
+    default:
+      break;
     }
-    
-    /* Toggle LED3 */
-    BSP_LED_Toggle(LED3);
-
-    /* Insert 100 ms delay */
-    HAL_Delay(100);
-
-    /* Toggle LED2 */
-    BSP_LED_Toggle(LED2);
-
-    /* Insert 100 ms delay */
-    HAL_Delay(100);
   }
 }
 

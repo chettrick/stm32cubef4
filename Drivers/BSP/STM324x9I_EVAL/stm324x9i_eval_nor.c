@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm324x9i_eval_nor.c
   * @author  MCD Application Team
-  * @version V2.2.3
-  * @date    22-April-2016
+  * @version V3.0.0
+  * @date    27-January-2017
   * @brief   This file includes a standard driver for the M29W256GL70ZA6E NOR flash memory 
   *          device mounted on STM324x9I-EVAL evaluation board.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -83,38 +83,6 @@
 /** @defgroup STM324x9I_EVAL_NOR STM324x9I EVAL NOR
   * @{
   */ 
-  
-/* Private typedef -----------------------------------------------------------*/
-
-/** @defgroup STM324x9I_EVAL_NOR_Private_Types_Definitions STM324x9I EVAL NOR Private Types Definitions
-  * @{
-  */ 
-  
-/**
-  * @}
-  */  
-  
-/* Private define ------------------------------------------------------------*/
-
-/** @defgroup STM324x9I_EVAL_NOR_Private_Defines STM324x9I EVAL NOR Private Defines
-  * @{
-  */
-
-/**
-  * @}
-  */ 
-  
-/* Private macro -------------------------------------------------------------*/
-
-/** @defgroup STM324x9I_EVAL_NOR_Private_Macros STM324x9I EVAL NOR Private Macros
-  * @{
-  */  
-  
-/**
-  * @}
-  */ 
-  
-/* Private variables ---------------------------------------------------------*/
 
 /** @defgroup STM324x9I_EVAL_NOR_Private_Variables STM324x9I EVAL NOR Private Variables
   * @{
@@ -126,27 +94,6 @@ static FMC_NORSRAM_TimingTypeDef Timing;
   * @}
   */ 
 
-/* Private function prototypes -----------------------------------------------*/
-
-/** @defgroup STM324x9I_EVAL_NOR_Private_Function_Prototypes STM324x9I EVAL NOR Private Function Prototypes
-  * @{
-  */ 
-  
-/**
-  * @}
-  */
- 
-/* Private functions ---------------------------------------------------------*/
-    
-/** @defgroup STM324x9I_EVAL_NOR_Private_Functions STM324x9I EVAL NOR Private Functions
-  * @{
-  */ 
-static void NOR_MspInit(void);
-
-/**
-  * @}
-  */
-    
 /**
   * @brief  Initializes the NOR device.
   * @retval NOR memory status
@@ -181,7 +128,7 @@ uint8_t BSP_NOR_Init(void)
   norHandle.Init.ContinuousClock    = CONTINUOUSCLOCK_FEATURE;
     
   /* NOR controller initialization */
-  NOR_MspInit();
+  BSP_NOR_MspInit();
   
   if(HAL_NOR_Init(&norHandle, &Timing, &Timing) != HAL_OK)
   {
@@ -335,18 +282,18 @@ uint8_t BSP_NOR_Read_ID(NOR_IDTypeDef *pNOR_ID)
 /**
   * @brief  Initializes the NOR MSP.
   */
-static void NOR_MspInit(void)
+__weak void BSP_NOR_MspInit(void)
 {
   GPIO_InitTypeDef GPIO_Init_Structure;
   
   /* Enable FMC clock */
-  __FMC_CLK_ENABLE();
+  __HAL_RCC_FMC_CLK_ENABLE();
 
   /* Enable GPIOs clock */
-  __GPIOD_CLK_ENABLE();
-  __GPIOE_CLK_ENABLE();
-  __GPIOF_CLK_ENABLE();
-  __GPIOG_CLK_ENABLE();
+  __HAL_RCC_GPIOD_CLK_ENABLE();
+  __HAL_RCC_GPIOE_CLK_ENABLE();
+  __HAL_RCC_GPIOF_CLK_ENABLE();
+  __HAL_RCC_GPIOG_CLK_ENABLE();
   
   /* Common GPIO configuration */
   GPIO_Init_Structure.Mode      = GPIO_MODE_AF_PP;

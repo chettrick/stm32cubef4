@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    USB_Device/HID_Standalone/Src/usbd_conf.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    04-November-2016
+  * @version V1.0.1
+  * @date    17-February-2017
   * @brief   This file implements the USB Device library callbacks and MSP
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -50,12 +50,16 @@
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
+#define CURSOR_STEP     5
 /* Private variables ---------------------------------------------------------*/
 PCD_HandleTypeDef hpcd;
+__IO uint32_t remotewakeupon = 0;
+uint8_t HID_Buffer[4];
+extern USBD_HandleTypeDef USBD_Device;
 
 /* Private function prototypes -----------------------------------------------*/
+static void GetPointerData(uint8_t *pbuf);
 static void SystemClockConfig_STOP(void);
-
 /* Private functions ---------------------------------------------------------*/
   
 /*******************************************************************************
@@ -215,8 +219,8 @@ void HAL_PCD_ResetCallback(PCD_HandleTypeDef *hpcd)
   */
 void HAL_PCD_SuspendCallback(PCD_HandleTypeDef *hpcd)
 {
-  __HAL_PCD_GATE_PHYCLOCK(hpcd);
-  USBD_LL_Suspend(hpcd->pData);
+    USBD_LL_Suspend(hpcd->pData);
+    __HAL_PCD_GATE_PHYCLOCK(hpcd);
   
   /*Enter in STOP mode */
   if (hpcd->Init.low_power_enable)
@@ -294,7 +298,6 @@ USBD_StatusTypeDef USBD_LL_Init(USBD_HandleTypeDef *pdev)
   hpcd.Init.dev_endpoints = 4;
   hpcd.Init.use_dedicated_ep1 = 0;
   hpcd.Init.ep0_mps = 0x40;
-  hpcd.Init.dma_enable = 0;
   hpcd.Init.low_power_enable = 1;
   hpcd.Init.phy_itface = PCD_PHY_EMBEDDED;
   hpcd.Init.Sof_enable = 0;
@@ -503,29 +506,39 @@ uint32_t USBD_LL_GetRxDataSize(USBD_HandleTypeDef *pdev, uint8_t ep_addr)
 static void SystemClockConfig_STOP(void)
 {
   RCC_ClkInitTypeDef RCC_ClkInitStruct;
-  RCC_OscInitTypeDef RCC_OscInitStruct;
   RCC_PeriphCLKInitTypeDef PeriphClkInitStruct;
   HAL_StatusTypeDef ret = HAL_OK;
 
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
-
+  
   /* The voltage scaling allows optimizing the power consumption when the device is 
-     clocked below the maximum system frequency, to update the voltage scaling value 
-     regarding system frequency refer to product datasheet.  */
+  clocked below the maximum system frequency, to update the voltage scaling value 
+  regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
-
-  /* Enable HSE Oscillator and activate PLL with HSE as source */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
-  RCC_OscInitStruct.HSEState = RCC_HSE_BYPASS;
-  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
-  RCC_OscInitStruct.PLL.PLLM = 8;
-  RCC_OscInitStruct.PLL.PLLN = 200;
-  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
-  RCC_OscInitStruct.PLL.PLLQ = 7;
-  RCC_OscInitStruct.PLL.PLLR = 2;
-  ret = HAL_RCC_OscConfig(&RCC_OscInitStruct);
+  
+  
+  /* Configures system clock after wake-up from STOP: enable HSE, PLL and select 
+  PLL as system clock source (HSE and PLL are disabled in STOP mode) */
+  
+  __HAL_RCC_HSE_CONFIG(RCC_HSE_ON);
+  
+  /* Wait till HSE is ready */  
+  while(__HAL_RCC_GET_FLAG(RCC_FLAG_HSERDY) == RESET)
+  {}
+  
+  /* Enable the main PLL. */
+  __HAL_RCC_PLL_ENABLE();
+  
+  /* Wait till PLL is ready */  
+  while(__HAL_RCC_GET_FLAG(RCC_FLAG_PLLRDY) == RESET)
+  {}
+  
+  /* Select PLL as SYSCLK */
+  MODIFY_REG(RCC->CFGR, RCC_CFGR_SW, RCC_SYSCLKSOURCE_PLLCLK);
+  
+  while (__HAL_RCC_GET_SYSCLK_SOURCE() != RCC_CFGR_SWS_PLL)
+  {}
   
   if(ret != HAL_OK)
   {
@@ -552,7 +565,7 @@ static void SystemClockConfig_STOP(void)
   {
     while(1) {};
   }
-
+  HAL_RCCEx_GetPeriphCLKConfig(&PeriphClkInitStruct);
 }
 
 /**
@@ -593,8 +606,39 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
       
       /* Change remote_wakeup feature to 0*/
       ((USBD_HandleTypeDef *)hpcd.pData)->dev_remote_wakeup=0;
+      remotewakeupon = 1;
+    }
+
+    else
+    {
+      GetPointerData(HID_Buffer);
+      USBD_HID_SendReport(&USBD_Device, HID_Buffer, 4);
     }
   }
+}
+
+/**
+  * @brief  Gets Pointer Data.
+  * @param  pbuf: Pointer to report
+  * @retval None
+  */
+static void GetPointerData(uint8_t *pbuf)
+{
+  static int8_t cnt = 0;
+  int8_t  x = 0, y = 0 ;
+  
+  if(cnt++ > 0)
+  {
+    x = CURSOR_STEP;
+  }
+  else
+  {
+    x = -CURSOR_STEP;
+  }
+  pbuf[0] = 0;
+  pbuf[1] = x;
+  pbuf[2] = y;
+  pbuf[3] = 0;
 }
 
 /**

@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    usbd_storage.c
   * @author  MCD Application Team
-  * @version V1.4.6
-  * @date    04-November-2016 
+  * @version V1.4.7
+  * @date    17-February-2017 
   * @brief   Memory management layer
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -67,6 +67,8 @@
 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
+  __IO uint32_t writestatus, readstatus = 0;
+
 /* USB Mass storage Standard Inquiry Data */
 const int8_t STORAGE_Inquirydata[] = { /* 36 */
   /* LUN 0 */
@@ -135,7 +137,7 @@ int8_t STORAGE_Init(uint8_t lun)
   */
 int8_t STORAGE_GetCapacity(uint8_t lun, uint32_t *block_num, uint16_t *block_size)
 {
-  HAL_SD_CardInfoTypedef info;
+  HAL_SD_CardInfoTypeDef info;
   int8_t ret = -1;  
   
   if(k_StorageGetStatus (MSD_DISK_UNIT) == 1)
@@ -143,8 +145,8 @@ int8_t STORAGE_GetCapacity(uint8_t lun, uint32_t *block_num, uint16_t *block_siz
 
     BSP_SD_GetCardInfo(&info);
    
-    *block_num = (info.CardCapacity)/STORAGE_BLK_SIZ  - 1;
-    *block_size = STORAGE_BLK_SIZ;
+    *block_num = info.LogBlockNbr  - 1;
+    *block_size = info.LogBlockSize;
     ret = 0;
   }
   return ret;
@@ -200,8 +202,8 @@ int8_t STORAGE_Read(uint8_t lun, uint8_t *buf, uint32_t blk_addr, uint16_t blk_l
    
     if(k_StorageGetStatus (MSD_DISK_UNIT) == 1)
     {  
-      BSP_SD_ReadBlocks((uint32_t *)buf, blk_addr * STORAGE_BLK_SIZ, STORAGE_BLK_SIZ, blk_len);
-      while(BSP_SD_GetStatus() != SD_TRANSFER_OK)
+      BSP_SD_ReadBlocks((uint32_t *)buf, blk_addr, blk_len, timeout);
+      while(BSP_SD_GetCardState() != SD_TRANSFER_OK)
       {  
         if (timeout-- == 0)
         {
@@ -216,7 +218,7 @@ int8_t STORAGE_Read(uint8_t lun, uint8_t *buf, uint32_t blk_addr, uint16_t blk_l
 /**
   * @brief  Writes data into the medium.
   * @param  lun: Logical unit number
-  * @param  buf: pointer to data buffer  
+  * @param  buf: pointer to data buffer    
   * @param  blk_addr: Logical block address
   * @param  blk_len: Blocks number
   * @retval Status (0 : Ok / -1 : Error)
@@ -228,8 +230,8 @@ int8_t STORAGE_Write(uint8_t lun, uint8_t *buf, uint32_t blk_addr, uint16_t blk_
   
     if(k_StorageGetStatus (MSD_DISK_UNIT) == 1)
     { 
-      BSP_SD_WriteBlocks((uint32_t *)buf, blk_addr * STORAGE_BLK_SIZ, STORAGE_BLK_SIZ, blk_len);
-      while(BSP_SD_GetStatus() != SD_TRANSFER_OK)
+      BSP_SD_WriteBlocks((uint32_t *)buf, blk_addr, blk_len, timeout);
+      while(BSP_SD_GetCardState() != SD_TRANSFER_OK)
       {  
         if (timeout-- == 0)
         {       

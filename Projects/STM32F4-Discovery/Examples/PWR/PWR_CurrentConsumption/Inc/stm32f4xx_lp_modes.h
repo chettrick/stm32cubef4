@@ -3,12 +3,12 @@
   * @file    PWR/PWR_CurrentConsumption/stm32f4xx_lp_modes.h
   * @author  MCD Application Team
   * @version V1.2.7
-  * @date    04-November-2016
+  * @date    17-February-2017
   * @brief   Header for stm32f4xx_lp_modes.c module
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:

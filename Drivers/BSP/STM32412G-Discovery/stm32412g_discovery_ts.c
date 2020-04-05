@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm32412g_discovery_ts.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    04-May-2016
+  * @version V2.0.0
+  * @date    27-January-2017
   * @brief   This file provides a set of functions needed to manage the Touch
   *          Screen on STM32412G-DISCOVERY evaluation board.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -70,43 +70,15 @@
   * @{
   */
 
-/** @addtogroup STM32412G-DISCOVERY
+/** @addtogroup STM32412G_DISCOVERY
   * @{
   */
 
-/** @defgroup STM32412G-DISCOVERY_TS STM32412G-DISCOVERY TS
+/** @defgroup STM32412G_DISCOVERY_TS STM32412G-DISCOVERY TS
   * @{
   */
 
-/** @defgroup STM32412G-DISCOVERY_TS_Private_Types_Definitions TS Private Types Definitions
-  * @{
-  */
-/**
-  * @}
-  */
-
-/** @defgroup STM32412G-DISCOVERY_TS_Private_Defines TS Private Types Defines
-  * @{
-  */
-/**
-  * @}
-  */
-
-/** @defgroup STM32412G-DISCOVERY_TS_Private_Macros TS Private Macros
-  * @{
-  */
-/**
-  * @}
-  */
-
-/** @defgroup STM32412G-DISCOVERY_TS_Imported_Variables TS Imported Variables
-  * @{
-  */
-  /**
-    * @}
-    */
-
-/** @defgroup STM32412G-DISCOVERY_TS_Private_Variables TS Private Variables
+/** @defgroup STM32412G_DISCOVERY_TS_Private_Variables STM32412G Discovery TS Private Variables
   * @{
   */
 static TS_DrvTypeDef *tsDriver;
@@ -133,14 +105,7 @@ char * ts_gesture_id_string_tab[GEST_ID_NB_MAX] = { "None",
   * @}
   */
 
-/** @defgroup STM32412G-DISCOVERY_TS_Private_Function_Prototypes TS Private Function Prototypes
-  * @{
-  */
-/**
-  * @}
-  */
-
-/** @defgroup STM32412G-DISCOVERY_TS_Public_Functions TS Public Functions
+/** @defgroup STM32412G_DISCOVERY_TS_Private_Functions STM32412G Discovery TS Private Functions
   * @{
   */
 /**
@@ -189,6 +154,10 @@ uint8_t BSP_TS_InitEx(uint16_t ts_SizeX, uint16_t ts_SizeY, uint8_t  orientation
     {
       tsOrientation = TS_SWAP_X | TS_SWAP_Y;                
     }
+    else if(orientation == TS_ORIENTATION_LANDSCAPE_ROT180)
+    {
+      tsOrientation = TS_SWAP_XY;
+    }    
     else
     {
       tsOrientation = TS_SWAP_XY | TS_SWAP_Y;                 
@@ -219,19 +188,10 @@ uint8_t BSP_TS_InitEx(uint16_t ts_SizeX, uint16_t ts_SizeY, uint8_t  orientation
 uint8_t BSP_TS_ITConfig(void)
 {
   uint8_t ts_status = TS_OK;
-  GPIO_InitTypeDef gpio_init_structure;
 
   /* Msp Init of GPIO used for TS_INT pin coming from TouchScreen driver IC FT6x36 */
   /* When touchscreen is operated in interrupt mode */
   BSP_TS_INT_MspInit();
-
-  /* Configure Interrupt mode for TS_INT pin falling edge : when a new touch is available */
-  /* TS_INT pin is active on low level on new touch available */
-  gpio_init_structure.Pin = TS_INT_PIN;
-  gpio_init_structure.Pull = GPIO_PULLUP;
-  gpio_init_structure.Speed = GPIO_SPEED_FAST;
-  gpio_init_structure.Mode = GPIO_MODE_IT_FALLING;
-  HAL_GPIO_Init(TS_INT_GPIO_PORT, &gpio_init_structure);
 
   /* Enable and set the TS_INT EXTI Interrupt to an intermediate priority */
   HAL_NVIC_SetPriority((IRQn_Type)(TS_INT_EXTI_IRQn), 0x0F, 0x00);
@@ -396,11 +356,6 @@ uint8_t BSP_TS_Get_GestureId(TS_StateTypeDef *TS_State)
 }
 #endif /* TS_MULTI_TOUCH_SUPPORTED == 1 */
 
-
-/** @defgroup STM32F769I-DISCOVERY_TS_Private_Functions TS Private Functions
-  * @{
-  */
-
 #if (TS_MULTI_TOUCH_SUPPORTED == 1)
 /**
   * @brief  Function used to reset all touch data before a new acquisition
@@ -437,8 +392,6 @@ uint8_t BSP_TS_ResetTouchData(TS_StateTypeDef *TS_State)
 
 /**
   * @brief  Initializes the TS_INT pin MSP.
-  * @param  None
-  * @retval None
   */
 __weak void BSP_TS_INT_MspInit(void)
 {
@@ -446,18 +399,14 @@ __weak void BSP_TS_INT_MspInit(void)
 
   TS_INT_GPIO_CLK_ENABLE();
 
-  /* GPIO configuration in input for TouchScreen interrupt signal on TS_INT pin */
-  gpio_init_structure.Pin       = TS_INT_PIN;
-
-  gpio_init_structure.Mode      = GPIO_MODE_INPUT;
-  gpio_init_structure.Pull      = GPIO_PULLUP;
-  gpio_init_structure.Speed     = GPIO_SPEED_HIGH;
+  /* Configure Interrupt mode for TS_INT pin falling edge : when a new touch is available */
+  /* TS_INT pin is active on low level on new touch available */
+  gpio_init_structure.Pin = TS_INT_PIN;
+  gpio_init_structure.Pull = GPIO_PULLUP;
+  gpio_init_structure.Speed = GPIO_SPEED_FAST;
+  gpio_init_structure.Mode = GPIO_MODE_IT_FALLING;
   HAL_GPIO_Init(TS_INT_GPIO_PORT, &gpio_init_structure);
 }
-
-/**
-  * @}
-  */
 
 /**
   * @}

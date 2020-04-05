@@ -157,11 +157,6 @@
 			<locationURI>PARENT-2-PROJECT_LOC/Src/ethernetif.c</locationURI>
 		</link>
 		<link>
-			<name>Application/User/fs.c</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Src/fs.c</locationURI>
-		</link>
-		<link>
 			<name>Application/User/httpserver-netconn.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/Src/httpserver-netconn.c</locationURI>
@@ -332,6 +327,11 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
+			<name>Middlewares/LwIP/apps</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
 			<name>Drivers/BSP/Components/ili9325.c</name>
 			<type>1</type>
 			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/ili9325/ili9325.c</locationURI>
@@ -407,11 +407,6 @@
 			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LwIP/src/api/netifapi.c</locationURI>
 		</link>
 		<link>
-			<name>Middlewares/LwIP/Api/pppapi.c</name>
-			<type>1</type>
-			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LwIP/src/api/pppapi.c</locationURI>
-		</link>
-		<link>
 			<name>Middlewares/LwIP/Api/sockets.c</name>
 			<type>1</type>
 			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LwIP/src/api/sockets.c</locationURI>
@@ -447,9 +442,9 @@
 			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LwIP/src/core/init.c</locationURI>
 		</link>
 		<link>
-			<name>Middlewares/LwIP/Core/lwip_timers.c</name>
+			<name>Middlewares/LwIP/Core/ip.c</name>
 			<type>1</type>
-			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LwIP/src/core/lwip_timers.c</locationURI>
+			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LwIP/src/core/ip.c</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/LwIP/Core/mem.c</name>
@@ -502,19 +497,29 @@
 			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LwIP/src/core/tcp_out.c</locationURI>
 		</link>
 		<link>
+			<name>Middlewares/LwIP/Core/timeouts.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LwIP/src/core/timeouts.c</locationURI>
+		</link>
+		<link>
 			<name>Middlewares/LwIP/Core/udp.c</name>
 			<type>1</type>
 			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LwIP/src/core/udp.c</locationURI>
 		</link>
 		<link>
-			<name>Middlewares/LwIP/Netif/etharp.c</name>
+			<name>Middlewares/LwIP/Netif/ethernet.c</name>
 			<type>1</type>
-			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LwIP/src/netif/etharp.c</locationURI>
+			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LwIP/src/netif/ethernet.c</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/LwIP/Netif/sys_arch.c</name>
 			<type>1</type>
 			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LwIP/system/OS/sys_arch.c</locationURI>
+		</link>
+		<link>
+			<name>Middlewares/LwIP/apps/httpd</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/LwIP/Core/IPv4/autoip.c</name>
@@ -525,6 +530,11 @@
 			<name>Middlewares/LwIP/Core/IPv4/dhcp.c</name>
 			<type>1</type>
 			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LwIP/src/core/ipv4/dhcp.c</locationURI>
+		</link>
+		<link>
+			<name>Middlewares/LwIP/Core/IPv4/etharp.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LwIP/src/core/ipv4/etharp.c</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/LwIP/Core/IPv4/icmp.c</name>
@@ -547,9 +557,19 @@
 			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LwIP/src/core/ipv4/ip4_addr.c</locationURI>
 		</link>
 		<link>
-			<name>Middlewares/LwIP/Core/IPv4/ip_frag.c</name>
+			<name>Middlewares/LwIP/Core/IPv4/ip4_frag.c</name>
 			<type>1</type>
-			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LwIP/src/core/ipv4/ip_frag.c</locationURI>
+			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LwIP/src/core/ipv4/ip4_frag.c</locationURI>
+		</link>
+		<link>
+			<name>Middlewares/LwIP/apps/httpd/fs.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LwIP/src/apps/httpd/fs.c</locationURI>
+		</link>
+		<link>
+			<name>Middlewares/LwIP/apps/httpd/httpd.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Middlewares/Third_Party/LwIP/src/apps/httpd/httpd.c</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

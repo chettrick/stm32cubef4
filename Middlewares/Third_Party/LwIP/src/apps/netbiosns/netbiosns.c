@@ -1,6 +1,11 @@
 /**
  * @file
  * NetBIOS name service responder
+ */
+
+/**
+ * @defgroup netbiosns NETBIOS responder
+ * @ingroup apps
  *
  * This is an example implementation of a NetBIOS name server.
  * It responds to name queries for a configurable name.
@@ -41,6 +46,7 @@
 
 #if LWIP_IPV4 && LWIP_UDP  /* don't build if not configured for use in lwipopts.h */
 
+#include "lwip/def.h"
 #include "lwip/udp.h"
 #include "lwip/netif.h"
 
@@ -265,7 +271,7 @@ netbiosns_recv(void *arg, struct udp_pcb *upcb, struct pbuf *p, const ip_addr_t 
         /* decode the NetBIOS name */
         netbiosns_name_decode((char*)(netbios_name_hdr->encname), netbios_name, sizeof(netbios_name));
         /* if the packet is for us */
-        if (NETBIOS_STRCMP(netbios_name, NETBIOS_LOCAL_NAME) == 0) {
+        if (lwip_strnicmp(netbios_name, NETBIOS_LOCAL_NAME, sizeof(NETBIOS_LOCAL_NAME)) == 0) {
           struct pbuf *q;
           struct netbios_resp *resp;
 
@@ -308,6 +314,10 @@ netbiosns_recv(void *arg, struct udp_pcb *upcb, struct pbuf *p, const ip_addr_t 
   }
 }
 
+/**
+ * @ingroup netbiosns 
+ * Init netbios responder
+ */
 void
 netbiosns_init(void)
 {
@@ -315,29 +325,36 @@ netbiosns_init(void)
   LWIP_ASSERT("NetBIOS name is too long!", strlen(NETBIOS_LWIP_NAME) < NETBIOS_NAME_LEN);
 #endif
 
-  netbiosns_pcb = udp_new();
+  netbiosns_pcb = udp_new_ip_type(IPADDR_TYPE_ANY);
   if (netbiosns_pcb != NULL) {
     /* we have to be allowed to send broadcast packets! */
-    netbiosns_pcb->so_options |= SOF_BROADCAST;
-    udp_bind(netbiosns_pcb, IP_ADDR_ANY, NETBIOS_PORT);
+    ip_set_option(netbiosns_pcb, SOF_BROADCAST);
+    udp_bind(netbiosns_pcb, IP_ANY_TYPE, NETBIOS_PORT);
     udp_recv(netbiosns_pcb, netbiosns_recv, netbiosns_pcb);
   }
 }
 
 #ifndef NETBIOS_LWIP_NAME
-/* ATTENTION: the hostname must be <= 15 characters! */
+/**
+ * @ingroup netbiosns 
+ * Set netbios name. ATTENTION: the hostname must be less than 15 characters!
+ */
 void
 netbiosns_set_name(const char* hostname)
 {
   size_t copy_len = strlen(hostname);
   LWIP_ASSERT("NetBIOS name is too long!", copy_len < NETBIOS_NAME_LEN);
-  if(copy_len >= NETBIOS_NAME_LEN) {
+  if (copy_len >= NETBIOS_NAME_LEN) {
     copy_len = NETBIOS_NAME_LEN - 1;
   }
-  memcpy(netbiosns_local_name, hostname, copy_len + 1);
+  MEMCPY(netbiosns_local_name, hostname, copy_len + 1);
 }
 #endif
 
+/**
+ * @ingroup netbiosns 
+ * Stop netbios responder
+ */
 void
 netbiosns_stop(void)
 {

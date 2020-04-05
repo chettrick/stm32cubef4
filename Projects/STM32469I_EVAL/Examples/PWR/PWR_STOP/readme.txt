@@ -2,11 +2,11 @@
   @page PWR_STOP Power Stop Mode Example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    PWR/PWR_STOP/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.5
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   Description of the Power Stop Mode example.
   ******************************************************************************
   *
@@ -110,13 +110,13 @@ This behavior is repeated in an infinite loop.
 
 @par Hardware and Software environment
 
-  - STM32469I-EVAL revB Set-up :
+  - STM32469I-EVAL RevC Set-up :
     - Use the Tamper push-button connected to pin PC.13 (EXTI15_10)
     - Connect an ampere-meter to  to measure the IDD current.
    
   - This example runs on STM32F469xx/STM32F479xx devices.
 
-  - This example has been tested and validated with STMicroelectronics STM32469I-EVAL revB 
+  - This example has been tested and validated with STMicroelectronics STM32469I-EVAL RevC 
     evaluation board and can be easily tailored to any other supported device 
     and development board.
     

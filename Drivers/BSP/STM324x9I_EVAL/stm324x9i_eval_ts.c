@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm324x9i_eval_ts.c
   * @author  MCD Application Team
-  * @version V2.2.3
-  * @date    22-April-2016
+  * @version V3.0.0
+  * @date    27-January-2017
   * @brief   This file provides a set of functions needed to manage the Touch 
   *          Screen on STM324x9I-EVAL evaluation board.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -92,27 +92,6 @@
   * @{
   */   
 
-/** @defgroup STM324x9I_EVAL_TS_Private_Types_Definitions STM324x9I EVAL TS Private Types Definitions
-  * @{
-  */ 
-/**
-  * @}
-  */ 
-
-/** @defgroup STM324x9I_EVAL_TS_Private_Defines STM324x9I EVAL TS Private Defines
-  * @{
-  */ 
-/**
-  * @}
-  */ 
-
-/** @defgroup STM324x9I_EVAL_TS_Private_Macros STM324x9I EVAL TS Private Macros
-  * @{
-  */ 
-/**
-  * @}
-  */  
-
 /** @defgroup STM324x9I_EVAL_TS_Private_Variables STM324x9I EVAL TS Private Variables
   * @{
   */ 
@@ -120,13 +99,6 @@ static TS_DrvTypeDef *ts_driver;
 static uint16_t ts_x_boundary, ts_y_boundary; 
 static uint8_t  ts_orientation;
 static uint8_t  I2C_Address;
-/**
-  * @}
-  */ 
-
-/** @defgroup STM324x9I_EVAL_TS_Private_Function_Prototypes STM324x9I EVAL TS Private Function Prototypes
-  * @{
-  */ 
 /**
   * @}
   */ 

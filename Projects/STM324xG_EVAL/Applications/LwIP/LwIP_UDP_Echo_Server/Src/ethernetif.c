@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    LwIP/LwIP_UDP_Echo_Server/Src/ethernetif.c
   * @author  MCD Application Team
-  * @version V1.3.6
-  * @date    04-November-2016
+  * @version V1.4.0
+  * @date    17-February-2017
   * @brief   This file implements Ethernet network interface drivers for lwIP
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -46,10 +46,7 @@
   */
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
-#include "lwip/opt.h"
-#include "lwip/mem.h"
-#include "lwip/memp.h"
-#include "lwip/lwip_timers.h"
+#include "lwip/timeouts.h"
 #include "netif/etharp.h"
 #include "ethernetif.h"
 #include <string.h>
@@ -171,7 +168,7 @@ void HAL_ETH_MspInit(ETH_HandleTypeDef *heth)
                        LL Driver Interface ( LwIP stack --> ETH) 
 *******************************************************************************/
 /**
-  * In this function, the hardware should be initialized.
+  * @brief In this function, the hardware should be initialized.
   * Called from ethernetif_init().
   *
   * @param netif the already initialized lwip network interface structure
@@ -181,7 +178,8 @@ static void low_level_init(struct netif *netif)
 { 
   uint32_t regvalue = 0;
   uint8_t macaddress[6]= { MAC_ADDR0, MAC_ADDR1, MAC_ADDR2, MAC_ADDR3, MAC_ADDR4, MAC_ADDR5 };
- 
+
+  
   EthHandle.Instance = ETH;  
   EthHandle.Init.MACAddr = macaddress;
   EthHandle.Init.AutoNegotiation = ETH_AUTONEGOTIATION_ENABLE;
@@ -204,9 +202,9 @@ static void low_level_init(struct netif *netif)
      
   /* Initialize Rx Descriptors list: Chain Mode  */
   HAL_ETH_DMARxDescListInit(&EthHandle, DMARxDscrTab, &Rx_Buff[0][0], ETH_RXBUFNB);
-  
+
   /* set MAC hardware address length */
-  netif->hwaddr_len = ETHARP_HWADDR_LEN;
+  netif->hwaddr_len = ETH_HWADDR_LEN;
   
   /* set MAC hardware address */
   netif->hwaddr[0] =  MAC_ADDR0;
@@ -245,7 +243,7 @@ static void low_level_init(struct netif *netif)
 }
 
 /**
-  * This function should do the actual transmission of the packet. The packet is
+  * @brief This function should do the actual transmission of the packet. The packet is
   * contained in the pbuf that is passed to the function. This pbuf
   * might be chained.
   *
@@ -337,7 +335,7 @@ error:
 }
 
 /**
-  * Should allocate a pbuf and transfer the bytes of the incoming
+  * @brief Should allocate a pbuf and transfer the bytes of the incoming
   * packet from the interface into the pbuf.
   *
   * @param netif the lwip network interface structure for this ethernetif
@@ -363,63 +361,69 @@ static struct pbuf * low_level_input(struct netif *netif)
   len = EthHandle.RxFrameInfos.length;
   buffer = (uint8_t *)EthHandle.RxFrameInfos.buffer;
   
-  /* We allocate a pbuf chain of pbufs from the Lwip buffer pool */
-  p = pbuf_alloc(PBUF_RAW, len, PBUF_POOL);
+  if (len > 0)
+  {
+    /* We allocate a pbuf chain of pbufs from the Lwip buffer pool */
+    p = pbuf_alloc(PBUF_RAW, len, PBUF_POOL);
+  }
   
   if (p != NULL)
   {
     dmarxdesc = EthHandle.RxFrameInfos.FSRxDesc;
     bufferoffset = 0;
+    
     for(q = p; q != NULL; q = q->next)
     {
       byteslefttocopy = q->len;
       payloadoffset = 0;
       
-      /* Check if the length of bytes to copy in current pbuf is bigger than Rx buffer size*/
+      /* Check if the length of bytes to copy in current pbuf is bigger than Rx buffer size */
       while( (byteslefttocopy + bufferoffset) > ETH_RX_BUF_SIZE )
       {
-        /* Copy data to pbuf*/
-        memcpy( (u8_t*)((u8_t*)q->payload + payloadoffset), (u8_t*)((u8_t*)buffer + bufferoffset), (ETH_RX_BUF_SIZE - bufferoffset));
+        /* Copy data to pbuf */
+        memcpy( (uint8_t*)((uint8_t*)q->payload + payloadoffset), (uint8_t*)((uint8_t*)buffer + bufferoffset), (ETH_RX_BUF_SIZE - bufferoffset));
         
         /* Point to next descriptor */
         dmarxdesc = (ETH_DMADescTypeDef *)(dmarxdesc->Buffer2NextDescAddr);
-        buffer = (unsigned char *)(dmarxdesc->Buffer1Addr);
+        buffer = (uint8_t *)(dmarxdesc->Buffer1Addr);
         
         byteslefttocopy = byteslefttocopy - (ETH_RX_BUF_SIZE - bufferoffset);
         payloadoffset = payloadoffset + (ETH_RX_BUF_SIZE - bufferoffset);
         bufferoffset = 0;
       }
+      
       /* Copy remaining data in pbuf */
-      memcpy( (u8_t*)((u8_t*)q->payload + payloadoffset), (u8_t*)((u8_t*)buffer + bufferoffset), byteslefttocopy);
+      memcpy( (uint8_t*)((uint8_t*)q->payload + payloadoffset), (uint8_t*)((uint8_t*)buffer + bufferoffset), byteslefttocopy);
       bufferoffset = bufferoffset + byteslefttocopy;
     }
-  }
-  
+  } 
+    
+  /* Release descriptors to DMA */
+  /* Point to first descriptor */
   dmarxdesc = EthHandle.RxFrameInfos.FSRxDesc;
-  
   /* Set Own bit in Rx descriptors: gives the buffers back to DMA */
-  for (i=0; i< (EthHandle.RxFrameInfos).SegCount; i++)
+  for (i=0; i< EthHandle.RxFrameInfos.SegCount; i++)
   {  
-    dmarxdesc->Status = ETH_DMARXDESC_OWN;
+    dmarxdesc->Status |= ETH_DMARXDESC_OWN;
     dmarxdesc = (ETH_DMADescTypeDef *)(dmarxdesc->Buffer2NextDescAddr);
   }
   
   /* Clear Segment_Count */
-  (EthHandle.RxFrameInfos).SegCount =0;
+  EthHandle.RxFrameInfos.SegCount =0;
   
   /* When Rx Buffer unavailable flag is set: clear it and resume reception */
-  if (((EthHandle.Instance)->DMASR & ETH_DMASR_RBUS) != (uint32_t)RESET)  
+  if ((EthHandle.Instance->DMASR & ETH_DMASR_RBUS) != (uint32_t)RESET)  
   {
     /* Clear RBUS ETHERNET DMA flag */
-    (EthHandle.Instance)->DMASR = ETH_DMASR_RBUS;
+    EthHandle.Instance->DMASR = ETH_DMASR_RBUS;
     /* Resume DMA reception */
-    (EthHandle.Instance)->DMARPDR = 0;
+    EthHandle.Instance->DMARPDR = 0;
   }
   return p;
 }
 
 /**
-  * This function should be called when a packet is ready to be read
+  * @brief This function should be called when a packet is ready to be read
   * from the interface. It uses the function low_level_input() that
   * should handle the actual reception of bytes from the network
   * interface. Then the type of the received packet is determined and
@@ -450,7 +454,7 @@ void ethernetif_input(struct netif *netif)
 }
 
 /**
-  * Should be called at the beginning of the program to set up the
+  * @brief Should be called at the beginning of the program to set up the
   * network interface. It calls the function low_level_init() to do the
   * actual setup of the hardware.
   *
@@ -489,7 +493,7 @@ err_t ethernetif_init(struct netif *netif)
   * @brief  Returns the current time in milliseconds
   *         when LWIP_TIMERS == 1 and NO_SYS == 1
   * @param  None
-  * @retval Time
+  * @retval Current Time value
   */
 u32_t sys_now(void)
 {
@@ -622,7 +626,7 @@ void ethernetif_update_config(struct netif *netif)
   */
 __weak void ethernetif_notify_conn_changed(struct netif *netif)
 {
-  /* NOTE : This is function clould be implemented in user file 
+  /* NOTE : This is function could be implemented in user file 
             when the callback is needed,
   */  
 }

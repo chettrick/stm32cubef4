@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LwIP/LwIP_HTTP_Server_Socket_RTOS/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.4.6
-  * @date    04-November-2016
+  * @version V1.5.0
+  * @date    17-February-2017
   * @brief   This sample code implements a http server application based on 
   *          Netconn API of LwIP stack and FreeRTOS. This application uses 
   *          STM32F4xx the ETH HAL API to transmit and receive data. 
@@ -11,7 +11,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -49,13 +49,14 @@
   */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "ethernetif.h"
 #include "lwip/netif.h"
 #include "lwip/tcpip.h"
-#include "cmsis_os.h"
-#include "ethernetif.h"
 #include "app_ethernet.h"
-#include "lcd_log.h"
 #include "httpserver-socket.h"
+#ifdef USE_LCD
+#include "lcd_log.h"
+#endif
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -123,23 +124,18 @@ static void StartThread(void const * argument)
   /* Create tcp_ip stack thread */
   tcpip_init(NULL, NULL);
   
-  /* Initilaize the LwIP stack */
-  Netif_Config(); 
+  /* Initialize the LwIP stack */
+  Netif_Config();
   
   /* Initialize webserver demo */
   http_server_socket_init();
   
-  /* Notify user about the netwoek interface config */
+  /* Notify user about the network interface config */
   User_notification(&gnetif);
   
 #ifdef USE_DHCP
   /* Start DHCPClient */
-#if defined(__GNUC__)
-  osThreadDef(DHCP, DHCP_thread, osPriorityBelowNormal, 0, configMINIMAL_STACK_SIZE * 5);
-#else
   osThreadDef(DHCP, DHCP_thread, osPriorityBelowNormal, 0, configMINIMAL_STACK_SIZE * 2);
-#endif
-
   osThreadCreate (osThread(DHCP), &gnetif);
 #endif
   
@@ -163,18 +159,17 @@ static void Netif_Config(void)
 {
   ip_addr_t ipaddr;
   ip_addr_t netmask;
-  ip_addr_t gw;	
-  
+  ip_addr_t gw;
+	
 #ifdef USE_DHCP
-  ipaddr.addr = 0;
-  netmask.addr = 0;
-  gw.addr = 0;
+  ip_addr_set_zero_ip4(&ipaddr);
+  ip_addr_set_zero_ip4(&netmask);
+  ip_addr_set_zero_ip4(&gw);
 #else
-  /* IP address default setting */
-  IP4_ADDR(&ipaddr, IP_ADDR0, IP_ADDR1, IP_ADDR2, IP_ADDR3);
-  IP4_ADDR(&netmask, NETMASK_ADDR0, NETMASK_ADDR1 , NETMASK_ADDR2, NETMASK_ADDR3);
-  IP4_ADDR(&gw, GW_ADDR0, GW_ADDR1, GW_ADDR2, GW_ADDR3);
-#endif
+  IP_ADDR4(&ipaddr,IP_ADDR0,IP_ADDR1,IP_ADDR2,IP_ADDR3);
+  IP_ADDR4(&netmask,NETMASK_ADDR0,NETMASK_ADDR1,NETMASK_ADDR2,NETMASK_ADDR3);
+  IP_ADDR4(&gw,GW_ADDR0,GW_ADDR1,GW_ADDR2,GW_ADDR3);
+#endif /* USE_DHCP */
   
   /* - netif_add(struct netif *netif, ip_addr_t *ipaddr,
   ip_addr_t *netmask, ip_addr_t *gw,
@@ -230,10 +225,9 @@ static void Netif_Config(void)
   */
 static void BSP_Config(void)
 {
-  /* Configure LED1, LED2, LED3 and LED4 */
+  /* Configure LED1, LED2, and LED4 */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED2);
-  BSP_LED_Init(LED3);
   BSP_LED_Init(LED4);
   
   /* Init IO Expander */
@@ -268,7 +262,7 @@ static void BSP_Config(void)
 }
 
 /**
-  * @brief  Toggle Led4 task
+  * @brief  Toggle LED4 thread
   * @param  pvParameters not used
   * @retval None
   */
@@ -276,7 +270,7 @@ static void ToggleLed4(void const * argument)
 {
   for( ;; )
   {
-    /* toggle LED4 each 250ms */
+    /* Toggle LED4 each 250ms */
     BSP_LED_Toggle(LED4);
     osDelay(250);
   }

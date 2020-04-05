@@ -2,15 +2,15 @@
   ******************************************************************************
   * @file    USB_Device/MSC_Standalone/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    04-November-2016
+  * @version V1.0.1
+  * @date    17-February-2017
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -139,7 +139,6 @@ void PendSV_Handler(void)
 void SysTick_Handler(void)
 {
   HAL_IncTick();
-  Toggle_Leds();
 }
 
 /******************************************************************************/
@@ -158,38 +157,5 @@ void OTG_FS_IRQHandler(void)
 {
   HAL_PCD_IRQHandler(&hpcd);
 }
-
-#if 0
-/**
-  * @brief  This function handles SDIO interrupt request.
-  * @param  None
-  * @retval None
-  */
-void SDMMC1_IRQHandler(void)
-{
-  BSP_SD_IRQHandler();
-}
-
-
-/**
-  * @brief  This function handles DMA2 Stream 3 interrupt request.
-  * @param  None
-  * @retval None
-  */
-void DMA2_Stream3_IRQHandler(void)
-{
-  BSP_SD_DMA_Rx_IRQHandler();
-}
-
-/**
-  * @brief  This function handles DMA2 Stream 6 interrupt request.
-  * @param  None
-  * @retval None
-  */
-void DMA2_Stream6_IRQHandler(void)
-{
-  BSP_SD_DMA_Tx_IRQHandler(); 
-}
-#endif
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

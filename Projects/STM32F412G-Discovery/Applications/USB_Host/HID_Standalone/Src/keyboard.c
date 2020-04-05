@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    USB_Host/HID_Standalone/Src/keyboard.c 
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   This file implements the HID keyboard functions
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -44,30 +44,31 @@
   *
   ******************************************************************************
   */
-/* Includes ------------------------------------------------------------------*/
+/* Includes ------------------------------------------------------------------ */
 #include "main.h"
 
-/* Private typedef -----------------------------------------------------------*/
-/* Private define ------------------------------------------------------------*/
+/* Private typedef ----------------------------------------------------------- */
+/* Private define ------------------------------------------------------------ */
 #define KYBRD_FIRST_COLUMN               (uint16_t) 8
 #define KYBRD_LAST_COLUMN                (uint16_t) BSP_LCD_GetXSize()
 #define KYBRD_FIRST_LINE                 (uint8_t) 70
 #define SMALL_FONT_COLUMN_WIDTH                    8
 #define SMALL_FONT_LINE_WIDTH                      15
 #define KYBRD_LAST_LINE                  (uint16_t)155
-/* Private macro -------------------------------------------------------------*/
-/* Private variables ---------------------------------------------------------*/
+/* Private macro ------------------------------------------------------------- */
+/* Private variables --------------------------------------------------------- */
 extern HID_DEMO_StateMachine hid_demo;
 extern uint8_t *DEMO_KEYBOARD_menu[];
 extern uint8_t prev_select;
 extern uint32_t hid_demo_ready;
 uint8_t KeybrdCharYpos = 0;
 uint16_t KeybrdCharXpos = 0;
-uint16_t CurrentLastXpos[KYBRD_LAST_LINE] = {0};
-/* Private function prototypes -----------------------------------------------*/
+uint16_t CurrentLastXpos[KYBRD_LAST_LINE] = { 0 };
+
+/* Private function prototypes ----------------------------------------------- */
 static void USR_KEYBRD_Init(void);
 
-/* Private functions ---------------------------------------------------------*/
+/* Private functions --------------------------------------------------------- */
 
 /**
   * @brief  Manages Keyboard Menu Process.  
@@ -76,48 +77,48 @@ static void USR_KEYBRD_Init(void);
   */
 void HID_KeyboardMenuProcess(void)
 {
-  switch(hid_demo.keyboard_state)
+  switch (hid_demo.keyboard_state)
   {
   case HID_KEYBOARD_IDLE:
     hid_demo.keyboard_state = HID_KEYBOARD_START;
-    HID_SelectItem(DEMO_KEYBOARD_menu, 0);   
+    HID_SelectItem(DEMO_KEYBOARD_menu, 0);
     hid_demo.select = 0;
-    prev_select = 0;       
+    prev_select = 0;
     break;
-    
+
   case HID_KEYBOARD_WAIT:
-    if(hid_demo.select != prev_select)
+    if (hid_demo.select != prev_select)
     {
       prev_select = hid_demo.select;
       HID_SelectItem(DEMO_KEYBOARD_menu, hid_demo.select & 0x7F);
       /* Handle select item */
-      if(hid_demo.select & 0x80)
+      if (hid_demo.select & 0x80)
       {
         hid_demo.select &= 0x7F;
-        switch(hid_demo.select)
+        switch (hid_demo.select)
         {
-        case 0: 
+        case 0:
           hid_demo.keyboard_state = HID_KEYBOARD_START;
           break;
-          
-        case 1: /* Return */
+
+        case 1:                /* Return */
           LCD_LOG_ClearTextZone();
           hid_demo.state = HID_DEMO_REENUMERATE;
           hid_demo.select = 0;
           break;
-          
+
         default:
           break;
         }
       }
     }
-    break; 
-    
+    break;
+
   case HID_KEYBOARD_START:
-    USR_KEYBRD_Init();   
+    USR_KEYBRD_Init();
     hid_demo.keyboard_state = HID_KEYBOARD_WAIT;
-    break;  
-    
+    break;
+
   default:
     break;
   }
@@ -132,10 +133,12 @@ static void USR_KEYBRD_Init(void)
 {
   LCD_LOG_ClearTextZone();
   BSP_LCD_SetTextColor(LCD_COLOR_YELLOW);
-  
-  BSP_LCD_DisplayStringAtLine(4, (uint8_t *)"Use Keyboard to tape characters:                                                            "); 
+
+  BSP_LCD_DisplayStringAtLine(4,
+                              (uint8_t *)
+                              "Use Keyboard to tape characters:                                                            ");
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  
+
   KeybrdCharYpos = KYBRD_FIRST_LINE;
   KeybrdCharXpos = KYBRD_FIRST_COLUMN;
 }
@@ -147,44 +150,44 @@ static void USR_KEYBRD_Init(void)
   */
 void USR_KEYBRD_ProcessData(uint8_t data)
 {
-  if(data == '\n')
+  if (data == '\n')
   {
     KeybrdCharXpos = KYBRD_FIRST_COLUMN;
-    
+
     /* Increment char Y position */
     KeybrdCharYpos += SMALL_FONT_LINE_WIDTH;
-    
-    if(KeybrdCharYpos > KYBRD_LAST_LINE)
+
+    if (KeybrdCharYpos > KYBRD_LAST_LINE)
     {
       LCD_LOG_ClearTextZone();
       KeybrdCharYpos = KYBRD_FIRST_LINE;
       KeybrdCharXpos = KYBRD_FIRST_COLUMN;
     }
   }
-  else if(data == '\r')
+  else if (data == '\r')
   {
     /* Manage deletion of character and update cursor location */
-    if(KeybrdCharXpos == KYBRD_FIRST_COLUMN) 
+    if (KeybrdCharXpos == KYBRD_FIRST_COLUMN)
     {
       /* First character of first line to be deleted */
-      if(KeybrdCharYpos == KYBRD_FIRST_LINE)
-      {  
-        KeybrdCharXpos = KYBRD_FIRST_COLUMN; 
+      if (KeybrdCharYpos == KYBRD_FIRST_LINE)
+      {
+        KeybrdCharXpos = KYBRD_FIRST_COLUMN;
       }
       else
       {
         KeybrdCharYpos -= SMALL_FONT_LINE_WIDTH;
-        KeybrdCharXpos = (KYBRD_LAST_COLUMN - SMALL_FONT_COLUMN_WIDTH); 
+        KeybrdCharXpos = (KYBRD_LAST_COLUMN - SMALL_FONT_COLUMN_WIDTH);
       }
     }
     else
     {
-      if(CurrentLastXpos[KeybrdCharYpos] > KYBRD_FIRST_COLUMN)
+      if (CurrentLastXpos[KeybrdCharYpos] > KYBRD_FIRST_COLUMN)
       {
         CurrentLastXpos[KeybrdCharYpos] -= SMALL_FONT_COLUMN_WIDTH;
         KeybrdCharXpos = CurrentLastXpos[KeybrdCharYpos];
       }
-      else if(KeybrdCharYpos > KYBRD_FIRST_LINE)
+      else if (KeybrdCharYpos > KYBRD_FIRST_LINE)
       {
         KeybrdCharYpos -= SMALL_FONT_LINE_WIDTH;
         CurrentLastXpos[KeybrdCharYpos] -= SMALL_FONT_COLUMN_WIDTH;
@@ -199,27 +202,27 @@ void USR_KEYBRD_ProcessData(uint8_t data)
   else
   {
     /* Update the cursor position on LCD */
-    BSP_LCD_DisplayChar(KeybrdCharXpos, KeybrdCharYpos, data);  
-    
+    BSP_LCD_DisplayChar(KeybrdCharXpos, KeybrdCharYpos, data);
+
     /* Increment char X position */
     KeybrdCharXpos += SMALL_FONT_COLUMN_WIDTH;
-    
+
     CurrentLastXpos[KeybrdCharYpos] = KeybrdCharXpos;
     /* Check if the X position has reached the last column */
-    if(KeybrdCharXpos == KYBRD_LAST_COLUMN)
+    if (KeybrdCharXpos == KYBRD_LAST_COLUMN)
     {
       KeybrdCharXpos = KYBRD_FIRST_COLUMN;
-      
+
       /* Increment char Y position */
       KeybrdCharYpos += SMALL_FONT_LINE_WIDTH;
     }
-    
-    if(KeybrdCharYpos > KYBRD_LAST_LINE)
+
+    if (KeybrdCharYpos > KYBRD_LAST_LINE)
     {
       LCD_LOG_ClearTextZone();
       KeybrdCharYpos = KYBRD_FIRST_LINE;
       /* Start New Display of the cursor position on LCD */
-      BSP_LCD_DisplayChar(KeybrdCharXpos,KeybrdCharYpos, data);  
+      BSP_LCD_DisplayChar(KeybrdCharXpos, KeybrdCharYpos, data);
     }
   }
 }

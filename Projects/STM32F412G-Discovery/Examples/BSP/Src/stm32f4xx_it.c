@@ -2,15 +2,15 @@
   ******************************************************************************
   * @file    BSP/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -57,8 +57,7 @@
 extern QSPI_HandleTypeDef               QSPIHandle;
 /* I2S handler declared in "stm32412g_discovery_audio.c" file */
 extern I2S_HandleTypeDef                haudio_i2s;
-extern DFSDM_Filter_HandleTypeDef       haudio_in_dfsdm_leftfilter;
-extern DFSDM_Filter_HandleTypeDef       haudio_in_dfsdm_rightfilter;
+extern DFSDM_Filter_HandleTypeDef      hAudioInDfsdmFilter[];
 extern SD_HandleTypeDef uSdHandle;
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
@@ -163,11 +162,6 @@ void PendSV_Handler(void)
 void SysTick_Handler(void)
 {
   HAL_IncTick();
-  Toggle_Leds();
-  /* Check periodically the buffer state and fill played buffer with new data 
-     following the state that has been updated by the BSP_AUDIO_OUT_TransferComplete_CallBack()
-     and BSP_AUDIO_OUT_HalfTransfer_CallBack() */
-  AUDIO_Process();
 }
 
 /******************************************************************************/
@@ -179,27 +173,15 @@ void SysTick_Handler(void)
 
 /**
   * @brief  This function handles External line 0 interrupt request.
-  * @param  None
   * @retval None
   */
 void EXTI0_IRQHandler(void)
 {
-  HAL_GPIO_EXTI_IRQHandler(BUTTON_WAKEUP | SEL_JOY_PIN | UP_JOY_PIN);
-}
-
-/**
-  * @brief  This function handles External line 1 interrupt request.
-  * @param  None
-  * @retval None
-  */
-void EXTI1_IRQHandler(void)
-{
-   HAL_GPIO_EXTI_IRQHandler(DOWN_JOY_PIN);
+  HAL_GPIO_EXTI_IRQHandler(BUTTON_WAKEUP);
 }
 
 /**
   * @brief  This function handles External line 3 interrupt request.
-  * @param  None
   * @retval None
   */
 void EXTI3_IRQHandler(void)
@@ -208,41 +190,34 @@ void EXTI3_IRQHandler(void)
 }
 
 /**
-  * @brief  This function handles External line 15_10 interrupt request.
-  * @param  None
+  * @brief  This function handles External line 9_5 interrupt request.
   * @retval None
   */
-void EXTI15_10_IRQHandler(void)
+void EXTI9_5_IRQHandler(void)
 {
-  HAL_GPIO_EXTI_IRQHandler(TAMPER_TAMP1_PIN | LEFT_JOY_PIN | RIGHT_JOY_PIN);
+   HAL_GPIO_EXTI_IRQHandler(TS_INT_PIN);
 }
 
 /**
   * @brief  This function handles DMA1 Stream5 interrupt request.
-  * @param  None
   * @retval None
   */
 void AUDIO_OUT_I2Sx_DMAx_IRQHandler(void)
 {
-/* BSP Audio not available */
   HAL_DMA_IRQHandler(haudio_i2s.hdmatx);
 }
 
 /**
   * @brief  This function handles DMA1 Stream 0 interrupt request.
-  * @param  None
   * @retval None
   */
 void AUDIO_IN_I2Sx_DMAx_IRQHandler(void)
 {
-/* BSP Audio not available */
   HAL_DMA_IRQHandler(haudio_i2s.hdmarx);
-
 }
 
 /**
   * @brief  This function handles QUADSPI interrupt request.
-  * @param  None
   * @retval None
   */
 void QuadSPI_IRQHandler(void)
@@ -250,24 +225,11 @@ void QuadSPI_IRQHandler(void)
   HAL_QSPI_IRQHandler(&QSPIHandle);
 }
 
-
-#if 0
 /**
-  * @brief  This function handles SPI3 interrupt request.
-  * @param  None
+  * @brief  This function handles DFSDM MIC1 DMA interrupt request.
   * @retval None
   */
-void SPI3_IRQHandler(void) {   
-  HAL_I2S_IRQHandler(&haudio_i2s);
-}
-#endif
-
-/**
-  * @brief  This function handles DFSDM Left DMAinterrupt request.
-  * @param  None
-  * @retval None
-  */
-void AUDIO_DFSDM_DMAx_LEFT_IRQHandler(void)
+void AUDIO_DFSDM_DMAx_MIC1_IRQHandler(void)
 {
   if(SdmmcTest == 1)
   {
@@ -275,42 +237,39 @@ void AUDIO_DFSDM_DMAx_LEFT_IRQHandler(void)
   }
   else
   {
-  HAL_DMA_IRQHandler(haudio_in_dfsdm_leftfilter.hdmaReg);
+  HAL_DMA_IRQHandler(hAudioInDfsdmFilter[POS_VAL(INPUT_DEVICE_DIGITAL_MIC1)].hdmaReg);
   }
 }
 
 /**
-  * @brief  This function handles DFSDM Right DMAinterrupt request.
-  * @param  None
+  * @brief  This function handles DFSDM MIC2 DMA interrupt request.
   * @retval None
   */
-void AUDIO_DFSDM_DMAx_RIGHT_IRQHandler(void)
+void AUDIO_DFSDM_DMAx_MIC2_IRQHandler(void)
 {
-  HAL_DMA_IRQHandler(haudio_in_dfsdm_rightfilter.hdmaReg);
+  HAL_DMA_IRQHandler(hAudioInDfsdmFilter[POS_VAL(INPUT_DEVICE_DIGITAL_MIC2)].hdmaReg);
 }
 
 /**
   * @brief  Handles SD card interrupt request.
   * @retval None
   */
-void SD_IRQHandler(void)
+void BSP_SD_IRQHandler(void)
 {
   HAL_SD_IRQHandler(&uSdHandle);
 }
-
 
 /**
   * @brief  Handles SD DMA Rx transfer interrupt request.
   * @retval None
   */
-void SD_DMA_Rx_IRQHandler(void)
+void BSP_SD_DMA_Rx_IRQHandler(void)
 {
   HAL_DMA_IRQHandler(uSdHandle.hdmarx);
 }
 
 /**
   * @brief  This function handles PPP interrupt request.
-  * @param  None
   * @retval None
   */
 /*void PPP_IRQHandler(void)

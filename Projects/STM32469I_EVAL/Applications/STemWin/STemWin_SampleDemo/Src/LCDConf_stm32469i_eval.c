@@ -36,13 +36,13 @@ Purpose     : Display controller configuration (single layer)
   ******************************************************************************
   * @file    LCDConf_stm32469i_eval.c
   * @author  MCD Application Team
-  * @version V1.0.6
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   Driver for STM32469I-EVAL board LCD
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -367,6 +367,7 @@ static void LCD_LL_Init(void)
 {   
   RCC_PeriphCLKInitTypeDef  PeriphClkInitStruct;
   GPIO_InitTypeDef          GPIO_Init_Structure;
+  static DSI_PHY_TimerTypeDef PhyTimings;
   static DSI_CmdCfgTypeDef         CmdCfg;
   static DSI_LPCmdTypeDef          LPCmd;
   static DSI_PLLInitTypeDef        PLLInit;
@@ -434,6 +435,15 @@ static void LCD_LL_Init(void)
   LPCmd.LPDcsLongWrite        = DSI_LP_DLW_ENABLE;
   HAL_DSI_ConfigCommand(&hdsi_eval, &LPCmd);
 
+  /* Configure DSI PHY HS2LP and LP2HS timings */
+  PhyTimings.ClockLaneHS2LPTime = 35;
+  PhyTimings.ClockLaneLP2HSTime = 35;
+  PhyTimings.DataLaneHS2LPTime = 35;
+  PhyTimings.DataLaneLP2HSTime = 35;
+  PhyTimings.DataLaneMaxReadTime = 0;
+  PhyTimings.StopWaitTime = 10;
+  HAL_DSI_ConfigPhyTimer(&hdsi_eval, &PhyTimings);
+  
   /* Initialize LTDC */
   LTDC_Init();
 
@@ -877,7 +887,7 @@ void HAL_DSI_EndOfRefreshCallback(DSI_HandleTypeDef *hdsi)
       /* Update LTDC configuaration */
       LTDC_LAYER(&hltdc_eval, index)->CFBAR  = LCD_Addr[index] + LCD_ActiveRegion  * HACT * 2;
     }
-    __HAL_LTDC_RELOAD_CONFIG(&hltdc_eval);
+    __HAL_LTDC_RELOAD_IMMEDIATE_CONFIG(&hltdc_eval);
     __HAL_DSI_WRAPPER_ENABLE(hdsi);
     LCD_SetUpdateRegion(LCD_ActiveRegion++);
     /* Refresh the right part of the display */
@@ -892,7 +902,7 @@ void HAL_DSI_EndOfRefreshCallback(DSI_HandleTypeDef *hdsi)
     {
       LTDC_LAYER(&hltdc_eval, index)->CFBAR  = LCD_Addr[index];
     }
-    __HAL_LTDC_RELOAD_CONFIG(&hltdc_eval);
+    __HAL_LTDC_RELOAD_IMMEDIATE_CONFIG(&hltdc_eval);
     __HAL_DSI_WRAPPER_ENABLE(&hdsi_eval);  
     LCD_SetUpdateRegion(0); 
   }
@@ -1075,7 +1085,7 @@ int LCD_X_DisplayDriver(unsigned LayerIndex, unsigned Cmd, void * pData)
       __HAL_LTDC_LAYER_DISABLE(&hltdc_eval, LayerIndex); 
       __HAL_DSI_WRAPPER_ENABLE(&hdsi_eval);
     }
-    __HAL_LTDC_RELOAD_CONFIG(&hltdc_eval); 
+    __HAL_LTDC_RELOAD_IMMEDIATE_CONFIG(&hltdc_eval); 
 
     HAL_DSI_Refresh(&hdsi_eval); 
     break;

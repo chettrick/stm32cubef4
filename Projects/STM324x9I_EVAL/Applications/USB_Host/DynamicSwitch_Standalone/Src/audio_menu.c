@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    USB_Host/DynamicSwitch_Standalone/Src/audio_menu.c 
   * @author  MCD Application Team
-  * @version V1.4.6
-  * @date    04-November-2016
+  * @version V1.5.0
+  * @date    17-February-2017
   * @brief   This file implements Audio Menu Functions
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -44,33 +44,35 @@
   *
   ******************************************************************************
   */
-/* Includes ------------------------------------------------------------------*/
+/* Includes ------------------------------------------------------------------ */
 #include "main.h"
 
-/* Private typedef -----------------------------------------------------------*/
-/* Private define ------------------------------------------------------------*/
-/* Private macro -------------------------------------------------------------*/
-/* Private variables ---------------------------------------------------------*/
+/* Private typedef ----------------------------------------------------------- */
+/* Private define ------------------------------------------------------------ */
+/* Private macro ------------------------------------------------------------- */
+/* Private variables --------------------------------------------------------- */
 uint32_t audio_flag = 0;
-FILELIST_FileTypeDef        file_list;
-extern uint8_t              prev_select;
-AUDIO_DEMO_SelectMode       audio_select_mode;
-AUDIO_DEMO_StateMachine     audio_demo;
+FILELIST_FileTypeDef file_list;
+extern uint8_t prev_select;
+AUDIO_DEMO_SelectMode audio_select_mode;
+AUDIO_DEMO_StateMachine audio_demo;
 AUDIO_PLAYBACK_StateTypeDef audio_state;
 
-uint8_t *AUDIO_main_menu[] = 
-{
-  (uint8_t *)"      1 - Explore audio file                                         ",
-  (uint8_t *)"      2 - Start audio Player                                         ",
-  (uint8_t *)"      3 - Re-Enumerate                                               ",
+uint8_t *AUDIO_main_menu[] = {
+  (uint8_t *)
+    "      1 - Explore audio file                                         ",
+  (uint8_t *)
+    "      2 - Start audio Player                                         ",
+  (uint8_t *)
+    "      3 - Re-Enumerate                                               ",
 };
 
-/* Private function prototypes -----------------------------------------------*/
+/* Private function prototypes ----------------------------------------------- */
 static uint8_t Audio_ShowWavFiles(void);
 static void LCD_ClearTextZone(void);
- 
-/* Private functions ---------------------------------------------------------*/
- 
+
+/* Private functions --------------------------------------------------------- */
+
 /**
   * @brief  Manages Audio Menu Process.
   * @param  None
@@ -78,117 +80,130 @@ static void LCD_ClearTextZone(void);
   */
 void AUDIO_MenuProcess(void)
 {
-  switch(audio_demo.state)
+  switch (audio_demo.state)
   {
   case AUDIO_DEMO_IDLE:
     BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
-    BSP_LCD_DisplayStringAtLine(16, (uint8_t *)"                                                 ");
-    BSP_LCD_DisplayStringAtLine(17, (uint8_t *)"Use [Buttons Left/Right] to scroll up/down       ");
-    BSP_LCD_DisplayStringAtLine(18, (uint8_t *)"Use [Joystick Up/Down] to scroll audio menu      ");
-    BSP_LCD_SetTextColor(LCD_COLOR_WHITE); 
-    AUDIO_MenuSelectItem(AUDIO_main_menu, 0); 
+    BSP_LCD_DisplayStringAtLine(16,
+                                (uint8_t *)
+                                "                                                 ");
+    BSP_LCD_DisplayStringAtLine(17,
+                                (uint8_t *)
+                                "Use [Buttons Left/Right] to scroll up/down       ");
+    BSP_LCD_DisplayStringAtLine(18,
+                                (uint8_t *)
+                                "Use [Joystick Up/Down] to scroll audio menu      ");
+    BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
+    AUDIO_MenuSelectItem(AUDIO_main_menu, 0);
     audio_demo.state = AUDIO_DEMO_WAIT;
     audio_demo.select = 0;
-    break;    
-    
+    break;
+
   case AUDIO_DEMO_WAIT:
-    if(audio_demo.select != prev_select)
+    if (audio_demo.select != prev_select)
     {
       prev_select = audio_demo.select;
       AUDIO_MenuSelectItem(AUDIO_main_menu, audio_demo.select & 0x7F);
-      
+
       /* Handle select item */
-      if(audio_demo.select & 0x80)
+      if (audio_demo.select & 0x80)
       {
         audio_demo.select &= 0x7F;
-        
-        switch(audio_demo.select)
+
+        switch (audio_demo.select)
         {
         case 0:
-          audio_demo.state = AUDIO_DEMO_EXPLORE;  
+          audio_demo.state = AUDIO_DEMO_EXPLORE;
           break;
-          
+
         case 1:
           /* Display HMI messages */
-          BSP_LCD_SetTextColor(LCD_COLOR_GREEN);          
-          BSP_LCD_DisplayStringAtLine(14, (uint8_t *)"                                             ");
-          BSP_LCD_DisplayStringAtLine(15, (uint8_t *)"                                             ");
-          BSP_LCD_DisplayStringAtLine(16, (uint8_t *)"Use [User Key] To Stop and return from player");
-          BSP_LCD_SetTextColor(LCD_COLOR_WHITE); 
+          BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
+          BSP_LCD_DisplayStringAtLine(14,
+                                      (uint8_t *)
+                                      "                                             ");
+          BSP_LCD_DisplayStringAtLine(15,
+                                      (uint8_t *)
+                                      "                                             ");
+          BSP_LCD_DisplayStringAtLine(16,
+                                      (uint8_t *)
+                                      "Use [User Key] To Stop and return from player");
+          BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
 
-          /* Set PLAYBACK state and start playing 1st file */ 
+          /* Set PLAYBACK state and start playing 1st file */
           audio_state = AUDIO_STATE_IDLE;
           audio_demo.state = AUDIO_DEMO_PLAYBACK;
           Audio_ChangeSelectMode(AUDIO_PLAYBACK_CONTROL);
           break;
-          
+
         case 2:
-          audio_demo.state = AUDIO_REENUMERATE;  
+          audio_demo.state = AUDIO_REENUMERATE;
           break;
-          
+
         default:
           break;
         }
       }
     }
     break;
-    
-  case AUDIO_DEMO_EXPLORE: 
-    if(Appli_state == APPLICATION_AUDIO)
+
+  case AUDIO_DEMO_EXPLORE:
+    if (Appli_state == APPLICATION_AUDIO)
     {
-      if(Audio_ShowWavFiles() > 0)
+      if (Audio_ShowWavFiles() > 0)
       {
-        LCD_ErrLog("There is no WAV file on the microSD.\n");         
-        Audio_ChangeSelectMode(AUDIO_SELECT_MENU);  
+        LCD_ErrLog("There is no WAV file on the microSD.\n");
+        Audio_ChangeSelectMode(AUDIO_SELECT_MENU);
       }
       else
       {
         audio_demo.state = AUDIO_DEMO_WAIT;
       }
     }
-    break; 
-    
+    break;
+
   case AUDIO_DEMO_PLAYBACK:
-    if(Appli_state == APPLICATION_AUDIO)
+    if (Appli_state == APPLICATION_AUDIO)
     {
-      if(audio_state == AUDIO_STATE_IDLE)
+      if (audio_state == AUDIO_STATE_IDLE)
       {
-        /* Start Playing...*/
+        /* Start Playing... */
         audio_state = AUDIO_STATE_INIT;
-        if(AUDIO_Start(0) == AUDIO_ERROR_IO)
+        if (AUDIO_Start(0) == AUDIO_ERROR_IO)
         {
-          Audio_ChangeSelectMode(AUDIO_SELECT_MENU);  
+          Audio_ChangeSelectMode(AUDIO_SELECT_MENU);
         }
         else
         {
-          BSP_LCD_SetTextColor(LCD_COLOR_YELLOW); 
-          BSP_LCD_DisplayStringAtLine(10, (uint8_t *)"[  UP   ] : Volume +");
-          BSP_LCD_DisplayStringAtLine(11, (uint8_t *)"[ DOWN  ] : Volume -");
-          BSP_LCD_DisplayStringAtLine(12, (uint8_t *)"[ LEFT  ] : Previous");
-          BSP_LCD_DisplayStringAtLine(13, (uint8_t *)"[ RIGHT ] : Next");
-          BSP_LCD_DisplayStringAtLine(14, (uint8_t *)"[  SEL  ] : Pause/Resume");
-          BSP_LCD_SetTextColor(LCD_COLOR_WHITE);           
+          BSP_LCD_SetTextColor(LCD_COLOR_YELLOW);
+          BSP_LCD_DisplayStringAtLine(10, (uint8_t *) "[  UP   ] : Volume +");
+          BSP_LCD_DisplayStringAtLine(11, (uint8_t *) "[ DOWN  ] : Volume -");
+          BSP_LCD_DisplayStringAtLine(12, (uint8_t *) "[ LEFT  ] : Previous");
+          BSP_LCD_DisplayStringAtLine(13, (uint8_t *) "[ RIGHT ] : Next");
+          BSP_LCD_DisplayStringAtLine(14,
+                                      (uint8_t *) "[  SEL  ] : Pause/Resume");
+          BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
         }
       }
-      else /* Not idle */
+      else                      /* Not idle */
       {
-        if(AUDIO_Process() == AUDIO_ERROR_IO)
+        if (AUDIO_Process() == AUDIO_ERROR_IO)
         {
-          Audio_ChangeSelectMode(AUDIO_SELECT_MENU);  
+          Audio_ChangeSelectMode(AUDIO_SELECT_MENU);
         }
       }
     }
-    break;    
-    
+    break;
+
   case AUDIO_REENUMERATE:
-    /* Force Audio Device to re-enumerate */   
+    /* Force Audio Device to re-enumerate */
     USBH_ReEnumerate(&hUSBHost);
     audio_demo.state = AUDIO_DEMO_WAIT;
     break;
-    
+
   default:
     break;
-  }  
+  }
 }
 
 /**
@@ -197,45 +212,45 @@ void AUDIO_MenuProcess(void)
   * @param  item: Selected item to be highlighted
   * @retval None
   */
-void AUDIO_MenuSelectItem(uint8_t **menu, uint8_t item)
+void AUDIO_MenuSelectItem(uint8_t ** menu, uint8_t item)
 {
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  
-  switch(item)
+
+  switch (item)
   {
-  case 0: 
+  case 0:
     BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
     BSP_LCD_DisplayStringAtLine(19, menu[0]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);    
+    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
     BSP_LCD_DisplayStringAtLine(20, menu[1]);
     BSP_LCD_DisplayStringAtLine(21, menu[2]);
     break;
-    
-  case 1: 
+
+  case 1:
     BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
     BSP_LCD_DisplayStringAtLine(19, menu[0]);
-    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);    
+    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
     BSP_LCD_DisplayStringAtLine(20, menu[1]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);  
-    BSP_LCD_DisplayStringAtLine(21, menu[2]); 
-    break;
-    
-  case 2: 
     BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
-    BSP_LCD_DisplayStringAtLine(19, menu[0]); 
-    BSP_LCD_DisplayStringAtLine(20, menu[1]);
-    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);  
-    BSP_LCD_DisplayStringAtLine(21, menu[2]); 
+    BSP_LCD_DisplayStringAtLine(21, menu[2]);
     break;
-    
+
+  case 2:
+    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
+    BSP_LCD_DisplayStringAtLine(19, menu[0]);
+    BSP_LCD_DisplayStringAtLine(20, menu[1]);
+    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
+    BSP_LCD_DisplayStringAtLine(21, menu[2]);
+    break;
+
   default:
     BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
     BSP_LCD_DisplayStringAtLine(19, menu[0]);
     BSP_LCD_DisplayStringAtLine(20, menu[1]);
-    BSP_LCD_DisplayStringAtLine(21, menu[2]);     
+    BSP_LCD_DisplayStringAtLine(21, menu[2]);
     break;
   }
-  BSP_LCD_SetBackColor(LCD_COLOR_BLACK); 
+  BSP_LCD_SetBackColor(LCD_COLOR_BLACK);
 }
 
 /**
@@ -246,26 +261,26 @@ void AUDIO_MenuSelectItem(uint8_t **menu, uint8_t item)
 void AUDIO_MenuProbeKey(JOYState_TypeDef state)
 {
   /* Handle Joystick inputs */
-  if(audio_select_mode == AUDIO_SELECT_MENU)
-  {  
+  if (audio_select_mode == AUDIO_SELECT_MENU)
+  {
     /* Handle Menu inputs */
-    if((state == JOY_UP) && (audio_demo.select > 0))
+    if ((state == JOY_UP) && (audio_demo.select > 0))
     {
       audio_demo.select--;
     }
-    else if((audio_demo.select < 2) && (state == JOY_DOWN))
+    else if ((audio_demo.select < 2) && (state == JOY_DOWN))
     {
       audio_demo.select++;
     }
-    else if(state == JOY_SEL)
+    else if (state == JOY_SEL)
     {
       audio_demo.select |= 0x80;
-    } 
+    }
   }
   else
   {
     AUDIO_PlaybackProbeKey(state);
-  } 
+  }
 }
 
 /**
@@ -275,20 +290,20 @@ void AUDIO_MenuProbeKey(JOYState_TypeDef state)
   */
 void Audio_ChangeSelectMode(AUDIO_DEMO_SelectMode select_mode)
 {
-  if(select_mode == AUDIO_SELECT_MENU)
+  if (select_mode == AUDIO_SELECT_MENU)
   {
     AUDIO_MenuSelectItem(AUDIO_main_menu, 0x00);
     LCD_ClearTextZone();
     LCD_LOG_UpdateDisplay();
-    audio_demo.state = AUDIO_DEMO_IDLE; 
+    audio_demo.state = AUDIO_DEMO_IDLE;
     AUDIO_Stop();
   }
-  else if(select_mode == AUDIO_PLAYBACK_CONTROL)
+  else if (select_mode == AUDIO_PLAYBACK_CONTROL)
   {
     LCD_ClearTextZone();
-    AUDIO_MenuSelectItem(AUDIO_main_menu, 0xFF);     
+    AUDIO_MenuSelectItem(AUDIO_main_menu, 0xFF);
   }
-  audio_select_mode = select_mode; 
+  audio_select_mode = select_mode;
   audio_demo.select = 0;
 }
 
@@ -302,25 +317,25 @@ static uint8_t Audio_ShowWavFiles(void)
   uint8_t i;
   uint8_t line_idx = 0;
 
-  if((FileList.ptr > 0) && (BSP_SD_IsDetected()))
+  if ((FileList.ptr > 0) && (BSP_SD_IsDetected()))
   {
     BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
     LCD_UsrLog("audio file(s) [ROOT]:\n\n");
 
-    for( i = 0; i < FileList.ptr; i++)
+    for (i = 0; i < FileList.ptr; i++)
     {
       line_idx++;
-      if(line_idx > 9)
+      if (line_idx > 9)
       {
         line_idx = 0;
         LCD_UsrLog("> Press [Key] To Continue.\n");
-        
+
         /* KEY Button in polling */
-        while(BSP_PB_GetState(BUTTON_KEY) != RESET)
+        while (BSP_PB_GetState(BUTTON_KEY) != RESET)
         {
           /* Wait for User Input */
         }
-      } 
+      }
       LCD_DbgLog("   |__");
       LCD_DbgLog((char *)FileList.file[i].name);
       LCD_DbgLog("\n");
@@ -344,7 +359,7 @@ static void LCD_ClearTextZone(void)
 {
   uint8_t i = 0;
 
-  for(i = 0; i < 12; i++)
+  for (i = 0; i < 12; i++)
   {
     BSP_LCD_ClearStringLine(i + 3);
   }

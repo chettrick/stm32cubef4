@@ -3,7 +3,7 @@
   * @file    ls016b8uy.h
   * @author  MCD Application Team
   * @version V1.0.0
-  * @date    10-May-2016
+  * @date    22-April-2016
   * @brief   This file contains all the functions prototypes for the ls016b8uy.c
   *          driver.
   ******************************************************************************

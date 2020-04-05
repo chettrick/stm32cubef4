@@ -2,11 +2,11 @@
   @page Templates  Description of the Templates example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    Templates/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    04-November-2016
+  * @version V1.0.2
+  * @date    17-February-2017
   * @brief   Description of the Templates example.
   ******************************************************************************
   *
@@ -42,9 +42,9 @@
 This project provides a reference template that can be used to build any firmware application.
 
 This directory provides a reference template project that can be used to build any firmware application for
-STM32F411xE devices using STM32CubeF4 HAL and running on STM32F412G-DISCO board from STMicroelectronics. 
+STM32F412xG devices using STM32CubeF4 HAL and running on STM32F412G-DISCO board from STMicroelectronics. 
 
-Two workspace are provided for STM32F412G-DISCO (STM32F412Zx devices) configuration.
+Two workspace are provided for STM32F412G-DISCO (STM32F412xG devices) configuration.
 
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
       based on variable incremented in SysTick ISR. This implies that if HAL_Delay() is called from
@@ -68,7 +68,7 @@ Two workspace are provided for STM32F412G-DISCO (STM32F412Zx devices) configurat
         
 @par Hardware and Software environment  
 
-  - This example runs on STM32F411xE device.
+  - This example runs on STM32F412xG device.
     
   - This example has been tested with STMicroelectronics STM32F411E-Discovery
     discovery boards and can be easily tailored to any other supported device 

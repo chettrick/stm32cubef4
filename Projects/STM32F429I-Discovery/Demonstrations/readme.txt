@@ -2,16 +2,16 @@
   @page Demo   Demo STM32F429I-Discovery
  
   @verbatim
-  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2017 STMicroelectronics  *******************
   * @file    Demonstrations/readme.txt 
   * @author  MCD Application Team
-  * @version V1.4.6
-  * @date    04-November-2016   
+  * @version V1.4.7
+  * @date    17-February-2017   
   * @brief   Description of STM32F429I-Discovery Demonstration
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -59,7 +59,7 @@ memory management, Real-Time operating system)
 
 The demonstration firmware is built around the graphical library STemWin and the FreeRTOS 
 real time operating system and uses almost the whole STM32 capability to offer a large scope
-of usage based on the STM3Cube HAL, BSP and several Middleware components.
+of usage based on the STM32Cube HAL, BSP and several Middleware components.
   
 Below you find an overview of the diffrent offred module in the demonstration:
 
@@ -68,7 +68,9 @@ Below you find an overview of the diffrent offred module in the demonstration:
  The system module provides three control tabs: 
   - system information 
   - general settings
+  - date settings
   - clock settings 
+
  To set the global demonstration settings. The system module retrieves
  demonstration information from internal kernel settings data structures and acts 
  on the several kernel services to changes settings.

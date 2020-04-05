@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    LibJPEG/LibJPEG_Decoding/Inc/decode.h 
   * @author  MCD Application Team
-  * @version V1.2.6
-  * @date    04-November-2016
+  * @version V1.3.0
+  * @date    17-February-2017
   * @brief   header of decode.c file
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -60,7 +60,7 @@
 /* Private functions ---------------------------------------------------------*/
 
 
-void jpeg_decode(FIL *file, uint32_t width, uint8_t * buff, uint8_t (*callback)(uint8_t*, uint32_t));
+void jpeg_decode(JFILE *file, uint32_t width, uint8_t * buff, uint8_t (*callback)(uint8_t*, uint32_t));
 
 #endif /* __DECODE_H */
 

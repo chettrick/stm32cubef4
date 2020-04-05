@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    LCD_DSI/LCD_DSI_CmdMode_SingleBuffer/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.5
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   This example describes how to configure and use LCD DSI to display an image
   *          of size WVGA in mode landscape (800x480) using the STM32F4xx HAL API and BSP.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -54,13 +54,7 @@
 /* Private typedef -----------------------------------------------------------*/
 extern LTDC_HandleTypeDef hltdc_eval;
 static DMA2D_HandleTypeDef   hdma2d;
-extern QSPI_HandleTypeDef QSPIHandle;
 extern DSI_HandleTypeDef hdsi_eval;
-DSI_VidCfgTypeDef hdsivideo_handle;
-DSI_CmdCfgTypeDef CmdCfg;
-DSI_LPCmdTypeDef LPCmd;
-DSI_PLLInitTypeDef dsiPllInit;
-static RCC_PeriphCLKInitTypeDef  PeriphClkInitStruct;
 
 /* Private define ------------------------------------------------------------*/
 #define VSYNC           1  
@@ -218,6 +212,7 @@ static void SystemClock_Config(void)
 {
   RCC_ClkInitTypeDef RCC_ClkInitStruct;
   RCC_OscInitTypeDef RCC_OscInitStruct;
+  
   HAL_StatusTypeDef ret = HAL_OK;
 
   /* Enable Power Control clock */
@@ -278,6 +273,12 @@ static void SystemClock_Config(void)
   */
 static uint8_t LCD_Init(void)
 {
+  DSI_PHY_TimerTypeDef PhyTimings;
+  DSI_CmdCfgTypeDef CmdCfg;
+  DSI_LPCmdTypeDef LPCmd;
+  DSI_PLLInitTypeDef dsiPllInit;
+  RCC_PeriphCLKInitTypeDef  PeriphClkInitStruct;
+  
   /* Toggle Hardware Reset of the DSI LCD using
   * its XRES signal (active low) */
   BSP_LCD_Reset();
@@ -341,15 +342,22 @@ static uint8_t LCD_Init(void)
   LPCmd.LPDcsLongWrite        = DSI_LP_DLW_ENABLE;
   HAL_DSI_ConfigCommand(&hdsi_eval, &LPCmd);
 
+  /* Configure DSI PHY HS2LP and LP2HS timings */
+  PhyTimings.ClockLaneHS2LPTime = 35;
+  PhyTimings.ClockLaneLP2HSTime = 35;
+  PhyTimings.DataLaneHS2LPTime = 35;
+  PhyTimings.DataLaneLP2HSTime = 35;
+  PhyTimings.DataLaneMaxReadTime = 0;
+  PhyTimings.StopWaitTime = 10;
+  HAL_DSI_ConfigPhyTimer(&hdsi_eval, &PhyTimings);
+  
   /* Initialize LTDC */
   LTDC_Init();
   
   /* Start DSI */
   HAL_DSI_Start(&(hdsi_eval));
     
-  /* Initialize the OTM8009A LCD Display IC Driver (KoD LCD IC Driver)
-  *  depending on configuration set in 'hdsivideo_handle'.
-  */
+  /* Initialize the OTM8009A LCD Display IC Driver (KoD LCD IC Driver) */
   OTM8009A_Init(OTM8009A_COLMOD_RGB888, LCD_ORIENTATION_LANDSCAPE);
   
   LPCmd.LPGenShortWriteNoP    = DSI_LP_GSW0P_DISABLE;

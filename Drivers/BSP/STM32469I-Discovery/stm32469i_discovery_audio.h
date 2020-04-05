@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm32469i_discovery_audio.h
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    04-August-2016
+  * @version V2.0.0
+  * @date    27-January-2017
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm32469i_discovery_audio.c driver.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -318,6 +318,7 @@ void    BSP_AUDIO_IN_Error_Callback(void);
 
 /* These function can be modified in case the current settings (e.g. DMA stream)
    need to be changed for specific application needs */
+void  BSP_AUDIO_IN_ClockConfig(I2S_HandleTypeDef *hi2s, void *Params);   
 void  BSP_AUDIO_IN_MspInit(I2S_HandleTypeDef *hi2s, void *Params);
 void  BSP_AUDIO_IN_MspDeInit(I2S_HandleTypeDef *hi2s, void *Params);
 

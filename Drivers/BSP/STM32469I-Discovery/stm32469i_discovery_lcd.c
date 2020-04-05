@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm32469i_discovery_lcd.c
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    04-August-2016
+  * @version V2.0.0
+  * @date    27-January-2017
   * @brief   This file includes the driver for Liquid Crystal Display (LCD) module
   *          mounted on STM32469I-Discovery evaluation board.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -269,12 +269,12 @@ uint8_t BSP_LCD_InitEx(LCD_OrientationTypeDef orientation)
   VACT = lcd_y_size;
   
   /* The following values are same for portrait and landscape orientations */
-  VSA  = OTM8009A_480X800_VSYNC;        /* 12  */
-  VBP  = OTM8009A_480X800_VBP;          /* 12  */
-  VFP  = OTM8009A_480X800_VFP;          /* 12  */
-  HSA  = OTM8009A_480X800_HSYNC;        /* 63  */
-  HBP  = OTM8009A_480X800_HBP;          /* 120 */
-  HFP  = OTM8009A_480X800_HFP;          /* 120 */
+  VSA  = OTM8009A_480X800_VSYNC;
+  VBP  = OTM8009A_480X800_VBP;
+  VFP  = OTM8009A_480X800_VFP;
+  HSA  = OTM8009A_480X800_HSYNC;
+  HBP  = OTM8009A_480X800_HBP;
+  HFP  = OTM8009A_480X800_HFP;
   
   
   hdsivideo_handle.VirtualChannelID = LCD_OTM8009A_ID;
@@ -362,7 +362,7 @@ uint8_t BSP_LCD_InitEx(LCD_OrientationTypeDef orientation)
   hltdc_eval.Instance = LTDC;
   
   /* Get LTDC Configuration from DSI Configuration */
-  HAL_LTDC_StructInitFromVideoConfig(&(hltdc_eval), &(hdsivideo_handle));
+  HAL_LTDCEx_StructInitFromVideoConfig(&(hltdc_eval), &(hdsivideo_handle));
   
   /* Initialize the LTDC */  
   HAL_LTDC_Init(&hltdc_eval);
@@ -529,7 +529,7 @@ void BSP_LCD_SetLayerVisible(uint32_t LayerIndex, FunctionalState State)
   {
     __HAL_LTDC_LAYER_DISABLE(&(hltdc_eval), LayerIndex);
   }
-  __HAL_LTDC_RELOAD_CONFIG(&(hltdc_eval));
+  __HAL_LTDC_RELOAD_IMMEDIATE_CONFIG(&(hltdc_eval));
   
 }
 
@@ -665,12 +665,12 @@ uint32_t BSP_LCD_ReadPixel(uint16_t Xpos, uint16_t Ypos)
   if(hltdc_eval.LayerCfg[ActiveLayer].PixelFormat == LTDC_PIXEL_FORMAT_ARGB8888)
   {
     /* Read data value from SDRAM memory */
-    ret = *(__IO uint32_t*) (hltdc_eval.LayerCfg[ActiveLayer].FBStartAdress + (2*(Ypos*BSP_LCD_GetXSize() + Xpos)));
+    ret = *(__IO uint32_t*) (hltdc_eval.LayerCfg[ActiveLayer].FBStartAdress + (4*(Ypos*BSP_LCD_GetXSize() + Xpos)));
   }
   else if(hltdc_eval.LayerCfg[ActiveLayer].PixelFormat == LTDC_PIXEL_FORMAT_RGB888)
   {
     /* Read data value from SDRAM memory */
-    ret = (*(__IO uint32_t*) (hltdc_eval.LayerCfg[ActiveLayer].FBStartAdress + (2*(Ypos*BSP_LCD_GetXSize() + Xpos))) & 0x00FFFFFF);
+    ret = (*(__IO uint32_t*) (hltdc_eval.LayerCfg[ActiveLayer].FBStartAdress + (4*(Ypos*BSP_LCD_GetXSize() + Xpos))) & 0x00FFFFFF);
   }
   else if((hltdc_eval.LayerCfg[ActiveLayer].PixelFormat == LTDC_PIXEL_FORMAT_RGB565) || \
           (hltdc_eval.LayerCfg[ActiveLayer].PixelFormat == LTDC_PIXEL_FORMAT_ARGB4444) || \

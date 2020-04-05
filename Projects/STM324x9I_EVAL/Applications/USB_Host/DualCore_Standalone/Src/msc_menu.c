@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    USB_Host/DualCore_Standalone/Src/msc_menu.c 
   * @author  MCD Application Team
-  * @version V1.4.6
-  * @date    04-November-2016
+  * @version V1.5.0
+  * @date    17-February-2017
   * @brief   Mass Stoarge Process
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -44,25 +44,27 @@
   *
   ******************************************************************************
   */
-/* Includes ------------------------------------------------------------------*/
+/* Includes ------------------------------------------------------------------ */
 #include "main.h"
 
-/* Private typedef -----------------------------------------------------------*/
-/* Private define ------------------------------------------------------------*/
-/* Private macro -------------------------------------------------------------*/
-/* Private variables ---------------------------------------------------------*/
+/* Private typedef ----------------------------------------------------------- */
+/* Private define ------------------------------------------------------------ */
+/* Private macro ------------------------------------------------------------- */
+/* Private variables --------------------------------------------------------- */
 
-uint8_t *MSC_main_menu[] = 
-{
-  (uint8_t *)"      1 - File Operations                                                   ",
-  (uint8_t *)"      2 - Explorer Disk                                                     ",
-  (uint8_t *)"      3 - Return                                                            ",
+uint8_t *MSC_main_menu[] = {
+  (uint8_t *)
+    "      1 - File Operations                                                   ",
+  (uint8_t *)
+    "      2 - Explorer Disk                                                     ",
+  (uint8_t *)
+    "      3 - Return                                                            ",
 };
 
-/* Private function prototypes -----------------------------------------------*/
+/* Private function prototypes ----------------------------------------------- */
 extern DEMO_StateMachine demo;
 
-/* Private functions ---------------------------------------------------------*/
+/* Private functions --------------------------------------------------------- */
 
 /**
   * @brief  Manages MSC Menu Process.
@@ -71,72 +73,72 @@ extern DEMO_StateMachine demo;
   */
 void MSC_MenuProcess(void)
 {
-  switch(demo.msc_state)
+  switch (demo.msc_state)
   {
   case APPLI_MSC_IDLE:
-    Demo_SelectItem(MSC_main_menu, 0); 
+    Demo_SelectItem(MSC_main_menu, 0);
     demo.msc_state = APPLI_MSC_WAIT;
     demo.select = 0;
-    break;    
-    
+    break;
+
   case APPLI_MSC_WAIT:
-    
-    if(demo.select != prev_select)
+
+    if (demo.select != prev_select)
     {
       prev_select = demo.select;
       Demo_SelectItem(MSC_main_menu, demo.select & 0x7F);
-      
+
       /* Handle select item */
-      if(demo.select & 0x80)
+      if (demo.select & 0x80)
       {
         demo.select &= 0x7F;
-        
-        switch(demo.select)
+
+        switch (demo.select)
         {
         case 0:
-          demo.msc_state = APPLI_MSC_FILE_OPERATIONS;  
+          demo.msc_state = APPLI_MSC_FILE_OPERATIONS;
           break;
-          
+
         case 1:
-          demo.msc_state = APPLI_MSC_EXPLORER;  
+          demo.msc_state = APPLI_MSC_EXPLORER;
           break;
-          
-        case 2: /* Return */
-          demo.state = DEMO_IDLE; 
+
+        case 2:                /* Return */
+          demo.state = DEMO_IDLE;
           demo.select = 0;
           LCD_UsrLogY("> MSC application closed.\n");
-          f_mount(0,0,0);
+          f_mount(0, 0, 0);
           break;
-          
+
         default:
           break;
         }
       }
     }
     break;
-    
-  case APPLI_MSC_FILE_OPERATIONS:  
-   
+
+  case APPLI_MSC_FILE_OPERATIONS:
+
     /* Read and Write File Here */
-    if(Appli_HS_state == APPLICATION_HS_READY)
+    if (Appli_HS_state == APPLICATION_HS_READY)
     {
       MSC_File_Operations();
     }
     demo.msc_state = APPLI_MSC_WAIT;
-    break; 
-    
+    break;
+
   case APPLI_MSC_EXPLORER:
     /* Display disk content */
-    if(Appli_HS_state == APPLICATION_HS_READY)
-    {        
+    if (Appli_HS_state == APPLICATION_HS_READY)
+    {
       Explore_Disk("0:/", 1);
     }
     demo.msc_state = APPLI_MSC_WAIT;
-    break; 
-    
+    break;
+
   default:
     break;
   }
-} 
+}
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

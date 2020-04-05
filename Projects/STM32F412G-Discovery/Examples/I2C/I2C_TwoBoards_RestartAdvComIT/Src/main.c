@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    I2C/I2C_TwoBoards_RestartAdvComIT/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   This sample code shows how to use STM32F4xx I2C HAL API to transmit
   *          and receive a data buffer with a communication process based on
   *          IT transfer and with a repeated start condition between the transmit
@@ -12,7 +12,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -566,6 +566,23 @@ void HAL_I2C_ListenCpltCallback(I2C_HandleTypeDef *hi2c)
   */
 void HAL_I2C_ErrorCallback(I2C_HandleTypeDef *I2cHandle)
 {
+  /** Error_Handler() function is called when error occurs.
+  * 1- When Slave don't acknowledge it's address, Master restarts communication.
+  * 2- When Master don't acknowledge the last data transferred, Slave don't care in this example.
+  */
+  if (HAL_I2C_GetError(I2cHandle) != HAL_I2C_ERROR_AF)
+  {
+    Error_Handler();
+  }
+}
+
+/**
+  * @brief  This function is executed in case of error occurrence.
+  * @param  None
+  * @retval None
+  */
+static void Error_Handler(void)
+{
   /* Turn Off LED1 */
   BSP_LED_Off(LED1);
 
@@ -577,17 +594,7 @@ void HAL_I2C_ErrorCallback(I2C_HandleTypeDef *I2cHandle)
 
   /* Turn On LED3 */
   BSP_LED_On(LED3);
-}
-
-/**
-  * @brief  This function is executed in case of error occurrence.
-  * @param  None
-  * @retval None
-  */
-static void Error_Handler(void)
-{
-  /* Turn LED3 on */
-  BSP_LED_On(LED3);
+  
   while(1)
   {
   }

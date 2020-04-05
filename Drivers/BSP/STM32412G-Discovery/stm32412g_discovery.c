@@ -2,15 +2,15 @@
   ******************************************************************************
   * @file    stm32412g_discovery.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    04-May-2016
+  * @version V2.0.0
+  * @date    27-January-2017
   * @brief   This file provides a set of firmware functions to manage LEDs, 
   *          push-buttons and COM ports available on STM32412G-DISCOVERY board 
   *          (MB1209) from STMicroelectronics.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -69,9 +69,9 @@ typedef struct
   * @{
   */
 /**
- * @brief STM32412G DISCOVERY BSP Driver version number V1.0.0
+ * @brief STM32412G DISCOVERY BSP Driver version number V2.0.0
    */
-#define __STM32412G_DISCOVERY_BSP_VERSION_MAIN   (0x01) /*!< [31:24] main version */
+#define __STM32412G_DISCOVERY_BSP_VERSION_MAIN   (0x02) /*!< [31:24] main version */
 #define __STM32412G_DISCOVERY_BSP_VERSION_SUB1   (0x00) /*!< [23:16] sub1 version */
 #define __STM32412G_DISCOVERY_BSP_VERSION_SUB2   (0x00) /*!< [15:8]  sub2 version */
 #define __STM32412G_DISCOVERY_BSP_VERSION_RC     (0x00) /*!< [7:0]  release candidate */
@@ -85,13 +85,6 @@ typedef struct
 #define FMC_BANK3_BASE  ((uint32_t)(0x60000000 | 0x08000000))  
 #define FMC_BANK1       ((LCD_CONTROLLER_TypeDef *) FMC_BANK1_BASE)
 
-/**
-  * @}
-  */
-
-/** @defgroup STM32412G_DISCOVERY_LOW_LEVEL_Private_Macros STM32412G Discovery Low Level Private Macro
-  * @{
-  */
 /**
   * @}
   */
@@ -200,8 +193,6 @@ void     TS_IO_Delay(uint32_t Delay);
 /**
   * @}
   */
-    
-
 
 /** @defgroup STM32412G_DISCOVERY_LOW_LEVEL_Private_Functions STM32412G Discovery Low Level Private Functions
   * @{
@@ -209,7 +200,6 @@ void     TS_IO_Delay(uint32_t Delay);
 
   /**
   * @brief  This method returns the STM32412G DISCOVERY BSP Driver revision
-  * @param  None
   * @retval version: 0xXYZR (8bits for each decimal, R for RC)
   */
 uint32_t BSP_GetVersion(void)
@@ -225,7 +215,6 @@ uint32_t BSP_GetVersion(void)
   *            @arg  LED2
   *            @arg  LED3
   *            @arg  LED4
-  * @retval None
   */
 void BSP_LED_Init(Led_TypeDef Led)
 {
@@ -255,8 +244,7 @@ void BSP_LED_Init(Led_TypeDef Led)
   *            @arg  LED2
   *            @arg  LED3
   *            @arg  LED4
-  * @note Led DeInit does not disable the GPIO clock nor disable the Mfx 
-  * @retval None
+  * @note Led DeInit does not disable the GPIO clock nor disable the Mfx
   */
 void BSP_LED_DeInit(Led_TypeDef Led)
 {
@@ -277,7 +265,6 @@ void BSP_LED_DeInit(Led_TypeDef Led)
   *            @arg  LED2
   *            @arg  LED3
   *            @arg  LED4
-  * @retval None
   */
 void BSP_LED_On(Led_TypeDef Led)
 {
@@ -292,7 +279,6 @@ void BSP_LED_On(Led_TypeDef Led)
   *            @arg  LED2
   *            @arg  LED3
   *            @arg  LED4
-  * @retval None
   */
 void BSP_LED_Off(Led_TypeDef Led)
 {
@@ -307,7 +293,6 @@ void BSP_LED_Off(Led_TypeDef Led)
   *            @arg  LED2
   *            @arg  LED3
   *            @arg  LED4
-  * @retval None
   */
 void BSP_LED_Toggle(Led_TypeDef Led)
 {
@@ -326,7 +311,6 @@ void BSP_LED_Toggle(Led_TypeDef Led)
   *                                    with interrupt generation capability  
   * @note   On STM32412G-DISCOVERY board, the Wakeup button is mapped on 
   *         the same push button which is the joystick selection button.
-  * @retval None
   */
 void BSP_PB_Init(Button_TypeDef Button, ButtonMode_TypeDef ButtonMode)
 {
@@ -370,7 +354,6 @@ void BSP_PB_Init(Button_TypeDef Button, ButtonMode_TypeDef ButtonMode)
   * @note   On STM32412G-DISCOVERY board, the Wakeup button is mapped on 
   *         the same push button which is the joystick selection button.
   * @note PB DeInit does not disable the GPIO clock
-  * @retval None
   */
 void BSP_PB_DeInit(Button_TypeDef Button)
 {
@@ -400,10 +383,10 @@ uint32_t BSP_PB_GetState(Button_TypeDef Button)
 /**
   * @brief  Configures all joystick's buttons in GPIO or EXTI modes.
   * @param  Joy_Mode: Joystick mode.
-  *    This parameter can be one of the following values:
-  *     @arg  JOY_MODE_GPIO: Joystick pins will be used as simple IOs
-  *     @arg  JOY_MODE_EXTI: Joystick pins will be connected to EXTI line
-  *                                 with interrupt generation capability
+  *         This parameter can be one of the following values:
+  *         JOY_MODE_GPIO: Joystick pins will be used as simple IOs
+  *         JOY_MODE_EXTI: Joystick pins will be connected to EXTI line
+  *                        with interrupt generation capability
   * @retval HAL_OK: if all initializations are OK. Other value if error.
   */
 uint8_t BSP_JOY_Init(JOYMode_TypeDef Joy_Mode)
@@ -444,7 +427,6 @@ uint8_t BSP_JOY_Init(JOYMode_TypeDef Joy_Mode)
 
 /**
   * @brief  Unconfigures all GPIOs used as joystick's buttons.
-  * @retval None.
   */
 void BSP_JOY_DeInit(void)
 {
@@ -492,11 +474,10 @@ JOYState_TypeDef BSP_JOY_GetState(void)
   * @brief  Configures COM port.
   * @param  COM: COM port to be configured.
   *          This parameter can be one of the following values:
-  *            @arg  COM1 
-  *            @arg  COM2 
+  *          COM1 
+  *          COM2 
   * @param  huart: Pointer to a UART_HandleTypeDef structure that contains the
   *                configuration information for the specified USART peripheral.
-  * @retval None
   */
 void BSP_COM_Init(COM_TypeDef COM, UART_HandleTypeDef *huart)
 {
@@ -532,11 +513,10 @@ void BSP_COM_Init(COM_TypeDef COM, UART_HandleTypeDef *huart)
   * @brief  DeInit COM port.
   * @param  COM: COM port to be configured.
   *          This parameter can be one of the following values:
-  *            @arg  COM1 
-  *            @arg  COM2 
+  *          COM1 
+  *          COM2 
   * @param  huart: Pointer to a UART_HandleTypeDef structure that contains the
   *                configuration information for the specified USART peripheral.
-  * @retval None
   */
 void BSP_COM_DeInit(COM_TypeDef COM, UART_HandleTypeDef *huart)
 {
@@ -563,7 +543,6 @@ void BSP_COM_DeInit(COM_TypeDef COM, UART_HandleTypeDef *huart)
 /**
   * @brief  Initializes I2C MSP.
   * @param  i2c_handler : I2C handler
-  * @retval None
   */
 static void I2Cx_MspInit(I2C_HandleTypeDef *i2c_handler)
 {
@@ -652,7 +631,6 @@ static void I2Cx_MspInit(I2C_HandleTypeDef *i2c_handler)
 /**
   * @brief  Initializes I2C HAL.
   * @param  i2c_handler : I2C handler
-  * @retval None
   */
 static void I2Cx_Init(I2C_HandleTypeDef *i2c_handler)
 {
@@ -691,7 +669,7 @@ static void I2Cx_Init(I2C_HandleTypeDef *i2c_handler)
   * @param  MemAddress: Memory address
   * @param  Buffer: Pointer to data buffer
   * @param  Length: Length of the data
-  * @retval Number of read data
+  * @retval HAL status
   */
 static HAL_StatusTypeDef I2Cx_ReadMultiple(I2C_HandleTypeDef *i2c_handler,
                                            uint8_t Addr,
@@ -760,7 +738,6 @@ static HAL_StatusTypeDef I2Cx_IsDeviceReady(I2C_HandleTypeDef *i2c_handler, uint
   * @brief  Manages error callback by re-initializing I2C.
   * @param  i2c_handler : I2C handler
   * @param  Addr: I2C Address
-  * @retval None
   */
 static void I2Cx_Error(I2C_HandleTypeDef *i2c_handler, uint8_t Addr)
 {
@@ -774,7 +751,6 @@ static void I2Cx_Error(I2C_HandleTypeDef *i2c_handler, uint8_t Addr)
 /**
   * @brief  Deinitializes I2C interface
   * @param  i2c_handler : I2C handler
-  * @retval None
   */
  static void I2Cx_DeInit(I2C_HandleTypeDef *i2c_handler)
 {
@@ -799,8 +775,6 @@ static void I2Cx_Error(I2C_HandleTypeDef *i2c_handler, uint8_t Addr)
 /*************************** FMC Routines ************************************/
 /**
   * @brief  Initializes FMC_BANK1 MSP.
-  * @param  None
-  * @retval None
   */
 static void FMC_BANK1_MspInit(void)
 {
@@ -839,8 +813,6 @@ static void FMC_BANK1_MspInit(void)
 
 /**
   * @brief  Initializes LCD IO.
-  * @param  None
-  * @retval None
   */ 
 static void FMC_BANK1_Init(void) 
 {  
@@ -893,33 +865,30 @@ static void FMC_BANK1_Init(void)
   HAL_SRAM_Init(&hsram, &sram_timing, &sram_timing_write);
 }
 
-
-
 /**
   * @brief  Writes register value.
   * @param  Data: Data to be written 
-  * @retval None
   */
 static void FMC_BANK1_WriteData(uint16_t Data) 
 {
   /* Write 16-bit Reg */
   FMC_BANK1->RAM = Data;
+  __DSB();
 }
 
 /**
   * @brief  Writes register address.
   * @param  Reg: Register to be written
-  * @retval None
   */
 static void FMC_BANK1_WriteReg(uint8_t Reg) 
 {
   /* Write 16-bit Index, then write register */
   FMC_BANK1->REG = Reg;
+  __DSB();
 }
 
 /**
   * @brief  Reads register value.
-  * @param  None
   * @retval Read value
   */
 static uint16_t FMC_BANK1_ReadData(void) 
@@ -935,8 +904,6 @@ static uint16_t FMC_BANK1_ReadData(void)
 
 /**
   * @brief  Initializes LCD low level.
-  * @param  None
-  * @retval None
   */
 void LCD_IO_Init(void) 
 {
@@ -945,8 +912,7 @@ void LCD_IO_Init(void)
 
 /**
   * @brief  Writes data on LCD data register.
-  * @param  Data: Data to be written
-  * @retval None
+  * @param  RegValue: Data to be written
   */
 void LCD_IO_WriteData(uint16_t RegValue) 
 {
@@ -956,9 +922,8 @@ void LCD_IO_WriteData(uint16_t RegValue)
 
 /**
   * @brief  Writes several data on LCD data register.
-  * @param  Data: pointer on data to be written
+  * @param  pData: pointer on data to be written
   * @param  Size: data amount in 16bits short unit
-  * @retval None
   */
 void LCD_IO_WriteMultipleData(uint16_t *pData, uint32_t Size)
 {
@@ -973,7 +938,6 @@ void LCD_IO_WriteMultipleData(uint16_t *pData, uint32_t Size)
 /**
   * @brief  Writes register on LCD register.
   * @param  Reg: Register to be written
-  * @retval None
   */
 void LCD_IO_WriteReg(uint8_t Reg) 
 {
@@ -983,7 +947,6 @@ void LCD_IO_WriteReg(uint8_t Reg)
 
 /**
   * @brief  Reads data from LCD data register.
-  * @param  None
   * @retval Read data.
   */
 uint16_t LCD_IO_ReadData(void) 
@@ -994,7 +957,6 @@ uint16_t LCD_IO_ReadData(void)
 /**
   * @brief  LCD delay
   * @param  Delay: Delay in ms
-  * @retval None
   */
 void LCD_IO_Delay(uint32_t Delay)
 {
@@ -1005,7 +967,6 @@ void LCD_IO_Delay(uint32_t Delay)
 
 /**
   * @brief  Initializes Audio low level.
-  * @retval None
   */
 void AUDIO_IO_Init(void) 
 {
@@ -1014,7 +975,6 @@ void AUDIO_IO_Init(void)
 
 /**
   * @brief  Deinitializes Audio low level.
-  * @retval None
   */
 void AUDIO_IO_DeInit(void)
 {
@@ -1026,7 +986,6 @@ void AUDIO_IO_DeInit(void)
   * @param  Addr: I2C address
   * @param  Reg: Reg address 
   * @param  Value: Data to be written
-  * @retval None
   */
 void AUDIO_IO_Write(uint8_t Addr, uint16_t Reg, uint16_t Value)
 {
@@ -1063,7 +1022,6 @@ uint16_t AUDIO_IO_Read(uint8_t Addr, uint16_t Reg)
 /**
   * @brief  AUDIO Codec delay 
   * @param  Delay: Delay in ms
-  * @retval None
   */
 void AUDIO_IO_Delay(uint32_t Delay)
 {
@@ -1074,7 +1032,6 @@ void AUDIO_IO_Delay(uint32_t Delay)
 
 /**
   * @brief  Initializes peripherals used by the I2C EEPROM driver.
-  * @retval None
   */
 void EEPROM_IO_Init(void)
 {
@@ -1122,7 +1079,6 @@ HAL_StatusTypeDef EEPROM_IO_IsDeviceReady(uint16_t DevAddress, uint32_t Trials)
 /************************** LINK TS (TouchScreen) *****************************/
 /**
   * @brief  Initializes Touchscreen low level.
-  * @retval None
   */
 void TS_IO_Init(void)
 {
@@ -1134,7 +1090,6 @@ void TS_IO_Init(void)
   * @param  Addr: I2C address
   * @param  Reg: Reg address
   * @param  Value: Data to be written
-  * @retval None
   */
 void TS_IO_Write(uint8_t Addr, uint8_t Reg, uint8_t Value)
 {
@@ -1163,7 +1118,7 @@ uint8_t TS_IO_Read(uint8_t Addr, uint8_t Reg)
   * @param  Reg: Register address
   * @param  Buffer: Pointer to data buffer
   * @param  Length: Length of the data
-  * @retval Number of read data
+  * @retval HAL status
   */
 uint16_t TS_IO_ReadMultiple(uint8_t Addr, uint8_t Reg, uint8_t *Buffer, uint16_t Length)
 {
@@ -1177,7 +1132,6 @@ uint16_t TS_IO_ReadMultiple(uint8_t Addr, uint8_t Reg, uint8_t *Buffer, uint16_t
   * @param  Reg: Register address
   * @param  Buffer: Pointer to data buffer
   * @param  Length: Length of the data
-  * @retval None
   */
 void TS_IO_WriteMultiple(uint8_t Addr, uint8_t Reg, uint8_t *Buffer, uint16_t Length)
 {
@@ -1187,7 +1141,6 @@ void TS_IO_WriteMultiple(uint8_t Addr, uint8_t Reg, uint8_t *Buffer, uint16_t Le
 /**
   * @brief  Delay function used in TouchScreen low level driver.
   * @param  Delay: Delay in ms
-  * @retval None
   */
 void TS_IO_Delay(uint32_t Delay)
 {

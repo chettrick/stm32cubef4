@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    FreeRTOS/FreeRTOS_ThreadCreation/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.6
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   Main program body
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -115,10 +115,10 @@ static void LED_Thread1(void const *argument)
   
   for(;;)
   {
-    count = osKernelSysTick() + 5000;
+    count = osKernelSysTick() + 6000;
     
-    /* Toggle LED1 every 200 ms for 5 s */
-    while (count >= osKernelSysTick())
+    /* Toggle LED1 every 200 ms for 6 s */
+    while (count > osKernelSysTick())
     {
       BSP_LED_Toggle(LED1);
       
@@ -131,10 +131,10 @@ static void LED_Thread1(void const *argument)
     /* Suspend Thread 1 */
     osThreadSuspend(NULL);
     
-    count = osKernelSysTick() + 5000;
+    count = osKernelSysTick() + 6000;
     
-    /* Toggle LED1 every 400 ms for 5 s */
-    while (count >= osKernelSysTick())
+    /* Toggle LED1 every 400 ms for 6 s */
+    while (count > osKernelSysTick())
     {
       BSP_LED_Toggle(LED1);
       
@@ -158,10 +158,10 @@ static void LED_Thread2(void const *argument)
   
   for(;;)
   {
-    count = osKernelSysTick() + 10000;
+    count = osKernelSysTick() + 12000;
     
-    /* Toggle LED3 every 500 ms for 10 s */
-    while (count >= osKernelSysTick())
+    /* Toggle LED3 every 500 ms for 12 s */
+    while (count > osKernelSysTick())
     {
       BSP_LED_Toggle(LED3);
 

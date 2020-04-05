@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm324x9i_eval_sdram.h
   * @author  MCD Application Team
-  * @version V2.2.3
-  * @date    22-April-2016
+  * @version V3.0.0
+  * @date    27-January-2017
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm324x9i_eval_sdram.c driver.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -59,25 +59,14 @@
   * @{
   */    
 
-/** @defgroup STM324x9I_EVAL_SDRAM_Exported_Types STM324x9I EVAL SDRAM Exported Types
-  * @{
-  */
-
-/** 
-  * @brief  SDRAM status structure definition  
-  */     
-#define   SDRAM_OK         0x00
-#define   SDRAM_ERROR      0x01
-
-/**
-  * @}
-  */ 
-  
 /** @defgroup STM324x9I_EVAL_SDRAM_Exported_Constants STM324x9I EVAL SDRAM Exported Constants
   * @{
-  */ 
+  */
+#define   SDRAM_OK         0x00
+#define   SDRAM_ERROR      0x01
+   
 #define SDRAM_DEVICE_ADDR  ((uint32_t)0xC0000000)
-#define SDRAM_DEVICE_SIZE  ((uint32_t)0x800000)  /* SDRAM device size in MBytes */
+#define SDRAM_DEVICE_SIZE  ((uint32_t)0x2000000)  /* SDRAM device size in Bytes */
 
 /* #define SDRAM_MEMORY_WIDTH            FMC_SDRAM_MEM_BUS_WIDTH_8  */
 /* #define SDRAM_MEMORY_WIDTH            FMC_SDRAM_MEM_BUS_WIDTH_16 */
@@ -91,12 +80,12 @@
 #define SDRAM_TIMEOUT     ((uint32_t)0xFFFF) 
 
 /* DMA definitions for SDRAM DMA transfer */
-#define __DMAx_CLK_ENABLE                 __DMA2_CLK_ENABLE
+#define __DMAx_CLK_ENABLE                 __HAL_RCC_DMA2_CLK_ENABLE
 #define SDRAM_DMAx_CHANNEL                DMA_CHANNEL_0
 #define SDRAM_DMAx_STREAM                 DMA2_Stream0  
 #define SDRAM_DMAx_IRQn                   DMA2_Stream0_IRQn
-#define SDRAM_DMAx_IRQHandler             DMA2_Stream0_IRQHandler   
-  
+#define SDRAM_DMAx_IRQHandler             DMA2_Stream0_IRQHandler  
+
 /**
   * @brief  FMC SDRAM Mode definition register defines
   */
@@ -114,13 +103,6 @@
 /**
   * @}
   */ 
-  
-/** @defgroup STM324x9I_EVAL_SDRAM_Exported_Macro STM324x9I EVAL SDRAM Exported Macro
-  * @{
-  */  
-/**
-  * @}
-  */ 
    
 /** @defgroup STM324x9I_EVAL_SDRAM_Exported_Functions STM324x9I EVAL SDRAM Exported Functions
   * @{
@@ -133,7 +115,7 @@ uint8_t BSP_SDRAM_WriteData(uint32_t uwStartAddress, uint32_t *pData, uint32_t u
 uint8_t BSP_SDRAM_WriteData_DMA(uint32_t uwStartAddress, uint32_t *pData, uint32_t uwDataSize);
 uint8_t BSP_SDRAM_Sendcmd(FMC_SDRAM_CommandTypeDef *SdramCmd);
 void    BSP_SDRAM_DMA_IRQHandler(void);  
-   
+void    BSP_SDRAM_MspInit(void);   
 /**
   * @}
   */ 

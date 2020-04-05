@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    BSP/Src/audio.c
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   This example code shows how to use the audio headphone microphone feature
   *          in the stm32412g_discovery driver
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -86,7 +86,7 @@ void AudioRecAnalog_demo (void)
   AudioRec_SetHint();
 
   /* Initialize Audio Recorder */
-  if (BSP_AUDIO_IN_InitEx(INPUT_DEVICE_ANALOG_MIC, DEFAULT_AUDIO_IN_FREQ, (uint32_t)DEFAULT_AUDIO_IN_BIT_RESOLUTION, (uint32_t)DEFAULT_AUDIO_IN_CHANNEL_NBR) == AUDIO_OK)
+  if (BSP_AUDIO_IN_InitEx(INPUT_DEVICE_ANALOG_MIC, DEFAULT_AUDIO_IN_FREQ, DEFAULT_AUDIO_IN_BIT_RESOLUTION, DEFAULT_AUDIO_IN_CHANNEL_NBR) == AUDIO_OK)
   {
     BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
     BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
@@ -108,13 +108,13 @@ void AudioRecAnalog_demo (void)
   BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize() - 80, (uint8_t *)"       RECORDING...     ", CENTER_MODE);
 
   /* Start Recording */
-  BSP_AUDIO_IN_RecordEx(INPUT_DEVICE_ANALOG_MIC, internal_buffer, AUDIO_BLOCK_SIZE);
+  BSP_AUDIO_IN_Record(internal_buffer, AUDIO_BLOCK_SIZE);
 
   /* Wait end of one block recording */
   while((audio_rec_buffer_state & BUFFER_OFFSET_FULL) != BUFFER_OFFSET_FULL);
 
   /* Stop recorder */
-  BSP_AUDIO_IN_StopEx(INPUT_DEVICE_ANALOG_MIC);
+  BSP_AUDIO_IN_Stop();
 
   BSP_LCD_SetBackColor(LCD_COLOR_WHITE);
   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
@@ -131,14 +131,15 @@ void AudioRecAnalog_demo (void)
   
   while (1)
   {
-    /* Insert 100 ms delay */
-    HAL_Delay(100);
+    /* IMPORTANT: AUDIO_Process() should be called within a periodic process */    
+    AUDIO_Process();
+    
     if (CheckForUserInput() > 0)
     {
       /* Stop Player before close Test */
       BSP_AUDIO_OUT_Stop(CODEC_PDWN_SW);
       BSP_AUDIO_OUT_DeInit();
-      BSP_AUDIO_IN_DeInitEx(INPUT_DEVICE_ANALOG_MIC);      
+      BSP_AUDIO_IN_DeInit();      
       return;
     }
   }

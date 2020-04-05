@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    usbh_conf.c
   * @author  MCD Application Team
-  * @version V1.3.6
-  * @date    04-November-2016
+  * @version V1.4.0
+  * @date    17-February-2017
   * @brief   USB Host configuration file.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -178,7 +178,7 @@ USBH_StatusTypeDef USBH_LL_Init(USBH_HandleTypeDef *phost)
   /*Set LL Driver parameters */
   hhcd.Instance = USB_OTG_HS;
   hhcd.Init.Host_channels = 11; 
-  hhcd.Init.dma_enable = 1;
+  hhcd.Init.dma_enable = 0;
   hhcd.Init.low_power_enable = 0;
   hhcd.Init.phy_itface = HCD_PHY_EMBEDDED; 
   hhcd.Init.Sof_enable = 0;

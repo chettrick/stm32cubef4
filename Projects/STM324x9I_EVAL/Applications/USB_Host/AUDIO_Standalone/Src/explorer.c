@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    USB_Host/AUDIO_Standalone/Src/explorer.c 
   * @author  MCD Application Team
-  * @version V1.4.6
-  * @date    04-November-2016
+  * @version V1.5.0
+  * @date    17-February-2017
   * @brief   This file provides uSD Card drive configuration
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -44,19 +44,19 @@
   *
   ******************************************************************************
   */
-/* Includes ------------------------------------------------------------------*/
+/* Includes ------------------------------------------------------------------ */
 #include "main.h"
 
-/* Private typedef -----------------------------------------------------------*/
+/* Private typedef ----------------------------------------------------------- */
 FATFS SD_FatFs;
-char SD_Path[4]; 
+char SD_Path[4];
 FILELIST_FileTypeDef FileList;
 
-/* Private define ------------------------------------------------------------*/
-/* Private macro -------------------------------------------------------------*/
-/* Private variables ---------------------------------------------------------*/
-/* Private function prototypes -----------------------------------------------*/
-/* Private functions ---------------------------------------------------------*/
+/* Private define ------------------------------------------------------------ */
+/* Private macro ------------------------------------------------------------- */
+/* Private variables --------------------------------------------------------- */
+/* Private function prototypes ----------------------------------------------- */
+/* Private functions --------------------------------------------------------- */
 
 /**
   * @brief  Initializes the SD Storage.
@@ -65,16 +65,16 @@ FILELIST_FileTypeDef FileList;
   */
 uint8_t SD_StorageInit(void)
 {
-  /*Initializes the SD card device*/
+  /* Initializes the SD card device */
   BSP_SD_Init();
-  
+
   /* Check if the SD card is plugged in the slot */
-  if(BSP_SD_IsDetected() == SD_PRESENT )
+  if (BSP_SD_IsDetected() == SD_PRESENT)
   {
     /* Link the SD Card disk I/O driver */
-    if(FATFS_LinkDriver(&SD_Driver, SD_Path) == 0)
+    if (FATFS_LinkDriver(&SD_Driver, SD_Path) == 0)
     {
-      if((f_mount(&SD_FatFs, (TCHAR const*)SD_Path, 0) != FR_OK))
+      if ((f_mount(&SD_FatFs, (TCHAR const *)SD_Path, 0) != FR_OK))
       {
         /* FatFs Initialization Error */
         LCD_ErrLog("Cannot Initialize FatFs! \n");
@@ -82,9 +82,9 @@ uint8_t SD_StorageInit(void)
       }
       else
       {
-        LCD_DbgLog ("INFO : FatFs Initialized! \n");
+        LCD_DbgLog("INFO : FatFs Initialized! \n");
       }
-    }  
+    }
   }
   else
   {
@@ -105,27 +105,27 @@ FRESULT SD_StorageParse(void)
   FILINFO fno;
   DIR dir;
   char *fn;
-  
+
 #if _USE_LFN
   static char lfn[_MAX_LFN];
   fno.lfname = lfn;
   fno.lfsize = sizeof(lfn);
 #endif
-  
+
   res = f_opendir(&dir, SD_Path);
   FileList.ptr = 0;
-  
-  if(res == FR_OK)
+
+  if (res == FR_OK)
   {
     while (1)
     {
       res = f_readdir(&dir, &fno);
-      
-      if(res != FR_OK || fno.fname[0] == 0)
+
+      if (res != FR_OK || fno.fname[0] == 0)
       {
         break;
       }
-      if(fno.fname[0] == '.')
+      if (fno.fname[0] == '.')
       {
         continue;
       }
@@ -134,19 +134,20 @@ FRESULT SD_StorageParse(void)
 #else
       fn = fno.fname;
 #endif
-      
-      if(FileList.ptr < FILEMGR_LIST_DEPDTH)
+
+      if (FileList.ptr < FILEMGR_LIST_DEPDTH)
       {
-        if((fno.fattrib & AM_DIR) == 0)
+        if ((fno.fattrib & AM_DIR) == 0)
         {
-          if((strstr(fn, "wav")) || (strstr(fn, "WAV")))
+          if ((strstr(fn, "wav")) || (strstr(fn, "WAV")))
           {
-            strncpy((char *)FileList.file[FileList.ptr].name, (char *)fn, FILEMGR_FILE_NAME_SIZE);
+            strncpy((char *)FileList.file[FileList.ptr].name, (char *)fn,
+                    FILEMGR_FILE_NAME_SIZE);
             FileList.file[FileList.ptr].type = FILETYPE_FILE;
             FileList.ptr++;
           }
         }
-      }   
+      }
     }
   }
   f_closedir(&dir);

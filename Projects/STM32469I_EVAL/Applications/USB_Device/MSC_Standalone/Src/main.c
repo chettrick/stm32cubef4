@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    USB_Device/MSC_Standalone/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.6
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   USB device MSC demo main file
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -98,6 +98,7 @@ int main(void)
   /* Run Application (Interrupt mode) */
   while (1)
   {
+    Toggle_Leds();
   }
 }
 
@@ -170,6 +171,115 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
+}
+
+/**
+  * @brief  Initializes the SD MSP.
+  * @param  hsd: SD handle
+  * @param  Params : pointer on additional configuration parameters, can be NULL.
+  */
+void BSP_SD_MspInit(SD_HandleTypeDef *hsd, void *Params)
+{
+  static DMA_HandleTypeDef dma_rx_handle;
+  static DMA_HandleTypeDef dma_tx_handle;
+  GPIO_InitTypeDef gpio_init_structure;
+
+  /* SD pins are in conflict with Camera pins therefore Camera is power down */
+  /* __weak function can be modified by the application */
+  BSP_IO_ConfigPin(RSTI_PIN, IO_MODE_OUTPUT);
+  BSP_IO_ConfigPin(XSDN_PIN, IO_MODE_OUTPUT);
+  /* De-assert the camera STANDBY pin (active high) */
+  BSP_IO_WritePin(XSDN_PIN, BSP_IO_PIN_RESET);
+  /* Assert the camera RSTI pin (active low) */
+  BSP_IO_WritePin(RSTI_PIN, BSP_IO_PIN_RESET);
+  HAL_Delay(100);
+  
+  /* Enable SDIO clock */
+  __HAL_RCC_SDIO_CLK_ENABLE();
+
+  /* Enable DMA2 clocks */
+  __DMAx_TxRx_CLK_ENABLE();
+
+  /* Enable GPIOs clock */
+  __HAL_RCC_GPIOC_CLK_ENABLE();
+  __HAL_RCC_GPIOD_CLK_ENABLE();
+
+  /* Common GPIO configuration */
+  gpio_init_structure.Mode      = GPIO_MODE_AF_PP;
+  gpio_init_structure.Pull      = GPIO_PULLUP;
+  gpio_init_structure.Speed     = GPIO_SPEED_HIGH;
+  gpio_init_structure.Alternate = GPIO_AF12_SDIO;
+  
+  /* GPIOC configuration */
+  gpio_init_structure.Pin = GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_10 | GPIO_PIN_11 | GPIO_PIN_12;
+   
+  HAL_GPIO_Init(GPIOC, &gpio_init_structure);
+
+  /* GPIOD configuration */
+  gpio_init_structure.Pin = GPIO_PIN_2;
+  HAL_GPIO_Init(GPIOD, &gpio_init_structure);
+
+  /* NVIC configuration for SDIO interrupts */
+  HAL_NVIC_SetPriority(SDIO_IRQn, 0x05, 0);
+  HAL_NVIC_EnableIRQ(SDIO_IRQn);
+
+  /* Configure DMA Rx parameters */
+  dma_rx_handle.Init.Channel             = SD_DMAx_Rx_CHANNEL;
+  dma_rx_handle.Init.Direction           = DMA_PERIPH_TO_MEMORY;
+  dma_rx_handle.Init.PeriphInc           = DMA_PINC_DISABLE;
+  dma_rx_handle.Init.MemInc              = DMA_MINC_ENABLE;
+  dma_rx_handle.Init.PeriphDataAlignment = DMA_PDATAALIGN_WORD;
+  dma_rx_handle.Init.MemDataAlignment    = DMA_MDATAALIGN_WORD;
+  dma_rx_handle.Init.Mode                = DMA_PFCTRL;
+  dma_rx_handle.Init.Priority            = DMA_PRIORITY_VERY_HIGH;
+  dma_rx_handle.Init.FIFOMode            = DMA_FIFOMODE_ENABLE;
+  dma_rx_handle.Init.FIFOThreshold       = DMA_FIFO_THRESHOLD_FULL;
+  dma_rx_handle.Init.MemBurst            = DMA_MBURST_INC4;
+  dma_rx_handle.Init.PeriphBurst         = DMA_PBURST_INC4;
+  
+  dma_rx_handle.Instance = SD_DMAx_Rx_STREAM;
+  
+  /* Associate the DMA handle */
+  __HAL_LINKDMA(hsd, hdmarx, dma_rx_handle);
+  
+  /* Deinitialize the stream for new transfer */
+  HAL_DMA_DeInit(&dma_rx_handle);
+  
+  /* Configure the DMA stream */
+  HAL_DMA_Init(&dma_rx_handle);
+  
+  /* Configure DMA Tx parameters */
+  dma_tx_handle.Init.Channel             = SD_DMAx_Tx_CHANNEL;
+  dma_tx_handle.Init.Direction           = DMA_MEMORY_TO_PERIPH;
+  dma_tx_handle.Init.PeriphInc           = DMA_PINC_DISABLE;
+  dma_tx_handle.Init.MemInc              = DMA_MINC_ENABLE;
+  dma_tx_handle.Init.PeriphDataAlignment = DMA_PDATAALIGN_WORD;
+  dma_tx_handle.Init.MemDataAlignment    = DMA_MDATAALIGN_WORD;
+  dma_tx_handle.Init.Mode                = DMA_PFCTRL;
+  dma_tx_handle.Init.Priority            = DMA_PRIORITY_VERY_HIGH;
+  dma_tx_handle.Init.FIFOMode            = DMA_FIFOMODE_ENABLE;
+  dma_tx_handle.Init.FIFOThreshold       = DMA_FIFO_THRESHOLD_FULL;
+  dma_tx_handle.Init.MemBurst            = DMA_MBURST_INC4;
+  dma_tx_handle.Init.PeriphBurst         = DMA_PBURST_INC4;
+  
+  dma_tx_handle.Instance = SD_DMAx_Tx_STREAM;
+  
+  /* Associate the DMA handle */
+  __HAL_LINKDMA(hsd, hdmatx, dma_tx_handle);
+  
+  /* Deinitialize the stream for new transfer */
+  HAL_DMA_DeInit(&dma_tx_handle);
+  
+  /* Configure the DMA stream */
+  HAL_DMA_Init(&dma_tx_handle); 
+  
+  /* NVIC configuration for DMA transfer complete interrupt */
+  HAL_NVIC_SetPriority(SD_DMAx_Rx_IRQn, 0x06, 0);
+  HAL_NVIC_EnableIRQ(SD_DMAx_Rx_IRQn);
+
+  /* NVIC configuration for DMA transfer complete interrupt */
+  HAL_NVIC_SetPriority(SD_DMAx_Tx_IRQn, 0x06, 0);
+  HAL_NVIC_EnableIRQ(SD_DMAx_Tx_IRQn);
 }
 
 /**

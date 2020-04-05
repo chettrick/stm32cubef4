@@ -2,11 +2,11 @@
   @page ADC_RegularConversion_Polling conversion using Polling
 
   @verbatim
-  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    ADC/ADC_RegularConversion_Polling/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.5
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   Description of the ADC RegularConversion Polling example.
   ******************************************************************************
   *
@@ -80,10 +80,10 @@ STM32 Eval board's LEDs can be used to monitor the transfer status:
 
   - This example runs on STM32F469xx/STM32F479xx devices.
   
-  - This example has been tested with STM32469I-EVAL revB board and can be
+  - This example has been tested with STM32469I-EVAL RevC board and can be
     easily tailored to any other supported device and development board.
 
-  - STM32469I-EVAL revB Set-up
+  - STM32469I-EVAL RevC Set-up
     - Use the Potentiometer (RV1) of the Eval board (connected to  PC.0).
     - Make sure that JP3 is fitted in 2-3 positions to use potentiometer.
     

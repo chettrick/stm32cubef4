@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    USB_Host/MSC_Standalone/Src/explorer.c 
   * @author  MCD Application Team
-  * @version V1.4.6
-  * @date    04-November-2016
+  * @version V1.5.0
+  * @date    17-February-2017
   * @brief   Explore the USB flash disk content
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -44,15 +44,15 @@
   *
   ******************************************************************************
   */
-/* Includes ------------------------------------------------------------------*/
+/* Includes ------------------------------------------------------------------ */
 #include "main.h"
 
-/* Private typedef -----------------------------------------------------------*/
-/* Private define ------------------------------------------------------------*/  
-/* Private macro -------------------------------------------------------------*/
-/* Private variables ---------------------------------------------------------*/
-/* Private function prototypes -----------------------------------------------*/
-/* Private functions ---------------------------------------------------------*/
+/* Private typedef ----------------------------------------------------------- */
+/* Private define ------------------------------------------------------------ */
+/* Private macro ------------------------------------------------------------- */
+/* Private variables --------------------------------------------------------- */
+/* Private function prototypes ----------------------------------------------- */
+/* Private functions --------------------------------------------------------- */
 
 /**
   * @brief  Displays disk content.
@@ -68,75 +68,75 @@ FRESULT Explore_Disk(char *path, uint8_t recu_level)
   char *fn;
   char tmp[14];
   uint8_t line_idx = 0;
-  
+
 #if _USE_LFN
-  static char lfn[_MAX_LFN + 1];   /* Buffer to store the LFN */
+  static char lfn[_MAX_LFN + 1];  /* Buffer to store the LFN */
   fno.lfname = lfn;
   fno.lfsize = sizeof lfn;
 #endif
-  
+
   res = f_opendir(&dir, path);
-  if(res == FR_OK) 
+  if (res == FR_OK)
   {
-    while(USBH_MSC_IsReady(&hUSBHost))
+    while (USBH_MSC_IsReady(&hUSBHost))
     {
       res = f_readdir(&dir, &fno);
-      if(res != FR_OK || fno.fname[0] == 0) 
+      if (res != FR_OK || fno.fname[0] == 0)
       {
         break;
       }
-      if(fno.fname[0] == '.')
+      if (fno.fname[0] == '.')
       {
         continue;
       }
-      
+
 #if _USE_LFN
       fn = *fno.lfname ? fno.lfname : fno.fname;
 #else
       fn = fno.fname;
 #endif
-      strcpy(tmp, fn); 
-      
+      strcpy(tmp, fn);
+
       line_idx++;
-      if(line_idx > 9)
+      if (line_idx > 9)
       {
         line_idx = 0;
         LCD_UsrLog("> Press [Key] To Continue.\n");
-        
+
         /* KEY Button in polling */
-        while(BSP_PB_GetState(BUTTON_KEY) != RESET)
+        while (BSP_PB_GetState(BUTTON_KEY) != RESET)
         {
           /* Wait for User Input */
         }
-      } 
-      
-      if(recu_level == 1)
+      }
+
+      if (recu_level == 1)
       {
         LCD_DbgLog("   |__");
       }
-      else if(recu_level == 2)
+      else if (recu_level == 2)
       {
         LCD_DbgLog("   |   |__");
       }
-      if((fno.fattrib & AM_MASK) == AM_DIR)
+      if ((fno.fattrib & AM_MASK) == AM_DIR)
       {
-        strcat(tmp, "\n"); 
+        strcat(tmp, "\n");
         LCD_UsrLog((void *)tmp);
         Explore_Disk(fn, 2);
       }
       else
       {
-        strcat(tmp, "\n"); 
+        strcat(tmp, "\n");
         LCD_DbgLog((void *)tmp);
       }
-      
-      if(((fno.fattrib & AM_MASK) == AM_DIR)&&(recu_level == 2))
+
+      if (((fno.fattrib & AM_MASK) == AM_DIR) && (recu_level == 2))
       {
         Explore_Disk(fn, 2);
       }
     }
     f_closedir(&dir);
-	LCD_UsrLog("> Select an operation to Continue.\n");
+    LCD_UsrLog("> Select an operation to Continue.\n");
   }
   return res;
 }

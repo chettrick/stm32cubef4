@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm32f429i_discovery.c
   * @author  MCD Application Team
-  * @version V2.1.4
-  * @date    06-May-2016
+  * @version V2.1.5
+  * @date    27-January-2017
   * @brief   This file provides set of firmware functions to manage Leds and
   *          push-button available on STM32F429I-Discovery Kit from STMicroelectronics.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -65,11 +65,11 @@
   */ 
   
   /**
-  * @brief STM32F429I DISCO BSP Driver version number V2.1.4
+  * @brief STM32F429I DISCO BSP Driver version number V2.1.5
   */
 #define __STM32F429I_DISCO_BSP_VERSION_MAIN   (0x02) /*!< [31:24] main version */
 #define __STM32F429I_DISCO_BSP_VERSION_SUB1   (0x01) /*!< [23:16] sub1 version */
-#define __STM32F429I_DISCO_BSP_VERSION_SUB2   (0x04) /*!< [15:8]  sub2 version */
+#define __STM32F429I_DISCO_BSP_VERSION_SUB2   (0x05) /*!< [15:8]  sub2 version */
 #define __STM32F429I_DISCO_BSP_VERSION_RC     (0x00) /*!< [7:0]  release candidate */ 
 #define __STM32F429I_DISCO_BSP_VERSION        ((__STM32F429I_DISCO_BSP_VERSION_MAIN << 24)\
                                              |(__STM32F429I_DISCO_BSP_VERSION_SUB1 << 16)\
@@ -346,12 +346,12 @@ static void I2Cx_MspInit(I2C_HandleTypeDef *hi2c)
     /* Release the I2C Peripheral Clock Reset */  
     DISCOVERY_I2Cx_RELEASE_RESET(); 
     
-    /* Enable and set Discovery I2Cx Interrupt to the highest priority */
-    HAL_NVIC_SetPriority(DISCOVERY_I2Cx_EV_IRQn, 0x00, 0);
+    /* Enable and set Discovery I2Cx Interrupt to the lowest priority */
+    HAL_NVIC_SetPriority(DISCOVERY_I2Cx_EV_IRQn, 0x0F, 0);
     HAL_NVIC_EnableIRQ(DISCOVERY_I2Cx_EV_IRQn);
     
-    /* Enable and set Discovery I2Cx Interrupt to the highest priority */
-    HAL_NVIC_SetPriority(DISCOVERY_I2Cx_ER_IRQn, 0x00, 0);
+    /* Enable and set Discovery I2Cx Interrupt to the lowest priority */
+    HAL_NVIC_SetPriority(DISCOVERY_I2Cx_ER_IRQn, 0x0F, 0);
     HAL_NVIC_EnableIRQ(DISCOVERY_I2Cx_ER_IRQn);  
 
 #ifdef EE_M24LR64
@@ -456,7 +456,7 @@ static void I2Cx_ITConfig(void)
   HAL_GPIO_Init(STMPE811_INT_GPIO_PORT, &GPIO_InitStruct);
     
   /* Enable and set GPIO EXTI Interrupt to the highest priority */
-  HAL_NVIC_SetPriority((IRQn_Type)(STMPE811_INT_EXTI), 0x00, 0x00);
+  HAL_NVIC_SetPriority((IRQn_Type)(STMPE811_INT_EXTI), 0x0F, 0x00);
   HAL_NVIC_EnableIRQ((IRQn_Type)(STMPE811_INT_EXTI));
 }
 

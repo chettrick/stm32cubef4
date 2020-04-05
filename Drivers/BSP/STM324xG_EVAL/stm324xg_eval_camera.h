@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm324xg_eval_camera.h
   * @author  MCD Application Team
-  * @version V2.2.2
-  * @date    22-April-2016
+  * @version V3.0.0
+  * @date    27-January-2017
   * @brief   This file contains all the functions prototypes for the 
   *          stm324xg_eval_camera.c driver.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -105,6 +105,7 @@ void    BSP_CAMERA_LineEventCallback(void);
 void    BSP_CAMERA_VsyncEventCallback(void);
 void    BSP_CAMERA_FrameEventCallback(void);
 void    BSP_CAMERA_ErrorCallback(void);
+void    BSP_CAMERA_MspInit(void);
 
 /* Camera features functions prototype */
 void    BSP_CAMERA_ContrastBrightnessConfig(uint32_t contrast_level, uint32_t brightness_level);

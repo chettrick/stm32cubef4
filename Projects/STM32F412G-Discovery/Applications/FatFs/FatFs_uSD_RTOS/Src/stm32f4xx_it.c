@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    FatFs/FatFs_uSD_RTOS/Src/stm32f4xx_it.c
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
   ******************************************************************************
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.
@@ -151,35 +151,6 @@ void BSP_SD_DMA_Tx_IRQHandler(void)
 void BSP_SD_DMA_Rx_IRQHandler(void)
 {
   HAL_DMA_IRQHandler(uSdHandle.hdmarx);
-}
-/**
-  * @brief  This function handles DMA2 Stream 3 interrupt request.
-  * @param  None
-  * @retval None
-  */
-void DMA2_Stream3_IRQHandler(void)
-{
-  BSP_SD_DMA_Rx_IRQHandler();
-}
-
-/**
-  * @brief  This function handles DMA2 Stream 6 interrupt request.
-  * @param  None
-  * @retval None
-  */
-void DMA2_Stream6_IRQHandler(void)
-{
-  BSP_SD_DMA_Tx_IRQHandler(); 
-}
-
-/**
-  * @brief  This function handles SDIO interrupt request.
-  * @param  None
-  * @retval None
-  */
-void SDIO_IRQHandler(void)
-{
-  BSP_SD_IRQHandler();
 }
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

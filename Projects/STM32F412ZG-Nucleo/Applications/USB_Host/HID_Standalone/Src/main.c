@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    USB_Host/HID_Standalone/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    06-May-2016
+  * @version V1.0.1
+  * @date    17-February-2017
   * @brief   USB host HID Mouse and Keyboard demo main file
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -125,13 +125,6 @@ int main(void)
   */
 static void HID_InitApplication(void)
 {
-  /* Configure LEDs */
-  BSP_LED_Init(LED2);
-  BSP_LED_Init(LED3);
-  
-  /* Configure KEY Button */
-  BSP_PB_Init(BUTTON_USER, BUTTON_MODE_GPIO);
-  
   /* Configure Joystick in EXTI mode */
   BSP_JOY_Init();
 
@@ -178,24 +171,6 @@ static void USBH_UserProcess(USBH_HandleTypeDef *phost, uint8_t id)
     break; 
   }
 }
-
-/**
-  * @brief  Toggles LEDs to show user input state.
-  * @param  None
-  * @retval None
-  */
-void Toggle_Leds(void)
-{
-  static uint32_t ticks;
-
-  if(ticks++ == 100)
-  {
-    BSP_LED_Toggle(LED2);
-    BSP_LED_Toggle(LED3);
-    ticks = 0;
-  }
-}
-
 
 /**
   * @brief  System Clock Configuration

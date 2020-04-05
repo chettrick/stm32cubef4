@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    LCD_DSI/LCD_DSI_CmdMode_PartialRefresh/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.4
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   This example describes how to configure and use LCD DSI to display an image
   *          of size WVGA in mode landscape (800x480) using the STM32F4xx HAL API and BSP.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -54,13 +54,7 @@
 /* Private typedef -----------------------------------------------------------*/
 extern LTDC_HandleTypeDef hltdc_eval;
 static DMA2D_HandleTypeDef   hdma2d;
-extern QSPI_HandleTypeDef QSPIHandle;
 extern DSI_HandleTypeDef hdsi_eval;
-DSI_VidCfgTypeDef hdsivideo_handle;
-DSI_CmdCfgTypeDef CmdCfg;
-DSI_LPCmdTypeDef LPCmd;
-DSI_PLLInitTypeDef dsiPllInit;
-static RCC_PeriphCLKInitTypeDef  PeriphClkInitStruct;
 
 /* Private define ------------------------------------------------------------*/
 #define VSYNC           1  
@@ -214,7 +208,7 @@ void HAL_DSI_EndOfRefreshCallback(DSI_HandleTypeDef *hdsi)
       __HAL_DSI_WRAPPER_DISABLE(&hdsi_eval);
       /* Update LTDC configuaration */
       LTDC_LAYER(&hltdc_eval, 0)->CFBAR = LAYER0_ADDRESS + 400 * 4;
-      __HAL_LTDC_RELOAD_CONFIG(&hltdc_eval);
+      __HAL_LTDC_RELOAD_IMMEDIATE_CONFIG(&hltdc_eval);
       /* Enable DSI Wrapper */
       __HAL_DSI_WRAPPER_ENABLE(&hdsi_eval);
       
@@ -230,7 +224,7 @@ void HAL_DSI_EndOfRefreshCallback(DSI_HandleTypeDef *hdsi)
       __HAL_DSI_WRAPPER_DISABLE(&hdsi_eval);
       /* Update LTDC configuaration */
       LTDC_LAYER(&hltdc_eval, 0)->CFBAR = LAYER0_ADDRESS;
-      __HAL_LTDC_RELOAD_CONFIG(&hltdc_eval);
+      __HAL_LTDC_RELOAD_IMMEDIATE_CONFIG(&hltdc_eval);
       /* Enable DSI Wrapper */
       __HAL_DSI_WRAPPER_ENABLE(&hdsi_eval);
       
@@ -330,6 +324,12 @@ static void SystemClock_Config(void)
   */
 static uint8_t LCD_Init(void)
 {
+  static DSI_PHY_TimerTypeDef PhyTimings;
+  static DSI_CmdCfgTypeDef CmdCfg;
+  static DSI_LPCmdTypeDef LPCmd;
+  static DSI_PLLInitTypeDef dsiPllInit;
+  static RCC_PeriphCLKInitTypeDef  PeriphClkInitStruct;
+
   /* Toggle Hardware Reset of the DSI LCD using
   * its XRES signal (active low) */
   BSP_LCD_Reset();
@@ -397,6 +397,15 @@ static uint8_t LCD_Init(void)
   LPCmd.LPDcsShortReadNoP     = DSI_LP_DSR0P_ENABLE;
   LPCmd.LPDcsLongWrite        = DSI_LP_DLW_ENABLE;
   HAL_DSI_ConfigCommand(&hdsi_eval, &LPCmd);
+
+  /* Configure DSI PHY HS2LP and LP2HS timings */
+  PhyTimings.ClockLaneHS2LPTime = 35;
+  PhyTimings.ClockLaneLP2HSTime = 35;
+  PhyTimings.DataLaneHS2LPTime = 35;
+  PhyTimings.DataLaneLP2HSTime = 35;
+  PhyTimings.DataLaneMaxReadTime = 0;
+  PhyTimings.StopWaitTime = 10;
+  HAL_DSI_ConfigPhyTimer(&hdsi_eval, &PhyTimings);
 
   /* Initialize LTDC */
   LTDC_Init();

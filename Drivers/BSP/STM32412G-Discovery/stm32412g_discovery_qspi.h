@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm32412g_discovery_qspi.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    04-May-2016
+  * @version V2.0.0
+  * @date    27-January-2017
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm32412g_discovery_qspi.c driver.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -56,13 +56,13 @@
 #include "stm32f4xx_hal.h"
 #include "../Components/n25q128a/n25q128a.h"
 
-/** @defgroup STM32412G_DISCOVERY_QSPI STM32412G-DISCOVERY QSPI
+/** @addtogroup STM32412G_DISCOVERY_QSPI
   * @{
   */    
 
   
 /* Exported constants --------------------------------------------------------*/ 
-/** @defgroup STM32412G_DISCOVERY_QSPI_Exported_Constants Exported Constants
+/** @defgroup STM32412G_DISCOVERY_QSPI_Exported_Constants STM32412G Discovery QSPI Exported Constants
   * @{
   */
 /* QSPI Error codes */
@@ -110,7 +110,7 @@
   */
 
 /* Exported types ------------------------------------------------------------*/
-/** @defgroup STM32412G_DISCOVERY_QSPI_Exported_Types Exported Types
+/** @defgroup STM32412G_DISCOVERY_QSPI_Exported_Types STM32412G Discovery QSPI Exported Types
   * @{
   */
 /* QSPI Info */
@@ -128,7 +128,7 @@ typedef struct {
 
   
 /* Exported functions --------------------------------------------------------*/
-/** @defgroup STM32412G_DISCOVERY_QSPI_Exported_Functions  Exported Functions
+/** @defgroup STM32412G_DISCOVERY_QSPI_Exported_Functions STM32412G Discovery QSPI Exported Functions
   * @{
   */  
 uint8_t BSP_QSPI_Init       (void);

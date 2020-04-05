@@ -29,11 +29,12 @@
  * Author: Simon Goldschmidt
  *
  */
-#ifndef LWIP_HDR_LWIPOPTS_H__
-#define LWIP_HDR_LWIPOPTS_H__
+#ifndef LWIP_HDR_LWIPOPTS_H
+#define LWIP_HDR_LWIPOPTS_H
 
 /* Prevent having to link sys_arch.c (we don't test the API layers in unit tests) */
 #define NO_SYS                          1
+#define SYS_LIGHTWEIGHT_PROT            0
 #define LWIP_NETCONN                    0
 #define LWIP_SOCKET                     0
 
@@ -45,12 +46,17 @@
 #define TCP_SND_QUEUELEN                40
 #define MEMP_NUM_TCP_SEG                TCP_SND_QUEUELEN
 #define TCP_SND_BUF                     (12 * TCP_MSS)
-#define TCP_WND                         (10 * TCP_MSS)ss
+#define TCP_WND                         (10 * TCP_MSS)
 #define LWIP_WND_SCALE                  1
 #define TCP_RCV_SCALE                   0
-#define PBUF_POOL_SIZE                  400 // pbuf tests need ~200KByte
+#define PBUF_POOL_SIZE                  400 /* pbuf tests need ~200KByte */
+
+/* Enable IGMP and MDNS for MDNS tests */
+#define LWIP_IGMP                       1
+#define LWIP_MDNS_RESPONDER             1
+#define LWIP_NUM_NETIF_CLIENT_DATA      (LWIP_MDNS_RESPONDER)
 
 /* Minimal changes to opt.h required for etharp unit tests: */
 #define ETHARP_SUPPORT_STATIC_ENTRIES   1
 
-#endif /* LWIP_HDR_LWIPOPTS_H__ */
+#endif /* LWIP_HDR_LWIPOPTS_H */

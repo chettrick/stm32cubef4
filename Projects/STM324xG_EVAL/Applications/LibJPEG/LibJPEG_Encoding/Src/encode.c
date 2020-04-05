@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    LibJPEG/LibJPEG_Encoding/Src/encode.c 
   * @author  MCD Application Team
-  * @version V1.3.6
-  * @date    04-November-2016
+  * @version V1.4.0
+  * @date    17-February-2017
   * @brief   This file contain the compress method.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -69,7 +69,7 @@
   * @param  buff:          pointer to the image line   
   * @retval None
   */
-void jpeg_encode(FIL *file, FIL *file1, uint32_t width, uint32_t height, uint32_t image_quality, uint8_t * buff)
+void jpeg_encode(JFILE *file, JFILE *file1, uint32_t width, uint32_t height, uint32_t image_quality, uint8_t * buff)
 { 
     
   /* Encode BMP Image to JPEG */ 

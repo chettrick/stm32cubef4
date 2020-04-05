@@ -2,16 +2,16 @@
   @page LibJPEG_Decoding LibJPEG decoding application
   
   @verbatim
-  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    LibJPEG/LibJPEG_Decoding/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.6
-  * @date    04-November-2016
+  * @version V1.3.0
+  * @date    17-February-2017
   * @brief   Description of the LibJPEG decoding application.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -62,6 +62,10 @@ The images must have the following properties:
 The image size can be modified by changing IMAGE_WIDTH and IMAGE_HEIGHT defines 
 in "main.h" file to decode other resolution than 320x240.
 
+@note IMAGE_WIDTH and IMAGE_HEIGHT values must be lower or equal to LCD screen resolution.
+ - LCD width  = 320 
+ - LCD height = 240
+
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
       based on variable incremented in SysTick ISR. This implies that if HAL_Delay() is called from
       a peripheral ISR process, then the SysTick interrupt must have higher priority (numerically lower)
@@ -81,10 +85,12 @@ in "main.h" file to decode other resolution than 320x240.
     - LibJPEG/LibJPEG_Decoding/Inc/decode.h                    Decoder header file
     - LibJPEG/LibJPEG_Decoding/Inc/jmorecfg.h                  Lib JPEG configuration file (advanced configuration)
     - LibJPEG/LibJPEG_Decoding/Inc/jconfig.h                   Lib JPEG configuration file
+    - LibJPEG/LibJPEG_Decoding/Inc/jdata_conf.h                Write/Read methods definition
     - LibJPEG/LibJPEG_Decoding/Src/main.c                      Main program  
     - LibJPEG/LibJPEG_Decoding/Src/stm32f4xx_it.c              Interrupt handlers
     - LibJPEG/LibJPEG_Decoding/Src/system_stm32f4xx.c          STM32F4xx system clock configuration file
     - LibJPEG/LibJPEG_Decoding/Src/decode.c                    Decoder file
+    - LibJPEG/LibJPEG_Decoding/Src/jdata_conf.c                Write/Read methods definition
 
 
 @par Hardware and Software environment

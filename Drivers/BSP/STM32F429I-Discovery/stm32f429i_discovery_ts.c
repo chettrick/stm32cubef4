@@ -2,15 +2,15 @@
   ******************************************************************************
   * @file    stm32f429i_discovery_ts.c
   * @author  MCD Application Team
-  * @version V2.1.4
-  * @date    06-May-2016
+  * @version V2.1.5
+  * @date    27-January-2017
   * @brief   This file provides a set of functions needed to manage Touch 
   *          screen available with STMPE811 IO Expander device mounted on 
   *          STM32F429I-Discovery Kit.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:

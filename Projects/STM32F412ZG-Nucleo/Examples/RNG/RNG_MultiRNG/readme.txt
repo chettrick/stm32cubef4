@@ -2,11 +2,11 @@
   @page RNG_MultiRNG Multiple Random Numbers Generator example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    RNG/RNG_MultiRNG/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    06-May-2016  
+  * @version V1.1.0
+  * @date    17-February-2017  
   * @brief   Description of multiple random numbers generation example.
   ******************************************************************************
   *

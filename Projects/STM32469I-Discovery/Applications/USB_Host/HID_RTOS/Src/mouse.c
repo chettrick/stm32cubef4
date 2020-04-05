@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    USB_Host/HID_RTOS/Src/mouse.c 
   * @author  MCD Application Team
-  * @version V1.0.6
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   This file implements Functions for mouse menu
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -67,7 +67,7 @@ extern USBH_HandleTypeDef  hUSBHost;
 
 #define MOUSE_WINDOW_X                  140
 #define MOUSE_WINDOW_Y                  90
-#define MOUSE_WINDOW_X_MAX              181
+#define MOUSE_WINDOW_X_MAX              190
 #define MOUSE_WINDOW_Y_MIN              101
 #define MOUSE_WINDOW_HEIGHT             80
 #define MOUSE_WINDOW_WIDTH              200
@@ -168,13 +168,13 @@ static void HID_MOUSE_UpdatePosition(int8_t x, int8_t y)
     x_loc += x/2;
     y_loc += y/10;
 
-    if(y_loc > MOUSE_WINDOW_HEIGHT - 12)
+    if(y_loc > MOUSE_WINDOW_HEIGHT - 18)
     {
-      y_loc = MOUSE_WINDOW_HEIGHT - 12;
+      y_loc = MOUSE_WINDOW_HEIGHT - 18;
     }  
-    if(x_loc > MOUSE_WINDOW_WIDTH - 10)
+    if(x_loc > MOUSE_WINDOW_WIDTH - 12)
     {
-      x_loc = MOUSE_WINDOW_WIDTH - 10;
+      x_loc = MOUSE_WINDOW_WIDTH - 12;
     }  
     
     if(y_loc < 2)

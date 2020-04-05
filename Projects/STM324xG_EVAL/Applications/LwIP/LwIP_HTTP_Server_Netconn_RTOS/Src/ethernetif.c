@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    LwIP/LwIP_HTTP_Server_Netconn_RTOS/Src/ethernetif.c
   * @author  MCD Application Team
-  * @version V1.3.6
-  * @date    04-November-2016
+  * @version V1.4.0
+  * @date    17-February-2017
   * @brief   This file implements Ethernet network interface drivers for lwIP
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -46,8 +46,7 @@
   */
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
-#include "lwip/opt.h"
-#include "lwip/lwip_timers.h"
+#include "lwip/timeouts.h"
 #include "netif/etharp.h"
 #include "ethernetif.h"
 #include <string.h>
@@ -55,7 +54,7 @@
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* The time to block waiting for input. */
-#define TIME_WAITING_FOR_INPUT                 ( portMAX_DELAY )
+#define TIME_WAITING_FOR_INPUT                 ( osWaitForever )
 /* Stack size of the interface thread */
 #define INTERFACE_THREAD_STACK_SIZE            ( 350 )
 
@@ -104,7 +103,7 @@ static void ethernetif_input( void const * argument );
   * @retval None
   */
 void HAL_ETH_MspInit(ETH_HandleTypeDef *heth)
-{ 
+{
   GPIO_InitTypeDef GPIO_InitStructure;
   
   /* Enable GPIOs clocks */
@@ -190,16 +189,6 @@ void HAL_ETH_RxCpltCallback(ETH_HandleTypeDef *heth)
   osSemaphoreRelease(s_xSemaphore);
 }
 
-/**
-  * @brief  Ethernet IRQ Handler
-  * @param  None
-  * @retval None
-  */
-void ETHERNET_IRQHandler(void)
-{
-  HAL_ETH_IRQHandler(&EthHandle);
-}
-
 /*******************************************************************************
                        LL Driver Interface ( LwIP stack --> ETH) 
 *******************************************************************************/
@@ -229,7 +218,7 @@ static void low_level_init(struct netif *netif)
   if (HAL_ETH_Init(&EthHandle) == HAL_OK)
   {
     /* Set netif link flag */
-    netif->flags |= NETIF_FLAG_LINK_UP;    
+    netif->flags |= NETIF_FLAG_LINK_UP;
   }
   
   /* Initialize Tx Descriptors list: Chain Mode */
@@ -239,7 +228,7 @@ static void low_level_init(struct netif *netif)
   HAL_ETH_DMARxDescListInit(&EthHandle, DMARxDscrTab, &Rx_Buff[0][0], ETH_RXBUFNB);
   
   /* set netif MAC hardware address length */
-  netif->hwaddr_len = ETHARP_HWADDR_LEN;
+  netif->hwaddr_len = ETH_HWADDR_LEN;
 
   /* set netif MAC hardware address */
   netif->hwaddr[0] =  MAC_ADDR0;
@@ -260,8 +249,8 @@ static void low_level_init(struct netif *netif)
   s_xSemaphore = osSemaphoreCreate(osSemaphore(SEM) , 1 );
 
   /* create the task that handles the ETH_MAC */
-  osThreadDef(Eth_if, ethernetif_input, osPriorityRealtime, 0, INTERFACE_THREAD_STACK_SIZE);
-  osThreadCreate (osThread(Eth_if), netif);
+  osThreadDef(EthIf, ethernetif_input, osPriorityRealtime, 0, INTERFACE_THREAD_STACK_SIZE);
+  osThreadCreate (osThread(EthIf), netif);
 
   /* Enable MAC and DMA transmission and reception */
   HAL_ETH_Start(&EthHandle);
@@ -387,7 +376,7 @@ error:
 static struct pbuf * low_level_input(struct netif *netif)
 {
   struct pbuf *p = NULL, *q = NULL;
-  u16_t len = 0;
+  uint16_t len = 0;
   uint8_t *buffer;
   __IO ETH_DMADescTypeDef *dmarxdesc;
   uint32_t bufferoffset = 0;
@@ -418,41 +407,40 @@ static struct pbuf * low_level_input(struct netif *netif)
     {
       byteslefttocopy = q->len;
       payloadoffset = 0;
-
-      /* Check if the length of bytes to copy in current pbuf is bigger than Rx buffer size*/
+      
+      /* Check if the length of bytes to copy in current pbuf is bigger than Rx buffer size */
       while( (byteslefttocopy + bufferoffset) > ETH_RX_BUF_SIZE )
       {
-        /* Copy data to pbuf*/
-        memcpy( (u8_t*)((u8_t*)q->payload + payloadoffset), (u8_t*)((u8_t*)buffer + bufferoffset), (ETH_RX_BUF_SIZE - bufferoffset));
-
+        /* Copy data to pbuf */
+        memcpy( (uint8_t*)((uint8_t*)q->payload + payloadoffset), (uint8_t*)((uint8_t*)buffer + bufferoffset), (ETH_RX_BUF_SIZE - bufferoffset));
+        
         /* Point to next descriptor */
         dmarxdesc = (ETH_DMADescTypeDef *)(dmarxdesc->Buffer2NextDescAddr);
-        buffer = (unsigned char *)(dmarxdesc->Buffer1Addr);
-
+        buffer = (uint8_t *)(dmarxdesc->Buffer1Addr);
+        
         byteslefttocopy = byteslefttocopy - (ETH_RX_BUF_SIZE - bufferoffset);
         payloadoffset = payloadoffset + (ETH_RX_BUF_SIZE - bufferoffset);
         bufferoffset = 0;
       }
 
       /* Copy remaining data in pbuf */
-      memcpy( (u8_t*)((u8_t*)q->payload + payloadoffset), (u8_t*)((u8_t*)buffer + bufferoffset), byteslefttocopy);
+      memcpy( (uint8_t*)((uint8_t*)q->payload + payloadoffset), (uint8_t*)((uint8_t*)buffer + bufferoffset), byteslefttocopy);
       bufferoffset = bufferoffset + byteslefttocopy;
     }
   }
-  
-  /* Release descriptors to DMA */
-  dmarxdesc = EthHandle.RxFrameInfos.FSRxDesc;
 
+  /* Release descriptors to DMA */
+  /* Point to first descriptor */
+  dmarxdesc = EthHandle.RxFrameInfos.FSRxDesc;
   /* Set Own bit in Rx descriptors: gives the buffers back to DMA */
   for (i=0; i< EthHandle.RxFrameInfos.SegCount; i++)
   {  
     dmarxdesc->Status |= ETH_DMARXDESC_OWN;
     dmarxdesc = (ETH_DMADescTypeDef *)(dmarxdesc->Buffer2NextDescAddr);
   }
- 
+
   /* Clear Segment_Count */
   EthHandle.RxFrameInfos.SegCount =0;
-
   
   /* When Rx Buffer unavailable flag is set: clear it and resume reception */
   if ((EthHandle.Instance->DMASR & ETH_DMASR_RBUS) != (uint32_t)RESET)  
@@ -464,7 +452,6 @@ static struct pbuf * low_level_input(struct netif *netif)
   }
   return p;
 }
-
 
 /**
   * @brief This function is the ethernetif_input task, it is processed when a packet 
@@ -544,7 +531,7 @@ void ethernetif_set_link(void const *argument)
   
   for(;;)
   {
-    if (osSemaphoreWait( link_arg->semaphore, 100)== osOK)
+    if (osSemaphoreWait( link_arg->semaphore, osWaitForever)== osOK)
     {
       /* Read PHY_MISR*/
       HAL_ETH_ReadPHYRegister(&EthHandle, PHY_MISR, &regvalue);
@@ -668,5 +655,10 @@ __weak void ethernetif_notify_conn_changed(struct netif *netif)
   /* NOTE : This is function could be implemented in user file 
             when the callback is needed,
   */  
+}
+
+u32_t sys_now(void)
+{
+  return HAL_GetTick();
 }
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

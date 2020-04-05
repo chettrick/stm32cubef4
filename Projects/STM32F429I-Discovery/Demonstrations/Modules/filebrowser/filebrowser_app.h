@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    filebrowser_app.h
   * @author  MCD Application Team
-  * @version V1.4.6
-  * @date    04-November-2016 
+  * @version V1.4.7
+  * @date    17-February-2017 
   * @brief   Header for filebrowser_app.c file
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 

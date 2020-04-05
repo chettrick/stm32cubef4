@@ -2,16 +2,16 @@
   @page Audio_playback_and_record  Audio Playback and Record application
 
   @verbatim
-  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    Audio/Audio_playback_and_record/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.6
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   Description of the Audio Playback and Record application
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -163,10 +163,10 @@ this application. For IAR EWARM toolchain, the library is labeled
 
   - This application runs on STM32F469xx and STM32F479xx devices.
     
-  - This application has been tested with STM32469I-EVAL RevB evaluation board and can be
+  - This application has been tested with STM32469I-EVAL RevC evaluation board and can be
     easily tailored to any other supported device and development board.   
 
-  - STM32469I-EVAL RevB Set-up
+  - STM32469I-EVAL RevC Set-up
     - Please ensure that jumpers JP5 and JP6 are fitted in position 2-3
     - Please ensure that jumpers JP16, JP17 and JP18 are fitted in position 2-3
     - Plug the USB key into the STM32469I-EVAL board through 'USB micro A-Male 

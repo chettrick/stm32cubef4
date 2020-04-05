@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    LwIP/LwIP_IAP/Src/tftpserver.c
   * @author  MCD Application Team
-  * @version V1.3.6
-  * @date    04-November-2016   
+  * @version V1.4.0
+  * @date    17-February-2017  
   * @brief   basic tftp server implementation for IAP (only Write Req supported)
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -181,9 +181,9 @@ static err_t IAP_tftp_send_ack_packet(struct udp_pcb *upcb, const ip_addr_t *to,
   * @brief  Processes data transfers after a TFTP write request
   * @param  _args: used as pointer on TFTP connection args
   * @param  upcb: pointer on udp_pcb structure
-  * @param pkt_buf: pointer on a pbuf stucture
-  * @param ip_addr: pointer on the receive IP_address structure
-  * @param port: receive port address
+  * @param  pkt_buf: pointer on a pbuf stucture
+  * @param  ip_addr: pointer on the receive IP_address structure
+  * @param  port: receive port address
   * @retval None
   */
 static void IAP_wrq_recv_callback(void *_args, struct udp_pcb *upcb, struct pbuf *pkt_buf, const ip_addr_t *addr, u16_t port)
@@ -331,7 +331,7 @@ static void IAP_tftp_recv_callback(void *arg, struct udp_pcb *upcb, struct pbuf 
 
 #ifdef USE_LCD
   uint32_t i;
-  char filename[40],message[40], *ptr;
+  char filename[40],message[46], *ptr;
 #endif
 
   /* create new UDP PCB structure */

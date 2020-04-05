@@ -2,16 +2,16 @@
   @page LibJPEG_Encoding LibJPEG encoding application
   
   @verbatim
-  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    LibJPEG/LibJPEG_Encoding/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.6
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   Description of the LibJPEG encoding application.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -56,6 +56,10 @@ The images must have the following properties:
 The image size can be modified by changing IMAGE_WIDTH and IMAGE_HEIGHT defines 
 in "main.h" file to decode other resolution than 320x240.
 
+@note IMAGE_WIDTH and IMAGE_HEIGHT values must be lower or equal to LCD screen resolution.
+ - LCD width  = 320 
+ - LCD height = 240
+
 @note If the displayed image's colors are inverted, please uncomment "SWAP_RB" define in "main.h" file.
 
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
@@ -77,12 +81,14 @@ in "main.h" file to decode other resolution than 320x240.
     - LibJPEG/LibJPEG_Encoding/Inc/encode.h                    Encoder header file
     - LibJPEG/LibJPEG_Encoding/Inc/decode.h                    Decoder header file
     - LibJPEG/LibJPEG_Encoding/Inc/jmorecfg.h                  Lib JPEG configuration file (advanced configuration)
-    - LibJPEG/LibJPEG_Encoding/Inc/jconfig.h                   Lib JPEG configuration file       
+    - LibJPEG/LibJPEG_Encoding/Inc/jconfig.h                   Lib JPEG configuration file 
+    - LibJPEG/LibJPEG_Encoding/Inc/jdata_conf.h                Write/Read methods definition      
     - LibJPEG/LibJPEG_Encoding/Src/main.c                      Main program  
     - LibJPEG/LibJPEG_Encoding/Src/stm32f4xx_it.c              Interrupt handlers
     - LibJPEG/LibJPEG_Encoding/Src/system_stm32f4xx.c          STM32F4xx system clock configuration file
     - LibJPEG/LibJPEG_Encoding/Src/encode.c                    Encoder file
     - LibJPEG/LibJPEG_Encoding/Src/decode.c                    Decoder file
+    - LibJPEG/LibJPEG_Encoding/Src/jdata_conf.c                Write/Read methods definition
 
 
 @par Hardware and Software environment

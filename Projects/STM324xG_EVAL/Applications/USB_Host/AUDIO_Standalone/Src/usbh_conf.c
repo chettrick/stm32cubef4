@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    USB_Host/AUDIO_Standalone/Src/usbh_conf.c
   * @author  MCD Application Team
-  * @version V1.3.6
-  * @date    04-November-2016
+  * @version V1.4.0
+  * @date    17-February-2017
   * @brief   USB Host configuration file.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -90,7 +90,7 @@ void HAL_HCD_MspInit(HCD_HandleTypeDef *hhcd)
     __HAL_RCC_USB_OTG_FS_CLK_ENABLE();
     
     /* Set USBFS Interrupt to the lowest priority */
-    HAL_NVIC_SetPriority(OTG_FS_IRQn, 5, 0);
+    HAL_NVIC_SetPriority(OTG_FS_IRQn, 3, 0);
     
     /* Enable USBFS Interrupt */
     HAL_NVIC_EnableIRQ(OTG_FS_IRQn);

@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm32469i_discovery_sdram.h
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    04-August-2016
+  * @version V2.0.0
+  * @date    27-January-2017
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm32469i_discovery_sdram.c driver.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -78,8 +78,8 @@
   */
 #define SDRAM_DEVICE_ADDR  ((uint32_t)0xC0000000)
 
- /* SDRAM device size in MBytes */
- #define SDRAM_DEVICE_SIZE  ((uint32_t)0x800000)
+ /* SDRAM device size in Bytes */
+ #define SDRAM_DEVICE_SIZE  ((uint32_t)0x1000000)
 
 #define SDRAM_MEMORY_WIDTH FMC_SDRAM_MEM_BUS_WIDTH_32
 #define SDCLOCK_PERIOD     FMC_SDRAM_CLOCK_PERIOD_2

@@ -36,21 +36,6 @@
 			<locationURI>PARENT-2-PROJECT_LOC/Demo/GUIDEMO.c</locationURI>
 		</link>
 		<link>
-			<name>Application/Demo/GUIDEMO_AntialiasedText.c</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Demo/GUIDEMO_AntialiasedText.c</locationURI>
-		</link>
-		<link>
-			<name>Application/Demo/GUIDEMO_Automotive.c</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Demo/GUIDEMO_Automotive.c</locationURI>
-		</link>
-		<link>
-			<name>Application/Demo/GUIDEMO_BarGraph.c</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Demo/GUIDEMO_BarGraph.c</locationURI>
-		</link>
-		<link>
 			<name>Application/Demo/GUIDEMO_Bitmap.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/Demo/GUIDEMO_Bitmap.c</locationURI>
@@ -71,11 +56,6 @@
 			<locationURI>PARENT-2-PROJECT_LOC/Demo/GUIDEMO_Cursor.c</locationURI>
 		</link>
 		<link>
-			<name>Application/Demo/GUIDEMO_Fading.c</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Demo/GUIDEMO_Fading.c</locationURI>
-		</link>
-		<link>
 			<name>Application/Demo/GUIDEMO_Graph.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/Demo/GUIDEMO_Graph.c</locationURI>
@@ -84,11 +64,6 @@
 			<name>Application/Demo/GUIDEMO_IconView.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/Demo/GUIDEMO_IconView.c</locationURI>
-		</link>
-		<link>
-			<name>Application/Demo/GUIDEMO_ImageFlow.c</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Demo/GUIDEMO_ImageFlow.c</locationURI>
 		</link>
 		<link>
 			<name>Application/Demo/GUIDEMO_Intro.c</name>
@@ -111,29 +86,14 @@
 			<locationURI>PARENT-2-PROJECT_LOC/Demo/GUIDEMO_Resource.c</locationURI>
 		</link>
 		<link>
-			<name>Application/Demo/GUIDEMO_Skinning.c</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Demo/GUIDEMO_Skinning.c</locationURI>
-		</link>
-		<link>
 			<name>Application/Demo/GUIDEMO_Speed.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/Demo/GUIDEMO_Speed.c</locationURI>
 		</link>
 		<link>
-			<name>Application/Demo/GUIDEMO_Speedometer.c</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Demo/GUIDEMO_Speedometer.c</locationURI>
-		</link>
-		<link>
 			<name>Application/Demo/GUIDEMO_Start.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/Demo/GUIDEMO_Start.c</locationURI>
-		</link>
-		<link>
-			<name>Application/Demo/GUIDEMO_TransparentDialog.c</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Demo/GUIDEMO_TransparentDialog.c</locationURI>
 		</link>
 		<link>
 			<name>Application/Demo/GUIDEMO_Treeview.c</name>
@@ -144,16 +104,6 @@
 			<name>Application/Demo/GUIDEMO_VScreen.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/Demo/GUIDEMO_VScreen.c</locationURI>
-		</link>
-		<link>
-			<name>Application/Demo/GUIDEMO_WashingMachine.c</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Demo/GUIDEMO_WashingMachine.c</locationURI>
-		</link>
-		<link>
-			<name>Application/Demo/GUIDEMO_ZoomAndRotate.c</name>
-			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Demo/GUIDEMO_ZoomAndRotate.c</locationURI>
 		</link>
 		<link>
 			<name>Application/SW4STM32/startup_stm32f429xx.s</name>
@@ -311,6 +261,11 @@
 			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/exc7200/exc7200.c</locationURI>
 		</link>
 		<link>
+			<name>Drivers/BSP/Components/stmpe1600.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/stmpe1600/stmpe1600.c</locationURI>
+		</link>
+		<link>
 			<name>Drivers/BSP/Components/stmpe811.c</name>
 			<type>1</type>
 			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/Components/stmpe811/stmpe811.c</locationURI>
@@ -324,6 +279,11 @@
 			<name>Drivers/BSP/STM324x9I_EVAL/stm324x9i_eval.c</name>
 			<type>1</type>
 			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/STM324x9I_EVAL/stm324x9i_eval.c</locationURI>
+		</link>
+		<link>
+			<name>Drivers/BSP/STM324x9I_EVAL/stm324x9i_eval_io.c</name>
+			<type>1</type>
+			<locationURI>PARENT-7-PROJECT_LOC/Drivers/BSP/STM324x9I_EVAL/stm324x9i_eval_io.c</locationURI>
 		</link>
 		<link>
 			<name>Drivers/BSP/STM324x9I_EVAL/stm324x9i_eval_sdram.c</name>

@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    information_win.c
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    04-November-2016   
+  * @version V1.0.2
+  * @date    17-February-2017   
   * @brief   System information functions
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -94,7 +94,7 @@ static const GUI_WIDGET_CREATE_INFO _aDialog[] =
 {
   { WINDOW_CreateIndirect, "Information", 0, 0,   0, 240, 240, FRAMEWIN_CF_MOVEABLE },
   { TEXT_CreateIndirect, "System Information", ID_TEXT_TITLE,  50,  50, 200, 30,  0, 0x0,  0 },
-  { TEXT_CreateIndirect, "Copyright (c) STMicroelectronics 2016", ID_TEXT_COPYRIGHT, 62, 228, 180, 10, 0, 0x0, 0 },
+  { TEXT_CreateIndirect, "Copyright (c) STMicroelectronics 2017", ID_TEXT_COPYRIGHT, 62, 228, 180, 10, 0, 0x0, 0 },
   
   { TEXT_CreateIndirect, "Core: ",       ID_TEXT_CORE,    55,  90,  40,  15,  0, 0x0,  0 },  
   { TEXT_CreateIndirect, "Board: ",      ID_TEXT_BOARD,   55,  125, 45,  15,  0, 0x0,  0 },
@@ -104,7 +104,7 @@ static const GUI_WIDGET_CREATE_INFO _aDialog[] =
   { TEXT_CreateIndirect, "STM32F4",          ID_TEXT_CORE_1,   95,  90,  140,  15,  0, 0x0,  0 },  
   { TEXT_CreateIndirect, "STM32F412G-DISCO", ID_TEXT_BOARD_1,   100,  125, 135,  15,  0, 0x0,  0 },
   { TEXT_CreateIndirect, "100MHz",           ID_TEXT_CPU_1,     125,  160, 110,  15,  0, 0x0,  0 },
-  { TEXT_CreateIndirect, "V1.0.0",           ID_TEXT_VERSION_1, 115,  195, 120,  15,  0, 0x0,  0 }  
+  { TEXT_CreateIndirect, "V1.0.2",           ID_TEXT_VERSION_1, 115,  195, 120,  15,  0, 0x0,  0 }  
   
 };
 

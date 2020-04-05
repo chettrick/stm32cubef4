@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    USB_Host/DynamicSwitch_Standalone/Src/main.c
   * @author  MCD Application Team
-  * @version V1.3.6
-  * @date    04-November-2016
+  * @version V1.4.0
+  * @date    17-February-2017
   * @brief   USB host Dynamic Class Switch demo main file
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -175,12 +175,6 @@ static void DynamicSwitch_InitApplication(void)
   /* Configure Joystick in EXTI mode */
   BSP_JOY_Init(JOY_MODE_EXTI);
   
-  /* Configure LED1, LED2, LED3 and LED4 */
-  BSP_LED_Init(LED1);
-  BSP_LED_Init(LED2);
-  BSP_LED_Init(LED3);
-  BSP_LED_Init(LED4);
-  
   /* Initialize the LCD */
   BSP_LCD_Init();
   
@@ -198,25 +192,6 @@ static void DynamicSwitch_InitApplication(void)
   /* Start Dynamic Switch Interface */
   LCD_UsrLog("Starting DynamicSwitch Demo\n");
   LCD_UsrLog("Plug your device To Continue...\n");
-}
-
-/**
-  * @brief  Toggles LEDs to show user input state.
-  * @param  None
-  * @retval None
-  */
-void Toggle_Leds(void)
-{
-  static uint32_t ticks;
-
-  if(ticks++ == 100)
-  {
-    BSP_LED_Toggle(LED1);
-    BSP_LED_Toggle(LED2);
-    BSP_LED_Toggle(LED3);
-    BSP_LED_Toggle(LED4);
-    ticks = 0;
-  }  
 }
 
 /**

@@ -15,6 +15,8 @@
 
 
 
+
+
   
   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
@@ -102,7 +104,7 @@ div.Section1
             <h1 style="margin-bottom: 18pt; text-align: center;" align="center"><span style="font-size: 20pt; font-family: Verdana; color: rgb(51, 102, 255);">Release
 Notes for STM32469I_EVAL Evaluation Board Drivers</span><span style="font-size: 20pt; font-family: Verdana;"><o:p></o:p></span></h1>
             <p class="MsoNormal" style="text-align: center;" align="center"><span style="font-size: 10pt; font-family: Arial; color: black;">Copyright
-2016 STMicroelectronics</span><span style="color: black;"><u1:p></u1:p><o:p></o:p></span></p>
+2017 STMicroelectronics</span><span style="color: black;"><u1:p></u1:p><o:p></o:p></span></p>
             <p class="MsoNormal" style="text-align: center;" align="center"><span style="font-size: 10pt; font-family: Arial; color: black;"><img alt="" id="_x0000_i1025" src="../../../_htmresc/st_logo.png" style="border: 0px solid ; width: 86px; height: 65px;"></span><span style="font-size: 10pt;"><o:p></o:p></span></p>
             </td>
           </tr>
@@ -111,12 +113,89 @@ Notes for STM32469I_EVAL Evaluation Board Drivers</span><span style="font-size: 
       <p class="MsoNormal"><span style="font-family: Arial; display: none;"><o:p>&nbsp;</o:p></span></p>
       <table class="MsoNormalTable" style="width: 675pt;" border="0" cellpadding="0" width="900">
         <tbody>
-          <tr style="">
+          <tr>
             <td style="padding: 0cm;" valign="top">
             <span style="font-family: &quot;Times New Roman&quot;;">
             </span>
             <h2 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;"><a name="History"></a><span style="font-size: 12pt; color: white;">Update History</span></h2>
+            
+            <h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; margin-right: 500pt; width: 180px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V2.0.0 / 27-January-2017 <o:p></o:p></span></h3>
+            <p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">Main
+Changes<o:p></o:p></span></u></b></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+
+
+            
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+
+
+            
+            <span style="font-size: 10pt; font-family: Verdana;"></span><span style="font-size: 10pt; font-family: Verdana;"></span>
+
+
+
+
+
+
+            
+            
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+
+
+
+
+
+
+            
+            
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+
+
+
+
+
+            
+            
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+
+
+
+
+            
+            
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+            
+            
+            <ul style="list-style-type: square;">
+<li><span style="font-size: 10pt; font-family: Verdana;">stm32469i_eval_sd.c/.h:</span></li><ul><li><span style="font-size: 10pt; font-family: Verdana;">Update BSP SD APIs </span><span style="font-family: Verdana; font-size: 10pt;">following new HAL SD drivers implementation</span></li><li><span style="font-size: 10pt; font-family: Verdana;">Fix BlockSize to 512 bytes<br>
+</span></li></ul><li><span style="font-size: 10pt; font-family: Verdana;">stm32469i_eval_ts.c/.h:</span></li><ul><li><span style="font-size: 10pt; font-family: Verdana;">Support of FT6336G Touch Screen</span></li></ul><li><span style="font-size: 10pt; font-family: Verdana;">stm32469i_eval_qspi.c/.h:</span></li><ul><li><span style="font-size: 10pt; font-family: Verdana;">QSPI write operation improvement</span></li><li><span style="font-size: 10pt; font-family: Verdana;">Update CS High Time</span></li></ul>
+              <li><span style="font-size: 10pt; font-family: Verdana;">stm32469i_eval_sdram.c:</span></li>
+              <ul>
+<li><span style="font-size: 10pt; font-family: Verdana;">Update SDRAM RowBitsNumbers and ColumnBitsNumber values to address all 32MB memory size</span><span style="font-size: 10.5pt; font-family: &quot;Helvetica&quot;,sans-serif; color: rgb(51, 51, 51);">. </span></li>
+              </ul>
+<li><span style="font-family: Verdana; font-size: 10pt;"><span style="font-style: italic; font-weight: bold; text-decoration: underline;">Notes:</span> <br>
+  </span></li><ul><li><span style="font-family: Verdana; font-size: 10pt;">These</span><span style="font-family: Verdana; font-size: 10pt;"> BSP drivers</span><span style="font-family: Verdana; font-size: 10pt;"> break the compatibility with previous versions.</span></li></ul><ul><li><span style="font-family: Verdana; font-size: 10pt;">If FatFs is required, </span><span style="font-family: Verdana; font-size: 10pt; font-style: italic;">"FatFS R0.11<span class="Apple-converted-space"> </span> </span><span style="font-family: Verdana; font-size: 10pt;"><span style="font-style: italic;">ST modified 20161223"</span><span style="color: red;"><span style="color: black;"></span></span></span><span style="font-family: Verdana; font-size: 10pt;"> must be used with </span><span style="font-family: Verdana; font-size: 10pt;">this version of BSP drivers.</span></li></ul>
+            </ul>
             <h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; margin-right: 500pt; width: 180px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V1.0.4 / 04-August-2016 <o:p></o:p></span></h3>
+
             <p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt; font-size: medium; font-family: 'Times New Roman'; color: rgb(0, 0, 0); font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px;"><b><u><span style="font-size: 10pt; font-family: Verdana; color: black;">Main Changes</span></u></b><b><u><span style="font-size: 10pt; font-family: Verdana; color: black;"><o:p></o:p></span></u></b></p>
             <ul style="color: rgb(0, 0, 0); font-family: 'Times New Roman'; font-size: medium; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; margin-top: 0cm;" type="square">
 <li><span style="font-size: 10pt; font-family: Verdana;">stm32469i_eval_lcd.c/.h:<br></span></li><ul><li class="MsoNormal" style="margin: 4.5pt 0in; font-size: 12pt; font-family: 'Times New Roman'; color: black;"><span style="font-size: 10pt; font-family: Verdana;">Update DSI initialization<br>

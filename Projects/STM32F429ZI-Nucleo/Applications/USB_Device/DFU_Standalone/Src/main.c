@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    USB_Device/DFU_Standalone/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    06-May-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   USB device DFU demo main file
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -57,6 +57,7 @@ uint32_t JumpAddress;
 
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);
+static void Error_Handler(void);
 
 /* Private functions ---------------------------------------------------------*/
 
@@ -153,7 +154,12 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLN = 336;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
-  HAL_RCC_OscConfig(&RCC_OscInitStruct);
+  if(HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+  {
+    /* Initialization Error */
+    Error_Handler();
+  }
+
   
   /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
@@ -162,7 +168,11 @@ static void SystemClock_Config(void)
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
-  HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
+  if(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)
+  {
+    /* Initialization Error */
+    Error_Handler();
+  }
 }
 
 /**
@@ -184,7 +194,17 @@ void HAL_Delay(__IO uint32_t Delay)
     }
   }
 }
-
+/**
+  * @brief  This function is executed in case of error occurrence.
+  * @param  None
+  * @retval None
+  */
+static void Error_Handler(void)
+{
+  while(1)
+  {
+  }
+}
 
 #ifdef  USE_FULL_ASSERT
 /**

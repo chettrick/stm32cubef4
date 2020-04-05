@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LwIP/LwIP_HTTP_Server_Netconn_RTOS/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.0.6
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   This sample code implements a http server application based on 
   *          Netconn API of LwIP stack and FreeRTOS. This application uses 
   *          STM32F4xx the ETH HAL API to transmit and receive data. 
@@ -11,7 +11,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -49,13 +49,14 @@
   */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "ethernetif.h"
 #include "lwip/netif.h"
 #include "lwip/tcpip.h"
-#include "cmsis_os.h"
-#include "ethernetif.h"
 #include "app_ethernet.h"
-#include "lcd_log.h"
 #include "httpserver-netconn.h"
+#ifdef USE_LCD
+#include "lcd_log.h"
+#endif
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -117,7 +118,7 @@ int main(void)
   * @retval None
   */
 static void StartThread(void const * argument)
-{ 
+{
   /* Initialize LCD and LEDs */
   BSP_Config();
   
@@ -135,12 +136,7 @@ static void StartThread(void const * argument)
   
 #ifdef USE_DHCP
   /* Start DHCPClient */
-#if defined(__GNUC__)
-  osThreadDef(DHCP, DHCP_thread, osPriorityBelowNormal, 0, configMINIMAL_STACK_SIZE * 5);
-#else
   osThreadDef(DHCP, DHCP_thread, osPriorityBelowNormal, 0, configMINIMAL_STACK_SIZE * 2);
-#endif
-  
   osThreadCreate (osThread(DHCP), &gnetif);
 #endif
   
@@ -164,32 +160,18 @@ static void Netif_Config(void)
 {
   ip_addr_t ipaddr;
   ip_addr_t netmask;
-  ip_addr_t gw;	
-  
+  ip_addr_t gw;
+	
 #ifdef USE_DHCP
-  ipaddr.addr = 0;
-  netmask.addr = 0;
-  gw.addr = 0;
+  ip_addr_set_zero_ip4(&ipaddr);
+  ip_addr_set_zero_ip4(&netmask);
+  ip_addr_set_zero_ip4(&gw);
 #else
-  /* IP address default setting */
-  IP4_ADDR(&ipaddr, IP_ADDR0, IP_ADDR1, IP_ADDR2, IP_ADDR3);
-  IP4_ADDR(&netmask, NETMASK_ADDR0, NETMASK_ADDR1 , NETMASK_ADDR2, NETMASK_ADDR3);
-  IP4_ADDR(&gw, GW_ADDR0, GW_ADDR1, GW_ADDR2, GW_ADDR3);
-#endif
-  
-  /* - netif_add(struct netif *netif, struct ip_addr *ipaddr,
-  struct ip_addr *netmask, struct ip_addr *gw,
-  void *state, err_t (* init)(struct netif *netif),
-  err_t (* input)(struct pbuf *p, struct netif *netif))
-  
-  Adds your network interface to the netif_list. Allocate a struct
-  netif and pass a pointer to this structure as the first argument.
-  Give pointers to cleared ip_addr structures when using DHCP,
-  or fill them with sane numbers otherwise. The state pointer may be NULL.
-  
-  The init function pointer must point to a initialization function for
-  your ethernet netif interface. The following code illustrates it's use.*/
-  
+  IP_ADDR4(&ipaddr,IP_ADDR0,IP_ADDR1,IP_ADDR2,IP_ADDR3);
+  IP_ADDR4(&netmask,NETMASK_ADDR0,NETMASK_ADDR1,NETMASK_ADDR2,NETMASK_ADDR3);
+  IP_ADDR4(&gw,GW_ADDR0,GW_ADDR1,GW_ADDR2,GW_ADDR3);
+#endif /* USE_DHCP */
+    
   netif_add(&gnetif, &ipaddr, &netmask, &gw, NULL, &ethernetif_init, &tcpip_input);
   
   /*  Registers the default network interface. */
@@ -232,16 +214,11 @@ static void Netif_Config(void)
   */
 static void BSP_Config(void)
 {
-#ifdef USE_LCD
-  uint8_t lcd_status = LCD_OK;
-#endif /* USE_LCD */
-
-
   /* Configure LED1, LED2, LED3 and LED4 */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED2);
   BSP_LED_Init(LED3);
-  BSP_LED_Init(LED4);
+  BSP_LED_Init(LED4);   
   
   /* Init MFX IO Expander */
   BSP_IO_Init();
@@ -251,18 +228,8 @@ static void BSP_Config(void)
   
 #ifdef USE_LCD
 
-  /* Initialize and start the LCD display in mode 'lcd_mode'
-   *  Using LCD_FB_START_ADDRESS as frame buffer displayed contents.
-   *  This buffer is modified by the BSP (draw fonts, objects depending on BSP calls).
-   */
-
-  /* Set Portrait orientation if needed, by default orientation is set to
-     Landscape */
-  
   /* Initialize DSI LCD */
-  //  BSP_LCD_InitEx(LCD_ORIENTATION_PORTRAIT); /* uncomment if Portrait orientation is needed */
-  BSP_LCD_Init(); /* Uncomment if default config (landscape orientation) is needed */
-  while(lcd_status != LCD_OK);
+  BSP_LCD_Init();
 
   BSP_LCD_LayerDefaultInit(0, LCD_FB_START_ADDRESS);   
   
@@ -281,7 +248,7 @@ static void BSP_Config(void)
 }
 
 /**
-  * @brief  Toggle LED4 task
+  * @brief  Toggle LED4 thread
   * @param  pvParameters not used
   * @retval None
   */
@@ -296,8 +263,8 @@ static void ToggleLed4(void const * argument)
 }
 
 /**
-  * @brief  EXTI line detection callbacks
-  * @param  GPIO_Pin: Specifies the pins connected EXTI line
+  * @brief EXTI line detection callbacks
+  * @param GPIO_Pin: Specifies the pins connected EXTI line
   * @retval None
   */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
@@ -374,7 +341,7 @@ static void SystemClock_Config(void)
   }
  
   /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
-  clocks dividers */
+     clocks dividers */
   RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;

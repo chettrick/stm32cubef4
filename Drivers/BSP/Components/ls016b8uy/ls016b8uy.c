@@ -3,7 +3,7 @@
   * @file    ls016b8uy.c
   * @author  MCD Application Team
   * @version V1.0.0
-  * @date    10-May-2016
+  * @date    22-April-2016
   * @brief   This file includes the LCD driver for LS016B8UY LCD.
   ******************************************************************************
   * @attention
@@ -132,6 +132,7 @@ static void ls016b8uy_DrawRGBHLine(uint16_t Xpos, uint16_t Ypos, uint16_t Xsize,
 void ls016b8uy_Init(void)
 {
   uint8_t   parameter[4];
+  uint32_t  i;
 
   /* Initialize LS016B8UY low level bus layer ----------------------------------*/
   LCD_IO_Init();
@@ -198,6 +199,15 @@ void ls016b8uy_Init(void)
 
   ls016b8uy_DisplayOn();   /* Display ON command */
 
+  /* Fill LCD frame memory with black pixels */
+  ls016b8uy_WriteReg(LCD_CMD_WRITE_RAM, parameter, 0);   /* RAM Write Data */
+
+  for(i = 0; i < (LS016B8UY_LCD_PIXEL_WIDTH * LS016B8UY_LCD_PIXEL_HEIGHT * 3)/2; i++)
+  {
+    LCD_IO_WriteData(0x0000);
+  }
+
+  LCD_IO_Delay(20);   /* Wait for 20ms */
 }
 
 /**

@@ -9,7 +9,6 @@ to be used with the following projects:
 
 - BMP_240x240
    - /Projects/STM32F412G-Discovery/Applications/Display/LCD_PicturesFromSDCard
-   - /Projects/STM32F412G-Discovery/Applications/LibJPEG/LibJPEG_Encoding
 
 - BMP_240x320
    - /Projects/STM32F429I-Discovery/Applications/Display/LTDC_AnimatedPictureFromUSB

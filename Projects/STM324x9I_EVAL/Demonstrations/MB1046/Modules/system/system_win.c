@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    system_win.c
   * @author  MCD Application Team
-  * @version V1.4.6
-  * @date    04-November-2016 
+  * @version V1.4.7
+  * @date    17-February-2017 
   * @brief   System information functions
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -155,7 +155,7 @@ static const GUI_WIDGET_CREATE_INFO _aDialogSystemInformation[] = {
   { TEXT_CreateIndirect, "CPU Speed : up to 180MHz", ID_TEXT_CPU, 40, 64, 280, 20, 0, 0x0, 0 },
   { TEXT_CreateIndirect, "Firmware Version : 1.0", ID_TEXT_VERSION, 40, 84, 280, 20, 0, 0x0, 0 },
   { IMAGE_CreateIndirect, "Image", ID_IMAGE_LOGO, 140, 110, 40, 20, 0, 0, 0 },  
-  { TEXT_CreateIndirect, "Copyright (c) STMicroelectronics 2016", ID_TEXT_COPYRIGHT, 40, 142, 280, 20, 0, 0x0, 0 },  
+  { TEXT_CreateIndirect, "Copyright (c) STMicroelectronics 2017", ID_TEXT_COPYRIGHT, 40, 142, 280, 20, 0, 0x0, 0 },
 };
 
 static const GUI_WIDGET_CREATE_INFO _aDialogGeneralSettings[] = {
@@ -289,7 +289,7 @@ static void _cbSystemInformation(WM_MESSAGE * pMsg)
     hItem = WM_GetDialogItem(pMsg->hWin, ID_TEXT_VERSION);
     TEXT_SetFont(hItem, GUI_FONT_13HB_ASCII);
     TEXT_SetTextColor(hItem, GUI_DARKGRAY);
-    strcpy(str, "Demo rev: 1.4.5");
+    strcpy(str, "Demo rev: 1.5.0");
     TEXT_SetText(hItem, str); 
 
     /* ST Copyright */

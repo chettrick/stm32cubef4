@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    USB_Device/CustomHID_Standalone/Src/main.c
   * @author  MCD Application Team
-  * @version V1.4.6
-  * @date    04-November-2016 
+  * @version V1.5.0
+  * @date    17-February-2017 
   * @brief   USB device Custom HID demo main file
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -44,19 +44,19 @@
   *
   ******************************************************************************
   */
-/* Includes ------------------------------------------------------------------*/
+/* Includes ------------------------------------------------------------------ */
 #include "main.h"
 
-/* Private typedef -----------------------------------------------------------*/
-/* Private define ------------------------------------------------------------*/
-/* Private macro -------------------------------------------------------------*/
-/* Private variables ---------------------------------------------------------*/
+/* Private typedef ----------------------------------------------------------- */
+/* Private define ------------------------------------------------------------ */
+/* Private macro ------------------------------------------------------------- */
+/* Private variables --------------------------------------------------------- */
 USBD_HandleTypeDef USBD_Device;
 
-/* Private function prototypes -----------------------------------------------*/
+/* Private function prototypes ----------------------------------------------- */
 static void SystemClock_Config(void);
 
-/* Private functions ---------------------------------------------------------*/
+/* Private functions --------------------------------------------------------- */
 
 /**
   * @brief  Main program
@@ -65,29 +65,27 @@ static void SystemClock_Config(void);
   */
 int main(void)
 {
-  /* STM32F4xx HAL library initialization:
-       - Configure the Flash prefetch, instruction and Data caches
-       - Configure the Systick to generate an interrupt each 1 msec
-       - Set NVIC Group Priority to 4
-       - Global MSP (MCU Support Package) initialization
-     */
+  /* STM32F4xx HAL library initialization: - Configure the Flash prefetch,
+   * instruction and Data caches - Configure the Systick to generate an
+   * interrupt each 1 msec - Set NVIC Group Priority to 4 - Global MSP (MCU
+   * Support Package) initialization */
   HAL_Init();
-  
+
   /* Configure the system clock to 168 MHz */
   SystemClock_Config();
-  
+
   /* Init Device Library */
   USBD_Init(&USBD_Device, &HID_Desc, 0);
-  
+
   /* Add Supported Class */
   USBD_RegisterClass(&USBD_Device, USBD_CUSTOM_HID_CLASS);
-  
+
   /* Add Custom HID callbacks */
   USBD_CUSTOM_HID_RegisterInterface(&USBD_Device, &USBD_CustomHID_fops);
-  
+
   /* Start Device Process */
   USBD_Start(&USBD_Device);
-  
+
   /* Run Application (Interrupt mode) */
   while (1)
   {
@@ -117,17 +115,19 @@ int main(void)
 static void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct;
-  RCC_ClkInitTypeDef RCC_ClkInitStruct;   
+  RCC_ClkInitTypeDef RCC_ClkInitStruct;
 
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is 
-     clocked below the maximum system frequency, to update the voltage scaling value 
-     regarding system frequency refer to product datasheet.  */
+  /* The voltage scaling allows optimizing the power consumption when the
+   * device is clocked below the maximum system frequency, to update the
+   * voltage scaling value regarding system frequency refer to product
+   * datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
-  /* Configure RCC Oscillators: All parameters can be changed according to user’s needs */
+  /* Configure RCC Oscillators: All parameters can be changed according to
+   * user’s needs */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
@@ -136,14 +136,16 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLN = 336;
   RCC_OscInitStruct.PLL.PLLP = 2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
-  HAL_RCC_OscConfig (&RCC_OscInitStruct);
-  
+  HAL_RCC_OscConfig(&RCC_OscInitStruct);
+
   /* RCC Clocks: All parameters can be changed according to user’s needs */
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_SYSCLK |RCC_CLOCKTYPE_HCLK |RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK |
+                                RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
+
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
 }
 
@@ -155,10 +157,11 @@ static void SystemClock_Config(void)
   * @param  line: assert_param error line source number
   * @retval None
   */
-void assert_failed(uint8_t* file, uint32_t line)
-{ 
-  /* User can add his own implementation to report the file name and line number,
-     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+void assert_failed(uint8_t * file, uint32_t line)
+{
+  /* User can add his own implementation to report the file name and line
+   * number, ex: printf("Wrong parameters value: file %s on line %d\r\n", file, 
+   * line) */
 
   /* Infinite loop */
   while (1)

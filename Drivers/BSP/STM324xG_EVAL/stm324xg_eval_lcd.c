@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm324xg_eval_lcd.c
   * @author  MCD Application Team
-  * @version V2.2.2
-  * @date    22-April-2016
+  * @version V3.0.0
+  * @date    27-January-2017
   * @brief   This file includes the driver for Liquid Crystal Display (LCD) module
   *          mounted on STM324xG-EVAL evaluation board.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -80,13 +80,6 @@
     
 /** @defgroup STM324xG_EVAL_LCD STM324xG EVAL LCD
   * @{
-  */ 
-
-/** @defgroup STM324xG_EVAL_LCD_Private_TypesDefinitions STM324xG EVAL LCD Private TypesDefinitions
-  * @{
-  */ 
-/**
-  * @}
   */ 
 
 /** @defgroup STM324xG_EVAL_LCD_Private_Defines STM324xG EVAL LCD Private Defines

@@ -2,11 +2,11 @@
   @page PWR_STANDBY PWR standby example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    PWR/PWR_STANDBY/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.5
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   Description of the PWR STANDBY example.
   ******************************************************************************
   *
@@ -52,7 +52,7 @@ A rising edge on WKUP pin or an external RESET will wake-up the system from
 STANDBY. If within 5 second neither rising edge on WKUP pin nor external RESET
 are generated, the RTC Alarm A will wake-up the system. 
 
-Two leds LED1 and LED3 are used to monitor the system's state as following:
+Two LEDs LED1 and LED3 are used to monitor the system's state as following:
  - LED3 ON: configuration failed (system will go to an infinite loop)
  - LED1 toggling: system in RUN mode
  - LED1 OFF: system in STANDBY mode
@@ -96,7 +96,7 @@ These steps are repeated in an infinite loop.
 
   - This example runs on STM32F469xx/STM32F479xx devices.
 
-  - This example has been tested and validated with STMicroelectronics STM32469I-EVAL revB 
+  - This example has been tested and validated with STMicroelectronics STM32469I-EVAL RevC 
     board and can be easily tailored to any other supported device 
     and development board.
 

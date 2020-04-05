@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LwIP/LwIP_HTTP_Server_Raw/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.4.6
-  * @date    04-November-2016
+  * @version V1.5.0
+  * @date    17-February-2017
   * @brief   This sample code implements a http server application based on LwIP 
   *          Raw API of LwIP stack. This application uses the STM32F4Cube ETH HAL  
   *          API to transmit and receive data. 
@@ -11,7 +11,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -48,17 +48,17 @@
   ******************************************************************************
   */
 /* Includes ------------------------------------------------------------------*/
-#include "lwip/opt.h"
-#include "lwip/init.h"
-#include "netif/etharp.h"
-#include "lwip/netif.h"
-#include "lwip/lwip_timers.h"
-#include "ethernetif.h"
 #include "main.h"
+#include "lwip/init.h"
+#include "lwip/netif.h"
+#include "lwip/timeouts.h"
+#include "netif/etharp.h"
+#include "ethernetif.h"
 #include "app_ethernet.h"
-#include "lcd_log.h"
 #include "http_cgi_ssi.h"
-
+#ifdef USE_LCD
+#include "lcd_log.h"
+#endif
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -67,9 +67,9 @@
 struct netif gnetif;
 
 /* Private function prototypes -----------------------------------------------*/
-static void SystemClock_Config(void);
 static void BSP_Config(void);
 static void Netif_Config(void);
+static void SystemClock_Config(void);
 
 /* Private functions ---------------------------------------------------------*/
 
@@ -99,7 +99,7 @@ int main(void)
   
   /* Configure the Network interface */
   Netif_Config();
-
+  
   /* Http webserver Init */
   http_server_init();
   
@@ -181,17 +181,16 @@ static void Netif_Config(void)
   ip_addr_t gw;
 
 #ifdef USE_DHCP
-  ipaddr.addr = 0;
-  netmask.addr = 0;
-  gw.addr = 0;
+  ip_addr_set_zero_ip4(&ipaddr);
+  ip_addr_set_zero_ip4(&netmask);
+  ip_addr_set_zero_ip4(&gw);
 #else
-  /* IP address default setting */
-  IP4_ADDR(&ipaddr, IP_ADDR0, IP_ADDR1, IP_ADDR2, IP_ADDR3);
-  IP4_ADDR(&netmask, NETMASK_ADDR0, NETMASK_ADDR1 , NETMASK_ADDR2, NETMASK_ADDR3);
-  IP4_ADDR(&gw, GW_ADDR0, GW_ADDR1, GW_ADDR2, GW_ADDR3);
-#endif
+  IP_ADDR4(&ipaddr,IP_ADDR0,IP_ADDR1,IP_ADDR2,IP_ADDR3);
+  IP_ADDR4(&netmask,NETMASK_ADDR0,NETMASK_ADDR1,NETMASK_ADDR2,NETMASK_ADDR3);
+  IP_ADDR4(&gw,GW_ADDR0,GW_ADDR1,GW_ADDR2,GW_ADDR3);
+#endif /* USE_DHCP */
   
-  /* add the network interface */    
+  /* Add the network interface */    
   netif_add(&gnetif, &ipaddr, &netmask, &gw, NULL, &ethernetif_init, &ethernet_input);
   
   /*  Registers the default network interface */

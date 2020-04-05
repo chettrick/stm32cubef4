@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    USB_Device/CDC_Standalone/Src/usbd_desc.c
   * @author  MCD Application Team
-  * @version V1.2.6
-  * @date    04-November-2016
+  * @version V1.3.0
+  * @date    17-February-2017
   * @brief   This file provides the USBD descriptors and string formating method.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -95,8 +95,8 @@ __ALIGN_BEGIN uint8_t USBD_DeviceDesc[USB_LEN_DEV_DESC] __ALIGN_END = {
   USB_DESC_TYPE_DEVICE,       /* bDescriptorType */
   0x00,                       /* bcdUSB */
   0x02,
-  0x00,                       /* bDeviceClass */
-  0x00,                       /* bDeviceSubClass */
+  0x02,                       /* bDeviceClass */
+  0x02,                       /* bDeviceSubClass */
   0x00,                       /* bDeviceProtocol */
   USB_MAX_EP0_SIZE,           /* bMaxPacketSize */
   LOBYTE(USBD_VID),           /* idVendor */

@@ -2,15 +2,15 @@
   ******************************************************************************
   * @file    stm32469i_eval.c
   * @author  MCD Application Team
-  * @version V1.0.4
-  * @date    04-August-2016
+  * @version V2.0.0
+  * @date    27-January-2017
   * @brief   This file provides a set of firmware functions to manage LEDs,
   *          push-buttons and COM ports available on STM32469I-EVAL evaluation
   *          board(MB1165) RevA/B from STMicroelectronics.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -73,11 +73,11 @@
   * @{
   */
 /**
- * @brief STM32469I EVAL BSP Driver version number V1.0.4
+ * @brief STM32469I EVAL BSP Driver version number V2.0.0
    */
-#define __STM32469I_EVAL_BSP_VERSION_MAIN   (0x01) /*!< [31:24] main version */
+#define __STM32469I_EVAL_BSP_VERSION_MAIN   (0x02) /*!< [31:24] main version */
 #define __STM32469I_EVAL_BSP_VERSION_SUB1   (0x00) /*!< [23:16] sub1 version */
-#define __STM32469I_EVAL_BSP_VERSION_SUB2   (0x04) /*!< [15:8]  sub2 version */
+#define __STM32469I_EVAL_BSP_VERSION_SUB2   (0x00) /*!< [15:8]  sub2 version */
 #define __STM32469I_EVAL_BSP_VERSION_RC     (0x00) /*!< [7:0]  release candidate */
 #define __STM32469I_EVAL_BSP_VERSION        ((__STM32469I_EVAL_BSP_VERSION_MAIN << 24)\
                                             |(__STM32469I_EVAL_BSP_VERSION_SUB1 << 16)\

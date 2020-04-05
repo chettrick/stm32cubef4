@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm324x9i_eval_ts.h
   * @author  MCD Application Team
-  * @version V2.2.3
-  * @date    22-April-2016
+  * @version V3.0.0
+  * @date    27-January-2017
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm324x9i_eval_ts.c driver.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -59,7 +59,7 @@
   * @{
   */
     
-/** @defgroup STM324x9I_EVAL_TS STM324x9I EVAL TS
+/** @addtogroup STM324x9I_EVAL_TS
   * @{
   */    
 
@@ -73,6 +73,14 @@ typedef struct
   uint16_t y;
   uint16_t z;
 }TS_StateTypeDef;
+
+typedef enum 
+{
+  TS_OK       = 0x00,
+  TS_ERROR    = 0x01,
+  TS_TIMEOUT  = 0x02
+}TS_StatusTypeDef;
+
 /**
   * @}
   */ 
@@ -85,22 +93,8 @@ typedef struct
 #define TS_SWAP_Y                       0x02
 #define TS_SWAP_XY                      0x04
 
-typedef enum 
-{
-  TS_OK       = 0x00,
-  TS_ERROR    = 0x01,
-  TS_TIMEOUT  = 0x02
-}TS_StatusTypeDef;
-
 /* Interrupt sources pins definition */
 #define TS_INT_PIN                      0x0010
-/**
-  * @}
-  */ 
-
-/** @defgroup STM324x9I_EVAL_TS_Exported_Macros STM324x9I EVAL TS Exported Macros
-  * @{
-  */ 
 /**
   * @}
   */ 

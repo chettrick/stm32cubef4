@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    system_stm32f4xx.c
   * @author  MCD Application Team
-  * @version V1.0.4
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   CMSIS Cortex-M4 Device Peripheral Access Layer System Source File.
   *
   *   This file provides two functions and one global variable to be called from 
@@ -32,7 +32,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -137,9 +137,19 @@
                is no need to call the 2 first functions listed above, since SystemCoreClock
                variable is updated automatically.
   */
-  uint32_t SystemCoreClock = 16000000;
-const uint8_t AHBPrescTable[16] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 6, 7, 8, 9};
 
+#if defined(__CC_ARM)
+uint32_t SystemCoreClock __attribute__((section("NoInit"),zero_init)); /* Uninitialized Variable */
+
+#elif defined(__ICCARM__)
+__no_init uint32_t SystemCoreClock;
+
+#elif defined(__GNUC__)
+uint32_t SystemCoreClock = 16000000;
+#endif
+
+const uint8_t AHBPrescTable[16] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 6, 7, 8, 9};
+const uint8_t APBPrescTable[8]  = {0, 0, 0, 0, 1, 2, 3, 4};
 /**
   * @}
   */
@@ -170,6 +180,8 @@ const uint8_t AHBPrescTable[16] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 6, 7, 8, 
   */
 void SystemInit(void)
 {
+  SystemCoreClock = 16000000;
+  
   /* FPU settings ------------------------------------------------------------*/
   #if (__FPU_PRESENT == 1) && (__FPU_USED == 1)
     SCB->CPACR |= ((3UL << 10*2)|(3UL << 11*2));  /* set CP10 and CP11 Full Access */
@@ -387,7 +399,9 @@ void SetSysClk(void)
     {
       tmpreg = (RCC->CFGR & RCC_CFGR_SWS); 
     } while((tmpreg != RCC_CFGR_SWS) && (timeout-- > 0));
-  }   
+  }
+  
+  SystemCoreClockUpdate();
 }
 
 /**

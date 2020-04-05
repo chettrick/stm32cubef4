@@ -1,17 +1,17 @@
 /**
-  @page LwIP_HTTP_Server_Socket_RTOS LwIP HTTP Server Raw Application
+  @page LwIP_HTTP_Server_Raw LwIP HTTP Server Raw Application
   
   @verbatim
-  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
-  * @file    LwIP/LwIP_HTTP_Server_Socket_RTOS/readme.txt 
+  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
+  * @file    LwIP/LwIP_HTTP_Server_Raw/readme.txt 
   * @author  MCD Application Team
-  * @version V1.4.6
-  * @date    04-November-2016
+  * @version V1.5.0
+  * @date    17-February-2017
   * @brief   Description of the LwIP http server Raw API.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -71,10 +71,10 @@ will be ensured by LEDs:
 If a DHCP server is available, a dynamic IP address can be allocated by enabling 
 the DHCP process (#define USE_DHCP in main.h)
 
-Note: In this application the Ethernet Link ISR need the System tick interrupt 
-to configure the Ethernet MAC, so the Ethernet Link interrupt priority must be 
-set lower (numerically greater) than the Systick interrupt priority to ensure 
-that the System tick increments while executing the Ethernet Link ISR.
+Note: In this application the Ethernet Link ISR need the HAL time base to configure 
+the Ethernet MAC, so the Ethernet Link interrupt priority must be set lower (numerically greater) 
+than the HAL tick interrupt priority to ensure that the System tick increments while executing 
+the Ethernet Link ISR.
 
 Note: By default, the Ethernet Half duplex mode is not supported in the 
 STM324x9I-EVAL board, for more information refer to the HAL_ETH_MspInit() 

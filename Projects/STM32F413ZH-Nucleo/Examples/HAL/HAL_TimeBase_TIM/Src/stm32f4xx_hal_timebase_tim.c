@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f4xx_hal_timebase_tim.c 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   HAL time base based on the hardware TIM.
   *    
   *          This file override the native HAL time base functions (defined as weak)
@@ -14,7 +14,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:

@@ -1,6 +1,8 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head>
 
+
+
   
   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
@@ -89,7 +91,7 @@ div.Section1
             <h1 style="margin-bottom: 18pt; text-align: center;" align="center"><span style="font-size: 20pt; font-family: Verdana; color: rgb(51, 102, 255);">Release
 Notes for STM32469I_Discovery Board Drivers</span><span style="font-size: 20pt; font-family: Verdana;"><o:p></o:p></span></h1>
             <p class="MsoNormal" style="text-align: center;" align="center"><span style="font-size: 10pt; font-family: Arial; color: black;">Copyright
-2016 STMicroelectronics</span><span style="color: black;"><u1:p></u1:p><o:p></o:p></span></p>
+2017 STMicroelectronics</span><span style="color: black;"><u1:p></u1:p><o:p></o:p></span></p>
             <p class="MsoNormal" style="text-align: center;" align="center"><span style="font-size: 10pt; font-family: Arial; color: black;"><img alt="" id="_x0000_i1025" src="../../../_htmresc/st_logo.png" style="border: 0px solid ; width: 86px; height: 65px;"></span><span style="font-size: 10pt;"><o:p></o:p></span></p>
             </td>
           </tr>
@@ -102,8 +104,94 @@ Notes for STM32469I_Discovery Board Drivers</span><span style="font-size: 20pt; 
             <td style="padding: 0cm;" valign="top"> <span style="font-family: &quot;Times New Roman&quot;;"> </span>
             <h2 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;"><a name="History"></a><span style="font-size: 12pt; color: white;">Update
 History</span></h2>
+            <h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; margin-right: 500pt; width: 180px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V2.0.0 / 27-January-2017 <o:p></o:p></span></h3>
+
+
+            <p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">Main
+Changes<o:p></o:p></span></u></b></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+
+
             
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+
+
+            
+            <span style="font-size: 10pt; font-family: Verdana;"></span><span style="font-size: 10pt; font-family: Verdana;"></span>
+
+
+
+
+
+
+            
+            
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+
+
+
+
+
+
+            
+            
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+
+
+
+
+
+            
+            
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+
+
+
+
+            
+            
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+
+            <span style="font-size: 10pt; font-family: Verdana;"></span>
+            
+            
+            <ul style="list-style-type: square;">
+<li><span style="font-size: 10pt; font-family: Verdana;">stm32469i_discovery_sd.c/.h:</span></li><ul><li><span style="font-size: 10pt; font-family: Verdana;">Update BSP SD APIs </span><span style="font-family: Verdana; font-size: 10pt;">following new HAL SD drivers implementation</span></li><li><span style="font-size: 10pt; font-family: Verdana;">Fix BlockSize to 512 bytes<br>
+</span></li></ul><li><span style="font-size: 10pt; font-family: Verdana;">stm32469i_</span><span style="font-size: 10pt; font-family: Verdana;">discovery</span><span style="font-size: 10pt; font-family: Verdana;">_ts.c/.h:</span></li><ul><li><span style="font-size: 10pt; font-family: Verdana;">Support of FT6336G Touch Screen</span></li></ul><li><span style="font-size: 10pt; font-family: Verdana;">stm32469i_</span><span style="font-size: 10pt; font-family: Verdana;">discovery</span><span style="font-size: 10pt; font-family: Verdana;">_qspi.c/.h:</span></li><ul><li><span style="font-size: 10pt; font-family: Verdana;">QSPI write operation improvement</span></li><li><span style="font-size: 10pt; font-family: Verdana;">Update CS High Time</span></li></ul><li><span style="font-size: 10pt; font-family: Verdana;">stm32469i_</span><span style="font-size: 10pt; font-family: Verdana;">discovery</span><span style="font-size: 10pt; font-family: Verdana;">_sdram.c:</span></li><ul><li><span style="font-size: 10pt; font-family: Verdana;">Update SDRAM RowBitsNumbers and ColumnBitsNumber values to address all 16MB memory size</span><span style="font-size: 10.5pt; font-family: &quot;Helvetica&quot;,sans-serif; color: rgb(51, 51, 51);">.</span></li></ul>
+              <li><span style="font-size: 10pt; font-family: Verdana;">stm32469i_</span><span style="font-size: 10pt; font-family: Verdana;">discovery</span><span style="font-size: 10pt; font-family: Verdana;">_lcd.c:</span></li>
+              <ul>
+<li><span style="font-size: 10pt; font-family: Verdana;">Update BSP_LCD_ReadPixel for ARGB8888 and RGB888 formats</span></li>
+              </ul>
+              <li><span style="font-size: 10pt; font-family: Verdana;">stm32469i_</span><span style="font-size: 10pt; font-family: Verdana;">discovery</span><span style="font-size: 10pt; font-family: Verdana;">_audio.c:</span></li>
+              <ul>
+<li><span style="font-size: 10pt; font-family: Verdana;">Remove static CODEC_Reset API<br>
+</span></li>
+              </ul>
+
+<li><span style="font-family: Verdana; font-size: 10pt;"><span style="font-style: italic; font-weight: bold; text-decoration: underline;">Notes:</span> <br>
+  </span></li><ul><li><span style="font-family: Verdana; font-size: 10pt;">These</span><span style="font-family: Verdana; font-size: 10pt;"> BSP drivers</span><span style="font-family: Verdana; font-size: 10pt;"> break the compatibility with previous versions.</span></li></ul><ul><li><span style="font-family: Verdana; font-size: 10pt;">If FatFs is required, </span><span style="font-family: Verdana; font-size: 10pt; font-style: italic;">"FatFS R0.11<span class="Apple-converted-space"> </span> </span><span style="font-family: Verdana; font-size: 10pt;"><span style="font-style: italic;">ST modified 20161223"</span><span style="color: red;"><span style="color: black;"></span></span></span><span style="font-family: Verdana; font-size: 10pt;"> must be used with </span><span style="font-family: Verdana; font-size: 10pt;">this version of BSP drivers.</span></li></ul>
+            </ul>
+
             <h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; margin-right: 500pt; width: 180px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V1.0.3 / 04-August-2016 <o:p></o:p></span></h3>
+
 
 
             
@@ -160,52 +248,11 @@ update:</span></li>
 within&nbsp;BSP_LCD_Reset() function </span></li>
               </ul>
             </ul>
-            <h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; margin-right: 500pt; width: 200px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V0.2.0 /
-10-July-2015</span></h3>
-            <p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">Main
+            <h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; margin-right: 500pt; width: 200px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V1.0.0 /
+14-Augusty-2015</span></h3><p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">Main
 Changes<o:p></o:p></span></u></b></p>
             <ul style="margin-top: 0cm;" type="square">
-              <li class="MsoNormal"><span style="font-size: 10pt; font-family: Verdana;">Second Beta Release </span><span style="font-size: 10pt; font-family: Verdana;"><span style="font-weight: bold; font-style: italic;"></span></span><span style="font-size: 10pt; font-family: Verdana;">for&nbsp;<span style="font-weight: bold; font-style: italic;">STM32469I_Discovery</span>
-board drivers.</span></li>
-              <li><span style="color: rgb(0, 0, 0); font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px; font-size: 10pt; font-family: Verdana;">Add
-support of Rev.B Discovery boards.</span></li>
-              <li class="MsoNormal" style="margin: 0in 0in 0.0001pt; font-size: 12pt; font-family: 'Times New Roman';"><span style="font-size: 10pt; font-family: Verdana;">stm32469i_eval update:</span></li>
-              <ul>
-                <li class="MsoNormal" style="margin: 0in 0in 0.0001pt; font-size: 12pt; font-family: 'Times New Roman';"><span style="font-size: 10pt; font-family: Verdana;">Add AUDIO_IO_DeInit()
-function</span></li>
-                <li class="MsoNormal" style="margin: 0in 0in 0.0001pt; font-size: 12pt; font-family: 'Times New Roman';"><span style="font-size: 10pt; font-family: Verdana;">Update TS_I2C_ADDRESS</span></li>
-                <li class="MsoNormal" style="margin: 0in 0in 0.0001pt; font-size: 12pt; font-family: 'Times New Roman';"><span style="font-size: 10pt; font-family: Verdana;">Update MULTI_TOUCH
-management<br>
-                  </span></li>
-              </ul>
-              <li class="MsoNormal" style="margin: 0in 0in 0.0001pt; font-size: 12pt; font-family: 'Times New Roman';"><span style="font-size: 10pt; font-family: Verdana;">stm32469i_eval_audio
-update:</span></li>
-              <ul>
-                <li class="MsoNormal" style="margin: 0in 0in 0.0001pt; font-size: 12pt; font-family: 'Times New Roman';"><span style="font-size: 10pt; font-family: Verdana;">Remove CODEC_Reset()
-static function</span></li>
-                <li class="MsoNormal" style="margin: 0in 0in 0.0001pt; font-size: 12pt; font-family: 'Times New Roman';"><span style="font-size: 10pt; font-family: Verdana;">Update
-BSP_AUDIO_OUT_Init() function to no more use&nbsp;</span><span style="font-size: 10pt; font-family: Verdana;">CODEC_Reset() function</span></li>
-              </ul>
-              <li class="MsoNormal" style="margin: 0in 0in 0.0001pt; font-size: 12pt; font-family: 'Times New Roman';"><span style="font-size: 10pt; font-family: Verdana;">stm32469i_eval_lcd
-update:</span></li>
-              <ul>
-                <li class="MsoNormal" style="margin: 0in 0in 0.0001pt; font-size: 12pt; font-family: 'Times New Roman';"><span style="font-size: 10pt; font-family: Verdana;">update lcd_x_size and
-lcd_y_size declaration and definition</span></li>
-                <li class="MsoNormal" style="margin: 0in 0in 0.0001pt; font-size: 12pt; font-family: 'Times New Roman';"><span style="font-size: 10pt; font-family: Verdana;">update
-BSP_LCD_GetXSize() and BSP_LCD_GetYSize() functions</span></li>
-              </ul>
-              <li class="MsoNormal" style="margin: 0in 0in 0.0001pt; font-size: 12pt; font-family: 'Times New Roman';"><span style="font-size: 10pt; font-family: Verdana;">stm32469i_eval_sd update</span></li>
-              <ul>
-                <li class="MsoNormal" style="margin: 0in 0in 0.0001pt; font-size: 12pt; font-family: 'Times New Roman';"><span style="font-size: 10pt; font-family: Verdana;">update BSP_SD_Init()
-function with appropriate hardware flow control configuration</span></li>
-              </ul>
-            </ul>
-            <h3 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; margin-right: 500pt; width: 200px;"><span style="font-size: 10pt; font-family: Arial; color: white;">V0.1.0 /
-12-June-2015</span></h3>
-            <p class="MsoNormal" style="margin: 4.5pt 0cm 4.5pt 18pt;"><b style=""><u><span style="font-size: 10pt; font-family: Verdana; color: black;">Main
-Changes<o:p></o:p></span></u></b></p>
-            <ul style="margin-top: 0cm;" type="square">
-              <li class="MsoNormal"><span style="font-size: 10pt; font-family: Verdana;">First Beta Release </span><span style="font-size: 10pt; font-family: Verdana;"><span style="font-weight: bold; font-style: italic;"></span></span><span style="font-size: 10pt; font-family: Verdana;">for&nbsp;<span style="font-weight: bold; font-style: italic;">STM32469I_Discovery</span>
+              <li class="MsoNormal"><span style="font-size: 10pt; font-family: Verdana;">First official Release </span><span style="font-size: 10pt; font-family: Verdana;"><span style="font-weight: bold; font-style: italic;"></span></span><span style="font-size: 10pt; font-family: Verdana;">for&nbsp;<span style="font-weight: bold; font-style: italic;">STM32469I_Discovery</span>
 board drivers.</span></li>
             </ul>
             <h2 style="background: rgb(51, 102, 255) none repeat scroll 0% 50%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;"><span style="font-size: 12pt; color: white;">License<o:p></o:p></span></h2>

@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    stm32469i_discovery_audio.c
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    04-August-2016
+  * @version V2.0.0
+  * @date    27-January-2017
   * @brief   This file provides the Audio driver for the STM32469I-Discovery board.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -200,7 +200,6 @@ uint16_t __IO AudioInVolume = DEFAULT_AUDIO_IN_VOLUME;
 /** @defgroup STM32469I-Discovery_AUDIO_Private_Function_Prototypes STM32469I Discovery AUDIO Private Prototypes
   * @{
   */
-static void AUDIO_CODEC_Reset(void);
 static uint8_t SAIx_Init(uint32_t AudioFreq);
 static void SAIx_DeInit(void);
 static void I2Sx_Init(uint32_t AudioFreq);
@@ -259,10 +258,7 @@ uint8_t BSP_AUDIO_OUT_Init(uint16_t OutputDevice,
   {
     /* Retieve audio codec identifier */
     if (cs43l22_drv.ReadID(AUDIO_I2C_ADDRESS) == CS43L22_ID)
-    {    
-      /* Reset the audio codec Registers */
-      AUDIO_CODEC_Reset();
-  
+    {  
       /* Initialize the audio driver structure */
       audio_drv = &cs43l22_drv;
     }
@@ -909,23 +905,6 @@ static void SAIx_DeInit(void)
 }
 
 /**
-  * @brief  Resets the audio codec. It restores the default configuration of the
-  *         codec (this function shall be called before initializing the codec).
-  */
-static void AUDIO_CODEC_Reset(void)
-{
-  HAL_GPIO_WritePin(AUDIO_RESET_GPIO_PORT, AUDIO_RESET_PIN, GPIO_PIN_RESET);
-
-  /* Wait for a delay to insure registers erasing */
-  HAL_Delay(CODEC_RESET_DELAY); 
-
-  HAL_GPIO_WritePin(AUDIO_RESET_GPIO_PORT, AUDIO_RESET_PIN, GPIO_PIN_SET);
-
-  /* Wait for a delay to insure registers erasing */
-  HAL_Delay(CODEC_RESET_DELAY); 
-}
-
-/**
   * @}
   */
 
@@ -945,15 +924,11 @@ static void AUDIO_CODEC_Reset(void)
   */
 uint8_t BSP_AUDIO_IN_Init(uint32_t AudioFreq, uint32_t BitRes, uint32_t ChnlNbr)
 {
-  RCC_PeriphCLKInitTypeDef rcc_ex_clk_init_struct;
-
+  /* DeInit the I2S */
   I2Sx_DeInit();
-  
-  HAL_RCCEx_GetPeriphCLKConfig(&rcc_ex_clk_init_struct);
-  rcc_ex_clk_init_struct.PeriphClockSelection = RCC_PERIPHCLK_I2S;
-  rcc_ex_clk_init_struct.PLLI2S.PLLI2SN = 384;
-  rcc_ex_clk_init_struct.PLLI2S.PLLI2SR = 2;
-  HAL_RCCEx_PeriphCLKConfig(&rcc_ex_clk_init_struct);
+
+  /* Configure PLL clock */ 
+  BSP_AUDIO_IN_ClockConfig(&haudio_in_i2s, NULL);
 
   /* Configure the PDM library */
   PDMDecoder_Init(AudioFreq, ChnlNbr);
@@ -1124,6 +1099,24 @@ void HAL_I2S_ErrorCallback(I2S_HandleTypeDef *hi2s)
   /* Manage the error generated on DMA FIFO: This function
      should be coded by user (its prototype is already declared in stm32469i_discovery_audio.h) */
   BSP_AUDIO_IN_Error_Callback();
+}
+
+/**
+  * @brief  Clock Config.
+  * @param  hi2s: I2S handle
+  * @param  Params : pointer on additional configuration parameters, can be NULL.   
+  * @note   This API is called by BSP_AUDIO_IN_Init()
+  *         Being __weak it can be overwritten by the application
+  */
+__weak void BSP_AUDIO_IN_ClockConfig(I2S_HandleTypeDef *hi2s, void *Params)
+{
+  RCC_PeriphCLKInitTypeDef RCC_ExCLKInitStruct;
+  
+  HAL_RCCEx_GetPeriphCLKConfig(&RCC_ExCLKInitStruct);
+  RCC_ExCLKInitStruct.PeriphClockSelection = RCC_PERIPHCLK_I2S;
+  RCC_ExCLKInitStruct.PLLI2S.PLLI2SN = 384;
+  RCC_ExCLKInitStruct.PLLI2S.PLLI2SR = 2;
+  HAL_RCCEx_PeriphCLKConfig(&RCC_ExCLKInitStruct); 
 }
 
 /**

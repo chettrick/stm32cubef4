@@ -2,15 +2,15 @@
   ******************************************************************************
   * @file    stm32446e_eval.c
   * @author  MCD Application Team
-  * @version V1.1.2
-  * @date    06-May-2016
+  * @version V2.0.0
+  * @date    27-January-2017
   * @brief   This file provides a set of firmware functions to manage LEDs, 
   *          push-buttons and COM ports available on STM32446E-EVAL evaluation
   *          board(MB1045) RevB from STMicroelectronics.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -80,11 +80,11 @@ typedef struct
   */
 
 /**
-  * @brief STM32446E EVAL BSP Driver version number V1.1.2
+  * @brief STM32446E EVAL BSP Driver version number V2.0.0
   */
-#define __STM32446E_EVAL_BSP_VERSION_MAIN   (0x01) /*!< [31:24] main version */
-#define __STM32446E_EVAL_BSP_VERSION_SUB1   (0x01) /*!< [23:16] sub1 version */
-#define __STM32446E_EVAL_BSP_VERSION_SUB2   (0x02) /*!< [15:8]  sub2 version */
+#define __STM32446E_EVAL_BSP_VERSION_MAIN   (0x02) /*!< [31:24] main version */
+#define __STM32446E_EVAL_BSP_VERSION_SUB1   (0x00) /*!< [23:16] sub1 version */
+#define __STM32446E_EVAL_BSP_VERSION_SUB2   (0x00) /*!< [15:8]  sub2 version */
 #define __STM32446E_EVAL_BSP_VERSION_RC     (0x00) /*!< [7:0]  release candidate */
 #define __STM32446E_EVAL_BSP_VERSION         ((__STM32446E_EVAL_BSP_VERSION_MAIN << 24)\
                                              |(__STM32446E_EVAL_BSP_VERSION_SUB1 << 16)\
@@ -1107,7 +1107,7 @@ void LCD_IO_WriteData(uint16_t Data)
 }
 
 /**
-  * @brief  Writes multiple data on LCD data register..
+  * @brief  Writes multiple data on LCD data register.
   * @param  pData Pointer on the register value
   * @param  Size Size of byte to transmit to the register
   * @retval None

@@ -46,6 +46,13 @@
     return ERR_BUF; \
   }
 
+/**
+ * Encodes a TLV into a pbuf stream.
+ *
+ * @param pbuf_stream points to a pbuf stream
+ * @param tlv TLV to encode
+ * @return ERR_OK if successful, ERR_ARG if we can't (or won't) encode
+ */
 err_t
 snmp_ans1_enc_tlv(struct snmp_pbuf_stream* pbuf_stream, struct snmp_asn1_tlv* tlv)
 {
@@ -93,8 +100,7 @@ snmp_ans1_enc_tlv(struct snmp_pbuf_stream* pbuf_stream, struct snmp_asn1_tlv* tl
 
     PBUF_OP_EXEC(snmp_pbuf_stream_write(pbuf_stream, data));
 
-    while (length_bytes_required > 1)
-    {
+    while (length_bytes_required > 1) {
       if (length_bytes_required == 2) {
         /* append high byte */
         data = (u8_t)(tlv->value_len >> 8);
@@ -118,8 +124,7 @@ snmp_ans1_enc_tlv(struct snmp_pbuf_stream* pbuf_stream, struct snmp_asn1_tlv* tl
 /**
  * Encodes raw data (octet string, opaque) into a pbuf chained ASN1 msg.
  *
- * @param p points to output pbuf to encode raw data into
- * @param ofs points to the offset within the pbuf chain
+ * @param pbuf_stream points to a pbuf stream
  * @param raw_len raw data length
  * @param raw points raw data
  * @return ERR_OK if successful, ERR_ARG if we can't (or won't) encode
@@ -135,8 +140,7 @@ snmp_asn1_enc_raw(struct snmp_pbuf_stream* pbuf_stream, const u8_t *raw, u16_t r
 /**
  * Encodes u32_t (counter, gauge, timeticks) into a pbuf chained ASN1 msg.
  *
- * @param p points to output pbuf to encode value into
- * @param ofs points to the offset within the pbuf chain
+ * @param pbuf_stream points to a pbuf stream
  * @param octets_needed encoding length (from snmp_asn1_enc_u32t_cnt())
  * @param value is the host order u32_t value to be encoded
  * @return ERR_OK if successful, ERR_ARG if we can't (or won't) encode
@@ -169,8 +173,7 @@ snmp_asn1_enc_u32t(struct snmp_pbuf_stream* pbuf_stream, u16_t octets_needed, u3
 /**
  * Encodes u64_t (counter64) into a pbuf chained ASN1 msg.
  *
- * @param p points to output pbuf to encode value into
- * @param ofs points to the offset within the pbuf chain
+ * @param pbuf_stream points to a pbuf stream
  * @param octets_needed encoding length (from snmp_asn1_enc_u32t_cnt())
  * @param value is the host order u32_t value to be encoded
  * @return ERR_OK if successful, ERR_ARG if we can't (or won't) encode
@@ -193,10 +196,10 @@ snmp_asn1_enc_u64t(struct snmp_pbuf_stream* pbuf_stream, u16_t octets_needed, co
     octets_needed--;
     PBUF_OP_EXEC(snmp_pbuf_stream_write(pbuf_stream, (u8_t)(*value >> ((octets_needed-4) << 3))));
   }
-  
+
   /* skip to low u32 */
   value++;
-  
+
   while (octets_needed > 1) {
     octets_needed--;
     PBUF_OP_EXEC(snmp_pbuf_stream_write(pbuf_stream, (u8_t)(*value >> (octets_needed << 3))));
@@ -211,8 +214,7 @@ snmp_asn1_enc_u64t(struct snmp_pbuf_stream* pbuf_stream, u16_t octets_needed, co
 /**
  * Encodes s32_t integer into a pbuf chained ASN1 msg.
  *
- * @param p points to output pbuf to encode value into
- * @param ofs points to the offset within the pbuf chain
+ * @param pbuf_stream points to a pbuf stream
  * @param octets_needed encoding length (from snmp_asn1_enc_s32t_cnt())
  * @param value is the host order s32_t value to be encoded
  * @return ERR_OK if successful, ERR_ARG if we can't (or won't) encode
@@ -237,10 +239,9 @@ snmp_asn1_enc_s32t(struct snmp_pbuf_stream* pbuf_stream, u16_t octets_needed, s3
 /**
  * Encodes object identifier into a pbuf chained ASN1 msg.
  *
- * @param p points to output pbuf to encode oid into
- * @param ofs points to the offset within the pbuf chain
- * @param ident_len object identifier array length
- * @param ident points to object identifier array
+ * @param pbuf_stream points to a pbuf stream
+ * @param oid points to object identifier array
+ * @param oid_len object identifier array length
  * @return ERR_OK if successful, ERR_ARG if we can't (or won't) encode
  */
 err_t
@@ -287,7 +288,7 @@ snmp_asn1_enc_oid(struct snmp_pbuf_stream* pbuf_stream, const u32_t *oid, u16_t 
 /**
  * Returns octet count for length.
  *
- * @param length
+ * @param length parameter length
  * @param octets_needed points to the return value
  */
 void
@@ -305,7 +306,7 @@ snmp_asn1_enc_length_cnt(u16_t length, u8_t *octets_needed)
 /**
  * Returns octet count for an u32_t.
  *
- * @param value
+ * @param value value to be encoded
  * @param octets_needed points to the return value
  *
  * @note ASN coded integers are _always_ signed. E.g. +0xFFFF is coded
@@ -331,7 +332,7 @@ snmp_asn1_enc_u32t_cnt(u32_t value, u16_t *octets_needed)
 /**
  * Returns octet count for an u64_t.
  *
- * @param value
+ * @param value value to be encoded
  * @param octets_needed points to the return value
  *
  * @note ASN coded integers are _always_ signed. E.g. +0xFFFF is coded
@@ -342,8 +343,7 @@ void
 snmp_asn1_enc_u64t_cnt(const u32_t *value, u16_t *octets_needed)
 {
   /* check if high u32 is 0 */
-  if (*value == 0x00)
-  {
+  if (*value == 0x00) {
     /* only low u32 is important */
     value++;
     snmp_asn1_enc_u32t_cnt(*value, octets_needed);
@@ -357,7 +357,7 @@ snmp_asn1_enc_u64t_cnt(const u32_t *value, u16_t *octets_needed)
 /**
  * Returns octet count for an s32_t.
  *
- * @param value
+ * @param value value to be encoded
  * @param octets_needed points to the return value
  *
  * @note ASN coded integers are _always_ signed.
@@ -367,7 +367,7 @@ snmp_asn1_enc_s32t_cnt(s32_t value, u16_t *octets_needed)
 {
   if (value < 0) {
     value = ~value;
-  } 
+  }
   if (value < 0x80L) {
     *octets_needed = 1;
   } else if (value < 0x8000L) {
@@ -382,8 +382,8 @@ snmp_asn1_enc_s32t_cnt(s32_t value, u16_t *octets_needed)
 /**
  * Returns octet count for an object identifier.
  *
- * @param ident_len object identifier array length
- * @param ident points to object identifier array
+ * @param oid points to object identifier array
+ * @param oid_len object identifier array length
  * @param octets_needed points to the return value
  */
 void
@@ -412,6 +412,13 @@ snmp_asn1_enc_oid_cnt(const u32_t *oid, u16_t oid_len, u16_t *octets_needed)
   }
 }
 
+/**
+ * Decodes a TLV from a pbuf stream.
+ *
+ * @param pbuf_stream points to a pbuf stream
+ * @param tlv returns decoded TLV
+ * @return ERR_OK if successful, ERR_VAL if we can't decode
+ */
 err_t
 snmp_asn1_dec_tlv(struct snmp_pbuf_stream* pbuf_stream, struct snmp_asn1_tlv* tlv)
 {
@@ -446,7 +453,7 @@ snmp_asn1_dec_tlv(struct snmp_pbuf_stream* pbuf_stream, struct snmp_asn1_tlv* tl
       PBUF_OP_EXEC(snmp_pbuf_stream_read(pbuf_stream, &data));
       tlv->value_len <<= 8;
       tlv->value_len |= data;
-      
+
       /* take care for special value used for indefinite length */
       if (tlv->value_len == 0xFFFF) {
         return ERR_VAL;
@@ -465,8 +472,7 @@ snmp_asn1_dec_tlv(struct snmp_pbuf_stream* pbuf_stream, struct snmp_asn1_tlv* tl
 /**
  * Decodes positive integer (counter, gauge, timeticks) into u32_t.
  *
- * @param p points to a pbuf holding an ASN1 coded integer
- * @param ofs points to the offset within the pbuf chain of the ASN1 coded integer
+ * @param pbuf_stream points to a pbuf stream
  * @param len length of the coded integer field
  * @param value return host order integer
  * @return ERR_OK if successful, ERR_ARG if we can't (or won't) decode
@@ -488,8 +494,7 @@ snmp_asn1_dec_u32t(struct snmp_pbuf_stream *pbuf_stream, u16_t len, u32_t *value
       *value = data;
       len--;
 
-      while (len > 0)
-      {
+      while (len > 0) {
         PBUF_OP_EXEC(snmp_pbuf_stream_read(pbuf_stream, &data));
         len--;
 
@@ -507,8 +512,7 @@ snmp_asn1_dec_u32t(struct snmp_pbuf_stream *pbuf_stream, u16_t len, u32_t *value
 /**
  * Decodes large positive integer (counter64) into 2x u32_t.
  *
- * @param p points to a pbuf holding an ASN1 coded integer
- * @param ofs points to the offset within the pbuf chain of the ASN1 coded integer
+ * @param pbuf_stream points to a pbuf stream
  * @param len length of the coded integer field
  * @param value return host order integer
  * @return ERR_OK if successful, ERR_ARG if we can't (or won't) decode
@@ -537,8 +541,7 @@ snmp_asn1_dec_u64t(struct snmp_pbuf_stream *pbuf_stream, u16_t len, u32_t *value
       *value = data;
       len--;
 
-      while (len > 0)
-      {
+      while (len > 0) {
         PBUF_OP_EXEC(snmp_pbuf_stream_read(pbuf_stream, &data));
 
         if (len == 4) {
@@ -548,7 +551,7 @@ snmp_asn1_dec_u64t(struct snmp_pbuf_stream *pbuf_stream, u16_t len, u32_t *value
         } else {
           *value <<= 8;
         }
-        
+
         *value |= data;
         len--;
       }
@@ -563,8 +566,7 @@ snmp_asn1_dec_u64t(struct snmp_pbuf_stream *pbuf_stream, u16_t len, u32_t *value
 /**
  * Decodes integer into s32_t.
  *
- * @param p points to a pbuf holding an ASN1 coded integer
- * @param ofs points to the offset within the pbuf chain of the ASN1 coded integer
+ * @param pbuf_stream points to a pbuf stream
  * @param len length of the coded integer field
  * @param value return host order integer
  * @return ERR_OK if successful, ERR_ARG if we can't (or won't) decode
@@ -586,7 +588,7 @@ snmp_asn1_dec_s32t(struct snmp_pbuf_stream *pbuf_stream, u16_t len, s32_t *value
   if ((len > 0) && (len < 5)) {
     PBUF_OP_EXEC(snmp_pbuf_stream_read(pbuf_stream, &data));
     len--;
-    
+
     if (data & 0x80) {
       /* negative, start from -1 */
       *value = -1;
@@ -628,10 +630,11 @@ snmp_asn1_dec_s32t(struct snmp_pbuf_stream *pbuf_stream, u16_t len, s32_t *value
 /**
  * Decodes object identifier from incoming message into array of u32_t.
  *
- * @param p points to a pbuf holding an ASN1 coded object identifier
- * @param ofs points to the offset within the pbuf chain of the ASN1 coded object identifier
+ * @param pbuf_stream points to a pbuf stream
  * @param len length of the coded object identifier
- * @param oid return object identifier struct
+ * @param oid return decoded object identifier
+ * @param oid_len return decoded object identifier length
+ * @param oid_max_len size of oid buffer
  * @return ERR_OK if successful, ERR_ARG if we can't (or won't) decode
  */
 err_t
@@ -646,7 +649,7 @@ snmp_asn1_dec_oid(struct snmp_pbuf_stream *pbuf_stream, u16_t len, u32_t* oid, u
     if (oid_max_len < 2) {
       return ERR_MEM;
     }
-    
+
     PBUF_OP_EXEC(snmp_pbuf_stream_read(pbuf_stream, &data));
     len--;
 
@@ -718,11 +721,11 @@ snmp_asn1_dec_oid(struct snmp_pbuf_stream *pbuf_stream, u16_t len, u32_t* oid, u
  * Decodes (copies) raw data (ip-addresses, octet strings, opaque encoding)
  * from incoming message into array.
  *
- * @param p points to a pbuf holding an ASN1 coded raw data
- * @param ofs points to the offset within the pbuf chain of the ASN1 coded raw data
+ * @param pbuf_stream points to a pbuf stream
  * @param len length of the coded raw data (zero is valid, e.g. empty string!)
- * @param raw_len length of the raw return value
- * @param raw return raw bytes
+ * @param buf return raw bytes
+ * @param buf_len returns length of the raw return value
+ * @param buf_max_len buffer size
  * @return ERR_OK if successful, ERR_ARG if we can't (or won't) decode
  */
 err_t
@@ -733,7 +736,7 @@ snmp_asn1_dec_raw(struct snmp_pbuf_stream *pbuf_stream, u16_t len, u8_t *buf, u1
     return ERR_MEM;
   }
   *buf_len = len;
-  
+
   while (len > 0) {
     PBUF_OP_EXEC(snmp_pbuf_stream_read(pbuf_stream, buf));
     buf++;

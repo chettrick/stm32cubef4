@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    USB_Host/DynamicSwitch_Standalone/Src/menu.c 
   * @author  MCD Application Team
-  * @version V1.4.6
-  * @date    04-November-2016
+  * @version V1.5.0
+  * @date    17-February-2017
   * @brief   This file implements MSC Menu Functions
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -44,27 +44,29 @@
   *
   ******************************************************************************
   */
-/* Includes ------------------------------------------------------------------*/
+/* Includes ------------------------------------------------------------------ */
 #include "main.h"
 
-/* Private typedef -----------------------------------------------------------*/
-/* Private define ------------------------------------------------------------*/
-/* Private macro -------------------------------------------------------------*/
-/* Private variables ---------------------------------------------------------*/
+/* Private typedef ----------------------------------------------------------- */
+/* Private define ------------------------------------------------------------ */
+/* Private macro ------------------------------------------------------------- */
+/* Private variables --------------------------------------------------------- */
 MSC_DEMO_StateMachine msc_demo;
 uint8_t prev_select = 0;
 
-uint8_t *MSC_main_menu[] = 
-{
-  (uint8_t *)"      1 - File Operations                                                   ",
-  (uint8_t *)"      2 - Explorer Disk                                                     ",
-  (uint8_t *)"      3 - Re-Enumerate                                                      ",
+uint8_t *MSC_main_menu[] = {
+  (uint8_t *)
+    "      1 - File Operations                                                   ",
+  (uint8_t *)
+    "      2 - Explorer Disk                                                     ",
+  (uint8_t *)
+    "      3 - Re-Enumerate                                                      ",
 };
 
-/* Private function prototypes -----------------------------------------------*/
-static void MSC_SelectItem(uint8_t **menu, uint8_t item);
+/* Private function prototypes ----------------------------------------------- */
+static void MSC_SelectItem(uint8_t ** menu, uint8_t item);
 
-/* Private functions ---------------------------------------------------------*/
+/* Private functions --------------------------------------------------------- */
 
 /**
   * @brief  Manages MSC Menu Process.
@@ -73,79 +75,85 @@ static void MSC_SelectItem(uint8_t **menu, uint8_t item);
   */
 void MSC_MenuProcess(void)
 {
-  switch(msc_demo.state)
+  switch (msc_demo.state)
   {
   case MSC_DEMO_IDLE:
     BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
-    BSP_LCD_DisplayStringAtLine(16, (uint8_t *)"                                                 ");
-    BSP_LCD_DisplayStringAtLine(17, (uint8_t *)"Use [Buttons Left/Right] to scroll up/down       ");
-    BSP_LCD_DisplayStringAtLine(18, (uint8_t *)"Use [Joystick Up/Down] to scroll MSC menu        ");
+    BSP_LCD_DisplayStringAtLine(16,
+                                (uint8_t *)
+                                "                                                 ");
+    BSP_LCD_DisplayStringAtLine(17,
+                                (uint8_t *)
+                                "Use [Buttons Left/Right] to scroll up/down       ");
+    BSP_LCD_DisplayStringAtLine(18,
+                                (uint8_t *)
+                                "Use [Joystick Up/Down] to scroll MSC menu        ");
     BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-    MSC_SelectItem(MSC_main_menu, 0); 
+    MSC_SelectItem(MSC_main_menu, 0);
     msc_demo.state = MSC_DEMO_WAIT;
     msc_demo.select = 0;
-    break;    
-    
+    break;
+
   case MSC_DEMO_WAIT:
-    if(msc_demo.select != prev_select)
+    if (msc_demo.select != prev_select)
     {
       prev_select = msc_demo.select;
       MSC_SelectItem(MSC_main_menu, msc_demo.select & 0x7F);
-      
+
       /* Handle select item */
-      if(msc_demo.select & 0x80)
+      if (msc_demo.select & 0x80)
       {
-        switch(msc_demo.select & 0x7F)
+        switch (msc_demo.select & 0x7F)
         {
         case 0:
-          msc_demo.state = MSC_DEMO_FILE_OPERATIONS;  
+          msc_demo.state = MSC_DEMO_FILE_OPERATIONS;
           break;
-          
+
         case 1:
-          msc_demo.state = MSC_DEMO_EXPLORER;  
+          msc_demo.state = MSC_DEMO_EXPLORER;
           break;
-          
+
         case 2:
-          msc_demo.state = MSC_REENUMERATE;  
+          msc_demo.state = MSC_REENUMERATE;
           break;
-          
+
         default:
           break;
         }
       }
     }
     break;
-    
-  case MSC_DEMO_FILE_OPERATIONS:  
+
+  case MSC_DEMO_FILE_OPERATIONS:
     /* Read and Write File Here */
-    if(Appli_state == APPLICATION_MSC)
+    if (Appli_state == APPLICATION_MSC)
     {
       MSC_File_Operations();
     }
     msc_demo.state = MSC_DEMO_WAIT;
-    break; 
-    
+    break;
+
   case MSC_DEMO_EXPLORER:
     /* Display disk content */
-    if(Appli_state == APPLICATION_MSC)
-    {        
+    if (Appli_state == APPLICATION_MSC)
+    {
       Explore_Disk("0:/", 1);
     }
     msc_demo.state = MSC_DEMO_WAIT;
-    break; 
-    
+    break;
+
   case MSC_REENUMERATE:
     /* Force MSC Device to re-enumerate */
-    USBH_ReEnumerate(&hUSBHost); 
+    USBH_ReEnumerate(&hUSBHost);
     msc_demo.state = MSC_DEMO_WAIT;
-    
+
     break;
 
   default:
     break;
   }
   msc_demo.select &= 0x7F;
-} 
+}
 
 /**
   * @brief  Manages the menu on the screen.
@@ -153,39 +161,39 @@ void MSC_MenuProcess(void)
   * @param  item: Selected item to be highlighted
   * @retval None
   */
-static void MSC_SelectItem(uint8_t **menu, uint8_t item)
+static void MSC_SelectItem(uint8_t ** menu, uint8_t item)
 {
   BSP_LCD_SetTextColor(LCD_COLOR_WHITE);
-  
-  switch(item)
+
+  switch (item)
   {
-  case 0: 
+  case 0:
     BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
     BSP_LCD_DisplayStringAtLine(19, menu[0]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);    
+    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
     BSP_LCD_DisplayStringAtLine(20, menu[1]);
     BSP_LCD_DisplayStringAtLine(21, menu[2]);
     break;
-    
-  case 1: 
+
+  case 1:
     BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
     BSP_LCD_DisplayStringAtLine(19, menu[0]);
-    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);    
+    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
     BSP_LCD_DisplayStringAtLine(20, menu[1]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);  
-    BSP_LCD_DisplayStringAtLine(21, menu[2]); 
+    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
+    BSP_LCD_DisplayStringAtLine(21, menu[2]);
     break;
-    
-  case 2: 
+
+  case 2:
     BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
     BSP_LCD_DisplayStringAtLine(19, menu[0]);
-    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);    
+    BSP_LCD_SetBackColor(LCD_COLOR_BLUE);
     BSP_LCD_DisplayStringAtLine(20, menu[1]);
-    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);  
-    BSP_LCD_DisplayStringAtLine(21, menu[2]); 
+    BSP_LCD_SetBackColor(LCD_COLOR_MAGENTA);
+    BSP_LCD_DisplayStringAtLine(21, menu[2]);
     break;
   }
-  BSP_LCD_SetBackColor(LCD_COLOR_BLACK); 
+  BSP_LCD_SetBackColor(LCD_COLOR_BLACK);
 }
 
 /**
@@ -196,18 +204,18 @@ static void MSC_SelectItem(uint8_t **menu, uint8_t item)
 void MSC_DEMO_ProbeKey(JOYState_TypeDef state)
 {
   /* Handle Menu inputs */
-  if((state == JOY_UP) && (msc_demo.select > 0))
+  if ((state == JOY_UP) && (msc_demo.select > 0))
   {
     msc_demo.select--;
   }
-  else if((state == JOY_DOWN) && (msc_demo.select < 2))
+  else if ((state == JOY_DOWN) && (msc_demo.select < 2))
   {
     msc_demo.select++;
   }
-  else if(state == JOY_SEL)
+  else if (state == JOY_SEL)
   {
     msc_demo.select |= 0x80;
-  }  
+  }
 }
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

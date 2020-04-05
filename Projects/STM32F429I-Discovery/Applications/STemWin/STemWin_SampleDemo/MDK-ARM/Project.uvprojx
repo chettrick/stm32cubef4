@@ -10,12 +10,12 @@
       <TargetName>STM32F429I_DISCO_MB1075</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060183::V5.06 update 2 (build 183)::ARMCC</pCCUsed>
+      <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F429ZITx</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32F4xx_DFP.2.9.0</PackID>
+          <PackID>Keil.STM32F4xx_DFP.2.11.0</PackID>
           <PackURL>http://www.keil.com/pack</PackURL>
           <Cpu>IRAM(0x20000000-0x2002FFFF) IRAM2(0x10000000-0x1000FFFF) IROM(0x8000000-0x81FFFFF) CLOCK(25000000) FPU2 CPUTYPE("Cortex-M4")</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -330,11 +330,12 @@
             <vShortWch>1</vShortWch>
             <v6Lto>0</v6Lto>
             <v6WtE>0</v6WtE>
+            <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls>--C99</MiscControls>
               <Define>STM32F429xx,USE_STM32F429I_DISCO</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../Demo;../../../../../../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../../../../../../Drivers/CMSIS/Include;../../../../../../Drivers/STM32F4xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32F429I-Discovery;../../../../../../Middlewares/ST/STemWin/inc</IncludePath>
+              <IncludePath>../Inc;../Demo;../../../../../../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../../../../../../Drivers/STM32F4xx_HAL_Driver/Inc;../../../../../../Drivers/BSP/STM32F429I-Discovery;../../../../../../Middlewares/ST/STemWin/inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -347,6 +348,7 @@
             <NoWarn>0</NoWarn>
             <uSurpInc>0</uSurpInc>
             <useXO>0</useXO>
+            <uClangAs>0</uClangAs>
             <VariousControls>
               <MiscControls></MiscControls>
               <Define></Define>
@@ -367,7 +369,7 @@
             <ScatterFile></ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
-            <Misc>--diag_suppress=L6329</Misc>
+            <Misc></Misc>
             <LinkerInputFile></LinkerInputFile>
             <DisabledWarnings></DisabledWarnings>
           </LDads>
@@ -398,16 +400,6 @@
               <FilePath>../Demo/GUIDEMO_RadialMenu.c</FilePath>
             </File>
             <File>
-              <FileName>GUIDEMO_Speedometer.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Demo/GUIDEMO_Speedometer.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDEMO_BarGraph.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Demo/GUIDEMO_BarGraph.c</FilePath>
-            </File>
-            <File>
               <FileName>GUIDEMO_Treeview.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Demo/GUIDEMO_Treeview.c</FilePath>
@@ -423,19 +415,9 @@
               <FilePath>../Demo/GUIDEMO_ColorBar.c</FilePath>
             </File>
             <File>
-              <FileName>GUIDEMO_Skinning.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Demo/GUIDEMO_Skinning.c</FilePath>
-            </File>
-            <File>
               <FileName>GUIDEMO_Intro.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Demo/GUIDEMO_Intro.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDEMO_AntialiasedText.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Demo/GUIDEMO_AntialiasedText.c</FilePath>
             </File>
             <File>
               <FileName>GUIDEMO.c</FileName>
@@ -453,39 +435,14 @@
               <FilePath>../Demo/GUIDEMO_Conf.c</FilePath>
             </File>
             <File>
-              <FileName>GUIDEMO_Fading.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Demo/GUIDEMO_Fading.c</FilePath>
-            </File>
-            <File>
               <FileName>GUIDEMO_Resource.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Demo/GUIDEMO_Resource.c</FilePath>
             </File>
             <File>
-              <FileName>GUIDEMO_ZoomAndRotate.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Demo/GUIDEMO_ZoomAndRotate.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDEMO_TransparentDialog.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Demo/GUIDEMO_TransparentDialog.c</FilePath>
-            </File>
-            <File>
               <FileName>GUIDEMO_Bitmap.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Demo/GUIDEMO_Bitmap.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDEMO_ImageFlow.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Demo/GUIDEMO_ImageFlow.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDEMO_WashingMachine.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Demo/GUIDEMO_WashingMachine.c</FilePath>
             </File>
             <File>
               <FileName>GUIDEMO_Speed.c</FileName>
@@ -506,11 +463,6 @@
               <FileName>GUIDEMO_Graph.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Demo/GUIDEMO_Graph.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUIDEMO_Automotive.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>../Demo/GUIDEMO_Automotive.c</FilePath>
             </File>
           </Files>
         </Group>

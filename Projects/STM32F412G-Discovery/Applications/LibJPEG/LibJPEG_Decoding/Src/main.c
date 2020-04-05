@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    LibJPEG/LibJPEG_Decoding/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   Main program body
   *          This sample code shows how to decompress JPEG file.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -124,6 +124,9 @@ int main(void)
   /*##-5- Decode the jpg image file ##########################################*/
   jpeg_decode(&MyFile, IMAGE_WIDTH, _aucLine, Jpeg_CallbackFunction);
 
+  /*##-6- Close the JPG image ################################################*/
+  f_close(&MyFile);
+        
   /* Infinite loop */
   while (1)
   {

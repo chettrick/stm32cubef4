@@ -2,16 +2,16 @@
   @page HID_Standalone USB Device Human Interface (HID) application
   
   @verbatim
-  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    USB_Device/HID_Standalone/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   Description of the USB HID application.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -84,8 +84,7 @@ To manually enable the wake from standby option for the USB mouse, proceed as fo
  - Finally click to select "Allow this device to wake the computer" check box.
 
 The function GetPointerData() is responsible to move the mouse cursor automatically,
-which can be easily customized (square, circle...). In this application the cursor
-is moving forward and backward in an infinite loop.
+which can be easily customized (square, circle...). Use Joystick to move the mouse Cursor.
  
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
       based on variable incremented in SysTick ISR. This implies that if HAL_Delay() is called from

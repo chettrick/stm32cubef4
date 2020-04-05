@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    BSP/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   This example code shows how to use the STM32412G_DISCOVERY BSP Drivers
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -105,7 +105,10 @@ int main(void)
   BSP_LED_Init(LED3);
   BSP_LED_Init(LED4); 
 
-  BSP_LED_Toggle(LED4); 
+  BSP_LED_On(LED1);
+  BSP_LED_On(LED2); 
+  BSP_LED_On(LED3);
+  BSP_LED_On(LED4); 
  
   /* Configure the User Button in GPIO Mode */
   BSP_PB_Init(BUTTON_WAKEUP, BUTTON_MODE_GPIO);
@@ -145,8 +148,6 @@ static void Error_Handler(void)
 {
   while(1)
   {
-    /* Insert a delay */
-    HAL_Delay(50);
   }
 }
 
@@ -218,7 +219,6 @@ static void SystemClock_Config(void)
   
 }
 
-
 /**
   * @brief  Display main demo messages.
   * @param  None
@@ -245,7 +245,7 @@ static void Display_DemoDescription(void)
   BSP_LCD_DrawBitmap((BSP_LCD_GetXSize() - 80)/2, 30, (uint8_t *)stlogo);
   
   BSP_LCD_SetFont(&Font12);
-  BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()-12, (uint8_t *)"STMicroelectronics 2016", CENTER_MODE);
+  BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()-12, (uint8_t *)"STMicroelectronics 2017", CENTER_MODE);
   
   BSP_LCD_SetFont(&Font12);
   BSP_LCD_SetTextColor(LCD_COLOR_BLUE);
@@ -266,29 +266,12 @@ uint8_t CheckForUserInput(void)
 {
   if(BSP_PB_GetState(BUTTON_WAKEUP) != RESET)
   {
-    HAL_Delay(10);
+    HAL_Delay(100);
     while (BSP_PB_GetState(BUTTON_WAKEUP) != RESET);
     return 1 ;
   }
   return 0;
 }
-
-/**
-  * @brief  Toggle Leds.
-  * @param  None
-  * @retval None
-  */
-void Toggle_Leds(void)
-{
-  static uint32_t ticks = 0;
-  
-  if(ticks++ > 200)
-  {
-    BSP_LED_Toggle(LED4);
-    ticks = 0;
-  }
-}
-
 
 /**
   * @brief EXTI line detection callbacks.

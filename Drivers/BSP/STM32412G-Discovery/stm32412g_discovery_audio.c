@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    stm32412g_discovery_audio.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    04-May-2016
+  * @version V2.0.0
+  * @date    27-January-2017
   * @brief   This file provides the Audio driver for the STM32412G-DISCOVERY board.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -80,7 +80,7 @@ Driver architecture:
      (BSP_AUDIO_OUT_Init(), BSP_AUDIO_OUT_Play() ...)
    + This driver provide also the Media Access Layer (MAL): which consists of functions allowing to access the media containing/
      providing the audio file/stream. These functions are also included as local functions into
-     the stm32412g_discovery_audio_codec.c file (I2Sx_Out_Init(), I2Sx_Out_DeInit(), I2Sx_In_Init() and I2Sx_In_DeInit())
+     the stm32412g_discovery_audio.c file (I2Sx_Out_Init(), I2Sx_Out_DeInit(), I2Sx_In_Init() and I2Sx_In_DeInit())
 
 Known Limitations:
 ------------------
@@ -112,14 +112,7 @@ Known Limitations:
 /** @defgroup STM32412G_DISCOVERY_AUDIO_Private_Types STM32412G Discovery Audio Private Types
   * @{
   */
-typedef struct
-{
-  uint32_t      Frequency;      /* Record Frequency */
-  uint32_t      BitResolution;  /* Record bit resolution */
-  uint32_t      ChannelNbr;     /* Record Channel Number */
-  uint16_t      *pRecBuf;       /* Pointer to record user buffer */
-  uint32_t      RecSize;        /* Size to record in mono, double size to record in stereo */
-}AUDIOIN_TypeDef;
+
 /**
   * @}
   */ 
@@ -162,7 +155,7 @@ typedef struct
       : (__FREQUENCY__ == AUDIO_FREQUENCY_44K) ? DFSDM_FILTER_SINC4_ORDER  \
       : (__FREQUENCY__ == AUDIO_FREQUENCY_48K) ? DFSDM_FILTER_SINC4_ORDER : DFSDM_FILTER_SINC4_ORDER  \
 
-#define DFSDM_RIGHT_BIT_SHIFT(__FREQUENCY__) \
+#define DFSDM_MIC_BIT_SHIFT(__FREQUENCY__) \
         (__FREQUENCY__ == AUDIO_FREQUENCY_8K)  ? 5 \
       : (__FREQUENCY__ == AUDIO_FREQUENCY_11K) ? 4 \
       : (__FREQUENCY__ == AUDIO_FREQUENCY_16K) ? 2 \
@@ -182,42 +175,27 @@ typedef struct
   * @{
   */
   
-/*
-Note: 
-  these global variables are not compliant to naming rules (upper case without "_" ), 
-  but we keep this naming for compatibility, in fact these variables (not static)
-  could have been used by the application, example the stm32f4xx_it.c:
-    void DMA2_Stream6_IRQHandler(void)
-     {  HAL_DMA_IRQHandler(haudio_i2s.hdmatx);  }
-*/
 AUDIO_DrvTypeDef                *audio_drv;
 I2S_HandleTypeDef               haudio_i2s;       /* for Audio_OUT and Audio_IN_analog mic */
 I2S_HandleTypeDef               haudio_in_i2sext; /* for Analog mic with full duplex mode  */
-AUDIOIN_TypeDef                 hAudioIn;
+AUDIOIN_ContextTypeDef          hAudioIn;
 
-DFSDM_Channel_HandleTypeDef     haudio_in_dfsdm_leftchannel;   /* MP34DT01TR microphones on PCB top side */
-DFSDM_Channel_HandleTypeDef     haudio_in_dfsdm_rightchannel;
-DFSDM_Filter_HandleTypeDef      haudio_in_dfsdm_leftfilter;         /* Common filters for MP34DT01TR microphones inputs */
-DFSDM_Filter_HandleTypeDef      haudio_in_dfsdm_rightfilter;
-DMA_HandleTypeDef               hdma_dfsdm_left;                    /* Common DMAs for MP34DT01TR microphones inputs */
-DMA_HandleTypeDef               hdma_dfsdm_right;
-
+DFSDM_Channel_HandleTypeDef     hAudioInDfsdmChannel[DFSDM_MIC_NUMBER];  /* 2 DFSDM channel handle used for all microphones */
+DFSDM_Filter_HandleTypeDef      hAudioInDfsdmFilter[DFSDM_MIC_NUMBER];   /* 2 DFSDM filter handle */
+DMA_HandleTypeDef               hDmaDfsdm[DFSDM_MIC_NUMBER];             /* 2 DMA handle used for DFSDM regular conversions */
 
 /* Buffers for right and left samples */
 int32_t                         *pScratchBuff[DEFAULT_AUDIO_IN_CHANNEL_NBR];
 int32_t                         ScratchSize;
 
-/* Buffers status flags */
-uint32_t                        DmaLeftRecHalfBuffCplt  = 0;
-uint32_t                        DmaLeftRecBuffCplt      = 0;
-uint32_t                        DmaRightRecHalfBuffCplt = 0;
-uint32_t                        DmaRightRecBuffCplt     = 0;
+uint32_t                        DmaRecHalfBuffCplt[DFSDM_MIC_NUMBER]  = {0};
+uint32_t                        DmaRecBuffCplt[DFSDM_MIC_NUMBER]  = {0};
 
 /* Application Buffer Trigger */
 __IO uint32_t                   AppBuffTrigger          = 0;
-uint32_t __IO                   AppBuffHalf             = 0;
-   
-uint16_t __IO AudioInVolume = DEFAULT_AUDIO_IN_VOLUME;
+__IO uint32_t                   AppBuffHalf             = 0;
+__IO uint32_t                   MicBuff[DFSDM_MIC_NUMBER] = {0};
+__IO uint16_t                   AudioInVolume = DEFAULT_AUDIO_IN_VOLUME; 
 
 /**
   * @}
@@ -228,11 +206,12 @@ uint16_t __IO AudioInVolume = DEFAULT_AUDIO_IN_VOLUME;
   */
 static void I2Sx_In_Init(uint32_t AudioFreq);
 static void I2Sx_In_DeInit(void);
+static void I2Sx_In_MspInit(void);
+static void I2Sx_In_MspDeInit(void);
 
 static void I2Sx_Out_Init(uint32_t AudioFreq);
 static void I2Sx_Out_DeInit(void);
 
-static uint8_t DFSDMx_Init(uint32_t AudioFreq);
 static uint8_t DFSDMx_DeInit(void);
 static void DFSDMx_ChannelMspInit(void);
 static void DFSDMx_ChannelMspDeInit(void);
@@ -243,7 +222,7 @@ static void DFSDMx_FilterMspDeInit(void);
   * @}
   */ 
 
-/** @defgroup STM32412G_DISCOVERY_AUDIO_out_Private_Functions STM32412G Discovery AudioOut Private Functions
+/** @defgroup STM32412G_DISCOVERY_AUDIO_OUT_Private_Functions STM32412G Discovery Audio Out Private Functions
   * @{
   */ 
 
@@ -335,7 +314,6 @@ uint8_t BSP_AUDIO_OUT_Play(uint16_t* pBuffer, uint32_t Size)
   * @brief  Sends n-Bytes on the I2S interface.
   * @param  pData: pointer on data address 
   * @param  Size: number of data to be written
-  * @retval None
   */
 void BSP_AUDIO_OUT_ChangeBuffer(uint16_t *pData, uint16_t Size)
 {
@@ -345,7 +323,7 @@ void BSP_AUDIO_OUT_ChangeBuffer(uint16_t *pData, uint16_t Size)
 /**
   * @brief  This function Pauses the audio file stream. In case
   *         of using DMA, the DMA Pause feature is used.
-  * @WARNING When calling BSP_AUDIO_OUT_Pause() function for pause, only
+  * @note   When calling BSP_AUDIO_OUT_Pause() function for pause, only
   *          BSP_AUDIO_OUT_Resume() function should be called for resume (use of BSP_AUDIO_OUT_Play() 
   *          function for resume could lead to unexpected behavior).
   * @retval AUDIO_OK if correct communication, else wrong communication
@@ -369,7 +347,7 @@ uint8_t BSP_AUDIO_OUT_Pause(void)
 
 /**
   * @brief  This function  Resumes the audio file stream.  
-  * @WARNING When calling BSP_AUDIO_OUT_Pause() function for pause, only
+  * @note   When calling BSP_AUDIO_OUT_Pause() function for pause, only
   *          BSP_AUDIO_OUT_Resume() function should be called for resume (use of BSP_AUDIO_OUT_Play() 
   *          function for resume could lead to unexpected behavior).
   * @retval AUDIO_OK if correct communication, else wrong communication
@@ -490,7 +468,6 @@ uint8_t BSP_AUDIO_OUT_SetOutputMode(uint8_t Output)
   * @param  AudioFreq: Audio frequency used to play the audio stream.
   * @note   This API should be called after the BSP_AUDIO_OUT_Init() to adjust the
   *         audio frequency.
-  * @retval None
   */
 void BSP_AUDIO_OUT_SetFrequency(uint32_t AudioFreq)
 { 
@@ -510,8 +487,6 @@ void BSP_AUDIO_OUT_SetFrequency(uint32_t AudioFreq)
 
 /**
   * @brief  Deinit the audio peripherals.
-  * @param  None
-  * @retval None
   */
 void BSP_AUDIO_OUT_DeInit(void)
 {
@@ -523,7 +498,6 @@ void BSP_AUDIO_OUT_DeInit(void)
 /**
   * @brief  Tx Transfer completed callbacks.
   * @param  hi2s: I2S handle
-  * @retval None
   */
 void HAL_I2S_TxCpltCallback(I2S_HandleTypeDef *hi2s)
 {
@@ -535,7 +509,6 @@ void HAL_I2S_TxCpltCallback(I2S_HandleTypeDef *hi2s)
 /**
   * @brief  Tx Half Transfer completed callbacks.
   * @param  hi2s: I2S handle
-  * @retval None
   */
 void HAL_I2S_TxHalfCpltCallback(I2S_HandleTypeDef *hi2s)
 {
@@ -547,7 +520,6 @@ void HAL_I2S_TxHalfCpltCallback(I2S_HandleTypeDef *hi2s)
 /**
   * @brief  I2S error callbacks.
   * @param  hi2s: I2S handle
-  * @retval None
   */
 void HAL_I2S_ErrorCallback(I2S_HandleTypeDef *hi2s)
 {
@@ -556,8 +528,6 @@ void HAL_I2S_ErrorCallback(I2S_HandleTypeDef *hi2s)
 
 /**
   * @brief  Manages the DMA full Transfer complete event.
-  * @param  None
-  * @retval None
   */
 __weak void BSP_AUDIO_OUT_TransferComplete_CallBack(void)
 {
@@ -565,8 +535,6 @@ __weak void BSP_AUDIO_OUT_TransferComplete_CallBack(void)
 
 /**
   * @brief  Manages the DMA Half Transfer complete event.
-  * @param  None
-  * @retval None
   */
 __weak void BSP_AUDIO_OUT_HalfTransfer_CallBack(void)
 { 
@@ -574,8 +542,6 @@ __weak void BSP_AUDIO_OUT_HalfTransfer_CallBack(void)
 
 /**
   * @brief  Manages the DMA FIFO error event.
-  * @param  None
-  * @retval None
   */
 __weak void BSP_AUDIO_OUT_Error_CallBack(void)
 {
@@ -584,7 +550,7 @@ __weak void BSP_AUDIO_OUT_Error_CallBack(void)
 /**
   * @brief  Initializes BSP_AUDIO_OUT MSP.
   * @param  hi2s: I2S handle
-  * @retval None
+  * @param  Params : pointer on additional configuration parameters, can be NULL.
   */
 __weak void BSP_AUDIO_OUT_MspInit(I2S_HandleTypeDef *hi2s, void *Params)
 { 
@@ -662,52 +628,52 @@ __weak void BSP_AUDIO_OUT_MspInit(I2S_HandleTypeDef *hi2s, void *Params)
 
 /**
   * @brief  Deinitializes I2S MSP.
+  * @param  Params : pointer on additional configuration parameters, can be NULL.
   * @param  hi2s: I2S handle
-  * @retval None
   */
 __weak void BSP_AUDIO_OUT_MspDeInit(I2S_HandleTypeDef *hi2s, void *Params)
 {
-    GPIO_InitTypeDef  gpio_init_structure;
-
-    /* I2S DMA IRQ Channel deactivation */
-    HAL_NVIC_DisableIRQ(AUDIO_OUT_I2Sx_DMAx_IRQ);
-
-    if(hi2s->Instance == AUDIO_OUT_I2Sx)
-    {
-      /* Deinitialize the DMA stream */
-      HAL_DMA_DeInit(hi2s->hdmatx);
-    }
-
-    /* Disable I2S peripheral */
-    __HAL_I2S_DISABLE(hi2s);
-
-    /* Deactives CODEC_I2S pins MCK, SCK, WS and SD by putting them in input mode */
-    gpio_init_structure.Pin = AUDIO_OUT_I2Sx_MCK_PIN;
-    HAL_GPIO_DeInit(AUDIO_OUT_I2Sx_MCK_GPIO_PORT, gpio_init_structure.Pin);
-
-    gpio_init_structure.Pin = AUDIO_OUT_I2Sx_SCK_PIN;
-    HAL_GPIO_DeInit(AUDIO_OUT_I2Sx_SCK_GPIO_PORT, gpio_init_structure.Pin);
-
-    gpio_init_structure.Pin = AUDIO_OUT_I2Sx_WS_PIN;
-    HAL_GPIO_DeInit(AUDIO_OUT_I2Sx_WS_GPIO_PORT, gpio_init_structure.Pin);
-
-    gpio_init_structure.Pin = AUDIO_OUT_I2Sx_SD_PIN;
-    HAL_GPIO_DeInit(AUDIO_OUT_I2Sx_SD_GPIO_PORT, gpio_init_structure.Pin);
-
-    /* Disable I2S clock */
-    AUDIO_OUT_I2Sx_CLK_DISABLE();
-
-    /* GPIO pins clock and DMA clock can be shut down in the application 
-       by surcharging this __weak function */ 
+  GPIO_InitTypeDef  gpio_init_structure;
+  
+  /* I2S DMA IRQ Channel deactivation */
+  HAL_NVIC_DisableIRQ(AUDIO_OUT_I2Sx_DMAx_IRQ);
+  
+  if(hi2s->Instance == AUDIO_OUT_I2Sx)
+  {
+    /* Deinitialize the DMA stream */
+    HAL_DMA_DeInit(hi2s->hdmatx);
+  }
+  
+  /* Disable I2S peripheral */
+  __HAL_I2S_DISABLE(hi2s);
+  
+  /* Deactives CODEC_I2S pins MCK, SCK, WS and SD by putting them in input mode */
+  gpio_init_structure.Pin = AUDIO_OUT_I2Sx_MCK_PIN;
+  HAL_GPIO_DeInit(AUDIO_OUT_I2Sx_MCK_GPIO_PORT, gpio_init_structure.Pin);
+  
+  gpio_init_structure.Pin = AUDIO_OUT_I2Sx_SCK_PIN;
+  HAL_GPIO_DeInit(AUDIO_OUT_I2Sx_SCK_GPIO_PORT, gpio_init_structure.Pin);
+  
+  gpio_init_structure.Pin = AUDIO_OUT_I2Sx_WS_PIN;
+  HAL_GPIO_DeInit(AUDIO_OUT_I2Sx_WS_GPIO_PORT, gpio_init_structure.Pin);
+  
+  gpio_init_structure.Pin = AUDIO_OUT_I2Sx_SD_PIN;
+  HAL_GPIO_DeInit(AUDIO_OUT_I2Sx_SD_GPIO_PORT, gpio_init_structure.Pin);
+  
+  /* Disable I2S clock */
+  AUDIO_OUT_I2Sx_CLK_DISABLE();
+  
+  /* GPIO pins clock and DMA clock can be shut down in the application 
+  by surcharging this __weak function */ 
 }
 
 /**
   * @brief  Clock Config.
   * @param  hi2s: might be required to set audio peripheral predivider if any.
   * @param  AudioFreq: Audio frequency used to play the audio stream.
+  * @param  Params : pointer on additional configuration parameters, can be NULL.
   * @note   This API is called by BSP_AUDIO_OUT_Init() and BSP_AUDIO_OUT_SetFrequency()
   *         Being __weak it can be overwritten by the application     
-  * @retval None
   */
 __weak void BSP_AUDIO_OUT_ClockConfig(I2S_HandleTypeDef *hi2s, uint32_t AudioFreq, void *Params)
 { 
@@ -766,7 +732,6 @@ __weak void BSP_AUDIO_OUT_ClockConfig(I2S_HandleTypeDef *hi2s, uint32_t AudioFre
   * @note   This function assumes that the I2S input clock
   *         is already configured and ready to be used.
   * @param  AudioFreq: Audio frequency to be configured for the I2S peripheral.
-  * @retval None
   */
 static void I2Sx_Out_Init(uint32_t AudioFreq)
 {
@@ -795,8 +760,6 @@ static void I2Sx_Out_Init(uint32_t AudioFreq)
 
 /**
   * @brief  Deinitializes the Audio Codec audio interface (I2S).
-  * @param  None
-  * @retval None
   */
 static void I2Sx_Out_DeInit(void)
 {
@@ -814,18 +777,17 @@ static void I2Sx_Out_DeInit(void)
   * @}
   */
 
-/** @defgroup STM32412G_DISCOVERY_AUDIO_in_Private_Functions STM32412G Discovery AudioIn Private functions
+/** @defgroup STM32412G_DISCOVERY_AUDIO_IN_Private_Functions STM32412G Discovery Audio In Private functions
   * @{
   */ 
 
 /**
   * @brief  Initializes wave recording.
   * @note   This function assumes that the I2S input clock
-  *         is already configured and ready to be used.  
-  * @param  InputDevice: INPUT_DEVICE_DIGITAL_MIC or INPUT_DEVICE_ANALOG_MIC.                     
+  *         is already configured and ready to be used.                     
   * @param  AudioFreq: Audio frequency to be configured for the I2S peripheral.
-  * @param  BitRes: Audio frequency to be configured for the I2S peripheral.
-  * @param  ChnlNbr: Audio frequency to be configured for the I2S peripheral.
+  * @param  BitRes: Audio bit resolustion.
+  * @param  ChnlNbr: Audio channel number.
   * @retval AUDIO_OK if correct communication, else wrong communication
   */
 uint8_t BSP_AUDIO_IN_Init(uint32_t AudioFreq, uint32_t BitRes, uint32_t ChnlNbr)
@@ -834,47 +796,44 @@ uint8_t BSP_AUDIO_IN_Init(uint32_t AudioFreq, uint32_t BitRes, uint32_t ChnlNbr)
 }
 
 /**
-  * @brief  Initializes wave recording.
-  * @note   This function assumes that the I2S input clock
-  *         is already configured and ready to be used.  
-  * @param  InputDevice: INPUT_DEVICE_DIGITAL_MIC or INPUT_DEVICE_ANALOG_MIC.                     
+  * @brief  Initializes wave recording. 
+  * @param  InputDevice: input device digital or analog                     
   * @param  AudioFreq: Audio frequency to be configured for the I2S peripheral.
-  * @param  BitRes: Audio frequency to be configured for the I2S peripheral.
-  * @param  ChnlNbr: Audio frequency to be configured for the I2S peripheral.
+  * @param  BitRes: Audio bit resolution.
+  * @param  ChnlNbr: Audio channel number.
   * @retval AUDIO_OK if correct communication, else wrong communication
   */
-uint8_t BSP_AUDIO_IN_InitEx(uint16_t InputDevice, uint32_t AudioFreq, uint32_t BitRes, uint32_t ChnlNbr)
+uint8_t BSP_AUDIO_IN_InitEx(uint32_t InputDevice, uint32_t AudioFreq, uint32_t BitRes, uint32_t ChnlNbr)
 {
   uint32_t ret = AUDIO_ERROR;
-  uint32_t deviceid =0;
+  uint32_t i = 0;
+  uint32_t mic_enabled = 0;
   uint16_t buffer_fake[16] = {0x00};
 
   /* Store the audio record context */
   hAudioIn.Frequency     = AudioFreq;
   hAudioIn.BitResolution = BitRes;
-  
-  if (InputDevice == INPUT_DEVICE_DIGITAL_MIC)
+  hAudioIn.InputDevice = InputDevice; 
+  hAudioIn.ChannelNbr = ChnlNbr;
+
+  /* Store the total number of microphones enabled */  
+  for(i = 0; i < DFSDM_MIC_NUMBER; i ++)
   {
-    /* PLL clock is set depending on the AudioFreq (44.1khz vs 48khz groups) */
-    BSP_AUDIO_IN_ClockConfig(&haudio_in_dfsdm_leftchannel, AudioFreq, NULL); /* Clock config is shared between AUDIO IN and OUT for analog mic */
-    
-    /* MSP channels initialization */
-    DFSDMx_ChannelMspInit();
-    
-    /* MSP filters initialization */
-    DFSDMx_FilterMspInit();
-    
-    /* DFSDM data acquisition preparation */
-    ret = DFSDMx_Init(AudioFreq);
+    if(((hAudioIn.InputDevice >> i) & INPUT_DEVICE_DIGITAL_MIC1) == INPUT_DEVICE_DIGITAL_MIC1)
+    {
+      mic_enabled++;
+    }   
   }
-  else
-  {
+
+  if (InputDevice == INPUT_DEVICE_ANALOG_MIC)
+  { 
+    InputDevice = INPUT_DEVICE_INPUT_LINE_1;
     /* INPUT_DEVICE_ANALOG_MIC */
     /* Disable I2S */
     I2Sx_In_DeInit();
 
     /* PLL clock is set depending on the AudioFreq (44.1khz vs 48khz groups) */
-    BSP_AUDIO_IN_ClockConfig(&haudio_in_dfsdm_rightchannel, AudioFreq, NULL); /* Clock config is shared between AUDIO IN and OUT for analog mic */
+    BSP_AUDIO_IN_ClockConfig(AudioFreq, NULL); /* Clock config is shared between AUDIO IN and OUT for analog mic */
 
     /* I2S data transfer preparation:
     Prepare the Media to be used for the audio transfer from I2S peripheral to memory */
@@ -883,7 +842,7 @@ uint8_t BSP_AUDIO_IN_InitEx(uint16_t InputDevice, uint32_t AudioFreq, uint32_t B
     {
       BSP_AUDIO_OUT_MspInit(&haudio_i2s, NULL); /* Initialize GPIOs for SPI3 Master signals */
       /* Init the I2S MSP: this __weak function can be redefined by the application*/
-      BSP_AUDIO_IN_MspInit(&haudio_i2s, NULL);
+      BSP_AUDIO_IN_MspInit(NULL);
     }
 
     /* Configure I2S */
@@ -891,10 +850,8 @@ uint8_t BSP_AUDIO_IN_InitEx(uint16_t InputDevice, uint32_t AudioFreq, uint32_t B
 
     AUDIO_IO_Init();
 
-    /* wm8994 codec initialization */
-    deviceid = wm8994_drv.ReadID(AUDIO_I2C_ADDRESS);
-
-    if((deviceid) == WM8994_ID)
+    /* wm8994 codec initialization */    
+    if((wm8994_drv.ReadID(AUDIO_I2C_ADDRESS)) == WM8994_ID)
     {
       /* Reset the Codec Registers */
       wm8994_drv.Reset(AUDIO_I2C_ADDRESS);
@@ -911,10 +868,28 @@ uint8_t BSP_AUDIO_IN_InitEx(uint16_t InputDevice, uint32_t AudioFreq, uint32_t B
     {
       /* Receive fake I2S data in order to generate MCLK needed by WM8994 to set its registers */
       HAL_I2S_Receive_DMA(&haudio_i2s, buffer_fake, 16);
-     /* Initialize the codec internal registers */
+      /* Initialize the codec internal registers */
       audio_drv->Init(AUDIO_I2C_ADDRESS, (OUTPUT_DEVICE_HEADPHONE|InputDevice), 100, AudioFreq);
       /* Stop receiving fake I2S data */
       HAL_I2S_DMAStop(&haudio_i2s);
+    }    
+  }
+  else
+  {
+    if(hAudioIn.ChannelNbr != mic_enabled)  
+    {
+      return AUDIO_ERROR;
+    }
+    else
+    {
+      /* PLL clock is set depending on the AudioFreq (44.1khz vs 48khz groups) */
+      BSP_AUDIO_IN_ClockConfig(AudioFreq, NULL); /* Clock config is shared between AUDIO IN and OUT for analog mic */
+      
+      /* Init the DFSDM MSP: this __weak function can be redefined by the application*/
+      BSP_AUDIO_IN_MspInit(NULL);
+      
+      /* Default configuration of DFSDM filters and channels */
+      ret = BSP_AUDIO_IN_ConfigDigitalMic(hAudioIn.InputDevice, NULL);
     }
   }
 
@@ -924,28 +899,13 @@ uint8_t BSP_AUDIO_IN_InitEx(uint16_t InputDevice, uint32_t AudioFreq, uint32_t B
 
 /**
   * @brief  DeInitializes the audio peripheral.
-  * @param  None                    
-  * @retval None
   */
 void BSP_AUDIO_IN_DeInit(void)
 {
-  BSP_AUDIO_IN_DeInitEx(INPUT_DEVICE_DIGITAL_MIC);
-}
-
-/**
-  * @brief  DeInitializes the audio peripheral.
-  * @param  InputDevice: INPUT_DEVICE_DIGITAL_MIC or INPUT_DEVICE_ANALOG_MIC.                    
-  * @retval None
-  */
-void BSP_AUDIO_IN_DeInitEx(uint16_t InputDevice)
-{
-  if (InputDevice == INPUT_DEVICE_DIGITAL_MIC)
-  {
-    /* MSP channels initialization */
-    DFSDMx_ChannelMspDeInit(); 
-    
-    /* MSP filters initialization */
-    DFSDMx_FilterMspDeInit();
+  if(hAudioIn.InputDevice != INPUT_DEVICE_ANALOG_MIC)
+  {    
+    /* MSP filters/channels initialization */   
+    BSP_AUDIO_IN_MspDeInit(NULL);
     
     DFSDMx_DeInit();
   }
@@ -954,6 +914,110 @@ void BSP_AUDIO_IN_DeInitEx(uint16_t InputDevice)
     I2Sx_In_DeInit();
   }
 }
+
+/**
+  * @brief  Initializes default configuration of the Digital Filter for Sigma-Delta Modulators interface (DFSDM).
+  * @param  InputDevice: The microphone to be configured. Can be INPUT_DEVICE_DIGITAL_MIC1..INPUT_DEVICE_DIGITAL_MIC5
+  * @note   Channel output Clock Divider and Filter Oversampling are calculated as follow: 
+  *         - Clock_Divider = CLK(input DFSDM)/CLK(micro) with
+  *           1MHZ < CLK(micro) < 3.2MHZ (TYP 2.4MHZ for MP34DT01TR)
+  *         - Oversampling = CLK(input DFSDM)/(Clock_Divider * AudioFreq)
+  * @retval AUDIO_OK if correct communication, else wrong communication
+  */
+uint8_t BSP_AUDIO_IN_ConfigMicDefault(uint32_t InputDevice)
+{
+  uint32_t i = 0, mic_init[DFSDM_MIC_NUMBER] = {0};
+  uint32_t filter_ch = 0, mic_num = 0;
+  
+  DFSDM_Filter_TypeDef* FilterInstnace[DFSDM_MIC_NUMBER] = {AUDIO_DFSDMx_MIC1_FILTER, AUDIO_DFSDMx_MIC2_FILTER};
+  DFSDM_Channel_TypeDef* ChannelInstnace[DFSDM_MIC_NUMBER] = {AUDIO_DFSDMx_MIC1_CHANNEL, AUDIO_DFSDMx_MIC2_CHANNEL};
+  uint32_t DigitalMicPins[DFSDM_MIC_NUMBER] = {DFSDM_CHANNEL_SAME_CHANNEL_PINS, DFSDM_CHANNEL_FOLLOWING_CHANNEL_PINS};
+  uint32_t DigitalMicType[DFSDM_MIC_NUMBER] = {DFSDM_CHANNEL_SPI_RISING, DFSDM_CHANNEL_SPI_FALLING};
+  uint32_t Channel4Filter[DFSDM_MIC_NUMBER] = {AUDIO_DFSDMx_MIC1_CHANNEL_FOR_FILTER, AUDIO_DFSDMx_MIC2_CHANNEL_FOR_FILTER};
+  
+  for(i = 0; i < hAudioIn.ChannelNbr; i++)
+  {  
+    if(((hAudioIn.InputDevice & INPUT_DEVICE_DIGITAL_MIC1) == INPUT_DEVICE_DIGITAL_MIC1) && (mic_init[POS_VAL(INPUT_DEVICE_DIGITAL_MIC1)] != 1))
+    { 
+      mic_num = POS_VAL(INPUT_DEVICE_DIGITAL_MIC1); 
+    }    
+    else if(((hAudioIn.InputDevice & INPUT_DEVICE_DIGITAL_MIC2) == INPUT_DEVICE_DIGITAL_MIC2) && (mic_init[POS_VAL(INPUT_DEVICE_DIGITAL_MIC2)] != 1))
+    {
+      mic_num = POS_VAL(INPUT_DEVICE_DIGITAL_MIC2);
+    } 
+    
+    mic_init[mic_num] = 1;
+    
+    HAL_DFSDM_FilterDeInit(&hAudioInDfsdmFilter[mic_num]);
+    /* MIC filters  initialization */
+    __HAL_DFSDM_FILTER_RESET_HANDLE_STATE(&hAudioInDfsdmFilter[mic_num]); 
+    hAudioInDfsdmFilter[mic_num].Instance                          = FilterInstnace[mic_num]; 
+    hAudioInDfsdmFilter[mic_num].Init.RegularParam.Trigger         = DFSDM_FILTER_SW_TRIGGER;
+    hAudioInDfsdmFilter[mic_num].Init.RegularParam.FastMode        = ENABLE;
+    hAudioInDfsdmFilter[mic_num].Init.RegularParam.DmaMode         = ENABLE;
+    hAudioInDfsdmFilter[mic_num].Init.InjectedParam.Trigger        = DFSDM_FILTER_SW_TRIGGER;
+    hAudioInDfsdmFilter[mic_num].Init.InjectedParam.ScanMode       = DISABLE;
+    hAudioInDfsdmFilter[mic_num].Init.InjectedParam.DmaMode        = DISABLE;
+    hAudioInDfsdmFilter[mic_num].Init.InjectedParam.ExtTrigger     = DFSDM_FILTER_EXT_TRIG_TIM8_TRGO;
+    hAudioInDfsdmFilter[mic_num].Init.InjectedParam.ExtTriggerEdge = DFSDM_FILTER_EXT_TRIG_BOTH_EDGES;
+    hAudioInDfsdmFilter[mic_num].Init.FilterParam.SincOrder        = DFSDM_FILTER_ORDER(hAudioIn.Frequency);
+    hAudioInDfsdmFilter[mic_num].Init.FilterParam.Oversampling     = DFSDM_OVER_SAMPLING(hAudioIn.Frequency);   
+    hAudioInDfsdmFilter[mic_num].Init.FilterParam.IntOversampling  = 1;
+    
+    if(HAL_OK != HAL_DFSDM_FilterInit(&hAudioInDfsdmFilter[mic_num]))
+    {
+      return AUDIO_ERROR;
+    }
+    
+    HAL_DFSDM_ChannelDeInit(&hAudioInDfsdmChannel[mic_num]);
+    /* MIC channels initialization */
+    __HAL_DFSDM_CHANNEL_RESET_HANDLE_STATE(&hAudioInDfsdmChannel[mic_num]);   
+    hAudioInDfsdmChannel[mic_num].Init.OutputClock.Activation   = ENABLE;
+    hAudioInDfsdmChannel[mic_num].Init.OutputClock.Selection    = DFSDM_CHANNEL_OUTPUT_CLOCK_AUDIO; 
+    hAudioInDfsdmChannel[mic_num].Init.OutputClock.Divider      = DFSDM_CLOCK_DIVIDER(hAudioIn.Frequency); 
+    hAudioInDfsdmChannel[mic_num].Init.Input.Multiplexer        = DFSDM_CHANNEL_EXTERNAL_INPUTS;  
+    hAudioInDfsdmChannel[mic_num].Init.Input.DataPacking        = DFSDM_CHANNEL_STANDARD_MODE;
+    hAudioInDfsdmChannel[mic_num].Init.SerialInterface.SpiClock = DFSDM_CHANNEL_SPI_CLOCK_INTERNAL; 
+    hAudioInDfsdmChannel[mic_num].Init.Awd.FilterOrder          = DFSDM_CHANNEL_SINC1_ORDER;
+    hAudioInDfsdmChannel[mic_num].Init.Awd.Oversampling         = 10; 
+    hAudioInDfsdmChannel[mic_num].Init.Offset                   = 0;
+    hAudioInDfsdmChannel[mic_num].Init.RightBitShift            = DFSDM_MIC_BIT_SHIFT(hAudioIn.Frequency);
+    hAudioInDfsdmChannel[mic_num].Instance                      = ChannelInstnace[mic_num];
+    hAudioInDfsdmChannel[mic_num].Init.Input.Pins               = DigitalMicPins[mic_num]; 
+    hAudioInDfsdmChannel[mic_num].Init.SerialInterface.Type     = DigitalMicType[mic_num];
+    
+    if(HAL_OK != HAL_DFSDM_ChannelInit(&hAudioInDfsdmChannel[mic_num]))
+    {
+      return AUDIO_ERROR;
+    }
+    
+    filter_ch = Channel4Filter[mic_num];      
+    /* Configure injected channel */
+    if(HAL_OK != HAL_DFSDM_FilterConfigRegChannel(&hAudioInDfsdmFilter[mic_num], filter_ch, DFSDM_CONTINUOUS_CONV_ON))
+    {
+      return AUDIO_ERROR;
+    }   
+  } 
+  
+  return AUDIO_OK;
+} 
+                         
+/**
+  * @brief  Initializes the Digital Filter for Sigma-Delta Modulators interface (DFSDM).
+  * @param  InputDevice: The microphone to be configured. Can be INPUT_DEVICE_DIGITAL_MIC1..INPUT_DEVICE_DIGITAL_MIC5
+  * @param  Params : pointer on additional configuration parameters, can be NULL.  
+  * @retval AUDIO_OK if correct communication, else wrong communication
+  */
+__weak uint8_t BSP_AUDIO_IN_ConfigDigitalMic(uint32_t InputDevice, void *Params)
+{
+  /* Prevent unused argument(s) compilation warning */
+  UNUSED(Params);
+  
+  /* Default configuration of DFSDM filters and channels */
+  return(BSP_AUDIO_IN_ConfigMicDefault(InputDevice));
+  /* Note: This function can be called at application level and default configuration
+           can be ovewritten to fit user's need */
+} 
 
 /**
   * @brief  Allocate channel buffer scratch 
@@ -979,43 +1043,28 @@ uint8_t BSP_AUDIO_IN_AllocScratch (int32_t *pScratch, uint32_t size)
   * @brief  Starts audio recording.                    
   * @param  pBuf: Main buffer pointer for the recorded data storing
   * @param  size: Current size of the recorded buffer
-  * @note   The Right channel is start at first with synchro on start of Left channel
   * @retval AUDIO_OK if correct communication, else wrong communication
   */
 uint8_t BSP_AUDIO_IN_Record(uint16_t *pBuf, uint32_t size)
-{
-  return BSP_AUDIO_IN_RecordEx(INPUT_DEVICE_DIGITAL_MIC, pBuf, size);
-}
-/**
-  * @brief  Starts audio recording.
-  * @param  InputDevice: INPUT_DEVICE_DIGITAL_MIC or INPUT_DEVICE_ANALOG_MIC.                    
-  * @param  pBuf: Main buffer pointer for the recorded data storing
-  * @param  size: Current size of the recorded buffer
-  * @note   The Right channel is start at first with synchro on start of Left channel
-  * @retval AUDIO_OK if correct communication, else wrong communication
-  */
-uint8_t BSP_AUDIO_IN_RecordEx(uint16_t InputDevice, uint16_t *pBuf, uint32_t size)
-{
-  uint8_t ret = AUDIO_ERROR;
-  
+{  
   hAudioIn.pRecBuf = pBuf;
   hAudioIn.RecSize = size;
   /* Reset Application Buffer Trigger */
   AppBuffTrigger = 0;
   AppBuffHalf = 0;
   
-  if (InputDevice == INPUT_DEVICE_DIGITAL_MIC)
+  if (hAudioIn.InputDevice == INPUT_DEVICE_DIGITAL_MIC)
   {
-    /* Call the Media layer start function for right channel */
-    if(HAL_OK != HAL_DFSDM_FilterRegularStart_DMA(&haudio_in_dfsdm_rightfilter, pScratchBuff[0], ScratchSize))
+    /* Call the Media layer start function for MIC1 channel */
+    if(HAL_OK != HAL_DFSDM_FilterRegularStart_DMA(&hAudioInDfsdmFilter[POS_VAL(INPUT_DEVICE_DIGITAL_MIC1)], pScratchBuff[POS_VAL(INPUT_DEVICE_DIGITAL_MIC1)], ScratchSize))
     {
-      return ret;
+      return AUDIO_ERROR;
     }
     
-    /* Call the Media layer start function for left channel */
-    if(HAL_OK != HAL_DFSDM_FilterRegularStart_DMA(&haudio_in_dfsdm_leftfilter, pScratchBuff[1], ScratchSize))
+    /* Call the Media layer start function for MIC2 channel */
+    if(HAL_OK != HAL_DFSDM_FilterRegularStart_DMA(&hAudioInDfsdmFilter[POS_VAL(INPUT_DEVICE_DIGITAL_MIC2)], pScratchBuff[POS_VAL(INPUT_DEVICE_DIGITAL_MIC2)], ScratchSize))
     {
-      return ret;
+      return AUDIO_ERROR;
     }
   }
   else
@@ -1023,22 +1072,64 @@ uint8_t BSP_AUDIO_IN_RecordEx(uint16_t InputDevice, uint16_t *pBuf, uint32_t siz
     /* Start the process to receive the DMA */
     if (HAL_OK != HAL_I2SEx_TransmitReceive_DMA(&haudio_i2s, pBuf, pBuf, size))
     {
-      return ret;
+      return AUDIO_ERROR;
     }
   }
   /* Return AUDIO_OK when all operations are correctly done */
-  ret = AUDIO_OK;
-  
-  return ret;
+  return AUDIO_OK;
 }
 
 /**
-  * @brief  Initializes BSP_AUDIO_IN MSP.
-  * @param  hi2s_in: I2S handle
-  * @param  Params
-  * @retval None
+  * @brief  Starts audio recording.                   
+  * @param  pBuf: Main buffer pointer for the recorded data storing
+  * @param  size: Current size of the recorded buffer
+  * @retval AUDIO_OK if correct communication, else wrong communication
   */
-__weak void BSP_AUDIO_IN_MspInit(I2S_HandleTypeDef *hi2s, void *Params)
+uint8_t BSP_AUDIO_IN_RecordEx(uint32_t *pBuf, uint32_t size)
+{
+  uint8_t ret = AUDIO_ERROR;
+  hAudioIn.RecSize = size;
+  uint32_t i = 0;
+  uint32_t mic_init[DFSDM_MIC_NUMBER] = {0};
+  if (hAudioIn.InputDevice == INPUT_DEVICE_ANALOG_MIC)
+  {
+    return ret;
+  }
+  else
+  {
+    hAudioIn.MultiBuffMode = 1;
+    for(i = 0; i < hAudioIn.ChannelNbr; i++)
+    {
+      if(((hAudioIn.InputDevice & INPUT_DEVICE_DIGITAL_MIC1) == INPUT_DEVICE_DIGITAL_MIC1) && (mic_init[POS_VAL(INPUT_DEVICE_DIGITAL_MIC1)] != 1))
+      {
+        /* Call the Media layer start function for MIC1 channel 1 */
+        if(HAL_OK != HAL_DFSDM_FilterRegularStart_DMA(&hAudioInDfsdmFilter[POS_VAL(INPUT_DEVICE_DIGITAL_MIC1)], (int32_t*)pBuf[i], size))
+        {
+          return AUDIO_ERROR;
+        }
+        MicBuff[POS_VAL(INPUT_DEVICE_DIGITAL_MIC1)] = i; 
+        mic_init[POS_VAL(INPUT_DEVICE_DIGITAL_MIC1)] = 1;
+      }
+      else if(((hAudioIn.InputDevice & INPUT_DEVICE_DIGITAL_MIC2) == INPUT_DEVICE_DIGITAL_MIC2) && (mic_init[POS_VAL(INPUT_DEVICE_DIGITAL_MIC2)] != 1))
+      {
+        /* Call the Media layer start function for MIC2 channel 1 */
+        if(HAL_OK != HAL_DFSDM_FilterRegularStart_DMA(&hAudioInDfsdmFilter[POS_VAL(INPUT_DEVICE_DIGITAL_MIC2)], (int32_t*)pBuf[i], size))
+        {
+          return AUDIO_ERROR;
+        }
+        MicBuff[POS_VAL(INPUT_DEVICE_DIGITAL_MIC2)] = i; 
+        mic_init[POS_VAL(INPUT_DEVICE_DIGITAL_MIC2)] = 1;
+      }
+    }
+  }
+  /* Return AUDIO_OK when all operations are correctly done */
+  return AUDIO_OK;
+}
+
+/**
+  * @brief  Initializes the I2S MSP.
+  */
+static void I2Sx_In_MspInit(void)
 {
   static DMA_HandleTypeDef hdma_i2s_rx;
   GPIO_InitTypeDef  gpio_init_structure;  
@@ -1067,7 +1158,7 @@ __weak void BSP_AUDIO_IN_MspInit(I2S_HandleTypeDef *hi2s, void *Params)
   /* Enable the DMA clock */
   AUDIO_IN_I2Sx_DMAx_CLK_ENABLE();
     
-  if(hi2s->Instance == AUDIO_IN_I2Sx)
+  if(haudio_i2s.Instance == AUDIO_IN_I2Sx)
   {
     /* Configure the hdma_i2s_rx handle parameters */
     hdma_i2s_rx.Init.Channel             = AUDIO_IN_I2Sx_DMAx_CHANNEL;
@@ -1086,7 +1177,7 @@ __weak void BSP_AUDIO_IN_MspInit(I2S_HandleTypeDef *hi2s, void *Params)
     hdma_i2s_rx.Instance = AUDIO_IN_I2Sx_DMAx_STREAM;
     
     /* Associate the DMA handle */
-    __HAL_LINKDMA(hi2s, hdmarx, hdma_i2s_rx);
+    __HAL_LINKDMA(&haudio_i2s, hdmarx, hdma_i2s_rx);
     
     /* Deinitialize the Stream for new transfer */
     HAL_DMA_DeInit(&hdma_i2s_rx);
@@ -1097,18 +1188,88 @@ __weak void BSP_AUDIO_IN_MspInit(I2S_HandleTypeDef *hi2s, void *Params)
   
   /* I2S DMA IRQ Channel configuration */
   HAL_NVIC_SetPriority(AUDIO_IN_I2Sx_DMAx_IRQ, AUDIO_IN_IRQ_PREPRIO, 0);
-  HAL_NVIC_EnableIRQ(AUDIO_IN_I2Sx_DMAx_IRQ);	
+  HAL_NVIC_EnableIRQ(AUDIO_IN_I2Sx_DMAx_IRQ);  
+}
+
+/**
+  * @brief  De-Initializes the I2S MSP.
+  */
+static void I2Sx_In_MspDeInit(void)
+{
+  GPIO_InitTypeDef  gpio_init_structure;
+  
+  /* I2S DMA IRQ Channel deactivation */
+  HAL_NVIC_DisableIRQ(AUDIO_IN_I2Sx_DMAx_IRQ);
+  
+  if(haudio_i2s.Instance == AUDIO_IN_I2Sx)
+  {
+    /* Deinitialize the DMA stream */
+    HAL_DMA_DeInit(haudio_i2s.hdmarx);
+  }
+  
+  /* Disable I2S peripheral */
+  __HAL_I2S_DISABLE(&haudio_i2s);
+  
+  /* Deactives CODEC_I2S pins MCK by putting them in input mode */
+  gpio_init_structure.Pin = AUDIO_OUT_I2Sx_MCK_PIN;
+  HAL_GPIO_DeInit(AUDIO_OUT_I2Sx_MCK_GPIO_PORT, gpio_init_structure.Pin);
+  
+  gpio_init_structure.Pin = AUDIO_IN_I2Sx_EXT_SD_PIN;
+  HAL_GPIO_DeInit(AUDIO_IN_I2Sx_EXT_SD_GPIO_PORT, gpio_init_structure.Pin);
+  
+  /* Disable I2S clock */
+  AUDIO_IN_I2Sx_CLK_DISABLE();  
+}
+
+/**
+  * @brief  Initializes BSP_AUDIO_IN MSP.
+  * @param  Params : pointer on additional configuration parameters, can be NULL.
+  */
+__weak void BSP_AUDIO_IN_MspInit(void *Params)
+{
+  if(hAudioIn.InputDevice == INPUT_DEVICE_ANALOG_MIC)
+  {
+    I2Sx_In_MspInit();
+  }
+  else
+  {
+    /* MSP channels initialization */
+    DFSDMx_ChannelMspInit();
+    
+    /* MSP filters initialization */
+    DFSDMx_FilterMspInit();  
+  }
+}
+
+/**
+  * @brief  De-Initializes BSP_AUDIO_IN MSP. 
+  * @param  Params : pointer on additional configuration parameters, can be NULL.
+  */
+__weak void BSP_AUDIO_IN_MspDeInit(void *Params)
+{
+  if(hAudioIn.InputDevice == INPUT_DEVICE_ANALOG_MIC)
+  {
+    I2Sx_In_MspDeInit();
+  }
+  else
+  {
+    /* MSP channels initialization */
+    DFSDMx_ChannelMspDeInit();
+    
+    /* MSP filters initialization */
+    DFSDMx_FilterMspDeInit();  
+  }
 }
 
 /**
   * @brief  Clock Config.
-  * @param  hdfsdm_channel : DFSDM channel handle, might be required to set audio peripheral predivider if any.
   * @param  AudioFreq: Audio frequency used to play the audio stream.
+  * @param  Params : pointer on additional configuration parameters, can be NULL.
   * @note   This API is called by BSP_AUDIO_OUT_Init() and BSP_AUDIO_OUT_SetFrequency()
   *         Being __weak it can be overwritten by the application
   * @retval AUDIO_OK if correct communication, else wrong communication
   */
-__weak uint8_t BSP_AUDIO_IN_ClockConfig(DFSDM_Channel_HandleTypeDef *hdfsdm_channel, uint32_t AudioFreq, void *Params)
+__weak uint8_t BSP_AUDIO_IN_ClockConfig(uint32_t AudioFreq, void *Params)
 {
   RCC_PeriphCLKInitTypeDef rcc_ex_clk_init_struct;
 
@@ -1155,7 +1316,7 @@ __weak uint8_t BSP_AUDIO_IN_ClockConfig(DFSDM_Channel_HandleTypeDef *hdfsdm_chan
     HAL_RCCEx_PeriphCLKConfig(&rcc_ex_clk_init_struct);
   }
 
-  if (hdfsdm_channel == &haudio_in_dfsdm_leftchannel)
+  if(hAudioIn.InputDevice != INPUT_DEVICE_ANALOG_MIC)
   {
     /* I2S_APB1 selected as DFSDM audio clock source */
     __HAL_RCC_DFSDM1AUDIO_CONFIG(RCC_DFSDM1AUDIOCLKSOURCE_I2SAPB1);
@@ -1169,53 +1330,61 @@ __weak uint8_t BSP_AUDIO_IN_ClockConfig(DFSDM_Channel_HandleTypeDef *hdfsdm_chan
   * @note   In interrupt mode, user has to read conversion value in this function
             using HAL_DFSDM_FilterGetRegularValue.
   * @param  hdfsdm_filter : DFSDM filter handle.
-  * @retval None
   */
 void HAL_DFSDM_FilterRegConvCpltCallback(DFSDM_Filter_HandleTypeDef *hdfsdm_filter)
 {
-  uint32_t index;
+  uint32_t index, input_device = 0;
   
-  if(hdfsdm_filter == &haudio_in_dfsdm_leftfilter)
+  if(hdfsdm_filter->Instance == AUDIO_DFSDMx_MIC1_FILTER)
   {
-    DmaLeftRecBuffCplt = 1;
+    DmaRecBuffCplt[POS_VAL(INPUT_DEVICE_DIGITAL_MIC1)] = 1;
+    input_device = INPUT_DEVICE_DIGITAL_MIC1;    
+  }
+  else if(hdfsdm_filter->Instance == AUDIO_DFSDMx_MIC2_FILTER)
+  {
+    DmaRecBuffCplt[POS_VAL(INPUT_DEVICE_DIGITAL_MIC2)] = 1;
+    input_device = INPUT_DEVICE_DIGITAL_MIC2; 
+  }
+  
+  if(hAudioIn.MultiBuffMode == 1)
+  {
+    BSP_AUDIO_IN_TransferComplete_CallBackEx(input_device);
   }
   else
-  {
-    DmaRightRecBuffCplt = 1;
-  }
-  
-  if((DmaRightRecBuffCplt == 1) && (DmaLeftRecBuffCplt == 1))
-  {
-    if(AppBuffTrigger >= hAudioIn.RecSize)
-      AppBuffTrigger = 0;
-    
-    for(index = (ScratchSize/2) ; index < ScratchSize; index++)
+  {  
+    if((DmaRecBuffCplt[POS_VAL(INPUT_DEVICE_DIGITAL_MIC2)] == 1) && (DmaRecBuffCplt[POS_VAL(INPUT_DEVICE_DIGITAL_MIC1)] == 1))
     {
-      hAudioIn.pRecBuf[AppBuffTrigger]     = (uint16_t)(SaturaLH((pScratchBuff[0][index] >> 8), -32760, 32760));
-      hAudioIn.pRecBuf[AppBuffTrigger + 1] = (uint16_t)(SaturaLH((pScratchBuff[1][index] >> 8), -32760, 32760));
-      AppBuffTrigger += 2;
+      if(AppBuffTrigger >= hAudioIn.RecSize)
+        AppBuffTrigger = 0;
+      
+      for(index = (ScratchSize/2) ; index < ScratchSize; index++)
+      {
+        hAudioIn.pRecBuf[AppBuffTrigger]     = (uint16_t)(SaturaLH((pScratchBuff[POS_VAL(INPUT_DEVICE_DIGITAL_MIC1)][index] >> 8), -32760, 32760));
+        hAudioIn.pRecBuf[AppBuffTrigger + 1] = (uint16_t)(SaturaLH((pScratchBuff[POS_VAL(INPUT_DEVICE_DIGITAL_MIC2)][index] >> 8), -32760, 32760));
+        AppBuffTrigger += 2;
+      }
+      DmaRecBuffCplt[POS_VAL(INPUT_DEVICE_DIGITAL_MIC2)] = DmaRecBuffCplt[POS_VAL(INPUT_DEVICE_DIGITAL_MIC1)] = 0;
     }
-    DmaRightRecBuffCplt = DmaLeftRecBuffCplt = 0;
-  }
-  
-  /* Update Trigger with Remaining Byte before callback if necessary */
-  if(AppBuffTrigger >= hAudioIn.RecSize)
-  {
-    /* Reset Application Buffer Trigger */
-    AppBuffTrigger = 0;
-    AppBuffHalf = 0;
     
-    /* Call the record update function to get the next buffer to fill and its size (size is ignored) */
-    BSP_AUDIO_IN_TransferComplete_CallBack();
-  }
-  else if((AppBuffTrigger >= hAudioIn.RecSize/2))
-  {
-    if(AppBuffHalf == 0)
+    /* Update Trigger with Remaining Byte before callback if necessary */
+    if(AppBuffTrigger >= hAudioIn.RecSize)
     {
-      AppBuffHalf = 1;
-      /* Manage the remaining file size and new address offset: This function
-      should be coded by user (its prototype is already declared in stm32l476g_eval_audio.h) */
-      BSP_AUDIO_IN_HalfTransfer_CallBack();
+      /* Reset Application Buffer Trigger */
+      AppBuffTrigger = 0;
+      AppBuffHalf = 0;
+      
+      /* Call the record update function to get the next buffer to fill and its size (size is ignored) */
+      BSP_AUDIO_IN_TransferComplete_CallBack();
+    }
+    else if((AppBuffTrigger >= hAudioIn.RecSize/2))
+    {
+      if(AppBuffHalf == 0)
+      {
+        AppBuffHalf = 1;
+        /* Manage the remaining file size and new address offset: This function
+        should be coded by user (its prototype is already declared in stm32l476g_eval_audio.h) */
+        BSP_AUDIO_IN_HalfTransfer_CallBack();
+      }
     }
   }
 }
@@ -1223,53 +1392,62 @@ void HAL_DFSDM_FilterRegConvCpltCallback(DFSDM_Filter_HandleTypeDef *hdfsdm_filt
 /**
   * @brief  Half regular conversion complete callback.
   * @param  hdfsdm_filter : DFSDM filter handle.
-  * @retval None
   */
 void HAL_DFSDM_FilterRegConvHalfCpltCallback(DFSDM_Filter_HandleTypeDef *hdfsdm_filter)
 {
-  uint32_t index;
+  uint32_t index, input_device = 0;
   
-  if(hdfsdm_filter == &haudio_in_dfsdm_leftfilter)
+  if(hdfsdm_filter->Instance == AUDIO_DFSDMx_MIC1_FILTER)
   {
-    DmaLeftRecHalfBuffCplt = 1;
+    DmaRecHalfBuffCplt[POS_VAL(INPUT_DEVICE_DIGITAL_MIC1)] = 1;
+    input_device = INPUT_DEVICE_DIGITAL_MIC1;    
+  }
+  else if(hdfsdm_filter->Instance == AUDIO_DFSDMx_MIC2_FILTER)
+  {
+    DmaRecHalfBuffCplt[POS_VAL(INPUT_DEVICE_DIGITAL_MIC2)] = 1;
+    input_device = INPUT_DEVICE_DIGITAL_MIC2; 
+  }
+
+  if(hAudioIn.MultiBuffMode == 1)
+  {
+    BSP_AUDIO_IN_HalfTransfer_CallBackEx(input_device);
   }
   else
-  {
-    DmaRightRecHalfBuffCplt = 1;
-  }
-  
-  if((DmaRightRecHalfBuffCplt == 1) && (DmaLeftRecHalfBuffCplt == 1))
-  {
-    if(AppBuffTrigger >= hAudioIn.RecSize)
-      AppBuffTrigger = 0;
-    
-    for(index = 0; index < ScratchSize/2; index++)
-    {
-      hAudioIn.pRecBuf[AppBuffTrigger]     = (int16_t)(SaturaLH((pScratchBuff[0][index] >> 8), -32760, 32760));
-      hAudioIn.pRecBuf[AppBuffTrigger + 1] = (int16_t)(SaturaLH((pScratchBuff[1][index] >> 8), -32760, 32760));
-      AppBuffTrigger += 2;
+  { 
+    if((DmaRecHalfBuffCplt[POS_VAL(INPUT_DEVICE_DIGITAL_MIC2)] == 1) && (DmaRecHalfBuffCplt[POS_VAL(INPUT_DEVICE_DIGITAL_MIC1)] == 1))
+    {  
+      if(AppBuffTrigger >= hAudioIn.RecSize)
+        AppBuffTrigger = 0;
+      
+      for(index = 0; index < ScratchSize/2; index++)
+      {
+        hAudioIn.pRecBuf[AppBuffTrigger]     = (int16_t)(SaturaLH((pScratchBuff[POS_VAL(INPUT_DEVICE_DIGITAL_MIC1)][index] >> 8), -32760, 32760));
+        hAudioIn.pRecBuf[AppBuffTrigger + 1] = (int16_t)(SaturaLH((pScratchBuff[POS_VAL(INPUT_DEVICE_DIGITAL_MIC2)][index] >> 8), -32760, 32760));
+        AppBuffTrigger += 2;
+      }
+      DmaRecHalfBuffCplt[POS_VAL(INPUT_DEVICE_DIGITAL_MIC2)] = DmaRecHalfBuffCplt[POS_VAL(INPUT_DEVICE_DIGITAL_MIC1)] = 0;
     }
-    DmaRightRecHalfBuffCplt = DmaLeftRecHalfBuffCplt = 0;
-  }
-  
-  /* Update Trigger with Remaining Byte before callback if necessary */
-  if(AppBuffTrigger >= hAudioIn.RecSize)
-  {
-    /* Reset Application Buffer Trigger */
-    AppBuffTrigger = 0;
-    AppBuffHalf = 0;
     
-    /* Call the record update function to get the next buffer to fill and its size (size is ignored) */
-    BSP_AUDIO_IN_TransferComplete_CallBack();
-  }
-  else if((AppBuffTrigger >= hAudioIn.RecSize/2))
-  {
-    if(AppBuffHalf == 0)
+    
+    /* Update Trigger with Remaining Byte before callback if necessary */
+    if(AppBuffTrigger >= hAudioIn.RecSize)
     {
-      AppBuffHalf = 1;
-      /* Manage the remaining file size and new address offset: This function
-      should be coded by user (its prototype is already declared in stm32l476g_eval_audio.h) */
-      BSP_AUDIO_IN_HalfTransfer_CallBack();
+      /* Reset Application Buffer Trigger */
+      AppBuffTrigger = 0;
+      AppBuffHalf = 0;
+      
+      /* Call the record update function to get the next buffer to fill and its size (size is ignored) */
+      BSP_AUDIO_IN_TransferComplete_CallBack();
+    }
+    else if((AppBuffTrigger >= hAudioIn.RecSize/2))
+    {
+      if(AppBuffHalf == 0)
+      {
+        AppBuffHalf = 1;
+        /* Manage the remaining file size and new address offset: This function
+        should be coded by user */
+        BSP_AUDIO_IN_HalfTransfer_CallBack();
+      }
     }
   }
 }
@@ -1277,7 +1455,6 @@ void HAL_DFSDM_FilterRegConvHalfCpltCallback(DFSDM_Filter_HandleTypeDef *hdfsdm_
 /**
   * @brief  Half reception complete callback.
   * @param  hi2s : I2S handle.
-  * @retval None
   */
 void HAL_I2S_RxHalfCpltCallback(I2S_HandleTypeDef *hi2s)
 {
@@ -1289,7 +1466,6 @@ void HAL_I2S_RxHalfCpltCallback(I2S_HandleTypeDef *hi2s)
 /**
   * @brief  Reception complete callback.
   * @param  hi2s : I2S handle.
-  * @retval None
   */
 void HAL_I2S_RxCpltCallback(I2S_HandleTypeDef *hi2s)
 {
@@ -1298,108 +1474,168 @@ void HAL_I2S_RxCpltCallback(I2S_HandleTypeDef *hi2s)
 }
 
 /**
-  * @brief  Stops audio recording.                 
-  * @param  None
+  * @brief  Stops audio recording.
   * @retval AUDIO_OK if correct communication, else wrong communication
   */
 uint8_t BSP_AUDIO_IN_Stop(void)
-{
-  return (BSP_AUDIO_IN_StopEx(INPUT_DEVICE_DIGITAL_MIC)); 
-}
-
-/**
-  * @brief  Stops audio recording.
-  * @param  InputDevice: INPUT_DEVICE_DIGITAL_MIC or INPUT_DEVICE_ANALOG_MIC.
-  * @retval AUDIO_OK if correct communication, else wrong communication
-  */
-uint8_t BSP_AUDIO_IN_StopEx(uint16_t InputDevice)
-{
-  uint32_t ret = AUDIO_ERROR;
-  
+{  
   AppBuffTrigger = 0;
   AppBuffHalf    = 0;
   
-  if (InputDevice == INPUT_DEVICE_DIGITAL_MIC)
+  if (hAudioIn.InputDevice == INPUT_DEVICE_ANALOG_MIC)
   {
-    /* Call the Media layer stop function for right channel */
-    if(HAL_OK != HAL_DFSDM_FilterRegularStop_DMA(&haudio_in_dfsdm_rightfilter))
-    {
-      return ret;
-    }
-    
-    /* Call the Media layer stop function for left channel */
-    if(HAL_OK != HAL_DFSDM_FilterRegularStop_DMA(&haudio_in_dfsdm_leftfilter))
-    {
-      return ret;
-    }
-  }
-  else /* InputDevice = INPUT_DEVICE_ANALOG_MIC */
-  { 
     /* Call the Media layer stop function */
     if(HAL_OK != HAL_I2S_DMAStop(&haudio_i2s))
     {
-      return ret;
+      return AUDIO_ERROR;
     }
     /* Call Audio Codec Stop function */
     if(audio_drv->Stop(AUDIO_I2C_ADDRESS, CODEC_PDWN_HW) != 0)
     {
-      return ret;
+      return AUDIO_ERROR;
     }
     /* Wait at least 100us */
     HAL_Delay(1);
   }
+  else /* InputDevice = Digital Mic */
+  {   
+    /* Call the Media layer stop function for MIC1 channel */
+    if(AUDIO_OK != BSP_AUDIO_IN_PauseEx(INPUT_DEVICE_DIGITAL_MIC1))
+    {
+      return AUDIO_ERROR;
+    }
+    
+    /* Call the Media layer stop function for MIC2 channel */
+    if(AUDIO_OK != BSP_AUDIO_IN_PauseEx(INPUT_DEVICE_DIGITAL_MIC2))
+    {
+      return AUDIO_ERROR;
+    } 
+  }
   
-  /* Return AUDIO_OK when all operations are correctly done */
-  ret = AUDIO_OK;
-  
-  return ret;
+  /* Return AUDIO_OK when all operations are correctly done */  
+  return AUDIO_OK;
 }
 
 /**
+  * @brief  Stops audio recording.                 
+  * @param  InputDevice: Microphone to be stopped. Can be INPUT_DEVICE_DIGITAL_MIC1 or INPUT_DEVICE_DIGITAL_MIC2. 
+  * @retval AUDIO_OK if correct communication, else wrong communication
+  */
+uint8_t BSP_AUDIO_IN_StopEx(uint32_t InputDevice)
+{
+  if((InputDevice < INPUT_DEVICE_DIGITAL_MIC1) || (InputDevice > INPUT_DEVICE_DIGITAL_MIC2))
+  {
+    return AUDIO_ERROR;
+  }
+  else
+  {
+    BSP_AUDIO_IN_PauseEx(InputDevice);      
+  }
+  
+  /* Return AUDIO_OK when all operations are correctly done */  
+  return AUDIO_OK;
+}
+
+
+/**
   * @brief  Pauses the audio file stream.
-  * @param  None                  .
   * @retval AUDIO_OK if correct communication, else wrong communication
   */
 uint8_t BSP_AUDIO_IN_Pause(void)
 {
-  /* Call the Media layer stop function */
-  if(HAL_OK != HAL_DFSDM_FilterRegularStop_DMA(&haudio_in_dfsdm_rightfilter))
+  if (hAudioIn.InputDevice == INPUT_DEVICE_ANALOG_MIC)
   {
     return AUDIO_ERROR;
   }
-  
-  /* Call the Media layer stop function */
-  if(HAL_OK != HAL_DFSDM_FilterRegularStop_DMA(&haudio_in_dfsdm_leftfilter))
+  else
+  {
+    /* Call the Media layer stop function */
+    if(HAL_OK != HAL_DFSDM_FilterRegularStop_DMA(&hAudioInDfsdmFilter[POS_VAL(INPUT_DEVICE_DIGITAL_MIC1)]))
+    {
+      return AUDIO_ERROR;
+    }
+    
+    /* Call the Media layer stop function */
+    if(HAL_OK != HAL_DFSDM_FilterRegularStop_DMA(&hAudioInDfsdmFilter[POS_VAL(INPUT_DEVICE_DIGITAL_MIC2)]))
+    {
+      return AUDIO_ERROR;
+    }
+  }
+  /* Return AUDIO_OK when all operations are correctly done */
+  return AUDIO_OK;
+}
+
+/**
+  * @brief  Pauses the audio file stream.
+  * @param  InputDevice: Microphone to be paused. Can be INPUT_DEVICE_DIGITAL_MIC1 or INPUT_DEVICE_DIGITAL_MIC2.
+  * @retval AUDIO_OK if correct communication, else wrong communication
+  */
+uint8_t BSP_AUDIO_IN_PauseEx(uint32_t InputDevice)
+{
+  if((InputDevice < INPUT_DEVICE_DIGITAL_MIC1) || (InputDevice > INPUT_DEVICE_DIGITAL_MIC2))
   {
     return AUDIO_ERROR;
   }
-  
+  else
+  {
+    /* Call the Media layer stop function */
+    if(HAL_OK != HAL_DFSDM_FilterRegularStop_DMA(&hAudioInDfsdmFilter[POS_VAL(InputDevice)]))
+    {
+      return AUDIO_ERROR;
+    }    
+  }
   /* Return AUDIO_OK when all operations are correctly done */
   return AUDIO_OK;
 }
 
 /**
   * @brief  Resumes the audio file stream.
-  * @param  None                   
-  * @note   The Right channel is start a first with synchro on start Left channel
   * @retval AUDIO_OK if correct communication, else wrong communication
   */
 uint8_t BSP_AUDIO_IN_Resume(void)
 {   
-  uint8_t ret = AUDIO_ERROR;
-  
-  /* Call the Media layer start function for right channel */
-  if(HAL_OK != HAL_DFSDM_FilterRegularStart_DMA(&haudio_in_dfsdm_rightfilter, pScratchBuff[0], ScratchSize))
+  if (hAudioIn.InputDevice == INPUT_DEVICE_ANALOG_MIC)
   {
-    return ret;
+    return AUDIO_ERROR;
   }
-  
-  /* Call the Media layer start function for left channel */
-  if(HAL_OK != HAL_DFSDM_FilterRegularStart_DMA(&haudio_in_dfsdm_leftfilter, pScratchBuff[1], ScratchSize))
+  else
+  {  
+    /* Call the Media layer start function for MIC2 channel */
+    if(HAL_OK != HAL_DFSDM_FilterRegularStart_DMA(&hAudioInDfsdmFilter[POS_VAL(INPUT_DEVICE_DIGITAL_MIC2)], pScratchBuff[POS_VAL(INPUT_DEVICE_DIGITAL_MIC2)], ScratchSize))
+    {
+      return AUDIO_ERROR;
+    }
+    
+    /* Call the Media layer start function for MIC1 channel */
+    if(HAL_OK != HAL_DFSDM_FilterRegularStart_DMA(&hAudioInDfsdmFilter[POS_VAL(INPUT_DEVICE_DIGITAL_MIC1)], pScratchBuff[POS_VAL(INPUT_DEVICE_DIGITAL_MIC1)], ScratchSize))
+    {
+      return AUDIO_ERROR;
+    }
+  } 
+  /* Return AUDIO_OK when all operations are correctly done */
+  return AUDIO_OK;
+}
+
+/**
+  * @brief  Resumes the audio file stream.
+  * @param  pBuf: Main buffer pointer for the recorded data storing
+  * @param  InputDevice: Microphone to be paused. Can be INPUT_DEVICE_DIGITAL_MIC1 or INPUT_DEVICE_DIGITAL_MIC2.
+  * @retval AUDIO_OK if correct communication, else wrong communication
+  */
+uint8_t BSP_AUDIO_IN_ResumeEx(uint32_t *pBuf, uint32_t InputDevice)
+{
+  if((InputDevice < INPUT_DEVICE_DIGITAL_MIC1) || (InputDevice > INPUT_DEVICE_DIGITAL_MIC2))
   {
-    return ret;
+    return AUDIO_ERROR;
   }
-  
+  else
+  {  
+    /* Call the Media layer stop function */
+    if(HAL_OK != HAL_DFSDM_FilterRegularStart_DMA(&hAudioInDfsdmFilter[POS_VAL(InputDevice)], (int32_t*)pBuf[MicBuff[POS_VAL(InputDevice)]], hAudioIn.RecSize))
+    {
+      return AUDIO_ERROR;
+    }    
+  }
   /* Return AUDIO_OK when all operations are correctly done */
   return AUDIO_OK;
 }
@@ -1421,7 +1657,6 @@ uint8_t BSP_AUDIO_IN_SetVolume(uint8_t Volume)
 
 /**
   * @brief  User callback when record buffer is filled.
-  * @retval None
   */
 __weak void BSP_AUDIO_IN_TransferComplete_CallBack(void)
 {
@@ -1432,7 +1667,6 @@ __weak void BSP_AUDIO_IN_TransferComplete_CallBack(void)
 
 /**
   * @brief  Manages the DMA Half Transfer complete event.
-  * @retval None
   */
 __weak void BSP_AUDIO_IN_HalfTransfer_CallBack(void)
 {
@@ -1442,8 +1676,29 @@ __weak void BSP_AUDIO_IN_HalfTransfer_CallBack(void)
 }
 
 /**
+  * @brief  User callback when record buffer is filled.
+  * @param  InputDevice: INPUT_DEVICE_DIGITAL_MIC1 or INPUT_DEVICE_DIGITAL_MIC2
+  */
+__weak void BSP_AUDIO_IN_TransferComplete_CallBackEx(uint32_t InputDevice)
+{
+  /* This function should be implemented by the user application.
+     It is called into this driver when the current buffer is filled
+     to prepare the next buffer pointer and its size. */
+}
+
+/**
+  * @brief  User callback when record buffer is filled.
+  * @param InputDevice: INPUT_DEVICE_DIGITAL_MIC1 or INPUT_DEVICE_DIGITAL_MIC2
+  */
+__weak void BSP_AUDIO_IN_HalfTransfer_CallBackEx(uint32_t InputDevice)
+{
+  /* This function should be implemented by the user application.
+     It is called into this driver when the current buffer is filled
+     to prepare the next buffer pointer and its size. */
+}
+
+/**
   * @brief  Audio IN Error callback function.
-  * @retval None
   */
 __weak void BSP_AUDIO_IN_Error_Callback(void)
 {
@@ -1458,161 +1713,36 @@ __weak void BSP_AUDIO_IN_Error_Callback(void)
 /*******************************************************************************
                             Static Functions
 *******************************************************************************/
-
-/**
-  * @brief  Initializes the Digital Filter for Sigma-Delta Modulators interface (DFSDM).
-  * @param  AudioFreq: Audio frequency to be used to set correctly the DFSDM peripheral.
-  * @note   Channel output Clock Divider and Filter Oversampling are calculated as follow: 
-  *         - Clock_Divider = CLK(input DFSDM)/CLK(micro) with
-  *           1MHZ < CLK(micro) < 3.2MHZ (TYP 2.4MHZ for MP34DT01TR)
-  *         - Oversampling = CLK(input DFSDM)/(Clock_Divider * AudioFreq)
-  * @retval AUDIO_OK if correct communication, else wrong communication
-  */
-static uint8_t DFSDMx_Init(uint32_t AudioFreq)
-{  
-  /*####LEFT CHANNEL ####*/
-  __HAL_DFSDM_CHANNEL_RESET_HANDLE_STATE(&haudio_in_dfsdm_leftchannel);   
-  haudio_in_dfsdm_leftchannel.Init.OutputClock.Activation   = ENABLE;
-  haudio_in_dfsdm_leftchannel.Instance                      = AUDIO_DFSDMx_LEFT_CHANNEL;  
-  haudio_in_dfsdm_leftchannel.Init.OutputClock.Selection    = DFSDM_CHANNEL_OUTPUT_CLOCK_AUDIO;
-  /* Set the DFSDM clock OUT audio frequency configuration */
-  haudio_in_dfsdm_leftchannel.Init.OutputClock.Divider      = DFSDM_CLOCK_DIVIDER(AudioFreq);
-  haudio_in_dfsdm_leftchannel.Init.Input.Multiplexer        = DFSDM_CHANNEL_EXTERNAL_INPUTS;
-  haudio_in_dfsdm_leftchannel.Init.Input.DataPacking        = DFSDM_CHANNEL_STANDARD_MODE;
-  haudio_in_dfsdm_leftchannel.Init.Input.Pins               = DFSDM_CHANNEL_SAME_CHANNEL_PINS;
-  /* Request to sample stable data for LEFT micro on Rising edge */
-  haudio_in_dfsdm_leftchannel.Init.SerialInterface.Type     = DFSDM_CHANNEL_SPI_RISING;
-  haudio_in_dfsdm_leftchannel.Init.SerialInterface.SpiClock = DFSDM_CHANNEL_SPI_CLOCK_INTERNAL;
-  haudio_in_dfsdm_leftchannel.Init.Awd.FilterOrder          = DFSDM_CHANNEL_SINC1_ORDER;
-  haudio_in_dfsdm_leftchannel.Init.Awd.Oversampling         = 10;
-  haudio_in_dfsdm_leftchannel.Init.Offset                   = 0;
-  haudio_in_dfsdm_leftchannel.Init.RightBitShift            = DFSDM_RIGHT_BIT_SHIFT(AudioFreq);
-  haudio_in_dfsdm_leftchannel.State                         = HAL_DFSDM_CHANNEL_STATE_RESET;
-  if(HAL_OK != HAL_DFSDM_ChannelInit(&haudio_in_dfsdm_leftchannel))
-  {
-    return AUDIO_ERROR;
-  }
-  
-  /*####RIGHT CHANNEL ####*/
-  __HAL_DFSDM_CHANNEL_RESET_HANDLE_STATE(&haudio_in_dfsdm_rightchannel);    
-  haudio_in_dfsdm_rightchannel.Init.OutputClock.Activation   = ENABLE;
-  haudio_in_dfsdm_rightchannel.Instance                       = AUDIO_DFSDMx_RIGHT_CHANNEL;
-  haudio_in_dfsdm_rightchannel.Init.OutputClock.Selection    = DFSDM_CHANNEL_OUTPUT_CLOCK_AUDIO;
-  /* Set the DFSDM clock OUT audio frequency configuration */
-  haudio_in_dfsdm_rightchannel.Init.OutputClock.Divider      = DFSDM_CLOCK_DIVIDER(AudioFreq);
-  haudio_in_dfsdm_rightchannel.Init.Input.Multiplexer        = DFSDM_CHANNEL_EXTERNAL_INPUTS;
-  haudio_in_dfsdm_rightchannel.Init.Input.DataPacking        = DFSDM_CHANNEL_STANDARD_MODE;
-  haudio_in_dfsdm_rightchannel.Init.Input.Pins               = DFSDM_CHANNEL_FOLLOWING_CHANNEL_PINS;
-  /* Request to sample stable data for RIGHT micro on Falling edge */
-  haudio_in_dfsdm_rightchannel.Init.SerialInterface.Type     = DFSDM_CHANNEL_SPI_FALLING;
-  haudio_in_dfsdm_rightchannel.Init.SerialInterface.SpiClock = DFSDM_CHANNEL_SPI_CLOCK_INTERNAL;
-  haudio_in_dfsdm_rightchannel.Init.Awd.FilterOrder          = DFSDM_CHANNEL_SINC1_ORDER;
-  haudio_in_dfsdm_rightchannel.Init.Awd.Oversampling         = 10;
-  haudio_in_dfsdm_rightchannel.Init.Offset                   = 0;
-  haudio_in_dfsdm_rightchannel.Init.RightBitShift            = DFSDM_RIGHT_BIT_SHIFT(AudioFreq);
-  haudio_in_dfsdm_rightchannel.State                         = HAL_DFSDM_CHANNEL_STATE_RESET;
-  if(HAL_OK != HAL_DFSDM_ChannelInit(&haudio_in_dfsdm_rightchannel))
-  {
-    return AUDIO_ERROR;
-  }
-  
-  /*####FILTER 0####*/
-  __HAL_DFSDM_FILTER_RESET_HANDLE_STATE(&haudio_in_dfsdm_leftfilter);  
-  haudio_in_dfsdm_leftfilter.Init.RegularParam.Trigger         = DFSDM_FILTER_SW_TRIGGER;
-  haudio_in_dfsdm_leftfilter.Init.RegularParam.FastMode        = ENABLE;
-  haudio_in_dfsdm_leftfilter.Init.RegularParam.DmaMode         = ENABLE;
-  haudio_in_dfsdm_leftfilter.Init.InjectedParam.Trigger        = DFSDM_FILTER_SW_TRIGGER;
-  haudio_in_dfsdm_leftfilter.Init.InjectedParam.ScanMode       = DISABLE;
-  haudio_in_dfsdm_leftfilter.Init.InjectedParam.DmaMode        = DISABLE;
-  haudio_in_dfsdm_leftfilter.Init.InjectedParam.ExtTrigger     = DFSDM_FILTER_EXT_TRIG_TIM8_TRGO;
-  haudio_in_dfsdm_leftfilter.Init.InjectedParam.ExtTriggerEdge = DFSDM_FILTER_EXT_TRIG_BOTH_EDGES;
-  haudio_in_dfsdm_leftfilter.Init.FilterParam.SincOrder        = DFSDM_FILTER_ORDER(AudioFreq);
-  /* Set the DFSDM Filters Oversampling to have correct sample rate */
-  haudio_in_dfsdm_leftfilter.Init.FilterParam.Oversampling     = DFSDM_OVER_SAMPLING(AudioFreq);
-  haudio_in_dfsdm_leftfilter.Init.FilterParam.IntOversampling  = 1;
-  haudio_in_dfsdm_leftfilter.State                             = HAL_DFSDM_FILTER_STATE_RESET;
-  haudio_in_dfsdm_leftfilter.Instance                          = AUDIO_DFSDMx_LEFT_FILTER;
-  if(HAL_OK != HAL_DFSDM_FilterInit(&haudio_in_dfsdm_leftfilter))
-  {
-    return AUDIO_ERROR;
-  }
-  
-  /* Configure injected channel */
-  if(HAL_OK != HAL_DFSDM_FilterConfigRegChannel(&haudio_in_dfsdm_leftfilter, AUDIO_DFSDMx_LEFT_CHANNEL_FOR_FILTER, DFSDM_CONTINUOUS_CONV_ON))
-  {
-    return AUDIO_ERROR;
-  }
-  
-  /*####FILTER 1####*/
-  __HAL_DFSDM_CHANNEL_RESET_HANDLE_STATE(&haudio_in_dfsdm_rightchannel);   
-  haudio_in_dfsdm_rightfilter.Init.RegularParam.Trigger         = DFSDM_FILTER_SYNC_TRIGGER;
-  haudio_in_dfsdm_rightfilter.Init.RegularParam.FastMode        = ENABLE;
-  haudio_in_dfsdm_rightfilter.Init.RegularParam.DmaMode         = ENABLE;
-  haudio_in_dfsdm_rightfilter.Init.InjectedParam.Trigger        = DFSDM_FILTER_SW_TRIGGER;
-  haudio_in_dfsdm_rightfilter.Init.InjectedParam.ScanMode       = DISABLE;
-  haudio_in_dfsdm_rightfilter.Init.InjectedParam.DmaMode        = DISABLE;
-  haudio_in_dfsdm_rightfilter.Init.InjectedParam.ExtTrigger     = DFSDM_FILTER_EXT_TRIG_TIM8_TRGO;
-  haudio_in_dfsdm_rightfilter.Init.InjectedParam.ExtTriggerEdge = DFSDM_FILTER_EXT_TRIG_BOTH_EDGES;
-  haudio_in_dfsdm_rightfilter.Init.FilterParam.SincOrder        = DFSDM_FILTER_ORDER(AudioFreq);
-  /* Set the DFSDM Filters Oversampling to have correct sample rate */
-  haudio_in_dfsdm_rightfilter.Init.FilterParam.Oversampling     = DFSDM_OVER_SAMPLING(AudioFreq);
-  haudio_in_dfsdm_rightfilter.Init.FilterParam.IntOversampling  = 1;
-  haudio_in_dfsdm_rightfilter.State                             = HAL_DFSDM_FILTER_STATE_RESET;
-  haudio_in_dfsdm_rightfilter.Instance                          = AUDIO_DFSDMx_RIGHT_FILTER;
-  if(HAL_OK != HAL_DFSDM_FilterInit(&haudio_in_dfsdm_rightfilter))
-  {
-    return AUDIO_ERROR;
-  }
-  
-  /* Configure injected channel */
-  if(HAL_OK != HAL_DFSDM_FilterConfigRegChannel(&haudio_in_dfsdm_rightfilter, AUDIO_DFSDMx_RIGHT_CHANNEL_FOR_FILTER, DFSDM_CONTINUOUS_CONV_ON))
-  {
-    return AUDIO_ERROR;
-  }
-  
-  return AUDIO_OK;
-}
-
 /**
   * @brief  De-initializes the Digital Filter for Sigma-Delta Modulators interface (DFSDM).
-  * @param  None
   * @retval AUDIO_OK if correct communication, else wrong communication
   */
 static uint8_t DFSDMx_DeInit(void)
 {
-  haudio_in_dfsdm_leftfilter.Instance = AUDIO_DFSDMx_LEFT_FILTER;
-  haudio_in_dfsdm_rightfilter.Instance = AUDIO_DFSDMx_RIGHT_FILTER;
-  haudio_in_dfsdm_leftchannel.Instance = AUDIO_DFSDMx_LEFT_CHANNEL;
-  haudio_in_dfsdm_rightchannel.Instance = AUDIO_DFSDMx_RIGHT_CHANNEL;
-  /* De-initializes the DFSDM filters to allow access to DFSDM internal registers */
-  if(HAL_OK != HAL_DFSDM_FilterDeInit(&haudio_in_dfsdm_leftfilter))
+  for(uint32_t i = 0; i < DFSDM_MIC_NUMBER; i++)
   {
-    return AUDIO_ERROR;
+    if(hAudioInDfsdmFilter[i].Instance != NULL)
+    {
+      if(HAL_OK != HAL_DFSDM_FilterDeInit(&hAudioInDfsdmFilter[i]))
+      {
+        return AUDIO_ERROR;
+      }
+      hAudioInDfsdmFilter[i].Instance = NULL;
+    }
+    if(hAudioInDfsdmChannel[i].Instance != NULL)
+    {
+      if(HAL_OK != HAL_DFSDM_ChannelDeInit(&hAudioInDfsdmChannel[i]))
+      {
+        return AUDIO_ERROR;
+      }
+      hAudioInDfsdmChannel[i].Instance = NULL;
+    }
   }
-
-  if(HAL_OK != HAL_DFSDM_FilterDeInit(&haudio_in_dfsdm_rightfilter))
-  {
-    return AUDIO_ERROR;
-  }
-
-  /* De-initializes the DFSDM channels to allow access to DFSDM internal registers */
-  if(HAL_OK != HAL_DFSDM_ChannelDeInit(&haudio_in_dfsdm_leftchannel))
-  {
-    return AUDIO_ERROR;
-  }
-
-  if(HAL_OK != HAL_DFSDM_ChannelDeInit(&haudio_in_dfsdm_rightchannel))
-  {
-    return AUDIO_ERROR;
-  }
-
   return AUDIO_OK;
 }
 
 /**
   * @brief  Initializes the DFSDM channel MSP.
-  * @param  None
-  * @retval None
   */
 static void DFSDMx_ChannelMspInit(void)
 {
@@ -1643,8 +1773,6 @@ static void DFSDMx_ChannelMspInit(void)
 
 /**
   * @brief  DeInitializes the DFSDM channel MSP.
-  * @param  None
-  * @retval None
   */
 static void DFSDMx_ChannelMspDeInit(void)
 {
@@ -1661,87 +1789,73 @@ static void DFSDMx_ChannelMspDeInit(void)
 
 /**
   * @brief  Initializes the DFSDM filter MSP.
-  * @param  None
-  * @retval None
   */
 static void DFSDMx_FilterMspInit(void)
 {
-  /* Enable DFSDM clock */
-  AUDIO_DFSDMx_CLK_ENABLE();
+  uint32_t i = 0, mic_num = 0, mic_init[DFSDM_MIC_NUMBER] = {0};
+  IRQn_Type AUDIO_DFSDM_DMAx_MIC_IRQHandler[DFSDM_MIC_NUMBER] = {AUDIO_DFSDMx_DMAx_MIC1_IRQ, AUDIO_DFSDMx_DMAx_MIC2_IRQ};
+  DMA_Stream_TypeDef* AUDIO_DFSDMx_DMAx_MIC_STREAM[DFSDM_MIC_NUMBER] = {AUDIO_DFSDMx_DMAx_MIC1_STREAM, AUDIO_DFSDMx_DMAx_MIC2_STREAM};
+  uint32_t AUDIO_DFSDMx_DMAx_MIC_CHANNEL[DFSDM_MIC_NUMBER] = {AUDIO_DFSDMx_DMAx_MIC1_CHANNEL, AUDIO_DFSDMx_DMAx_MIC2_CHANNEL};
   
   /* Enable the DMA clock */
   AUDIO_DFSDMx_DMAx_CLK_ENABLE();
   
-  /* AUDIO_DFSDMx_LEFT FILTER */
-  /* Configure the hdma_dfsdm_left handle parameters */
-  hdma_dfsdm_left.Init.Direction           = DMA_PERIPH_TO_MEMORY;
-  hdma_dfsdm_left.Init.PeriphInc           = DMA_PINC_DISABLE;
-  hdma_dfsdm_left.Init.MemInc              = DMA_MINC_ENABLE;
-  hdma_dfsdm_left.Init.PeriphDataAlignment = AUDIO_DFSDMx_DMAx_PERIPH_DATA_SIZE;
-  hdma_dfsdm_left.Init.MemDataAlignment    = AUDIO_DFSDMx_DMAx_MEM_DATA_SIZE;
-  hdma_dfsdm_left.Init.Mode                = DMA_CIRCULAR;
-  hdma_dfsdm_left.Init.Priority            = DMA_PRIORITY_HIGH;
-  hdma_dfsdm_left.Init.FIFOMode            = DMA_FIFOMODE_DISABLE;
-  hdma_dfsdm_left.Init.MemBurst            = DMA_MBURST_SINGLE;
-  hdma_dfsdm_left.Init.PeriphBurst         = DMA_PBURST_SINGLE;
-  hdma_dfsdm_left.State                    = HAL_DMA_STATE_RESET;  
-  hdma_dfsdm_left.Init.Channel             = AUDIO_DFSDMx_DMAx_LEFT_CHANNEL; 
-  hdma_dfsdm_left.Instance                 = AUDIO_DFSDMx_DMAx_LEFT_STREAM; 
-  
-  /* Associate the DMA handle */
-  __HAL_LINKDMA(&haudio_in_dfsdm_leftfilter, hdmaReg, hdma_dfsdm_left);
-  
-  /* Reset DMA handle state */
-  __HAL_DMA_RESET_HANDLE_STATE(&hdma_dfsdm_left);
-  
-  /* Configure the DMA Channel */
-  HAL_DMA_Init(&hdma_dfsdm_left);
-  
-  /* DMA IRQ Channel configuration */
-  HAL_NVIC_SetPriority(AUDIO_DFSDMx_DMAx_LEFT_IRQ, AUDIO_IN_IRQ_PREPRIO, 0);
-  HAL_NVIC_EnableIRQ(AUDIO_DFSDMx_DMAx_LEFT_IRQ);
-  
-  
-  /* AUDIO_DFSDMx_RIGHT_FILTER */
-  /* Configure the hdma_dfsdm_right handle parameters */
-  hdma_dfsdm_right.Init.Direction           = DMA_PERIPH_TO_MEMORY;
-  hdma_dfsdm_right.Init.PeriphInc           = DMA_PINC_DISABLE;
-  hdma_dfsdm_right.Init.MemInc              = DMA_MINC_ENABLE;
-  hdma_dfsdm_right.Init.PeriphDataAlignment = AUDIO_DFSDMx_DMAx_PERIPH_DATA_SIZE;
-  hdma_dfsdm_right.Init.MemDataAlignment    = AUDIO_DFSDMx_DMAx_MEM_DATA_SIZE;
-  hdma_dfsdm_right.Init.Mode                = DMA_CIRCULAR;
-  hdma_dfsdm_right.Init.Priority            = DMA_PRIORITY_HIGH;
-  hdma_dfsdm_right.Init.FIFOMode            = DMA_FIFOMODE_DISABLE;
-  hdma_dfsdm_right.Init.MemBurst            = DMA_MBURST_SINGLE;
-  hdma_dfsdm_right.Init.PeriphBurst         = DMA_PBURST_SINGLE;
-  hdma_dfsdm_right.State                    = HAL_DMA_STATE_RESET;  
-  hdma_dfsdm_right.Init.Channel             = AUDIO_DFSDMx_DMAx_RIGHT_CHANNEL;
-  hdma_dfsdm_right.Instance                 = AUDIO_DFSDMx_DMAx_RIGHT_STREAM;  
-  
-  /* Associate the DMA handle */
-  __HAL_LINKDMA(&haudio_in_dfsdm_rightfilter, hdmaReg, hdma_dfsdm_right);
-  
-  /* Reset DMA handle state */
-  __HAL_DMA_RESET_HANDLE_STATE(&hdma_dfsdm_right);
-  
-  /* Configure the DMA Channel */
-  HAL_DMA_Init(&hdma_dfsdm_right);
-  
-  /* DMA IRQ Channel configuration */
-  HAL_NVIC_SetPriority(AUDIO_DFSDMx_DMAx_RIGHT_IRQ, AUDIO_IN_IRQ_PREPRIO, 0);
-  HAL_NVIC_EnableIRQ(AUDIO_DFSDMx_DMAx_RIGHT_IRQ);
+  for(i = 0; i < hAudioIn.ChannelNbr; i++)
+  {
+    if(((hAudioIn.InputDevice & INPUT_DEVICE_DIGITAL_MIC1) == INPUT_DEVICE_DIGITAL_MIC1) && (mic_init[POS_VAL(INPUT_DEVICE_DIGITAL_MIC1)] != 1))
+    {
+      mic_num = POS_VAL(INPUT_DEVICE_DIGITAL_MIC1);
+      mic_init[mic_num] = 1;
+    }
+    else if(((hAudioIn.InputDevice & INPUT_DEVICE_DIGITAL_MIC2) == INPUT_DEVICE_DIGITAL_MIC2) && (mic_init[POS_VAL(INPUT_DEVICE_DIGITAL_MIC2)] != 1))
+    {
+      mic_num = POS_VAL(INPUT_DEVICE_DIGITAL_MIC2);
+      mic_init[mic_num] = 1;
+    }  
+    
+    /* Configure the hDmaDfsdm[i] handle parameters */    
+    hDmaDfsdm[mic_num].Init.Channel             = AUDIO_DFSDMx_DMAx_MIC_CHANNEL[mic_num]; 
+    hDmaDfsdm[mic_num].Instance                 = AUDIO_DFSDMx_DMAx_MIC_STREAM[mic_num];
+    hDmaDfsdm[mic_num].Init.Direction           = DMA_PERIPH_TO_MEMORY;
+    hDmaDfsdm[mic_num].Init.PeriphInc           = DMA_PINC_DISABLE;
+    hDmaDfsdm[mic_num].Init.MemInc              = DMA_MINC_ENABLE;
+    hDmaDfsdm[mic_num].Init.PeriphDataAlignment = AUDIO_DFSDMx_DMAx_PERIPH_DATA_SIZE;
+    hDmaDfsdm[mic_num].Init.MemDataAlignment    = AUDIO_DFSDMx_DMAx_MEM_DATA_SIZE;
+    hDmaDfsdm[mic_num].Init.Mode                = DMA_CIRCULAR;
+    hDmaDfsdm[mic_num].Init.Priority            = DMA_PRIORITY_HIGH;
+    hDmaDfsdm[mic_num].Init.FIFOMode            = DMA_FIFOMODE_DISABLE;
+    hDmaDfsdm[mic_num].Init.MemBurst            = DMA_MBURST_SINGLE;
+    hDmaDfsdm[mic_num].Init.PeriphBurst         = DMA_PBURST_SINGLE;
+    hDmaDfsdm[mic_num].State                    = HAL_DMA_STATE_RESET;  
+    
+    /* Associate the DMA handle */
+    __HAL_LINKDMA(&hAudioInDfsdmFilter[mic_num], hdmaReg, hDmaDfsdm[mic_num]);
+    
+    /* Reset DMA handle state */
+    __HAL_DMA_RESET_HANDLE_STATE(&hDmaDfsdm[mic_num]);
+    
+    /* Configure the DMA Channel */
+    HAL_DMA_Init(&hDmaDfsdm[mic_num]);
+    
+    /* DMA IRQ Channel configuration */
+    HAL_NVIC_SetPriority(AUDIO_DFSDM_DMAx_MIC_IRQHandler[mic_num], AUDIO_IN_IRQ_PREPRIO, 0);
+    HAL_NVIC_EnableIRQ(AUDIO_DFSDM_DMAx_MIC_IRQHandler[mic_num]);
+  }  
 }
 
 /**
   * @brief  DeInitializes the DFSDM filter MSP.
-  * @param  None
-  * @retval None
   */
 static void DFSDMx_FilterMspDeInit(void)
 {
   /* Configure the DMA Channel */
-  HAL_DMA_DeInit(&hdma_dfsdm_left);
-  HAL_DMA_DeInit(&hdma_dfsdm_right);
+  for(uint32_t i = 0; i < DFSDM_MIC_NUMBER; i++)
+  {
+    if(hDmaDfsdm[i].Instance != NULL)
+    {
+      HAL_DMA_DeInit(&hDmaDfsdm[i]); 
+    }
+  } 
 }
 
 /**
@@ -1749,7 +1863,6 @@ static void DFSDMx_FilterMspDeInit(void)
   * @note   This function assumes that the I2S input clock
   *         is already configured and ready to be used.
   * @param  AudioFreq: Audio frequency to be configured for the I2S peripheral.
-  * @retval None
   */
 static void I2Sx_In_Init(uint32_t AudioFreq)
 {
@@ -1792,8 +1905,6 @@ static void I2Sx_In_Init(uint32_t AudioFreq)
 
 /**
   * @brief  Deinitializes the Audio Codec audio interface (I2S).
-  * @param  None
-  * @retval None
   */
 static void I2Sx_In_DeInit(void)
 {

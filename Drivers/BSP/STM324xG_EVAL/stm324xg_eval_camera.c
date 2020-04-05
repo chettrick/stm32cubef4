@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm324xg_eval_camera.c
   * @author  MCD Application Team
-  * @version V2.2.2
-  * @date    22-April-2016
+  * @version V3.0.0
+  * @date    27-January-2017
   * @brief   This file includes the driver for Camera module mounted on
   *          STM324xG-EVAL evaluation board(MB786).
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -78,27 +78,6 @@
   * @{
   */ 
 
-/** @defgroup STM324xG_EVAL_CAMERA_Private_TypesDefinitions STM324xG EVAL CAMERA Private TypesDefinitions
-  * @{
-  */ 
-/**
-  * @}
-  */ 
-
-/** @defgroup STM324xG_EVAL_CAMERA_Private_Defines STM324xG EVAL CAMERA Private Defines
-  * @{
-  */
-/**
-  * @}
-  */ 
-  
-/** @defgroup STM324xG_EVAL_CAMERA_Private_Macros STM324xG EVAL CAMERA Private Macros
-  * @{
-  */ 
-/**
-  * @}
-  */  
-
 /** @defgroup STM324xG_EVAL_CAMERA_Private_Variables STM324xG EVAL CAMERA Private Variables
   * @{
   */ 
@@ -112,7 +91,6 @@ uint32_t current_resolution;
 /** @defgroup STM324xG_EVAL_CAMERA_Private_FunctionPrototypes STM324xG EVAL CAMERA Private FunctionPrototypes
   * @{
   */
-static void DCMI_MspInit(void);
 static uint32_t GetSize(uint32_t resolution);
 /**
   * @}
@@ -146,7 +124,7 @@ uint8_t BSP_CAMERA_Init(uint32_t Resolution)
   phdcmi->Instance              = DCMI;
   
   /* DCMI Initialization */
-  DCMI_MspInit();
+  BSP_CAMERA_MspInit();
   HAL_DCMI_Init(phdcmi);    
   
   if(ov2640_drv.ReadID(CAMERA_I2C_ADDRESS) == OV2640_ID)
@@ -334,7 +312,7 @@ static uint32_t GetSize(uint32_t resolution)
 /**
   * @brief  Initializes the DCMI MSP.
   */
-static void DCMI_MspInit(void)
+__weak void BSP_CAMERA_MspInit(void)
 {  
   static DMA_HandleTypeDef hdma;
   GPIO_InitTypeDef GPIO_Init_Structure;  
@@ -342,15 +320,15 @@ static void DCMI_MspInit(void)
   
   /*** Enable peripherals and GPIO clocks ***/
   /* Enable DCMI clock */
-  __DCMI_CLK_ENABLE();
+  __HAL_RCC_DCMI_CLK_ENABLE();
 
   /* Enable DMA2 clock */
-  __DMA2_CLK_ENABLE(); 
+  __HAL_RCC_DMA2_CLK_ENABLE(); 
   
   /* Enable GPIO clocks */
-  __GPIOA_CLK_ENABLE();
-  __GPIOH_CLK_ENABLE();
-  __GPIOI_CLK_ENABLE();
+  __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOH_CLK_ENABLE();
+  __HAL_RCC_GPIOI_CLK_ENABLE();
   
   /*** Configure the GPIO ***/
   /* Configure DCMI GPIO as alternate function */
@@ -399,11 +377,11 @@ static void DCMI_MspInit(void)
   
   /*** Configure the NVIC for DCMI and DMA ***/
   /* NVIC configuration for DCMI transfer complete interrupt */
-  HAL_NVIC_SetPriority(DCMI_IRQn, 5, 0);
+  HAL_NVIC_SetPriority(DCMI_IRQn, 0x0F, 0);
   HAL_NVIC_EnableIRQ(DCMI_IRQn);  
   
   /* NVIC configuration for DMA2 transfer complete interrupt */
-  HAL_NVIC_SetPriority(DMA2_Stream1_IRQn, 5, 0);
+  HAL_NVIC_SetPriority(DMA2_Stream1_IRQn, 0x0F, 0);
   HAL_NVIC_EnableIRQ(DMA2_Stream1_IRQn); 
   
   /* Configure the DMA stream */

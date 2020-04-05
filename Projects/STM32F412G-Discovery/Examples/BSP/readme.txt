@@ -2,11 +2,11 @@
   @page BSP  Example on how to use the BSP drivers
   
   @verbatim
-  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    BSP/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   Description of the BSP example.
   ******************************************************************************
   *
@@ -46,10 +46,10 @@ Then the SystemClock_Config() function is used to configure the system clock
 This frequency permit to reach 14 Mhz clock needed for SD operation and in line 
 with microSD specification. 
 
-
 This example shows how to use the different functionalities of LCD, SD card, 
 EEPROM, QSPI, audio playback and record by switching between all tests 
 using joystick selection button. 
+At the beginning, all leds are ON.
 
 #### JOYSTICK ####
 Use the joystick button to move a pointer inside a rectangle 
@@ -139,7 +139,7 @@ to the beginning (first examples).
   - BSP/Inc/stm32f4xx_it.h             Interrupt handlers header file
   - BSP/Inc/lcd_log_conf.h             lcd_log configuration template file
   - BSP/Inc/stlogo.h                   Image used for BSP example
-  - BSP/Inc/perroquet.h                Image used for BSP example
+  - BSP/Inc/image_f4.h                 Image used for BSP example
         
         
 @par Hardware and Software environment  

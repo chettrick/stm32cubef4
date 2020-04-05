@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    LTDC/LTDC_ColorKeying/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.3.5
-  * @date    04-November-2016
+  * @version V1.4.0
+  * @date    17-February-2017
   * @brief   This example describes how to enable and use 
   *          the LTDC color keying functionality.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -52,7 +52,6 @@
 /* Private define ------------------------------------------------------------*/
 #define PRESSED_FIRST    0x00
 #define PRESSED_SECOND   0x01
-#define LTDC_LAYER_1     1
 #define RGB565_COLOR_KEY 0xFFFFFF
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
@@ -127,7 +126,7 @@ int main(void)
       }
       
       ReloadFlag = 0;
-      HAL_LTDC_Relaod(&LtdcHandle,LTDC_SRCR_VBR);
+      HAL_LTDC_Reload(&LtdcHandle,LTDC_SRCR_VBR);
       
       while(ReloadFlag == 0)
       {
@@ -235,7 +234,7 @@ static void LCD_Config(void)
   }
   
   /* Configure the Layer */
-  if(HAL_LTDC_ConfigLayer(&LtdcHandle, &pLayerCfg, 1) != HAL_OK)
+  if(HAL_LTDC_ConfigLayer(&LtdcHandle, &pLayerCfg, LTDC_LAYER_1) != HAL_OK)
   {
     /* Initialization Error */
     Error_Handler(); 

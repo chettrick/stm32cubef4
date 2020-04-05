@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    LwIP/LwIP_TFTP_Server/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.6
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   Main program body
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -46,15 +46,13 @@
   */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "lwip/opt.h"
 #include "lwip/init.h"
-#include "netif/etharp.h"
 #include "lwip/netif.h"
-#include "lwip/lwip_timers.h"
+#include "lwip/timeouts.h"
+#include "netif/etharp.h"
 #include "ethernetif.h"
 #include "app_ethernet.h"
 #include "tftpserver.h"
-
 #ifdef USE_LCD
 #include "lcd_log.h"
 #endif
@@ -64,14 +62,13 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 struct netif gnetif;
-
 FATFS SD_FatFs;  /* File system object for SD card logical drive */
 char SD_Path[4]; /* SD card logical drive path */
 
 /* Private function prototypes -----------------------------------------------*/
-static void SystemClock_Config(void);
 static void BSP_Config(void);
 static void Netif_Config(void);
+static void SystemClock_Config(void);
 static void Error_Handler(void);
 
 /* Private functions ---------------------------------------------------------*/
@@ -136,16 +133,11 @@ int main(void)
   */
 static void BSP_Config(void)
 {
-#ifdef USE_LCD
-  uint8_t lcd_status = LCD_OK;
-#endif /* USE_LCD */
-
-  /* Configure LED1, LED2, LED3 and LED4 */
+  /* Configure LED1, LED2 */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED2);
   BSP_LED_Init(LED3);
-  BSP_LED_Init(LED4);
-
+  
   /* Set Systick Interrupt to the highest priority */
   HAL_NVIC_SetPriority(SysTick_IRQn, 0x0, 0x0);
 
@@ -155,19 +147,9 @@ static void BSP_Config(void)
   BSP_IO_ConfigPin(MII_INT_PIN, IO_MODE_IT_FALLING_EDGE);
 
 #ifdef USE_LCD
-
-  /* Initialize and start the LCD display in mode 'lcd_mode'
-   *  Using LCD_FB_START_ADDRESS as frame buffer displayed contents.
-   *  This buffer is modified by the BSP (draw fonts, objects depending on BSP calls).
-   */
-
-  /* Set Portrait orientation if needed, by default orientation is set to
-     Landscape */
   
   /* Initialize DSI LCD */
   BSP_LCD_Init();
-  
-  while(lcd_status != LCD_OK);
 
   BSP_LCD_LayerDefaultInit(0, LCD_FB_START_ADDRESS);   
 
@@ -180,7 +162,7 @@ static void BSP_Config(void)
   LCD_LOG_Init();
 
   /* Show Header and Footer texts */
-  LCD_LOG_SetHeader((uint8_t *)"TFTP server Application");
+  LCD_LOG_SetHeader((uint8_t *)"TFTP Server Application");
   LCD_LOG_SetFooter((uint8_t *)"STM32469I-EVAL board");
 
   LCD_UsrLog ("  State: Ethernet Initialization ...\n");
@@ -200,19 +182,18 @@ static void Netif_Config(void)
   ip_addr_t gw;
 
 #ifdef USE_DHCP
-  ipaddr.addr = 0;
-  netmask.addr = 0;
-  gw.addr = 0;
+  ip_addr_set_zero_ip4(&ipaddr);
+  ip_addr_set_zero_ip4(&netmask);
+  ip_addr_set_zero_ip4(&gw);
 #else
-  /* IP address default setting */
-  IP4_ADDR(&ipaddr, IP_ADDR0, IP_ADDR1, IP_ADDR2, IP_ADDR3);
-  IP4_ADDR(&netmask, NETMASK_ADDR0, NETMASK_ADDR1 , NETMASK_ADDR2, NETMASK_ADDR3);
-  IP4_ADDR(&gw, GW_ADDR0, GW_ADDR1, GW_ADDR2, GW_ADDR3);
-#endif
-
-  /* Add the network interface */
+  IP_ADDR4(&ipaddr,IP_ADDR0,IP_ADDR1,IP_ADDR2,IP_ADDR3);
+  IP_ADDR4(&netmask,NETMASK_ADDR0,NETMASK_ADDR1,NETMASK_ADDR2,NETMASK_ADDR3);
+  IP_ADDR4(&gw,GW_ADDR0,GW_ADDR1,GW_ADDR2,GW_ADDR3);
+#endif /* USE_DHCP */
+  
+  /* Add the network interface */    
   netif_add(&gnetif, &ipaddr, &netmask, &gw, NULL, &ethernetif_init, &ethernet_input);
-
+  
   /*  Registers the default network interface */
   netif_set_default(&gnetif);
 

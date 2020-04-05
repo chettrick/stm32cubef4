@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm32412g_discovery_eeprom.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    04-May-2016
+  * @version V2.0.0
+  * @date    27-January-2017
   * @brief   This file contains all the functions prototypes for 
   *          the stm32412g_discovery_eeprom.c firmware driver.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -55,18 +55,10 @@
   * @{
   */ 
   
-/** @defgroup STM32412G_DISCOVERY_EEPROM STM32412G-DISCOVERY EEPROM
-  * @brief This file includes the I2C EEPROM driver of STM32412G-DISCOVERY board.
+/** @addtogroup STM32412G_DISCOVERY_EEPROM 
   * @{
   */
 
-/** @defgroup STM32412G_DISCOVERY_EEPROM_Exported_Types STM32412G DISCOVERY EEPROM Exported Types
-  * @{
-  */ 
-/**
-  * @}
-  */
-  
 /** @defgroup STM32412G_DISCOVERY_EEPROM_Exported_Constants STM32412G DISCOVERY EEPROM Exported Constants
   * @{
   */
@@ -84,19 +76,12 @@
 /**
   * @}
   */ 
-  
-/** @defgroup STM32412G_DISCOVERY_EEPROM_Exported_Macros STM32412G DISCOVERY EEPROM Exported Macros
-  * @{
-  */    
-/**
-  * @}
-  */ 
 
 /** @defgroup STM32412G_DISCOVERY_EEPROM_Exported_Functions STM32412G DISCOVERY EEPROM Exported Functions
   * @{
   */ 
 uint32_t BSP_EEPROM_Init(void);
-uint8_t BSP_EEPROM_DeInit(void);
+uint8_t  BSP_EEPROM_DeInit(void);
 uint32_t BSP_EEPROM_ReadBuffer(uint8_t* pBuffer, uint16_t ReadAddr, uint16_t* NumByteToRead);
 uint32_t BSP_EEPROM_WritePage(uint8_t* pBuffer, uint16_t WriteAddr, uint8_t* NumByteToWrite);
 uint32_t BSP_EEPROM_WriteBuffer(uint8_t* pBuffer, uint16_t WriteAddr, uint16_t NumByteToWrite);

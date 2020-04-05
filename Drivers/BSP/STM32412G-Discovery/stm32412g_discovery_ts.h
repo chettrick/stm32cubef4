@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm32412g_discovery_ts.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    04-May-2016
+  * @version V2.0.0
+  * @date    27-January-2017
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm32412g_discovery_ts.c driver.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -55,15 +55,15 @@
   * @{
   */
 
-/** @addtogroup STM32F769I-DISCOVERY
+/** @addtogroup STM32412G_DISCOVERY
   * @{
   */
 
-/** @defgroup STM32F769I-DISCOVERY_TS STM32F769I-DISCOVERY TS
+/** @addtogroup STM32412G_DISCOVERY_TS
   * @{
   */
 
- /** @defgroup STM32F769I-DISCOVERY_TS_Exported_Constants TS Exported Constants
+ /** @defgroup STM32412G_DISCOVERY_TS_Exported_Constants STM32412G Discovery TS Exported Constants
    * @{
    */
 /** @brief With FT6206 : maximum 2 touches detected simultaneously
@@ -79,12 +79,14 @@
 #define TS_SWAP_XY                      ((uint8_t) 0x08)
 
 #define TS_ORIENTATION_PORTRAIT         ((uint8_t) 0)
-#define TS_ORIENTATION_LANDSCAPE        ((uint8_t) 1)     
+#define TS_ORIENTATION_LANDSCAPE        ((uint8_t) 1) 
+#define TS_ORIENTATION_LANDSCAPE_ROT180 ((uint8_t) 2)
+   
  /**
    * @}
    */
 
-/** @defgroup STM32F769I-DISCOVERY_TS_Exported_Types  TS Exported Types
+/** @defgroup STM32412G_DISCOVERY_TS_Exported_Types STM32412G Discovery TS Exported Types
   * @{
   */
 /**
@@ -154,7 +156,7 @@ typedef enum
   * @}
   */
 
-/** @defgroup STM32F769I-DISCOVERY_TS_Imported_Variables STM32F769I DISCOVERY TS Imported Variables
+/** @defgroup STM32412G_DISCOVERY_TS_Imported_Variables STM32412G DISCOVERY TS Imported Variables
   * @{
   */
 /**
@@ -172,7 +174,7 @@ extern char * ts_gesture_id_string_tab[GEST_ID_NB_MAX];
   * @}
   */
 
-/** @defgroup STM32F769I-DISCOVERY_TS_Exported_Functions TS Exported Functions
+/** @defgroup STM32412G_DISCOVERY_TS_Exported_Functions STM32412G Discovery TS Exported Functions
   * @{
   */
 uint8_t BSP_TS_Init(uint16_t ts_SizeX, uint16_t ts_SizeY);

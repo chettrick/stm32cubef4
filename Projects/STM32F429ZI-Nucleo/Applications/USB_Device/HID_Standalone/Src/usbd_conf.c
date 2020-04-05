@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    USB_Device/HID_Standalone/Src/usbd_conf.c
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    06-May-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   This file implements the USB Device library callbacks and MSP
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -49,13 +49,18 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
+#define CURSOR_STEP     5
+
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 PCD_HandleTypeDef hpcd;
+__IO uint32_t remotewakeupon = 0;
+uint8_t HID_Buffer[4];
+extern USBD_HandleTypeDef USBD_Device;
 
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClockConfig_STOP(void);
-
+static void GetPointerData(uint8_t *pbuf);
 /* Private functions ---------------------------------------------------------*/
   
 /*******************************************************************************
@@ -111,11 +116,22 @@ void HAL_PCD_MspInit(PCD_HandleTypeDef *hpcd)
     __HAL_USB_OTG_FS_WAKEUP_EXTI_ENABLE_RISING_EDGE();
     __HAL_USB_OTG_FS_WAKEUP_EXTI_ENABLE_IT();    
     
-    /* Set EXTI Wakeup Interrupt priority*/
-    HAL_NVIC_SetPriority(OTG_FS_WKUP_IRQn, 0, 0);
+    /* Enable USBFS Interrupt */
+    HAL_NVIC_EnableIRQ(OTG_FS_IRQn);
     
-    /* Enable EXTI Interrupt */
-    HAL_NVIC_EnableIRQ(OTG_FS_WKUP_IRQn);          
+    if(hpcd->Init.low_power_enable == 1)
+    {
+      /* Enable EXTI Line 18 for USB wakeup*/
+      __HAL_USB_OTG_FS_WAKEUP_EXTI_CLEAR_FLAG();
+      __HAL_USB_OTG_FS_WAKEUP_EXTI_ENABLE_RISING_EDGE();
+      __HAL_USB_OTG_FS_WAKEUP_EXTI_ENABLE_IT();
+      
+      /* Set EXTI Wakeup Interrupt priority*/
+      HAL_NVIC_SetPriority(OTG_FS_WKUP_IRQn, 0, 0);
+      
+      /* Enable EXTI Interrupt */
+      HAL_NVIC_EnableIRQ(OTG_FS_WKUP_IRQn);          
+    }
   }
 }
 
@@ -215,8 +231,8 @@ void HAL_PCD_ResetCallback(PCD_HandleTypeDef *hpcd)
   */
 void HAL_PCD_SuspendCallback(PCD_HandleTypeDef *hpcd)
 {
-  __HAL_PCD_GATE_PHYCLOCK(hpcd);
   USBD_LL_Suspend(hpcd->pData);
+  __HAL_PCD_GATE_PHYCLOCK(hpcd);
   
   /*Enter in STOP mode */
   if (hpcd->Init.low_power_enable)
@@ -233,7 +249,16 @@ void HAL_PCD_SuspendCallback(PCD_HandleTypeDef *hpcd)
   */
 void HAL_PCD_ResumeCallback(PCD_HandleTypeDef *hpcd)
 {
+  if ((hpcd->Init.low_power_enable)&&(remotewakeupon == 0))
+  {
+    SystemClockConfig_STOP();
+    
+    /* Reset SLEEPDEEP bit of Cortex System Control Register */
+    SCB->SCR &= (uint32_t)~((uint32_t)(SCB_SCR_SLEEPDEEP_Msk | SCB_SCR_SLEEPONEXIT_Msk));
+  }
+  __HAL_PCD_UNGATE_PHYCLOCK(hpcd);
   USBD_LL_Resume(hpcd->pData);
+  remotewakeupon = 0;
 }
 
 /**
@@ -572,8 +597,38 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
       
       /* Change remote_wakeup feature to 0*/
       ((USBD_HandleTypeDef *)hpcd.pData)->dev_remote_wakeup=0;
+      remotewakeupon = 1;
+    }
+    else
+    {
+      GetPointerData(HID_Buffer);
+      USBD_HID_SendReport(&USBD_Device, HID_Buffer, 4);
     }
   }
+}
+
+/**
+  * @brief  Gets Pointer Data.
+  * @param  pbuf: Pointer to report
+  * @retval None
+  */
+static void GetPointerData(uint8_t *pbuf)
+{
+  static int8_t cnt = 0;
+  int8_t  x = 0, y = 0 ;
+  
+  if(cnt++ > 0)
+  {
+    x = CURSOR_STEP;
+  }
+  else
+  {
+    x = -CURSOR_STEP;
+  }
+  pbuf[0] = 0;
+  pbuf[1] = x;
+  pbuf[2] = y;
+  pbuf[3] = 0;
 }
 
 /**
@@ -585,5 +640,13 @@ void USBD_LL_Delay(uint32_t Delay)
 {
   HAL_Delay(Delay);
 }
+
+/**
+  * @}
+  */
+
+/**
+  * @}
+  */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

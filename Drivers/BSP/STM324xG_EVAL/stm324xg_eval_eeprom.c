@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm324xg_eval_eeprom.c
   * @author  MCD Application Team
-  * @version V2.2.2
-  * @date    22-April-2016
+  * @version V3.0.0
+  * @date    27-January-2017
   * @brief   This file provides a set of functions needed to manage an I2C M24C64 
   *          EEPROM memory.
   *          
@@ -45,7 +45,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -85,27 +85,6 @@
 /** @defgroup STM324xG_EVAL_EEPROM STM324xG EVAL EEPROM
   * @brief This file includes the I2C EEPROM driver of STM32F4xG-EVAL evaluation board.
   * @{
-  */ 
-
-/** @defgroup STM324xG_EVAL_EEPROM_Private_Types STM324xG EVAL EEPROM Private Types
-  * @{
-  */ 
-/**
-  * @}
-  */ 
-
-/** @defgroup STM324xG_EVAL_EEPROM_Private_Defines STM324xG EVAL EEPROM Private Defines
-  * @{
-  */  
-/**
-  * @}
-  */ 
-
-/** @defgroup STM324xG_EVAL_EEPROM_Private_Macros STM324xG EVAL EEPROM Private Macros
-  * @{
-  */
-/**
-  * @}
   */ 
 
 /** @defgroup STM324xG_EVAL_EEPROM_Private_Variables STM324xG EVAL EEPROM Private Variables

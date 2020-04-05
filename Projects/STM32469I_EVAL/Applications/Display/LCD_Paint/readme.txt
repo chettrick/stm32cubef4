@@ -2,16 +2,16 @@
   @page LCD_Paint LCD Paint application
   
   @verbatim
-  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    Display/LCD_Paint/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.6
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -127,7 +127,7 @@ Note: After save operation, the touch positions are not cleared from STMPE811 FI
 
   - This application runs on STM32F469xx and STM32F479xx devices.
 
-  - This application has been tested with STM32469I-EVAL revB evaluation board 
+  - This application has been tested with STM32469I-EVAL RevC evaluation board 
     and can be easily tailored to any other supported device and development board.
 
   - STM32469I-EVAL Set-up

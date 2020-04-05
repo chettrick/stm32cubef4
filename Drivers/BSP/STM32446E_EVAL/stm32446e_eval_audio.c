@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    stm32446e_eval_audio.c
   * @author  MCD Application Team
-  * @version V1.1.2
-  * @date    06-May-2016
+  * @version V2.0.0
+  * @date    27-January-2017
   * @brief   This file provides the Audio driver for the STM32446E-EVAL evaluation board.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -605,35 +605,35 @@ __weak void BSP_AUDIO_OUT_MspInit(SAI_HandleTypeDef *hsai, void *Params)
   */
 __weak void BSP_AUDIO_OUT_MspDeInit(SAI_HandleTypeDef *hsai, void *Params)
 {
-    GPIO_InitTypeDef  gpio_init_structure;
+  GPIO_InitTypeDef  gpio_init_structure;
 
-    /* SAI DMA IRQ Channel deactivation */
-    HAL_NVIC_DisableIRQ(AUDIO_SAIx_DMAx_IRQ);
+  /* SAI DMA IRQ Channel deactivation */
+  HAL_NVIC_DisableIRQ(AUDIO_SAIx_DMAx_IRQ);
 
-    if(hsai->Instance == AUDIO_SAIx)
-    {
-      /* Deinitialize the DMA stream */
-      HAL_DMA_DeInit(hsai->hdmatx);
-    }
+  if(hsai->Instance == AUDIO_SAIx)
+  {
+    /* Deinitialize the DMA stream */
+    HAL_DMA_DeInit(hsai->hdmatx);
+  }
 
-    /* Disable SAI peripheral */
-    __HAL_SAI_DISABLE(hsai);  
+  /* Disable SAI peripheral */
+  __HAL_SAI_DISABLE(hsai);  
 
-    /* Deactives CODEC_SAI pins FS, SCK, MCK and SD by putting them in input mode */
-    gpio_init_structure.Pin = AUDIO_SAIx_FS_PIN | AUDIO_SAIx_SD_PIN;
-    HAL_GPIO_DeInit(AUDIO_SAIx_SD_FS_GPIO_PORT, gpio_init_structure.Pin);
+  /* Deactives CODEC_SAI pins FS, SCK, MCK and SD by putting them in input mode */
+  gpio_init_structure.Pin = AUDIO_SAIx_FS_PIN | AUDIO_SAIx_SD_PIN;
+  HAL_GPIO_DeInit(AUDIO_SAIx_SD_FS_GPIO_PORT, gpio_init_structure.Pin);
 
-    gpio_init_structure.Pin = AUDIO_SAIx_MCK_PIN;
-    HAL_GPIO_DeInit(AUDIO_SAIx_MCLK_SCK_GPIO_PORT, gpio_init_structure.Pin);
+  gpio_init_structure.Pin = AUDIO_SAIx_MCK_PIN;
+  HAL_GPIO_DeInit(AUDIO_SAIx_MCLK_SCK_GPIO_PORT, gpio_init_structure.Pin);
 
-    gpio_init_structure.Pin = AUDIO_SAIx_SCK_PIN ;
-    HAL_GPIO_DeInit(AUDIO_SAIx_MCLK_SCK_GPIO_PORT, gpio_init_structure.Pin);
-  
-    /* Disable SAI clock */
-    AUDIO_SAIx_CLK_DISABLE();
+  gpio_init_structure.Pin = AUDIO_SAIx_SCK_PIN ;
+  HAL_GPIO_DeInit(AUDIO_SAIx_MCLK_SCK_GPIO_PORT, gpio_init_structure.Pin);
 
-    /* GPIO pins clock and DMA clock can be shut down in the application 
-       by surcharging this __weak function */ 
+  /* Disable SAI clock */
+  AUDIO_SAIx_CLK_DISABLE();
+
+  /* GPIO pins clock and DMA clock can be shut down in the application 
+     by surcharging this __weak function */ 
 }
 
 /**
@@ -665,7 +665,6 @@ __weak void BSP_AUDIO_OUT_ClockConfig(SAI_HandleTypeDef *hsai, uint32_t AudioFre
     rcc_ex_clk_init_struct.PLLSAIDivQ = 19; 
     
     HAL_RCCEx_PeriphCLKConfig(&rcc_ex_clk_init_struct);
-    
   }
   else /* AUDIO_FREQUENCY_8K, AUDIO_FREQUENCY_16K, AUDIO_FREQUENCY_48K), AUDIO_FREQUENCY_96K */
   {
@@ -745,8 +744,6 @@ static void SAIx_Init(uint32_t AudioFreq)
   __HAL_SAI_ENABLE(&haudio_out_sai);
 }
 
-
-
 /**
   * @brief  Deinitializes the Audio Codec audio interface (SAI).
   */
@@ -760,7 +757,6 @@ static void SAIx_DeInit(void)
 
   HAL_SAI_DeInit(&haudio_out_sai);
 }
-
 
 /**
   * @}
@@ -782,15 +778,10 @@ static void SAIx_DeInit(void)
   */
 uint8_t BSP_AUDIO_IN_Init(uint32_t AudioFreq, uint32_t BitRes, uint32_t ChnlNbr)
 {
-  RCC_PeriphCLKInitTypeDef rcc_ex_clk_init_struct;
-
   I2Sx_DeInit();
   
-  HAL_RCCEx_GetPeriphCLKConfig(&rcc_ex_clk_init_struct);
-  rcc_ex_clk_init_struct.PeriphClockSelection = RCC_PERIPHCLK_I2S_APB1; /*SPI3 & TIM4 on APB1*/
-  rcc_ex_clk_init_struct.PLLI2S.PLLI2SN = 384;
-  rcc_ex_clk_init_struct.PLLI2S.PLLI2SR = 2;
-  HAL_RCCEx_PeriphCLKConfig(&rcc_ex_clk_init_struct); 
+  /* Initialize I2S clock */ 
+  BSP_AUDIO_IN_ClockConfig(&haudio_in_i2s, NULL);
   
   /* Configure the PDM library */
   PDMDecoder_Init(AudioFreq, ChnlNbr);
@@ -1066,35 +1057,56 @@ __weak void BSP_AUDIO_IN_MspInit(I2S_HandleTypeDef *hi2s, void *Params)
   */
 __weak void BSP_AUDIO_IN_MspDeInit(I2S_HandleTypeDef *hi2s, void *Params)
 {
-    GPIO_InitTypeDef  gpio_init_structure;  
+  GPIO_InitTypeDef  gpio_init_structure;  
 
-    static DMA_HandleTypeDef hdma_i2s_rx;
+  static DMA_HandleTypeDef hdma_i2s_rx;
 
-    /* I2S DMA IRQ Channel deactivation */
-    HAL_NVIC_DisableIRQ(AUDIO_I2Sx_DMAx_IRQ); 
-    
-    if(hi2s->Instance == AUDIO_I2Sx)
-    {
-      /* Deinitialize the Stream for new transfer */
-      HAL_DMA_DeInit(&hdma_i2s_rx);
-    }
+  /* I2S DMA IRQ Channel deactivation */
+  HAL_NVIC_DisableIRQ(AUDIO_I2Sx_DMAx_IRQ); 
+  
+  if(hi2s->Instance == AUDIO_I2Sx)
+  {
+    /* Deinitialize the Stream for new transfer */
+    HAL_DMA_DeInit(&hdma_i2s_rx);
+  }
 
-   /* Disable I2S block */
-    __HAL_I2S_DISABLE(hi2s);
+  /* Disable I2S block */
+  __HAL_I2S_DISABLE(hi2s);
 
-    /* Disable pins: SCK and SD pins */
-    gpio_init_structure.Pin = AUDIO_I2Sx_SCK_PIN;
-    HAL_GPIO_DeInit(AUDIO_I2Sx_SCK_GPIO_PORT, gpio_init_structure.Pin);
-    gpio_init_structure.Pin = AUDIO_I2Sx_SD_PIN;
-    HAL_GPIO_DeInit(AUDIO_I2Sx_SD_GPIO_PORT, gpio_init_structure.Pin); 
+  /* Disable pins: SCK and SD pins */
+  gpio_init_structure.Pin = AUDIO_I2Sx_SCK_PIN;
+  HAL_GPIO_DeInit(AUDIO_I2Sx_SCK_GPIO_PORT, gpio_init_structure.Pin);
+  gpio_init_structure.Pin = AUDIO_I2Sx_SD_PIN;
+  HAL_GPIO_DeInit(AUDIO_I2Sx_SD_GPIO_PORT, gpio_init_structure.Pin); 
 
-    /* Disable I2S clock */
-    AUDIO_I2Sx_CLK_DISABLE();
+  /* Disable I2S clock */
+  AUDIO_I2Sx_CLK_DISABLE();
 
-    /* GPIO pins clock and DMA clock can be shut down in the applic 
-       by surcgarging this __weak function */ 
+  /* GPIO pins clock and DMA clock can be shut down in the applic 
+     by surcgarging this __weak function */ 
 }
 
+/**
+  * @brief  Clock Config.
+  * @param  hi2s: might be required to set audio peripheral predivider if any.
+  * @param  Params: pointer on additional configuration parameters, can be NULL.
+  * @note   This API is called by BSP_AUDIO_IN_Init()
+  *         Being __weak it can be overwritten by the application     
+  */
+__weak void BSP_AUDIO_IN_ClockConfig(I2S_HandleTypeDef *hi2s, void *Params)
+{ 
+  RCC_PeriphCLKInitTypeDef rcc_ex_clk_init_struct;
+
+  HAL_RCCEx_GetPeriphCLKConfig(&rcc_ex_clk_init_struct);
+  
+  /* Configure PLLI2S prescalers */
+  /* I2S_CLK = PLLI2S_VCO/PLLI2SR = 384/2 = 192 Mhz */ 
+  rcc_ex_clk_init_struct.PeriphClockSelection = RCC_PERIPHCLK_I2S_APB1; /*SPI3 & TIM4 on APB1*/
+  rcc_ex_clk_init_struct.PLLI2S.PLLI2SN = 384;
+  rcc_ex_clk_init_struct.PLLI2S.PLLI2SR = 2;
+
+  HAL_RCCEx_PeriphCLKConfig(&rcc_ex_clk_init_struct);
+}
 
 /*******************************************************************************
                             Static Functions
@@ -1153,7 +1165,6 @@ static void I2Sx_Init(uint32_t AudioFreq)
 
  /* Disable I2S block */
   __HAL_I2S_ENABLE(&haudio_in_i2s);
-
 }
 
 /**
@@ -1170,7 +1181,6 @@ static void I2Sx_DeInit(void)
   /* DeInit the I2S */
   HAL_I2S_DeInit(&haudio_in_i2s); 
 }
-
 
 /**
   * @brief  Initializes the TIM INput Capture MSP.

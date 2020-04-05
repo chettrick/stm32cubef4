@@ -975,6 +975,27 @@
     <name>Drivers</name>
     <group>
       <name>BSP</name>
+      <group>
+        <name>Adafruit Shield</name>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Adafruit_Shield\stm32_adafruit_lcd.c</name>
+        </file>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Adafruit_Shield\stm32_adafruit_sd.c</name>
+        </file>
+      </group>
+      <group>
+        <name>Components</name>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Components\st7735\st7735.c</name>
+        </file>
+      </group>
+      <group>
+        <name>STM32F413ZH-Nucleo</name>
+        <file>
+          <name>$PROJ_DIR$\..\..\..\..\Drivers\BSP\STM32F4xx_Nucleo_144\stm32f4xx_nucleo_144.c</name>
+        </file>
+      </group>
     </group>
     <group>
       <name>CMSIS</name>

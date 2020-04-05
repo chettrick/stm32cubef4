@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm32f429i_discovery_lcd.c
   * @author  MCD Application Team
-  * @version V2.1.4
-  * @date    06-May-2016
+  * @version V2.1.5
+  * @date    27-January-2017
   * @brief   This file includes the LCD driver for ILI9341 Liquid Crystal 
   *          Display Modules of STM32F429I-Discovery kit (MB1075).
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -137,7 +137,6 @@ LCD_DrvTypeDef  *LcdDrv;
 /** @defgroup STM32F429I_DISCOVERY_LCD_Private_FunctionPrototypes STM32F429I DISCOVERY LCD Private FunctionPrototypes
   * @{
   */ 
-static void MspInit(void);
 static void DrawChar(uint16_t Xpos, uint16_t Ypos, const uint8_t *c);
 static void FillBuffer(uint32_t LayerIndex, void *pDst, uint32_t xSize, uint32_t ySize, uint32_t OffLine, uint32_t ColorIndex);
 static void ConvertLineToARGB8888(void *pSrc, void *pDst, uint32_t xSize, uint32_t ColorMode);
@@ -214,7 +213,7 @@ uint8_t BSP_LCD_Init(void)
     LtdcHandler.Init.DEPolarity = LTDC_DEPOLARITY_AL;
     LtdcHandler.Init.PCPolarity = LTDC_PCPOLARITY_IPC;
     
-    MspInit();
+    BSP_LCD_MspInit();
     HAL_LTDC_Init(&LtdcHandler); 
     
     /* Select the device */
@@ -540,12 +539,12 @@ uint32_t BSP_LCD_ReadPixel(uint16_t Xpos, uint16_t Ypos)
   if(LtdcHandler.LayerCfg[ActiveLayer].PixelFormat == LTDC_PIXEL_FORMAT_ARGB8888)
   {
     /* Read data value from SDRAM memory */
-    ret = *(__IO uint32_t*) (LtdcHandler.LayerCfg[ActiveLayer].FBStartAdress + (2*(Ypos*BSP_LCD_GetXSize() + Xpos)));
+    ret = *(__IO uint32_t*) (LtdcHandler.LayerCfg[ActiveLayer].FBStartAdress + (4*(Ypos*BSP_LCD_GetXSize() + Xpos)));
   }
   else if(LtdcHandler.LayerCfg[ActiveLayer].PixelFormat == LTDC_PIXEL_FORMAT_RGB888)
   {
     /* Read data value from SDRAM memory */
-    ret = (*(__IO uint32_t*) (LtdcHandler.LayerCfg[ActiveLayer].FBStartAdress + (2*(Ypos*BSP_LCD_GetXSize() + Xpos))) & 0x00FFFFFF);
+    ret = (*(__IO uint32_t*) (LtdcHandler.LayerCfg[ActiveLayer].FBStartAdress + (4*(Ypos*BSP_LCD_GetXSize() + Xpos))) & 0x00FFFFFF);
   }
   else if((LtdcHandler.LayerCfg[ActiveLayer].PixelFormat == LTDC_PIXEL_FORMAT_RGB565) || \
           (LtdcHandler.LayerCfg[ActiveLayer].PixelFormat == LTDC_PIXEL_FORMAT_ARGB4444) || \
@@ -1227,21 +1226,21 @@ void BSP_LCD_DisplayOff(void)
 /**
   * @brief  Initializes the LTDC MSP.
   */
-static void MspInit(void)
+__weak void BSP_LCD_MspInit(void)
 {
   GPIO_InitTypeDef GPIO_InitStructure;
   
   /* Enable the LTDC and DMA2D Clock */
-  __LTDC_CLK_ENABLE();
-  __DMA2D_CLK_ENABLE(); 
+  __HAL_RCC_LTDC_CLK_ENABLE();
+  __HAL_RCC_DMA2D_CLK_ENABLE(); 
   
   /* Enable GPIOs clock */
-  __GPIOA_CLK_ENABLE();
-  __GPIOB_CLK_ENABLE();
-  __GPIOC_CLK_ENABLE();
-  __GPIOD_CLK_ENABLE();
-  __GPIOF_CLK_ENABLE();
-  __GPIOG_CLK_ENABLE();
+  __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
+  __HAL_RCC_GPIOC_CLK_ENABLE();
+  __HAL_RCC_GPIOD_CLK_ENABLE();
+  __HAL_RCC_GPIOF_CLK_ENABLE();
+  __HAL_RCC_GPIOG_CLK_ENABLE();
 
   /* GPIOs Configuration */
   /*

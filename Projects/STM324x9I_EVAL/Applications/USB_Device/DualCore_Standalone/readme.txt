@@ -2,16 +2,16 @@
   @page DualCore_Standalone USB Device Dual Core application
   
   @verbatim
-  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    USB_Device/DualCore_Standalone/readme.txt 
   * @author  MCD Application Team
-  * @version V1.4.6
-  * @date    04-November-2016
+  * @version V1.5.0
+  * @date    17-February-2017
   * @brief   Description of the USB Device Dual Core application.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -51,7 +51,7 @@
 @par Application Description 
 
 This application is a part of the USB Device Library package using STM32Cube firmware. It describes how to use
-USB device application based on the STM32F4xx multi core support feature integrating Mass Storage (MSC) 
+USB device application based on the STM32F4xx multi core support feature integrating communication class (CDC) 
 and Human Interface (HID) in the same project.
 
 This is a typical application on how to use the STM32F4xx USB OTG Device peripheral, where STM32 is 

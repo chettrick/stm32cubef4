@@ -2,11 +2,11 @@
   @page I2S_AUDIO  How to use the Audio features with I2S peripheral
   
   @verbatim
-  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    I2S/I2S_Audio/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   Description of the I2S Audio Example.
   ******************************************************************************
   *

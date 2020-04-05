@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm32469i_eval_sram.h
   * @author  MCD Application Team
-  * @version V1.0.4
-  * @date    04-August-2016
+  * @version V2.0.0
+  * @date    27-January-2017
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm32469i_eval_sram.c driver.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -75,7 +75,7 @@
 
 #define SRAM_DEVICE_ADDR       ((uint32_t)0x64000000)
 
- /* SRAM device size in MBytes */
+ /* SRAM device size in Bytes */
 #define SRAM_DEVICE_SIZE       ((uint32_t)0x200000)
 
 #define SRAM_MEMORY_WIDTH       FMC_NORSRAM_MEM_BUS_WIDTH_16

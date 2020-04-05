@@ -39,8 +39,8 @@
 									<listOptionValue builtIn="false" value="../../../../../../../../Drivers/STM32F4xx_HAL_Driver/Inc"/>
 									<listOptionValue builtIn="false" value="../../../../../../../../Drivers/BSP/STM32412G-Discovery"/>
 									<listOptionValue builtIn="false" value="../../../../../../../../Drivers/BSP/Components"/>
-									<listOptionValue builtIn="false" value="../../../../../../../../Middlewares/ST/STM32_USB_HOST_Library/Core/Inc"/>
-									<listOptionValue builtIn="false" value="../../../../../../../../Middlewares/ST/STM32_USB_HOST_Library/Class/MSC/Inc"/>
+									<listOptionValue builtIn="false" value="../../../../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Inc"/>
+									<listOptionValue builtIn="false" value="../../../../../../../../Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc"/>
 									<listOptionValue builtIn="false" value="../../../../../../../../Middlewares/Third_Party/FatFs/src"/>
 									<listOptionValue builtIn="false" value="../../../../../../../../Middlewares/Third_Party/FatFs/src/drivers"/>
 								</option>

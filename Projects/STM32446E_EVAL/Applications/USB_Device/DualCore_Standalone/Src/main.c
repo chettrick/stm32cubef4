@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    USB_Device/DualCore_Standalone/Src/main.c
   * @author  MCD Application Team
-  * @version V1.2.6
-  * @date    04-November-2016
+  * @version V1.3.0
+  * @date    17-February-2017
   * @brief   USB device DualCore demo main file
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -59,7 +59,6 @@ uint8_t HID_Buffer[4];
 
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);
-static void Toggle_Leds(void);
 static void GetPointerData(uint8_t *pbuf);
 
 /* Private functions ---------------------------------------------------------*/
@@ -76,10 +75,6 @@ int main(void)
   
   /* Configure the system clock to 180 MHz */
   SystemClock_Config();
-  
-  /* Configure LED1 and LED3 */
-  BSP_LED_Init(LED1);
-  BSP_LED_Init(LED3);
   
   /* Initialize IO expander */
   BSP_IO_Init();
@@ -109,7 +104,6 @@ int main(void)
   
   while (1)
   {
-    Toggle_Leds();
     if(HID_SendReport == 1)
     {
       HID_SendReport = 0;
@@ -161,23 +155,6 @@ static void GetPointerData(uint8_t *pbuf)
   pbuf[1] = x;
   pbuf[2] = y;
   pbuf[3] = 0;
-}
-
-/**
-  * @brief  Toggles LEDs to show user input state.
-  * @param  None
-  * @retval None
-  */
-static void Toggle_Leds(void)
-{
-  static uint32_t ticks;
-  
-  if(ticks++ == 0xfffff)
-  {
-    BSP_LED_Toggle(LED1);
-    BSP_LED_Toggle(LED3);
-    ticks = 0;
-  }  
 }
 
 /**

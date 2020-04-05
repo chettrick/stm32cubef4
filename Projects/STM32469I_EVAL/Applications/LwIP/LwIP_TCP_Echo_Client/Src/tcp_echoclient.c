@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    LwIP/LwIP_TCP_Echo_Client/Src/tcp_echoclient.c
   * @author  MCD Application Team
-  * @version V1.0.6
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   tcp echoclient application using LwIP RAW API
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -52,7 +52,6 @@
 #include "lwip/memp.h"
 #include <stdio.h>
 #include <string.h>
-#include "tcp_echoclient.h"
 
 #if LWIP_TCP
 /* Private typedef -----------------------------------------------------------*/

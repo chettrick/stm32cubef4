@@ -2,16 +2,16 @@
   @page HID_Standalone USB Device Human Interface (HID) application
   
   @verbatim
-  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    USB_Device/HID_Standalone/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    04-November-2016 
+  * @version V1.0.1
+  * @date    17-February-2017 
   * @brief   Description of the USB HID application.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -55,7 +55,8 @@ use USB device application based on the Human Interface (HID) on the STM32F4xx d
 
 This is a typical application on how to use the STM32F413xx USB OTG Device peripheral where the STM32 MCU is
 enumerated as a HID device using the native PC Host HID driver to which the NUCLEO-F413ZH
-board is connected, in order to emulate the joystick by moving the host mouse pointer horizontally.
+board is connected. To emulate the joystick user can press the button Key, the host mouse pointer will move 
+horizontally.
 
 At the beginning of the main program the HAL_Init() function is called to reset all the peripherals,
 initialize the Flash interface and the systick. The user is provided with the SystemClock_Config()

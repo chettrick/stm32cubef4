@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm324xg_eval_io.c
   * @author  MCD Application Team
-  * @version V2.2.2
-  * @date    22-April-2016
+  * @version V3.0.0
+  * @date    27-January-2017
   * @brief   This file provides a set of functions needed to manage the IO pins
   *          on STM324xG-EVAL evaluation board.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -91,31 +91,10 @@
   * @}
   */ 
     
-/** @defgroup STM324xG_EVAL_IO_Private_Defines STM324xG EVAL IO Private Defines
-  * @{
-  */ 
-/**
-  * @}
-  */ 
-
-/** @defgroup STM324xG_EVAL_IO_Private_Macros STM324xG EVAL IO Private Macros
-  * @{
-  */ 
-/**
-  * @}
-  */ 
-    
 /** @defgroup STM324xG_EVAL_IO_Private_Variables STM324xG EVAL IO Private Variables
   * @{
   */ 
 static IO_DrvTypeDef *io_driver;
-/**
-  * @}
-  */ 
-
-/** @defgroup STM324xG_EVAL_IO_Private_Function_Prototypes STM324xG EVAL IO Private Function Prototypes
-  * @{
-  */ 
 /**
   * @}
   */ 

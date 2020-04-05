@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    USB_Device/MSC_Standalone/Src/usbd_storage.c
   * @author  MCD Application Team
-  * @version V1.2.6
-  * @date    04-November-2016
+  * @version V1.3.0
+  * @date    17-February-2017
   * @brief   Memory management layer
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -56,6 +56,7 @@
 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
+__IO uint32_t writestatus, readstatus = 0;
 /* USB Mass storage Standard Inquiry Data */
 int8_t STORAGE_Inquirydata[] = { /* 36 */
   /* LUN 0 */
@@ -114,15 +115,15 @@ int8_t STORAGE_Init(uint8_t lun)
   */
 int8_t STORAGE_GetCapacity(uint8_t lun, uint32_t *block_num, uint16_t *block_size)
 {
-  HAL_SD_CardInfoTypedef info;
+  HAL_SD_CardInfoTypeDef info;
   int8_t ret = -1;  
   
   if(BSP_SD_IsDetected() != SD_NOT_PRESENT)
   {
     BSP_SD_GetCardInfo(&info);
     
-    *block_num = (info.CardCapacity)/STORAGE_BLK_SIZ  - 1;
-    *block_size = STORAGE_BLK_SIZ;
+    *block_num =  info.LogBlockNbr  - 1;
+    *block_size = info.LogBlockSize;
     ret = 0;
   }
   return ret;
@@ -146,7 +147,7 @@ int8_t STORAGE_IsReady(uint8_t lun)
       prev_status = 0;
       
     }
-    if(BSP_SD_GetStatus() == SD_TRANSFER_OK)
+    if(BSP_SD_GetCardState() == SD_TRANSFER_OK)
     {
       ret = 0;
     }
@@ -181,7 +182,14 @@ int8_t STORAGE_Read(uint8_t lun, uint8_t *buf, uint32_t blk_addr, uint16_t blk_l
   
   if(BSP_SD_IsDetected() != SD_NOT_PRESENT)
   {  
-    BSP_SD_ReadBlocks_DMA((uint32_t *)buf, blk_addr * STORAGE_BLK_SIZ, STORAGE_BLK_SIZ, blk_len);
+    BSP_SD_ReadBlocks_DMA((uint32_t *)buf, blk_addr, blk_len);
+
+    /* Wait for Rx Transfer completion */
+    while (readstatus == 0){}
+    readstatus = 0;
+
+    /* Wait until SD card is ready to use for new operation */
+    while (BSP_SD_GetCardState() != SD_TRANSFER_OK){}
     ret = 0;
   }
   return ret;
@@ -200,7 +208,14 @@ int8_t STORAGE_Write(uint8_t lun, uint8_t *buf, uint32_t blk_addr, uint16_t blk_
   
   if(BSP_SD_IsDetected() != SD_NOT_PRESENT)
   { 
-    BSP_SD_WriteBlocks_DMA((uint32_t *)buf, blk_addr * STORAGE_BLK_SIZ, STORAGE_BLK_SIZ, blk_len);
+    BSP_SD_WriteBlocks_DMA((uint32_t *)buf, blk_addr, blk_len);
+    
+    /* Wait for Tx Transfer completion */
+    while (writestatus == 0){}
+    writestatus = 0;
+    
+    /* Wait until SD card is ready to use for new operation */
+    while (BSP_SD_GetCardState() != SD_TRANSFER_OK){}
     ret = 0;
   }
   return ret;
@@ -216,6 +231,25 @@ int8_t STORAGE_GetMaxLun(void)
   return(STORAGE_LUN_NBR - 1);
 }
  
+/**
+  * @brief BSP Tx Transfer completed callbacks
+  * @param None
+  * @retval None
+  */
+void BSP_SD_WriteCpltCallback(void)
+{
+  writestatus = 1;
+}
+
+/**
+  * @brief BSP Rx Transfer completed callbacks
+  * @param None
+  * @retval None
+  */
+void BSP_SD_ReadCpltCallback(void)
+{
+  readstatus = 1;
+}
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
 

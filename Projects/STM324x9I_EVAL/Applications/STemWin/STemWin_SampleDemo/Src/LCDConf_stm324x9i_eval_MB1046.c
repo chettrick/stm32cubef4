@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    lcdconf.c
   * @author  MCD Application Team
-  * @version V1.4.6
-  * @date    04-November-2016
+  * @version V1.5.0
+  * @date    17-February-2017
   * @brief   This file implements the configuration for the GUI library
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -327,7 +327,7 @@ void HAL_LTDC_LineEvenCallback(LTDC_HandleTypeDef *hltdc)
       
       HAL_LTDC_SetAddress(hltdc, Addr, layer);
       
-      __HAL_LTDC_RELOAD_CONFIG(hltdc);
+      __HAL_LTDC_RELOAD_IMMEDIATE_CONFIG(hltdc);
       
       /* Notify STemWin that buffer is used */
       GUI_MULTIBUF_ConfirmEx(layer, layer_prop[layer].pending_buffer);
@@ -501,7 +501,7 @@ int LCD_X_DisplayDriver(unsigned LayerIndex, unsigned Cmd, void * pData)
     {
       __HAL_LTDC_LAYER_DISABLE(&hltdc, LayerIndex); 
     }
-    __HAL_LTDC_RELOAD_CONFIG(&hltdc); 
+    __HAL_LTDC_RELOAD_IMMEDIATE_CONFIG(&hltdc); 
     break;
     
   case LCD_X_SETPOS: 

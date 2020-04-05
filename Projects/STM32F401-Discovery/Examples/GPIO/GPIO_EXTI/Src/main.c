@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    GPIO/GPIO_EXTI/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.2.7
-  * @date    04-November-2016
+  * @version V1.2.8
+  * @date    17-February-2017
   * @brief   This example describes how to configure and use GPIOs through 
   *          the STM32F4xx HAL API.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:

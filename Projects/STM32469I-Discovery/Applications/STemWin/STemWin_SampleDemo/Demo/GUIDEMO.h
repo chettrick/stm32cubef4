@@ -36,13 +36,13 @@ Purpose     : Configuration file of GUIDemo
   ******************************************************************************
   * @file    GUIDEMO.c
   * @author  MCD Application Team
-  * @version V1.0.6
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   Configuration file of GUIDemo
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -187,30 +187,6 @@ extern "C" {     /* Make sure we have C-declarations in C++ programs */
 
 #ifndef   SHOW_GUIDEMO_TRANSPARENTDIALOG
   #define SHOW_GUIDEMO_TRANSPARENTDIALOG (1)
-#endif
-
-#ifndef   SHOW_GUIDEMO_AATEXT
-  #define SHOW_GUIDEMO_AATEXT            (0)
-#endif
-
-#ifndef   SHOW_GUIDEMO_BARGRAPH
-  #define SHOW_GUIDEMO_BARGRAPH          (0)
-#endif
-
-#ifndef   SHOW_GUIDEMO_FADING
-  #define SHOW_GUIDEMO_FADING            (0)
-#endif
-
-#ifndef   SHOW_GUIDEMO_SKINNING
-  #define SHOW_GUIDEMO_SKINNING          (0)
-#endif
-
-#ifndef   SHOW_GUIDEMO_SPEEDOMETER
-  #define SHOW_GUIDEMO_SPEEDOMETER       (0)
-#endif
-
-#ifndef   SHOW_GUIDEMO_IMAGEFLOW
-  #define SHOW_GUIDEMO_IMAGEFLOW         (0)
 #endif
 
 /*********************************************************************

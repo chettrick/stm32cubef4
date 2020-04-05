@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    I2S/I2S_Audio/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   Main program body
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -403,7 +403,7 @@ static void Display_ExampleDescription(void)
   BSP_LCD_DrawBitmap((BSP_LCD_GetXSize() - 80)/2, 35, (uint8_t *)stlogo);
   
   BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 35, (uint8_t *)"Copyright (c)", CENTER_MODE);
-  BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 20, (uint8_t *)"STMicroelectronics 2016", CENTER_MODE);
+  BSP_LCD_DisplayStringAt(0, BSP_LCD_GetYSize()- 20, (uint8_t *)"STMicroelectronics 2017", CENTER_MODE);
   
   BSP_LCD_SetTextColor(LCD_COLOR_DARKBLUE);
   BSP_LCD_FillRect(0, BSP_LCD_GetYSize()/2 - 10, BSP_LCD_GetXSize(), 60);

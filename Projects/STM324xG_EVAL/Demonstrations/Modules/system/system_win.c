@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    system_win.c
   * @author  MCD Application Team
-  * @version V1.3.6
-  * @date    04-November-2016
+  * @version V1.4.0
+  * @date    17-February-2017
   * @brief   System information functions
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -123,12 +123,12 @@ static const GUI_WIDGET_CREATE_INFO _aDialog[] =
 
 static const GUI_WIDGET_CREATE_INFO _aDialogSystemInformation[] = {
   { WINDOW_CreateIndirect, "System Information",                                     0,   0,   0,   300, 180, FRAMEWIN_CF_MOVEABLE },
-  { TEXT_CreateIndirect, "Board : STM324xG", ID_TEXT_BOARD,                         15,  15,  200, 20,  0,   0x0, 0 },
+  { TEXT_CreateIndirect, "Board : STM324xG-EVAL", ID_TEXT_BOARD,                         15,  15,  200, 20,  0,   0x0, 0 },
   { TEXT_CreateIndirect, "Core: STM32F-4 Series", ID_TEXT_CORE,                      15,  35,  200, 20,  0,   0x0, 0 },
   { TEXT_CreateIndirect, "CPU Speed : 168MHz", ID_TEXT_CPU,                          15,  55,  200, 20,  0,   0x0, 0 },
   { TEXT_CreateIndirect, "Firmware Version : 1.0", ID_TEXT_VERSION,                  15,  75,  280, 20,  0,   0x0, 0 },
   { IMAGE_CreateIndirect, "Image", ID_IMAGE_LOGO,                                    90,  95,  40,  20,  0,   0,   0 },
-  { TEXT_CreateIndirect, "Copyright (c) STMicroelectronics 2015", ID_TEXT_COPYRIGHT, 15,  125, 200, 20,  0,   0x0, 0 },  
+  { TEXT_CreateIndirect, "Copyright (c) STMicroelectronics 2017", ID_TEXT_COPYRIGHT, 15,  125, 200, 20,  0,   0x0, 0 },  
 };
 
 static const GUI_WIDGET_CREATE_INFO _aDialogGeneralSettings[] = {

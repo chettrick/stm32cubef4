@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    USB_Host/HID_Standalone/Src/menu.c 
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    06-May-2016
+  * @version V1.0.3
+  * @date    17-February-2017
   * @brief   This file implements Menu Functions
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -190,6 +190,8 @@ void HID_MenuProcess(void)
   {
     Appli_state = APPLICATION_IDLE; 
     LCD_LOG_ClearTextZone();
+    BSP_LCD_ClearStringLine(12);
+    BSP_LCD_ClearStringLine(13);
     LCD_ErrLog("HID device disconnected!\n");
     hid_demo.state = HID_DEMO_IDLE;
     hid_demo.select = 0;    
@@ -251,6 +253,11 @@ static void HID_DEMO_ProbeKey(JOYState_TypeDef state)
   }  
 }
 
+/**
+  * @brief  Get the joystick state.
+  * @param  None
+  * @retval None
+  */
 void HID_Joysticky(void)
 {
   static JOYState_TypeDef JoyState = JOY_NONE;

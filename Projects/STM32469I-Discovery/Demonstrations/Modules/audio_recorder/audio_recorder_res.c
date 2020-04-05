@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    audio_recorder_res.c
   * @author  MCD Application Team
-  * @version V1.1.4
-  * @date    03-June-2016
+  * @version V1.2.0
+  * @date    17-February-2017
   * @brief   resources define for audio_recorder module
   ******************************************************************************
   * @attention

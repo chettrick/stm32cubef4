@@ -2,11 +2,11 @@
   @page SAI_AudioPlay  Description of the SAI audio play example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    SAI/SAI_AudioPlay/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.5
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   Description of the SAI audio play example.
   ******************************************************************************
   *
@@ -72,7 +72,7 @@ Once started, LED1 is toggling on STM32469I-EVAL.
 
   - This example runs on STM32F469xx/STM32F479xx devices.
 
-  - This example has been tested and validated with STMicroelectronics STM32469I-EVAL revB 
+  - This example has been tested and validated with STMicroelectronics STM32469I-EVAL RevC 
     board and can be easily tailored to any other supported device
     and development board.      
 

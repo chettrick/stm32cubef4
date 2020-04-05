@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    PWR/PWR_CurrentConsumption/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.3.5
-  * @date    04-November-2016
+  * @version V1.4.0
+  * @date    17-February-2017
   * @brief   This sample code shows how to use STM32F4xx PWR HAL API to measure 
   *          different Low Power modes current consumption.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -87,6 +87,12 @@ int main(void)
   if(__HAL_PWR_GET_FLAG(PWR_FLAG_SB) != RESET)
   {
     __HAL_PWR_CLEAR_FLAG(PWR_FLAG_SB);
+    
+    /* Exit Ethernet Phy from low power mode */
+    ETH_PhyExitFromPowerDownMode();
+    
+    /* Exit USB Phy from low power mode */
+    USB_PhyExitFromLowPowerMode();
 
     /* Turn LED4 On */
     BSP_LED_On(LED4);
@@ -107,6 +113,14 @@ int main(void)
     while(BSP_PB_GetState(BUTTON_KEY) == RESET)
     {
     }
+
+    /* Ethernet PHY and USB PHY must be in low power mode in order to have the lowest current consumption */
+    /* Enter USB PHY to Lowpower Mode */
+    USB_PhyEnterLowPowerMode();
+    
+    /* Enter Ethernet PHY to Power Down Mode */
+    ETH_PhyEnterPowerDownMode();
+
 #if defined (SLEEP_MODE)
     /* Sleep Mode Entry 
         - System Running at PLL (180MHz)

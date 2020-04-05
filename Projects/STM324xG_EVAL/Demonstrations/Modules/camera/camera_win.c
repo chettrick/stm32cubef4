@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    camera_win.c
   * @author  MCD Application Team
-  * @version V1.3.6
-  * @date    04-November-2016
+  * @version V1.4.0
+  * @date    17-February-2017
   * @brief   Camera functions source file
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -407,7 +407,7 @@ static void _cbFileControl(WM_MESSAGE * pMsg)
         pFileInfo->pfGetData = k_GetData;
         pFileInfo->pMask = acMask_folder;
         chooser_select_folder = CHOOSEFILE_Create(CAMERA_hWin, 20, 20, 200, 150, apDrives, GUI_COUNTOF(apDrives), 0, "Select a folder", 0, pFileInfo);
-
+        WM_MakeModal(chooser_select_folder );
         result = GUI_ExecCreatedDialog(chooser_select_folder);
         if (result == 0) 
         {  

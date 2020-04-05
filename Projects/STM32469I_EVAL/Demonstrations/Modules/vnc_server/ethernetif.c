@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    LwIP/LwIP_HTTP_Server_Netconn_RTOS/Src/ethernetif.c
   * @author  MCD Application Team
-  * @version V1.1.5
-  * @date    04-November-2016
+  * @version V1.2.0
+  * @date    17-February-2017
   * @brief   This file implements Ethernet network interface drivers for lwIP
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -46,8 +46,7 @@
   */
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
-#include "lwip/opt.h"
-#include "lwip/lwip_timers.h"
+#include "lwip/timeouts.h"
 #include "netif/etharp.h"
 #include "ethernetif.h"
 #include <string.h>
@@ -55,7 +54,7 @@
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* The time to block waiting for input. */
-#define TIME_WAITING_FOR_INPUT                 ( 100 )
+#define TIME_WAITING_FOR_INPUT                 ( osWaitForever )
 /* Stack size of the interface thread */
 #define INTERFACE_THREAD_STACK_SIZE            ( 350 )
 
@@ -466,20 +465,20 @@ static struct pbuf * low_level_input(struct netif *netif)
       memcpy( (uint8_t*)((uint8_t*)q->payload + payloadoffset), (uint8_t*)((uint8_t*)buffer + bufferoffset), byteslefttocopy);
       bufferoffset = bufferoffset + byteslefttocopy;
     }
-    
-    /* Release descriptors to DMA */
-    /* Point to first descriptor */
-    dmarxdesc = EthHandle.RxFrameInfos.FSRxDesc;
-    /* Set Own bit in Rx descriptors: gives the buffers back to DMA */
-    for (i=0; i< EthHandle.RxFrameInfos.SegCount; i++)
-    {  
-      dmarxdesc->Status |= ETH_DMARXDESC_OWN;
-      dmarxdesc = (ETH_DMADescTypeDef *)(dmarxdesc->Buffer2NextDescAddr);
-    }
-    
-    /* Clear Segment_Count */
-    EthHandle.RxFrameInfos.SegCount =0;
   }
+    
+  /* Release descriptors to DMA */
+  /* Point to first descriptor */
+  dmarxdesc = EthHandle.RxFrameInfos.FSRxDesc;
+  /* Set Own bit in Rx descriptors: gives the buffers back to DMA */
+  for (i=0; i< EthHandle.RxFrameInfos.SegCount; i++)
+  {  
+    dmarxdesc->Status |= ETH_DMARXDESC_OWN;
+    dmarxdesc = (ETH_DMADescTypeDef *)(dmarxdesc->Buffer2NextDescAddr);
+  }
+  
+  /* Clear Segment_Count */
+  EthHandle.RxFrameInfos.SegCount =0;
   
   /* When Rx Buffer unavailable flag is set: clear it and resume reception */
   if ((EthHandle.Instance->DMASR & ETH_DMASR_RBUS) != (uint32_t)RESET)  
@@ -570,7 +569,7 @@ void ethernetif_set_link(void const *argument)
   
   for(;;)
   {
-    if (osSemaphoreWait( link_arg->semaphore, 100)== osOK)
+    if (osSemaphoreWait( link_arg->semaphore, osWaitForever)== osOK)
     {
       /* Read PHY_MISR*/
       HAL_ETH_ReadPHYRegister(&EthHandle, PHY_MISR, &regvalue);
@@ -682,5 +681,10 @@ void ethernetif_update_config(struct netif *netif)
   }
 
   ethernetif_notify_conn_changed(netif);
+}
+
+u32_t sys_now(void)
+{
+  return HAL_GetTick();
 }
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

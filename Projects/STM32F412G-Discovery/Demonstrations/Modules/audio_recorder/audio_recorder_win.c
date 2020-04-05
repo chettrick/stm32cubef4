@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    audio_recorder_win.c
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    04-November-2016   
+  * @version V1.0.2
+  * @date    17-February-2017   
   * @brief   audio_recorde functions
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -49,7 +49,7 @@
 #include "main.h"
 
 #include "audio_recorder_res.c"
-#include "..\Common\audio_if.h"
+#include "../Common/audio_if.h"
 #include "audio_recorder_app.h"
 
 

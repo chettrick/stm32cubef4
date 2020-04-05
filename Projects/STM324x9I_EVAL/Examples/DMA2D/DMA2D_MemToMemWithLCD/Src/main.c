@@ -2,15 +2,15 @@
   ******************************************************************************
   * @file    DMA2D/DMA2D_MemToMemWithLCD/Src/main.c
   * @author  MCD Application Team
-  * @version V1.3.5
-  * @date    04-November-2016
+  * @version V1.4.0
+  * @date    17-February-2017
   * @brief   This example provides a description of how to configure 
   *          DMA2D peripheral in Memory to Memory transfer mode 
   *          and display the result on LCD.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:

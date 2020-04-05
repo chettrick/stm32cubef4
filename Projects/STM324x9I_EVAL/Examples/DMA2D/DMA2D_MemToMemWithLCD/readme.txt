@@ -2,16 +2,16 @@
   @page DMA2D_MemToMemWithLCD DMA2D Memory to Memory with LCD example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    DMA2D/DMA2D_MemToMemWithLCD/readme.txt 
   * @author  MCD Application Team
-  * @version V1.3.5
-  * @date    04-November-2016
+  * @version V1.4.0
+  * @date    17-February-2017
   * @brief   Description of the DMA2D Memory to Memory with LCD example.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -51,7 +51,7 @@
   In this basic example the goal is to explain the different fields of the DMA2D 
   structure in the case of Memory_to_Memory transfer mode.
 
-  After DMA2D configuration, the data transfer is performed from FLASH memory to
+  After DMA2D configuration, the data transfer is performed from Flash memory to
   SRAM and then the LCD is configured to display transferred picture on LCD. 
   (more details about LCD configuration in LCD examples)
   

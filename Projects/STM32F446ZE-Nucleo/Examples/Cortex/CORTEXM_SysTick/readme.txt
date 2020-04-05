@@ -2,11 +2,11 @@
   @page CORTEXM_SysTick CORTEXM SysTick example
 
   @verbatim
-  ******************** (C) COPYRIGHT 2015 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    CORTEXM/CORTEXM_SysTick/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    06-May-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   Description of the CortexM SysTick example.
   ******************************************************************************
   *

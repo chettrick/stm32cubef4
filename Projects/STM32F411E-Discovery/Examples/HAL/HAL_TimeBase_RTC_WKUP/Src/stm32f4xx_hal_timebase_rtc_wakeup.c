@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32f4xx_hal_timebase_rtc_wakeup.c 
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    04-November-2016
+  * @version V1.0.4
+  * @date    17-February-2017
   * @brief   HAL time base based on the hardware RTC_WAKEUP.
   *    
   *          This file overrides the native HAL time base functions (defined as weak)
@@ -35,7 +35,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:

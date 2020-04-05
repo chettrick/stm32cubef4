@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm324xg_eval_ts.h
   * @author  MCD Application Team
-  * @version V2.2.2
-  * @date    22-April-2016
+  * @version V3.0.0
+  * @date    27-January-2017
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm324xg_eval_ts.c driver.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -89,13 +89,6 @@ typedef enum
   TS_ERROR    = 0x01,
   TS_TIMEOUT  = 0x02
 }TS_StatusTypeDef;
-/**
-  * @}
-  */ 
-
-/** @defgroup STM324xG_EVAL_TS_Exported_Macros STM324xG EVAL TS Exported Macros
-  * @{
-  */ 
 /**
   * @}
   */ 

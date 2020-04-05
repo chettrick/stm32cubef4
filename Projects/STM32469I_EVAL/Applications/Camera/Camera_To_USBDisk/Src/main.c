@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    Camera/Camera_To_USBDisk/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.6
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   This application describes how to configure the camera in continuous mode
              and save picture under USBDisk.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -113,11 +113,6 @@ extern DSI_HandleTypeDef hdsi_eval;
 
 static __IO int32_t pending_buffer = -1;
 static __IO int32_t active_area = 0;
-
-DSI_CmdCfgTypeDef CmdCfg;
-DSI_LPCmdTypeDef LPCmd;
-DSI_PLLInitTypeDef dsiPllInit;
-static RCC_PeriphCLKInitTypeDef  PeriphClkInitStruct;
 
 uint8_t pColLeft[]    = {0x00, 0x00, 0x01, 0x8F}; /*   0 -> 399 */
 uint8_t pColRight[]   = {0x01, 0x90, 0x03, 0x1F}; /* 400 -> 799 */
@@ -510,6 +505,11 @@ static void PicturePrepare(void)
 static uint8_t LCD_Init(void){
   
   GPIO_InitTypeDef GPIO_Init_Structure;
+  DSI_PHY_TimerTypeDef PhyTimings; 
+  DSI_CmdCfgTypeDef CmdCfg;
+  DSI_LPCmdTypeDef LPCmd;
+  DSI_PLLInitTypeDef dsiPllInit;
+  RCC_PeriphCLKInitTypeDef  PeriphClkInitStruct;
   
   /* Toggle Hardware Reset of the DSI LCD using
      its XRES signal (active low) */
@@ -571,7 +571,18 @@ static uint8_t LCD_Init(void){
   LPCmd.LPDcsShortWriteOneP   = DSI_LP_DSW1P_ENABLE;
   LPCmd.LPDcsShortReadNoP     = DSI_LP_DSR0P_ENABLE;
   LPCmd.LPDcsLongWrite        = DSI_LP_DLW_ENABLE;
+  LPCmd.LPMaxReadPacket       = DSI_LP_MRDP_ENABLE;
+  LPCmd.AcknowledgeRequest    = DSI_ACKNOWLEDGE_ENABLE;
   HAL_DSI_ConfigCommand(&hdsi_eval, &LPCmd);
+
+  /* Configure DSI PHY HS2LP and LP2HS timings */
+  PhyTimings.ClockLaneHS2LPTime = 35;
+  PhyTimings.ClockLaneLP2HSTime = 35;
+  PhyTimings.DataLaneHS2LPTime = 35;
+  PhyTimings.DataLaneLP2HSTime = 35;
+  PhyTimings.DataLaneMaxReadTime = 0;
+  PhyTimings.StopWaitTime = 10;
+  HAL_DSI_ConfigPhyTimer(&hdsi_eval, &PhyTimings);
 
   /* Initialize LTDC */
   LTDC_Init();
@@ -594,6 +605,8 @@ static uint8_t LCD_Init(void){
   LPCmd.LPDcsShortWriteOneP   = DSI_LP_DSW1P_DISABLE;
   LPCmd.LPDcsShortReadNoP     = DSI_LP_DSR0P_DISABLE;
   LPCmd.LPDcsLongWrite        = DSI_LP_DLW_DISABLE;
+  LPCmd.LPMaxReadPacket       = DSI_LP_MRDP_DISABLE;  
+  LPCmd.AcknowledgeRequest    = DSI_ACKNOWLEDGE_DISABLE;
   HAL_DSI_ConfigCommand(&hdsi_eval, &LPCmd);
   
   HAL_DSI_ConfigFlowControl(&hdsi_eval, DSI_FLOW_CONTROL_BTA);
@@ -766,7 +779,7 @@ void HAL_DSI_EndOfRefreshCallback(DSI_HandleTypeDef *hdsi)
       __HAL_DSI_WRAPPER_DISABLE(hdsi);
       /* Update LTDC configuaration */
       LTDC_LAYER(&hltdc_eval, 0)->CFBAR = LCD_FB_START_ADDRESS + 400 * 4;
-      __HAL_LTDC_RELOAD_CONFIG(&hltdc_eval);
+      __HAL_LTDC_RELOAD_IMMEDIATE_CONFIG(&hltdc_eval);
       /* Enable DSI Wrapper */
       __HAL_DSI_WRAPPER_ENABLE(hdsi);
       
@@ -782,7 +795,7 @@ void HAL_DSI_EndOfRefreshCallback(DSI_HandleTypeDef *hdsi)
       __HAL_DSI_WRAPPER_DISABLE(&hdsi_eval);
       /* Update LTDC configuaration */
       LTDC_LAYER(&hltdc_eval, 0)->CFBAR = LCD_FB_START_ADDRESS;
-      __HAL_LTDC_RELOAD_CONFIG(&hltdc_eval);
+      __HAL_LTDC_RELOAD_IMMEDIATE_CONFIG(&hltdc_eval);
       /* Enable DSI Wrapper */
       __HAL_DSI_WRAPPER_ENABLE(&hdsi_eval);
       

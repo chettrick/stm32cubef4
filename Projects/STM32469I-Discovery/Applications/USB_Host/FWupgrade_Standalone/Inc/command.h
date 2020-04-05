@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Host/FWupgrade_Standalone/Inc/command.h 
   * @author  MCD Application Team
-  * @version V1.0.6
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   Header file for command.c 
   ******************************************************************************
   * @attention

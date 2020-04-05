@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    USB_Host/HID_Standalone/Inc/main.h 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    06-May-2016
+  * @version V1.0.1
+  * @date    17-February-2017
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -105,7 +105,6 @@ extern uint8_t prev_select;
 /* Exported constants --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
-void Toggle_Leds(void);
 void HID_SelectItem(uint8_t **menu, uint8_t item);
 void HID_MenuInit(void);
 void HID_MenuProcess(void);

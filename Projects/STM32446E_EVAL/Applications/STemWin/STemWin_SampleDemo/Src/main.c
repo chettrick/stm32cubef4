@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    main.c
   * @author  MCD Application Team
-  * @version V1.2.6
-  * @date    04-November-2016
+  * @version V1.3.0
+  * @date    17-February-2017
   * @brief   This file provides main program functions
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -194,7 +194,7 @@ static void BSP_Config(void)
   BSP_LED_Init(LED3);
   
   /* Initialize the Touch screen */
-  BSP_TS_Init(240, 320);
+  BSP_TS_Init(320, 240);
  
   /* Enable the CRC Module */
   __CRC_CLK_ENABLE();
@@ -229,10 +229,10 @@ void BSP_Pointer_Update(void)
 {
   GUI_PID_STATE TS_State;
   static TS_StateTypeDef prev_state;
-  TS_StateTypeDef  ts;
+  __IO TS_StateTypeDef  ts;
   uint16_t xDiff, yDiff;  
   
-  BSP_TS_GetState(&ts);
+  BSP_TS_GetState((TS_StateTypeDef *)&ts);
   
   TS_State.Pressed = ts.TouchDetected;
 

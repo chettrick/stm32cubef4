@@ -2,16 +2,16 @@
   @page Demo   STM32469I-EVAL Demonstration Firmware
  
   @verbatim
-  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    Demonstrations/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.5
-  * @date    04-November-2016
+  * @version V1.2.0
+  * @date    17-February-2017
   * @brief   Description of STM32469I-EVAL Demonstration
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -63,7 +63,14 @@ scope of usage based on the STM32Cube HAL BSP and several middleware components.
 
 @par Demo Description
 
-The STM32 F4 demonstration is running on STM32469I-EVAL boards RevB. 
+The STM32 F4 demonstration is running on STM32469I-EVAL boards RevC.
+Tow flavours of the Demonstration binaries are available: 
+  - 'STM32469I_EVAL_Demo_VX.Y.Z.hex': based on StemWin and which source code 
+     is provided within the STM32Cube_FW_F4 package. Its modules are listed below.
+  - 'STM32469I_EVAL_Demo_VX.Y.Z_FULL.hex' : an out of the box Demo integrating the StemWin
+    demo in addition to third parties graphical Demo modules: 
+	   - TouchGFX demonstration module based on Draupner Graphics’ commercial graphic library.
+	     Free evaluation version is available at www.touchgfx.com/stmicroelectronics.
   
 Below you find an overview of the different offered module in the demonstration:
 
@@ -130,7 +137,7 @@ Below you find an overview of the different offered module in the demonstration:
   - This application runs on STM32F469xx devices.  
 
   - This example has been tested with STMicroelectronics STM32469I_EVAL
-    boards RevB and can be easily tailored to any other supported device 
+    boards RevC and can be easily tailored to any other supported device 
     and development board.
 
   - Jumpers configuration:
@@ -153,11 +160,14 @@ and then use your preferred toolchain to update and debug the internal flash con
 Below the detailed steps:
 
 In order to program the demonstration you must do the following:
-1- Open STM32 ST-Link Utility V3.7, click on "External Loader" from the bar menu then check 
+1- Open STM32 ST-Link Utility V4.1.0, click on "External Loader" from the bar menu then check 
    "MT25QL512A_STM32469I-EVAL" box 
 2- Connect the STM32469I-EVAL board to PC with USB cable through CN22
-3- Use "STM32469I_EVAL_Demo_V1.1.4.hex" file provided under “Binary” with STM32 ST-Link Utility
+3- Use "STM32469I_EVAL_Demo_V1.2.0.hex" file provided under “Binary” with STM32 ST-Link Utility
    to program both internal Flash and external NOR memory
+   The "STM32469I_EVAL_Demo_V1.2.0_FULL.hex" file provided under 'Binary', can also be used to take benefit
+   from Touch-GFX third party demonstrations modules replacing Gardening control module.
+   
 4- copy the audio and video files provided under "Utilities/Media/" in the USB key
 5- Plug a USB micro A-Male to A-Female cable on CN8 connector
 -> The internal Flash and the external NOR are now programmed and the demonstration is shown on the board.

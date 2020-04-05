@@ -77,7 +77,7 @@
         </option>
         <option>
           <name>OGLastSavedByProductVersion</name>
-          <state>7.50.2.10499</state>
+          <state>7.70.1.11471</state>
         </option>
         <option>
           <name>GeneralEnableMisra</name>
@@ -127,12 +127,12 @@
         </option>
         <option>
           <name>GBECoreSlave</name>
-          <version>22</version>
+          <version>24</version>
           <state>39</state>
         </option>
         <option>
           <name>OGUseCmsis</name>
-          <state>0</state>
+          <state>1</state>
         </option>
         <option>
           <name>OGUseCmsisDspLib</name>
@@ -144,7 +144,7 @@
         </option>
         <option>
           <name>CoreVariant</name>
-          <version>22</version>
+          <version>24</version>
           <state>39</state>
         </option>
         <option>
@@ -167,7 +167,7 @@
         </option>
         <option>
           <name>GFPUCoreSlave2</name>
-          <version>22</version>
+          <version>24</version>
           <state>39</state>
         </option>
       </data>
@@ -323,14 +323,13 @@
           <state>$PROJ_DIR$\..\Core\inc</state>
           <state>$PROJ_DIR$\..\Modules\vnc_server</state>
           <state>$PROJ_DIR$\..\..\..\..\Utilities\CPU</state>
-          <state>$PROJ_DIR$\..\..\..\..\Drivers\CMSIS\Include</state>
           <state>$PROJ_DIR$\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include</state>
+          <state>$PROJ_DIR$\..\..\..\..\Drivers\CMSIS\Include</state>
           <state>$PROJ_DIR$\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc</state>
           <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\STM32469I_EVAL</state>
           <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Components</state>
           <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Components\Common</state>
           <state>$PROJ_DIR$\..\..\..\..\Middlewares\Third_Party\LwIP\src\include\</state>
-          <state>$PROJ_DIR$\..\..\..\..\Middlewares\Third_Party\LwIP\src\include\ipv4</state>
           <state>$PROJ_DIR$\..\..\..\..\Middlewares\Third_Party\LwIP\system</state>
           <state>$PROJ_DIR$\..\..\..\..\Middlewares\Third_Party\LwIP\system\OS</state>
           <state>$PROJ_DIR$\..\..\..\..\Middlewares\ST\STM32_USB_Host_Library\Core\Inc</state>
@@ -634,7 +633,7 @@
         </option>
         <option>
           <name>OOCOutputFile</name>
-          <state>STM32469I_EVAL_Demo_V1.1.4.hex</state>
+          <state>STM32469I_EVAL_Demo_V1.2.0.hex</state>
         </option>
         <option>
           <name>OOCCommandLineProducer</name>
@@ -672,7 +671,7 @@
       <name>ILINK</name>
       <archiveVersion>0</archiveVersion>
       <data>
-        <version>16</version>
+        <version>17</version>
         <wantNonLocal>1</wantNonLocal>
         <debug>1</debug>
         <option>
@@ -956,6 +955,10 @@
           <name>IlinkThreadsSlave</name>
           <state>1</state>
         </option>
+        <option>
+          <name>IlinkLogCallGraph</name>
+          <state>0</state>
+        </option>
       </data>
     </settings>
     <settings>
@@ -1152,8 +1155,8 @@
                   <state>$PROJ_DIR$\..\Core\inc</state>
                   <state>$PROJ_DIR$\..\Modules\vncserver</state>
                   <state>$PROJ_DIR$\..\..\..\..\Utilities\CPU</state>
-                  <state>$PROJ_DIR$\..\..\..\..\Drivers\CMSIS\Include</state>
                   <state>$PROJ_DIR$\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include</state>
+          <state>$PROJ_DIR$\..\..\..\..\Drivers\CMSIS\Include</state>
                   <state>$PROJ_DIR$\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc</state>
                   <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\STM32469I_EVAL</state>
                   <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Components</state>
@@ -1468,8 +1471,8 @@
                     <state>$PROJ_DIR$\..\Core\inc</state>
                     <state>$PROJ_DIR$\..\Modules\vncserver</state>
                     <state>$PROJ_DIR$\..\..\..\..\Utilities\CPU</state>
-                    <state>$PROJ_DIR$\..\..\..\..\Drivers\CMSIS\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include</state>
+          <state>$PROJ_DIR$\..\..\..\..\Drivers\CMSIS\Include</state>
                     <state>$PROJ_DIR$\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc</state>
                     <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\STM32469I_EVAL</state>
                     <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Components</state>
@@ -2088,8 +2091,8 @@
                   <state>$PROJ_DIR$\..\Core\inc</state>
                   <state>$PROJ_DIR$\..\Modules\vncserver</state>
                   <state>$PROJ_DIR$\..\..\..\..\Utilities\CPU</state>
-                  <state>$PROJ_DIR$\..\..\..\..\Drivers\CMSIS\Include</state>
                   <state>$PROJ_DIR$\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include</state>
+          <state>$PROJ_DIR$\..\..\..\..\Drivers\CMSIS\Include</state>
                   <state>$PROJ_DIR$\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc</state>
                   <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\STM32469I_EVAL</state>
                   <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Components</state>
@@ -2382,8 +2385,8 @@
               <state>$PROJ_DIR$\..\Core\inc</state>
               <state>$PROJ_DIR$\..\Modules\vncserver</state>
               <state>$PROJ_DIR$\..\..\..\..\Utilities\CPU</state>
-              <state>$PROJ_DIR$\..\..\..\..\Drivers\CMSIS\Include</state>
               <state>$PROJ_DIR$\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include</state>
+          <state>$PROJ_DIR$\..\..\..\..\Drivers\CMSIS\Include</state>
               <state>$PROJ_DIR$\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc</state>
               <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\STM32469I_EVAL</state>
               <state>$PROJ_DIR$\..\..\..\..\Drivers\BSP\Components</state>
@@ -2567,9 +2570,6 @@
           <name>$PROJ_DIR$\..\..\..\..\Middlewares\Third_Party\LwIP\src\api\netifapi.c</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\Middlewares\Third_Party\LwIP\src\api\pppapi.c</name>
-        </file>
-        <file>
           <name>$PROJ_DIR$\..\..\..\..\Middlewares\Third_Party\LwIP\src\api\sockets.c</name>
         </file>
         <file>
@@ -2587,6 +2587,9 @@
             <name>$PROJ_DIR$\..\..\..\..\Middlewares\Third_Party\LwIP\src\core\ipv4\dhcp.c</name>
           </file>
           <file>
+            <name>$PROJ_DIR$\..\..\..\..\Middlewares\Third_Party\LwIP\src\core\ipv4\etharp.c</name>
+          </file>
+          <file>
             <name>$PROJ_DIR$\..\..\..\..\Middlewares\Third_Party\LwIP\src\core\ipv4\icmp.c</name>
           </file>
           <file>
@@ -2599,7 +2602,7 @@
             <name>$PROJ_DIR$\..\..\..\..\Middlewares\Third_Party\LwIP\src\core\ipv4\ip4_addr.c</name>
           </file>
           <file>
-            <name>$PROJ_DIR$\..\..\..\..\Middlewares\Third_Party\LwIP\src\core\ipv4\ip_frag.c</name>
+            <name>$PROJ_DIR$\..\..\..\..\Middlewares\Third_Party\LwIP\src\core\ipv4\ip4_frag.c</name>
           </file>
         </group>
         <file>
@@ -2615,7 +2618,7 @@
           <name>$PROJ_DIR$\..\..\..\..\Middlewares\Third_Party\LwIP\src\core\init.c</name>
         </file>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\Middlewares\Third_Party\LwIP\src\core\lwip_timers.c</name>
+          <name>$PROJ_DIR$\..\..\..\..\Middlewares\Third_Party\LwIP\src\core\ip.c</name>
         </file>
         <file>
           <name>$PROJ_DIR$\..\..\..\..\Middlewares\Third_Party\LwIP\src\core\mem.c</name>
@@ -2648,13 +2651,16 @@
           <name>$PROJ_DIR$\..\..\..\..\Middlewares\Third_Party\LwIP\src\core\tcp_out.c</name>
         </file>
         <file>
+          <name>$PROJ_DIR$\..\..\..\..\Middlewares\Third_Party\LwIP\src\core\timeouts.c</name>
+        </file>
+        <file>
           <name>$PROJ_DIR$\..\..\..\..\Middlewares\Third_Party\LwIP\src\core\udp.c</name>
         </file>
       </group>
       <group>
         <name>Netif</name>
         <file>
-          <name>$PROJ_DIR$\..\..\..\..\Middlewares\Third_Party\LwIP\src\netif\etharp.c</name>
+          <name>$PROJ_DIR$\..\..\..\..\Middlewares\Third_Party\LwIP\src\netif\ethernet.c</name>
         </file>
         <file>
           <name>$PROJ_DIR$\..\..\..\..\Middlewares\Third_Party\LwIP\system\OS\sys_arch.c</name>

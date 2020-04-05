@@ -36,13 +36,13 @@ Purpose     : Several GUIDEMO routines
   ******************************************************************************
   * @file    GUIDEMO.c
   * @author  MCD Application Team
-  * @version V1.3.6
-  * @date    04-November-2016
+  * @version V1.4.0
+  * @date    17-February-2017
   * @brief   Several GUIDEMO routines
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -348,7 +348,7 @@ static void _cbFrameWinControl(WM_MESSAGE * pMsg) {
     Id    = WM_GetId(pMsg->hWinSrc);
     NCode = pMsg->Data.v;
     switch (NCode) {
-    case WM_NOTIFICATION_RELEASED:
+    case WM_NOTIFICATION_CLICKED:
       switch (Id) {
       case GUI_ID_HALT:
         if (_Halt) {

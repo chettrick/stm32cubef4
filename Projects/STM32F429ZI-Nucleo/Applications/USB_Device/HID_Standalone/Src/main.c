@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    USB_Device/HID_Standalone/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    06-May-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   USB device HID demo main file
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -50,17 +50,15 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-#define CURSOR_STEP     5
 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 USBD_HandleTypeDef USBD_Device;
 extern PCD_HandleTypeDef hpcd;
-uint8_t HID_Buffer[4];
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
-static void GetPointerData(uint8_t *pbuf);
+static void Error_Handler(void);
 
 /* Private functions ---------------------------------------------------------*/
 
@@ -103,35 +101,8 @@ int main(void)
     BSP_LED_Toggle(LED2);
     BSP_LED_Toggle(LED3);
     HAL_Delay(100);  
-    GetPointerData(HID_Buffer);
-    USBD_HID_SendReport(&USBD_Device, HID_Buffer, 4);
   }
 }
-
-/**
-  * @brief  Gets Pointer Data.
-  * @param  pbuf: Pointer to report
-  * @retval None
-  */
-static void GetPointerData(uint8_t *pbuf)
-{
-  static int8_t cnt = 0;
-  int8_t  x = 0, y = 0 ;
-  
-  if(cnt++ > 0)
-  {
-    x = CURSOR_STEP;
-  }
-  else
-  {
-    x = -CURSOR_STEP;
-  }
-  pbuf[0] = 0;
-  pbuf[1] = x;
-  pbuf[2] = y;
-  pbuf[3] = 0;
-}
-
 
 /**
   * @brief  System Clock Configuration
@@ -175,7 +146,12 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLN = 336;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
-  HAL_RCC_OscConfig(&RCC_OscInitStruct);
+  if(HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+  {
+    /* Initialization Error */
+    Error_Handler();
+  }
+
   
   /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
      clocks dividers */
@@ -184,7 +160,11 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
-  HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
+  if(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)
+  {
+    /* Initialization Error */
+    Error_Handler();
+  }
 }
 /**
   * @brief This function provides accurate delay (in milliseconds) based 
@@ -205,7 +185,17 @@ void HAL_Delay(__IO uint32_t Delay)
     }
   }
 }
-
+/**
+  * @brief  This function is executed in case of error occurrence.
+  * @param  None
+  * @retval None
+  */
+static void Error_Handler(void)
+{
+  while(1)
+  {
+  }
+}
 
 #ifdef  USE_FULL_ASSERT
 /**

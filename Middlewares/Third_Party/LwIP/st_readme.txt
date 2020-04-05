@@ -47,6 +47,23 @@
   ******************************************************************************
   @endverbatim
 
+### 23-December-2106 ###
+========================
+  + Upgrade to use LwIP V2.0.0 version
+    - For detailed list of new features and bug fixes please refer to CHANGELOG.txt
+    - Additional modification done on V2.0.0 sources:
+      - httpd.c: add include "lwip/sys.h"
+      - snmp_netconn.c: add include "string.h"
+      - snmp_msg.c: add implementation of  "strnlen()" function
+      - fix statement unreachable warnings
+      - fix variable "var" was set but never used warnings
+      - cpu.h: add preprocessor condition to avoid redefinition of BYTE_ORDER macro (defined by default in the last GCC compiler version)
+      - api_lib.c:add LWIP_IPV4 preprocessor condition to avoid compilation error when IPV4 is disabled
+      - sys_arch.c: implementation updated to be CMSIS-RTOS compliant
+      - snmp_msg.c: add implementation of  "strnlen()" function
+      - cc.h: target debug macro to printf() 
+
+
 ### 22-April-2016 ###
 =====================
   + Use updated version of LwIP v1.4.1 by integrating latest sources from LwIP Git Repository: 
@@ -61,6 +78,7 @@
       - inet_chcksum.c is now available under \src\core directory
       - ip.c and ip_addr.c are renamed to ip4.c and ip4_addr.c respectively.
       - SNMP, SNTP and HTTP protocols implementation is available under \src\include\lwip\apps directory
+
  
 ### 19-June-2014 ###
 ====================

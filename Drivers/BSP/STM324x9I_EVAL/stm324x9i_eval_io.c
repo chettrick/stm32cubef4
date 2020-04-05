@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm324x9i_eval_io.c
   * @author  MCD Application Team
-  * @version V2.2.3
-  * @date    22-April-2016
+  * @version V3.0.0
+  * @date    27-January-2017
   * @brief   This file provides a set of functions needed to manage the IO pins
   *          on STM324x9I-EVAL evaluation board.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -84,38 +84,10 @@
   * @{
   */   
 
-/** @defgroup STM324x9I_EVAL_IO_Private_Types_Definitions STM324x9I EVAL IO Private Types Definitions
-  * @{
-  */ 
-/**
-  * @}
-  */ 
-
-/** @defgroup STM324x9I_EVAL_IO_Private_Defines STM324x9I EVAL IO Private Defines
-  * @{
-  */ 
-/**
-  * @}
-  */ 
-
-/** @defgroup STM324x9I_EVAL_IO_Private_Macros STM324x9I EVAL IO Private Macros
-  * @{
-  */ 
-/**
-  * @}
-  */ 
-
 /** @defgroup STM324x9I_EVAL_IO_Private_Variables STM324x9I EVAL IO Private Variables
   * @{
   */ 
 static IO_DrvTypeDef *io_driver;
-/**
-  * @}
-  */
-
-/** @defgroup STM324x9I_EVAL_IO_Private_Function_Prototypes STM324x9I EVAL IO Private Function Prototypes
-  * @{
-  */ 
 /**
   * @}
   */

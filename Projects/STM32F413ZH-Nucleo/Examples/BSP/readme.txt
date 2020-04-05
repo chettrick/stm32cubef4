@@ -2,11 +2,11 @@
   @page BSP Example on how to use the BSP drivers
   
   @verbatim
-  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    Demonstration/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    04-November-2016 
+  * @version V1.1.0
+  * @date    17-February-2017 
   * @brief   Description NUCLEO-F413ZH Demo description.
   ******************************************************************************
   *
@@ -41,7 +41,7 @@ The BSP examples detects the presence of Adafruit 1.8" TFT shield with joystick 
 
 If the Adafruit shield is NOT connected, then:
  - Red led (led3) blinks waiting the user button is pushed.
- - Then red led swithces off and green & blue leds start blinking at high frequency.
+ - Then red led swithces off and green & blue LEDs start blinking at high frequency.
  - Pushing user button again and again blinking frequency decreases until looping 
    to high frequency.
 

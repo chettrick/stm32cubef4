@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    system_res.c
   * @author  MCD Application Team
-  * @version V1.2.5
-  * @date    03-June-2016
+  * @version V1.2.6
+  * @date    17-February-2017
   * @brief   system resources
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2017 STMicroelectronics</center></h2>
   *
   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
   * You may not use this file except in compliance with the License.

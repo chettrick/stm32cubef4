@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32412g_discovery_qspi.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    04-May-2016
+  * @version V2.0.0
+  * @date    27-January-2017
   * @brief   This file includes a standard driver for the N25Q128A QSPI
   *          memory mounted on STM32412G-DISCOVERY board.
   @verbatim
@@ -37,7 +37,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -79,10 +79,7 @@
   * @{
   */ 
 
-
-/* Private variables ---------------------------------------------------------*/
-
-/** @defgroup STM32412G_DISCOVERY_QSPI_Private_Variables Private Variables
+/** @defgroup STM32412G_DISCOVERY_QSPI_Private_Variables STM32412G Discovery QSPI Private Variables
   * @{
   */       
 QSPI_HandleTypeDef QSPIHandle;
@@ -90,12 +87,8 @@ QSPI_HandleTypeDef QSPIHandle;
 /**
   * @}
   */ 
-
-
-
-/* Private functions ---------------------------------------------------------*/
     
-/** @defgroup STM32412G_DISCOVERY_QSPI_Private_Functions Private Functions
+/** @defgroup STM32412G_DISCOVERY_QSPI_Private_FunctionPrototypes STM32412G Discovery QSPI Private FunctionPrototypes
   * @{
   */ 
 static uint8_t QSPI_ResetMemory          (QSPI_HandleTypeDef *hqspi);
@@ -107,7 +100,7 @@ static uint8_t QSPI_AutoPollingMemReady(QSPI_HandleTypeDef *hqspi, uint32_t Time
   * @}
   */
     
-/** @defgroup STM32412G_DISCOVERY_QSPI_Exported_Functions Exported Functions
+/** @defgroup STM32412G_DISCOVERY_QSPI_Private_Functions STM32412G Discovery QSPI Private Functions
   * @{
   */ 
 
@@ -133,7 +126,7 @@ uint8_t BSP_QSPI_Init(void)
   QSPIHandle.Init.FifoThreshold      = 4;
   QSPIHandle.Init.SampleShifting     = QSPI_SAMPLE_SHIFTING_HALFCYCLE;
   QSPIHandle.Init.FlashSize          = POSITION_VAL(N25Q128A_FLASH_SIZE) - 1;
-  QSPIHandle.Init.ChipSelectHighTime = QSPI_CS_HIGH_TIME_2_CYCLE;
+  QSPIHandle.Init.ChipSelectHighTime = QSPI_CS_HIGH_TIME_5_CYCLE; /* Min 50ns for nonRead command */
   QSPIHandle.Init.ClockMode          = QSPI_CLOCK_MODE_0;
   QSPIHandle.Init.FlashID            = QSPI_FLASH_ID_1;
   QSPIHandle.Init.DualFlash          = QSPI_DUALFLASH_DISABLE;
@@ -208,6 +201,9 @@ uint8_t BSP_QSPI_Read(uint8_t* pData, uint32_t ReadAddr, uint32_t Size)
   {
     return QSPI_ERROR;
   }
+
+  /* Set S# timing for Read command: Min 20ns for N25Q128A memory */
+  MODIFY_REG(QSPIHandle.Instance->DCR, QUADSPI_DCR_CSHT, QSPI_CS_HIGH_TIME_2_CYCLE);
   
   /* Reception of the data */
   if (HAL_QSPI_Receive(&QSPIHandle, pData, HAL_QPSI_TIMEOUT_DEFAULT_VALUE) != HAL_OK)
@@ -215,6 +211,9 @@ uint8_t BSP_QSPI_Read(uint8_t* pData, uint32_t ReadAddr, uint32_t Size)
     return QSPI_ERROR;
   }
 
+  /* Restore S# timing for nonRead commands */
+  MODIFY_REG(QSPIHandle.Instance->DCR, QUADSPI_DCR_CSHT, QSPI_CS_HIGH_TIME_5_CYCLE);
+  
   return QSPI_OK;
 }
 
@@ -231,13 +230,7 @@ uint8_t BSP_QSPI_Write(uint8_t* pData, uint32_t WriteAddr, uint32_t Size)
   uint32_t end_addr, current_size, current_addr;
 
   /* Calculation of the size between the write address and the end of the page */
-  current_addr = 0;
-
-  while (current_addr <= WriteAddr)
-  {
-    current_addr += N25Q128A_PAGE_SIZE;
-  }
-  current_size = current_addr - WriteAddr;
+  current_size = N25Q128A_PAGE_SIZE - (WriteAddr % N25Q128A_PAGE_SIZE);
 
   /* Check if the size of the data is less than the remaining place in the page */
   if (current_size > Size)
@@ -484,13 +477,6 @@ uint8_t BSP_QSPI_EnableMemoryMappedMode(void)
   return QSPI_OK;
 }
 
-/**
-  * @}
-  */
-
-/** @addtogroup STM32412G_DISCOVERY_QSPI_Private_Functions 
-  * @{
-  */ 
 
 /**
   * @brief QSPI MSP Initialization
@@ -498,7 +484,8 @@ uint8_t BSP_QSPI_EnableMemoryMappedMode(void)
   *           - Peripheral's clock enable
   *           - Peripheral's GPIO Configuration
   *           - NVIC configuration for QSPI interrupt
-  * @retval None
+  * @param hqspi: QSPI handle
+  * @param  Params : pointer on additional configuration parameters, can be NULL.
   */
 __weak void BSP_QSPI_MspInit(QSPI_HandleTypeDef *hqspi, void *Params)
 {
@@ -562,7 +549,8 @@ __weak void BSP_QSPI_MspInit(QSPI_HandleTypeDef *hqspi, void *Params)
   *        This function frees the hardware resources used in this example:
   *          - Disable the Peripheral's clock
   *          - Revert GPIO and NVIC configuration to their default state
-  * @retval None
+  * @param hqspi: QSPI handle
+  * @param  Params : pointer on additional configuration parameters, can be NULL.
   */
 __weak void BSP_QSPI_MspDeInit(QSPI_HandleTypeDef *hqspi, void *Params)
 {
@@ -587,10 +575,10 @@ __weak void BSP_QSPI_MspDeInit(QSPI_HandleTypeDef *hqspi, void *Params)
   QSPI_CLK_DISABLE();
 }
 
+/*********************** Static functions *************************************/
 /**
   * @brief  This function reset the QSPI memory.
   * @param  hqspi: QSPI handle
-  * @retval None
   */
 static uint8_t QSPI_ResetMemory(QSPI_HandleTypeDef *hqspi)
 {
@@ -632,7 +620,6 @@ static uint8_t QSPI_ResetMemory(QSPI_HandleTypeDef *hqspi)
 /**
   * @brief  This function configure the dummy cycles on memory side.
   * @param  hqspi: QSPI handle
-  * @retval None
   */
 static uint8_t QSPI_DummyCyclesCfg(QSPI_HandleTypeDef *hqspi)
 {
@@ -691,7 +678,6 @@ static uint8_t QSPI_DummyCyclesCfg(QSPI_HandleTypeDef *hqspi)
 /**
   * @brief  This function send a Write Enable and wait it is effective.
   * @param  hqspi: QSPI handle
-  * @retval None
   */
 static uint8_t QSPI_WriteEnable(QSPI_HandleTypeDef *hqspi)
 {
@@ -737,7 +723,6 @@ static uint8_t QSPI_WriteEnable(QSPI_HandleTypeDef *hqspi)
   * @brief  This function read the SR of the memory and wait the EOP.
   * @param  hqspi: QSPI handle
   * @param  Timeout
-  * @retval None
   */
 static uint8_t QSPI_AutoPollingMemReady(QSPI_HandleTypeDef *hqspi, uint32_t Timeout)
 {

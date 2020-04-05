@@ -2,15 +2,15 @@
   ******************************************************************************
   * @file    CRYP/CRYP_AESModes/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.5
-  * @date    04-November-2016   
+  * @version V1.1.0
+  * @date    17-February-2017   
   * @brief   This example provides a short description of how to use the CRYP
   *          peripheral to encrypt and decrypt data using AES algorithm in 
   *          chaining modes (ECB, CBC, CTR) and with all key sizes.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -131,7 +131,7 @@ uint8_t aDecryptedtext[AES_TEXT_SIZE];
 
 /* Private function prototypes -----------------------------------------------*/
 #ifdef __GNUC__
-/* With GCC/RAISONANCE, small printf (option LD Linker->Libraries->Small printf
+/* With GCC, small printf (option LD Linker->Libraries->Small printf
    set to 'Yes') calls __io_putchar() */
 #define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
 #else

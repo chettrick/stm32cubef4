@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    USB_Device/HID_Standalone/Src/usbd_conf.c
   * @author  MCD Application Team
-  * @version V1.2.6
-  * @date    04-November-2016
+  * @version V1.3.0
+  * @date    17-February-2017
   * @brief   This file implements the USB Device library callbacks and MSP
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -448,8 +448,8 @@ USBD_StatusTypeDef USBD_LL_Init(USBD_HandleTypeDef *pdev)
   not allow sending data from non word-aligned addresses.
   For this specific application, it is advised to not enable this option
   unless required. */
-  hpcd.Init.dma_enable = 1;
-  hpcd.Init.low_power_enable = 1;
+  hpcd.Init.dma_enable = 0;
+  hpcd.Init.low_power_enable = 0;
   hpcd.Init.phy_itface = PCD_PHY_ULPI; 
   hpcd.Init.Sof_enable = 0;
   hpcd.Init.speed = PCD_SPEED_HIGH;

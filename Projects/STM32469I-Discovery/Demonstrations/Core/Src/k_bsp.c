@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    k_bsp.c
   * @author  MCD Application Team
-  * @version V1.1.4
-  * @date    03-June-2016
+  * @version V1.2.0
+  * @date    17-February-2017
   * @brief   This file provides the kernel bsp functions
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -57,7 +57,8 @@
   */
 
 /* External variables --------------------------------------------------------*/
-  extern uint8_t SelLayer;
+extern uint8_t SelLayer;
+extern uint8_t  I2C_Address;
 TS_StateTypeDef  TS_State = {0};
 /* Private typedef -----------------------------------------------------------*/
 /* Private defines -----------------------------------------------------------*/
@@ -80,9 +81,11 @@ void k_BspInit(void)
   /* Initialize the SDRAM */
   BSP_SDRAM_Init();
   
+  HAL_Delay(100);
+  
   /* Initialize the Touch screen */
   BSP_TS_Init(800, 480);
-        
+    
   /* Enable CRC to Unlock GUI */
  __HAL_RCC_CRC_CLK_ENABLE();
   
@@ -123,13 +126,20 @@ void k_TouchUpdate(void)
     if(ts.touchDetected) 
     {
       TS_State.x = ts.touchX[0];
-      if(ts.touchY[0] < 240)
+      if(I2C_Address == TS_I2C_ADDRESS)
       {
-        TS_State.y = ts.touchY[0] ;
+        if(ts.touchY[0] < 240)
+        {
+          TS_State.y = ts.touchY[0];
+        }
+        else
+        {
+          TS_State.y = (ts.touchY[0] * 480) / 450;
+        }
       }
       else
       {
-        TS_State.y = (ts.touchY[0] * 480) / 450;
+        TS_State.y = ts.touchY[0]; 
       }
       GUI_TOUCH_StoreStateEx(&TS_State);
     }

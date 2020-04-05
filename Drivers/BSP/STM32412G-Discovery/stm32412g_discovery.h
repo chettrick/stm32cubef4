@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm32412g_discovery.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    04-May-2016
+   * @version V2.0.0
+  * @date    27-January-2017
   * @brief   This file contains definitions for STM32412G_DISCOVERY's LEDs,
   *          push-buttons and COM ports hardware resources.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -55,7 +55,7 @@
   * @{
   */
       
-/** @defgroup STM32412G_DISCOVERY_LOW_LEVEL STM32412G-DISCOVERY LOW LEVEL
+/** @addtogroup STM32412G_DISCOVERY_LOW_LEVEL
   * @{
   */ 
 
@@ -361,19 +361,10 @@ typedef enum
  #define DISCOVERY_I2C_SPEED                             100000
 #endif /* DISCOVERY_I2C_SPEED */
 
-
-
 /**
   * @}
   */ 
 
-/**
-  * @}
-  */ 
-  
-/** @defgroup STM32412G_DISCOVERY_LOW_LEVEL_Exported_Macros STM32412G DISCOVERY Low Level Exported Macros
-  * @{
-  */  
 /**
   * @}
   */ 

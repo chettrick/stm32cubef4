@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    st7789h2.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    10-May-2016
+  * @version V1.1.1
+  * @date    29-December-2016
   * @brief   This file contains all the functions prototypes for the st7789h2.c
   *          driver.
   ******************************************************************************
@@ -85,8 +85,10 @@
  *  @brief LCD_OrientationTypeDef
  *  Possible values of Display Orientation
  */
-#define ST7789H2_ORIENTATION_PORTRAIT    ((uint32_t)0x00) /* Portrait orientation choice of LCD screen  */
-#define ST7789H2_ORIENTATION_LANDSCAPE   ((uint32_t)0x01) /* Landscape orientation choice of LCD screen */    
+#define ST7789H2_ORIENTATION_PORTRAIT         ((uint32_t)0x00) /* Portrait orientation choice of LCD screen  */
+#define ST7789H2_ORIENTATION_LANDSCAPE        ((uint32_t)0x01) /* Landscape orientation choice of LCD screen */
+#define ST7789H2_ORIENTATION_LANDSCAPE_ROT180 ((uint32_t)0x02) /* Landscape rotated 180° orientation choice of LCD screen */
+    
 /** 
   * @brief  ST7789H2 Registers  
   */
@@ -100,6 +102,8 @@
 #define ST7789H2_READ_RAM           0x2E
 #define ST7789H2_CASET              0x2A
 #define ST7789H2_RASET              0x2B
+#define ST7789H2_VSCRDEF            0x33 /* Vertical Scroll Definition */
+#define ST7789H2_VSCSAD             0x37 /* Vertical Scroll Start Address of RAM */   
 #define ST7789H2_TEARING_EFFECT     0x35
 #define ST7789H2_NORMAL_DISPLAY     0x36
 #define ST7789H2_IDLE_MODE_OFF      0x38

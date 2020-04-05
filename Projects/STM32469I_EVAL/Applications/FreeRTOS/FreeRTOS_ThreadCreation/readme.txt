@@ -2,16 +2,16 @@
   @page FreeRTOS_ThreadCreation FreeRTOS Thread Creation application
  
   @verbatim
-  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    FreeRTOS/FreeRTOS_ThreadCreation/readme.txt
   * @author  MCD Application Team
-  * @version V1.0.6
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   Description of the FreeRTOS Thread Creation application.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -54,13 +54,13 @@ This directory contains a set of source files that implement a thread creation
 application using CMSIS RTOS API 
 
 This application creates two threads with the same priority, which execute in 
-a periodic cycle of 15 seconds. 
+a periodic cycle of 18 seconds. 
 
-In the first 5 seconds, the thread 1 toggles LED1 each 200 ms and the 
+In the first 6 seconds, the thread 1 toggles LED1 each 200 ms and the 
 thread 2 toggles LED3 each 500 ms
-In the second 5 seconds, the thread 1 suspend itself and the thread 2
+In the second 6 seconds, the thread 1 suspend itself and the thread 2
 continue toggling LED3
-In the last 5 seconds, the thread 2 resumes execution of thread 1 then 
+In the last 6 seconds, the thread 2 resumes execution of thread 1 then 
 suspends itself, the thread 1 toggles the LED1 each 400 ms    
 
 
@@ -97,7 +97,7 @@ on STM32Cube with RTOS".
 
   - This application runs on STM32F469xx and STM32F479xx devices.
   
-  - This application has been tested with STM32469I-EVAL revB board and can be
+  - This application has been tested with STM32469I-EVAL RevC board and can be
     easily tailored to any other supported device and development board.
     
     

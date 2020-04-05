@@ -2,15 +2,15 @@
   ******************************************************************************
   * @file    stm32f4xx_it.c
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    04-November-2016
+  * @version V1.0.2
+  * @date    17-February-2017
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -67,9 +67,8 @@ extern PCD_HandleTypeDef                hpcd;
 extern QSPI_HandleTypeDef               QSPIHandle;
 extern K_ModuleItem_Typedef             USB_Storage_board;
 extern I2S_HandleTypeDef                haudio_i2s;
-extern DFSDM_Filter_HandleTypeDef       haudio_in_dfsdm_rightfilter;
-extern DFSDM_Filter_HandleTypeDef       haudio_in_dfsdm_leftfilter;
 
+extern DFSDM_Filter_HandleTypeDef      hAudioInDfsdmFilter[];
 
 /* Private function prototypes -----------------------------------------------*/
 extern void xPortSysTickHandler(void);
@@ -165,7 +164,7 @@ void SysTick_Handler(void)
 }
 
 /******************************************************************************/
-/*                 STM32F7xx Peripherals Interrupt Handlers                   */
+/*                 STM32F4xx Peripherals Interrupt Handlers                   */
 /*  Add here the Interrupt Handler for the used peripheral(s) (PPP), for the  */
 /*  available peripheral interrupt handler's name please refer to the startup */
 /*  file (startup_stm32f4xx.s).                                               */
@@ -178,9 +177,7 @@ void SysTick_Handler(void)
   */
 void AUDIO_IN_I2Sx_DMAx_IRQHandler(void)
 {
-/* BSP Audio not available */
   HAL_DMA_IRQHandler(haudio_i2s.hdmarx);
-
 }
 
 /**
@@ -200,7 +197,6 @@ void EXTI3_IRQHandler(void)
   */
 void AUDIO_OUT_I2Sx_DMAx_IRQHandler(void)
 {
-/* BSP Audio not available */
   HAL_DMA_IRQHandler(haudio_i2s.hdmatx);
 }
 
@@ -224,27 +220,24 @@ void QUADSPI_IRQHandler(void)
   HAL_QSPI_IRQHandler(&QSPIHandle);
 }
 
-/* DMA2 STREAM6 */
 /**
-  * @brief  This function handles DFSDM Left DMAinterrupt request.
-  * @param  None
+  * @brief  This function handles DFSDM MIC1 DMA interrupt request.
   * @retval None
   */
-void AUDIO_DFSDM_DMAx_LEFT_IRQHandler(void)
+void AUDIO_DFSDM_DMAx_MIC1_IRQHandler(void)
 {
-  HAL_DMA_IRQHandler(haudio_in_dfsdm_leftfilter.hdmaReg);
+  HAL_DMA_IRQHandler(hAudioInDfsdmFilter[POS_VAL(INPUT_DEVICE_DIGITAL_MIC1)].hdmaReg);
 }
 
-/* DMA2 STREAM4 */
 /**
-  * @brief  This function handles DFSDM Right DMAinterrupt request.
-  * @param  None
+  * @brief  This function handles DFSDM MIC2 DMA interrupt request.
   * @retval None
   */
-void AUDIO_DFSDM_DMAx_RIGHT_IRQHandler(void)
+void AUDIO_DFSDM_DMAx_MIC2_IRQHandler(void)
 {
-  HAL_DMA_IRQHandler(haudio_in_dfsdm_rightfilter.hdmaReg);
+  HAL_DMA_IRQHandler(hAudioInDfsdmFilter[POS_VAL(INPUT_DEVICE_DIGITAL_MIC2)].hdmaReg);
 }
+
 
 /**
   * @}

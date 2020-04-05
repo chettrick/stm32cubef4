@@ -2,11 +2,11 @@
   @page PWR_CurrentConsumption PWR Current Consumption example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    PWR/PWR_CurrentConsumption/readme.txt 
   * @author  MCD Application Team
-  * @version V1.3.5
-  * @date    04-November-2016
+  * @version V1.4.0
+  * @date    17-February-2017
   * @brief   Description of the PWR Current Consumption example.
   ******************************************************************************
   *
@@ -154,6 +154,9 @@ Here below a detailed description of the example code:
        case the Backup domain will be reset in order to modify the RTC Clock source, as consequence RTC  
        registers (including the backup registers) and RCC_BDCR register are set to their reset values.
 
+@note On the STM324x9I-EVAL board, an extra current consumption(~0.5mA) is added due to the Ethernet 
+      and USB PHYs. So, to reach the correct current consumption values, this example configures the Ethernet
+      and USB PHYs in Low power mode.
 
 @par Directory contents 
 

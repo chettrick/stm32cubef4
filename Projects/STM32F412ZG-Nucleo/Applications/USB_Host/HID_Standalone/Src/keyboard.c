@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    USB_Host/HID_Standalone/Src/keyboard.c 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    06-May-2016
+  * @version V1.0.1
+  * @date    17-February-2017
   * @brief   This file implements the HID keyboard functions
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -54,7 +54,7 @@
 #define KYBRD_FIRST_LINE                 50
 #define SMALL_FONT_COLUMN_WIDTH          6
 #define SMALL_FONT_LINE_WIDTH            10
-#define KYBRD_LAST_LINE                  80
+#define KYBRD_LAST_LINE                  81
 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/

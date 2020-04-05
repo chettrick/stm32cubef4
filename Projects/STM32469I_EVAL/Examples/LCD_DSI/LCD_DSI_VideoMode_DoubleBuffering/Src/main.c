@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    LCD_DSI/LCD_DSI_VideoMode_DoubleBuffering/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.5
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   This example describes how to configure and use LCD DSI to display an image
   *          of size WVGA in mode landscape (800x480) using the STM32F4xx HAL API and BSP.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -173,7 +173,7 @@ void HAL_LTDC_LineEventCallback(LTDC_HandleTypeDef *hltdc)
   if(pend_buffer >= 0)
   {  
     LTDC_LAYER(hltdc, 0)->CFBAR = ((uint32_t)Buffers[pend_buffer]);
-    __HAL_LTDC_RELOAD_CONFIG(hltdc); 
+    __HAL_LTDC_RELOAD_IMMEDIATE_CONFIG(hltdc); 
     
     front_buffer = pend_buffer;  
     pend_buffer = -1;

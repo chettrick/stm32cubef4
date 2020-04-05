@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    FatFs/FatFs_USBDisk/Inc/usbh_conf.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    04-November-2016
+  * @version V1.0.1
+  * @date    17-February-2017
   * @brief   General low level driver configuration
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -62,7 +62,7 @@
 #define USBH_KEEP_CFG_DESCRIPTOR              0
 #define USBH_MAX_SIZE_CONFIGURATION           0x200
 #define USBH_MAX_DATA_BUFFER                  0x200
-#define USBH_DEBUG_LEVEL                      0
+#define USBH_DEBUG_LEVEL                      2
 #define USBH_USE_OS                           0
     
 /* Exported constants --------------------------------------------------------*/

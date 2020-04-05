@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    USB_Device/HID_Standalone/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    06-May-2016
+  * @version V1.0.1
+  * @date    17-February-2017
   * @brief   USB device HID demo main file
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -55,11 +55,8 @@
 /* Private variables ---------------------------------------------------------*/
 USBD_HandleTypeDef USBD_Device;
 extern PCD_HandleTypeDef hpcd;
-uint8_t HID_Buffer[4];
 
 /* Private function prototypes -----------------------------------------------*/
-static void GetPointerData(uint8_t *pbuf);
-
 /* Private functions ---------------------------------------------------------*/
 
 /**
@@ -69,7 +66,15 @@ static void GetPointerData(uint8_t *pbuf);
   */
 int main(void)
 {
-  /* STM32F412xx HAL library initialization */
+  /* STM32F4xx HAL library initialization:
+     - Configure the Flash prefetch and Buffer caches
+     - Systick timer is configured by default as source of time base, but user 
+       can eventually implement his proper time base source (a general purpose 
+       timer for example or other time source), keeping in mind that Time base 
+       duration should be kept 1ms since PPP_TIMEOUT_VALUEs are defined and 
+       handled in milliseconds basis.
+     - Low Level Initialization
+  */
   HAL_Init();
   
   /* Configure the System clock to have a frequency of 100 MHz */
@@ -100,36 +105,8 @@ int main(void)
     BSP_LED_Toggle(LED1);
     BSP_LED_Toggle(LED2);
     BSP_LED_Toggle(LED3);
-    HAL_Delay(100);  
-    GetPointerData(HID_Buffer);
-    USBD_HID_SendReport(&USBD_Device, HID_Buffer, 4);
   }
 }
-
-/**
-  * @brief  Gets Pointer Data.
-  * @param  pbuf: Pointer to report
-  * @retval None
-  */
-static void GetPointerData(uint8_t *pbuf)
-{
-  static int8_t cnt = 0;
-  int8_t  x = 0, y = 0 ;
-  
-  if(cnt++ > 0)
-  {
-    x = CURSOR_STEP;
-  }
-  else
-  {
-    x = -CURSOR_STEP;
-  }
-  pbuf[0] = 0;
-  pbuf[1] = x;
-  pbuf[2] = y;
-  pbuf[3] = 0;
-}
-
 
 /**
   * @brief  System Clock Configuration

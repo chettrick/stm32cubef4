@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm324x9i_eval_lcd.c
   * @author  MCD Application Team
-  * @version V2.2.3
-  * @date    22-April-2016
+  * @version V3.0.0
+  * @date    27-January-2017
   * @brief   This file includes the driver for Liquid Crystal Display (LCD) module
   *          mounted on STM324x9I-EVAL evaluation board.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -95,25 +95,11 @@
   * @{
   */ 
 
-/** @defgroup STM324x9I_EVAL_LCD_Private_TypesDefinitions STM324x9I EVAL LCD Private TypesDefinitions
-  * @{
-  */ 
-/**
-  * @}
-  */ 
-
-/** @defgroup STM324x9I_EVAL_LCD_Private_Defines STM324x9I EVAL LCD Private Defines
-  * @{
-  */
-#define POLY_X(Z)              ((int32_t)((Points + Z)->X))
-#define POLY_Y(Z)              ((int32_t)((Points + Z)->Y))      
-/**
-  * @}
-  */ 
-
 /** @defgroup STM324x9I_EVAL_LCD_Private_Macros STM324x9I EVAL LCD Private Macros
   * @{
   */
+#define POLY_X(Z)              ((int32_t)((Points + Z)->X))
+#define POLY_Y(Z)              ((int32_t)((Points + Z)->Y))    
 #define ABS(X)  ((X) > 0 ? (X) : -(X))      
 /**
   * @}
@@ -540,12 +526,12 @@ uint32_t BSP_LCD_ReadPixel(uint16_t Xpos, uint16_t Ypos)
   if(hltdc_eval.LayerCfg[ActiveLayer].PixelFormat == LTDC_PIXEL_FORMAT_ARGB8888)
   {
     /* Read data value from SDRAM memory */
-    ret = *(__IO uint32_t*) (hltdc_eval.LayerCfg[ActiveLayer].FBStartAdress + (2*(Ypos*BSP_LCD_GetXSize() + Xpos)));
+    ret = *(__IO uint32_t*) (hltdc_eval.LayerCfg[ActiveLayer].FBStartAdress + (4*(Ypos*BSP_LCD_GetXSize() + Xpos)));
   }
   else if(hltdc_eval.LayerCfg[ActiveLayer].PixelFormat == LTDC_PIXEL_FORMAT_RGB888)
   {
     /* Read data value from SDRAM memory */
-    ret = (*(__IO uint32_t*) (hltdc_eval.LayerCfg[ActiveLayer].FBStartAdress + (2*(Ypos*BSP_LCD_GetXSize() + Xpos))) & 0x00FFFFFF);
+    ret = (*(__IO uint32_t*) (hltdc_eval.LayerCfg[ActiveLayer].FBStartAdress + (4*(Ypos*BSP_LCD_GetXSize() + Xpos))) & 0x00FFFFFF);
   }
   else if((hltdc_eval.LayerCfg[ActiveLayer].PixelFormat == LTDC_PIXEL_FORMAT_RGB565) || \
           (hltdc_eval.LayerCfg[ActiveLayer].PixelFormat == LTDC_PIXEL_FORMAT_ARGB4444) || \
@@ -1159,13 +1145,13 @@ static void MspInit(void)
   GPIO_InitTypeDef GPIO_Init_Structure;
   
   /* Enable the LTDC and DMA2D clocks */
-  __LTDC_CLK_ENABLE();
-  __DMA2D_CLK_ENABLE(); 
+  __HAL_RCC_LTDC_CLK_ENABLE();
+  __HAL_RCC_DMA2D_CLK_ENABLE(); 
   
   /* Enable GPIOs clock */
-  __GPIOI_CLK_ENABLE(); 
-  __GPIOJ_CLK_ENABLE();
-  __GPIOK_CLK_ENABLE();  
+  __HAL_RCC_GPIOI_CLK_ENABLE(); 
+  __HAL_RCC_GPIOJ_CLK_ENABLE();
+  __HAL_RCC_GPIOK_CLK_ENABLE();  
 
   /*** LTDC Pins configuration ***/
   /* GPIOI configuration */

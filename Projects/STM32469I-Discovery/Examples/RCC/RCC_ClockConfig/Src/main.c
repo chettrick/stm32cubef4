@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    RCC/RCC_ClockConfig/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.4
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   This example describes how to use the RCC HAL API to configure the
   *          system clock (SYSCLK) and modify the clock settings on run time.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -267,7 +267,7 @@ static void SystemClockHSE_Config(void)
   
   RCC_OscInitStruct.PLL.PLLSource         = RCC_PLLSOURCE_HSE;
   RCC_OscInitStruct.PLL.PLLState          = RCC_PLL_ON;
-  RCC_OscInitStruct.PLL.PLLM              = 25;
+  RCC_OscInitStruct.PLL.PLLM              = 8;
   RCC_OscInitStruct.PLL.PLLN              = 360;
   RCC_OscInitStruct.PLL.PLLP              = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ              = 7;

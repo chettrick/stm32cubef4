@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    USB_Device/HID_LPM_Standalone/Src/main.c
   * @author  MCD Application Team
-  * @version V1.2.6
-  * @date    04-November-2016
+  * @version V1.3.0
+  * @date    17-February-2017
   * @brief   USB device HID_LPM demo main file
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -74,13 +74,6 @@ int main(void)
 
   /* Initialize IO expander */
   BSP_IO_Init();
-
-  /* Configure LED1, LED2, LED3 and LED4 */
-  BSP_LED_Init(LED1);
-  BSP_LED_Init(LED2);
-  BSP_LED_Init(LED3);
-  BSP_LED_Init(LED4);
-  LEDsInitialized = 1;
   
   /* Initialize Joystick */
   if (BSP_JOY_Init(JOY_MODE_GPIO) == 0)
@@ -175,28 +168,6 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
-}
-
-/**
-  * @brief  Toggle LEDs to shows user input state.   
-  * @param  None
-  * @retval None
-  */
-void Toggle_Leds(void)
-{
-  static uint32_t ticks;
-  
-  if(LEDsInitialized == 1)
-  {
-    if(ticks++ == 100)
-    {
-      BSP_LED_Toggle(LED1);
-      BSP_LED_Toggle(LED2);
-      BSP_LED_Toggle(LED3);
-      BSP_LED_Toggle(LED4);
-      ticks = 0;
-    }
-  }
 }
 
 #ifdef  USE_FULL_ASSERT

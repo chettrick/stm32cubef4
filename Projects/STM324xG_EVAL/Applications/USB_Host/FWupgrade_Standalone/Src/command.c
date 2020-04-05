@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    USB_Host/FWupgrade_Standalone/Src/command.c
   * @author  MCD Application Team
-  * @version V1.3.6
-  * @date    04-November-2016
+  * @version V1.4.0
+  * @date    17-February-2017
   * @brief   This file provides all the IAP command functions.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -54,7 +54,6 @@
 
 /* Private macros ------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-static uint32_t TmpProgramCounter = 0x00;
 static uint32_t TmpReadSize = 0x00;
 static uint32_t RamAddress = 0x00;
 static __IO uint32_t LastPGAddress = APPLICATION_ADDRESS;
@@ -244,21 +243,21 @@ static void COMMAND_ProgramFlashMemory(void)
       readflag = FALSE;
     }
     
-    /* Program flash memory */
-    for(programcounter = TmpReadSize; programcounter != 0; programcounter -= 4)
+   /* Program flash memory */
+    for (programcounter = 0; programcounter < TmpReadSize; programcounter += 4)
     {
-      TmpProgramCounter = programcounter;
       /* Write word into flash memory */
-      if( FLASH_If_Write((LastPGAddress- TmpProgramCounter + TmpReadSize), \
-        *(uint32_t *)(RamAddress - programcounter + TmpReadSize )) != 0x00)
+      if (FLASH_If_Write((LastPGAddress + programcounter),
+                         *(uint32_t *) (RamAddress + programcounter)) != 0x00)
       {
-        /* Flash programming error: Turn LED2 On and Toggle LED3 in infinite loop */
+        /* Flash programming error: Turn LED2 On and Toggle LED3 in infinite
+         * loop */
         BSP_LED_On(LED2);
         Fail_Handler();
       }
     }
     /* Update last programmed address value */
-    LastPGAddress = LastPGAddress + TmpReadSize;
+    LastPGAddress += TmpReadSize;
   }  
 } 
 

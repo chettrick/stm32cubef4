@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    BSP/Inc/stm32f4xx_it.h 
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   This file contains the headers of the interrupt handlers.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -60,16 +60,15 @@ void DebugMon_Handler(void);
 void PendSV_Handler(void);
 void SysTick_Handler(void);
 void EXTI0_IRQHandler(void);
-void EXTI1_IRQHandler(void);
 void EXTI3_IRQHandler(void);
-void EXTI15_10_IRQHandler(void);
+void EXTI9_5_IRQHandler(void);
 void AUDIO_OUT_I2Sx_DMAx_IRQHandler(void); /* I2S tx */
 void AUDIO_IN_I2Sx_DMAx_IRQHandler(void); /* I2S rx */
 void QuadSPI_IRQHandler(void);
-void AUDIO_DFSDM_DMAx_LEFT_IRQHandler(void);
-void AUDIO_DFSDM_DMAx_RIGHT_IRQHandler(void);
-void SD_IRQHandler(void);
-void SD_DMA_Rx_IRQHandler(void);
+void AUDIO_DFSDM_DMAx_MIC1_IRQHandler(void);
+void AUDIO_DFSDM_DMAx_MIC2_IRQHandler(void);
+void BSP_SD_IRQHandler(void);
+void BSP_SD_DMA_Rx_IRQHandler(void);
 
 #ifdef __cplusplus
 }

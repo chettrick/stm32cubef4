@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    LwIP/LwIP_UDP_Echo_Client/Inc/main.h 
   * @author  MCD Application Team
-  * @version V1.4.6
-  * @date    04-November-2016
+  * @version V1.5.0
+  * @date    17-February-2017
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -55,36 +55,39 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
 #include "stm324x9i_eval.h"
+#include "stm324x9i_eval_lcd.h"
 #include "stm324x9i_eval_io.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
+#define USE_LCD        /* enable LCD  */  
+#define USE_DHCP       /* enable DHCP, if disabled static address is used */
 
-#define DEST_IP_ADDR0   192
-#define DEST_IP_ADDR1   168
-#define DEST_IP_ADDR2   0
-#define DEST_IP_ADDR3   11
+#define DEST_IP_ADDR0   (uint8_t) 192
+#define DEST_IP_ADDR1   (uint8_t) 168
+#define DEST_IP_ADDR2   (uint8_t) 0
+#define DEST_IP_ADDR3   (uint8_t) 11
 
-#define UDP_SERVER_PORT    7   /* define the UDP local connection port */
-#define UDP_CLIENT_PORT    7   /* define the UDP remote connection port */
+#define UDP_SERVER_PORT    (uint16_t) 7   /* define the UDP local connection port */
+#define UDP_CLIENT_PORT    (uint16_t) 7   /* define the UDP remote connection port */
  
 /*Static IP ADDRESS: IP_ADDR0.IP_ADDR1.IP_ADDR2.IP_ADDR3 */
-#define IP_ADDR0   192
-#define IP_ADDR1   168
-#define IP_ADDR2   0
-#define IP_ADDR3   10
+#define IP_ADDR0   (uint8_t) 192
+#define IP_ADDR1   (uint8_t) 168
+#define IP_ADDR2   (uint8_t) 0
+#define IP_ADDR3   (uint8_t) 10
    
 /*NETMASK*/
-#define NETMASK_ADDR0   255
-#define NETMASK_ADDR1   255
-#define NETMASK_ADDR2   255
-#define NETMASK_ADDR3   0
+#define NETMASK_ADDR0   (uint8_t) 255
+#define NETMASK_ADDR1   (uint8_t) 255
+#define NETMASK_ADDR2   (uint8_t) 255
+#define NETMASK_ADDR3   (uint8_t) 0
 
 /*Gateway Address*/
-#define GW_ADDR0   192
-#define GW_ADDR1   168
-#define GW_ADDR2   0
-#define GW_ADDR3   1
+#define GW_ADDR0   (uint8_t) 192
+#define GW_ADDR1   (uint8_t) 168
+#define GW_ADDR2   (uint8_t) 0
+#define GW_ADDR3   (uint8_t) 1
 
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */

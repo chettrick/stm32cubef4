@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    USB_Device/HID_Standalone/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   USB device HID demo main file
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -44,24 +44,22 @@
   *
   ******************************************************************************
   */
-/* Includes ------------------------------------------------------------------*/
+/* Includes ------------------------------------------------------------------ */
 #include "main.h"
 
-/* Private typedef -----------------------------------------------------------*/
-/* Private define ------------------------------------------------------------*/
+/* Private typedef ----------------------------------------------------------- */
+/* Private define ------------------------------------------------------------ */
 #define CURSOR_STEP     5
 
-/* Private macro -------------------------------------------------------------*/
-/* Private variables ---------------------------------------------------------*/
+/* Private macro ------------------------------------------------------------- */
+/* Private variables --------------------------------------------------------- */
 USBD_HandleTypeDef USBD_Device;
 extern PCD_HandleTypeDef hpcd;
-uint8_t HID_Buffer[4];
 
-/* Private function prototypes -----------------------------------------------*/
+/* Private function prototypes ----------------------------------------------- */
 void SystemClock_Config(void);
-static void GetPointerData(uint8_t *pbuf);
 
-/* Private functions ---------------------------------------------------------*/
+/* Private functions --------------------------------------------------------- */
 
 /**
   * @brief  Main program
@@ -72,65 +70,42 @@ int main(void)
 {
   /* STM32F412xx HAL library initialization */
   HAL_Init();
-  
+
   /* Configure the System clock to have a frequency of 100 MHz */
   SystemClock_Config();
-  
+
   /* Configure LED1, LED2, LED3 and LED4 */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED2);
   BSP_LED_Init(LED3);
   BSP_LED_Init(LED4);
-  
+
+    /* Initialize Joystick */
+  BSP_JOY_Init(JOY_MODE_EXTI);
+
   /* Configure Key button for remote wakeup */
   BSP_PB_Init(BUTTON_WAKEUP, BUTTON_MODE_EXTI);
-  
+
   /* Init Device Library */
   USBD_Init(&USBD_Device, &HID_Desc, 0);
-  
+
   /* Add Supported Class */
   USBD_RegisterClass(&USBD_Device, USBD_HID_CLASS);
-  
+
   /* Start Device Process */
   USBD_Start(&USBD_Device);
-  
+
   while (1)
   {
     HAL_Delay(100);
-    
-    /* Toggle LEDs  */
+
+    /* Toggle LEDs */
     BSP_LED_Toggle(LED1);
     BSP_LED_Toggle(LED2);
     BSP_LED_Toggle(LED3);
     BSP_LED_Toggle(LED4);
-    HAL_Delay(100);  
-    GetPointerData(HID_Buffer);
-    USBD_HID_SendReport(&USBD_Device, HID_Buffer, 4);
+    HAL_Delay(100);
   }
-}
-
-/**
-  * @brief  Gets Pointer Data.
-  * @param  pbuf: Pointer to report
-  * @retval None
-  */
-static void GetPointerData(uint8_t *pbuf)
-{
-  static int8_t cnt = 0;
-  int8_t  x = 0, y = 0 ;
-  
-  if(cnt++ > 0)
-  {
-    x = CURSOR_STEP;
-  }
-  else
-  {
-    x = -CURSOR_STEP;
-  }
-  pbuf[0] = 0;
-  pbuf[1] = x;
-  pbuf[2] = y;
-  pbuf[3] = 0;
 }
 
 /**
@@ -165,15 +140,16 @@ void SystemClock_Config(void)
   RCC_OscInitTypeDef RCC_OscInitStruct;
   RCC_PeriphCLKInitTypeDef PeriphClkInitStruct;
   HAL_StatusTypeDef ret = HAL_OK;
-  
+
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
-  
-  /* The voltage scaling allows optimizing the power consumption when the device is 
-  clocked below the maximum system frequency, to update the voltage scaling value 
-  regarding system frequency refer to product datasheet.  */
+
+  /* The voltage scaling allows optimizing the power consumption when the
+   * device is clocked below the maximum system frequency, to update the
+   * voltage scaling value regarding system frequency refer to product
+   * datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
-  
+
   /* Enable HSE Oscillator and activate PLL with HSE as source */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
@@ -185,12 +161,14 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLQ = 7;
   RCC_OscInitStruct.PLL.PLLR = 2;
   ret = HAL_RCC_OscConfig(&RCC_OscInitStruct);
-  
-  if(ret != HAL_OK)
+
+  if (ret != HAL_OK)
   {
-    while(1) { ; }
+    while (1)
+    {;
+    }
   }
-  
+
   /* Select PLLSAI output as USB clock source */
   PeriphClkInitStruct.PLLI2S.PLLI2SM = 8;
   PeriphClkInitStruct.PLLI2S.PLLI2SQ = 4;
@@ -198,18 +176,22 @@ void SystemClock_Config(void)
   PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_CK48;
   PeriphClkInitStruct.Clk48ClockSelection = RCC_CK48CLKSOURCE_PLLI2SQ;
   HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);
-  
-  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 
-  clocks dividers */
-  RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
+
+  /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+   * clocks dividers */
+  RCC_ClkInitStruct.ClockType =
+    (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 |
+     RCC_CLOCKTYPE_PCLK2);
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;  
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;  
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
   ret = HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_3);
-  if(ret != HAL_OK)
+  if (ret != HAL_OK)
   {
-    while(1) { ; }
+    while (1)
+    {;
+    }
   }
 }
 
@@ -224,9 +206,9 @@ void SystemClock_Config(void)
 
 void HAL_Delay(__IO uint32_t Delay)
 {
-  while(Delay) 
+  while (Delay)
   {
-    if (SysTick->CTRL & SysTick_CTRL_COUNTFLAG_Msk) 
+    if (SysTick->CTRL & SysTick_CTRL_COUNTFLAG_Msk)
     {
       Delay--;
     }
@@ -241,10 +223,11 @@ void HAL_Delay(__IO uint32_t Delay)
   * @param  line: assert_param error line source number
   * @retval None
   */
-void assert_failed(uint8_t* file, uint32_t line)
-{ 
-  /* User can add his own implementation to report the file name and line number,
-     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+void assert_failed(uint8_t * file, uint32_t line)
+{
+  /* User can add his own implementation to report the file name and line
+   * number, ex: printf("Wrong parameters value: file %s on line %d\r\n", file, 
+   * line) */
 
   /* Infinite loop */
   while (1)

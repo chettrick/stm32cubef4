@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    USB_Host/MSC_Standalone/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.6
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   USB host Mass storage demo main file
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -103,6 +103,8 @@ int main(void)
     
     /* MSC Menu Process */
     MSC_MenuProcess();
+    
+    Toggle_Leds();
   } 
 }
 
@@ -161,6 +163,10 @@ static void USBH_UserProcess(USBH_HandleTypeDef *phost, uint8_t id)
     
   case HOST_USER_DISCONNECTION:
     Appli_state = APPLICATION_DISCONNECT;
+    if(f_mount(NULL, "", 0) != FR_OK)
+    {
+      LCD_ErrLog("ERROR : Cannot DeInitialize FatFs! \n");
+    }
     
     break;
     
@@ -169,6 +175,10 @@ static void USBH_UserProcess(USBH_HandleTypeDef *phost, uint8_t id)
     break;
     
   case HOST_USER_CONNECTION:
+    if(f_mount(&USBH_fatfs, "", 0) != FR_OK)
+    {  
+      LCD_ErrLog("ERROR : Cannot Initialize FatFs! \n");
+    }
     break;
 
   default:

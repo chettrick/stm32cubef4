@@ -2,16 +2,16 @@
   @page Demo   Demo STM324xG-EVAL
  
   @verbatim
-  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    Demonstrations/readme.txt 
   * @author  MCD Application Team
-  * @version V1.3.6
-  * @date    04-November-2016
+  * @version V1.4.0
+  * @date    17-February-2017
   * @brief   Description of STM324xG-EVAL Demonstration
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -124,12 +124,12 @@ Below you find an overview of the different offered module in the demonstration:
  
  + Image viewer
  --------------
- The Image viewer module allows displaying bmp and jpg pictures. It is possible to load the
+ The Image viewer module allows displaying bmp pictures. It is possible to load the
  full images list from a folder or to add the images manually to the playlist. Once the playlist is
  created, navigation between pictures can be done either via Next and previous buttons or by
  enabling the slide show mode. The slide show timer can be changed on the fly (there is no
  need to restart the module).
- You can use the *.jpg image files provided under "Utilities/Media/Pictures/JPG" or any other ones.
+ You can use the *.bmp image files provided under "Utilities/Media/Pictures/BMP_320x240/" or any other ones.
  
  For more details about the demonstration modules please refers to  STM32CubeF4 demonstration (UM1743)
 

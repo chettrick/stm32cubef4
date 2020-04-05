@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm32412g_discovery_lcd.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    04-May-2016
+  * @version V2.0.0
+  * @date    27-January-2017
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm32412g_discovery_lcd.c driver.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -58,7 +58,7 @@
   * @{
   */
     
-/** @defgroup STM32412G_DISCOVERY_LCD STM32412G-DISCOVERY LCD
+/** @addtogroup STM32412G_DISCOVERY_LCD
   * @{
   */ 
 
@@ -71,20 +71,7 @@ typedef struct
   uint32_t BackColor;
   sFONT    *pFont; 
 }LCD_DrawPropTypeDef;
-/**
-  * @}
-  */ 
 
-/** @defgroup STM32412G_DISCOVERY_LCD_Exported_Constants STM32412G DISCOVERY LCD Exported Constants
-  * @{
-  */
-/** 
-  * @brief  LCD status structure definition  
-  */     
-#define LCD_OK         ((uint8_t)0x00)
-#define LCD_ERROR      ((uint8_t)0x01)
-#define LCD_TIMEOUT    ((uint8_t)0x02)
-    
 typedef struct 
 {
   int16_t X;
@@ -101,10 +88,26 @@ typedef enum
   LEFT_MODE            = 0x03     /* Left mode   */
 }Line_ModeTypdef;
 
+/**
+  * @}
+  */ 
 
+/** @defgroup STM32412G_DISCOVERY_LCD_Exported_Constants STM32412G DISCOVERY LCD Exported Constants
+  * @{
+  */
+/** 
+  * @brief  LCD status structure definition  
+  */     
+#define LCD_OK         ((uint8_t)0x00)
+#define LCD_ERROR      ((uint8_t)0x01)
+#define LCD_TIMEOUT    ((uint8_t)0x02)
+
+/** 
+  * @brief  LCD orientation  
+  */ 
 #define  LCD_ORIENTATION_PORTRAIT   ((uint8_t)0x00) /*!< Portrait orientation choice of LCD screen  */
 #define  LCD_ORIENTATION_LANDSCAPE  ((uint8_t)0x01) /*!< Landscape orientation choice of LCD screen */
-
+#define  LCD_ORIENTATION_LANDSCAPE_ROT180 ((uint8_t)0x02) /*!< Landscape rotated 180° orientation choice of LCD screen */
 
 /** 
   * @brief  LCD color  

@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    LTDC/LTDC_Display_2Layers/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.3.5
-  * @date    04-November-2016
+  * @version V1.4.0
+  * @date    17-February-2017
   * @brief   This example describes how to configure the LTDC peripheral 
   *          to display two Layers at the same time.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -122,7 +122,7 @@ int main(void)
        HAL_LTDC_SetWindowPosition_NoReload(&LtdcHandle, Xpos2, Ypos2, 1);
        /*Ask for LTDC reload within next vertical blanking*/
        ReloadFlag = 0;
-       HAL_LTDC_Relaod(&LtdcHandle,LTDC_SRCR_VBR);
+       HAL_LTDC_Reload(&LtdcHandle,LTDC_SRCR_VBR);
 
       while(ReloadFlag == 0)
       {
@@ -142,7 +142,7 @@ int main(void)
        HAL_LTDC_SetWindowPosition_NoReload(&LtdcHandle, Xpos2, Ypos2, 1);
        /*Ask for LTDC reload within next vertical blanking*/
        ReloadFlag = 0;
-       HAL_LTDC_Relaod(&LtdcHandle,LTDC_SRCR_VBR);
+       HAL_LTDC_Reload(&LtdcHandle,LTDC_SRCR_VBR);
 
       while(ReloadFlag == 0)
       {

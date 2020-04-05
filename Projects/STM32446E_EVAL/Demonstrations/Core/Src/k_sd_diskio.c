@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    k_sd_diskio.c
   * @author  MCD Application Team
-  * @version V1.2.5
-  * @date    03-June-2016
+  * @version V1.2.6
+  * @date    17-February-2017
   * @brief   kernel SD Disk I/O driver
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -51,8 +51,6 @@
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Block Size in Bytes */
-#define BLOCK_SIZE                512
-
 /* Private variables ---------------------------------------------------------*/
 /* Disk status */
 static volatile DSTATUS Stat = STA_NOINIT;
@@ -111,7 +109,7 @@ DSTATUS SD_status(BYTE pdrv)
 {
   Stat = STA_NOINIT;
 
-  if(BSP_SD_GetStatus() == MSD_OK)
+  if(BSP_SD_GetCardState() == MSD_OK)
   {
     Stat &= ~STA_NOINIT;
   }
@@ -130,14 +128,22 @@ DSTATUS SD_status(BYTE pdrv)
 DRESULT SD_read(BYTE pdrv, BYTE *buff, DWORD sector, UINT count)
 {
   DRESULT res = RES_OK;
-  __disable_irq();
+  uint32_t timeout = 100000;
   
+  __disable_irq();
+
   if(BSP_SD_ReadBlocks((uint32_t*)buff, 
-                       (uint64_t) (sector * BLOCK_SIZE), 
-                       BLOCK_SIZE, 
-                       count) != MSD_OK)
+                       (uint32_t) (sector), 
+                       count, SD_DATATIMEOUT) == MSD_OK)
   {
-    res = RES_ERROR;
+    while(BSP_SD_GetCardState()!= MSD_OK)
+    {
+      if (timeout-- == 0)
+      {
+        return RES_ERROR;
+      }
+    }
+    res = RES_OK;
   }
   __enable_irq();
   return res;
@@ -155,13 +161,22 @@ DRESULT SD_read(BYTE pdrv, BYTE *buff, DWORD sector, UINT count)
 DRESULT SD_write(BYTE pdrv, const BYTE* buff, DWORD sector, UINT count)
 {
   DRESULT res = RES_OK;
-  __disable_irq();
+  uint32_t timeout = 100000;
   
+  __disable_irq();
+
   if(BSP_SD_WriteBlocks((uint32_t*)buff, 
-                        (uint64_t)(sector * BLOCK_SIZE), 
-                        BLOCK_SIZE, count) != MSD_OK)
+                        (uint32_t)(sector), 
+                        count, SD_DATATIMEOUT) == MSD_OK)
   {
-    res = RES_ERROR;
+    while(BSP_SD_GetCardState()!= MSD_OK)
+    {
+      if (timeout-- == 0)
+      {
+        return RES_ERROR;
+      }
+    }    
+    res = RES_OK;
   }
   
   __enable_irq();
@@ -181,7 +196,7 @@ DRESULT SD_write(BYTE pdrv, const BYTE* buff, DWORD sector, UINT count)
 DRESULT SD_ioctl(BYTE pdrv, BYTE cmd, void *buff)
 {
   DRESULT res = RES_ERROR;
-  SD_CardInfo CardInfo;
+  HAL_SD_CardInfoTypeDef CardInfo;
   
   if (Stat & STA_NOINIT) return RES_NOTRDY;
   
@@ -195,19 +210,22 @@ DRESULT SD_ioctl(BYTE pdrv, BYTE cmd, void *buff)
   /* Get number of sectors on the disk (DWORD) */
   case GET_SECTOR_COUNT :
     BSP_SD_GetCardInfo(&CardInfo);
-    *(DWORD*)buff = CardInfo.CardCapacity / BLOCK_SIZE;
+    *(DWORD*)buff = CardInfo.LogBlockNbr;
     res = RES_OK;
     break;
   
   /* Get R/W sector size (WORD) */
   case GET_SECTOR_SIZE :
-    *(WORD*)buff = BLOCK_SIZE;
+    BSP_SD_GetCardInfo(&CardInfo);
+    *(WORD*)buff = CardInfo.LogBlockSize;
     res = RES_OK;
     break;
   
   /* Get erase block size in unit of sector (DWORD) */
   case GET_BLOCK_SIZE :
-    *(DWORD*)buff = BLOCK_SIZE;
+    BSP_SD_GetCardInfo(&CardInfo);
+    *(DWORD*)buff = CardInfo.LogBlockSize;
+    res = RES_OK;
     break;
   
   default:

@@ -2,16 +2,16 @@
   @page STemWin_HelloWorld Readme file
  
   @verbatim
-  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    STemWin_HelloWorld/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.6
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -58,11 +58,8 @@ downloaded from here:
 http://www.segger.com/emwin-samples.html
 To do this, user has only to replace the file "Basic_HelloWorld.c" into the
 project workspace by the downloaded one.
-As example, two sample source files are provided (but not linked to the project):
-	STemWin/HelloWorld/Src/MEMDEV_WM_Ticker.c
-	STemWin/HelloWorld/Src/MOVIE_ShowFeatures.c
 
-The 4 leds are blinking to show that the program is runing
+The 4 LEDs are blinking to show that the program is runing
 
 Note that the following user files may need to be updated:
   LCDConf_stm32469i_eval.c
@@ -99,7 +96,7 @@ Note that the following user files may need to be updated:
 
   - This example runs on STM32F469xx/STM32F479xx devices.
     
-  - This example has been tested with STM32469I-EVAL revB evaluation board and can be
+  - This example has been tested with STM32469I-EVAL rev C evaluation board and can be
     easily tailored to any other supported device and development board.
 
 @par How to use it ? 

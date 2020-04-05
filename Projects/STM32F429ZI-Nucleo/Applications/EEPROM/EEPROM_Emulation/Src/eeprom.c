@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    EEPROM/EEPROM_Emulation/src/eeprom.c 
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    06-May-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   This file provides all the EEPROM emulation firmware functions.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -736,4 +736,4 @@ static uint16_t EE_PageTransfer(uint16_t VirtAddress, uint16_t Data)
   * @}
   */ 
 
-/******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT 2017 STMicroelectronics *****END OF FILE****/

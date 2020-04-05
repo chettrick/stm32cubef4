@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    main.c 
   * @author  MCD Application Team
-  * @version V1.1.4
-  * @date    03-June-2016
+  * @version V1.2.0
+  * @date    17-February-2017
   * @brief   This file provides main program functions
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -180,7 +180,7 @@ int main(void)
 #endif     
   k_ModuleAdd(&home_alarm_board); 
   k_ModuleAdd(&settings_board);
-
+  
   /* Initialize GUI */
   GUI_Init();   
   
@@ -260,7 +260,7 @@ static void TimerCallback(void const *n)
   *            APB1 Prescaler                 = 4
   *            APB2 Prescaler                 = 2
   *            HSE Frequency(Hz)              = 8000000
-  *            PLL_M                          = 25
+  *            PLL_M                          = 8
   *            PLL_N                          = 360
   *            PLL_P                          = 2
   *            PLL_Q                          = 7

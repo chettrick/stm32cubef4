@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    LwIP/LwIP_TFTP_Server/Src/main.c
   * @author  MCD Application Team
-  * @version V1.4.6
-  * @date    04-November-2016
+  * @version V1.5.0
+  * @date    17-February-2017
   * @brief   Main program body
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -46,29 +46,29 @@
   */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "lwip/opt.h"
 #include "lwip/init.h"
-#include "netif/etharp.h"
 #include "lwip/netif.h"
-#include "lwip/lwip_timers.h"
+#include "lwip/timeouts.h"
+#include "netif/etharp.h"
 #include "ethernetif.h"
 #include "app_ethernet.h"
-#include "lcd_log.h"
 #include "tftpserver.h"
+#ifdef USE_LCD
+#include "lcd_log.h"
+#endif
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 struct netif gnetif;
-
 FATFS SD_FatFs;  /* File system object for SD card logical drive */
 char SD_Path[4]; /* SD card logical drive path */
 
 /* Private function prototypes -----------------------------------------------*/
-static void SystemClock_Config(void);
 static void BSP_Config(void);
 static void Netif_Config(void);
+static void SystemClock_Config(void);
 
 /* Private functions ---------------------------------------------------------*/
 
@@ -85,87 +85,44 @@ int main(void)
        - Set NVIC Group Priority to 4
        - Global MSP (MCU Support Package) initialization
      */
-  HAL_Init();  
-  
+  HAL_Init();
+
   /* Configure the system clock to 175 MHz */
   SystemClock_Config();
-  
+
   /* Configure the BSP */
   BSP_Config();
-  
-  /* Initilaize the LwIP stack */
+
+  /* Initialize the LwIP stack */
   lwip_init();
-  
+
   /* Configure the Network interface */
   Netif_Config();
-  
-  /* Initilaize the TFTP server */
+
+  /* Initialize the TFTP server */
   tftpd_init();
-  
-  /* Notify user about the netwoek interface config */
+
+  /* Notify user about the network interface config */
   User_notification(&gnetif);
-  
+
   /* Link the SD Card disk I/O driver */
   FATFS_LinkDriver(&SD_Driver, SD_Path);
-  
+
   /* Infinite loop */
   while (1)
-  { 
-    /* Read a received packet from the Ethernet buffers and send it 
+  {
+    /* Read a received packet from the Ethernet buffers and send it
     to the lwIP for handling */
     ethernetif_input(&gnetif);
-    
+
     /* Handle timeouts */
     sys_check_timeouts();
-    
+
 #ifdef USE_DHCP
     /* handle periodic timers for LwIP */
     DHCP_Periodic_Handle(&gnetif);
 #endif
-  } 
-}
-
-/**
-  * @brief  Configurates the network interface
-  * @param  None
-  * @retval None
-  */
-static void Netif_Config(void)
-{
-  ip_addr_t ipaddr;
-  ip_addr_t netmask;
-  ip_addr_t gw;
-  
-#ifdef USE_DHCP
-  ipaddr.addr = 0;
-  netmask.addr = 0;
-  gw.addr = 0;
-#else
-  /* IP address default setting */
-  IP4_ADDR(&ipaddr, IP_ADDR0, IP_ADDR1, IP_ADDR2, IP_ADDR3);
-  IP4_ADDR(&netmask, NETMASK_ADDR0, NETMASK_ADDR1 , NETMASK_ADDR2, NETMASK_ADDR3);
-  IP4_ADDR(&gw, GW_ADDR0, GW_ADDR1, GW_ADDR2, GW_ADDR3);
-#endif
-  
-  /* add the network interface */    
-  netif_add(&gnetif, &ipaddr, &netmask, &gw, NULL, &ethernetif_init, &ethernet_input);
-  
-  /*  Registers the default network interface */
-  netif_set_default(&gnetif);
-  
-  if (netif_is_link_up(&gnetif))
-  {
-    /* When the netif is fully configured this function must be called */
-    netif_set_up(&gnetif);
   }
-  else
-  {
-    /* When the netif link is down this function must be called */
-    netif_set_down(&gnetif);
-  }
-  
-  /* Set the link callback function, this function is called on change of link status*/
-  netif_set_link_callback(&gnetif, ethernetif_update_config);
 }
 
 /**
@@ -175,12 +132,10 @@ static void Netif_Config(void)
   */
 static void BSP_Config(void)
 {
-  /* Configure LED1, LED2, LED3 and LED4 */
+  /* Configure LED1, LED2 */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED2);
-  BSP_LED_Init(LED3);
-  BSP_LED_Init(LED4);
-  
+
   /* Set Systick Interrupt to the highest priority */
   HAL_NVIC_SetPriority(SysTick_IRQn, 0x0, 0x0);
   
@@ -215,6 +170,48 @@ static void BSP_Config(void)
 }
 
 /**
+  * @brief  Configurates the network interface
+  * @param  None
+  * @retval None
+  */
+static void Netif_Config(void)
+{
+  ip_addr_t ipaddr;
+  ip_addr_t netmask;
+  ip_addr_t gw;
+
+#ifdef USE_DHCP
+  ip_addr_set_zero_ip4(&ipaddr);
+  ip_addr_set_zero_ip4(&netmask);
+  ip_addr_set_zero_ip4(&gw);
+#else
+  IP_ADDR4(&ipaddr,IP_ADDR0,IP_ADDR1,IP_ADDR2,IP_ADDR3);
+  IP_ADDR4(&netmask,NETMASK_ADDR0,NETMASK_ADDR1,NETMASK_ADDR2,NETMASK_ADDR3);
+  IP_ADDR4(&gw,GW_ADDR0,GW_ADDR1,GW_ADDR2,GW_ADDR3);
+#endif /* USE_DHCP */
+  
+  /* Add the network interface */    
+  netif_add(&gnetif, &ipaddr, &netmask, &gw, NULL, &ethernetif_init, &ethernet_input);
+  
+  /*  Registers the default network interface */
+  netif_set_default(&gnetif);
+
+  if (netif_is_link_up(&gnetif))
+  {
+    /* When the netif is fully configured this function must be called */
+    netif_set_up(&gnetif);
+  }
+  else
+  {
+    /* When the netif link is down this function must be called */
+    netif_set_down(&gnetif);
+  }
+
+  /* Set the link callback function, this function is called on change of link status*/
+  netif_set_link_callback(&gnetif, ethernetif_update_config);
+}
+
+/**
   * @brief EXTI line detection callbacks
   * @param GPIO_Pin: Specifies the pins connected EXTI line
   * @retval None
@@ -231,7 +228,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
 /**
   * @brief  System Clock Configuration
-  *         The system Clock is configured as follow : 
+  *         The system Clock is configured as follow :
   *            System Clock source            = PLL (HSE)
   *            SYSCLK(Hz)                     = 175000000
   *            HCLK(Hz)                       = 175000000

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32469i_eval_qspi.c
   * @author  MCD Application Team
-  * @version V1.0.4
-  * @date    04-August-2016
+  * @version V2.0.0
+  * @date    27-January-2017
   * @brief   This file includes a standard driver for the N25Q256A QSPI 
   *          memory mounted on STM32469I-EVAL board.
   @verbatim
@@ -37,7 +37,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -138,7 +138,7 @@ uint8_t BSP_QSPI_Init(void)
   QSPIHandle.Init.FifoThreshold      = 1;
   QSPIHandle.Init.SampleShifting     = QSPI_SAMPLE_SHIFTING_HALFCYCLE;
   QSPIHandle.Init.FlashSize          = POSITION_VAL(S25FL512S_FLASH_SIZE) - 1; /* same size on both memory types */
-  QSPIHandle.Init.ChipSelectHighTime = QSPI_CS_HIGH_TIME_2_CYCLE;
+  QSPIHandle.Init.ChipSelectHighTime = QSPI_CS_HIGH_TIME_5_CYCLE; /* Min 50ns for nonRead on both memory types */
   QSPIHandle.Init.ClockMode          = QSPI_CLOCK_MODE_0;
   QSPIHandle.Init.FlashID            = QSPI_FLASH_ID_1;
   QSPIHandle.Init.DualFlash          = QSPI_DUALFLASH_DISABLE;
@@ -225,6 +225,9 @@ uint8_t BSP_QSPI_Read(uint8_t* pData, uint32_t ReadAddr, uint32_t Size)
   {
     return QSPI_ERROR;
   }
+
+  /* Set S# timing for Read command: Min 20ns for N25Q512A memory and 10ns for S25FL512S memory */
+  MODIFY_REG(QSPIHandle.Instance->DCR, QUADSPI_DCR_CSHT, QSPI_CS_HIGH_TIME_2_CYCLE);
   
   /* Reception of the data */
   if (HAL_QSPI_Receive(&QSPIHandle, pData, HAL_QPSI_TIMEOUT_DEFAULT_VALUE) != HAL_OK)
@@ -232,6 +235,9 @@ uint8_t BSP_QSPI_Read(uint8_t* pData, uint32_t ReadAddr, uint32_t Size)
     return QSPI_ERROR;
   }
 
+  /* Restore S# timing for nonRead commands */
+  MODIFY_REG(QSPIHandle.Instance->DCR, QUADSPI_DCR_CSHT, QSPI_CS_HIGH_TIME_5_CYCLE);
+  
   return QSPI_OK;
 }
 
@@ -248,14 +254,8 @@ uint8_t BSP_QSPI_Write(uint8_t* pData, uint32_t WriteAddr, uint32_t Size)
   uint32_t end_addr, current_size, current_addr;
   
   /* Calculation of the size between the write address and the end of the page */
-  current_addr = 0;
-
-  while (current_addr <= WriteAddr)
-  {
-    current_addr += QspiInfo.ProgPageSize;
-  }
-  current_size = current_addr - WriteAddr;
-
+  current_size = QspiInfo.ProgPageSize - (WriteAddr % (QspiInfo.ProgPageSize));
+  
   /* Check if the size of the data is less than the remaining place in the page */
   if (current_size > Size)
   {

@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    k_menu.c
   * @author  MCD Application Team
-  * @version V1.4.6
-  * @date    04-November-2016 
+  * @version V1.4.7
+  * @date    17-February-2017 
   * @brief   This file provides the kernel menu functions 
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -574,7 +574,7 @@ static void _cbBk(WM_MESSAGE * pMsg) {
   
   MENU_MSG_DATA* pData;
   uint32_t NCode, Id;
-  static int sel = 0;
+  static int sel = (-1);
   
   switch (pMsg->MsgId) 
   {
@@ -677,7 +677,7 @@ static void _cbBk(WM_MESSAGE * pMsg) {
           WM_HideWindow(hPerformance);
         } 
         
-        if(sel < k_ModuleGetNumber())
+        if((sel >= 0) && (sel < k_ModuleGetNumber()))
         {    
           if(sel < 8)
           {
@@ -695,7 +695,7 @@ static void _cbBk(WM_MESSAGE * pMsg) {
       if (Id == ID_ICONVIEW_MENU)
       {
         
-        if(sel < k_ModuleGetNumber())
+        if((sel >= 0) && (sel < k_ModuleGetNumber()))
         { 
           SpriteDisabled = 1;
           GUI_SPRITE_Hide(_aSprite[0].hSprite);
@@ -924,6 +924,17 @@ void k_SetGuiProfile(void)
   }
   else
   {
+    FRAMEWIN_SetDefaultSkinClassic();
+    PROGBAR_SetDefaultSkinClassic();
+    RADIO_SetDefaultSkinClassic();
+    SCROLLBAR_SetDefaultSkinClassic();
+    SLIDER_SetDefaultSkinClassic();
+    SPINBOX_SetDefaultSkinClassic();
+    BUTTON_SetDefaultSkinClassic();
+    DROPDOWN_SetDefaultSkinClassic();
+    MULTIPAGE_SetDefaultSkinClassic();
+    CHECKBOX_SetDefaultSkinClassic();
+
     FRAMEWIN_SetDefaultTextColor(0, GUI_WHITE);
     FRAMEWIN_SetDefaultTextColor(1, GUI_WHITE);   
   }
@@ -995,6 +1006,9 @@ void k_InitMenu(void)
                             ID_ICONVIEW_MENU, 
                             112, 
                             105);
+  
+  /* Initialise the selection number */
+  ICONVIEW_SetSel(hIcon, (-1));
   
   ICONVIEW_SetFont(hIcon, &GUI_Font13B_ASCII);
   

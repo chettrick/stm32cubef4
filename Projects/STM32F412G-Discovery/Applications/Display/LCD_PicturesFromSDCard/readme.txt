@@ -5,13 +5,13 @@
   ******************************************************************************
   * @file    Display/LCD_PicturesFromSDCard/readme.txt
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   Description of the LCD pictures from SD card application.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -42,7 +42,7 @@
 
 This application describes how to display on LCD pictures saved under SD card.
 
-The image copied from SD card into internal SRAM memory and then displayed on LCD.
+The image copied from SD card into internal SRAM and then displayed on LCD.
 By pressing Joystick SEL button, the application displays the next image.
 
 Once the LCD, SD card and file systems are initialized and configured,

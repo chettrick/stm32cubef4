@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LwIP/LwIP_HTTP_Server_Raw/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.3.6
-  * @date    04-November-2016
+  * @version V1.4.0
+  * @date    17-February-2017
   * @brief   This sample code implements a http server application based on Raw
   *          API of LwIP stack. This application uses STM32F4xx the ETH HAL API 
   *          to transmit and receive data. 
@@ -11,7 +11,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -48,17 +48,17 @@
   ******************************************************************************
   */
 /* Includes ------------------------------------------------------------------*/
-#include "lwip/opt.h"
-#include "lwip/init.h"
-#include "netif/etharp.h"
-#include "lwip/netif.h"
-#include "lwip/lwip_timers.h"
-#include "ethernetif.h"
 #include "main.h"
+#include "lwip/init.h"
+#include "lwip/netif.h"
+#include "lwip/timeouts.h"
+#include "netif/etharp.h"
+#include "ethernetif.h"
 #include "app_ethernet.h"
-#include "lcd_log.h"
 #include "http_cgi_ssi.h"
-
+#ifdef USE_LCD
+#include "lcd_log.h"
+#endif
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -119,51 +119,8 @@ int main(void)
 #ifdef USE_DHCP
     /* handle periodic timers for LwIP */
     DHCP_Periodic_Handle(&gnetif);
-#endif 
-  } 
-}
-
-/**
-* @brief  Initializes the lwIP stack
-* @param  None
-* @retval None
-*/
-static void Netif_Config(void)
-{
-  ip_addr_t ipaddr;
-  ip_addr_t netmask;
-  ip_addr_t gw;
-  
-#ifdef USE_DHCP
-  ipaddr.addr = 0;
-  netmask.addr = 0;
-  gw.addr = 0;
-#else
-  /* IP address default setting */
-  IP4_ADDR(&ipaddr, IP_ADDR0, IP_ADDR1, IP_ADDR2, IP_ADDR3);
-  IP4_ADDR(&netmask, NETMASK_ADDR0, NETMASK_ADDR1 , NETMASK_ADDR2, NETMASK_ADDR3);
-  IP4_ADDR(&gw, GW_ADDR0, GW_ADDR1, GW_ADDR2, GW_ADDR3);
 #endif
-  
-  /* add the network interface */    
-  netif_add(&gnetif, &ipaddr, &netmask, &gw, NULL, &ethernetif_init, &ethernet_input);
-  
-  /*  Registers the default network interface */
-  netif_set_default(&gnetif);
-  
-  if (netif_is_link_up(&gnetif))
-  {
-    /* When the netif is fully configured this function must be called */
-    netif_set_up(&gnetif);
   }
-  else
-  {
-    /* When the netif link is down this function must be called */
-    netif_set_down(&gnetif);
-  }
-  
-  /* Set the link callback function, this function is called on change of link status*/
-  netif_set_link_callback(&gnetif, ethernetif_update_config);
 }
 
 /**
@@ -172,9 +129,9 @@ static void Netif_Config(void)
   * @retval None
   */
 static void BSP_Config(void)
-{  
+{
   GPIO_InitTypeDef GPIO_InitStructure;
-   
+  
   /* Enable PB14 to IT mode: Ethernet Link interrupt */ 
   __HAL_RCC_GPIOB_CLK_ENABLE();
   GPIO_InitStructure.Pin = GPIO_PIN_14;
@@ -183,7 +140,7 @@ static void BSP_Config(void)
   HAL_GPIO_Init(GPIOB, &GPIO_InitStructure);
  
   /* Enable EXTI Line interrupt */
-  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0x5, 0x0);
+  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0xF, 0);
   HAL_NVIC_EnableIRQ(EXTI15_10_IRQn); 
   
   /* Configure LED1, LED2, LED3 and LED4 */
@@ -191,7 +148,7 @@ static void BSP_Config(void)
   BSP_LED_Init(LED2);
   BSP_LED_Init(LED3);
   BSP_LED_Init(LED4);
-  
+
   /* Set Systick Interrupt to the highest priority */
   HAL_NVIC_SetPriority(SysTick_IRQn, 0x0, 0x0);
  
@@ -210,6 +167,48 @@ static void BSP_Config(void)
   LCD_UsrLog("  State: Ethernet Initialization ...\n");
   
 #endif
+}
+
+/**
+  * @brief  Configurates the network interface
+  * @param  None
+  * @retval None
+  */
+static void Netif_Config(void)
+{
+  ip_addr_t ipaddr;
+  ip_addr_t netmask;
+  ip_addr_t gw;
+  
+#ifdef USE_DHCP
+  ip_addr_set_zero_ip4(&ipaddr);
+  ip_addr_set_zero_ip4(&netmask);
+  ip_addr_set_zero_ip4(&gw);
+#else
+  IP_ADDR4(&ipaddr,IP_ADDR0,IP_ADDR1,IP_ADDR2,IP_ADDR3);
+  IP_ADDR4(&netmask,NETMASK_ADDR0,NETMASK_ADDR1,NETMASK_ADDR2,NETMASK_ADDR3);
+  IP_ADDR4(&gw,GW_ADDR0,GW_ADDR1,GW_ADDR2,GW_ADDR3);
+#endif /* USE_DHCP */
+  
+  /* Add the network interface */    
+  netif_add(&gnetif, &ipaddr, &netmask, &gw, NULL, &ethernetif_init, &ethernet_input);
+  
+  /*  Registers the default network interface */
+  netif_set_default(&gnetif);
+  
+  if (netif_is_link_up(&gnetif))
+  {
+    /* When the netif is fully configured this function must be called */
+    netif_set_up(&gnetif);
+  }
+  else
+  {
+    /* When the netif link is down this function must be called */
+    netif_set_down(&gnetif);
+  }
+  
+  /* Set the link callback function, this function is called on change of link status*/
+  netif_set_link_callback(&gnetif, ethernetif_update_config);
 }
 
 /**

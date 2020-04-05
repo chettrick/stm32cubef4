@@ -2,11 +2,11 @@
   @page FLASH_DualBoot  FLASH Dual Boot example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    FLASH/FLASH_DualBoot/readme.txt
   * @author  MCD Application Team
-  * @version V1.3.5
-  * @date    04-November-2016
+  * @version V1.4.0
+  * @date    17-February-2017
   * @brief   Description of the FLASH Dual boot example.
   ******************************************************************************
   *
@@ -38,7 +38,7 @@
 @par Example Description 
 
 This example guides you through the different configuration steps by mean of HAL API
-how to program bank1 and bank2 of the FLASH memory integrated within STM32F4xx devices 
+how to program bank1 and bank2 of the Flash memory integrated within STM32F4xx devices 
 and swap between both of them.
   
 At the beginning of the main program the HAL_Init() function is called to reset 

@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm32469i_eval.h
   * @author  MCD Application Team
-  * @version V1.0.4
-  * @date    04-August-2016
+  * @version V2.0.0
+  * @date    27-January-2017
   * @brief   This file contains definitions for STM32469I-EVAL's LEDs,
   *          push-buttons and COM ports hardware resources.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -313,9 +313,14 @@ typedef enum
 /* Exported constant IO ------------------------------------------------------*/
 
 /**
-  * @brief TouchScreen FT6206 Slave I2C address
+  * @brief TouchScreen FT6206 Slave I2C address 1
   */
 #define TS_I2C_ADDRESS                   ((uint16_t)0x54)
+
+/**
+  * @brief TouchScreen FT6336G Slave I2C address 2
+  */
+#define TS_I2C_ADDRESS_A02               ((uint16_t)0x70)
 
 /**
   * @brief MFX_I2C_ADDR 0

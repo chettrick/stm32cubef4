@@ -2,11 +2,11 @@
   @page PWR_CurrentConsumption PWR Current Consumption example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    PWR/PWR_CurrentConsumption/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.6
-  * @date    04-November-2016
+  * @version V1.2.7
+  * @date    17-February-2017
   * @brief   Description of the PWR Current Consumption example.
   ******************************************************************************
   *
@@ -158,8 +158,8 @@ Here below a detailed description of the example code:
     - Use LED2 connected respectively to PA05 pin.
       * LED2 (GREEN) will keep ON if initialization fails.
       * LED2 (GREEN) will slowly toggle (1sec.) waiting for user to launch test, then be turn OFF
-      * LED2 (GREEN) will toggle fast (200ms) while returning from STANDBY mode (PWR flag check callback) 
-      * LED2 (GREEN) will toggle fast (200ms) at the end of test in case of 
+      * LED2 (GREEN) will slowly toggle (1sec.) while returning from STANDBY mode
+      * LED2 (GREEN) will toggle fast (100ms) at the end of test in case of 
       success.
     - Use Key Button connected to PC13 pin.
     - Connect PA0 (pin 28 in CN7 connector) to 3.3v to wake up from STANDBY mode.

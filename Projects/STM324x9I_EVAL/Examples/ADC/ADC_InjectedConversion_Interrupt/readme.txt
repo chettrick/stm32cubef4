@@ -2,11 +2,11 @@
   @page ADC_InjectedConversion_Interrupt ADC3 conversion using Interrupt
 
   @verbatim
-  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    ADC/ADC_InjectedConversion_Interrupt/readme.txt 
   * @author  MCD Application Team
-  * @version V1.3.5
-  * @date    04-November-2016
+  * @version V1.4.0
+  * @date    17-February-2017
   * @brief   Description of the ADC InjectedConversion Interrupt example.
   ******************************************************************************
   *

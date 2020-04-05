@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    FLASH/FLASH_EraseProgram/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    04-November-2016
+  * @version V1.0.4
+  * @date    17-February-2017
   * @brief   This example provides a description of how to erase and program the 
   *          STM32F4xx FLASH.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -229,9 +229,17 @@ static uint32_t GetSector(uint32_t Address)
   {
     sector = FLASH_SECTOR_4;  
   }
-   else/*(Address < FLASH_END_ADDR) && (Address >= ADDR_FLASH_SECTOR_5))*/
+  else if((Address < ADDR_FLASH_SECTOR_6) && (Address >= ADDR_FLASH_SECTOR_5))
   {
-    sector = FLASH_SECTOR_5;
+    sector = FLASH_SECTOR_5;  
+  }
+  else if((Address < ADDR_FLASH_SECTOR_7) && (Address >= ADDR_FLASH_SECTOR_6))
+  {
+    sector = FLASH_SECTOR_6;  
+  }
+  else/*(Address < FLASH_END_ADDR) && (Address >= ADDR_FLASH_SECTOR_7))*/
+  {
+    sector = FLASH_SECTOR_7;
   }
 
   return sector;

@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    LwIP/LwIP_TCP_Echo_Server/Src/ethernetif.c
   * @author  MCD Application Team
-  * @version V1.0.6
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   This file implements Ethernet network interface drivers for lwIP
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -46,8 +46,7 @@
   */
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
-#include "lwip/opt.h"
-#include "lwip/lwip_timers.h"
+#include "lwip/timeouts.h"
 #include "netif/etharp.h"
 #include "ethernetif.h"
 #include <string.h>
@@ -136,7 +135,7 @@ void HAL_ETH_MspInit(ETH_HandleTypeDef *heth)
   GPIO_InitStructure.Alternate = GPIO_AF11_ETH;
   GPIO_InitStructure.Pin = GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_7;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStructure);
-
+  
   
   /* Configure PB5 */
   GPIO_InitStructure.Pin = GPIO_PIN_5;
@@ -152,7 +151,7 @@ void HAL_ETH_MspInit(ETH_HandleTypeDef *heth)
   GPIO_InitStructure.Pin = GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStructure);
 
-                                
+
   /* Configure PG11, PG14 and PG13 */
   GPIO_InitStructure.Pin =  GPIO_PIN_11 | GPIO_PIN_13 | GPIO_PIN_14;
   HAL_GPIO_Init(GPIOG, &GPIO_InitStructure);
@@ -256,7 +255,7 @@ static void low_level_init(struct netif *netif)
   
   /* Enable MAC and DMA transmission and reception */
   HAL_ETH_Start(&EthHandle);
-  
+
   /**** Configure PHY to generate an interrupt when Eth Link state changes ****/
   /* Read Register Configuration */
   HAL_ETH_ReadPHYRegister(&EthHandle, PHY_MICR, &regvalue);
@@ -287,7 +286,7 @@ static void low_level_init(struct netif *netif)
   *
   * @note Returning ERR_MEM here if a DMA queue of your MAC is full can lead to
   *       strange results. You might consider waiting for space in the DMA queue
-  *       to become availale since the stack doesn't retry to send a packet
+  *       to become available since the stack doesn't retry to send a packet
   *       dropped because of memory failure (except for the TCP timers).
   */
 static err_t low_level_output(struct netif *netif, struct pbuf *p)
@@ -387,6 +386,7 @@ static struct pbuf * low_level_input(struct netif *netif)
   uint32_t byteslefttocopy = 0;
   uint32_t i=0;
   
+  /* get received frame */
   if (HAL_ETH_GetReceivedFrame(&EthHandle) != HAL_OK)
     return NULL;
   
@@ -429,21 +429,20 @@ static struct pbuf * low_level_input(struct netif *netif)
       memcpy( (uint8_t*)((uint8_t*)q->payload + payloadoffset), (uint8_t*)((uint8_t*)buffer + bufferoffset), byteslefttocopy);
       bufferoffset = bufferoffset + byteslefttocopy;
     }
+  }    
     
-    
-    /* Release descriptors to DMA */
-    /* Point to first descriptor */
-    dmarxdesc = EthHandle.RxFrameInfos.FSRxDesc;
-    /* Set Own bit in Rx descriptors: gives the buffers back to DMA */
-    for (i=0; i< EthHandle.RxFrameInfos.SegCount; i++)
-    {  
-      dmarxdesc->Status |= ETH_DMARXDESC_OWN;
-      dmarxdesc = (ETH_DMADescTypeDef *)(dmarxdesc->Buffer2NextDescAddr);
-    }
-    
-    /* Clear Segment_Count */
-    EthHandle.RxFrameInfos.SegCount =0;
+  /* Release descriptors to DMA */
+  /* Point to first descriptor */
+  dmarxdesc = EthHandle.RxFrameInfos.FSRxDesc;
+  /* Set Own bit in Rx descriptors: gives the buffers back to DMA */
+  for (i=0; i< EthHandle.RxFrameInfos.SegCount; i++)
+  {  
+    dmarxdesc->Status |= ETH_DMARXDESC_OWN;
+    dmarxdesc = (ETH_DMADescTypeDef *)(dmarxdesc->Buffer2NextDescAddr);
   }
+    
+  /* Clear Segment_Count */
+  EthHandle.RxFrameInfos.SegCount =0;
   
   /* When Rx Buffer unavailable flag is set: clear it and resume reception */
   if ((EthHandle.Instance->DMASR & ETH_DMASR_RBUS) != (uint32_t)RESET)  
@@ -660,7 +659,7 @@ void ethernetif_update_config(struct netif *netif)
   */
 __weak void ethernetif_notify_conn_changed(struct netif *netif)
 {
-  /* NOTE : This is function clould be implemented in user file 
+  /* NOTE : This is function could be implemented in user file 
             when the callback is needed,
   */  
 }

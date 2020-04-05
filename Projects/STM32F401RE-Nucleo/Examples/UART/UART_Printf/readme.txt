@@ -2,11 +2,11 @@
   @page UART_Printf UART Printf example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    UART/UART_Printf/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.6
-  * @date    04-November-2016
+  * @version V1.2.7
+  * @date    17-February-2017
   * @brief   Description of the UART Printf example.
   ******************************************************************************
   *
@@ -105,7 +105,7 @@ on your serial terminal:
 
   - This example runs on STM32F401xEx devices.
     
-  - This example has been tested with STMicroelectronics STM32F4xx-Nucleo RevB 
+  - This example has been tested with STMicroelectronics STM32F4xx-Nucleo
     boards and can be easily tailored to any other supported device 
     and development board.
 

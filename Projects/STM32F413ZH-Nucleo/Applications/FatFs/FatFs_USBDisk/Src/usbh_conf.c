@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    FatFs/FatFs_USBDisk/Src/usbh_conf.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    04-November-2016
+  * @version V1.0.1
+  * @date    17-February-2017
   * @brief   USB Host configuration file.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -172,13 +172,9 @@ USBH_StatusTypeDef USBH_LL_Init(USBH_HandleTypeDef *phost)
   /* Set the LL Driver parameters */
   hhcd.Instance = USB_OTG_FS;
   hhcd.Init.Host_channels = 11; 
-  hhcd.Init.dma_enable = 0;
-  hhcd.Init.low_power_enable = 0;
   hhcd.Init.phy_itface = HCD_PHY_EMBEDDED; 
   hhcd.Init.Sof_enable = 0;
   hhcd.Init.speed = HCD_SPEED_FULL;
-  hhcd.Init.vbus_sensing_enable = 0;
-  hhcd.Init.lpm_enable = 0;
   
   /* Link the driver to the stack */
   hhcd.pData = phost;

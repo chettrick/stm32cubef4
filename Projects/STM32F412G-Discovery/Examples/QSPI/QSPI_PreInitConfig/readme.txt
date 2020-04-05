@@ -2,11 +2,11 @@
   @page QSPI_PreInitConfig QSPI pre-init configuration example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    QSPI/QSPI_PreInitConfig/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   Description of the code execution from QSPI memory example.
   ******************************************************************************
   *

@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    HAL/HAL_TimeBase/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    04-November-2016
+  * @version V1.0.4
+  * @date    17-February-2017
   * @brief   This example describes how to configure HAL time base using
   *          the STM32F4xx HAL API.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -80,7 +80,7 @@ int main(void)
      */
   HAL_Init();
   
-  /* Configure the system clock to 84 MHz */
+  /* Configure the system clock to 100 MHz */
   SystemClock_Config();
   
   /* Configure LED3, LED4, LED5 and LED6 */
@@ -139,14 +139,14 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
   * @brief  System Clock Configuration
   *         The system Clock is configured as follow : 
   *            System Clock source            = PLL (HSE)
-  *            SYSCLK(Hz)                     = 84000000
-  *            HCLK(Hz)                       = 84000000
+  *            SYSCLK(Hz)                     = 100000000
+  *            HCLK(Hz)                       = 100000000
   *            AHB Prescaler                  = 1
   *            APB1 Prescaler                 = 2
   *            APB2 Prescaler                 = 1
   *            HSE Frequency(Hz)              = 8000000
   *            PLL_M                          = 8
-  *            PLL_N                          = 336
+  *            PLL_N                          = 400
   *            PLL_P                          = 4
   *            PLL_Q                          = 7
   *            VDD(V)                         = 3.3
@@ -174,7 +174,7 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
   RCC_OscInitStruct.PLL.PLLM = 8;
-  RCC_OscInitStruct.PLL.PLLN = 336;
+  RCC_OscInitStruct.PLL.PLLN = 400;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV4;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   HAL_RCC_OscConfig(&RCC_OscInitStruct);

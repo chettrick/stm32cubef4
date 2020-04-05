@@ -2,16 +2,16 @@
   @page Binary Description of the binary template
   
   @verbatim
-  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    USB_Device/DFU_Standalone/Binary/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.6
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   Description of the binary template application.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -67,7 +67,7 @@ The offset address of this binary is 0x08008000 which matches the definition in 
 
   - This application runs on STM32F469xx and STM32F479xx devices.
     
-  - This application has been tested with STMicroelectronics STM32469I-EVAL RevB 
+  - This application has been tested with STMicroelectronics STM32469I-EVAL RevC 
     evaluation boards and can be easily tailored to any other supported device 
     and development board.  
 

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BSP/Src/eeprom.c 
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   This example code shows how to manage an I2C M24LR64 
   *          EEPROM memory
   *          =================================================================== 
@@ -19,7 +19,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -61,7 +61,7 @@
 typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus; 
 /* Private define ------------------------------------------------------------*/
 #define EEPROM_FEATURES_NUM     2
-#define BUFFER_SIZE1            (countof(Tx1Buffer))//-1 + 8)
+#define BUFFER_SIZE1            (countof(Tx1Buffer)+ 1)
 #define EEPROM_WRITE_ADDRESS1      0x49 /*addr internal to the mem (not I2C addr)*/
 #define EEPROM_READ_ADDRESS1       0x49
 #define HEADBAND_HEIGHT            64
@@ -73,7 +73,7 @@ uint8_t EEPROMConnected =1;
 
 /*Due to big size we put it global to avoid saturating the memory stack */
 static uint8_t Tx1Buffer[] = "STM32412G-DISCOVERY EEPROM Ex. - STM32412G-DISCOVERY EEPROM Ex. - STM32412G-DISCOVERY EEPROM Ex. - STM32412G-DISCOVERY EEPROM Ex. - STM32412G-DISCOVERY EEPROM Ex. - STM32412G-DISCOVERY EEPROM Ex. - STM32412G-DISCOVERY EEPROM Ex. - STM32412G-DISCOVERY EEPROM Ex. - STM32412G-DISCOVERY EEPROM Ex. - STM32412G-DISCOVERY EEPROM Ex. - STM32412G-DISCOVERY EEPROM Ex. - STM32412G-DISCOVERY EEPROM Ex. - STM32412G-DISCOVERY EEPROM Ex. - STM32412G-DISCOVERY EEPROM Ex. - STM32412G-DISCOVERY EEPROM Ex. - STM32412G-DISCOVERY EEPROM Ex. - STM32412G-DISCOVERY EEPROM Ex. - STM32412G-DISCOVERY EEPROM Ex.";
-static uint8_t Displayuffer[25] = {0}; 
+static uint8_t Displayuffer[30] = {0}; 
 static uint8_t Rx1Buffer[BUFFER_SIZE1] = {0}; 
 static uint8_t Tx2Buffer[BUFFER_SIZE1] = {0}; 
 
@@ -193,7 +193,7 @@ static void EEPROM_Show_Feature(uint8_t Feature)
       BSP_LCD_DisplayStringAt(0, 115, (uint8_t *)"PASSED String read", CENTER_MODE);
       BSP_LCD_DisplayStringAt(0, 130, (uint8_t *)"in EEPROM:", CENTER_MODE);
       BSP_LCD_SetTextColor(LCD_COLOR_BLUE);    
-      for (i=0; i<25; i++)
+      for (i=0; i<30; i++)
          Displayuffer[i] = Rx1Buffer[i];      
       BSP_LCD_DisplayStringAt(0, 160, Displayuffer, CENTER_MODE); 
       BSP_LCD_SetTextColor(LCD_COLOR_BLACK);
@@ -243,7 +243,7 @@ static void EEPROM_Show_Feature(uint8_t Feature)
         BSP_LCD_DisplayStringAt(0, 115, (uint8_t *)"PASSED String writes", CENTER_MODE);
         BSP_LCD_DisplayStringAt(0, 130, (uint8_t *)"in EEPROM:", CENTER_MODE);
         BSP_LCD_SetTextColor(LCD_COLOR_BLUE);    
-        for (i=0; i<25; i++)
+        for (i=0; i<30; i++)
            Displayuffer[i] = Tx2Buffer[i];
         BSP_LCD_DisplayStringAt(0, 160, Displayuffer, CENTER_MODE); 
       }

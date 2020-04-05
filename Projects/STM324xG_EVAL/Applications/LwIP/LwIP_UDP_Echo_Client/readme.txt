@@ -2,16 +2,16 @@
   @page LwIP_UDP_Echo_Client LwIP UDP Echo Client application
   
   @verbatim
-  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    LwIP/LwIP_UDP_Echo_Client/readme.txt 
   * @author  MCD Application Team
-  * @version V1.3.6
-  * @date    04-November-2016
+  * @version V1.4.0
+  * @date    17-February-2017
   * @brief   Description of the LwIP UDP Echo Client application.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -64,14 +64,21 @@ where:
 Each time the user pushes the KEY button of the STM324xG-EVAL board, an echo 
 request is sent to the server
 
-STM32 Eval board LEDs are used for the following purpose:
+If the LCD is used (#define USE_LCD in main.h), log messages will be displayed 
+to inform user about ethernet cable status and the IP address value, else this 
+will be ensured by LEDs:
   + LED1: ethernet cable is connected.
   + LED2: ethernet cable is not connected.
 
-Note: In this application the Ethernet Link ISR need the System tick interrupt 
-to configure the Ethernet MAC, so the Ethernet Link interrupt priority must be 
-set lower (numerically greater) than the Systick interrupt priority to ensure 
-that the System tick increments while executing the Ethernet Link ISR.
+If a DHCP server is available, a dynamic IP address can be allocated by enabling 
+the DHCP process (#define USE_DHCP in main.h)
+
+If DHCP is used, user should define its PC Host IP address ( DEST_IP_ADDR0 [0..3] in main.h file.
+
+Note: In this application the Ethernet Link ISR need the HAL time base to configure 
+the Ethernet MAC, so the Ethernet Link interrupt priority must be set lower (numerically greater) 
+than the HAL tick interrupt priority to ensure that the System tick increments while executing 
+the Ethernet Link ISR.
 
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
       based on variable incremented in SysTick ISR. This implies that if HAL_Delay() is called from
@@ -89,6 +96,7 @@ For more details about this application, refer to UM1713 "STM32Cube interfacing 
 
   - LwIP/LwIP_UDP_Echo_Client/Inc/app_ethernet.h          header of app_ethernet.c file
   - LwIP/LwIP_UDP_Echo_Client/Inc/ethernetif.h            header for ethernetif.c file
+  - LwIP/LwIP_UDP_Echo_Client/Inc/lcd_log_conf.h          LCD Log configuration file
   - LwIP/LwIP_UDP_Echo_Client/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - LwIP/LwIP_UDP_Echo_Client/Inc/stm32f4xx_it.h          STM32 interrupt handlers header file
   - LwIP/LwIP_UDP_Echo_Client/Inc/main.h                  Main program header file

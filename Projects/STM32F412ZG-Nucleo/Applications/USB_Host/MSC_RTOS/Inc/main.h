@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    USB_Host/MSC_RTOS/Inc/main.h 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    06-May-2016
+  * @version V1.0.1
+  * @date    17-February-2017
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -86,7 +86,6 @@ extern osSemaphoreId MenuEvent;
 /* Exported functions ------------------------------------------------------- */
 FRESULT Explore_Disk(char *path, uint8_t recu_level);
 void MSC_File_Operations(void);
-void Toggle_Leds(void);
 void Menu_Init(void);
 
 #endif /* __MAIN_H */

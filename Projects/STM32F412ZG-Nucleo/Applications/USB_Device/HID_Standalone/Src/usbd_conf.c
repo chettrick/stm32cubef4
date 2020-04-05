@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    USB_Device/HID_Standalone/Src/usbd_conf.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    06-May-2016
+  * @version V1.0.1
+  * @date    17-February-2017
   * @brief   This file implements the USB Device library callbacks and MSP
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -49,12 +49,17 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
+#define CURSOR_STEP     5
+
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 PCD_HandleTypeDef hpcd;
+uint8_t HID_Buffer[4];
+extern USBD_HandleTypeDef USBD_Device;
 
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClockConfig_STOP(void);
+static void GetPointerData(uint8_t *pbuf);
 
 /* Private functions ---------------------------------------------------------*/
   
@@ -215,8 +220,8 @@ void HAL_PCD_ResetCallback(PCD_HandleTypeDef *hpcd)
   */
 void HAL_PCD_SuspendCallback(PCD_HandleTypeDef *hpcd)
 {
-  __HAL_PCD_GATE_PHYCLOCK(hpcd);
   USBD_LL_Suspend(hpcd->pData);
+  __HAL_PCD_GATE_PHYCLOCK(hpcd);
   
   /*Enter in STOP mode */
   if (hpcd->Init.low_power_enable)
@@ -295,7 +300,7 @@ USBD_StatusTypeDef USBD_LL_Init(USBD_HandleTypeDef *pdev)
   hpcd.Init.use_dedicated_ep1 = 0;
   hpcd.Init.ep0_mps = 0x40;
   hpcd.Init.dma_enable = 0;
-  hpcd.Init.low_power_enable = 1;
+  hpcd.Init.low_power_enable = 0;
   hpcd.Init.phy_itface = PCD_PHY_EMBEDDED;
   hpcd.Init.Sof_enable = 0;
   hpcd.Init.speed = PCD_SPEED_FULL;
@@ -505,7 +510,6 @@ static void SystemClockConfig_STOP(void)
   RCC_ClkInitTypeDef RCC_ClkInitStruct;
   RCC_OscInitTypeDef RCC_OscInitStruct;
   RCC_PeriphCLKInitTypeDef PeriphClkInitStruct;
-  HAL_StatusTypeDef ret = HAL_OK;
 
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
@@ -525,12 +529,7 @@ static void SystemClockConfig_STOP(void)
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   RCC_OscInitStruct.PLL.PLLR = 2;
-  ret = HAL_RCC_OscConfig(&RCC_OscInitStruct);
-  
-  if(ret != HAL_OK)
-  {
-    while(1) {};
-  }
+  HAL_RCC_OscConfig(&RCC_OscInitStruct);
 
   /* Select PLLSAI output as USB clock source */
   PeriphClkInitStruct.PLLI2S.PLLI2SM = 8;
@@ -547,12 +546,7 @@ static void SystemClockConfig_STOP(void)
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;  
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;  
-  ret = HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_3);
-  if(ret != HAL_OK)
-  {
-    while(1) {};
-  }
-
+  HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_3);
 }
 
 /**
@@ -594,7 +588,36 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
       /* Change remote_wakeup feature to 0*/
       ((USBD_HandleTypeDef *)hpcd.pData)->dev_remote_wakeup=0;
     }
+    else
+    {
+      GetPointerData(HID_Buffer);
+      USBD_HID_SendReport(&USBD_Device, HID_Buffer, 4);
+    }
   }
+}
+
+/**
+  * @brief  Gets Pointer Data.
+  * @param  pbuf: Pointer to report
+  * @retval None
+  */
+static void GetPointerData(uint8_t *pbuf)
+{
+  static int8_t cnt = 0;
+  int8_t  x = 0, y = 0 ;
+  
+  if(cnt++ > 0)
+  {
+    x = CURSOR_STEP;
+  }
+  else
+  {
+    x = -CURSOR_STEP;
+  }
+  pbuf[0] = 0;
+  pbuf[1] = x;
+  pbuf[2] = y;
+  pbuf[3] = 0;
 }
 
 /**

@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm324x9i_eval_sdram.c
   * @author  MCD Application Team
-  * @version V2.2.3
-  * @date    22-April-2016
+  * @version V3.0.0
+  * @date    27-January-2017
   * @brief   This file includes the SDRAM driver for the MT48LC4M32B2B5-7 memory 
   *          device mounted on STM324x9I-EVAL evaluation board.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -65,7 +65,7 @@
        BSP_SDRAM_ReadData_DMA()/BSP_SDRAM_WriteData_DMA().
      o The AHB access is performed with 32-bit width transaction, the DMA transfer
        configuration is fixed at single (no burst) word transfer (see the 
-       SDRAM_MspInit() static function).
+       BSP_SDRAM_MspInit() static function).
      o User can implement his own functions for read/write access with his desired 
        configurations.
      o If interrupt mode is used for DMA transfer, the function BSP_SDRAM_DMA_IRQHandler()
@@ -92,27 +92,6 @@
   * @{
   */ 
 
-/** @defgroup STM324x9I_EVAL_SDRAM_Private_Types_Definitions STM324x9I EVAL SDRAM Private Types Definitions
-  * @{
-  */ 
-/**
-  * @}
-  */
-
-/** @defgroup STM324x9I_EVAL_SDRAM_Private_Defines STM324x9I EVAL SDRAM Private Defines
-  * @{
-  */
-/**
-  * @}
-  */
-
-/** @defgroup STM324x9I_EVAL_SDRAM_Private_Macros STM324x9I EVAL SDRAM Private Macros
-  * @{
-  */  
-/**
-  * @}
-  */
-
 /** @defgroup STM324x9I_EVAL_SDRAM_Private_Variables STM324x9I EVAL SDRAM Private Variables
   * @{
   */       
@@ -122,14 +101,6 @@ static FMC_SDRAM_CommandTypeDef Command;
 /**
   * @}
   */ 
-
-/** @defgroup STM324x9I_EVAL_SDRAM_Private_Function_Prototypes STM324x9I EVAL SDRAM Private Function Prototypes
-  * @{
-  */ 
-static void SDRAM_MspInit(void); 
-/**
-  * @}
-  */
     
 /** @defgroup STM324x9I_EVAL_SDRAM_Private_Functions STM324x9I EVAL SDRAM Private Functions
   * @{
@@ -166,7 +137,7 @@ uint8_t BSP_SDRAM_Init(void)
   sdramHandle.Init.ReadPipeDelay      = FMC_SDRAM_RPIPE_DELAY_0;
   
   /* SDRAM controller initialization */
-  SDRAM_MspInit();
+  BSP_SDRAM_MspInit();
   if(HAL_SDRAM_Init(&sdramHandle, &Timing) != HAL_OK)
   {
     sdramstatus = SDRAM_ERROR;
@@ -345,25 +316,25 @@ void BSP_SDRAM_DMA_IRQHandler(void)
 /**
   * @brief  Initializes SDRAM MSP.
   */
-static void SDRAM_MspInit(void)
+__weak void BSP_SDRAM_MspInit(void)
 {  
   static DMA_HandleTypeDef dmaHandle;
   GPIO_InitTypeDef GPIO_Init_Structure;
   SDRAM_HandleTypeDef  *hsdram = &sdramHandle; 
   
   /* Enable FMC clock */
-  __FMC_CLK_ENABLE();
+  __HAL_RCC_FMC_CLK_ENABLE();
   
   /* Enable chosen DMAx clock */
   __DMAx_CLK_ENABLE();
 
   /* Enable GPIOs clock */
-  __GPIOD_CLK_ENABLE();
-  __GPIOE_CLK_ENABLE();
-  __GPIOF_CLK_ENABLE();
-  __GPIOG_CLK_ENABLE();
-  __GPIOH_CLK_ENABLE();
-  __GPIOI_CLK_ENABLE();  
+  __HAL_RCC_GPIOD_CLK_ENABLE();
+  __HAL_RCC_GPIOE_CLK_ENABLE();
+  __HAL_RCC_GPIOF_CLK_ENABLE();
+  __HAL_RCC_GPIOG_CLK_ENABLE();
+  __HAL_RCC_GPIOH_CLK_ENABLE();
+  __HAL_RCC_GPIOI_CLK_ENABLE();  
   
   /* Common GPIO configuration */
   GPIO_Init_Structure.Mode      = GPIO_MODE_AF_PP;
@@ -434,7 +405,7 @@ static void SDRAM_MspInit(void)
   HAL_DMA_Init(&dmaHandle); 
   
   /* NVIC configuration for DMA transfer complete interrupt */
-  HAL_NVIC_SetPriority(SDRAM_DMAx_IRQn, 5, 0);
+  HAL_NVIC_SetPriority(SDRAM_DMAx_IRQn, 0x0F, 0);
   HAL_NVIC_EnableIRQ(SDRAM_DMAx_IRQn);
 }
 

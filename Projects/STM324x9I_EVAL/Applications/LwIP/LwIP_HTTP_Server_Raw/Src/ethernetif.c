@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    LwIP/LwIP_HTTP_Server_Raw/Src/ethernetif.c
   * @author  MCD Application Team
-  * @version V1.4.6
-  * @date    04-November-2016
+  * @version V1.5.0
+  * @date    17-February-2017
   * @brief   This file implements Ethernet network interface drivers for lwIP
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -46,8 +46,7 @@
   */
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
-#include "lwip/opt.h"
-#include "lwip/lwip_timers.h"
+#include "lwip/timeouts.h"
 #include "netif/etharp.h"
 #include "ethernetif.h"
 #include <string.h>
@@ -203,6 +202,7 @@ static void low_level_init(struct netif *netif)
 { 
   uint32_t regvalue = 0;
   uint8_t macaddress[6]= { MAC_ADDR0, MAC_ADDR1, MAC_ADDR2, MAC_ADDR3, MAC_ADDR4, MAC_ADDR5 };
+
   
   EthHandle.Instance = ETH;  
   EthHandle.Init.MACAddr = macaddress;
@@ -226,9 +226,9 @@ static void low_level_init(struct netif *netif)
      
   /* Initialize Rx Descriptors list: Chain Mode  */
   HAL_ETH_DMARxDescListInit(&EthHandle, DMARxDscrTab, &Rx_Buff[0][0], ETH_RXBUFNB);
-  
+
   /* set MAC hardware address length */
-  netif->hwaddr_len = ETHARP_HWADDR_LEN;
+  netif->hwaddr_len = ETH_HWADDR_LEN;
   
   /* set MAC hardware address */
   netif->hwaddr[0] =  MAC_ADDR0;
@@ -431,7 +431,7 @@ static struct pbuf * low_level_input(struct netif *netif)
     dmarxdesc->Status |= ETH_DMARXDESC_OWN;
     dmarxdesc = (ETH_DMADescTypeDef *)(dmarxdesc->Buffer2NextDescAddr);
   }
-    
+  
   /* Clear Segment_Count */
   EthHandle.RxFrameInfos.SegCount =0;
   
@@ -557,7 +557,7 @@ void ethernetif_set_link(struct netif *netif)
 /**
   * @brief  Link callback function, this function is called on change of link status
   *         to update low level driver configuration.
-* @param  netif: The network interface
+  * @param  netif: The network interface
   * @retval None
   */
 void ethernetif_update_config(struct netif *netif)

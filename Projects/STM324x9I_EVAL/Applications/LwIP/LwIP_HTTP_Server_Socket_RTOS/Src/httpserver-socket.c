@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    LwIP/LwIP_HTTP_Server_Socket_RTOS/Src/httpserver-socket.c
   * @author  MCD Application Team
-  * @version V1.4.6
-  * @date    04-November-2016  
+  * @version V1.5.0
+  * @date    17-February-2017  
   * @brief   Basic http server implementation using LwIP socket API   
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -44,13 +44,9 @@
   *
   ******************************************************************************
   */  
-#include "lwip/opt.h"
-#include "lwip/arch.h"
-#include "lwip/api.h"
-#include "lwip/inet.h"
+#include "lwip/sys.h"
 #include "lwip/sockets.h"
-#include "fs.h"
-#include "fsdata.h"
+#include "lwip/apps/fs.h"
 #include "string.h"
 #include "httpserver-socket.h"
 #include "cmsis_os.h"
@@ -59,7 +55,7 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
-#define WEBSERVER_THREAD_PRIO    ( tskIDLE_PRIORITY + 4 )
+#define WEBSERVER_THREAD_PRIO    ( osPriorityAboveNormal )
 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
@@ -181,7 +177,7 @@ void http_server_serve(int conn)
 {
   int buflen = 1500;
   int ret;
-  struct fs_file * file;
+  struct fs_file file;
   unsigned char recv_buffer[1500];
 				
   /* Read in the request */
@@ -191,23 +187,23 @@ void http_server_serve(int conn)
   /* Check if request to get ST.gif */
   if (strncmp((char *)recv_buffer,"GET /STM32F4xx_files/ST.gif",27)==0)
   {
-    file = fs_open("/STM32F4xx_files/ST.gif"); 
-    write(conn, (const unsigned char*)(file->data), (size_t)file->len);
-    if(file) fs_close(file);
+    fs_open(&file, "/STM32F4xx_files/ST.gif"); 
+    write(conn, (const unsigned char*)(file.data), (size_t)file.len);
+    fs_close(&file);
   }
   /* Check if request to get stm32.jpeg */
   else if (strncmp((char *)recv_buffer,"GET /STM32F4xx_files/stm32.jpg",30)==0)
   {
-    file = fs_open("/STM32F4xx_files/stm32.jpg"); 
-    write(conn, (const unsigned char*)(file->data), (size_t)file->len);
-    if(file) fs_close(file);
+    fs_open(&file, "/STM32F4xx_files/stm32.jpg"); 
+    write(conn, (const unsigned char*)(file.data), (size_t)file.len);
+    fs_close(&file);
   }
   /* Check if request to get ST logo.jpeg */
   else if (strncmp((char *)recv_buffer,"GET /STM32F4xx_files/logo.jpg", 29) == 0)
   {
-    file = fs_open("/STM32F4xx_files/logo.jpg"); 
-    write(conn, (const unsigned char*)(file->data), (size_t)file->len);
-    if(file) fs_close(file);
+    fs_open(&file, "/STM32F4xx_files/logo.jpg"); 
+    write(conn, (const unsigned char*)(file.data), (size_t)file.len);
+    fs_close(&file);
   }
   else if(strncmp((char *)recv_buffer, "GET /STM32F4xxTASKS.html", 24) == 0)
   {
@@ -216,17 +212,17 @@ void http_server_serve(int conn)
   }
   else if((strncmp((char *)recv_buffer, "GET /STM32F4xx.html", 19) == 0)||(strncmp((char *)recv_buffer, "GET / ", 6) == 0))
   {
-    /* Load STM32F4x7 page */
-    file = fs_open("/STM32F4xx.html"); 
-    write(conn, (const unsigned char*)(file->data), (size_t)file->len);
-    if(file) fs_close(file);
+    /* Load STM32F4xx */
+    fs_open(&file, "/STM32F4xx.html"); 
+    write(conn, (const unsigned char*)(file.data), (size_t)file.len);
+    fs_close(&file);
   }
   else
   {
     /* Load 404 page */
-    file = fs_open("/404.html"); 
-    write(conn, (const unsigned char*)(file->data), (size_t)file->len);
-    if(file) fs_close(file);
+    fs_open(&file, "/404.html");
+    write(conn, (const unsigned char*)(file.data), (size_t)file.len);
+    fs_close(&file);
   }
   /* Close connection socket */
   close(conn);

@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm32469i_eval_sdram.c
   * @author  MCD Application Team
-  * @version V1.0.4
-  * @date    04-August-2016
+  * @version V2.0.0
+  * @date    27-January-2017
   * @brief   This file includes the SDRAM driver for the MT48LC4M32B2B5-7 memory
   *          device mounted on STM32469I-EVAL evaluation board.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -164,8 +164,8 @@ uint8_t BSP_SDRAM_Init(void)
   Timing.RCDDelay             = 2;   /* TRCD: 20ns => 2x11.11ns */
 
   sdramHandle.Init.SDBank             = FMC_SDRAM_BANK1;
-  sdramHandle.Init.ColumnBitsNumber   = FMC_SDRAM_COLUMN_BITS_NUM_8;
-  sdramHandle.Init.RowBitsNumber      = FMC_SDRAM_ROW_BITS_NUM_11;
+  sdramHandle.Init.ColumnBitsNumber   = FMC_SDRAM_COLUMN_BITS_NUM_9;
+  sdramHandle.Init.RowBitsNumber      = FMC_SDRAM_ROW_BITS_NUM_12;
   sdramHandle.Init.MemoryDataWidth    = SDRAM_MEMORY_WIDTH;
   sdramHandle.Init.InternalBankNumber = FMC_SDRAM_INTERN_BANKS_NUM_4;
   sdramHandle.Init.CASLatency         = FMC_SDRAM_CAS_LATENCY_3;

@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    LwIP/LwIP_HTTP_Server_Netconn_RTOS/Src/app_ethernet.c 
   * @author  MCD Application Team
-  * @version V1.1.5
-  * @date    04-November-2016
+  * @version V1.2.0
+  * @date    17-February-2017
   * @brief   Ethernet specefic module
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -399,7 +399,8 @@ void  VNC_SetLockState(uint8_t LockState)
   */
 void VNC_Thread(void const * argument)
 {
-
+  struct dhcp *dhcp;
+  
   for (;;)
   { 
     switch (VNC_State)
@@ -418,16 +419,17 @@ void VNC_Thread(void const * argument)
       
     case VNC_WAIT_FOR_ADDRESS:
       {        
-        if (gnetif.ip_addr.addr!=0) 
+        if (dhcp_supplied_address(&gnetif)) 
         {
-          dhcp_stop(&gnetif);
           VNC_State = VNC_START;
           VNC_SERVER_StatusChanged(VNC_START);          
         }
         else
         {
+          dhcp = (struct dhcp *)netif_get_client_data(&gnetif, LWIP_NETIF_CLIENT_DATA_INDEX_DHCP);
+          
           /* DHCP timeout */
-          if (gnetif.dhcp->tries > MAX_DHCP_TRIES)
+          if (dhcp->tries > MAX_DHCP_TRIES)
           {
             VNC_State = VNC_ERROR;
             dhcp_stop(&gnetif);

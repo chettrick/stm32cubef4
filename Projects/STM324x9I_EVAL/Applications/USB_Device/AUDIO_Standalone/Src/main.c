@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    USB_Device/AUDIO_Standalone/Src/main.c
   * @author  MCD Application Team
-  * @version V1.4.6
-  * @date    04-November-2016 
+  * @version V1.5.0
+  * @date    17-February-2017 
   * @brief   USB device AUDIO demo main file
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -44,20 +44,20 @@
   *
   ******************************************************************************
   */
-/* Includes ------------------------------------------------------------------*/
+/* Includes ------------------------------------------------------------------ */
 #include "main.h"
 
-/* Private typedef -----------------------------------------------------------*/
-/* Private define ------------------------------------------------------------*/
-/* Private macro -------------------------------------------------------------*/
-/* Private variables ---------------------------------------------------------*/
+/* Private typedef ----------------------------------------------------------- */
+/* Private define ------------------------------------------------------------ */
+/* Private macro ------------------------------------------------------------- */
+/* Private variables --------------------------------------------------------- */
 USBD_HandleTypeDef USBD_Device;
 
-/* Private function prototypes -----------------------------------------------*/
+/* Private function prototypes ----------------------------------------------- */
 static void SystemClock_Config(void);
 static void Toggle_Leds(void);
 
-/* Private functions ---------------------------------------------------------*/
+/* Private functions --------------------------------------------------------- */
 
 /**
   * @brief  Main program
@@ -66,40 +66,38 @@ static void Toggle_Leds(void);
   */
 int main(void)
 {
-  /* STM32F4xx HAL library initialization:
-       - Configure the Flash prefetch, instruction and Data caches
-       - Configure the Systick to generate an interrupt each 1 msec
-       - Set NVIC Group Priority to 4
-       - Global MSP (MCU Support Package) initialization
-     */
+  /* STM32F4xx HAL library initialization: - Configure the Flash prefetch,
+   * instruction and Data caches - Configure the Systick to generate an
+   * interrupt each 1 msec - Set NVIC Group Priority to 4 - Global MSP (MCU
+   * Support Package) initialization */
   HAL_Init();
-  
+
   /* Configure the system clock to 168 MHz */
   SystemClock_Config();
-  
+
   /* Configure LED1, LED2, LED3 and LED4 */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED2);
   BSP_LED_Init(LED3);
   BSP_LED_Init(LED4);
-  
+
   /* Init Device Library */
   USBD_Init(&USBD_Device, &AUDIO_Desc, 0);
-  
+
   /* Add Supported Class */
   USBD_RegisterClass(&USBD_Device, USBD_AUDIO_CLASS);
-  
+
   /* Add Interface callbacks for AUDIO Class */
   USBD_AUDIO_RegisterInterface(&USBD_Device, &USBD_AUDIO_fops);
-  
+
   /* Start Device Process */
   USBD_Start(&USBD_Device);
-  
+
   /* Run Application (Interrupt mode) */
   while (1)
   {
     Toggle_Leds();
-  }  
+  }
 }
 
 /**
@@ -125,18 +123,20 @@ int main(void)
 static void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct;
-  RCC_ClkInitTypeDef RCC_ClkInitStruct;   
-  RCC_PeriphCLKInitTypeDef  PeriphClkInitStruct;
+  RCC_ClkInitTypeDef RCC_ClkInitStruct;
+  RCC_PeriphCLKInitTypeDef PeriphClkInitStruct;
 
   /* Enable Power Control clock */
   __HAL_RCC_PWR_CLK_ENABLE();
 
-  /* The voltage scaling allows optimizing the power consumption when the device is 
-     clocked below the maximum system frequency, to update the voltage scaling value 
-     regarding system frequency refer to product datasheet.  */
+  /* The voltage scaling allows optimizing the power consumption when the
+   * device is clocked below the maximum system frequency, to update the
+   * voltage scaling value regarding system frequency refer to product
+   * datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
-  /* Configure RCC Oscillators: All parameters can be changed according to user’s needs */
+  /* Configure RCC Oscillators: All parameters can be changed according to
+   * user’s needs */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
@@ -145,21 +145,23 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLN = 336;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
-  HAL_RCC_OscConfig (&RCC_OscInitStruct);
-  
+  HAL_RCC_OscConfig(&RCC_OscInitStruct);
+
   /* RCC Clocks: All parameters can be changed according to user’s needs */
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_SYSCLK |RCC_CLOCKTYPE_HCLK |RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK |
+                                RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
+
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
-  
+
   PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_SAI_PLLI2S;
   PeriphClkInitStruct.PLLI2S.PLLI2SN = 429;
   PeriphClkInitStruct.PLLI2S.PLLI2SQ = 2;
   PeriphClkInitStruct.PLLI2SDivQ = 19;
-  HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct); 
+  HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);
 }
 
 /**
@@ -170,15 +172,15 @@ static void SystemClock_Config(void)
 static void Toggle_Leds(void)
 {
   static uint32_t ticks;
-  
-  if(ticks++ == 0xfffff)
+
+  if (ticks++ == 0xfffff)
   {
     BSP_LED_Toggle(LED1);
     BSP_LED_Toggle(LED2);
     BSP_LED_Toggle(LED3);
     BSP_LED_Toggle(LED4);
     ticks = 0;
-  }  
+  }
 }
 
 #ifdef  USE_FULL_ASSERT
@@ -189,10 +191,11 @@ static void Toggle_Leds(void)
   * @param  line: assert_param error line source number
   * @retval None
   */
-void assert_failed(uint8_t* file, uint32_t line)
-{ 
-  /* User can add his own implementation to report the file name and line number,
-     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+void assert_failed(uint8_t * file, uint32_t line)
+{
+  /* User can add his own implementation to report the file name and line
+   * number, ex: printf("Wrong parameters value: file %s on line %d\r\n", file, 
+   * line) */
 
   /* Infinite loop */
   while (1)

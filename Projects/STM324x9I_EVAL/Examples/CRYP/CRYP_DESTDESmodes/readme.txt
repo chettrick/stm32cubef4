@@ -3,11 +3,11 @@
   in all chaining modes.
   
   @verbatim
-  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    CRYP/CRYP_DESTDESmodes/readme.txt 
   * @author  MCD Application Team
-  * @version V1.3.5
-  * @date    04-November-2016
+  * @version V1.4.0
+  * @date    17-February-2017
   * @brief   Description of the CRYP DES and TDES Algorithm in all modes Example
   ******************************************************************************
   *

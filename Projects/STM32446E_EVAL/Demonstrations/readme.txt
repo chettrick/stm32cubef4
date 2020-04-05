@@ -2,16 +2,16 @@
   @page Demo   STM32446E-EVAL Demonstration Firmware
  
   @verbatim
-  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    Demonstrations/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.5
-  * @date    03-June-2016
+  * @version V1.2.6
+  * @date    17-February-2017
   * @brief   Description of STM32446E-EVAL Demonstration
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -149,7 +149,7 @@ Below the detailed steps:
 In order to make the program work, you must do the following :
  1 - Open your preferred toolchain 
  2 - Rebuild all files
- 3 - Open STM32 ST-Link Utility V3.9, click on "External Loader" from the bar menu then check "N25Q256A_STM32446E-EVAL" box 
+ 3 - Open STM32 ST-Link Utility V4.1.0, click on "External Loader" from the bar menu then check "N25Q256A_STM32446E-EVAL" box 
  4 - Connect the STM32446E-EVAL board to PC with USB cable through CN16
  5 - Set BOOT0 pin (SW1) to 1 to select RAM Boot
  6 - Use "STM32CubeDemo_STM32446E-EVAL_V1.2.5.hex" file with STM32 ST-Link Utility to program both internal Flash and external QSPI memory

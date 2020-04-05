@@ -2,15 +2,15 @@
   ******************************************************************************
   * @file    stm324xg_eval.c
   * @author  MCD Application Team
-  * @version V2.2.2
-  * @date    22-April-2016
+  * @version V3.0.0
+  * @date    27-January-2017
   * @brief   This file provides a set of firmware functions to manage LEDs, 
   *          push-buttons and COM ports available on STM324xG-EVAL evaluation 
   *          board(MB786) RevB from STMicroelectronics.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -77,11 +77,11 @@ typedef struct
   */
 
 /**
-  * @brief STM324xG EVAL BSP Driver version number V2.2.2
+  * @brief STM324xG EVAL BSP Driver version number V3.0.0
   */
-#define __STM324xG_EVAL_BSP_VERSION_MAIN   (0x02) /*!< [31:24] main version */
-#define __STM324xG_EVAL_BSP_VERSION_SUB1   (0x02) /*!< [23:16] sub1 version */
-#define __STM324xG_EVAL_BSP_VERSION_SUB2   (0x02) /*!< [15:8]  sub2 version */
+#define __STM324xG_EVAL_BSP_VERSION_MAIN   (0x03) /*!< [31:24] main version */
+#define __STM324xG_EVAL_BSP_VERSION_SUB1   (0x00) /*!< [23:16] sub1 version */
+#define __STM324xG_EVAL_BSP_VERSION_SUB2   (0x00) /*!< [15:8]  sub2 version */
 #define __STM324xG_EVAL_BSP_VERSION_RC     (0x00) /*!< [7:0]  release candidate */ 
 #define __STM324xG_EVAL_BSP_VERSION         ((__STM324xG_EVAL_BSP_VERSION_MAIN << 24)\
                                              |(__STM324xG_EVAL_BSP_VERSION_SUB1 << 16)\
@@ -93,13 +93,6 @@ typedef struct
 
 #define I2C_TIMEOUT  100 /*<! Value of Timeout when I2C communication fails */
 
-/**
-  * @}
-  */ 
-
-/** @defgroup STM324xG_EVAL_LOW_LEVEL_Private_Macros STM324xG EVAL LOW LEVEL Private Macros
-  * @{
-  */ 
 /**
   * @}
   */ 
@@ -519,11 +512,11 @@ static void I2Cx_MspInit(void)
   EVAL_I2Cx_RELEASE_RESET(); 
   
   /* Set priority and enable I2Cx event Interrupt */
-  HAL_NVIC_SetPriority(EVAL_I2Cx_EV_IRQn, 5, 0);
+  HAL_NVIC_SetPriority(EVAL_I2Cx_EV_IRQn, 0x0F, 0);
   HAL_NVIC_EnableIRQ(EVAL_I2Cx_EV_IRQn);
   
   /* Set priority and enable I2Cx error Interrupt */
-  HAL_NVIC_SetPriority(EVAL_I2Cx_ER_IRQn, 5, 0);
+  HAL_NVIC_SetPriority(EVAL_I2Cx_ER_IRQn, 0x0F, 0);
   HAL_NVIC_EnableIRQ(EVAL_I2Cx_ER_IRQn);
 }
 
@@ -573,7 +566,7 @@ static void I2Cx_ITConfig(void)
     HAL_GPIO_Init(GPIOI, &GPIO_InitStruct);
     
     /* Set priority and Enable GPIO EXTI Interrupt */
-    HAL_NVIC_SetPriority((IRQn_Type)(EXTI2_IRQn), 5, 0);
+    HAL_NVIC_SetPriority((IRQn_Type)(EXTI2_IRQn), 0x0F, 0);
     HAL_NVIC_EnableIRQ((IRQn_Type)(EXTI2_IRQn));
   }
 }

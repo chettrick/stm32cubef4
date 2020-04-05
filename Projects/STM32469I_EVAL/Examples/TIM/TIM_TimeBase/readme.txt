@@ -2,11 +2,11 @@
   @page TIM_TimeBase Time Base example
   
   @verbatim
-  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    TIM/TIM_TimeBase/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.5
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   Description of the TIM Time Base example
   ******************************************************************************
   *
@@ -89,7 +89,7 @@ In case of error, LED3 is turned ON.
   - This example runs on STM32F469xx/STM32F479xx devices.
 
   - In this example, the clock is set to 180 MHz.
-  - This example has been tested and validated with STMicroelectronics STM32469I-EVAL revB 
+  - This example has been tested and validated with STMicroelectronics STM32469I-EVAL RevC 
     board and can be easily tailored to any other supported device
     and development board.      
 

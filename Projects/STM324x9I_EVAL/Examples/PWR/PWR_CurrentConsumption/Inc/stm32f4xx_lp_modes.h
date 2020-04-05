@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    PWR/PWR_CurrentConsumption/stm32f4xx_lp_modes.h
   * @author  MCD Application Team
-  * @version V1.3.5
-  * @date    04-November-2016
+  * @version V1.4.0
+  * @date    17-February-2017
   * @brief   Header for stm32f4xx_lp_modes.c module
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -68,6 +68,14 @@ void StopUnderDriveMode_Measure(void);
 void StandbyMode_Measure(void);
 void StandbyRTCMode_Measure(void);
 void StandbyRTCBKPSRAMMode_Measure(void);
+
+uint32_t USB_ULPI_Read(uint32_t Addr);
+uint32_t USB_ULPI_Write(uint32_t Addr, uint32_t Data);
+void USB_ULPI_MspInit(void);
+void USB_PhyEnterLowPowerMode(void);
+void USB_PhyExitFromLowPowerMode(void);
+void ETH_PhyEnterPowerDownMode(void);
+void ETH_PhyExitFromPowerDownMode(void);
 
 #endif /* __STM32F4xx_LP_MODES_H */
 

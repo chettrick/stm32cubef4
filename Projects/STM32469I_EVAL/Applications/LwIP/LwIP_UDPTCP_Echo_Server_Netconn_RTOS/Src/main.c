@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LwIP/LwIP_UDPTCP_Echo_Server_Netconn_RTOS/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.0.6
-  * @date    04-November-2016
+  * @version V1.1.0
+  * @date    17-February-2017
   * @brief   This sample code implements a UDP and TCP Echo Client application 
   *          based on Netconn API of LwIP stack and FreeRTOS. 
   *          This application uses STM32F4xx the ETH HAL API to transmit and 
@@ -12,7 +12,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -50,11 +50,13 @@
   */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "ethernetif.h"
 #include "lwip/netif.h"
 #include "lwip/tcpip.h"
-#include "cmsis_os.h"
-#include "ethernetif.h"
 #include "app_ethernet.h"
+#ifdef USE_LCD
+#include "lcd_log.h"
+#endif
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -96,8 +98,13 @@ int main(void)
   /* Configure the system clock to 180 MHz */
   SystemClock_Config();
   
-  /* Init task */
+  /* Init thread */
+#if defined(__GNUC__)
+  osThreadDef(Start, StartThread, osPriorityNormal, 0, configMINIMAL_STACK_SIZE * 5);
+#else
   osThreadDef(Start, StartThread, osPriorityNormal, 0, configMINIMAL_STACK_SIZE * 2);
+#endif
+  
   osThreadCreate (osThread(Start), NULL);
   
   /* Start scheduler */
@@ -108,8 +115,8 @@ int main(void)
 }
 
 /**
-  * @brief  Main task
-  * @param  pvParameters not used
+  * @brief  Start Thread 
+  * @param  argument not used
   * @retval None
   */
 static void StartThread(void const * argument)
@@ -120,7 +127,7 @@ static void StartThread(void const * argument)
   /* Create tcp_ip stack thread */
   tcpip_init(NULL, NULL);
   
-  /* Initilaize the LwIP stack */
+  /* Initialize the LwIP stack */
   Netif_Config();
   
   /* Initialize tcp echo server */
@@ -129,22 +136,68 @@ static void StartThread(void const * argument)
   /* Initialize udp echo server */
   udpecho_init();
   
-  /* Notify user about the netwoek interface config */
+  /* Notify user about the network interface config */
   User_notification(&gnetif);
   
-   /* Start toogleLed4 task : Toggle LED4  every 250ms */
+#ifdef USE_DHCP
+  /* Start DHCPClient */
+  osThreadDef(DHCP, DHCP_thread, osPriorityBelowNormal, 0, configMINIMAL_STACK_SIZE * 2);
+  osThreadCreate (osThread(DHCP), &gnetif);
+#endif
+  
+  /* Start toogleLed4 task : Toggle LED4  every 250ms */
   osThreadDef(LED4, ToggleLed4, osPriorityLow, 0, configMINIMAL_STACK_SIZE);
   osThreadCreate (osThread(LED4), NULL);
-
+  
   for( ;; )
   {
-    /* Delete the Init Thread*/ 
+    /* Delete the Init Thread */ 
     osThreadTerminate(NULL);
   }
 }
 
 /**
-  * @brief  Initializes the lwIP stack
+  * @brief  Configures the BSP.
+  * @param  None
+  * @retval None
+  */
+static void BSP_Config(void)
+{
+  /* Configure LED1, LED2, LED3 and LED4 */
+  BSP_LED_Init(LED1);
+  BSP_LED_Init(LED2);
+  BSP_LED_Init(LED3);
+  BSP_LED_Init(LED4); 
+  
+  /* Init MFX IO Expander */
+  BSP_IO_Init();
+  
+  /* Enable MFX IO Expander interrupt for ETH MII pin */
+  BSP_IO_ConfigPin(MII_INT_PIN, IO_MODE_IT_FALLING_EDGE);
+  
+#ifdef USE_LCD
+
+  /* Initialize DSI LCD */
+  BSP_LCD_Init();
+
+  BSP_LCD_LayerDefaultInit(0, LCD_FB_START_ADDRESS);   
+  
+  BSP_LCD_SetFont(&LCD_DEFAULT_FONT);
+  
+  /* Initialize LCD Log module */
+  LCD_LOG_Init();
+  
+  /* Show Header and Footer texts */
+  LCD_LOG_SetHeader((uint8_t *)"TCP UDP Echo Server Application Netconn API");
+  LCD_LOG_SetFooter((uint8_t *)"STM32469I-EVAL board");
+  
+  LCD_UsrLog ((char *)"  State: Ethernet Initialization ...\n");
+
+#endif /* USE_LCD */
+}
+
+/**
+  * @brief  Configures the network interface
   * @param  None
   * @retval None
   */
@@ -153,33 +206,26 @@ static void Netif_Config(void)
   ip_addr_t ipaddr;
   ip_addr_t netmask;
   ip_addr_t gw;
-  
-  /* IP address setting */
-  IP4_ADDR(&ipaddr, IP_ADDR0, IP_ADDR1, IP_ADDR2, IP_ADDR3);
-  IP4_ADDR(&netmask, NETMASK_ADDR0, NETMASK_ADDR1 , NETMASK_ADDR2, NETMASK_ADDR3);
-  IP4_ADDR(&gw, GW_ADDR0, GW_ADDR1, GW_ADDR2, GW_ADDR3);
-  
-  /* - netif_add(struct netif *netif, struct ip_addr *ipaddr,
-  struct ip_addr *netmask, struct ip_addr *gw,
-  void *state, err_t (* init)(struct netif *netif),
-  err_t (* input)(struct pbuf *p, struct netif *netif))
-  
-  Adds your network interface to the netif_list. Allocate a struct
-  netif and pass a pointer to this structure as the first argument.
-  Give pointers to cleared ip_addr structures when using DHCP,
-  or fill them with sane numbers otherwise. The state pointer may be NULL.
-  
-  The init function pointer must point to a initialization function for
-  your ethernet netif interface. The following code illustrates it's use.*/
-  
+	
+#ifdef USE_DHCP
+  ip_addr_set_zero_ip4(&ipaddr);
+  ip_addr_set_zero_ip4(&netmask);
+  ip_addr_set_zero_ip4(&gw);
+#else
+  IP_ADDR4(&ipaddr,IP_ADDR0,IP_ADDR1,IP_ADDR2,IP_ADDR3);
+  IP_ADDR4(&netmask,NETMASK_ADDR0,NETMASK_ADDR1,NETMASK_ADDR2,NETMASK_ADDR3);
+  IP_ADDR4(&gw,GW_ADDR0,GW_ADDR1,GW_ADDR2,GW_ADDR3);
+#endif /* USE_DHCP */
+
+  /* Add the network interface */
   netif_add(&gnetif, &ipaddr, &netmask, &gw, NULL, &ethernetif_init, &tcpip_input);
   
-  /*  Registers the default network interface. */
+  /* Registers the default network interface. */
   netif_set_default(&gnetif);
   
   if (netif_is_link_up(&gnetif))
   {
-    /* When the netif is fully configured this function must be called.*/
+    /* When the netif is fully configured this function must be called */
     netif_set_up(&gnetif);
   }
   else
@@ -198,31 +244,17 @@ static void Netif_Config(void)
   link_arg.netif = &gnetif;
   link_arg.semaphore = Netif_LinkSemaphore;
   /* Create the Ethernet link handler thread */
-  osThreadDef(LinkThr, ethernetif_set_link, osPriorityNormal, 0, configMINIMAL_STACK_SIZE);
+#if defined(__GNUC__)
+  osThreadDef(LinkThr, ethernetif_set_link, osPriorityNormal, 0, configMINIMAL_STACK_SIZE * 5);
+#else
+  osThreadDef(LinkThr, ethernetif_set_link, osPriorityNormal, 0, configMINIMAL_STACK_SIZE * 2);
+#endif
+
   osThreadCreate (osThread(LinkThr), &link_arg);
 }
 
 /**
-  * @brief  Initializes the STM324x9I-EVAL's LCD and LEDs resources.
-  * @param  None
-  * @retval None
-  */
-static void BSP_Config(void)
-{
-  /* Configure LED1, LED2, LED3 and LED4 */
-  BSP_LED_Init(LED1);
-  BSP_LED_Init(LED2);
-  BSP_LED_Init(LED3);
-  BSP_LED_Init(LED4);
-  
-  /* Init IO Expander */
-  BSP_IO_Init();
-  /* Enable IO Expander interrupt for ETH MII pin */
-  BSP_IO_ConfigPin(MII_INT_PIN, IO_MODE_IT_FALLING_EDGE);
-}
-
-/**
-  * @brief  Toggle Led4 task
+  * @brief  Toggle LED4 thread
   * @param  pvParameters not used
   * @retval None
   */
@@ -230,7 +262,7 @@ static void ToggleLed4(void const * argument)
 {
   for( ;; )
   {
-    /* toggle LED4 each 250ms */
+    /* Toggle LED4 each 250ms */
     BSP_LED_Toggle(LED4);
     osDelay(250);
   }
@@ -243,13 +275,14 @@ static void ToggleLed4(void const * argument)
   */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-  if (GPIO_Pin == GPIO_PIN_8)
+  if (GPIO_Pin == MFX_IRQOUT_PIN)
   {
     /* Get the IT status register value */
     if(BSP_IO_ITGetStatus(MII_INT_PIN))
     {
       osSemaphoreRelease(Netif_LinkSemaphore);
     }
+    BSP_IO_ITClear();
   }
 }
 
@@ -287,7 +320,7 @@ static void SystemClock_Config(void)
      clocked below the maximum system frequency, to update the voltage scaling value 
      regarding system frequency refer to product datasheet.  */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
-
+  
   /* Enable HSE Oscillator and activate PLL with HSE as source */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_ON;
@@ -298,14 +331,14 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   RCC_OscInitStruct.PLL.PLLR = 6;
-  
+
   ret = HAL_RCC_OscConfig(&RCC_OscInitStruct);
   
   if(ret != HAL_OK)
   {
     Error_Handler();
   }
-  
+
   /* Activate the OverDrive to reach the 180 MHz Frequency */  
   ret = HAL_PWREx_EnableOverDrive();
   if(ret != HAL_OK)
@@ -353,7 +386,7 @@ void assert_failed(uint8_t* file, uint32_t line)
 {
   /* User can add his own implementation to report the file name and line number,
      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
-
+  
   /* Infinite loop */
   while (1)
   {

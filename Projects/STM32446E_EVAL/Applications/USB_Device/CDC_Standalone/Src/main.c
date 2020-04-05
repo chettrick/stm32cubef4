@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    USB_Device/CDC_Standalone/Src/main.c
   * @author  MCD Application Team
-  * @version V1.2.6
-  * @date    04-November-2016
+  * @version V1.3.0
+  * @date    17-February-2017
   * @brief   USB device CDC demo main file
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -55,7 +55,6 @@ USBD_HandleTypeDef USBD_Device;
 
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);
-static void Toggle_Leds(void);
 
 /* Private functions ---------------------------------------------------------*/
 
@@ -71,10 +70,6 @@ int main(void)
   
   /* Configure the system clock to 180 MHz */
   SystemClock_Config();
-    
-  /* Configure LED1, LED2, LED3 and LED4 */
-  BSP_LED_Init(LED1);
-  BSP_LED_Init(LED3);
   
   /* Init Device Library */
   USBD_Init(&USBD_Device, &VCP_Desc, 0);
@@ -91,7 +86,6 @@ int main(void)
   /* Run Application (Interrupt mode) */
   while (1)
   {
-    Toggle_Leds();
   }
 }
 
@@ -164,25 +158,6 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
-}
-
-/**
-  * @brief  Toggle LEDs to shows user input state.   
-  * @param  None
-  * @retval None
-  */
-void Toggle_Leds(void)
-{
-  static uint32_t ticks;
-  
-  if(ticks++ == 0xfffff)
-  {
-    /* Ok to toggle Led1 and Led3 on timer because on GPIOs */
-    /* Led2 and Led4 use MFX controlled via MFX. Not advisible on Irq*/
-    BSP_LED_Toggle(LED1);
-    BSP_LED_Toggle(LED3);
-    ticks = 0;
-  }
 }
 
 #ifdef  USE_FULL_ASSERT

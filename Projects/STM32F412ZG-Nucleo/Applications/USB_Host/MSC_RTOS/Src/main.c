@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    USB_Host/MSC_RTOS/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    06-May-2016
+  * @version V1.0.1
+  * @date    17-February-2017
   * @brief   USB host Mass storage demo main file
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -129,12 +129,6 @@ static void StartThread(void const * argument)
   /* Start Host Process */
   USBH_Start(&hUSBHost);
   
-  /* Register the file system object to the FatFs module */
-  if(f_mount(&USBH_fatfs, "", 0) != FR_OK)
-  {  
-    LCD_ErrLog("ERROR : Cannot Initialize FatFs! \n");
-  }
-  
   for( ;; )
   {
     event = osMessageGet(AppliEvent, osWaitForever);
@@ -173,10 +167,22 @@ static void USBH_UserProcess(USBH_HandleTypeDef *phost, uint8_t id)
     
   case HOST_USER_DISCONNECTION:
     osMessagePut(AppliEvent, APPLICATION_DISCONNECT, 0);
+    if(f_mount(NULL, "", 0) != FR_OK)
+    {
+      LCD_ErrLog("ERROR : Cannot DeInitialize FatFs! \n");
+    }
     break;
     
   case HOST_USER_CLASS_ACTIVE:
     osMessagePut(AppliEvent, APPLICATION_READY, 0);
+    break;
+    
+  case HOST_USER_CONNECTION:
+    /* Register the file system object to the FatFs module */
+    if(f_mount(&USBH_fatfs, "", 0) != FR_OK)
+    {
+      LCD_ErrLog("ERROR : Cannot Initialize FatFs! \n");
+    }
     break;
     
   default:
@@ -193,10 +199,6 @@ static void MSC_InitApplication(void)
 {
   /* Configure Key Button */
   BSP_PB_Init(BUTTON_USER, BUTTON_MODE_EXTI);
-      
-  /* Configure LEDs */
-  BSP_LED_Init(LED2);
-  BSP_LED_Init(LED3);
   
   /* Initialize the LCD */
   BSP_LCD_Init();
@@ -233,24 +235,6 @@ void HAL_Delay(__IO uint32_t Delay)
     }
   }
 }
-
-/**
-  * @brief  Toggles LEDs to show user input state.
-  * @param  None
-  * @retval None
-  */
-void Toggle_Leds(void)
-{
-  static uint32_t ticks;
-  
-  if(ticks++ == 100)
-  {
-    BSP_LED_Toggle(LED2);
-    BSP_LED_Toggle(LED3);
-    ticks = 0;
-  }  
-}
-
 
 /**
   * @brief  System Clock Configuration

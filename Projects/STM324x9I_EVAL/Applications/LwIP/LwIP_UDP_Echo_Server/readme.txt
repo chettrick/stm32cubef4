@@ -2,16 +2,16 @@
   @page LwIP_UDP_Echo_Server LwIP UDP Echo Server Application
   
   @verbatim
-  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
   * @file    LwIP/LwIP_UDP_Echo_Server/readme.txt 
   * @author  MCD Application Team
-  * @version V1.4.6
-  * @date    04-November-2016
+  * @version V1.5.0
+  * @date    17-February-2017
   * @brief   Description of the LwIP UDP Echo Server Application.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -68,14 +68,19 @@ where:
     – /t is the connection timeout in seconds (for example, 2)
     – /d is the message to be sent for echo 
 
-STM32 Eval board LEDs are used for the following purpose:
+If the LCD is used (#define USE_LCD in main.h), log messages will be displayed 
+to inform user about ethernet cable status and the IP address value, else this 
+will be ensured by LEDs:
   + LED1: ethernet cable is connected.
   + LED2: ethernet cable is not connected.
 
-Note: In this application the Ethernet Link ISR need the System tick interrupt 
-to configure the Ethernet MAC, so the Ethernet Link interrupt priority must be 
-set lower (numerically greater) than the Systick interrupt priority to ensure 
-that the System tick increments while executing the Ethernet Link ISR.
+If a DHCP server is available, a dynamic IP address can be allocated by enabling 
+the DHCP process (#define USE_DHCP in main.h)
+
+Note: In this application the Ethernet Link ISR need the HAL time base to configure 
+the Ethernet MAC, so the Ethernet Link interrupt priority must be set lower (numerically greater) 
+than the HAL tick interrupt priority to ensure that the System tick increments while executing 
+the Ethernet Link ISR.
 
 Note: By default, the Ethernet Half duplex mode is not supported in the 
 STM324x9I-EVAL board, for more information refer to the HAL_ETH_MspInit() 
@@ -97,6 +102,7 @@ For more details about this application, refer to UM1713 "STM32Cube interfacing 
 
   - LwIP/LwIP_UDP_Echo_Server/Inc/app_ethernet.h          header of app_ethernet.c file
   - LwIP/LwIP_UDP_Echo_Server/Inc/ethernetif.h            header for ethernetif.c file
+  - LwIP/LwIP_UDP_Echo_Server/Inc/lcd_log_conf.h          LCD Log configuration file
   - LwIP/LwIP_UDP_Echo_Server/Inc/stm32f4xx_hal_conf.h    HAL configuration file
   - LwIP/LwIP_UDP_Echo_Server/Inc/stm32f4xx_it.h          STM32 interrupt handlers header file
   - LwIP/LwIP_UDP_Echo_Server/Inc/main.h                  Main program header file

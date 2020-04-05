@@ -2,7 +2,9 @@
 
 #include "lwip/netif.h"
 #include "lwip/dhcp.h"
-#include "netif/etharp.h"
+#include "lwip/prot/dhcp.h"
+#include "lwip/etharp.h"
+#include "netif/ethernet.h"
 
 struct netif net_test;
 
@@ -118,11 +120,13 @@ static enum tcase {
   TEST_LWIP_DHCP,
   TEST_LWIP_DHCP_NAK,
   TEST_LWIP_DHCP_RELAY,
-  TEST_LWIP_DHCP_NAK_NO_ENDMARKER,
+  TEST_LWIP_DHCP_NAK_NO_ENDMARKER
 } tcase;
 
 static int debug = 0;
 static void setdebug(int a) {debug = a;}
+
+#define netif_dhcp_data(netif) ((struct dhcp*)(netif)->client_data[LWIP_NETIF_CLIENT_DATA_INDEX_DHCP])
 
 static int tick = 0;
 static void tick_lwip(void)
@@ -203,7 +207,7 @@ static void check_pkt(struct pbuf *p, u32_t pos, const u8_t *mem, u32_t len)
   fail_if(p == NULL);
   fail_unless(pos + len <= p->len); /* All data we seek within same pbuf */
 
-  data = p->payload;
+  data = (u8_t*)p->payload;
   fail_if(memcmp(&data[pos], mem, len), "data at pos %d, len %d in packet %d did not match", pos, len, txpacket);
 }
 
@@ -222,7 +226,7 @@ static void check_pkt_fuzzy(struct pbuf *p, u32_t startpos, const u8_t *mem, u32
   fail_unless(startpos + len <= p->len); /* All data we seek within same pbuf */
 
   found = 0;
-  data = p->payload;
+  data = (u8_t*)p->payload;
   for (i = startpos; i <= (p->len - len); i++) {
     if (memcmp(&data[i], mem, len) == 0) {
       found = 1;
@@ -301,6 +305,9 @@ static err_t lwip_tx_func(struct netif *netif, struct pbuf *p)
         check_pkt(p, 12, arpproto, sizeof(arpproto)); /* eth level proto: ip */
         break;
       }
+      default:
+        fail();
+        break;
     }
     break;
 
@@ -405,6 +412,9 @@ static err_t lwip_tx_func(struct netif *netif, struct pbuf *p)
         check_pkt_fuzzy(p, 282, dhcp_request_opt, sizeof(dhcp_request_opt));
         break;
       }
+    default:
+      fail();
+      break;
     }
     break;
 
@@ -441,7 +451,7 @@ START_TEST(test_dhcp)
   dhcp_start(&net_test);
 
   fail_unless(txpacket == 1); /* DHCP discover sent */
-  xid = net_test.dhcp->xid; /* Write bad xid, not using htonl! */
+  xid = netif_dhcp_data(&net_test)->xid; /* Write bad xid, not using htonl! */
   memcpy(&dhcp_offer[46], &xid, 4);
   send_pkt(&net_test, dhcp_offer, sizeof(dhcp_offer));
 
@@ -451,17 +461,17 @@ START_TEST(test_dhcp)
   fail_if(memcmp(&gw, &net_test.gw, sizeof(ip4_addr_t)));
 
   fail_unless(txpacket == 1, "TX %d packets, expected 1", txpacket); /* Nothing more sent */
-  xid = htonl(net_test.dhcp->xid);
+  xid = htonl(netif_dhcp_data(&net_test)->xid);
   memcpy(&dhcp_offer[46], &xid, 4); /* insert correct transaction id */
   send_pkt(&net_test, dhcp_offer, sizeof(dhcp_offer));
 
   fail_unless(txpacket == 2, "TX %d packets, expected 2", txpacket); /* DHCP request sent */
-  xid = net_test.dhcp->xid; /* Write bad xid, not using htonl! */
+  xid = netif_dhcp_data(&net_test)->xid; /* Write bad xid, not using htonl! */
   memcpy(&dhcp_ack[46], &xid, 4);
   send_pkt(&net_test, dhcp_ack, sizeof(dhcp_ack));
 
   fail_unless(txpacket == 2, "TX %d packets, still expected 2", txpacket); /* No more sent */
-  xid = htonl(net_test.dhcp->xid); /* xid updated */
+  xid = htonl(netif_dhcp_data(&net_test)->xid); /* xid updated */
   memcpy(&dhcp_ack[46], &xid, 4); /* insert transaction id */
   send_pkt(&net_test, dhcp_ack, sizeof(dhcp_ack));
 
@@ -510,7 +520,7 @@ START_TEST(test_dhcp_nak)
   dhcp_start(&net_test);
 
   fail_unless(txpacket == 1); /* DHCP discover sent */
-  xid = net_test.dhcp->xid; /* Write bad xid, not using htonl! */
+  xid = netif_dhcp_data(&net_test)->xid; /* Write bad xid, not using htonl! */
   memcpy(&dhcp_offer[46], &xid, 4);
   send_pkt(&net_test, dhcp_offer, sizeof(dhcp_offer));
 
@@ -520,17 +530,17 @@ START_TEST(test_dhcp_nak)
   fail_if(memcmp(&gw, &net_test.gw, sizeof(ip4_addr_t)));
 
   fail_unless(txpacket == 1); /* Nothing more sent */
-  xid = htonl(net_test.dhcp->xid);
+  xid = htonl(netif_dhcp_data(&net_test)->xid);
   memcpy(&dhcp_offer[46], &xid, 4); /* insert correct transaction id */
   send_pkt(&net_test, dhcp_offer, sizeof(dhcp_offer));
 
   fail_unless(txpacket == 2); /* DHCP request sent */
-  xid = net_test.dhcp->xid; /* Write bad xid, not using htonl! */
+  xid = netif_dhcp_data(&net_test)->xid; /* Write bad xid, not using htonl! */
   memcpy(&dhcp_ack[46], &xid, 4);
   send_pkt(&net_test, dhcp_ack, sizeof(dhcp_ack));
 
   fail_unless(txpacket == 2); /* No more sent */
-  xid = htonl(net_test.dhcp->xid); /* xid updated */
+  xid = htonl(netif_dhcp_data(&net_test)->xid); /* xid updated */
   memcpy(&dhcp_ack[46], &xid, 4); /* insert transaction id */
   send_pkt(&net_test, dhcp_ack, sizeof(dhcp_ack));
 
@@ -735,13 +745,13 @@ START_TEST(test_dhcp_relayed)
   fail_if(memcmp(&gw, &net_test.gw, sizeof(ip4_addr_t)));
 
   fail_unless(txpacket == 1); /* Nothing more sent */
-  xid = htonl(net_test.dhcp->xid);
+  xid = htonl(netif_dhcp_data(&net_test)->xid);
   memcpy(&relay_offer[46], &xid, 4); /* insert correct transaction id */
   send_pkt(&net_test, relay_offer, sizeof(relay_offer));
 
   /* request sent? */
   fail_unless(txpacket == 2, "txpkt = %d, should be 2", txpacket);
-  xid = htonl(net_test.dhcp->xid); /* xid updated */
+  xid = htonl(netif_dhcp_data(&net_test)->xid); /* xid updated */
   memcpy(&relay_ack1[46], &xid, 4); /* insert transaction id */
   send_pkt(&net_test, relay_ack1, sizeof(relay_ack1));
 
@@ -777,7 +787,7 @@ START_TEST(test_dhcp_relayed)
   fail_unless(txpacket == 7, "txpacket = %d", txpacket);
   fail_unless(netif_is_up(&net_test));
 
-  xid = htonl(net_test.dhcp->xid); /* xid updated */
+  xid = htonl(netif_dhcp_data(&net_test)->xid); /* xid updated */
   memcpy(&relay_ack2[46], &xid, 4); /* insert transaction id */
   send_pkt(&net_test, relay_ack2, sizeof(relay_ack2));
 
@@ -866,7 +876,7 @@ START_TEST(test_dhcp_nak_no_endmarker)
   dhcp_start(&net_test);
 
   fail_unless(txpacket == 1); /* DHCP discover sent */
-  xid = net_test.dhcp->xid; /* Write bad xid, not using htonl! */
+  xid = netif_dhcp_data(&net_test)->xid; /* Write bad xid, not using htonl! */
   memcpy(&dhcp_offer[46], &xid, 4);
   send_pkt(&net_test, dhcp_offer, sizeof(dhcp_offer));
 
@@ -876,19 +886,19 @@ START_TEST(test_dhcp_nak_no_endmarker)
   fail_if(memcmp(&gw, &net_test.gw, sizeof(ip4_addr_t)));
 
   fail_unless(txpacket == 1); /* Nothing more sent */
-  xid = htonl(net_test.dhcp->xid);
+  xid = htonl(netif_dhcp_data(&net_test)->xid);
   memcpy(&dhcp_offer[46], &xid, 4); /* insert correct transaction id */
   send_pkt(&net_test, dhcp_offer, sizeof(dhcp_offer));
   
-  fail_unless(net_test.dhcp->state == DHCP_STATE_REQUESTING);
+  fail_unless(netif_dhcp_data(&net_test)->state == DHCP_STATE_REQUESTING);
 
   fail_unless(txpacket == 2); /* No more sent */
-  xid = htonl(net_test.dhcp->xid); /* xid updated */
+  xid = htonl(netif_dhcp_data(&net_test)->xid); /* xid updated */
   memcpy(&dhcp_nack_no_endmarker[46], &xid, 4); /* insert transaction id */
   send_pkt(&net_test, dhcp_nack_no_endmarker, sizeof(dhcp_nack_no_endmarker));
 
   /* NAK should put us in another state for a while, no other way detecting it */
-  fail_unless(net_test.dhcp->state != DHCP_STATE_REQUESTING);
+  fail_unless(netif_dhcp_data(&net_test)->state != DHCP_STATE_REQUESTING);
 
   netif_remove(&net_test);
 }

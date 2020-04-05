@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm32469i_eval_ts.c
   * @author  MCD Application Team
-  * @version V1.0.4
-  * @date    04-August-2016
+  * @version V2.0.0
+  * @date    27-January-2017
   * @brief   This file provides a set of functions needed to manage the Touch
   *          Screen on STM32469I-EVAL evaluation board.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -120,7 +120,7 @@
   */
 static TS_DrvTypeDef *ts_driver;
 static uint8_t  ts_orientation;
-static uint8_t  I2C_Address = 0;
+uint8_t  I2C_Address = 0;
 
 /* Table for touchscreen event information display on LCD : table indexed on enum @ref TS_TouchEventTypeDef information */
 char * ts_event_string_tab[TOUCH_EVENT_NB_MAX] = { "None",
@@ -165,7 +165,7 @@ char * ts_gesture_id_string_tab[GEST_ID_NB_MAX] = { "None",
 uint8_t BSP_TS_Init(uint16_t ts_SizeX, uint16_t ts_SizeY)
 {
   uint8_t ts_status = TS_OK;
-
+  uint8_t ts_id1, ts_id2 = 0;
   /* Note : I2C_Address is un-initialized here, but is not used at all in init function */
   /* but the prototype of Init() is like that in template and should be respected       */
 
@@ -173,14 +173,23 @@ uint8_t BSP_TS_Init(uint16_t ts_SizeX, uint16_t ts_SizeY)
   /* that is initialization is done only once after a power up         */
   ft6x06_ts_drv.Init(I2C_Address);
 
-  /* Scan FT6x06 TouchScreen IC controller ID register by I2C Read */
-  /* Verify this is a FT6x06, otherwise this is an error case      */
-  if(ft6x06_ts_drv.ReadID(TS_I2C_ADDRESS) == FT6206_ID_VALUE)
+  ts_id1 = ft6x06_ts_drv.ReadID(TS_I2C_ADDRESS);
+  if(ts_id1 != FT6206_ID_VALUE)
+  {
+    ts_id2 = ft6x06_ts_drv.ReadID(TS_I2C_ADDRESS_A02);
+    I2C_Address    = TS_I2C_ADDRESS_A02;    
+  }
+  else
+  {
+    I2C_Address    = TS_I2C_ADDRESS;    
+  }
+  
+  /* Scan FT6xx6 TouchScreen IC controller ID register by I2C Read       */
+  /* Verify this is a FT6206 or FT6336G, otherwise this is an error case */
+  if((ts_id1 == FT6206_ID_VALUE) || (ts_id2 == FT6206_ID_VALUE))
   {
     /* Found FT6206 : Initialize the TS driver structure */
     ts_driver = &ft6x06_ts_drv;
-
-    I2C_Address    = TS_I2C_ADDRESS;
 
     /* Get LCD chosen orientation */
     if(ts_SizeX < ts_SizeY)

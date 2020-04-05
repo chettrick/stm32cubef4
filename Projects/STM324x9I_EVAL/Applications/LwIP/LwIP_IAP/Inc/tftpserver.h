@@ -1,14 +1,14 @@
 /**
   ******************************************************************************
-  * @file    LwIP/LwIP_IAP/Inc/tftpserver.h 
+  * @file    LwIP/LwIP_TFTP_Server/Inc/tftpserver.h 
   * @author  MCD Application Team
-  * @version V1.4.6
-  * @date    04-November-2016
+  * @version V1.5.0
+  * @date    17-February-2017 
   * @brief   This file is the header of tftpserver file.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -44,6 +44,7 @@
   *
   ******************************************************************************
   */
+
 #ifndef __TFTPSERVER_H_
 #define __TFTPSERVER_H_
 

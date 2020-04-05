@@ -2,16 +2,16 @@
   @page STemWin_HelloWorld  STemWin HelloWorld Readme file
  
   @verbatim
-  ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
+  ******************** (C) COPYRIGHT 2017 STMicroelectronics  *******************
   * @file    STemWin/STemWin_HelloWorld/readme.txt 
   * @author  MCD Application Team
-  * @version V1.3.6
-  * @date    04-November-2016    
+  * @version V1.4.0
+  * @date    17-February-2017    
   * @brief   Description of STemWin Hello World application. 
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -58,9 +58,6 @@ downloaded from here:
 http://www.segger.com/emwin-samples.html
 To do this, user has only to replace the file "Basic_HelloWorld.c" into the
 project workspace by the downloaded one.
-As application, two sample source files are provided (but not linked to the project):
-	STemWin/STemWin_HelloWorld/Src/MEMDEV_WM_Ticker.c
-	STemWin/STemWin_HelloWorld/Src/MOVIE_ShowFeatures.c
 
 Note that the following user files may need to be updated:
   LCDConf_stm32f429i_disco_MB1075.c

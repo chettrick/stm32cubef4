@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    stm32f429i_discovery_lcd.h
   * @author  MCD Application Team
-  * @version V2.1.4
-  * @date    06-May-2016
+  * @version V2.1.5
+  * @date    27-January-2017
   * @brief   This file contains all the functions prototypes for the 
   *          stm32f429i_discovery_lcd.c driver.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2017 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -236,6 +236,10 @@ void     BSP_LCD_FillEllipse(int Xpos, int Ypos, int XRadius, int YRadius);
 
 void     BSP_LCD_DisplayOff(void);
 void     BSP_LCD_DisplayOn(void);
+
+/* This function can be modified in case the current settings need to be changed 
+   for specific application needs */
+void    BSP_LCD_MspInit(void);
 
 /**
   * @}

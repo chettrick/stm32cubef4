@@ -2,13 +2,13 @@
   ******************************************************************************
   * @file    LwIP/LwIP_HTTP_Server_Netconn_RTOS/Inc/main.h 
   * @author  MCD Application Team
-  * @version V1.3.6
-  * @date    04-November-2016
+  * @version V1.4.0
+  * @date    17-February-2017
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
@@ -57,10 +57,12 @@
 #include "stm324xg_eval.h"
 #include "stm324xg_eval_lcd.h"
 
+#include "cmsis_os.h"
+
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 #define USE_LCD        /* enable LCD  */  
-//#define USE_DHCP       /* enable DHCP, if disabled static address is used*/
+#define USE_DHCP       /* enable DHCP, if disabled static address is used*/
  
 /*Static IP ADDRESS*/
 #define IP_ADDR0   192
@@ -81,8 +83,7 @@
 #define GW_ADDR3   1 
 
 /* Exported macro ------------------------------------------------------------*/
-/* Exported functions ------------------------------------------------------- */  
-
+/* Exported functions ------------------------------------------------------- */
 
 #ifdef __cplusplus
 }
@@ -92,3 +93,4 @@
 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+

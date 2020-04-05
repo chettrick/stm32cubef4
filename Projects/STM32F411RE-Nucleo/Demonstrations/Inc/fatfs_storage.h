@@ -2,15 +2,15 @@
   ******************************************************************************
   * @file    fatfs_storage.h
   * @author  MCD Application Team
-  * @version V1.2.5
-  * @date    04-November-2016
+  * @version V1.2.6
+  * @date    17-February-2017
 
   * @brief   This file contains all the functions prototypes for the storage
   *          firmware driver.
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright © 2016 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright © 2017 STMicroelectronics International N.V. 
   * All rights reserved.</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without 
