@@ -48,10 +48,9 @@
 
 @par Application Description
 
-This application provides a description on how to use STM32Cube firmware with FatFs 
-middleware component as a generic FAT file system module and STM32 USB On-The-Go
-(OTG) host library, in Full Speed (FS) and High Speed (HS) modes, in order to develop 
-an application exploiting FatFs offered features with USB disk drive configuration.
+How to use STM32Cube firmware with FatFs middleware component as a generic FAT
+file system module. This example develops an application exploiting FatFs
+features with a USB disk drive configuration.
 
 At the beginning of the main program the HAL_Init() function is called to reset 
 all the peripherals, initialize the Flash interface and the systick.

@@ -108,6 +108,7 @@ int main(void)
   TimMasterHandle.Init.Prescaler         = (SystemCoreClock / 18000000) - 1;;
   TimMasterHandle.Init.ClockDivision     = 0;
   TimMasterHandle.Init.CounterMode       = TIM_COUNTERMODE_UP;
+  TimMasterHandle.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if(HAL_TIM_OC_Init(&TimMasterHandle) != HAL_OK)
   {
     /* Initialization Error */
@@ -162,6 +163,7 @@ int main(void)
   TimSlaveMasterHandle.Init.Prescaler         = ((SystemCoreClock/2) / 16000000) - 1;;
   TimSlaveMasterHandle.Init.ClockDivision     = 0;
   TimSlaveMasterHandle.Init.CounterMode       = TIM_COUNTERMODE_UP;
+  TimSlaveMasterHandle.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if(HAL_TIM_OC_Init(&TimSlaveMasterHandle) != HAL_OK)
   {
     /* Initialization Error */
@@ -204,6 +206,7 @@ int main(void)
   TimSlaveHandle.Init.Prescaler         = ((SystemCoreClock/2) / 18000000) - 1;;
   TimSlaveHandle.Init.ClockDivision     = 0;
   TimSlaveHandle.Init.CounterMode       = TIM_COUNTERMODE_UP;
+  TimSlaveHandle.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if(HAL_TIM_OC_Init(&TimSlaveHandle) != HAL_OK)
   {
     /* Initialization Error */

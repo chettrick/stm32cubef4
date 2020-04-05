@@ -51,7 +51,8 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-
+/* CRYP handler declared in "main.c" file */
+extern CRYP_HandleTypeDef hcryp;
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -163,6 +164,38 @@ void SysTick_Handler(void)
 /*  available peripheral interrupt handler's name please refer to the startup */
 /*  file (startup_stm32f4xx.s).                                               */
 /******************************************************************************/
+
+/**
+  * @brief  This function handles CRYP Handler.
+  * @param  None
+  * @retval None
+  */
+void CRYP_IRQHandler(void)
+{
+  HAL_CRYP_IRQHandler(&hcryp);
+}
+
+/**
+* @brief  This function handles DMA2 Stream 5 interrupt request.
+* @param  None
+* @retval None
+*/
+void DMA2_Stream5_IRQHandler(void)
+{
+  /* CRYP input data */
+   HAL_DMA_IRQHandler(hcryp.hdmaout);
+}
+
+/**
+* @brief  This function handles DMA2 Stream 6 interrupt request.
+* @param  None
+* @retval None
+*/
+void DMA2_Stream6_IRQHandler(void)
+{
+  /* CRYP output data */
+   HAL_DMA_IRQHandler(hcryp.hdmain);
+}
 
 /**
   * @brief  This function handles PPP interrupt request.

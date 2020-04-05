@@ -176,6 +176,19 @@ void OTG_FS_IRQHandler(void)
 }
 
 /**
+  * @brief  This function handles USB OTG FS Wakeup IRQ Handler.
+  * @param  None
+  * @retval None
+  */
+
+void OTG_FS_WKUP_IRQHandler(void)
+{
+  /* Clear EXTI pending Bit */
+  __HAL_USB_OTG_FS_WAKEUP_EXTI_CLEAR_FLAG();
+}
+
+
+/**
   * @brief  This function handles External line 0 interrupt request.
   * @param  None
   * @retval None
@@ -184,6 +197,7 @@ void EXTI0_IRQHandler(void)
 {
   HAL_GPIO_EXTI_IRQHandler(WAKEUP_BUTTON_PIN);
 }
+
 
 /**
   * @brief  This function handles external lines 5 to 9 interrupt request.

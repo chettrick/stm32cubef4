@@ -59,6 +59,7 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 USBD_HandleTypeDef USBD_Device;
+extern PCD_HandleTypeDef hpcd;
 
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);
@@ -90,75 +91,27 @@ int main(void)
   BSP_LED_Init(LED3);
   BSP_LED_Init(LED4);
 
+  /* Configure User button */
+  BSP_PB_Init(BUTTON_WAKEUP, BUTTON_MODE_EXTI);
+
   /* Init Device Library */
   USBD_Init(&USBD_Device, &HID_Desc, 0);
   
   /* Add Supported Class */
   USBD_RegisterClass(&USBD_Device, USBD_HID_CLASS);
   
-  /* Start Device Process */
-  if(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_9))
+  if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_9) == GPIO_PIN_SET)
   {
-    /* Start Device Process */
-    USBD_Start(&USBD_Device);
+    /*wait for bus stabilization*/
+    HAL_Delay(450);
+    /*Start BCD Detect*/
+    HAL_PCDEx_ActivateBCD (&hpcd);
+    HAL_PCDEx_BCD_VBUSDetect(&hpcd);
   }
   
   /* Run Application (Interrupt mode) */
   while (1)
   {
-  }
-}
-
-/**
-  * @brief This function provides accurate delay (in milliseconds) based 
-  *        on SysTick counter flag.
-  * @note This function is declared as __weak to be overwritten in case of other
-  *       implementations in user file.
-  * @param Delay: specifies the delay time length, in milliseconds.
-  * @retval None
-  */
-
-void HAL_Delay(__IO uint32_t Delay)
-{
-  while(Delay) 
-  {
-    if (SysTick->CTRL & SysTick_CTRL_COUNTFLAG_Msk) 
-    {
-      Delay--;
-    }
-  }
-}
-
-/**
-  * @brief  HAL_PCDEx_BCD_Callback : Send BCD message to user layer
-  * @param  hpcd: PCD handle
-  * @param  msg: LPM message
-  * @retval HAL status
-  */
-void HAL_PCDEx_BCD_Callback(PCD_HandleTypeDef *hpcd, PCD_BCD_MsgTypeDef msg)
-{
-  switch(msg)
-  {
-  case PCD_BCD_STD_DOWNSTREAM_PORT:
-    BSP_LED_On(LED3);
-    break;
-    
-  case PCD_BCD_CHARGING_DOWNSTREAM_PORT:
-    BSP_LED_On(LED4);
-    break;
-    
-  case PCD_BCD_DEDICATED_CHARGING_PORT:
-    BSP_LED_On(LED3);
-    BSP_LED_On(LED4);
-    break;
-    
-  case PCD_BCD_DISCOVERY_COMPLETED:
-    USBD_Start(&USBD_Device);
-    break;
-    
-  case PCD_BCD_ERROR:
-  default:
-    break;
   }
 }
 
@@ -237,6 +190,63 @@ static void SystemClock_Config(void)
     while(1) { ; }  
   }
 }
+
+
+/**
+  * @brief This function provides accurate delay (in milliseconds) based 
+  *        on SysTick counter flag.
+  * @note This function is declared as __weak to be overwritten in case of other
+  *       implementations in user file.
+  * @param Delay: specifies the delay time length, in milliseconds.
+  * @retval None
+  */
+
+void HAL_Delay(__IO uint32_t Delay)
+{
+  while(Delay) 
+  {
+    if (SysTick->CTRL & SysTick_CTRL_COUNTFLAG_Msk) 
+    {
+      Delay--;
+    }
+  }
+}
+
+/**
+  * @brief  HAL_PCDEx_BCD_Callback : Send BCD message to user layer
+  * @param  hpcd: PCD handle
+  * @param  msg: LPM message
+  * @retval HAL status
+  */
+void HAL_PCDEx_BCD_Callback(PCD_HandleTypeDef *hpcd, PCD_BCD_MsgTypeDef msg)
+{
+  switch(msg)
+  {
+  case PCD_BCD_STD_DOWNSTREAM_PORT:
+    BSP_LED_On(LED3);
+    break;
+    
+  case PCD_BCD_CHARGING_DOWNSTREAM_PORT:
+    BSP_LED_On(LED4);
+    break;
+    
+  case PCD_BCD_DEDICATED_CHARGING_PORT:
+    BSP_LED_On(LED3);
+    BSP_LED_On(LED4);
+    break;
+    
+  case PCD_BCD_DISCOVERY_COMPLETED:
+    HAL_Delay(20);
+    /* Start USB */
+    USBD_Start(&USBD_Device);
+    break;
+    
+  case PCD_BCD_ERROR:
+  default:
+    break;
+  }
+}
+
 
 #ifdef  USE_FULL_ASSERT
 /**

@@ -318,9 +318,9 @@ COM_StatusTypeDef Ymodem_Receive ( uint32_t *p_size )
 {
   uint32_t i, packet_length, session_done = 0, file_done, errors = 0, session_begin = 0;
  // uint32_t flashdestination;
-  uint32_t ramsource, filesize;
+  uint32_t ramsource, filesize, packets_received;
   uint8_t *file_ptr;
-  uint8_t file_size[FILE_SIZE_LENGTH], tmp, packets_received;
+  uint8_t file_size[FILE_SIZE_LENGTH], tmp;
   COM_StatusTypeDef result = COM_OK;
 
   /* Initialize flashdestination variable */
@@ -350,7 +350,7 @@ COM_StatusTypeDef Ymodem_Receive ( uint32_t *p_size )
               break;
             default:
               /* Normal packet */
-              if (aPacketData[PACKET_NUMBER_INDEX] != packets_received)
+              if (aPacketData[PACKET_NUMBER_INDEX] != (uint8_t)packets_received)
               {
                 Serial_PutByte(NAK);
               }

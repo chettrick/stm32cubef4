@@ -51,7 +51,7 @@
 This application aims to show the outstanding capability of Display Serial Interface (DSI)
  periphiral to display images with high resolution (800x480). With a simple movement of finger,
 the content of GRAM is directly updated and displayed on DSI LCD. 
-Thanks to Tearing Effect and Partial refresh features, that allow user to provoke
+Thanks to Tearing Effect and Partial refresh features that allow user to provoke
 a refresh whenever he wants and on the specified region he desires, the refresh 
 of LCD is more rapid than any time before.
 

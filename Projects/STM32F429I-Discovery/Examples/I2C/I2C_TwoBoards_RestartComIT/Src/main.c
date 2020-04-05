@@ -102,9 +102,7 @@ int main(void)
   /* Configure the system clock to 180 MHz */
   SystemClock_Config();
 
-  /* Configure LED3, LED3, LED3 and LED4 */
-  BSP_LED_Init(LED3);
-  BSP_LED_Init(LED3);
+  /* Configure LED3 and LED4 */
   BSP_LED_Init(LED3);
   BSP_LED_Init(LED4);
 
@@ -146,7 +144,7 @@ int main(void)
   /*##-2- Start the transmission process #####################################*/  
   /* While the I2C in reception process, user can transmit data through 
      "aTxBuffer" buffer */
-  while(HAL_I2C_Master_Sequential_Transmit_IT(&I2cHandle, (uint16_t)I2C_ADDRESS, (uint8_t*)aTxBuffer, TXBUFFERSIZE, I2C_FIRST_FRAME)!= HAL_OK)
+  while(HAL_I2C_Master_Seq_Transmit_IT(&I2cHandle, (uint16_t)I2C_ADDRESS, (uint8_t*)aTxBuffer, TXBUFFERSIZE, I2C_FIRST_FRAME)!= HAL_OK)
   {
     /* Error_Handler() function is called when Timeout error occurs.
        When Acknowledge failure occurs (Slave don't acknowledge it's address)
@@ -179,7 +177,7 @@ int main(void)
   }
 
   /*##-4- Put I2C peripheral in reception process ############################*/  
-  while(HAL_I2C_Master_Sequential_Receive_IT(&I2cHandle, (uint16_t)I2C_ADDRESS, (uint8_t *)aRxBuffer, RXBUFFERSIZE, I2C_LAST_FRAME) != HAL_OK)
+  while(HAL_I2C_Master_Seq_Receive_IT(&I2cHandle, (uint16_t)I2C_ADDRESS, (uint8_t *)aRxBuffer, RXBUFFERSIZE, I2C_LAST_FRAME) != HAL_OK)
   {
     /* Error_Handler() function is called when Timeout error occurs.
        When Acknowledge failure occurs (Slave don't acknowledge it's address)
@@ -210,7 +208,7 @@ int main(void)
   }
   
   /*##-3- Put I2C peripheral in reception process ############################*/  
-  if(HAL_I2C_Slave_Sequential_Receive_IT(&I2cHandle, (uint8_t *)aRxBuffer, RXBUFFERSIZE, I2C_FIRST_FRAME) != HAL_OK)
+  if(HAL_I2C_Slave_Seq_Receive_IT(&I2cHandle, (uint8_t *)aRxBuffer, RXBUFFERSIZE, I2C_FIRST_FRAME) != HAL_OK)
   {
     /* Transfer error in reception process */
     Error_Handler();        
@@ -230,7 +228,7 @@ int main(void)
   /*##-5- Start the transmission process #####################################*/  
   /* While the I2C in reception process, user can transmit data through 
      "aTxBuffer" buffer */
-  if(HAL_I2C_Slave_Sequential_Transmit_IT(&I2cHandle, (uint8_t*)aTxBuffer, TXBUFFERSIZE, I2C_LAST_FRAME)!= HAL_OK)
+  if(HAL_I2C_Slave_Seq_Transmit_IT(&I2cHandle, (uint8_t*)aTxBuffer, TXBUFFERSIZE, I2C_LAST_FRAME)!= HAL_OK)
   {
     /* Transfer error in transmission process */
     Error_Handler();    
@@ -411,11 +409,6 @@ void HAL_I2C_ListenCpltCallback(I2C_HandleTypeDef *hi2c)
   */
 void HAL_I2C_ErrorCallback(I2C_HandleTypeDef *I2cHandle)
 {
-  /* Turn Off LED3 */
-  BSP_LED_Off(LED3);
-
-  /* Turn Off LED3 */
-  BSP_LED_Off(LED3);
 
   /* Turn Off LED3 */
   BSP_LED_Off(LED3);

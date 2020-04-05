@@ -65,8 +65,70 @@
   */
 void HAL_CRYP_MspInit(CRYP_HandleTypeDef *hcryp)
 {
+  static DMA_HandleTypeDef   hdmaIn;
+  static DMA_HandleTypeDef   hdmaOut;
+  
+  /*##-1- Enable peripherals Clock ###########################################*/
   /* Enable CRYP clock */
-  __HAL_RCC_CRYP_CLK_ENABLE();
+  __HAL_RCC_CRYP_CLK_ENABLE();  
+  
+  /* Enable DMA2 clocks */
+  __HAL_RCC_DMA2_CLK_ENABLE();
+  
+  /*##-2- Set CRYP Interrupt to the highest priority ##########################################*/
+  HAL_NVIC_SetPriority(CRYP_IRQn, 4, 0);
+  HAL_NVIC_EnableIRQ(CRYP_IRQn);
+
+  /*##-3- Configure the DMA streams ##########################################*/
+  /***************** Configure common DMA In parameters ***********************/
+  hdmaIn.Init.Channel             = DMA_CHANNEL_2;
+  hdmaIn.Init.Direction           = DMA_MEMORY_TO_PERIPH;
+  hdmaIn.Init.PeriphInc           = DMA_PINC_DISABLE;
+  hdmaIn.Init.MemInc              = DMA_MINC_ENABLE;
+  hdmaIn.Init.PeriphDataAlignment = DMA_PDATAALIGN_WORD;
+  hdmaIn.Init.MemDataAlignment    = DMA_MDATAALIGN_WORD;
+  hdmaIn.Init.Mode                = DMA_NORMAL;
+  hdmaIn.Init.Priority            = DMA_PRIORITY_HIGH;
+  hdmaIn.Init.FIFOMode            = DMA_FIFOMODE_DISABLE;
+  hdmaIn.Init.FIFOThreshold       = DMA_FIFO_THRESHOLD_FULL;
+  hdmaIn.Init.MemBurst            = DMA_MBURST_SINGLE;
+  hdmaIn.Init.PeriphBurst         = DMA_PBURST_SINGLE;
+  hdmaIn.Instance = DMA2_Stream6;
+  
+  /* Associate the DMA handle */
+  __HAL_LINKDMA(hcryp, hdmain, hdmaIn);
+  
+  /* Configure the DMA Stream */
+  HAL_DMA_Init(hcryp->hdmain);
+  
+  /* NVIC configuration for DMA Input data interrupt */
+  HAL_NVIC_SetPriority(DMA2_Stream6_IRQn, 0x0F, 0);
+  HAL_NVIC_EnableIRQ(DMA2_Stream6_IRQn);
+  
+  /***************** Configure common DMA Out parameters **********************/
+  hdmaOut.Init.Channel             = DMA_CHANNEL_2;
+  hdmaOut.Init.Direction           = DMA_PERIPH_TO_MEMORY;
+  hdmaOut.Init.PeriphInc           = DMA_PINC_DISABLE;
+  hdmaOut.Init.MemInc              = DMA_MINC_ENABLE;
+  hdmaOut.Init.PeriphDataAlignment = DMA_PDATAALIGN_WORD;
+  hdmaOut.Init.MemDataAlignment    = DMA_MDATAALIGN_WORD;
+  hdmaOut.Init.Mode                = DMA_NORMAL;
+  hdmaOut.Init.Priority            = DMA_PRIORITY_VERY_HIGH;
+  hdmaOut.Init.FIFOMode            = DMA_FIFOMODE_DISABLE;
+  hdmaOut.Init.FIFOThreshold       = DMA_FIFO_THRESHOLD_FULL;
+  hdmaOut.Init.MemBurst            = DMA_MBURST_SINGLE;
+  hdmaOut.Init.PeriphBurst         = DMA_PBURST_SINGLE;
+  hdmaOut.Instance = DMA2_Stream5;
+  
+  /* Associate the DMA handle */
+  __HAL_LINKDMA(hcryp, hdmaout, hdmaOut);
+  
+  /* Configure the DMA Stream */
+  HAL_DMA_Init(&hdmaOut);
+  /*##-4- Configure the NVIC for DMA #########################################*/
+  /* NVIC configuration for DMA output data interrupt */
+  HAL_NVIC_SetPriority(DMA2_Stream5_IRQn, 0x0F, 0);
+  HAL_NVIC_EnableIRQ(DMA2_Stream5_IRQn);
   
 }
 

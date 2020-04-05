@@ -78,9 +78,9 @@
 
 /* Definition for I2Cx's NVIC */
 #define I2Cx_EV_IRQn                    FMPI2C1_EV_IRQn
-#define I2Cx_EV_IRQHandler              FMPI2C1_Event_IRQHandler
+#define I2Cx_EV_IRQHandler              FMPI2C1_EV_IRQHandler
 #define I2Cx_ER_IRQn                    FMPI2C1_ER_IRQn
-#define I2Cx_ER_IRQHandler              FMPI2C1_Error_IRQHandler
+#define I2Cx_ER_IRQHandler              FMPI2C1_ER_IRQHandler
 
 /* Size of Transmission buffer */
 #define TXBUFFERSIZE                      (COUNTOF(aTxBuffer) - 1)

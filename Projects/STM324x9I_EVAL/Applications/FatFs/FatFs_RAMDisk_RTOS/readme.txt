@@ -48,10 +48,9 @@
 
 @par Application Description
 
-This application provides a description on how to use STM32Cube firmware with FatFs 
-middleware component as a generic FAT file system module, in order to develop an
-application exploiting FatFs offered features with RAM disk (SDRAM) drive in RTOS 
-mode configuration. 
+How to use STM32Cube firmware with FatFs middleware component as a generic FAT
+file system module. This example develops an application exploiting FatFs
+features with a RAM disk (SRAM) drive in RTOS mode configuration.
 
 At the beginning of the main program the HAL_Init() function is called to reset 
 all the peripherals, initialize the Flash interface and the systick.

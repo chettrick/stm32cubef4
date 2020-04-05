@@ -171,7 +171,7 @@ void SysTick_Handler(void)
   * @retval None
   * @Note   This function is redefined in "main.h" and related to I2C data transmission     
   */
-void FMPI2C1_Event_IRQHandler(void)
+void I2Cx_EV_IRQHandler(void)
 {
   HAL_FMPI2C_EV_IRQHandler(&I2cHandle);
 }
@@ -182,7 +182,7 @@ void FMPI2C1_Event_IRQHandler(void)
   * @retval None
   * @Note   This function is redefined in "main.h" and related to I2C error
   */
-void FMPI2C1_Error_IRQHandler(void)
+void I2Cx_ER_IRQHandler(void)
 {
   HAL_FMPI2C_ER_IRQHandler(&I2cHandle);
 }

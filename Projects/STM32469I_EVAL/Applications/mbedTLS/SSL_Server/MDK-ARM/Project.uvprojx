@@ -1179,6 +1179,26 @@
               <FileType>1</FileType>
               <FilePath>../../../../../../Middlewares/Third_Party/mbedTLS/library/ecp.c</FilePath>
             </File>
+            <File>
+              <FileName>aria.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Middlewares/Third_Party/mbedTLS/library/aria.c</FilePath>
+            </File>
+            <File>
+              <FileName>platform_util.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Middlewares/Third_Party/mbedTLS/library/platform_util.c</FilePath>
+            </File>
+            <File>
+              <FileName>hkdf.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Middlewares/Third_Party/mbedTLS/library/hkdf.c</FilePath>
+            </File>
+            <File>
+              <FileName>rsa_internal.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Middlewares/Third_Party/mbedTLS/library/rsa_internal.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

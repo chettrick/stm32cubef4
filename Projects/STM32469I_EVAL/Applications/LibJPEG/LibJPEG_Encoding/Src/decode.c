@@ -85,7 +85,6 @@ void jpeg_decode(JFILE *file, uint32_t width, uint8_t * buff, uint8_t (*callback
   /* Step 3: read image parameters with jpeg_read_header() */
   jpeg_read_header(&cinfo, TRUE);
 
-  /* TBC */
   /* Step 4: set parameters for decompression */
   cinfo.dct_method = JDCT_FLOAT;
 
@@ -97,7 +96,6 @@ void jpeg_decode(JFILE *file, uint32_t width, uint8_t * buff, uint8_t (*callback
   {
     (void) jpeg_read_scanlines(&cinfo, buffer, 1);
     
-    /* TBC */
     if (callback(buffer[0], row_stride) != 0)
     {
       break;

@@ -130,9 +130,9 @@ int main(void)
   *        -1- Enable DMA2 clock
   *        -2- Select the DMA functional Parameters
   *        -3- Select the DMA instance to be used for the transfer
-  *        -4- Select Callbacks functions called after Transfer complete and
-               Transfer error interrupt detection
-  *        -5- Initialize the DMA stream
+  *        -4- Initialize the DMA stream
+  *        -5- Select Callbacks functions called after Transfer complete and 
+  *            Transfer error interrupt detection
   *        -6- Configure NVIC for DMA transfer complete/error interrupts
   *        -7- Start the DMA transfer using the interrupt mode
   * @param  None
@@ -160,16 +160,16 @@ static void DMA_Config(void)
   /*##-3- Select the DMA instance to be used for the transfer : DMA2_Stream0 #*/
   DmaHandle.Instance = DMA_INSTANCE;
 
-  /*##-4- Select Callbacks functions called after Transfer complete and Transfer error */
-  DmaHandle.XferCpltCallback  = TransferComplete;
-  DmaHandle.XferErrorCallback = TransferError;
-
-  /*##-5- Initialize the DMA stream ##########################################*/
-  if (HAL_DMA_Init(&DmaHandle) != HAL_OK)
+  /*##-4- Initialize the DMA stream ##########################################*/
+  if(HAL_DMA_Init(&DmaHandle) != HAL_OK)
   {
     /* Initialization Error */
     Error_Handler();
   }
+
+  /*##-5- Select Callbacks functions called after Transfer complete and Transfer error */
+  HAL_DMA_RegisterCallback(&DmaHandle, HAL_DMA_XFER_CPLT_CB_ID, TransferComplete);
+  HAL_DMA_RegisterCallback(&DmaHandle, HAL_DMA_XFER_ERROR_CB_ID, TransferError);
 
   /*##-6- Configure NVIC for DMA transfer complete/error interrupts ##########*/
   /* Set Interrupt Group Priority */

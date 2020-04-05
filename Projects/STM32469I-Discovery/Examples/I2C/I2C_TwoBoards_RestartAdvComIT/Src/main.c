@@ -213,7 +213,7 @@ int main(void)
       ubMasterNbDataToTransmit = strlen((char *)(aCommandCode[ubMasterCommandIndex][0]));
 
       /* Handle I2C events (Master Transmit only) */
-      while(HAL_I2C_Master_Sequential_Transmit_IT(&I2cHandle, (uint16_t)I2C_ADDRESS, pMasterTransmitBuffer, ubMasterNbDataToTransmit, I2C_FIRST_AND_LAST_FRAME)!= HAL_OK)
+      while(HAL_I2C_Master_Seq_Transmit_IT(&I2cHandle, (uint16_t)I2C_ADDRESS, pMasterTransmitBuffer, ubMasterNbDataToTransmit, I2C_FIRST_AND_LAST_FRAME)!= HAL_OK)
       {
         /* Error_Handler() function is called when Timeout error occurs.
            When Acknowledge failure occurs (Slave don't acknowledge it's address)
@@ -249,7 +249,7 @@ int main(void)
       ubMasterNbDataToTransmit = strlen((char *)(aCommandCode[ubMasterCommandIndex][0]));
 
       /* Handle I2C events (Master Transmit only) */
-      while(HAL_I2C_Master_Sequential_Transmit_IT(&I2cHandle, (uint16_t)I2C_ADDRESS, pMasterTransmitBuffer, ubMasterNbDataToTransmit, I2C_FIRST_FRAME)!= HAL_OK)
+      while(HAL_I2C_Master_Seq_Transmit_IT(&I2cHandle, (uint16_t)I2C_ADDRESS, pMasterTransmitBuffer, ubMasterNbDataToTransmit, I2C_FIRST_FRAME)!= HAL_OK)
       {
         /* Error_Handler() function is called when Timeout error occurs.
            When Acknowledge failure occurs (Slave don't acknowledge it's address)
@@ -275,7 +275,7 @@ int main(void)
       /* Master generate a restart condition and then change the I2C peripheral 
          from transmission process to reception process, to retrieve information
          data from Slave device. */
-      while(HAL_I2C_Master_Sequential_Receive_IT(&I2cHandle, (uint16_t)I2C_ADDRESS, aMasterReceiveBuffer, strlen((char *)(aSlaveInfo[ubMasterCommandIndex])), I2C_LAST_FRAME)!= HAL_OK)
+      while(HAL_I2C_Master_Seq_Receive_IT(&I2cHandle, (uint16_t)I2C_ADDRESS, aMasterReceiveBuffer, strlen((char *)(aSlaveInfo[ubMasterCommandIndex])), I2C_LAST_FRAME)!= HAL_OK)
       {
         /* Error_Handler() function is called when Timeout error occurs.
            When Acknowledge failure occurs (Slave don't acknowledge it's address)
@@ -491,7 +491,7 @@ void HAL_I2C_SlaveRxCpltCallback(I2C_HandleTypeDef *I2cHandle)
   }
   else
   {
-    if(HAL_I2C_Slave_Sequential_Receive_IT(I2cHandle, &aSlaveReceiveBuffer[ubSlaveReceiveIndex], 1, I2C_FIRST_FRAME) != HAL_OK)
+    if(HAL_I2C_Slave_Seq_Receive_IT(I2cHandle, &aSlaveReceiveBuffer[ubSlaveReceiveIndex], 1, I2C_FIRST_FRAME) != HAL_OK)
     {
       Error_Handler();
     }
@@ -523,7 +523,7 @@ void HAL_I2C_AddrCallback(I2C_HandleTypeDef *hi2c, uint8_t TransferDirection, ui
     /* First of all, check the transfer direction to call the correct Slave Interface */
     if(uwTransferDirection == I2C_DIRECTION_TRANSMIT)
     {
-      if(HAL_I2C_Slave_Sequential_Receive_IT(&I2cHandle, &aSlaveReceiveBuffer[ubSlaveReceiveIndex], 1, I2C_FIRST_FRAME) != HAL_OK)
+      if(HAL_I2C_Slave_Seq_Receive_IT(&I2cHandle, &aSlaveReceiveBuffer[ubSlaveReceiveIndex], 1, I2C_FIRST_FRAME) != HAL_OK)
       {
         Error_Handler();
       }
@@ -534,7 +534,7 @@ void HAL_I2C_AddrCallback(I2C_HandleTypeDef *hi2c, uint8_t TransferDirection, ui
       pSlaveTransmitBuffer = (uint8_t*)(aSlaveInfo[ubSlaveInfoIndex]);
       ubSlaveNbDataToTransmit = strlen((char *)(aSlaveInfo[ubSlaveInfoIndex]));
 
-      if(HAL_I2C_Slave_Sequential_Transmit_IT(&I2cHandle, pSlaveTransmitBuffer, ubSlaveNbDataToTransmit, I2C_LAST_FRAME) != HAL_OK)
+      if(HAL_I2C_Slave_Seq_Transmit_IT(&I2cHandle, pSlaveTransmitBuffer, ubSlaveNbDataToTransmit, I2C_LAST_FRAME) != HAL_OK)
       {
         Error_Handler();
       }

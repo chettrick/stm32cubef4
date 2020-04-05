@@ -189,22 +189,6 @@ void HAL_PCD_ResetCallback(PCD_HandleTypeDef *hpcd)
 {   
   USBD_SpeedTypeDef speed = USBD_SPEED_FULL;
   
-  /* Set USB Current Speed */
-  switch(hpcd->Init.speed)
-  {
-  case PCD_SPEED_HIGH:
-    speed = USBD_SPEED_HIGH;
-    break;
-    
-  case PCD_SPEED_FULL:
-    speed = USBD_SPEED_FULL;
-    break;   
-    
-  default:
-    speed = USBD_SPEED_FULL;
-    break;
-  }
-  
   /* Reset Device */
   USBD_LL_Reset(hpcd->pData);
   
@@ -296,7 +280,6 @@ USBD_StatusTypeDef USBD_LL_Init(USBD_HandleTypeDef *pdev)
   hpcd.Instance = USB_OTG_FS;
   hpcd.Init.dev_endpoints = 4;
   hpcd.Init.use_dedicated_ep1 = 0;
-  hpcd.Init.ep0_mps = 0x40;
   hpcd.Init.dma_enable = 0;
   hpcd.Init.low_power_enable = 0;
   hpcd.Init.phy_itface = PCD_PHY_EMBEDDED;

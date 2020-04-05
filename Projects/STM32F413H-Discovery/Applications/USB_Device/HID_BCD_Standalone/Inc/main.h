@@ -59,6 +59,7 @@
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 void SystemClockConfig_STOP(void);
+void GetPointerData(uint8_t *pbuf);
 
 #endif /* __MAIN_H */
 

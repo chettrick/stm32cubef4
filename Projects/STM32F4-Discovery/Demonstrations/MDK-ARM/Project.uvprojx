@@ -333,7 +333,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls> </MiscControls>
-              <Define>STM32F407xx,USE_STM32F4_DISCO</Define>
+              <Define>STM32F407xx,USE_STM32F4_DISCO,USE_HAL_DRIVER</Define>
               <Undefine></Undefine>
               <IncludePath>../Inc;../../../../Drivers//CMSIS/Device/ST/STM32F4xx/Include;../../../../Drivers//STM32F4xx_HAL_Driver/Inc;../../../../Drivers//BSP/STM32F4-Discovery;../../../../Middlewares/ST/STM32_USB_Device_Library/Core/Inc;../../../../Middlewares/ST/STM32_USB_Device_Library/Class/HID/Inc</IncludePath>
             </VariousControls>

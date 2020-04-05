@@ -520,6 +520,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\event_groups.c</FilePath>
             </File>
+            <File>
+              <FileName>stream_buffer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\stream_buffer.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

@@ -180,8 +180,8 @@ __vector_table
         DCD     QUADSPI_IRQHandler                ; QuadSPI
         DCD     CEC_IRQHandler                    ; CEC
         DCD     SPDIF_RX_IRQHandler               ; SPDIF RX
-        DCD     I2C4_Event_IRQHandler             ; I2C 4 Event
-        DCD     I2C4_Error_IRQHandler             ; I2C 4 Error
+        DCD     FMPI2C1_EV_IRQHandler             ;FMPI2C Event
+        DCD     FMPI2C1_ER_IRQHandler             ;FMPI2C Error
 		;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;; Default interrupt handlers.
@@ -661,15 +661,15 @@ CEC_IRQHandler
 SPDIF_RX_IRQHandler 
         B SPDIF_RX_IRQHandler  
         
-        PUBWEAK I2C4_Event_IRQHandler
+        PUBWEAK FMPI2C1_EV_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1) 
-I2C4_Event_IRQHandler 
-        B I2C4_Event_IRQHandler    
+FMPI2C1_EV_IRQHandler 
+        B FMPI2C1_EV_IRQHandler    
         
-        PUBWEAK I2C4_Error_IRQHandler
+        PUBWEAK FMPI2C1_ER_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1) 
-I2C4_Error_IRQHandler 
-        B I2C4_Error_IRQHandler                 
+FMPI2C1_ER_IRQHandler 
+        B FMPI2C1_ER_IRQHandler                 
 
 
         END

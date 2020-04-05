@@ -107,6 +107,7 @@ int main(void)
   TimMasterHandle.Init.ClockDivision     = 0;
   TimMasterHandle.Init.CounterMode       = TIM_COUNTERMODE_UP;
   TimMasterHandle.Init.RepetitionCounter = 4;
+  TimMasterHandle.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if(HAL_TIM_PWM_Init(&TimMasterHandle) != HAL_OK)
   {
     /* Initialization Error */
@@ -142,6 +143,7 @@ int main(void)
   TimSlave1Handle.Init.ClockDivision     = 0;
   TimSlave1Handle.Init.CounterMode       = TIM_COUNTERMODE_UP;
   TimSlave1Handle.Init.RepetitionCounter = 0;
+  TimSlave1Handle.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if(HAL_TIM_PWM_Init(&TimSlave1Handle) != HAL_OK)
   {
     /* Initialization Error */
@@ -178,6 +180,7 @@ int main(void)
   TimSlave2Handle.Init.ClockDivision     = 0;
   TimSlave2Handle.Init.CounterMode       = TIM_COUNTERMODE_UP;
   TimSlave2Handle.Init.RepetitionCounter = 0;
+  TimSlave2Handle.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if(HAL_TIM_PWM_Init(&TimSlave2Handle) != HAL_OK)
   {
     /* Initialization Error */

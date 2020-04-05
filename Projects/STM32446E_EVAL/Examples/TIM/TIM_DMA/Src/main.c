@@ -146,6 +146,7 @@ int main(void)
 
   TimHandle.Init.Period            = uwTimerPeriod;
   TimHandle.Init.RepetitionCounter = 3;
+  TimHandle.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   TimHandle.Init.Prescaler         = 0;
   TimHandle.Init.ClockDivision     = 0;
   TimHandle.Init.CounterMode       = TIM_COUNTERMODE_UP;

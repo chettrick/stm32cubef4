@@ -154,6 +154,9 @@ static void Get_SerialNum(void);
   */
 uint8_t *USBD_AUDIO_DeviceDescriptor(USBD_SpeedTypeDef speed, uint16_t * length)
 {
+  /* Prevent unused argument(s) compilation warning */
+  UNUSED(speed);
+
   *length = sizeof(USBD_DeviceDesc);
   return (uint8_t *) USBD_DeviceDesc;
 }

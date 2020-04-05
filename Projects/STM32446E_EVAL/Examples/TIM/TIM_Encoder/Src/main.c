@@ -116,6 +116,7 @@ int main(void)
   Encoder_Handle.Init.ClockDivision     = 0;
   Encoder_Handle.Init.CounterMode       = TIM_COUNTERMODE_UP;
   Encoder_Handle.Init.RepetitionCounter = 0;
+  Encoder_Handle.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
 
   sEncoderConfig.EncoderMode        = TIM_ENCODERMODE_TI12;
 

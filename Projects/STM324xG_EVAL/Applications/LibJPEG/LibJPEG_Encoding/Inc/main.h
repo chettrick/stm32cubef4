@@ -58,7 +58,6 @@
 #include "ff_gen_drv.h"
 #include "sd_diskio.h"
 
-/* TBC */
 #include <stdint.h>
 #include <string.h>
 #include "jpeglib.h"

@@ -422,6 +422,7 @@ static void TIM_Config(void)
   TimHandle.Init.Prescaler = 84-1;
   TimHandle.Init.ClockDivision = 0;
   TimHandle.Init.CounterMode = TIM_COUNTERMODE_UP;
+  TimHandle.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if(HAL_TIM_Base_Init(&TimHandle) != HAL_OK)
   {
     /* Initialization Error */

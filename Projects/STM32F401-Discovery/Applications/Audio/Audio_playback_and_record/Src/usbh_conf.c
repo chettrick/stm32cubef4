@@ -46,7 +46,7 @@
 #include "stm32f4xx_hal.h"
 #include "usbh_core.h"
 
-HCD_HandleTypeDef hHCD;
+HCD_HandleTypeDef hhcd;
 
 #define HOST_POWERSW_CLK_ENABLE()          __HAL_RCC_GPIOC_CLK_ENABLE()
 #define HOST_POWERSW_PORT                  GPIOC
@@ -57,15 +57,15 @@ HCD_HandleTypeDef hHCD;
 *******************************************************************************/
 /**
   * @brief  Initializes the HCD MSP.
-  * @param  hHCD: HCD handle
+  * @param  hhcd: HCD handle
   * @retval None
   */
-void HAL_HCD_MspInit(HCD_HandleTypeDef *hHCD)
+void HAL_HCD_MspInit(HCD_HandleTypeDef *hhcd)
 {
   /* Note: On STM32F401-Discovery board only USB OTG FS core is supported. */
   GPIO_InitTypeDef  GPIO_InitStruct;
   
-  if(hHCD->Instance == USB_OTG_FS)
+  if(hhcd->Instance == USB_OTG_FS)
   {
     /* Configure USB FS GPIOs */
     __HAL_RCC_GPIOA_CLK_ENABLE();
@@ -110,12 +110,12 @@ void HAL_HCD_MspInit(HCD_HandleTypeDef *hHCD)
 
 /**
   * @brief  DeInitializes the HCD MSP.
-  * @param  hHCD: HCD handle
+  * @param  hhcd: HCD handle
   * @retval None
   */
-void HAL_HCD_MspDeInit(HCD_HandleTypeDef *hHCD)
+void HAL_HCD_MspDeInit(HCD_HandleTypeDef *hhcd)
 {
-  if(hHCD->Instance == USB_OTG_FS)
+  if(hhcd->Instance == USB_OTG_FS)
   {  
     /* Disable USB FS Clocks */ 
     __HAL_RCC_USB_OTG_FS_CLK_DISABLE();
@@ -128,33 +128,54 @@ void HAL_HCD_MspDeInit(HCD_HandleTypeDef *hHCD)
 
     /**
   * @brief  SOF callback.
-  * @param  hHCD: HCD handle
+  * @param  hhcd: HCD handle
   * @retval None
   */
-void HAL_HCD_SOF_Callback(HCD_HandleTypeDef *hHCD)
+void HAL_HCD_SOF_Callback(HCD_HandleTypeDef *hhcd)
 {
-  USBH_LL_IncTimer (hHCD->pData);
+  USBH_LL_IncTimer (hhcd->pData);
 }
 
 /**
   * @brief  Connect callback.
-  * @param  hHCD: HCD handle
+  * @param  hhcd: HCD handle
   * @retval None
   */
-void HAL_HCD_Connect_Callback(HCD_HandleTypeDef *hHCD)
+void HAL_HCD_Connect_Callback(HCD_HandleTypeDef *hhcd)
 {
-  USBH_LL_Connect(hHCD->pData);
+  USBH_LL_Connect(hhcd->pData);
 }
 
 /**
   * @brief  Disconnect callback.
-  * @param  hHCD: HCD handle
+  * @param  hhcd: HCD handle
   * @retval None
   */
-void HAL_HCD_Disconnect_Callback(HCD_HandleTypeDef *hHCD)
+void HAL_HCD_Disconnect_Callback(HCD_HandleTypeDef *hhcd)
 {
-  USBH_LL_Disconnect(hHCD->pData);
+  USBH_LL_Disconnect(hhcd->pData);
 } 
+
+/**
+  * @brief  Port Port Enabled callback.
+  * @param  hhcd: HCD handle
+  * @retval None
+  */
+void HAL_HCD_PortEnabled_Callback(HCD_HandleTypeDef *hhcd)
+{
+  USBH_LL_PortEnabled(hhcd->pData);
+} 
+
+
+/**
+  * @brief  Port Port Disabled callback.
+  * @param  hhcd: HCD handle
+  * @retval None
+  */
+void HAL_HCD_PortDisabled_Callback(HCD_HandleTypeDef *hhcd)
+{
+  USBH_LL_PortDisabled(hhcd->pData);
+}
 
 
 /**
@@ -162,7 +183,7 @@ void HAL_HCD_Disconnect_Callback(HCD_HandleTypeDef *hHCD)
   * @param  hhcd: HCD handle
   * @retval None
   */
-void HAL_HCD_HC_NotifyURBChange_Callback(HCD_HandleTypeDef *hHCD, uint8_t chnum, HCD_URBStateTypeDef urb_state)
+void HAL_HCD_HC_NotifyURBChange_Callback(HCD_HandleTypeDef *hhcd, uint8_t chnum, HCD_URBStateTypeDef urb_state)
 {
   /* To be used with OS to sync URB state with the global state machine */
 }
@@ -182,20 +203,20 @@ USBH_StatusTypeDef  USBH_LL_Init (USBH_HandleTypeDef *phost)
   HAL_NVIC_SetPriority (SysTick_IRQn, 0, 0);
   
   /*Set LL Driver parameters */
-  hHCD.Instance = USB_OTG_FS;
-  hHCD.Init.Host_channels = 11; 
-  hHCD.Init.dma_enable = 0;
-  hHCD.Init.low_power_enable = 0;
-  hHCD.Init.phy_itface = HCD_PHY_EMBEDDED; 
-  hHCD.Init.Sof_enable = 0;
-  hHCD.Init.speed = HCD_SPEED_FULL;
+  hhcd.Instance = USB_OTG_FS;
+  hhcd.Init.Host_channels = 11; 
+  hhcd.Init.dma_enable = 0;
+  hhcd.Init.low_power_enable = 0;
+  hhcd.Init.phy_itface = HCD_PHY_EMBEDDED; 
+  hhcd.Init.Sof_enable = 0;
+  hhcd.Init.speed = HCD_SPEED_FULL;
   /* Link The driver to the stack */
-  hHCD.pData = phost;
-  phost->pData = &hHCD;
+  hhcd.pData = phost;
+  phost->pData = &hhcd;
   /* Initialize LL Driver */
-  HAL_HCD_Init(&hHCD);
+  HAL_HCD_Init(&hhcd);
 
-  USBH_LL_SetTimer (phost, HAL_HCD_GetCurrentFrame(&hHCD));
+  USBH_LL_SetTimer (phost, HAL_HCD_GetCurrentFrame(&hhcd));
   
   return USBH_OK;
 }
@@ -452,13 +473,13 @@ USBH_StatusTypeDef  USBH_LL_DriverVBUS (USBH_HandleTypeDef *phost, uint8_t state
   */
 USBH_StatusTypeDef   USBH_LL_SetToggle   (USBH_HandleTypeDef *phost, uint8_t pipe, uint8_t toggle)   
 {
-  if(hHCD.hc[pipe].ep_is_in)
+  if(hhcd.hc[pipe].ep_is_in)
   {
-    hHCD.hc[pipe].toggle_in = toggle;
+    hhcd.hc[pipe].toggle_in = toggle;
   }
   else
   {
-    hHCD.hc[pipe].toggle_out = toggle;
+    hhcd.hc[pipe].toggle_out = toggle;
   }
   return USBH_OK; 
 }
@@ -474,13 +495,13 @@ uint8_t  USBH_LL_GetToggle   (USBH_HandleTypeDef *phost, uint8_t pipe)
 {
   uint8_t toggle = 0;
   
-  if(hHCD.hc[pipe].ep_is_in)
+  if(hhcd.hc[pipe].ep_is_in)
   {
-    toggle = hHCD.hc[pipe].toggle_in;
+    toggle = hhcd.hc[pipe].toggle_in;
   }
   else
   {
-    toggle = hHCD.hc[pipe].toggle_out;
+    toggle = hhcd.hc[pipe].toggle_out;
   }
   return toggle; 
 }

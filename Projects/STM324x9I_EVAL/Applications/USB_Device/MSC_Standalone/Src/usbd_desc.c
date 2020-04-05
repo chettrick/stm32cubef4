@@ -153,6 +153,9 @@ static void Get_SerialNum(void);
   */
 uint8_t *USBD_MSC_DeviceDescriptor(USBD_SpeedTypeDef speed, uint16_t * length)
 {
+  /* Prevent unused argument(s) compilation warning */
+  UNUSED(speed);
+
   *length = sizeof(USBD_DeviceDesc);
   return (uint8_t *) USBD_DeviceDesc;
 }
@@ -166,6 +169,9 @@ uint8_t *USBD_MSC_DeviceDescriptor(USBD_SpeedTypeDef speed, uint16_t * length)
 uint8_t *USBD_MSC_LangIDStrDescriptor(USBD_SpeedTypeDef speed,
                                       uint16_t * length)
 {
+  /* Prevent unused argument(s) compilation warning */
+  UNUSED(speed);
+
   *length = sizeof(USBD_LangIDDesc);
   return (uint8_t *) USBD_LangIDDesc;
 }
@@ -215,6 +221,9 @@ uint8_t *USBD_MSC_ManufacturerStrDescriptor(USBD_SpeedTypeDef speed,
 uint8_t *USBD_MSC_SerialStrDescriptor(USBD_SpeedTypeDef speed,
                                       uint16_t * length)
 {
+  /* Prevent unused argument(s) compilation warning */
+  UNUSED(speed);
+  
   *length = USB_SIZ_STRING_SERIAL;
 
   /* Update the serial number string descriptor with the data from the unique

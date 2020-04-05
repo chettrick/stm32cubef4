@@ -350,7 +350,6 @@ USBD_StatusTypeDef USBD_LL_Init(USBD_HandleTypeDef *pdev)
     hpcd_FS.Instance = USB_OTG_FS;
     hpcd_FS.Init.dev_endpoints = 4;
     hpcd_FS.Init.use_dedicated_ep1 = 0;
-    hpcd_FS.Init.ep0_mps = 0x40;
     hpcd_FS.Init.dma_enable = 0;
     hpcd_FS.Init.low_power_enable = 0;
     hpcd_FS.Init.phy_itface = PCD_PHY_EMBEDDED;
@@ -376,7 +375,6 @@ USBD_StatusTypeDef USBD_LL_Init(USBD_HandleTypeDef *pdev)
     hpcd_HS.Instance = USB_OTG_HS;
     hpcd_HS.Init.dev_endpoints = 6;
     hpcd_HS.Init.use_dedicated_ep1 = 0;
-    hpcd_HS.Init.ep0_mps = 0x40;
     
     /* Be aware that enabling DMA mode will result in data being sent only by
     multiple of 4 packet sizes. This is due to the fact that USB DMA does

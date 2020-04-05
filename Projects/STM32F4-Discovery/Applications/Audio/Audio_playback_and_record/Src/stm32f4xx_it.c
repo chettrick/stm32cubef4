@@ -45,7 +45,7 @@ extern I2S_HandleTypeDef       hAudioOutI2s;
 extern I2S_HandleTypeDef       hAudioInI2s;
  __IO uint32_t TimeRecBase = 0;  /* Time Recording base variable */
 extern __IO uint32_t CmdIndex;
-extern HCD_HandleTypeDef hHCD;
+extern HCD_HandleTypeDef hhcd;
 
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
@@ -223,7 +223,7 @@ void TIM4_IRQHandler(void)
   */
 void OTG_FS_IRQHandler(void)
 {
-  HAL_HCD_IRQHandler(&hHCD);
+  HAL_HCD_IRQHandler(&hhcd);
 }
 
 /**

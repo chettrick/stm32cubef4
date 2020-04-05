@@ -95,7 +95,6 @@ void jpeg_decode(JFILE *file, uint32_t width, uint8_t * buff, uint8_t (*callback
   {
     (void) jpeg_read_scanlines(&cinfo, buffer, 1);
 
-    /* TBC */
     if (callback(buffer[0], row_stride) != 0)
     {
       break;

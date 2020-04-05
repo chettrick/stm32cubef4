@@ -1,9 +1,9 @@
 /**
   ******************************************************************************
-  * @file    CRYP/CRYP_AESModes/Src/stm32f4xx_it.c
+  * @file    CRYP/CRYP_AESModes/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and
+  *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
@@ -51,6 +51,8 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
+/* CRYP handler declared in "main.c" file */
+extern CRYP_HandleTypeDef hcryp;
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -163,10 +165,51 @@ void SysTick_Handler(void)
 /*  file (startup_stm32f4xx.s).                                               */
 /******************************************************************************/
 
+/**
+  * @brief  This function handles CRYP Handler.
+  * @param  None
+  * @retval None
+  */
+void CRYP_IRQHandler(void)
+{
+  HAL_CRYP_IRQHandler(&hcryp);
+}
+
+/**
+* @brief  This function handles DMA2 Stream 5 interrupt request.
+* @param  None
+* @retval None
+*/
+void DMA2_Stream5_IRQHandler(void)
+{
+  /* CRYP input data */
+   HAL_DMA_IRQHandler(hcryp.hdmaout);
+}
+
+/**
+* @brief  This function handles DMA2 Stream 6 interrupt request.
+* @param  None
+* @retval None
+*/
+void DMA2_Stream6_IRQHandler(void)
+{
+  /* CRYP output data */
+   HAL_DMA_IRQHandler(hcryp.hdmain);
+}
+
+/**
+  * @brief  This function handles PPP interrupt request.
+  * @param  None
+  * @retval None
+  */
+/*void PPP_IRQHandler(void)
+{
+}*/
+
 
 /**
   * @}
-  */
+  */ 
 
 /**
   * @}

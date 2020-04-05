@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    CRYP/CRYP_AESModes/Inc/main.h
+  * @file    CRYP/CRYP_AESmodes/Inc/main.h
   * @author  MCD Application Team
   * @brief   Header for main.c module
   ******************************************************************************
@@ -40,16 +40,11 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
 #include "stm32469i_eval.h"
-#include "stdio.h"
 #include "string.h"
 
-
 /* Exported types ------------------------------------------------------------*/
-
 /* Exported constants --------------------------------------------------------*/
-#define  TIMEOUT_VALUE 0xFF 
-
-
+#define  TIMEOUT_VALUE 0xFF
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 

@@ -91,9 +91,8 @@ int main(void)
   /* Configure the system clock to 180 MHz */
   SystemClock_Config();
 
-  /* Initialize LED1, LED3 and LED3 */
+  /* Initialize LED1 and LED3 */
   BSP_LED_Init(LED1);
-  BSP_LED_Init(LED3);
   BSP_LED_Init(LED3);
 
   /* Unlock the Flash to enable the flash control register access *************/

@@ -127,6 +127,7 @@ int main(void)
   TimHandle.Init.Prescaler         = ((SystemCoreClock/2) / (18 * 1000000)) - 1;
   TimHandle.Init.ClockDivision     = 0;
   TimHandle.Init.CounterMode       = TIM_COUNTERMODE_UP;
+  TimHandle.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if(HAL_TIM_PWM_Init(&TimHandle) != HAL_OK)
   {
     /* Initialization Error */

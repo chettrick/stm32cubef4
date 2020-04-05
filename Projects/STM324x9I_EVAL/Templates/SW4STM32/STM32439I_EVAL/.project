@@ -326,6 +326,14 @@
 			<type>1</type>
 			<location>PARENT-5-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_crc.c</location>
 		</link><link>
+			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_exti.c</name>
+			<type>1</type>
+			<location>PARENT-5-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c</location>
+		</link><link>
+			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_exti.c</name>
+			<type>1</type>
+			<location>PARENT-5-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c</location>
+		</link><link>
 			<name>Drivers/STM32F4xx_HAL_Driver/stm32f4xx_hal_gpio.c</name>
 			<type>1</type>
 			<location>PARENT-5-PROJECT_LOC/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c</location>

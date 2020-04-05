@@ -108,11 +108,6 @@ uint8_t Touchscreen_Calibration(void)
 {
   uint8_t ts_status = TS_OK;
   uint8_t i;
-  uint16_t ts_SizeX;
-  uint16_t ts_SizeY;
-
-  ts_SizeX = BSP_LCD_GetXSize();
-  ts_SizeY = BSP_LCD_GetYSize();
 
   data1.d32 = k_BkupRestoreParameter(RTC_BKP_DR0);
   data2.d32 = k_BkupRestoreParameter(RTC_BKP_DR1); 
@@ -122,7 +117,7 @@ uint8_t Touchscreen_Calibration(void)
   TouchscreenCalibration_SetHint();
 
   /* Start touchscreen internal calibration and configuration + start */
-  ts_status = BSP_TS_InitEx(ts_SizeX, ts_SizeY, TS_ORIENTATION_PORTRAIT);
+  ts_status = TS_OK;
   if (ts_status != TS_OK)
   {
     BSP_LCD_SetBackColor(LCD_COLOR_WHITE);

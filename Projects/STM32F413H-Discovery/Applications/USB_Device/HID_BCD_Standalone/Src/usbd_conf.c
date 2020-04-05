@@ -6,37 +6,37 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V. 
+  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics International N.V.
   * All rights reserved.</center></h2>
   *
-  * Redistribution and use in source and binary forms, with or without 
+  * Redistribution and use in source and binary forms, with or without
   * modification, are permitted, provided that the following conditions are met:
   *
-  * 1. Redistribution of source code must retain the above copyright notice, 
+  * 1. Redistribution of source code must retain the above copyright notice,
   *    this list of conditions and the following disclaimer.
   * 2. Redistributions in binary form must reproduce the above copyright notice,
   *    this list of conditions and the following disclaimer in the documentation
   *    and/or other materials provided with the distribution.
-  * 3. Neither the name of STMicroelectronics nor the names of other 
-  *    contributors to this software may be used to endorse or promote products 
+  * 3. Neither the name of STMicroelectronics nor the names of other
+  *    contributors to this software may be used to endorse or promote products
   *    derived from this software without specific written permission.
-  * 4. This software, including modifications and/or derivative works of this 
+  * 4. This software, including modifications and/or derivative works of this
   *    software, must execute solely and exclusively on microcontroller or
   *    microprocessor devices manufactured by or for STMicroelectronics.
-  * 5. Redistribution and use of this software other than as permitted under 
-  *    this license is void and will automatically terminate your rights under 
-  *    this license. 
+  * 5. Redistribution and use of this software other than as permitted under
+  *    this license is void and will automatically terminate your rights under
+  *    this license.
   *
-  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS" 
-  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT 
-  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
+  * THIS SOFTWARE IS PROVIDED BY STMICROELECTRONICS AND CONTRIBUTORS "AS IS"
+  * AND ANY EXPRESS, IMPLIED OR STATUTORY WARRANTIES, INCLUDING, BUT NOT
+  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
   * PARTICULAR PURPOSE AND NON-INFRINGEMENT OF THIRD PARTY INTELLECTUAL PROPERTY
-  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT 
+  * RIGHTS ARE DISCLAIMED TO THE FULLEST EXTENT PERMITTED BY LAW. IN NO EVENT
   * SHALL STMICROELECTRONICS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
   * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, 
-  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF 
-  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING 
+  * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
+  * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+  * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
   * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
@@ -52,17 +52,22 @@
 
 /** @addtogroup USB_Device_HID_BCD_Standalone
   * @{
-  */ 
+  */
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
+#define CURSOR_STEP     5
+
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 PCD_HandleTypeDef hpcd;
+__IO uint32_t remotewakeupon = 0;
+uint8_t HID_Buffer[4];
+extern USBD_HandleTypeDef USBD_Device;
 
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
-  
+
 /*******************************************************************************
                        PCD BSP Routines
 *******************************************************************************/
@@ -75,10 +80,10 @@ PCD_HandleTypeDef hpcd;
 void HAL_PCD_MspInit(PCD_HandleTypeDef *hpcd)
 {
   GPIO_InitTypeDef  GPIO_InitStruct;
-  
+
   /* Configure USB FS GPIOs */
   __HAL_RCC_GPIOA_CLK_ENABLE();
-  
+
   /* Configure DM DP Pins */
   GPIO_InitStruct.Pin = (GPIO_PIN_11 | GPIO_PIN_12);
   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
@@ -86,26 +91,26 @@ void HAL_PCD_MspInit(PCD_HandleTypeDef *hpcd)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
   GPIO_InitStruct.Alternate = GPIO_AF10_OTG_FS;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-  
-  /* START : Specific Code For BCD */  
+
+  /* START : Specific Code For BCD */
   /* Configure The VBUS PA9 Pin*/
   GPIO_InitStruct.Pin = GPIO_PIN_9;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct); 
-  
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
   /* Set priority and Enable GPIO EXTI Interrupt */
   HAL_NVIC_SetPriority((IRQn_Type)(EXTI9_5_IRQn), 5, 0);
   HAL_NVIC_EnableIRQ((IRQn_Type)(EXTI9_5_IRQn));
-  /* END : Specific Code For BCD */  
-  
+  /* END : Specific Code For BCD */
+
   /* Enable USB FS Clock */
   __HAL_RCC_USB_OTG_FS_CLK_ENABLE();
-  
+
   /* Set USBFS Interrupt priority */
-  HAL_NVIC_SetPriority(OTG_FS_IRQn, 5, 0);
-  
+  HAL_NVIC_SetPriority(OTG_FS_IRQn, 6, 0);
+
   /* Enable USBFS Interrupt */
   HAL_NVIC_EnableIRQ(OTG_FS_IRQn);
 }
@@ -116,7 +121,7 @@ void HAL_PCD_MspInit(PCD_HandleTypeDef *hpcd)
   * @retval None
   */
 void HAL_PCD_MspDeInit(PCD_HandleTypeDef *hpcd)
-{ 
+{
   /* Disable USB FS Clock */
   __HAL_RCC_USB_OTG_FS_CLK_DISABLE();
 }
@@ -173,24 +178,12 @@ void HAL_PCD_SOFCallback(PCD_HandleTypeDef *hpcd)
   * @retval None
   */
 void HAL_PCD_ResetCallback(PCD_HandleTypeDef *hpcd)
-{   
+{
   USBD_SpeedTypeDef speed = USBD_SPEED_FULL;
-  
-  /* Set USB Current Speed */
-  switch(hpcd->Init.speed)
-  {
-  case PCD_SPEED_FULL:
-    speed = USBD_SPEED_FULL;
-    break;   
-    
-  default:
-    speed = USBD_SPEED_FULL;
-    break;
-  }
-  
+
   /* Reset Device */
   USBD_LL_Reset(hpcd->pData);
-  
+
   USBD_LL_SetSpeed(hpcd->pData, speed);
 }
 
@@ -214,11 +207,12 @@ void HAL_PCD_ResumeCallback(PCD_HandleTypeDef *hpcd)
 {
   __HAL_PCD_UNGATE_PHYCLOCK(hpcd);
   USBD_LL_Resume(hpcd->pData);
+  remotewakeupon = 0;
 }
 
 /**
   * @brief  ISOOUTIncomplete callback.
-  * @param  hpcd: PCD handle 
+  * @param  hpcd: PCD handle
   * @param  epnum: Endpoint Number
   * @retval None
   */
@@ -229,7 +223,7 @@ void HAL_PCD_ISOOUTIncompleteCallback(PCD_HandleTypeDef *hpcd, uint8_t epnum)
 
 /**
   * @brief  ISOINIncomplete callback.
-  * @param  hpcd: PCD handle 
+  * @param  hpcd: PCD handle
   * @param  epnum: Endpoint Number
   * @retval None
   */
@@ -273,7 +267,6 @@ USBD_StatusTypeDef USBD_LL_Init(USBD_HandleTypeDef *pdev)
   hpcd.Instance = USB_OTG_FS;
   hpcd.Init.dev_endpoints = 4;
   hpcd.Init.use_dedicated_ep1 = 0;
-  hpcd.Init.ep0_mps = 0x40;
   hpcd.Init.dma_enable = 0;
   hpcd.Init.low_power_enable = 0;
   hpcd.Init.phy_itface = PCD_PHY_EMBEDDED;
@@ -282,17 +275,18 @@ USBD_StatusTypeDef USBD_LL_Init(USBD_HandleTypeDef *pdev)
   hpcd.Init.vbus_sensing_enable = 0;
   hpcd.Init.battery_charging_enable = 1;
   hpcd.Init.lpm_enable = 0;
-  
+
   /* Link The driver to the stack */
   hpcd.pData = pdev;
   pdev->pData = &hpcd;
-  
+
   /* Initialize LL Driver */
   HAL_PCD_Init(&hpcd);
-  
+
   HAL_PCDEx_SetRxFiFo(&hpcd, 0x80);
   HAL_PCDEx_SetTxFiFo(&hpcd, 0, 0x40);
   HAL_PCDEx_SetTxFiFo(&hpcd, 1, 0x80);
+
   return USBD_OK;
 }
 
@@ -308,7 +302,7 @@ USBD_StatusTypeDef USBD_LL_DeInit(USBD_HandleTypeDef *pdev)
 }
 
 /**
-  * @brief  Starts the Low Level portion of the Device driver. 
+  * @brief  Starts the Low Level portion of the Device driver.
   * @param  pdev: Device handle
   * @retval USBD Status
   */
@@ -342,11 +336,8 @@ USBD_StatusTypeDef USBD_LL_OpenEP(USBD_HandleTypeDef *pdev,
                                   uint8_t ep_type,
                                   uint16_t ep_mps)
 {
-  HAL_PCD_EP_Open(pdev->pData,
-                  ep_addr,
-                  ep_mps,
-                  ep_type);
-  
+  HAL_PCD_EP_Open(pdev->pData, ep_addr, ep_mps, ep_type);
+
   return USBD_OK;
 }
 
@@ -395,7 +386,7 @@ USBD_StatusTypeDef USBD_LL_StallEP(USBD_HandleTypeDef *pdev, uint8_t ep_addr)
 USBD_StatusTypeDef USBD_LL_ClearStallEP(USBD_HandleTypeDef *pdev, uint8_t ep_addr)
 {
   HAL_PCD_EP_ClrStall(pdev->pData, ep_addr);
-  return USBD_OK; 
+  return USBD_OK;
 }
 
 /**
@@ -407,7 +398,7 @@ USBD_StatusTypeDef USBD_LL_ClearStallEP(USBD_HandleTypeDef *pdev, uint8_t ep_add
 uint8_t USBD_LL_IsStallEP(USBD_HandleTypeDef *pdev, uint8_t ep_addr)
 {
   PCD_HandleTypeDef *hpcd = pdev->pData;
-  
+
   if((ep_addr & 0x80) == 0x80)
   {
     return hpcd->IN_ep[ep_addr & 0x7F].is_stall;
@@ -427,7 +418,7 @@ uint8_t USBD_LL_IsStallEP(USBD_HandleTypeDef *pdev, uint8_t ep_addr)
 USBD_StatusTypeDef USBD_LL_SetUSBAddress(USBD_HandleTypeDef *pdev, uint8_t dev_addr)
 {
   HAL_PCD_SetAddress(pdev->pData, dev_addr);
-  return USBD_OK; 
+  return USBD_OK;
 }
 
 /**
@@ -435,10 +426,10 @@ USBD_StatusTypeDef USBD_LL_SetUSBAddress(USBD_HandleTypeDef *pdev, uint8_t dev_a
   * @param  pdev: Device handle
   * @param  ep_addr: Endpoint Number
   * @param  pbuf: Pointer to data to be sent
-  * @param  size: Data size    
+  * @param  size: Data size
   * @retval USBD Status
   */
-USBD_StatusTypeDef USBD_LL_Transmit(USBD_HandleTypeDef *pdev, 
+USBD_StatusTypeDef USBD_LL_Transmit(USBD_HandleTypeDef *pdev,
                                     uint8_t ep_addr,
                                     uint8_t *pbuf,
                                     uint16_t size)
@@ -455,7 +446,7 @@ USBD_StatusTypeDef USBD_LL_Transmit(USBD_HandleTypeDef *pdev,
   * @param  size: Data size
   * @retval USBD Status
   */
-USBD_StatusTypeDef USBD_LL_PrepareReceive(USBD_HandleTypeDef *pdev, 
+USBD_StatusTypeDef USBD_LL_PrepareReceive(USBD_HandleTypeDef *pdev,
                                           uint8_t ep_addr,
                                           uint8_t *pbuf,
                                           uint16_t size)
@@ -483,10 +474,84 @@ uint32_t USBD_LL_GetRxDataSize(USBD_HandleTypeDef *pdev, uint8_t ep_addr)
   */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-  if (GPIO_Pin == GPIO_PIN_9)
+  if (GPIO_Pin == WAKEUP_BUTTON_PIN)
   {
-    HAL_PCDEx_BCD_VBUSDetect (&hpcd);
+    if ((((USBD_HandleTypeDef *) hpcd.pData)->dev_remote_wakeup == 1) &&
+        (((USBD_HandleTypeDef *) hpcd.pData)->dev_state ==
+         USBD_STATE_SUSPENDED))
+    {
+      /* Ungate PHY clock */
+      __HAL_PCD_UNGATE_PHYCLOCK((&hpcd));
+
+      /* Activate Remote wakeup */
+      HAL_PCD_ActivateRemoteWakeup((&hpcd));
+
+      /* Remote wakeup delay */
+      HAL_Delay(10);
+
+      /* Disable Remote wakeup */
+      HAL_PCD_DeActivateRemoteWakeup((&hpcd));
+
+      /* change state to configured */
+      ((USBD_HandleTypeDef *) hpcd.pData)->dev_state = USBD_STATE_CONFIGURED;
+
+      /* Change remote_wakeup feature to 0 */
+      ((USBD_HandleTypeDef *) hpcd.pData)->dev_remote_wakeup = 0;
+      remotewakeupon = 1;
+    }
+    else
+    {
+      GetPointerData(HID_Buffer);
+      USBD_HID_SendReport(&USBD_Device, HID_Buffer, 4);
+    }
   }
+  else if (GPIO_Pin == GPIO_PIN_9)
+  {
+    if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_9) == GPIO_PIN_SET)
+    {
+      /*wait for bus stabilization*/
+      HAL_Delay(450);
+      /*Start BCD Detect*/
+      HAL_PCDEx_ActivateBCD (&hpcd);
+      HAL_PCDEx_BCD_VBUSDetect(&hpcd);
+    }
+    else
+    {
+      HAL_PCD_DevDisconnect(&hpcd);
+
+      /*switch off indication LED*/
+      BSP_LED_Off(LED3);
+      BSP_LED_Off(LED4);
+    }
+  }
+  else
+  {
+    /* .. */
+  }
+}
+
+/**
+  * @brief  Gets Pointer Data.
+  * @param  pbuf: Pointer to report
+  * @retval None
+  */
+void GetPointerData(uint8_t *pbuf)
+{
+  static int8_t cnt = 0;
+  int8_t  x = 0, y = 0 ;
+
+  if(cnt++ > 0)
+  {
+    x = CURSOR_STEP;
+  }
+  else
+  {
+    x = -CURSOR_STEP;
+  }
+  pbuf[0] = 0;
+  pbuf[1] = x;
+  pbuf[2] = y;
+  pbuf[3] = 0;
 }
 
 /**

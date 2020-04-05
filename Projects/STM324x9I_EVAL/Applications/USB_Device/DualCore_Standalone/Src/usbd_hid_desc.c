@@ -211,6 +211,9 @@ uint8_t *USBD_HID_ManufacturerStrDescriptor(USBD_SpeedTypeDef speed,
 uint8_t *USBD_HID_SerialStrDescriptor(USBD_SpeedTypeDef speed,
                                       uint16_t * length)
 {
+  /* Prevent unused argument(s) compilation warning */
+  UNUSED(speed);
+  
   *length = USB_SIZ_STRING_SERIAL;
 
   /* Update the serial number string descriptor with the data from the unique

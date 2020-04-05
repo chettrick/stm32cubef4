@@ -146,6 +146,27 @@ void HAL_HCD_Disconnect_Callback(HCD_HandleTypeDef *hhcd)
   Appli_state = APPLICATION_DISCONNECT;
 }
 
+/**
+  * @brief  Port Port Enabled callback.
+  * @param  hhcd: HCD handle
+  * @retval None
+  */
+void HAL_HCD_PortEnabled_Callback(HCD_HandleTypeDef *hhcd)
+{
+  USBH_LL_PortEnabled(hhcd->pData);
+} 
+
+
+/**
+  * @brief  Port Port Disabled callback.
+  * @param  hhcd: HCD handle
+  * @retval None
+  */
+void HAL_HCD_PortDisabled_Callback(HCD_HandleTypeDef *hhcd)
+{
+  USBH_LL_PortDisabled(hhcd->pData);
+}
+
 
 /**
   * @brief  Notify URB state change callback.

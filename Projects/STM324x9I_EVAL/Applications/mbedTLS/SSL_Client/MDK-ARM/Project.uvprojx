@@ -875,6 +875,11 @@
               <FilePath>../../../../../../Middlewares/Third_Party/mbedTLS/library/arc4.c</FilePath>
             </File>
             <File>
+              <FileName>aria.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Middlewares/Third_Party/mbedTLS/library/aria.c</FilePath>
+            </File>
+            <File>
               <FileName>camellia.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../../Middlewares/Third_Party/mbedTLS/library/camellia.c</FilePath>
@@ -908,6 +913,11 @@
               <FileName>platform.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../../Middlewares/Third_Party/mbedTLS/library/platform.c</FilePath>
+            </File>
+            <File>
+              <FileName>platform_util.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Middlewares/Third_Party/mbedTLS/library/platform_util.c</FilePath>
             </File>
             <File>
               <FileName>pkcs5.c</FileName>
@@ -953,6 +963,11 @@
               <FileName>havege.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../../Middlewares/Third_Party/mbedTLS/library/havege.c</FilePath>
+            </File>
+            <File>
+              <FileName>hkdf.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Middlewares/Third_Party/mbedTLS/library/hkdf.c</FilePath>
             </File>
             <File>
               <FileName>des.c</FileName>
@@ -1158,6 +1173,11 @@
               <FileName>rsa.c</FileName>
               <FileType>1</FileType>
               <FilePath>../../../../../../Middlewares/Third_Party/mbedTLS/library/rsa.c</FilePath>
+            </File>
+            <File>
+              <FileName>rsa_internal.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../../../../../../Middlewares/Third_Party/mbedTLS/library/rsa_internal.c</FilePath>
             </File>
             <File>
               <FileName>ccm.c</FileName>

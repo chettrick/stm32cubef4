@@ -101,7 +101,8 @@ int main(void)
   TimHandle.Init.Prescaler         = 0;
   TimHandle.Init.ClockDivision     = 0;
   TimHandle.Init.CounterMode       = TIM_COUNTERMODE_UP;
-  TimHandle.Init.RepetitionCounter = 0;  
+  TimHandle.Init.RepetitionCounter = 0;
+  TimHandle.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;  
   
   if(HAL_TIM_OC_Init(&TimHandle) != HAL_OK)
   {
