@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LCD_DSI/LCD_DSI_CmdMode_TearingEffect/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.0.4
-  * @date    06-May-2016
+  * @version V1.0.5
+  * @date    04-November-2016
   * @brief   HAL MSP module.
   ******************************************************************************
   * @attention

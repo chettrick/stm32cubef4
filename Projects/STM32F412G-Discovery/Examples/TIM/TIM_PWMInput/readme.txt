@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    TIM/TIM_PWMInput/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    06-May-2016
+  * @version V1.0.1
+  * @date    04-November-2016
   * @brief   Description of the TIM PWM_Input example.
   ******************************************************************************
   *
@@ -59,7 +59,7 @@ DutyCycle = (TIM3_CCR1*100)/(TIM3_CCR2) in %.
 
 The minimum frequency value to measure is (TIM3 counter clock / CCR MAX)
                                          = (100 MHz)/ 65535
-                                         = 2747 Hz
+                                         = 1525 Hz
 
 @note Care must be taken when using HAL_Delay(), this function provides accurate delay (in milliseconds)
       based on variable incremented in SysTick ISR. This implies that if HAL_Delay() is called from

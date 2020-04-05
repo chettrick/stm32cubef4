@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Templates/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.2.3
-  * @date    06-May-2016
+  * @version V1.2.4
+  * @date    04-November-2016
   * @brief   Main program body
   ******************************************************************************
   * @attention

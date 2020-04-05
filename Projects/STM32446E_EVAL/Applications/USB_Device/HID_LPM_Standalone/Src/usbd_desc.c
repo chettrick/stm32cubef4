@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Device/HID_LPM_Standalone/Src/usbd_desc.c
   * @author  MCD Application Team
-  * @version V1.2.5
-  * @date    03-June-2016
+  * @version V1.2.6
+  * @date    04-November-2016
   * @brief   This file provides the USBD descriptors and string formating method.
   ******************************************************************************
   * @attention
@@ -140,7 +140,7 @@ __ALIGN_BEGIN  uint8_t USBD_BOSDesc[USB_SIZ_BOS_DESC] __ALIGN_END =
   0x7,
   USB_DEVICE_CAPABITY_TYPE,
   0x2,
-  0x2, /*LPM capability bit set */
+  0x6, /*LPM capability bit set */
   0x0,
   0x0,
   0x0

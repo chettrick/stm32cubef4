@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    PWR/PWR_CurrentConsumption/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.2.6
-  * @date    06-May-2016
+  * @version V1.2.7
+  * @date    04-November-2016
   * @brief   This sample code shows how to use STM32F4xx PWR HAL API to enter
   *          and exit the stop mode.
   ******************************************************************************

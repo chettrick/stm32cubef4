@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    DMA2D/DMA2D_MemToMemWithBlending/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.4
-  * @date    06-May-2016
+  * @version V1.0.5
+  * @date    04-November-2016
   * @brief   Description of the STM32F4xx DMA2D Memory to Memory with blending example.
   ******************************************************************************
   * @attention

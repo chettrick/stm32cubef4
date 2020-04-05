@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Device/DFU_Standalone/Inc/usbd_desc.h
   * @author  MCD Application Team
-  * @version V1.3.5
-  * @date    03-June-2016
+  * @version V1.3.6
+  * @date    04-November-2016
   * @brief   Header for usbd_desc.c module
   ******************************************************************************
   * @attention

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    EEPROM/EEPROM_Emulation/src/eeprom.c 
   * @author  MCD Application Team
-  * @version V1.3.5
-  * @date    03-June-2016
+  * @version V1.3.6
+  * @date    04-November-2016
   * @brief   This file provides all the EEPROM emulation firmware functions.
   ******************************************************************************
   * @attention

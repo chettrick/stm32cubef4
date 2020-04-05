@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    PWR/PWR_BOR/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.3.4
-  * @date    06-May-2016
+  * @version V1.3.5
+  * @date    04-November-2016
   * @brief   This sample code shows how to use STM32F4xx PWR HAL API to manage the
   *          Programmable Voltage Detector (PVD).
   ******************************************************************************
@@ -50,10 +50,10 @@
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Uncomment the corresponding line to select the BOR level*/
-#define BOR_LEVEL OB_BOR_OFF /*!< BOR Reset threshold levels for 1.64V - 2.10V VDD power supply  */
+//#define BOR_LEVEL OB_BOR_OFF /*!< BOR Reset threshold levels for 1.64V - 2.10V VDD power supply  */
 //#define BOR_LEVEL OB_BOR_LEVEL1  /*!< BOR Reset threshold levels for 2.10V - 2.40V VDD power supply */
 //#define BOR_LEVEL OB_BOR_LEVEL2  /*!< BOR Reset threshold levels for 2.40V - 2.70V VDD power supply */
-//#define BOR_LEVEL OB_BOR_LEVEL3  /*!< BOR Reset threshold levels for 2.70V - 3.00V VDD power supply */
+#define BOR_LEVEL OB_BOR_LEVEL3  /*!< BOR Reset threshold levels for 2.70V - 3.00V VDD power supply */
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 /* OB Program structure */

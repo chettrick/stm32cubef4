@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    STemWin/STemWin_SampleDemo/readme.txt 
   * @author  MCD Application Team
-  * @version V1.4.5
-  * @date    03-June-2016    
+  * @version V1.4.6
+  * @date    04-November-2016    
   * @brief   Description of STemWin Sample Demo application.  
   ******************************************************************************
   * @attention

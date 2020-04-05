@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    ADC/ADC_TriggerMode/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.3.4
-  * @date    06-May-2016
+  * @version V1.3.5
+  * @date    04-November-2016
   * @brief   This example describes how to use Timer to convert continuously data.
   ******************************************************************************
   * @attention

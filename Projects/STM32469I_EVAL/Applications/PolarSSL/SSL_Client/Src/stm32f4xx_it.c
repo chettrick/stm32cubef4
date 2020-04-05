@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    PolarSSL/SSL_Client/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
-  * @version V1.0.5
-  * @date    03-June-2016
+  * @version V1.0.6
+  * @date    04-November-2016
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.

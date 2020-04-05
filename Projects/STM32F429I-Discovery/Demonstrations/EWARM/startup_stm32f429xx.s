@@ -2,7 +2,7 @@
 ;* File Name          : startup_stm32f429xx.s
 ;* Author             : MCD Application Team
 ;* Version            : V1.4.5
-;* Date               : 03-June-2016
+;* Date               : 04-November-2016
 ;* Description        : STM32F429xx devices vector table for EWARM toolchain.
 ;*                      This module performs:
 ;*                      - Set the initial SP

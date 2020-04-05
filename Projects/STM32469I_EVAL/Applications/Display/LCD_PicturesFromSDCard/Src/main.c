@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Display/LCD_PicturesFromSDCard/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.5
-  * @date    03-June-2016
+  * @version V1.0.6
+  * @date    04-November-2016
   * @brief   This file provides main program functions
   ******************************************************************************
   * @attention
@@ -259,22 +259,22 @@ static void LCD_Config(void)
 {
   uint8_t lcd_status = LCD_OK;
   
-  /* LCD DSI initialization in mode Video Burst  */
+  /* LCD DSI initialization in mode Video Burst */
   /* Initialize DSI LCD */
-  //  BSP_LCD_InitEx(LCD_ORIENTATION_PORTRAIT); /* uncomment if Portrait orientation is needed */
-  BSP_LCD_Init(); /* Uncomment if default config (landscape orientation) is needed */
+  BSP_LCD_Init();
   while(lcd_status != LCD_OK);
   
-  BSP_LCD_LayerDefaultInit(0, LCD_FB_START_ADDRESS);
-  BSP_LCD_LayerDefaultInit(1, LCD_BG_LAYER_ADDRESS);   
+  BSP_LCD_LayerDefaultInit(LTDC_ACTIVE_LAYER_BACKGROUND, LCD_FB_START_ADDRESS);
   
-  /* Select the LCD Background Layer  */
+  /* Select the LCD Background Layer */
   BSP_LCD_SelectLayer(LTDC_ACTIVE_LAYER_BACKGROUND);
   
   /* Clear the Background Layer */
   BSP_LCD_Clear(LCD_COLOR_BLACK);
   
-  /* Select the LCD Foreground Layer  */
+  BSP_LCD_LayerDefaultInit(LTDC_ACTIVE_LAYER_FOREGROUND, LCD_BG_LAYER_ADDRESS); 
+  
+  /* Select the LCD Foreground Layer */
   BSP_LCD_SelectLayer(LTDC_ACTIVE_LAYER_FOREGROUND);
   
   /* Clear the Foreground Layer */
@@ -284,7 +284,7 @@ static void LCD_Config(void)
   Increase the transparency */
   BSP_LCD_SetTransparency(LTDC_ACTIVE_LAYER_BACKGROUND, 0);
   BSP_LCD_SetTransparency(LTDC_ACTIVE_LAYER_FOREGROUND, 100);
-}
+} 
 
 /**
   * @brief  This function is executed in case of error occurrence.

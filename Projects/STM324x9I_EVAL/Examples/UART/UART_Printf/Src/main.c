@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    UART/UART_Printf/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.3.4
-  * @date    06-May-2016
+  * @version V1.3.5
+  * @date    04-November-2016
   * @brief   This example shows how to retarget the C library printf function 
   *          to the UART.
   ******************************************************************************

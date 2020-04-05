@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BSP/Inc/audio_record.h 
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    06-May-2016
+  * @version V1.0.3
+  * @date    04-November-2016
   * @brief   Header for audio_record.c module
   ******************************************************************************
   * @attention

@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    TIM/TIM_PWMInput/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.4
-  * @date    06-May-2016
+  * @version V1.0.5
+  * @date    04-November-2016
   * @brief   Description of the TIM PWM_Input example.
   ******************************************************************************
   *
@@ -54,7 +54,7 @@ signal are computed.
 TIM1 counter clock = SystemCoreClock,
 Frequency = TIM1 counter clock / TIM1_CCR2 in Hz, 
 
-"DutyCycle" variable contains the external signal duty cycle:
+"uwDutyCycle" variable contains the external signal duty cycle:
 DutyCycle = (TIM1_CCR1*100)/(TIM1_CCR2) in %.
 
 The minimum frequency value to measure is (TIM1 counter clock / CCR MAX)

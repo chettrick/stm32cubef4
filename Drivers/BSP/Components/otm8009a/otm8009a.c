@@ -2,14 +2,14 @@
   ******************************************************************************
   * @file    otm8009a.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    03-August-2015
+  * @version V1.0.1
+  * @date    04-August-2016
   * @brief   This file provides the LCD Driver for KoD KM-040TMP-02-0621 (WVGA)
   *          DSI LCD Display OTM8009A.   
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2015 STMicroelectronics</center></h2>
+  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:

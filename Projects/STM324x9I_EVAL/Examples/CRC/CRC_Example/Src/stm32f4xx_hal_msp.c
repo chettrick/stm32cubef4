@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    CRC/CRC_Example/Src/stm32f4xx_hal_msp.c
   * @author  MCD Application Team
-  * @version V1.3.4
-  * @date    06-May-2016
+  * @version V1.3.5
+  * @date    04-November-2016
   * @brief   HAL MSP module.
   ******************************************************************************
   * @attention

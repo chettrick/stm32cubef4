@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    system_stm32f4xx.c
   * @author  MCD Application Team
-  * @version V1.0.4
-  * @date    06-May-2016
+  * @version V1.0.5
+  * @date    04-November-2016
   * @brief   CMSIS Cortex-M4 Device Peripheral Access Layer System Source File.
   *
   *   This file provides two functions and one global variable to be called from 
@@ -141,7 +141,17 @@
                is no need to call the 2 first functions listed above, since SystemCoreClock
                variable is updated automatically.
   */
-  uint32_t SystemCoreClock = 16000000;
+   
+#if defined(__CC_ARM)
+uint32_t SystemCoreClock __attribute__((section("NoInit"),zero_init)); /* Uninitialized Variable */
+
+#elif defined(__ICCARM__)
+__no_init uint32_t SystemCoreClock;
+
+#elif defined(__GNUC__)
+uint32_t SystemCoreClock = 16000000;
+#endif
+
 const uint8_t AHBPrescTable[16] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 6, 7, 8, 9};
 
 /**
@@ -390,6 +400,8 @@ static void SetSysClk(void)
       tmpreg = (RCC->CFGR & RCC_CFGR_SWS); 
     } while((tmpreg != RCC_CFGR_SWS) && (timeout-- > 0));
   }   
+  
+  SystemCoreClockUpdate();
 }
 #endif /* DATA IN QSPI */
 

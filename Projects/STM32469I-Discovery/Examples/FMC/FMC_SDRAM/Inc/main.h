@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    FMC/FMC_SDRAM/Inc/main.h
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    06-May-2016
+  * @version V1.0.4
+  * @date    04-November-2016
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention

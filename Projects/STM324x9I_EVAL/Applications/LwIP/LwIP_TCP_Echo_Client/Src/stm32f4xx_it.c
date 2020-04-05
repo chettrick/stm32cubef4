@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LwIP/LwIP_TCP_Echo_Client/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
-  * @version V1.4.5
-  * @date    03-June-2016
+  * @version V1.4.6
+  * @date    04-November-2016
   * @brief   Main Interrupt Service Routines.
   *   
   ******************************************************************************

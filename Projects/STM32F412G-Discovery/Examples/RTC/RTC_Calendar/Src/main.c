@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    RTC/RTC_Calendar/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    06-May-2016
+  * @version V1.0.1
+  * @date    04-November-2016
   * @brief   This sample code shows how to use STM32F4xx RTC HAL API to configure
   *          Time and Date.
   ******************************************************************************

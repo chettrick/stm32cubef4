@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Device/HID_LPM_Standalone/Src/usbd_conf.c
   * @author  MCD Application Team
-  * @version V1.0.5
-  * @date    03-June-2016
+  * @version V1.0.6
+  * @date    04-November-2016
   * @brief   This file implements the USB Device library callbacks and MSP
   ******************************************************************************
   * @attention
@@ -52,6 +52,7 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 PCD_HandleTypeDef hpcd;
+__IO uint32_t remotewakeupon=0;
 
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClockConfig_STOP(void);
@@ -351,6 +352,34 @@ void HAL_PCD_SuspendCallback(PCD_HandleTypeDef *hpcd)
       /* Set SLEEPDEEP bit and SleepOnExit of Cortex System Control Register */
       SCB->SCR |= (uint32_t)((uint32_t)(SCB_SCR_SLEEPDEEP_Msk | SCB_SCR_SLEEPONEXIT_Msk));
     }
+#else
+      __IO uint32_t i=0;
+    
+    __HAL_USB_OTG_HS_WAKEUP_EXTI_DISABLE_IT();
+    
+    __HAL_PCD_GATE_PHYCLOCK(hpcd);
+    
+    /*wait tiemout of 6 ULPI PHY clock ~= 18 cpu clocks @168MHz*/
+    for (i=0; i<18; i++)
+    {
+      __NOP();
+    }
+    
+    if (__HAL_PCD_IS_PHY_SUSPENDED(hpcd))  /* when set then false resume condition*/
+    {
+      __HAL_USB_OTG_HS_WAKEUP_EXTI_CLEAR_FLAG();
+      __HAL_USB_OTG_HS_WAKEUP_EXTI_ENABLE_IT(); 
+      
+      USBD_LL_Suspend(hpcd->pData);
+      
+      /*Enter in STOP mode */
+      if (hpcd->Init.low_power_enable)
+      {
+        /* Set SLEEPDEEP bit and SleepOnExit of Cortex System Control Register */
+        SCB->SCR |= (uint32_t)((uint32_t)(SCB_SCR_SLEEPDEEP_Msk | SCB_SCR_SLEEPONEXIT_Msk));
+      }
+    }
+    
 #endif
   }
   else
@@ -374,7 +403,16 @@ void HAL_PCD_SuspendCallback(PCD_HandleTypeDef *hpcd)
   */
 void HAL_PCD_ResumeCallback(PCD_HandleTypeDef *hpcd)
 {
+  if ((hpcd->Init.low_power_enable)&&(remotewakeupon == 0))
+  {
+    SystemClockConfig_STOP();
+    
+    /* Reset SLEEPDEEP bit of Cortex System Control Register */
+    SCB->SCR &= (uint32_t)~((uint32_t)(SCB_SCR_SLEEPDEEP_Msk | SCB_SCR_SLEEPONEXIT_Msk));
+  }
+  __HAL_PCD_UNGATE_PHYCLOCK(hpcd);
   USBD_LL_Resume(hpcd->pData);
+  remotewakeupon=0;
 }
 
 /**
@@ -468,9 +506,9 @@ USBD_StatusTypeDef USBD_LL_Init(USBD_HandleTypeDef *pdev)
   not allow sending data from non word-aligned addresses.
   For this specific application, it is advised to not enable this option
   unless required. */
-  hpcd.Init.dma_enable = 1;
+  hpcd.Init.dma_enable = 0;
   hpcd.Init.low_power_enable = 0;
-  hpcd.Init.lpm_enable = 0;
+  hpcd.Init.lpm_enable = 1;
   
 #ifdef USE_USB_HS_IN_FS
   hpcd.Init.low_power_enable = 0;
@@ -740,8 +778,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
   if (GPIO_Pin == KEY_BUTTON_PIN)
   {
 #if (USBD_LPM_ENABLED == 1)
-    if(hpcd.lpm_active)
-    {
+
       if(hpcd.LPM_State == LPM_L1)
       {
         if ((&hpcd)->Init.low_power_enable)
@@ -800,8 +837,8 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
           
           /* Change remote_wakeup feature to 0*/
           ((USBD_HandleTypeDef *)hpcd.pData)->dev_remote_wakeup=0;
+          remotewakeupon = 1;
         }
-    }
   }
 }
 
@@ -828,6 +865,7 @@ void HAL_PCDEx_LPM_Callback(PCD_HandleTypeDef *hpcd, PCD_LPM_MsgTypeDef msg)
     break;
     
   case PCD_LPM_L1_ACTIVE:
+      HAL_Delay(300);
     __HAL_PCD_GATE_PHYCLOCK(hpcd);
     USBD_LL_Suspend(hpcd->pData);
     

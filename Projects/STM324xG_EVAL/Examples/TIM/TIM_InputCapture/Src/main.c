@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    TIM/TIM_InputCapture/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.2.6
-  * @date    06-May-2016
+  * @version V1.2.7
+  * @date    04-November-2016
   * @brief   This example shows how to use the TIM peripheral to measure only 
   *          the frequency of an external signal.
   ******************************************************************************

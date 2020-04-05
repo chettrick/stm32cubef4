@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    DCMI/DCMI_SnapshotMode/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.4
-  * @date    06-May-2016
+  * @version V1.0.5
+  * @date    04-November-2016
   * @brief   This example describe how to configure the camera interface (DCMI) in snapshot
   *          mode to handle a single image capture in QVGA (320x240) resolution and RGB565
   *          format and display the obtained image on LCD screen.

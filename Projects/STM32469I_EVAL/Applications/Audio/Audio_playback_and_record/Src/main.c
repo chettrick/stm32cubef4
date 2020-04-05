@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Audio/Audio_playback_and_record/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.5
-  * @date    03-June-2016
+  * @version V1.0.6
+  * @date    04-November-2016
   * @brief   Audio playback and record main file.
   ******************************************************************************
   * @attention

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    TIM/TIM_Encoder/Src/main.c
   * @author  MCD Application Team
-  * @version V1.1.4
-  * @date    06-May-2016
+  * @version V1.1.5
+  * @date    04-November-2016
   * @brief   This example shows how to command 2 Timers as slaves (TIM3 & TIM4)
   *          using a Timer as master (TIM2)
   ******************************************************************************

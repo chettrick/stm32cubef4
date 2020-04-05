@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    UART/UART_TwoBoards_ComPolling/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    06-May-2016
+  * @version V1.0.4
+  * @date    04-November-2016
   * @brief   Description of the UART Two Boards Communication Polling example.
   ******************************************************************************
   *

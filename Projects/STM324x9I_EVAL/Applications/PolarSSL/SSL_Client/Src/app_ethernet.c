@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    PolarSSL/SSL_Client/Src/app_ethernet.c 
   * @author  MCD Application Team
-  * @version V1.4.5
-  * @date    03-June-2016
+  * @version V1.4.6
+  * @date    04-November-2016
   * @brief   Ethernet specefic module
   ******************************************************************************
   * @attention

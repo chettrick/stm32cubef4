@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    DAC/DAC_SimpleConversion/Inc/main.h
   * @author  MCD Application Team
-  * @version V1.0.4
-  * @date    06-May-2016
+  * @version V1.0.5
+  * @date    04-November-2016
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention
@@ -42,6 +42,8 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
 #include "stm32469i_eval.h"
+
+#include "stm32469i_eval_io.h"
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32469i_eval_nor.c
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    06-May-2016
+  * @version V1.0.4
+  * @date    04-August-2016
   * @brief   This file includes a standard driver for the M29W256GL70ZA6E NOR flash memory
   *          device mounted on STM32469I-EVAL evaluation board.
   ******************************************************************************

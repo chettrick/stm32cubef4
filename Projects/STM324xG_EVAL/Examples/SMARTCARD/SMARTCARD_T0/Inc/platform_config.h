@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    SMARTCARD/SMARTCARD_T0/Inc/platform_config.h 
   * @author  MCD Application Team
-  * @version V1.2.6
-  * @date    06-May-2016
+  * @version V1.2.7
+  * @date    04-November-2016
   * @brief   Evaluation board specific configuration file.
   ******************************************************************************
   * @attention

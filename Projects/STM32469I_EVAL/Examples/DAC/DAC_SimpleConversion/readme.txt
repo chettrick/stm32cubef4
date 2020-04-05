@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    DAC/DAC_SimpleConversion/readme.txt 
   * @author  MCD Application Team
-  * @version V1.0.4
-  * @date    06-May-2016
+  * @version V1.0.5
+  * @date    04-November-2016
   * @brief   Description of the DAC Simple Conversion example.
   ******************************************************************************
   *
@@ -45,7 +45,9 @@ This example provides a short description of how to use the DAC peripheral to
 do a simple conversion in 8 bits right alignment of 0xFF value, the result of 
 conversion can be seen by connecting PA4(DAC channel1) to an oscilloscope.
 The observed value is 3.3V.
-      
+
+As PA4 is connected to other device on the eval board (Potentiometer and Camera) the analog output may be corrupted.
+In case please remove camera module and/or move RV1 potentiometer 
 
 STM32469I-EVAL board's LEDs can be used to monitor the process status:
   - LED3 is ON and example is stopped (using infinite loop)

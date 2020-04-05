@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    TIM/TIM_OCInactive/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.4
-  * @date    06-May-2016
+  * @version V1.0.5
+  * @date    04-November-2016
   * @brief   This example shows how to configure the Timer to generate four 
   *          delayed signals.
   ******************************************************************************
@@ -77,9 +77,7 @@ static void Error_Handler(void);
   * @retval None
   */
 int main(void)
-{
-  GPIO_InitTypeDef  GPIO_InitStruct;
-  
+{  
   /* STM32F4xx HAL library initialization:
        - Configure the Flash prefetch, instruction and Data caches
        - Systick timer is configured by default as source of time base, but user 
@@ -94,30 +92,6 @@ int main(void)
 
   /* Configure the system clock to 180 MHz */
   SystemClock_Config();
-
-  /* Enable GPIO Clock */
-  __HAL_RCC_GPIOB_CLK_ENABLE();
-  
-  /* Configure the GPIO pins: used to display the 4 wave forms */
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_PULLUP;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FAST;
-  
-  /* Configure PB.00 to display wave form of channel1 */
-  GPIO_InitStruct.Pin = GPIO_PIN_0;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-  
-  /* Configure PB.01 to display wave form of channel2 */
-  GPIO_InitStruct.Pin = GPIO_PIN_1;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-  
-  /* Configure PB.03 to display wave form of channel3 */  
-  GPIO_InitStruct.Pin = GPIO_PIN_3;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-  
-  /* Configure PB.05 to display wave form of channel4 */
-  GPIO_InitStruct.Pin = GPIO_PIN_5;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /* Compute the prescaler value to have TIMx counter clock equal to 10 kHz */
   uwPrescalerValue = ((SystemCoreClock) / 10000) - 1;

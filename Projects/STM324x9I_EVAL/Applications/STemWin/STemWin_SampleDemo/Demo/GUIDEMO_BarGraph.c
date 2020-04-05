@@ -36,8 +36,8 @@ Purpose     : Shows a bargraph with alpha effect
   ******************************************************************************
   * @file    GUIDEMO_Bargraph.c
   * @author  MCD Application Team
-  * @version V1.4.5
-  * @date    03-June-2016
+  * @version V1.4.6
+  * @date    04-November-2016
   * @brief   Shows a bargraph with alpha effect
   ******************************************************************************
   * @attention

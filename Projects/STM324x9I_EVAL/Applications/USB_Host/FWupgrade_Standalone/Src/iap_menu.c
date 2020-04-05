@@ -83,18 +83,7 @@ void FW_UPGRADE_Process(void)
       /* Toggle LED3 and LED4 in infinite loop */
       FatFs_Fail_Handler();
     }
-    
-    /* TO DO */
-    
-    //    /* Flash Disk is write protected: Turn LED4 On and Toggle LED3 in infinite loop */
-    //    if(USBH_MSC_Param.MSWriteProtect == DISK_WRITE_PROTECTED)
-    //    {
-    //      /* Turn LED4 On */
-    //      BSP_LED_On(LED4);
-    //      /* Toggle LED3 in infinite loop */
-    //      Fail_Handler();
-    //    }
-    
+
     /* Go to IAP menu */
     Demo_State = DEMO_IAP;
     break;

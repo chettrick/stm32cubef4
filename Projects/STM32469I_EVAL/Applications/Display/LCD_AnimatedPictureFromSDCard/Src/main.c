@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Display/LCD_AnimatedPictureFromSDCard/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.5
-  * @date    03-June-2016
+  * @version V1.0.6
+  * @date    04-November-2016
   * @brief   This file provides main program functions
   ******************************************************************************
   * @attention
@@ -125,9 +125,8 @@ int main(void)
         BSP_LCD_SetTextColor(LCD_COLOR_RED);
         
         BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"  Cannot allocate memory ");
-        while(1)
-        {
-        }       
+        Error_Handler();
+        
       }
     }
     
@@ -153,7 +152,7 @@ int main(void)
         BSP_LCD_SetTextColor(LCD_COLOR_RED);
         
         BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"    Open directory.. fails");
-        while(1) { ; }
+        Error_Handler();
       }
     }
     
@@ -170,7 +169,7 @@ int main(void)
       BSP_LCD_SetTextColor(LCD_COLOR_RED);
       
       BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"    File type not supported. "); 
-      while(1) { ; }
+      Error_Handler();
     }        
     
     /*##-5- Display Foreground picture #######################################*/
@@ -193,9 +192,12 @@ int main(void)
       BSP_LCD_SetTextColor(LCD_COLOR_RED);
       
       BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"    No Bitmap files...      ");
-      while(1) { ; }
+      Error_Handler();
     } 
   }
+  
+  HAL_Delay(100);
+  BSP_LCD_DisplayOn(); /*turn display On after background initialization */
   
   /* Infinite loop */
   while(1)
@@ -230,7 +232,7 @@ int main(void)
         
         BSP_LCD_DisplayStringAtLine(7, (uint8_t *) str);        
         BSP_LCD_DisplayStringAtLine(8, (uint8_t*)"    File type not supported. "); 
-        while(1) { ; }
+        Error_Handler();
       }
     }
   }
@@ -246,15 +248,18 @@ static void LCD_Config(void)
   /* LCD DSI initialization in mode Video Burst  */
   LCD_Init();
   
-  /* Activate foreground and background layers */
+  BSP_LCD_DisplayOff(); /*turn display Off during the initialization */
+  
+  /* Activate background layers */
   BSP_LCD_LayerDefaultInit(LTDC_ACTIVE_LAYER_BACKGROUND, LCD_BG_LAYER_ADDRESS); 
-  BSP_LCD_LayerDefaultInit(LTDC_ACTIVE_LAYER_FOREGROUND, LCD_FG_LAYER_ADDRESS);  
   
   /* Set LCD Background Layer  */
   BSP_LCD_SelectLayer(LTDC_ACTIVE_LAYER_BACKGROUND); 
   /* Clear the Background Layer */
   BSP_LCD_Clear(LCD_COLOR_WHITE);
-  
+ 
+  /* Activate foreground and background layers */  
+  BSP_LCD_LayerDefaultInit(LTDC_ACTIVE_LAYER_FOREGROUND, LCD_FG_LAYER_ADDRESS);   
   /* Set LCD Foreground Layer  */
   BSP_LCD_SelectLayer(LTDC_ACTIVE_LAYER_FOREGROUND);
   /* Clear the Foreground Layer */ 
@@ -265,15 +270,15 @@ static void LCD_Config(void)
 
   /* Configure the transparency for foreground: Increase the transparency */
   BSP_LCD_SetTransparency(LTDC_ACTIVE_LAYER_FOREGROUND, 100);
-  
 }
 
 static uint8_t LCD_Init(void)
 {
   DSI_PLLInitTypeDef dsiPllInit;
+  DSI_PHY_TimerTypeDef  PhyTimings;
   static RCC_PeriphCLKInitTypeDef  PeriphClkInitStruct;
-  uint32_t LcdClock  = 19200; 
-  uint32_t Clockratio  = 0;
+  uint32_t LcdClock  = 19200; /*!< LcdClk = 19200 kHz */
+
   uint32_t laneByteClk_kHz = 0;
   uint32_t                   VSA; /*!< Vertical start active time in units of lines */
   uint32_t                   VBP; /*!< Vertical Back Porch time in units of lines */
@@ -311,24 +316,22 @@ static uint8_t LCD_Init(void)
   
   /* Set number of Lanes */
   hdsi_eval.Init.NumberOfLanes = DSI_TWO_DATA_LANES;
-
+  
   /* TXEscapeCkdiv = f(LaneByteClk)/15.62 = 4 */
   hdsi_eval.Init.TXEscapeCkdiv = laneByteClk_kHz/15620; 
   
   HAL_DSI_Init(&(hdsi_eval), &(dsiPllInit));
-  Clockratio = laneByteClk_kHz/LcdClock;
-  /* Timing parameters for all Video modes
-  * Set Timing parameters of LTDC */
-    /* lcd_orientation == LCD_ORIENTATION_LANDSCAPE */
-    VSA  = OTM8009A_800X480_VSYNC;        /* 12  */
-    VBP  = OTM8009A_800X480_VBP;          /* 12  */
-    VFP  = OTM8009A_800X480_VFP;          /* 12  */
-    HSA  = OTM8009A_800X480_HSYNC;        /* 120 */
-    HBP  = OTM8009A_800X480_HBP;          /* 120 */
-    HFP  = OTM8009A_800X480_HFP;          /* 120 */
-    HACT = OTM8009A_800X480_WIDTH;        /* 800 */
-    VACT = OTM8009A_800X480_HEIGHT;       /* 480 */ 
   
+  /* The following values are same for portrait and landscape orientations */
+  VSA  = OTM8009A_480X800_VSYNC;        /* 10 */
+  VBP  = OTM8009A_480X800_VBP;          /* 15 */
+  VFP  = OTM8009A_480X800_VFP;          /* 16 */
+  HSA  = OTM8009A_480X800_HSYNC;        /* 2 */
+  HBP  = OTM8009A_480X800_HBP;          /* 20 */
+  HFP  = OTM8009A_480X800_HFP;          /* 20 */ 
+  HACT = OTM8009A_800X480_WIDTH;        /* 800 */
+  VACT = OTM8009A_800X480_HEIGHT;       /* 480 */   
+
   hdsivideo_handle.VirtualChannelID = LCD_OTM8009A_ID;
   hdsivideo_handle.ColorCoding = LCD_DSI_PIXEL_DATA_FMT_RBG888;
   hdsivideo_handle.VSPolarity = DSI_VSYNC_ACTIVE_HIGH;
@@ -338,9 +341,9 @@ static uint8_t LCD_Init(void)
   hdsivideo_handle.NullPacketSize = 0xFFF;
   hdsivideo_handle.NumberOfChunks = 0;
   hdsivideo_handle.PacketSize                = HACT; /* Value depending on display orientation choice portrait/landscape */ 
-  hdsivideo_handle.HorizontalSyncActive      = HSA*Clockratio;
-  hdsivideo_handle.HorizontalBackPorch       = HBP*Clockratio;
-  hdsivideo_handle.HorizontalLine            = (HACT + HSA + HBP + HFP)*Clockratio; /* Value depending on display orientation choice portrait/landscape */
+  hdsivideo_handle.HorizontalSyncActive      = (HSA * laneByteClk_kHz) / LcdClock;
+  hdsivideo_handle.HorizontalBackPorch       = (HBP * laneByteClk_kHz) / LcdClock;
+  hdsivideo_handle.HorizontalLine            = ((HACT + HSA + HBP + HFP) * laneByteClk_kHz) / LcdClock; /* Value depending on display orientation choice portrait/landscape */
   hdsivideo_handle.VerticalSyncActive        = VSA;
   hdsivideo_handle.VerticalBackPorch         = VBP;
   hdsivideo_handle.VerticalFrontPorch        = VFP;
@@ -351,11 +354,11 @@ static uint8_t LCD_Init(void)
   
   /* Largest packet size possible to transmit in LP mode in VSA, VBP, VFP regions */
   /* Only useful when sending LP packets is allowed while streaming is active in video mode */
-  hdsivideo_handle.LPLargestPacketSize = 64;
+  hdsivideo_handle.LPLargestPacketSize = 16;
   
   /* Largest packet size possible to transmit in LP mode in HFP region during VACT period */
   /* Only useful when sending LP packets is allowed while streaming is active in video mode */
-  hdsivideo_handle.LPVACTLargestPacketSize = 64;
+  hdsivideo_handle.LPVACTLargestPacketSize = 0;
   
   
   /* Specify for each region of the video frame, if the transmission of command in LP mode is allowed in this region */
@@ -369,9 +372,17 @@ static uint8_t LCD_Init(void)
   
   /* Configure DSI Video mode timings with settings set above */
   HAL_DSI_ConfigVideoMode(&(hdsi_eval), &(hdsivideo_handle));
+
+  /* Configure DSI PHY HS2LP and LP2HS timings */
+  PhyTimings.ClockLaneHS2LPTime = 35;
+  PhyTimings.ClockLaneLP2HSTime = 35;
+  PhyTimings.DataLaneHS2LPTime = 35;
+  PhyTimings.DataLaneLP2HSTime = 35;
+  PhyTimings.DataLaneMaxReadTime = 0;
+  PhyTimings.StopWaitTime = 10;
+  HAL_DSI_ConfigPhyTimer(&hdsi_eval, &PhyTimings);
   
-  /* Enable the DSI host and wrapper : but LTDC is not started yet at this stage */
-  HAL_DSI_Start(&(hdsi_eval));
+
 /*************************End DSI Initialization*******************************/ 
   
   
@@ -390,15 +401,15 @@ static uint8_t LCD_Init(void)
   
   /* LCD clock configuration */
   /* PLLSAI_VCO Input = HSE_VALUE/PLL_M = 1 Mhz */
-  /* PLLSAI_VCO Output = PLLSAI_VCO Input * PLLSAIN = 384 Mhz */
-  /* PLLLCDCLK = PLLSAI_VCO Output/PLLSAIR = 384 MHz / 7 = 54.857 MHz */
-  /* LTDC clock frequency = PLLLCDCLK / LTDC_PLLSAI_DIVR_2 = 54.857 MHz / 2 = 27.429 MHz */
+  /* PLLSAI_VCO Output = PLLSAI_VCO Input * PLLSAIN = 192 Mhz */
+  /* PLLLCDCLK = PLLSAI_VCO Output/PLLSAIR = 192 MHz / 5 = 38.4 MHz */
+  /* LTDC clock frequency = PLLLCDCLK / LTDC_PLLSAI_DIVR_2 = 38.4 MHz / 2 = 19.2 MHz */
   PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_LTDC;
-  PeriphClkInitStruct.PLLSAI.PLLSAIN = 384;
+  PeriphClkInitStruct.PLLSAI.PLLSAIN = 192;
   PeriphClkInitStruct.PLLSAI.PLLSAIR = 5;
-  PeriphClkInitStruct.PLLSAIDivR = RCC_PLLSAIDIVR_4;
+  PeriphClkInitStruct.PLLSAIDivR = RCC_PLLSAIDIVR_2;
   HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct); 
-
+  
   /* Background value */
   hltdc_eval.Init.Backcolor.Blue = 0;
   hltdc_eval.Init.Backcolor.Green = 0;
@@ -411,6 +422,11 @@ static uint8_t LCD_Init(void)
   
   /* Initialize the LTDC */  
   HAL_LTDC_Init(&hltdc_eval);
+
+  /* Enable the DSI host and wrapper after the LTDC initialization
+     To avoid any synchronization issue, the DSI shall be started after enabling the LTDC */
+
+  HAL_DSI_Start(&(hdsi_eval));
   
 #if !defined(DATA_IN_ExtSDRAM)
   /* Initialize the SDRAM */
@@ -428,7 +444,7 @@ static uint8_t LCD_Init(void)
   /* Initialize the OTM8009A LCD Display IC Driver (KoD LCD IC Driver)
   *  depending on configuration set in 'hdsivideo_handle'.
   */
-  OTM8009A_Init(hdsivideo_handle.ColorCoding, LCD_ORIENTATION_LANDSCAPE);
+  OTM8009A_Init(OTM8009A_FORMAT_RGB888, OTM8009A_ORIENTATION_LANDSCAPE);
   
 /***********************End OTM8009A Initialization****************************/ 
   
@@ -442,6 +458,7 @@ static uint8_t LCD_Init(void)
   */
 static void Error_Handler(void)
 {
+  BSP_LCD_DisplayOn();  /*turn display On in case of error to display the error message */
   /* Turn LED3 on */
   BSP_LED_On(LED3);
   while(1)
@@ -498,14 +515,14 @@ static void SystemClock_Config(void)
   ret = HAL_RCC_OscConfig(&RCC_OscInitStruct);
   if(ret != HAL_OK)
   {
-    while(1) { ; }
+    Error_Handler();
   }
 
   /* Activate the OverDrive to reach the 180 MHz Frequency */
   ret = HAL_PWREx_EnableOverDrive();
   if(ret != HAL_OK)
   {
-    while(1) { ; }
+     Error_Handler();
   }
 
   /* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2 clocks dividers */
@@ -518,10 +535,9 @@ static void SystemClock_Config(void)
   ret = HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
   if(ret != HAL_OK)
   {
-    while(1) { ; }
+    Error_Handler();
   }
 }
-
 
 #ifdef  USE_FULL_ASSERT
 /**

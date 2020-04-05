@@ -4,8 +4,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    IAP/IAP_Main/readme.txt 
   * @author  MCD Application Team
-  * @version V1.3.5
-  * @date    03-June-2016
+  * @version V1.3.6
+  * @date    04-November-2016
   * @brief   Description of implementation of the AN3965 (in-application programming
   *          using the USART (IAP)) on STM32F4xx devices.
   ******************************************************************************
@@ -102,7 +102,7 @@ Table 1. IAP implementation on STM324xG-EVAL RevC
 |                | ------------------------------------------------------|-------------------------|
 |                | The user application (image to be downloaded with the |                         | 
 |                | IAP) will be programmed starting from address         |                         |
-|                | (uint32_t)0x08004000(1).                              | (Sector 1 - Sector 11)  | 
+|                | (uint32_t)0x08008000(1).                              | (Sector 1 - Sector 11)  | 
 |                | The maximum size of the image to be loaded is:        | 3514 bytes             | 
 |                | ------------------------------------------------------|-------------------------|
 |                | The image is uploaded with the IAP from the STM32F4xx | 10 Kbytes                | 
@@ -115,7 +115,7 @@ Table 1. IAP implementation on STM324xG-EVAL RevC
 |                | USART used                                            |  USART    (CN16)        |
 \**************************************************************************************************/
 (1) User application location address is defined in the flash_if.h file as: 
-#define APPLICATION_ADDRESS           ((uint32_t)0x08004000)
+#define APPLICATION_ADDRESS           ((uint32_t)0x08008000)
 To modify it, change the default value to the desired one. Note that the application must be linked
 relatively to the new address too.
 
@@ -140,7 +140,7 @@ Figure 2. Flash memory usage
                           |                                           |
                           |- - - - - - - - - - - - - - - - - - - - - -|
                           |          Vector table                     |
-                          |-------------------------------------------|  0x08004000
+                          |-------------------------------------------|  0x08008000
                           |          IAP code                         |
                           |- - - - - - - - - - - - - - - - - - - - - -|
                           |          Vector table                     |

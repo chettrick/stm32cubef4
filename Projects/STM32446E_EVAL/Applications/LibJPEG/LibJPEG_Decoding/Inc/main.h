@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LibJPEG/LibJPEG_Decoding/Inc/main.h
   * @author  MCD Application Team
-  * @version V1.2.5
-  * @date    03-June-2016
+  * @version V1.2.6
+  * @date    04-November-2016
   * @brief   Header for main.c module
   ******************************************************************************
   * @attention

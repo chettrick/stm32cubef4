@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Device/MSC_Standalone/Inc/stm32f4xx_it.h 
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    03-June-2016
+  * @version V1.0.2
+  * @date    04-November-2016
   * @brief   This file contains the headers of the interrupt handlers.
   ******************************************************************************
   * @attention
@@ -50,9 +50,6 @@ void DebugMon_Handler(void);
 void PendSV_Handler(void);
 void SysTick_Handler(void);
 void OTG_FS_IRQHandler(void);
-void SDMMC1_IRQHandler(void);
-void DMA2_Stream3_IRQHandler(void);
-void DMA2_Stream6_IRQHandler(void);
 
 #ifdef __cplusplus
 }

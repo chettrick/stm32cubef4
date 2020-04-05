@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BSP/Src/qspi.c 
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    06-May-2016
+  * @version V1.0.1
+  * @date    04-November-2016
   * @brief   This example code shows how to use the QSPI Driver
   ******************************************************************************
   * @attention

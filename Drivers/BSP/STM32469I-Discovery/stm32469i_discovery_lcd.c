@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32469i_discovery_lcd.c
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    13-January-2016
+  * @version V1.0.3
+  * @date    04-August-2016
   * @brief   This file includes the driver for Liquid Crystal Display (LCD) module
   *          mounted on STM32469I-Discovery evaluation board.
   ******************************************************************************
@@ -197,6 +197,7 @@ uint8_t BSP_LCD_Init(void)
 uint8_t BSP_LCD_InitEx(LCD_OrientationTypeDef orientation)
 {
   DSI_PLLInitTypeDef dsiPllInit;
+  DSI_PHY_TimerTypeDef  PhyTimings;
   static RCC_PeriphCLKInitTypeDef  PeriphClkInitStruct;
   uint32_t LcdClock  = 27429; /*!< LcdClk = 27429 kHz */
   
@@ -254,30 +255,26 @@ uint8_t BSP_LCD_InitEx(LCD_OrientationTypeDef orientation)
   */
   if(orientation == LCD_ORIENTATION_PORTRAIT)
   {
-    VSA  = OTM8009A_480X800_VSYNC;        /* 12 */
-    VBP  = OTM8009A_480X800_VBP;          /* 12 */
-    VFP  = OTM8009A_480X800_VFP;          /* 12 */
-    HSA  = OTM8009A_480X800_HSYNC;        /* 120 */
-    HBP  = OTM8009A_480X800_HBP;          /* 120 */
-    HFP  = OTM8009A_480X800_HFP;          /* 120 */
     lcd_x_size = OTM8009A_480X800_WIDTH;  /* 480 */
     lcd_y_size = OTM8009A_480X800_HEIGHT; /* 800 */                                
   }
   else
   {
     /* lcd_orientation == LCD_ORIENTATION_LANDSCAPE */
-    VSA  = OTM8009A_800X480_VSYNC;        /* 12 */
-    VBP  = OTM8009A_800X480_VBP;          /* 12 */
-    VFP  = OTM8009A_800X480_VFP;          /* 12 */
-    HSA  = OTM8009A_800X480_HSYNC;        /* 120 */
-    HBP  = OTM8009A_800X480_HBP;          /* 120 */
-    HFP  = OTM8009A_800X480_HFP;          /* 120 */
     lcd_x_size = OTM8009A_800X480_WIDTH;  /* 800 */
     lcd_y_size = OTM8009A_800X480_HEIGHT; /* 480 */                                
-  }  
+  }
   
   HACT = lcd_x_size;
   VACT = lcd_y_size;
+  
+  /* The following values are same for portrait and landscape orientations */
+  VSA  = OTM8009A_480X800_VSYNC;        /* 12  */
+  VBP  = OTM8009A_480X800_VBP;          /* 12  */
+  VFP  = OTM8009A_480X800_VFP;          /* 12  */
+  HSA  = OTM8009A_480X800_HSYNC;        /* 63  */
+  HBP  = OTM8009A_480X800_HBP;          /* 120 */
+  HFP  = OTM8009A_480X800_HFP;          /* 120 */
   
   
   hdsivideo_handle.VirtualChannelID = LCD_OTM8009A_ID;
@@ -302,11 +299,11 @@ uint8_t BSP_LCD_InitEx(LCD_OrientationTypeDef orientation)
   
   /* Largest packet size possible to transmit in LP mode in VSA, VBP, VFP regions */
   /* Only useful when sending LP packets is allowed while streaming is active in video mode */
-  hdsivideo_handle.LPLargestPacketSize = 64;
+  hdsivideo_handle.LPLargestPacketSize = 16;
   
   /* Largest packet size possible to transmit in LP mode in HFP region during VACT period */
   /* Only useful when sending LP packets is allowed while streaming is active in video mode */
-  hdsivideo_handle.LPVACTLargestPacketSize = 64;
+  hdsivideo_handle.LPVACTLargestPacketSize = 0;
   
   
   /* Specify for each region of the video frame, if the transmission of command in LP mode is allowed in this region */
@@ -320,9 +317,16 @@ uint8_t BSP_LCD_InitEx(LCD_OrientationTypeDef orientation)
   
   /* Configure DSI Video mode timings with settings set above */
   HAL_DSI_ConfigVideoMode(&(hdsi_eval), &(hdsivideo_handle));
-  
-  /* Enable the DSI host and wrapper : but LTDC is not started yet at this stage */
-  HAL_DSI_Start(&(hdsi_eval));
+
+  /* Configure DSI PHY HS2LP and LP2HS timings */
+  PhyTimings.ClockLaneHS2LPTime = 35;
+  PhyTimings.ClockLaneLP2HSTime = 35;
+  PhyTimings.DataLaneHS2LPTime = 35;
+  PhyTimings.DataLaneLP2HSTime = 35;
+  PhyTimings.DataLaneMaxReadTime = 0;
+  PhyTimings.StopWaitTime = 10;
+  HAL_DSI_ConfigPhyTimer(&hdsi_eval, &PhyTimings);
+
 /*************************End DSI Initialization*******************************/ 
   
   
@@ -362,6 +366,10 @@ uint8_t BSP_LCD_InitEx(LCD_OrientationTypeDef orientation)
   
   /* Initialize the LTDC */  
   HAL_LTDC_Init(&hltdc_eval);
+
+  /* Enable the DSI host and wrapper after the LTDC initialization
+     To avoid any synchronization issue, the DSI shall be started after enabling the LTDC */
+  HAL_DSI_Start(&(hdsi_eval));
   
 #if !defined(DATA_IN_ExtSDRAM)
   /* Initialize the SDRAM */
@@ -379,11 +387,11 @@ uint8_t BSP_LCD_InitEx(LCD_OrientationTypeDef orientation)
   /* Initialize the OTM8009A LCD Display IC Driver (KoD LCD IC Driver)
   *  depending on configuration set in 'hdsivideo_handle'.
   */
-  OTM8009A_Init(hdsivideo_handle.ColorCoding, orientation);
+  OTM8009A_Init(OTM8009A_FORMAT_RGB888, orientation);
   
 /***********************End OTM8009A Initialization****************************/ 
   
-  return LCD_OK; 
+  return LCD_OK;
 }
 
 /**

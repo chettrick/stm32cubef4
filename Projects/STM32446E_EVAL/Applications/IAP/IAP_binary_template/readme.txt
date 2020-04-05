@@ -4,8 +4,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    IAP/IAP_Binary_Template/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.5
-  * @date    03-June-2016
+  * @version V1.2.6
+  * @date    04-November-2016
   * @brief   Description of the IAP_Binary_Template directory.
   ******************************************************************************
   * @attention

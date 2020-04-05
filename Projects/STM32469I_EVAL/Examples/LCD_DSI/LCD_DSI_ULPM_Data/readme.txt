@@ -7,8 +7,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    LCD_DSI/LCD_DSI_ULPM_Data/readme.txt
   * @author  MCD Application Team
-  * @version V1.0.4
-  * @date    06-May-2016
+  * @version V1.0.5
+  * @date    04-November-2016
   * @brief   Description of the LCD DSI enter and exit DSI ULPM Mode on data lane only example.
   ******************************************************************************
   *

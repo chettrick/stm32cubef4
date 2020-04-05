@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32469i_discovery.h
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    13-January-2016
+  * @version V1.0.3
+  * @date    04-August-2016
   * @brief   This file contains definitions for STM32469I-Discovery LEDs,
   *          push-buttons hardware resources.
   ******************************************************************************
@@ -217,7 +217,6 @@ typedef enum
 
 /**
   * @brief TS_INT signal from TouchScreen when it is configured in interrupt mode
-  * GPIOJ5 is used for that purpose on Manta Dragon Discovery board
   */
 #define TS_INT_PIN                        ((uint32_t)GPIO_PIN_5)
 #define TS_INT_GPIO_PORT                  ((GPIO_TypeDef*)GPIOJ)

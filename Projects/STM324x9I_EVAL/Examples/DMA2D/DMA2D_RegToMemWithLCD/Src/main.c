@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    DMA2D/DMA2D_RegToMemWithLCD/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.3.4
-  * @date    06-May-2016
+  * @version V1.3.5
+  * @date    04-November-2016
   * @brief   This example provides a description of how to configure DMA2D peripheral 
   *          in Register to Memory transfer mode and display the result on LCD.
   ******************************************************************************

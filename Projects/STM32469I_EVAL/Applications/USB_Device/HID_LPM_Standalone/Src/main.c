@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Device/HID_LPM_Standalone/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.5
-  * @date    03-June-2016
+  * @version V1.0.6
+  * @date    04-November-2016
   * @brief   USB device HID_LPM demo main file
   ******************************************************************************
   * @attention

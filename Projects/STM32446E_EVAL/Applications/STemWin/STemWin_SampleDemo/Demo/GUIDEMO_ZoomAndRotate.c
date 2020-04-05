@@ -36,8 +36,8 @@ Purpose     : Demo of zooming and rotating images
   ******************************************************************************
   * @file    GUIDEMO_ZoomAndRotate.c
   * @author  MCD Application Team
-  * @version V1.2.5
-  * @date    03-June-2016
+  * @version V1.2.6
+  * @date    04-November-2016
   * @brief   Demo of zooming and rotating images
   ******************************************************************************
   * @attention

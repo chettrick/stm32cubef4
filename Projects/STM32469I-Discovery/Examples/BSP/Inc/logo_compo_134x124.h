@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BSP/Inc/logo_compo_134x124.h
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    06-May-2016
+  * @version V1.0.4
+  * @date    04-November-2016
   * @brief   This file contains icon definition for animation control.
   ******************************************************************************
   * @attention

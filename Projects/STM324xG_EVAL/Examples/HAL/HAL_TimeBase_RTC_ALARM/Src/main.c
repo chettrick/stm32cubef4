@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    HAL/HAL_TimeBase_RTC_ALARM/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.2.6
-  * @date    06-May-2016
+  * @version V1.2.7
+  * @date    04-November-2016
   * @brief   This example describes how to configure HAL time base using
   *          the STM32F4xx HAL RTC ALARM API.
   ******************************************************************************

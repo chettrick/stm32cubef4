@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LibJPEG/LibJPEG_Decoding/Src/decode.c 
   * @author  MCD Application Team
-  * @version V1.2.5
-  * @date    03-June-2016
+  * @version V1.2.6
+  * @date    04-November-2016
   * @brief   This file contain the decompress method.
   ******************************************************************************
   * @attention

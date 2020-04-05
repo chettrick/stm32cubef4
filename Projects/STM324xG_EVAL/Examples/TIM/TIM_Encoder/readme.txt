@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    TIM/TIM_Encoder/readme.txt 
   * @author  MCD Application Team
-  * @version V1.2.6
-  * @date    06-May-2016
+  * @version V1.2.7
+  * @date    04-November-2016
   * @brief   This example shows how to configure the Timer in Encoder interface 
   *          to determinate the rotation direction. 
   ******************************************************************************

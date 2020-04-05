@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Demonstrations/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.2.4
-  * @date    06-May-2016
+  * @version V1.2.5
+  * @date    04-November-2016
 
   * @brief   This demo describes how to display bmp images from SD card on TFT 
              using STM32NUCLEO board Adafruit 1.8" TFT shield.

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Audio/Audio_playback_and_record/Inc/waverecorder.h
   * @author  MCD Application Team
-  * @version V1.3.4
-  * @date    06-May-2016
+  * @version V1.3.5
+  * @date    04-November-2016
   * @brief   Header for waverecorder.c module.
   ******************************************************************************
   * @attention

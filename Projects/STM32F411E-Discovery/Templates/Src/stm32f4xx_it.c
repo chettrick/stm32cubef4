@@ -3,7 +3,7 @@
   * @file    Templates/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
   * @version V1.0.3
-  * @date    06-May-2016
+  * @date    04-November-2016
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.

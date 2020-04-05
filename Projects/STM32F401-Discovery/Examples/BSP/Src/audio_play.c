@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    BSP/Src/audio_play.c 
   * @author  MCD Application Team
-  * @version V1.2.6
-  * @date    06-May-2016
+  * @version V1.2.7
+  * @date    04-November-2016
   * @brief   This example code shows how to use AUDIO features for the play.
   ******************************************************************************
   * @attention

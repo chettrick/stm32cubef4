@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    HAL/HAL_TimeBase_RTC_ALARM/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
-  * @version V1.2.6
-  * @date    06-May-2016
+  * @version V1.2.7
+  * @date    04-November-2016
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.

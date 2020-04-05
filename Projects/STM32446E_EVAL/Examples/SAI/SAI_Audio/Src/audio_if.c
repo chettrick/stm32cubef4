@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    SAI/SAI_Audio/Src/audio_if.c 
   * @author  MCD Application Team
-  * @version V1.1.4
-  * @date    06-May-2016
+  * @version V1.1.5
+  * @date    04-November-2016
   * @brief   This file provides the Audio Out (playback) interface API
   ******************************************************************************
   * @attention

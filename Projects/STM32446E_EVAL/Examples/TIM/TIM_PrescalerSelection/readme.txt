@@ -5,8 +5,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    TIM/TIM_PrescalerSelection/readme.txt 
   * @author  MCD Application Team
-  * @version V1.1.4
-  * @date    06-May-2016
+  * @version V1.1.5
+  * @date    04-November-2016
   * @brief   Description of the PWM signals generation using TIM3
   ******************************************************************************
   *

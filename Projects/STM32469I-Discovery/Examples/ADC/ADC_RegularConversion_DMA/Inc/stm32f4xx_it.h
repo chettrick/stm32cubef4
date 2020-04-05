@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    ADC/ADC_RegularConversion_DMA/Inc/stm32f4xx_it.h
   * @author  MCD Application Team
-  * @version V1.0.3
-  * @date    06-May-2016
+  * @version V1.0.4
+  * @date    04-November-2016
   * @brief   This file contains the headers of the interrupt handlers.
   ******************************************************************************
   * @attention

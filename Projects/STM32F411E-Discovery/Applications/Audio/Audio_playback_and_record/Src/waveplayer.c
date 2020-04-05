@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Audio_playback_and_record/Src/waveplayer.c 
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    06-May-2016
+  * @version V1.0.3
+  * @date    04-November-2016
   * @brief   I2S Audio player program. 
   ******************************************************************************
   * @attention

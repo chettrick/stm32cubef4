@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    stm32469i_discovery_lcd.h
   * @author  MCD Application Team
-  * @version V1.0.2
-  * @date    13-January-2016
+  * @version V1.0.3
+  * @date    04-August-2016
   * @brief   This file contains the common defines and functions prototypes for
   *          the stm32469i_discovery_lcd.c driver.
   ******************************************************************************
@@ -228,6 +228,18 @@
   * @}
   */
 
+/**
+ *  @brief  Possible values of
+ *  pixel data format (ie color coding) transmitted on DSI Data lane in DSI packets
+ */
+
+#define   LCD_DSI_PIXEL_DATA_FMT_RBG888  DSI_RGB888 /*!< DSI packet pixel format chosen is RGB888 : 24 bpp */
+#define   LCD_DSI_PIXEL_DATA_FMT_RBG565  DSI_RGB565 /*!< DSI packet pixel format chosen is RGB565 : 16 bpp */
+
+/**
+  * @}
+  */
+   
 /** @defgroup STM32469I-Discovery_LCD_Exported_Types STM32469I Discovery LCD Exported Types
   * @{
   */
@@ -280,18 +292,6 @@ typedef enum
   LCD_ORIENTATION_LANDSCAPE = 0x01, /*!< Landscape orientation choice of LCD screen */
   LCD_ORIENTATION_INVALID   = 0x02  /*!< Invalid orientation choice of LCD screen   */
 } LCD_OrientationTypeDef;
-
-/**
- *  @brief  Possible values of
- *  pixel data format (ie color coding) transmitted on DSI Data lane in DSI packets
- */
-typedef enum
-{
-  LCD_DSI_PIXEL_DATA_FMT_RBG888  = 0x00, /*!< DSI packet pixel format chosen is RGB888 : 24 bpp */
-  LCD_DSI_PIXEL_DATA_FMT_RBG565  = 0x02, /*!< DSI packet pixel format chosen is RGB565 : 16 bpp */
-  LCD_DSI_PIXEL_DATA_FMT_INVALID = 0x03  /*!< Invalid DSI packet pixel format                   */
-
-} LCD_DsiPixelDataFmtTypeDef;
 
 /**
   * @}

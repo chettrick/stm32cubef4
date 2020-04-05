@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    IAP/IAP_Main/Inc/flash_if.h 
   * @author  MCD Application Team
-  * @version V1.3.5
-  * @date    03-June-2016
+  * @version V1.3.6
+  * @date    04-November-2016
   * @brief   This file provides all the headers of the flash_if functions.
   ******************************************************************************
   * @attention
@@ -90,7 +90,7 @@ enum{
 
 /* Define the address from where user application will be loaded.
    Note: the 1st sector 0x08000000-0x08003FFF is reserved for the IAP code */
-#define APPLICATION_ADDRESS   (uint32_t)0x08004000 
+#define APPLICATION_ADDRESS   (uint32_t)0x08008000 
 
 /* Define bitmap representing user flash area that could be write protected (check restricted to pages 8-39). */
 #define FLASH_SECTOR_TO_BE_PROTECTED (OB_WRP_SECTOR_0 | OB_WRP_SECTOR_1 | OB_WRP_SECTOR_2 | OB_WRP_SECTOR_3 |\

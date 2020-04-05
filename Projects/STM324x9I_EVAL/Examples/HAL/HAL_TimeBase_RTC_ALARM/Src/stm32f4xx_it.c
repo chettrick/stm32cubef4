@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    HAL/HAL_TimeBase_RTC_ALARM/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
-  * @version V1.3.4
-  * @date    06-May-2016
+  * @version V1.3.5
+  * @date    04-November-2016
   * @brief   Interrupt Service Routines.
   ******************************************************************************
   * @attention

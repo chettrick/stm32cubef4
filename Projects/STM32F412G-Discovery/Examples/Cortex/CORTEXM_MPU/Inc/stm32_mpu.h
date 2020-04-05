@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Cortex/CORTEXM_MPU/Inc/stm32_mpu.h
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    06-May-2016
+  * @version V1.0.1
+  * @date    04-November-2016
   * @brief   Header for stm32_mpu.c module
   ******************************************************************************
   * @attention

@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Host/MSC_RTOS/Src/usbh_conf.c
   * @author  MCD Application Team
-  * @version V1.0.5
-  * @date    03-June-2016
+  * @version V1.0.6
+  * @date    04-November-2016
   * @brief   USB Host configuration file.
   ******************************************************************************
   * @attention
@@ -131,7 +131,7 @@ void HAL_HCD_Connect_Callback(HCD_HandleTypeDef *hhcd)
   USBH_LL_Connect(hhcd->pData);
   
   BSP_LCD_SetTextColor(LCD_COLOR_GREEN);
-  BSP_LCD_DisplayStringAtLine(19, (uint8_t *)"Press User button to start DSC demo");
+  BSP_LCD_DisplayStringAtLine(19, (uint8_t *)"Press User button to start MSC demo");
 }
 
 /**

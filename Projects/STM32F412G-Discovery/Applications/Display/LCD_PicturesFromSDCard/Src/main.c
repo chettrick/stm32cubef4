@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Display/LCD_PicturesFromSDCard/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    03-June-2016
+  * @version V1.0.2
+  * @date    04-November-2016
   * @brief   This file provides main program functions
   ******************************************************************************
   * @attention

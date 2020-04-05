@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    DMA2D/DMA2D_MemToMemWithPFC/Inc/ARGB8888_300x120.h 
   * @author  MCD Application Team
-  * @version V1.0.4
-  * @date    06-May-2016
+  * @version V1.0.5
+  * @date    04-November-2016
   * @brief   This file contains image array of size 300x120 and format ARGB8888 (32 bpp)
   *          used for DMA2D example.   
   ******************************************************************************

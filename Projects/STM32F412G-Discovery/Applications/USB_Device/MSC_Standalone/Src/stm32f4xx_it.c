@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    USB_Device/MSC_Standalone/Src/stm32f4xx_it.c 
   * @author  MCD Application Team
-  * @version V1.0.1
-  * @date    03-June-2016
+  * @version V1.0.2
+  * @date    04-November-2016
   * @brief   Main Interrupt Service Routines.
   *          This file provides template for all exceptions handler and 
   *          peripherals interrupt service routine.
@@ -158,38 +158,5 @@ void OTG_FS_IRQHandler(void)
 {
   HAL_PCD_IRQHandler(&hpcd);
 }
-
-#if 0
-/**
-  * @brief  This function handles SDIO interrupt request.
-  * @param  None
-  * @retval None
-  */
-void SDMMC1_IRQHandler(void)
-{
-  BSP_SD_IRQHandler();
-}
-
-
-/**
-  * @brief  This function handles DMA2 Stream 3 interrupt request.
-  * @param  None
-  * @retval None
-  */
-void DMA2_Stream3_IRQHandler(void)
-{
-  BSP_SD_DMA_Rx_IRQHandler();
-}
-
-/**
-  * @brief  This function handles DMA2 Stream 6 interrupt request.
-  * @param  None
-  * @retval None
-  */
-void DMA2_Stream6_IRQHandler(void)
-{
-  BSP_SD_DMA_Tx_IRQHandler(); 
-}
-#endif
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

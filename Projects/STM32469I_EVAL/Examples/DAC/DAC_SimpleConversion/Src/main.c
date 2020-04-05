@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    DAC/DAC_SimpleConversion/Src/main.c
   * @author  MCD Application Team
-  * @version V1.0.4
-  * @date    06-May-2016
+  * @version V1.0.5
+  * @date    04-November-2016
   * @brief   This example provides a short description of how to use the DAC
   *          peripheral to do a simple conversation.
   ******************************************************************************
@@ -86,6 +86,20 @@ int main(void)
   /* Configure LED3 */
   BSP_LED_Init(LED3);
 
+    /* Initializes and configures the IO functionalities */
+  BSP_IO_Init();
+  
+  /* Power down camera to apply high impedance on data bus */
+  /* Camera power down sequence */
+  BSP_IO_ConfigPin(RSTI_PIN, IO_MODE_OUTPUT);
+  BSP_IO_ConfigPin(XSDN_PIN, IO_MODE_OUTPUT);
+
+  /* De-assert the camera STANDBY pin (active high) */
+  BSP_IO_WritePin(XSDN_PIN, BSP_IO_PIN_RESET);
+
+  /* Assert the camera RSTI pin (active low) */
+  BSP_IO_WritePin(RSTI_PIN, BSP_IO_PIN_RESET);
+  
   DacHandle.Instance = DACx;
 
   /*##-0- DeInit the DAC peripheral ##########################################*/

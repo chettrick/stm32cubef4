@@ -6,8 +6,8 @@
   ******************** (C) COPYRIGHT 2016 STMicroelectronics *******************
   * @file    CRYP/CRYP_AES_DMA/readme.txt 
   * @author  MCD Application Team
-  * @version V1.3.4
-  * @date    06-May-2016
+  * @version V1.3.5
+  * @date    04-November-2016
   * @brief   Description of the CRYP AES-128 Algo in ECB mode with DMA Example
   ******************************************************************************
   *

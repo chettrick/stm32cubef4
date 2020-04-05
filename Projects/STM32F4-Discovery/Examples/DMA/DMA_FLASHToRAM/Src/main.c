@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    DMA/DMA_FLASHToRAM/Src/main.c  
   * @author  MCD Application Team
-  * @version V1.2.6
-  * @date    06-May-2016
+  * @version V1.2.7
+  * @date    04-November-2016
   * @brief   This example provides a description of how to use a DMA channel 
   *          to transfer a word data buffer from FLASH memory to embedded 
   *          SRAM memory through the STM32F4xx HAL API.

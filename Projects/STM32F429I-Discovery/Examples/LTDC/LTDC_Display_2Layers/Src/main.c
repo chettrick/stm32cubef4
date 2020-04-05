@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    LTDC/LTDC_Display_2Layers/Src/main.c 
   * @author  MCD Application Team
-  * @version V1.2.6
-  * @date    06-May-2016 
+  * @version V1.2.7
+  * @date    04-November-2016 
   * @brief   This example describes how to configure the LTDC peripheral 
   *          to display two Layers at the same time.
   ******************************************************************************

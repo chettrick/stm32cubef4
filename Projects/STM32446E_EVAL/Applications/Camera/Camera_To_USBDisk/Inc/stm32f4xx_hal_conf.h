@@ -2,8 +2,8 @@
   ******************************************************************************
   * @file    Camera/Camera_To_USBDisk/Inc/stm32f4xx_hal_conf.h
   * @author  MCD Application Team
-  * @version V1.2.5
-  * @date    03-June-2016
+  * @version V1.2.6
+  * @date    04-November-2016
   * @brief   HAL configuration template file.
   ******************************************************************************
   * @attention
