@@ -1,9 +1,9 @@
 /**
-  @page STemWin_acceleration  STemWin acceleration Readme file
+  @page STemWin_Acceleration  STemWin acceleration Readme file
  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    STemWin/STemWin_acceleration/readme.txt 
+  * @file    STemWin/STemWin_Acceleration/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of STemWin acceleration application. 
   ******************************************************************************
@@ -78,26 +78,26 @@ Note that the following user files may need to be updated:
 
 @par Directory contents 
 
-   - STemWin/STemWin_acceleration/Core/Inc/main.h			                          Main program header file
-   - STemWin/STemWin_acceleration/Core/Inc/stm32f4xx_hal_conf.h		                          Library Configuration file
-   - STemWin/STemWin_acceleration/Core/Inc/stm32f4xx_it.h		                          Interrupt handlers header file
-   - STemWin/STemWin_acceleration/Core/Src/main.c			                          Main program file
-   - STemWin/STemWin_acceleration/Core/Src/stm32f4xx_it.c		                          STM32F4xx Interrupt handlers
-   - STemWin/STemWin_acceleration/Core/Src/system_stm32f4xx.c		                          STM32F4xx system file
-   - STemWin/STemWin_acceleration/STemWin/App/acceleration_app.c	                          acceleration application
-   - STemWin/STemWin_acceleration/STemWin/App/generated_stm324x9i_eval_MB1063/moon.c		  moon picture (MB1063 LCD)
-   - STemWin/STemWin_acceleration/STemWin/App/generated_stm324x9i_eval_MB1063/sun.c		  sun picture (MB1063 LCD)
-   - STemWin/STemWin_acceleration/STemWin/App/generated_stm324x9i_eval_MB1063/sun_rain.c	  sun_rain picture (MB1063 LCD)
-   - STemWin/STemWin_acceleration/STemWin/App/generated_stm324x9i_eval_MB1063/village.c	          village picture (MB1063 LCD)
-   - STemWin/STemWin_acceleration/STemWin/App/generated_stm324x9i_eval_MB1046/moon.c		  moon picture (MB1046 LCD)
-   - STemWin/STemWin_acceleration/STemWin/App/generated_stm324x9i_eval_MB1046/sun.c		  sun picture (MB1046 LCD)
-   - STemWin/STemWin_acceleration/STemWin/App/generated_stm324x9i_eval_MB1046/sun_rain.c	  sun_rain picture (MB1046 LCD)
-   - STemWin/STemWin_acceleration/STemWin/App/generated_stm324x9i_eval_MB1046/village.c	          village picture (MB1046 LCD)
-   - STemWin/STemWin_acceleration/STemWin/Target/GUIConf.c		                          Display controller initialization
-   - STemWin/STemWin_acceleration/STemWin/Target/GUIConf.h		                          Header for GUIConf.c
-   - STemWin/STemWin_acceleration/STemWin/Target/LCDConf_stm324x9i_eval_MB1046.c                  Configuration file for the GUI library (MB1046 LCD)
-   - STemWin/STemWin_acceleration/STemWin/Target/LCDConf_stm324x9i_eval_MB1063.c                  Configuration file for the GUI library (MB1063 LCD)
-   - STemWin/STemWin_acceleration/STemWin/Target/LCDConf.h		                          Header for LCDConf.c
+   - STemWin/STemWin_Acceleration/Core/Inc/main.h			                          Main program header file
+   - STemWin/STemWin_Acceleration/Core/Inc/stm32f4xx_hal_conf.h		                          Library Configuration file
+   - STemWin/STemWin_Acceleration/Core/Inc/stm32f4xx_it.h		                          Interrupt handlers header file
+   - STemWin/STemWin_Acceleration/Core/Src/main.c			                          Main program file
+   - STemWin/STemWin_Acceleration/Core/Src/stm32f4xx_it.c		                          STM32F4xx Interrupt handlers
+   - STemWin/STemWin_Acceleration/Core/Src/system_stm32f4xx.c		                          STM32F4xx system file
+   - STemWin/STemWin_Acceleration/STemWin/App/acceleration_app.c	                          acceleration application
+   - STemWin/STemWin_Acceleration/STemWin/App/generated_stm324x9i_eval_MB1063/moon.c		  moon picture (MB1063 LCD)
+   - STemWin/STemWin_Acceleration/STemWin/App/generated_stm324x9i_eval_MB1063/sun.c		  sun picture (MB1063 LCD)
+   - STemWin/STemWin_Acceleration/STemWin/App/generated_stm324x9i_eval_MB1063/sun_rain.c	  sun_rain picture (MB1063 LCD)
+   - STemWin/STemWin_Acceleration/STemWin/App/generated_stm324x9i_eval_MB1063/village.c	          village picture (MB1063 LCD)
+   - STemWin/STemWin_Acceleration/STemWin/App/generated_stm324x9i_eval_MB1046/moon.c		  moon picture (MB1046 LCD)
+   - STemWin/STemWin_Acceleration/STemWin/App/generated_stm324x9i_eval_MB1046/sun.c		  sun picture (MB1046 LCD)
+   - STemWin/STemWin_Acceleration/STemWin/App/generated_stm324x9i_eval_MB1046/sun_rain.c	  sun_rain picture (MB1046 LCD)
+   - STemWin/STemWin_Acceleration/STemWin/App/generated_stm324x9i_eval_MB1046/village.c	          village picture (MB1046 LCD)
+   - STemWin/STemWin_Acceleration/STemWin/Target/GUIConf.c		                          Display controller initialization
+   - STemWin/STemWin_Acceleration/STemWin/Target/GUIConf.h		                          Header for GUIConf.c
+   - STemWin/STemWin_Acceleration/STemWin/Target/LCDConf_stm324x9i_eval_MB1046.c                  Configuration file for the GUI library (MB1046 LCD)
+   - STemWin/STemWin_Acceleration/STemWin/Target/LCDConf_stm324x9i_eval_MB1063.c                  Configuration file for the GUI library (MB1063 LCD)
+   - STemWin/STemWin_Acceleration/STemWin/Target/LCDConf.h		                          Header for LCDConf.c
   
 @par Hardware and Software environment  
 

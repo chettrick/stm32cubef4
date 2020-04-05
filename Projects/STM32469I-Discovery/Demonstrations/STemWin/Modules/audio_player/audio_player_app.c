@@ -84,16 +84,15 @@ static osThreadId     AudioThreadId = 0;
 /* Private function prototypes -----------------------------------------------*/
 static void Audio_Thread(void const * argument);
 
-#if (!defined ( __GNUC__ ))
+#if defined(AUDIO_USE_SPIRIT_EQUALIZER)
 __IO uint32_t  AUDIO_EqInstance[SPIRIT_EQ_PERSIST_SIZE_IN_BYTES/4]  ;
 TSpiritEQ_Band AUDIO_EQ_Bands[SPIRIT_EQ_MAX_BANDS];
-
 
 __IO uint32_t AUDIO_LdCtrlPersistance[SPIRIT_LDCTRL_PERSIST_SIZE_IN_BYTES/4];
 __IO uint32_t AUDIO_LdCtrlScratch[SPIRIT_LDCTRL_SCRATCH_SIZE_IN_BYTES/4];
 TSpiritLdCtrl_Prms AUDIO_LdCtrlInstanceParams;
 TSpiritEQ_Band *tmpEqBand;
-#endif
+#endif /* AUDIO_USE_SPIRIT_EQUALIZER */
 
 /* Private function prototypes -----------------------------------------------*/
 static void Audio_Thread(void const * argument);
@@ -112,10 +111,10 @@ static void AUDIO_Error_CallBack(void);
   */
 AUDIOPLAYER_ErrorTypdef  AUDIOPLAYER_Init(uint8_t volume)
 {
-#if (!defined ( __GNUC__ ))    
+#if defined(AUDIO_USE_SPIRIT_EQUALIZER)
   uint32_t index = 0;
   __IO uint32_t ldness_value;
-#endif  
+#endif /* AUDIO_USE_SPIRIT_EQUALIZER */
 
   /* Try to Init Audio interface in diffrent config in case of failure */
   BSP_AUDIO_OUT_Init(OUTPUT_DEVICE_AUTO, volume, I2S_AUDIOFREQ_48K);
@@ -126,10 +125,9 @@ AUDIOPLAYER_ErrorTypdef  AUDIOPLAYER_Init(uint8_t volume)
   haudio.out.mute   = MUTE_OFF;
   haudio.out.volume = volume;  
 
-#if (!defined ( __GNUC__ ))    
+#if defined(AUDIO_USE_SPIRIT_EQUALIZER)
   /* Enable the Eq */
   SpiritEQ_Init((TSpiritEq *)AUDIO_EqInstance, I2S_AUDIOFREQ_48K);
-  
   
   /* Retreive stored settings and set band params */
   SpiritEQ_FltGet((TSpiritEq *)AUDIO_EqInstance, &AUDIO_EQ_Bands[0], 0 );
@@ -164,7 +162,7 @@ AUDIOPLAYER_ErrorTypdef  AUDIOPLAYER_Init(uint8_t volume)
   ldness_value = k_BkupRestoreParameter(CALIBRATION_AUDIOPLAYER_LOUD_BKP);
   AUDIO_LdCtrlInstanceParams.gainQ8 = PERC_TO_LDNS_DB(ldness_value);
   SpiritLdCtrl_SetPrms((TSpiritLdCtrl*)AUDIO_LdCtrlPersistance, &AUDIO_LdCtrlInstanceParams);
-#endif   
+#endif /* AUDIO_USE_SPIRIT_EQUALIZER */
   
   /* Register audio BSP drivers callbacks */
   AUDIO_IF_RegisterCallbacks(AUDIO_TransferComplete_CallBack, 
@@ -183,7 +181,7 @@ AUDIOPLAYER_ErrorTypdef  AUDIOPLAYER_Init(uint8_t volume)
   return AUDIOPLAYER_ERROR_NONE;
 }
 
-#if (!defined ( __GNUC__ ))
+#if defined(AUDIO_USE_SPIRIT_EQUALIZER)
 /**
   * @brief  This function Set the new gain of the equilizer
   * @param  BandNum : equilizer band index
@@ -200,7 +198,6 @@ void AUDIO_SetEq(uint8_t BandNum, int16_t NewGainValue)
   
   SpiritEQ_FltSet((TSpiritEq *)AUDIO_EqInstance, &AUDIO_EQ_Bands[BandNum], BandNum);
 }
-
 
 /**
   * @brief  This function Set Loudness Control Gain Value.
@@ -233,7 +230,7 @@ void AUDIO_SetEqParams(uint32_t loudness_perc)
   
   k_BkupSaveParameter(CALIBRATION_AUDIOPLAYER_LOUD_BKP, loudness_perc);
 }
-#endif    
+#endif /* AUDIO_USE_SPIRIT_EQUALIZER */ 
 
 /**
   * @brief  Get audio state
@@ -563,7 +560,7 @@ static void Audio_Thread(void const * argument)
               haudio.out.state = AUDIOPLAYER_EOF;
             } 
             
-#if (!defined ( __GNUC__ )) 
+#if defined(AUDIO_USE_SPIRIT_EQUALIZER)
             SpiritEQ_Apply((void *)AUDIO_EqInstance,
                            /* NB_Channel */2, 
                            (int16_t *)&haudio.buff[0], 
@@ -576,7 +573,7 @@ static void Audio_Thread(void const * argument)
                                numOfReadBytes / 4, 
                                (void *)AUDIO_LdCtrlScratch);            
             
-#endif
+#endif /* AUDIO_USE_SPIRIT_EQUALIZER */
           }
           else
           {
@@ -594,7 +591,7 @@ static void Audio_Thread(void const * argument)
             { 
               haudio.out.state = AUDIOPLAYER_EOF;                     
             } 
-#if (!defined ( __GNUC__ ))            
+#if defined(AUDIO_USE_SPIRIT_EQUALIZER)
             SpiritEQ_Apply((void *)AUDIO_EqInstance,
                            /* NB_Channel */2, 
                            (int16_t *)&haudio.buff[AUDIO_OUT_BUFFER_SIZE /2], 
@@ -607,7 +604,7 @@ static void Audio_Thread(void const * argument)
                                (int16_t *)&haudio.buff[AUDIO_OUT_BUFFER_SIZE /2], 
                                numOfReadBytes / 4, 
                                (void *)AUDIO_LdCtrlScratch);                
-#endif   
+#endif /* AUDIO_USE_SPIRIT_EQUALIZER */
           }
           else
           {

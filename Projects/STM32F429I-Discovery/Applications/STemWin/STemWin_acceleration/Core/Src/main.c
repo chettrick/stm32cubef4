@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    STemWin/STemWin_acceleration/Src/main.c
+  * @file    STemWin/STemWin_Acceleration/Src/main.c
   * @author  MCD Application Team
   * @brief   This file provides main program functions
   ******************************************************************************

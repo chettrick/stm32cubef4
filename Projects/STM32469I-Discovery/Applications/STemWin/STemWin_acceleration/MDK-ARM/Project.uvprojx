@@ -10,8 +10,7 @@
       <TargetName>STM32469I_DISCOVERY</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060528::V5.06 update 5 (build 528)::ARMCC</pCCUsed>
-      <uAC6>0</uAC6>
+      <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F469NIHx</Device>
@@ -378,9 +377,6 @@
       </TargetOption>
       <Groups>
         <Group>
-          <GroupName>::CMSIS</GroupName>
-        </Group>
-        <Group>
           <GroupName>Drivers/BSP/Components</GroupName>
           <Files>
             <File>
@@ -429,9 +425,9 @@
           <GroupName>Middlewares/STemWin/Lib</GroupName>
           <Files>
             <File>
-              <FileName>STemWin540_CM4_IAR_ARGB.a</FileName>
+              <FileName>STemWin_CM4_wc16_ARGB.a</FileName>
               <FileType>4</FileType>
-              <FilePath>../../../../../../Middlewares/ST/STemWin/Lib/STemWin540_CM4_IAR_ARGB.a</FilePath>
+              <FilePath>..\..\..\..\..\..\Middlewares\ST\STemWin\Lib\STemWin_CM4_wc16_ARGB.a</FilePath>
             </File>
           </Files>
         </Group>
@@ -624,6 +620,9 @@
               <FilePath>../../../../../../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c</FilePath>
             </File>
           </Files>
+        </Group>
+        <Group>
+          <GroupName>::CMSIS</GroupName>
         </Group>
       </Groups>
     </Target>

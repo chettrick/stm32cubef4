@@ -66,7 +66,7 @@
 							<tool id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.1135856605" name="MCU GCC Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker">
 								<option id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script.936186020" name="Linker Script (-T)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script" useByScannerDiscovery="false" value="../STM32F469NIHx_FLASH.ld" valueType="string"/>
 								<option id="gnu.c.link.option.libs.1359956623" name="Libraries (-l)" superClass="gnu.c.link.option.libs" useByScannerDiscovery="false" valueType="libs">
-									<listOptionValue builtIn="false" value=":libPDMFilter_CM4_GCC.a"/>
+									<listOptionValue builtIn="false" value=":libPDMFilter_CM4_GCC_wc32.a"/>
 								</option>
 								<option id="gnu.c.link.option.paths.1509722422" name="Library search path (-L)" superClass="gnu.c.link.option.paths" useByScannerDiscovery="false" valueType="libPaths">
 									<listOptionValue builtIn="false" value="&quot;../../../../../../../../Middlewares/ST/STM32_Audio/Addons/PDM/Lib&quot;"/>

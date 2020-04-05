@@ -397,9 +397,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>::CMSIS</GroupName>
-        </Group>
-        <Group>
           <GroupName>Middlewares/STemWin/Target</GroupName>
           <Files>
             <File>
@@ -523,9 +520,9 @@
           <GroupName>Middlewares/STemWin/Lib</GroupName>
           <Files>
             <File>
-              <FileName>STemWin540_CM4_Keil_ARGB.lib</FileName>
+              <FileName>STemWin_CM4_wc16_ARGB.a</FileName>
               <FileType>4</FileType>
-              <FilePath>..\..\..\..\..\..\Middlewares\ST\STemWin\Lib\STemWin540_CM4_Keil_ARGB.lib</FilePath>
+              <FilePath>..\..\..\..\..\..\Middlewares\ST\STemWin\Lib\STemWin_CM4_wc16_ARGB.a</FilePath>
             </File>
           </Files>
         </Group>
@@ -728,6 +725,9 @@
               <FilePath>../../../../../../Drivers/BSP/Components/exc7200/exc7200.c</FilePath>
             </File>
           </Files>
+        </Group>
+        <Group>
+          <GroupName>::CMSIS</GroupName>
         </Group>
       </Groups>
     </Target>
@@ -1122,9 +1122,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>::CMSIS</GroupName>
-        </Group>
-        <Group>
           <GroupName>Middlewares/STemWin/Target</GroupName>
           <Files>
             <File>
@@ -1248,9 +1245,9 @@
           <GroupName>Middlewares/STemWin/Lib</GroupName>
           <Files>
             <File>
-              <FileName>STemWin540_CM4_Keil_ARGB.lib</FileName>
+              <FileName>STemWin_CM4_wc16_ARGB.a</FileName>
               <FileType>4</FileType>
-              <FilePath>..\..\..\..\..\..\Middlewares\ST\STemWin\Lib\STemWin540_CM4_Keil_ARGB.lib</FilePath>
+              <FilePath>..\..\..\..\..\..\Middlewares\ST\STemWin\Lib\STemWin_CM4_wc16_ARGB.a</FilePath>
             </File>
           </Files>
         </Group>
@@ -1453,6 +1450,9 @@
               <FilePath>../../../../../../Drivers/BSP/Components/exc7200/exc7200.c</FilePath>
             </File>
           </Files>
+        </Group>
+        <Group>
+          <GroupName>::CMSIS</GroupName>
         </Group>
       </Groups>
     </Target>

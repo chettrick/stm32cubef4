@@ -10,7 +10,7 @@
       <TargetName>STM32469I-DISCO_Demo</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060528::V5.06 update 5 (build 528)::ARMCC</pCCUsed>
+      <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F469NIHx</Device>
@@ -335,7 +335,7 @@
               <MiscControls> </MiscControls>
               <Define>STM32F469xx,USE_HAL_DRIVER,USE_STM32469I_DISCOVERY,USE_USB_FS,USE_IOEXPANDER</Define>
               <Undefine></Undefine>
-              <IncludePath>../Config;../Gui/STemWin_Addons;../Gui/Target;../Core/Inc;../../../../../Utilities/CPU;../../../../../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../../../../../Drivers/STM32F4xx_HAL_Driver/Inc;../../../../../Drivers/BSP/STM32469I-Discovery;../../../../../Drivers/BSP/Components;../../../../../Drivers/BSP/Components/Common;../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Inc;../../../../../Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc;../../../../../Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Inc;../../../../../Middlewares/ST/STemWin/inc;../../../../../Middlewares/Third_Party/FatFs/src;../../../../../Middlewares/Third_Party/FatFs/src/drivers;../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../../../../../Middlewares/Third_Party/FreeRTOS/Source/include;../../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../Modules/audio_player/Addons/SpiritDSP_Equalizer;../Modules/audio_player/Addons/SpiritDSP_LoudnessControl;../Modules/audio_player;../Modules/audio_recorder;../Modules/Common</IncludePath>
+              <IncludePath>../Config;../Gui/STemWin_Addons;../Gui/Target;../Core/Inc;../../../../../Utilities/CPU;../../../../../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../../../../../Drivers/STM32F4xx_HAL_Driver/Inc;../../../../../Drivers/BSP/STM32469I-Discovery;../../../../../Drivers/BSP/Components;../../../../../Drivers/BSP/Components/Common;../../../../../Middlewares/ST/STM32_USB_Host_Library/Core/Inc;../../../../../Middlewares/ST/STM32_USB_Host_Library/Class/MSC/Inc;../../../../../Middlewares/ST/STM32_USB_Device_Library/Class/MSC/Inc;../../../../../Middlewares/ST/STemWin/inc;../../../../../Middlewares/Third_Party/FatFs/src;../../../../../Middlewares/Third_Party/FatFs/src/drivers;../../../../../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../../../../../Middlewares/Third_Party/FreeRTOS/Source/include;../../../../../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../Modules/audio_player;../Modules/audio_recorder;../Modules/Common</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -742,21 +742,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Application/User/Modules/Audio/Addons</GroupName>
-          <Files>
-            <File>
-              <FileName>lib_loudness_cortex_m4.a</FileName>
-              <FileType>4</FileType>
-              <FilePath>../Modules/audio_player/Addons/SpiritDSP_LoudnessControl/lib_loudness_cortex_m4.a</FilePath>
-            </File>
-            <File>
-              <FileName>lib_equalizer_cortex_m4.a</FileName>
-              <FileType>4</FileType>
-              <FilePath>../Modules/audio_player/Addons/SpiritDSP_Equalizer/lib_equalizer_cortex_m4.a</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>Application/User/Utilities</GroupName>
           <Files>
             <File>
@@ -845,9 +830,9 @@
           <GroupName>Middlewares/STemWin/Library</GroupName>
           <Files>
             <File>
-              <FileName>STemWin540_CM4_OS_Keil_ot.lib</FileName>
+              <FileName>STemWin_CM4_OS_wc16_ot.a</FileName>
               <FileType>4</FileType>
-              <FilePath>..\..\..\..\..\Middlewares\ST\STemWin\Lib\STemWin540_CM4_OS_Keil_ot.lib</FilePath>
+              <FilePath>..\..\..\..\..\Middlewares\ST\STemWin\Lib\STemWin_CM4_OS_wc16_ot.a</FilePath>
             </File>
           </Files>
         </Group>
@@ -1020,9 +1005,9 @@
           <GroupName>Middlewares/STemWin/ST_GUI_Addons</GroupName>
           <Files>
             <File>
-              <FileName>STM32469I-Discovery_STemWin_Addons_KEIL.lib</FileName>
+              <FileName>STemWin_Addons_CM4_wc16.a</FileName>
               <FileType>4</FileType>
-              <FilePath>../Gui/STemWin_Addons/STM32469I-Discovery_STemWin_Addons_KEIL.lib</FilePath>
+              <FilePath>..\Gui\STemWin_Addons\STemWin_Addons_CM4_wc16.a</FilePath>
             </File>
           </Files>
         </Group>
@@ -1050,9 +1035,9 @@
           <GroupName>Middlewares/PDM</GroupName>
           <Files>
             <File>
-              <FileName>libPDMFilter_CM4_Keil.lib</FileName>
+              <FileName>libPDMFilter_CM4_Keil_wc16.lib</FileName>
               <FileType>4</FileType>
-              <FilePath>../../../../../Middlewares/ST/STM32_Audio/Addons/PDM/Lib/libPDMFilter_CM4_Keil.lib</FilePath>
+              <FilePath>..\..\..\..\..\Middlewares\ST\STM32_Audio\Addons\PDM\Lib\libPDMFilter_CM4_Keil_wc16.lib</FilePath>
             </File>
           </Files>
         </Group>

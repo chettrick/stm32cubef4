@@ -172,9 +172,9 @@ static void _GetPhysValues(int LogX, int LogY, int * pPhysX, int * pPhysY, const
   GUI_DispStringInRect(acText, &Rect, Align | GUI_TA_TOP);
   GUI_DispStringInRect(pString, &Rect, Align | GUI_TA_BOTTOM);
   /* Draw the ring */
-  GUI_FillCircle(LogX, LogY, 5);
+  GUI_FillCircle(LogX - 5, LogY - 5, 5);
   GUI_SetColor(GUI_WHITE);
-  GUI_FillCircle(LogX, LogY, 2);
+  GUI_FillCircle(LogX + 5, LogY + 5, 2);
   GUI_SetColor(GUI_BLACK);
   /* Wait until touch is pressed */
   _WaitForPressedState(1);
@@ -239,10 +239,8 @@ void k_CalibrationInit(void)
     A1 = (1000 * ( aLogX[1] - aLogX[0]))/ ( aPhysX[1] - aPhysX[0]); 
     B1 = (1000 * aLogX[0]) - A1 * aPhysX[0]; 
     
-    A2 = (660 * ( aLogY[1] - aLogY[0]))/ ( aPhysY[1] - aPhysY[0]); 
-    B2 = (660 * aLogY[0]) - A2 * aPhysY[0];
-    
-    if (B2 > 0) B2 = 0;
+    A2 = (1000 * ( aLogY[1] - aLogY[0]))/ ( aPhysY[1] - aPhysY[0]); 
+    B2 = (1000 * aLogY[0]) - A2 * aPhysY[0]; 
     
     data1.b.A1 = A1;
     data1.b.B1 = B1;
@@ -275,12 +273,12 @@ uint8_t k_CalibrationIsDone(void)
 
 uint16_t k_CalibrationGetX(uint16_t x)
 {
-  return ((((A1 * x) + B1)/1000) -45);
+  return ((((A1 * x) + B1)/1000));
 }
 
 uint16_t k_CalibrationGetY(uint16_t y)
 {
-  return (((A2 * y) + B2)/660);
+  return (((A2 * y) + B2)/1000);
 }
 
 /**

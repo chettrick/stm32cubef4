@@ -1,9 +1,9 @@
 /**
-  @page STemWin_fonts  STemWin fonts Readme file
+  @page STemWin_Fonts  STemWin fonts Readme file
  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    STemWin/STemWin_fonts/readme.txt 
+  * @file    STemWin/STemWin_Fonts/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of STemWin fonts application. 
   ******************************************************************************
@@ -105,44 +105,44 @@ Font generation
 
 @par Directory contents 
 
-  - STemWin/STemWin_fonts/Core/Inc/main.h                                                Main program header file
-  - STemWin/STemWin_fonts/Core/Inc/stm32f4xx_hal_conf.h                                  Library Configuration file
-  - STemWin/STemWin_fonts/Core/Inc/stm32f4xx_it.h                                        Interrupt handlers header file
-  - STemWin/STemWin_fonts/Core/Src/main.c                                                Main program file
-  - STemWin/STemWin_fonts/Core/Src/stm32f4xx_it.c                                        STM32F4xx Interrupt handlers
-  - STemWin/STemWin_fonts/Core/system_stm32f4xx.c                                        STM32F4xx system file
-  - STemWin/STemWin_fonts/STemWin/App/font_app_MB1046.c                                  fonts application  (MB1046 LCD)
-  - STemWin/STemWin_fonts/STemWin/App/font_app_MB1063.c                                  fonts application  (MB1063 LCD)
-  - STemWin/STemWin_fonts/STemWin/Target/GUIConf.c                                       Display controller initialization
-  - STemWin/STemWin_fonts/STemWin/Target/LCDConf_stm324x9i_eval_MB1046.c                 Configuration file for the GUI library (MB1046 LCD)  
-  - STemWin/STemWin_fonts/STemWin/Target/LCDConf_stm324x9i_eval_MB1063.c                 Configuration file for the GUI library (MB1063 LCD)
-  - STemWin/STemWin_fonts/STemWin/Target/GUIConf.h                                       Header for GUIConf.c
-  - STemWin/STemWin_fonts/STemWin/Target/LCDConf.h                                       Header for LCDConf.c
-  - STemWin/STemWin_fonts/STemWin/App/generated/images_stm324x9i_eval_MB1046/arabic.c    arabic flag picture (MB1046 LCD)
-  - STemWin/STemWin_fonts/STemWin/App/generated/images_stm324x9i_eval_MB1046/chinese.c   chinese flag picture (MB1046 LCD)
-  - STemWin/STemWin_fonts/STemWin/App/generated/images_stm324x9i_eval_MB1046/english.c   english flag picture (MB1046 LCD)
-  - STemWin/STemWin_fonts/STemWin/App/generated/images_stm324x9i_eval_MB1046/info.c      info logo picture (MB1046 LCD)
-  - STemWin/STemWin_fonts/STemWin/App/generated/images_stm324x9i_eval_MB1046/italian.c   italian flag picture (MB1046 LCD)
-  - STemWin/STemWin_fonts/STemWin/App/generated/images_stm324x9i_eval_MB1046/STLogo.c    STLogo logo picture (MB1046 LCD)
-  - STemWin/STemWin_fonts/STemWin/App/generated/images_stm324x9i_eval_MB1046/world.c     world flag picture (MB1046 LCD)
-  - STemWin/STemWin_fonts/STemWin/App/generated/images_stm324x9i_eval_MB1046/french.c    french flag picture (MB1046 LCD)
-    - STemWin/STemWin_fonts/STemWin/App/generated/images_stm324x9i_eval_MB1063/arabic.c  arabic flag picture (MB1063 LCD)
-  - STemWin/STemWin_fonts/STemWin/App/generated/images_stm324x9i_eval_MB1063/chinese.c   chinese flag picture (MB1063 LCD)
-  - STemWin/STemWin_fonts/STemWin/App/generated/images_stm324x9i_eval_MB1063/english.c   english flag picture (MB1063 LCD)
-  - STemWin/STemWin_fonts/STemWin/App/generated/images_stm324x9i_eval_MB1063/info.c      info logo picture (MB1063 LCD)
-  - STemWin/STemWin_fonts/STemWin/App/generated/images_stm324x9i_eval_MB1063/italian.c   italian flag picture (MB1063 LCD)
-  - STemWin/STemWin_fonts/STemWin/App/generated/images_stm324x9i_eval_MB1063/STLogo.c    STLogo logo picture (MB1063 LCD)
-  - STemWin/STemWin_fonts/STemWin/App/generated/images_stm324x9i_eval_MB1063/world.c     world flag picture (MB1063 LCD)
-  - STemWin/STemWin_fonts/STemWin/App/generated/images_stm324x9i_eval_MB1063/french.c    french flag picture (MB1063 LCD)
-  - STemWin/STemWin_fonts/STemWin/App/generated/fonts/arabic25.c                         arabic font with 25 pixels as width
-  - STemWin/STemWin_fonts/STemWin/App/generated/fonts/arabic40.c                         arabic font with 40 pixels as width
-  - STemWin/STemWin_fonts/STemWin/App/generated/fonts/arabic60.c                         arabic font with 60 pixels as width
-  - STemWin/STemWin_fonts/STemWin/App/generated/fonts/chinese25B.c                       chinese font with 25 pixels as width
-  - STemWin/STemWin_fonts/STemWin/App/generated/fonts/chinese40.c                        chinese font with 40 pixels as width
-  - STemWin/STemWin_fonts/STemWin/App/generated/fonts/chineseI60.c                       chinese font with 60 pixels as width
-  - STemWin/STemWin_fonts/STemWin/App/generated/fonts/eng25.c                            new generated font with 25 pixels as width
-  - STemWin/STemWin_fonts/STemWin/App/generated/fonts/eng40.c                            new generated font with 40 pixels as width
-  - STemWin/STemWin_fonts/STemWin/App/generated/fonts/eng60.c                            new generated font with 60 pixels as width
+  - STemWin/STemWin_Fonts/Core/Inc/main.h                                                Main program header file
+  - STemWin/STemWin_Fonts/Core/Inc/stm32f4xx_hal_conf.h                                  Library Configuration file
+  - STemWin/STemWin_Fonts/Core/Inc/stm32f4xx_it.h                                        Interrupt handlers header file
+  - STemWin/STemWin_Fonts/Core/Src/main.c                                                Main program file
+  - STemWin/STemWin_Fonts/Core/Src/stm32f4xx_it.c                                        STM32F4xx Interrupt handlers
+  - STemWin/STemWin_Fonts/Core/system_stm32f4xx.c                                        STM32F4xx system file
+  - STemWin/STemWin_Fonts/STemWin/App/font_app_MB1046.c                                  fonts application  (MB1046 LCD)
+  - STemWin/STemWin_Fonts/STemWin/App/font_app_MB1063.c                                  fonts application  (MB1063 LCD)
+  - STemWin/STemWin_Fonts/STemWin/Target/GUIConf.c                                       Display controller initialization
+  - STemWin/STemWin_Fonts/STemWin/Target/LCDConf_stm324x9i_eval_MB1046.c                 Configuration file for the GUI library (MB1046 LCD)  
+  - STemWin/STemWin_Fonts/STemWin/Target/LCDConf_stm324x9i_eval_MB1063.c                 Configuration file for the GUI library (MB1063 LCD)
+  - STemWin/STemWin_Fonts/STemWin/Target/GUIConf.h                                       Header for GUIConf.c
+  - STemWin/STemWin_Fonts/STemWin/Target/LCDConf.h                                       Header for LCDConf.c
+  - STemWin/STemWin_Fonts/STemWin/App/generated/images_stm324x9i_eval_MB1046/arabic.c    arabic flag picture (MB1046 LCD)
+  - STemWin/STemWin_Fonts/STemWin/App/generated/images_stm324x9i_eval_MB1046/chinese.c   chinese flag picture (MB1046 LCD)
+  - STemWin/STemWin_Fonts/STemWin/App/generated/images_stm324x9i_eval_MB1046/english.c   english flag picture (MB1046 LCD)
+  - STemWin/STemWin_Fonts/STemWin/App/generated/images_stm324x9i_eval_MB1046/info.c      info logo picture (MB1046 LCD)
+  - STemWin/STemWin_Fonts/STemWin/App/generated/images_stm324x9i_eval_MB1046/italian.c   italian flag picture (MB1046 LCD)
+  - STemWin/STemWin_Fonts/STemWin/App/generated/images_stm324x9i_eval_MB1046/STLogo.c    STLogo logo picture (MB1046 LCD)
+  - STemWin/STemWin_Fonts/STemWin/App/generated/images_stm324x9i_eval_MB1046/world.c     world flag picture (MB1046 LCD)
+  - STemWin/STemWin_Fonts/STemWin/App/generated/images_stm324x9i_eval_MB1046/french.c    french flag picture (MB1046 LCD)
+    - STemWin/STemWin_Fonts/STemWin/App/generated/images_stm324x9i_eval_MB1063/arabic.c  arabic flag picture (MB1063 LCD)
+  - STemWin/STemWin_Fonts/STemWin/App/generated/images_stm324x9i_eval_MB1063/chinese.c   chinese flag picture (MB1063 LCD)
+  - STemWin/STemWin_Fonts/STemWin/App/generated/images_stm324x9i_eval_MB1063/english.c   english flag picture (MB1063 LCD)
+  - STemWin/STemWin_Fonts/STemWin/App/generated/images_stm324x9i_eval_MB1063/info.c      info logo picture (MB1063 LCD)
+  - STemWin/STemWin_Fonts/STemWin/App/generated/images_stm324x9i_eval_MB1063/italian.c   italian flag picture (MB1063 LCD)
+  - STemWin/STemWin_Fonts/STemWin/App/generated/images_stm324x9i_eval_MB1063/STLogo.c    STLogo logo picture (MB1063 LCD)
+  - STemWin/STemWin_Fonts/STemWin/App/generated/images_stm324x9i_eval_MB1063/world.c     world flag picture (MB1063 LCD)
+  - STemWin/STemWin_Fonts/STemWin/App/generated/images_stm324x9i_eval_MB1063/french.c    french flag picture (MB1063 LCD)
+  - STemWin/STemWin_Fonts/STemWin/App/generated/fonts/arabic25.c                         arabic font with 25 pixels as width
+  - STemWin/STemWin_Fonts/STemWin/App/generated/fonts/arabic40.c                         arabic font with 40 pixels as width
+  - STemWin/STemWin_Fonts/STemWin/App/generated/fonts/arabic60.c                         arabic font with 60 pixels as width
+  - STemWin/STemWin_Fonts/STemWin/App/generated/fonts/chinese25B.c                       chinese font with 25 pixels as width
+  - STemWin/STemWin_Fonts/STemWin/App/generated/fonts/chinese40.c                        chinese font with 40 pixels as width
+  - STemWin/STemWin_Fonts/STemWin/App/generated/fonts/chineseI60.c                       chinese font with 60 pixels as width
+  - STemWin/STemWin_Fonts/STemWin/App/generated/fonts/eng25.c                            new generated font with 25 pixels as width
+  - STemWin/STemWin_Fonts/STemWin/App/generated/fonts/eng40.c                            new generated font with 40 pixels as width
+  - STemWin/STemWin_Fonts/STemWin/App/generated/fonts/eng60.c                            new generated font with 60 pixels as width
   
 @par Hardware and Software environment  
 

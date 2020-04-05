@@ -527,7 +527,7 @@ static void _OnPaint_close(BUTTON_Handle hObj) {
   GUI_DispStringAt("Menu", 20, 20);
 }
 
-#if (!defined ( __GNUC__ ))
+#if defined(AUDIO_USE_SPIRIT_EQUALIZER)
 /**
   * @brief  Paints close equal button
   * @param  hObj: button handle
@@ -547,7 +547,8 @@ static void _OnPaint_close_equal(BUTTON_Handle hObj) {
   GUI_DispStringAt("Back", 20, 20);  
   
 }
-#endif
+#endif /* AUDIO_USE_SPIRIT_EQUALIZER */
+
 /**
   * @brief  callback for play button
   * @param  pMsg: pointer to data structure of type WM_MESSAGE 
@@ -684,7 +685,7 @@ static void _cbButton_close(WM_MESSAGE * pMsg) {
   }
 }
 
-#if (!defined ( __GNUC__ ))
+#if defined(AUDIO_USE_SPIRIT_EQUALIZER)
 /**
   * @brief  callback for close equal frame button
   * @param  pMsg: pointer to data structure of type WM_MESSAGE
@@ -701,7 +702,8 @@ static void _cbButton_close_equal(WM_MESSAGE * pMsg) {
       break;
   }
 }
-#endif
+#endif /* AUDIO_USE_SPIRIT_EQUALIZER */
+
 /**
   * @brief  callback for repeat one button
   * @param  pMsg: pointer to data structure of type WM_MESSAGE
@@ -813,7 +815,7 @@ static void _cbAudioProcess(WM_MESSAGE * pMsg) {
   uint32_t Id;
   
   WM_HWIN hItem;
-  char tmp[] = "00:00";  
+  char tmp[12] = "00:00";
   long progress;
   uint32_t duration;
   
@@ -1185,34 +1187,7 @@ static void _cbMediaConnection(WM_MESSAGE * pMsg)
   }
 }
 
-#if (defined ( __GNUC__ ))
-/**
-  * @brief  Callback routine of informing user about exploring the disk
-  * @param  pMsg: pointer to data structure of type WM_MESSAGE
-  * @retval None
-  */
-static void _cbHintGNU(WM_MESSAGE * pMsg) 
-{ 
-  switch (pMsg->MsgId) 
-  {
-  case WM_PAINT:
-    GUI_SetBkColor(0x00DCA939);
-    GUI_Clear();
-    GUI_SetColor(GUI_WHITE);
-    GUI_SetFont(&GUI_Font20_ASCII);
-    GUI_DispStringHCenterAt("Audio equalizer feature not supported", 155 , 25);
-    GUI_DispStringHCenterAt("with GNU compiler ...", 155 , 55);
-    GUI_SetFont(GUI_DEFAULT_FONT);
-    break;
-    
-  default:
-    WM_DefaultProc(pMsg);
-    break;  
-  }
-}
-
-#else
-
+#if defined(AUDIO_USE_SPIRIT_EQUALIZER)
 /**
   * @brief  Callback routine of equal dialog
   * @param  pMsg: pointer to data structure of type WM_MESSAGE 
@@ -1424,7 +1399,34 @@ static void _cbEqualDialog(WM_MESSAGE * pMsg) {
     break;
   }
 }
-#endif
+#else /* !AUDIO_USE_SPIRIT_EQUALIZER */
+#if 0 /* Don't show any pop-up window */
+/**
+  * @brief  Callback routine of informing user about exploring the disk
+  * @param  pMsg: pointer to data structure of type WM_MESSAGE
+  * @retval None
+  */
+static void _cbHintEqNotAvailable(WM_MESSAGE * pMsg) 
+{ 
+  switch (pMsg->MsgId) 
+  {
+  case WM_PAINT:
+    GUI_SetBkColor(0x00DCA939);
+    GUI_Clear();
+    GUI_SetColor(GUI_WHITE);
+    GUI_SetFont(&GUI_Font20_ASCII);
+    GUI_DispStringHCenterAt("Audio equalizer feature not supported", 155 , 25);
+    GUI_DispStringHCenterAt("with this demo version ...", 155 , 55);
+    GUI_SetFont(GUI_DEFAULT_FONT);
+    break;
+    
+  default:
+    WM_DefaultProc(pMsg);
+    break;  
+  }
+}
+#endif /* no pop-up window */
+#endif /* AUDIO_USE_SPIRIT_EQUALIZER */
 
 /**
   * @brief  Callback routine of the audio main dialog
@@ -1438,10 +1440,6 @@ static void _cbMainDialog(WM_MESSAGE * pMsg) {
   uint32_t duration, index;
   static char tmp[40]; 
   static GUI_PID_STATE TS_State = {0, 0, 0, 0};
-
-#if (defined ( __GNUC__ ))
-  WM_HWIN Hint;  
-#endif  
   
   switch (pMsg->MsgId) {
   case WM_INIT_DIALOG:
@@ -1581,8 +1579,13 @@ static void _cbMainDialog(WM_MESSAGE * pMsg) {
 
     hItem = BUTTON_CreateEx(500, 405, 60, 60, pMsg->hWin, WM_CF_SHOW, 0, ID_REPEAT_OFF_BUTTON);
     WM_SetCallback(hItem, _cbButton_repeat_off);
-    
+
+#if defined(AUDIO_USE_SPIRIT_EQUALIZER)
     hItem = BUTTON_CreateEx(590, 405, 60, 60, pMsg->hWin, WM_CF_SHOW, 0, ID_EQUAL_BUTTON);
+#else /* !AUDIO_USE_SPIRIT_EQUALIZER */
+    /* Hide the Eq button */
+    hItem = BUTTON_CreateEx(590, 405, 60, 60, pMsg->hWin, WM_CF_HIDE, 0, ID_EQUAL_BUTTON);
+#endif /* AUDIO_USE_SPIRIT_EQUALIZER */
     WM_SetCallback(hItem, _cbButton_equal);   
  
     hItem = BUTTON_CreateEx(720, 415, 60, 60, pMsg->hWin, WM_CF_SHOW, 0, ID_MUTE_BUTTON);
@@ -1940,24 +1943,25 @@ static void _cbMainDialog(WM_MESSAGE * pMsg) {
     case ID_EQUAL_BUTTON: 
       if(NCode == WM_NOTIFICATION_RELEASED)
       {
-        #if (defined ( __GNUC__ ))
-
-        Hint = WM_CreateWindowAsChild(240,
-                                      200,
-                                      320, 100,
-                                      pMsg->hWin,
-                                      WM_CF_SHOW , 
-                                      _cbHintGNU, 
-                                      0);
+#if defined(AUDIO_USE_SPIRIT_EQUALIZER)
+        hEquWin = WM_CreateWindowAsChild(0, 0, 800, 480, pMsg->hWin, WM_CF_SHOW, _cbEqualDialog , 0);        
+#else /* !AUDIO_USE_SPIRIT_EQUALIZER  */
+#if 0 /* Don't show any pop-up window */
+        WM_HWIN Hint = WM_CreateWindowAsChild(240,
+                                            200,
+                                            320, 100,
+                                            pMsg->hWin,
+                                            WM_CF_SHOW , 
+                                            _cbHintEqNotAvailable, 
+                                            0);
         WM_Update(Hint);  
         
         GUI_Delay(2000);
-        
+
         /* Delete "camera initialisation" message */
-        WM_DeleteWindow(Hint);         
-#else
-        hEquWin = WM_CreateWindowAsChild(0, 0, 800, 480, pMsg->hWin, WM_CF_SHOW, _cbEqualDialog , 0);
-#endif
+        WM_DeleteWindow(Hint);
+#endif /* no pop-up window */
+#endif /* AUDIO_USE_SPIRIT_EQUALIZER */
       }
       break;      
       

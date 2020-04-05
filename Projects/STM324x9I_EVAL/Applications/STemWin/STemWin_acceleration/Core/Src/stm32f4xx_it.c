@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    STemWin/STemWin_acceleration/Core/Src/stm32f4xx_it.c
+  * @file    STemWin/STemWin_Acceleration/Core/Src/stm32f4xx_it.c
   * @author  MCD Application Team
   * @brief   Main Interrupt Service Routines.
   ******************************************************************************

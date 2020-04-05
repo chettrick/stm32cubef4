@@ -1,9 +1,9 @@
 /**
-  @page STemWin_animation  STemWin animation Readme file
+  @page STemWin_Animation  STemWin animation Readme file
  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    STemWin/STemWin_animation/readme.txt 
+  * @file    STemWin/STemWin_Animation/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of STemWin animation application. 
   ******************************************************************************
@@ -77,32 +77,32 @@ Note that the following user files may need to be updated:
 
 @par Directory contents 
 
-    - STemWin/STemWin_animation/Core/Inc/main.h						   Main program header file
-    - STemWin/STemWin_animation/Core/Inc/stm32f4xx_hal_conf.h			           Library Configuration file
-    - STemWin/STemWin_animation/Core/Inc/stm32f4xx_it.h					   Interrupt handlers header file
-    - STemWin/STemWin_animation/Core/Src/main.c						   Main program file
-    - STemWin/STemWin_animation/Core/Src/stm32f4xx_it.c					   STM32F4xx Interrupt handlers
-    - STemWin/STemWin_animation/Core/Src/system_stm32f4xx.c				   STM32F4xx system file
-    - STemWin/STemWin_animation/STemWin/App/animation_app.c				   Animation application
-    - STemWin/STemWin_animation/STemWin/App/generated_stm324x9i_eval_MB1046/Background.c   Background picture (MB1046 LCD)
-    - STemWin/STemWin_animation/STemWin/App/generated_stm324x9i_eval_MB1046/Balloon.c	   Balloon picture (MB1046 LCD)
-    - STemWin/STemWin_animation/STemWin/App/generated_stm324x9i_eval_MB1046/dog1_walk1.c   Dog first picture going right (MB1046 LCD)
-    - STemWin/STemWin_animation/STemWin/App/generated_stm324x9i_eval_MB1046/dog1_walk1_r.c Dog first picture going left (MB1046 LCD)
-    - STemWin/STemWin_animation/STemWin/App/generated_stm324x9i_eval_MB1046/dog1_walk2.c   Dog second picture going right (MB1046 LCD)
-    - STemWin/STemWin_animation/STemWin/App/generated_stm324x9i_eval_MB1046/dog1_walk2_r.c Dog second picture going left (MB1046 LCD)
-    - STemWin/STemWin_animation/STemWin/App/generated_stm324x9i_eval_MB1046/cloud.c	   Cloud picture (MB1046 LCD)
-    - STemWin/STemWin_animation/STemWin/App/generated_stm324x9i_eval_MB1063/Background.c   Background picture (MB1063 LCD)
-    - STemWin/STemWin_animation/STemWin/App/generated_stm324x9i_eval_MB1063/Balloon.c	   Balloon picture (MB1063 LCD)
-    - STemWin/STemWin_animation/STemWin/App/generated_stm324x9i_eval_MB1063/dog1_walk1.c   Dog first picture going right (MB1063 LCD)
-    - STemWin/STemWin_animation/STemWin/App/generated_stm324x9i_eval_MB1063/dog1_walk1_r.c Dog first picture going left (MB1063 LCD)
-    - STemWin/STemWin_animation/STemWin/App/generated_stm324x9i_eval_MB1063/dog1_walk2.c   Dog second picture going right (MB1063 LCD)
-    - STemWin/STemWin_animation/STemWin/App/generated_stm324x9i_eval_MB1063/dog1_walk2_r.c Dog second picture going left (MB1063 LCD)
-    - STemWin/STemWin_animation/STemWin/App/generated_stm324x9i_eval_MB1063/cloud.c	   Cloud picture (MB1063 LCD)
-    - STemWin/STemWin_animation/STemWin/Target/GUIConf.c				   Display controller initialization
-    - STemWin/STemWin_animation/STemWin/Target/GUIConf.h				   Header for GUIConf.c
-    - STemWin/STemWin_animation/STemWin/Target/LCDConf_stm324x9i_eval_MB1046.c             Configuration file for the GUI library (MB1046 LCD)
-    - STemWin/STemWin_animation/STemWin/Target/LCDConf_stm324x9i_eval_MB1063.c             Configuration file for the GUI library (MB1063 LCD)
-    - STemWin/STemWin_animation/STemWin/Target/LCDConf.h				   Header for LCDConf.c
+    - STemWin/STemWin_Animation/Core/Inc/main.h						   Main program header file
+    - STemWin/STemWin_Animation/Core/Inc/stm32f4xx_hal_conf.h			           Library Configuration file
+    - STemWin/STemWin_Animation/Core/Inc/stm32f4xx_it.h					   Interrupt handlers header file
+    - STemWin/STemWin_Animation/Core/Src/main.c						   Main program file
+    - STemWin/STemWin_Animation/Core/Src/stm32f4xx_it.c					   STM32F4xx Interrupt handlers
+    - STemWin/STemWin_Animation/Core/Src/system_stm32f4xx.c				   STM32F4xx system file
+    - STemWin/STemWin_Animation/STemWin/App/animation_app.c				   Animation application
+    - STemWin/STemWin_Animation/STemWin/App/generated_stm324x9i_eval_MB1046/Background.c   Background picture (MB1046 LCD)
+    - STemWin/STemWin_Animation/STemWin/App/generated_stm324x9i_eval_MB1046/Balloon.c	   Balloon picture (MB1046 LCD)
+    - STemWin/STemWin_Animation/STemWin/App/generated_stm324x9i_eval_MB1046/dog1_walk1.c   Dog first picture going right (MB1046 LCD)
+    - STemWin/STemWin_Animation/STemWin/App/generated_stm324x9i_eval_MB1046/dog1_walk1_r.c Dog first picture going left (MB1046 LCD)
+    - STemWin/STemWin_Animation/STemWin/App/generated_stm324x9i_eval_MB1046/dog1_walk2.c   Dog second picture going right (MB1046 LCD)
+    - STemWin/STemWin_Animation/STemWin/App/generated_stm324x9i_eval_MB1046/dog1_walk2_r.c Dog second picture going left (MB1046 LCD)
+    - STemWin/STemWin_Animation/STemWin/App/generated_stm324x9i_eval_MB1046/cloud.c	   Cloud picture (MB1046 LCD)
+    - STemWin/STemWin_Animation/STemWin/App/generated_stm324x9i_eval_MB1063/Background.c   Background picture (MB1063 LCD)
+    - STemWin/STemWin_Animation/STemWin/App/generated_stm324x9i_eval_MB1063/Balloon.c	   Balloon picture (MB1063 LCD)
+    - STemWin/STemWin_Animation/STemWin/App/generated_stm324x9i_eval_MB1063/dog1_walk1.c   Dog first picture going right (MB1063 LCD)
+    - STemWin/STemWin_Animation/STemWin/App/generated_stm324x9i_eval_MB1063/dog1_walk1_r.c Dog first picture going left (MB1063 LCD)
+    - STemWin/STemWin_Animation/STemWin/App/generated_stm324x9i_eval_MB1063/dog1_walk2.c   Dog second picture going right (MB1063 LCD)
+    - STemWin/STemWin_Animation/STemWin/App/generated_stm324x9i_eval_MB1063/dog1_walk2_r.c Dog second picture going left (MB1063 LCD)
+    - STemWin/STemWin_Animation/STemWin/App/generated_stm324x9i_eval_MB1063/cloud.c	   Cloud picture (MB1063 LCD)
+    - STemWin/STemWin_Animation/STemWin/Target/GUIConf.c				   Display controller initialization
+    - STemWin/STemWin_Animation/STemWin/Target/GUIConf.h				   Header for GUIConf.c
+    - STemWin/STemWin_Animation/STemWin/Target/LCDConf_stm324x9i_eval_MB1046.c             Configuration file for the GUI library (MB1046 LCD)
+    - STemWin/STemWin_Animation/STemWin/Target/LCDConf_stm324x9i_eval_MB1063.c             Configuration file for the GUI library (MB1063 LCD)
+    - STemWin/STemWin_Animation/STemWin/Target/LCDConf.h				   Header for LCDConf.c
     
   
 @par Hardware and Software environment  

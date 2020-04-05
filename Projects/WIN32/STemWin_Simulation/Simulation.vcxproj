@@ -47,12 +47,13 @@
     <IntDir>.\Output\Debug\</IntDir>
     <LinkIncremental>true</LinkIncremental>
     <TargetName>Simulation</TargetName>
-    <IncludePath>C:\git\CubeF4\Firmware\Projects\WIN32\STemWin_Simulation\Config;C:\git\CubeF4\Firmware\Middlewares\ST\STemWin\inc;$(IncludePath)</IncludePath>
+    <IncludePath>Config;..\..\..\Middlewares\ST\STemWin\inc;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>.\Output\Release\</OutDir>
     <IntDir>.\Output\Release\</IntDir>
-    <LinkIncremental>false</LinkIncremental>
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\git\CubeF4\Firmware\Projects\WIN32\STemWin_Simulation\Config;C:\git\CubeF4\Firmware\Middlewares\ST\STemWin\inc;$(IncludePath</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -101,19 +102,20 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <StringPooling>true</StringPooling>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <Optimization>MinSpace</Optimization>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>GUI\Include;Config;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;TARGET_1375_C8_137X;WIN32;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AssemblerListingLocation>.\Output\Release\</AssemblerListingLocation>
       <PrecompiledHeaderOutputFile>.\Output\Release\Simulation.pch</PrecompiledHeaderOutputFile>
       <ObjectFileName>.\Output\Release\</ObjectFileName>
       <ProgramDataBaseFileName>.\Output\Release\</ProgramDataBaseFileName>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
     </ClCompile>
     <Midl>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -134,9 +136,11 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
-      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <OutputFile>Exe/GUISimulation.exe</OutputFile>
-      <AdditionalDependencies>winmm.lib;libcmt.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>winmm.lib;libcmt.lib;ws2_32.lib;legacy_stdio_definitions.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>LIBC.lib;LIBCMTD.lib</IgnoreSpecificDefaultLibraries>
+      <LinkStatus>true</LinkStatus>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -256,7 +260,7 @@
     <ClInclude Include="Config\LCDConf.h" />
   </ItemGroup>
   <ItemGroup>
-    <Library Include="..\..\..\Middlewares\ST\STemWin\Lib\STemWin540_WIN32.lib" />
+    <Library Include="..\..\..\Middlewares\ST\STemWin\Lib\STemWin_WIN32.lib" />
     <Library Include="..\..\..\Middlewares\ST\STemWin\Simulation\GUISim.lib" />
   </ItemGroup>
   <ItemGroup>

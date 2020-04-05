@@ -688,8 +688,8 @@
       <Focus>0</Focus>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\..\Middlewares\ST\STM32_Audio\Addons\PDM\libPDMFilter_CM4_Keil.lib</PathWithFileName>
-      <FilenameWithoutPath>libPDMFilter_CM4_Keil.lib</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\..\..\..\Middlewares\ST\STM32_Audio\Addons\PDM\libPDMFilter_CM4_Keil_wc16.lib</PathWithFileName>
+      <FilenameWithoutPath>libPDMFilter_CM4_Keil_wc16.lib</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

@@ -76,7 +76,7 @@ int main(void)
   uint16_t Datalen;
   uint16_t Trials = CONNECTION_TRIAL_MAX;
 #if defined (LCD_USE)
-  uint8_t modulestr[10] = {0};
+  uint8_t modulestr[20] = {0};
 #endif /* LCD_USE */  
   
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */

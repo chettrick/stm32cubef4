@@ -1,9 +1,9 @@
 /**
-  @page STemWin_animation  STemWin animation Readme file
+  @page STemWin_Animation  STemWin animation Readme file
  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    STemWin/STemWin_animation/readme.txt 
+  * @file    STemWin/STemWin_Animation/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of STemWin animation application. 
   ******************************************************************************
@@ -71,24 +71,24 @@ The application shows the capability of STemWin to do different animations of di
 
 @par Directory contents 
 
-    - STemWin/STemWin_animation/Core/Inc/main.h					Main program header file
-    - STemWin/STemWin_animation/Core/Inc/stm32f4xx_hal_conf.h			Library Configuration file
-    - STemWin/STemWin_animation/Core/Inc/stm32f4xx_it.h				Interrupt handlers header file
-    - STemWin/STemWin_animation/Core/Src/main.c					Main program file
-    - STemWin/STemWin_animation/Core/Src/stm32f4xx_it.c				STM32F4xx Interrupt handlers
-    - STemWin/STemWin_animation/Core/Src/system_stm32f4xx.c			STM32F4xx system file
-    - STemWin/STemWin_animation/STemWin/App/animation_app.c			animation application
-    - STemWin/STemWin_animation/STemWin/App/generated/Background.c		Background picture
-    - STemWin/STemWin_animation/STemWin/App/generated/Balloon.c			Balloon picture
-    - STemWin/STemWin_animation/STemWin/App/generated/dog1_walk1.c	        Dog first picture going right
-    - STemWin/STemWin_animation/STemWin/App/generated/dog1_walk1_r.c	        Dog first picture going left
-    - STemWin/STemWin_animation/STemWin/App/generated/dog1_walk2.c	        Dog second picture going right
-    - STemWin/STemWin_animation/STemWin/App/generated/dog1_walk2_r.c	        Dog second picture going left
-    - STemWin/STemWin_animation/STemWin/App/generated/cloud.c			cloud picture
-    - STemWin/STemWin_animation/STemWin/Target/GUIConf.c			Display controller initialization
-    - STemWin/STemWin_animation/STemWin/Target/GUIConf.h			Header for GUIConf.c
-    - STemWin/STemWin_animation/STemWin/Target/LCDConf.c			Configuration file for the GUI library
-    - STemWin/STemWin_animation/STemWin/Target/LCDConf.h			Header for LCDConf.c
+    - STemWin/STemWin_Animation/Core/Inc/main.h					Main program header file
+    - STemWin/STemWin_Animation/Core/Inc/stm32f4xx_hal_conf.h			Library Configuration file
+    - STemWin/STemWin_Animation/Core/Inc/stm32f4xx_it.h				Interrupt handlers header file
+    - STemWin/STemWin_Animation/Core/Src/main.c					Main program file
+    - STemWin/STemWin_Animation/Core/Src/stm32f4xx_it.c				STM32F4xx Interrupt handlers
+    - STemWin/STemWin_Animation/Core/Src/system_stm32f4xx.c			STM32F4xx system file
+    - STemWin/STemWin_Animation/STemWin/App/animation_app.c			animation application
+    - STemWin/STemWin_Animation/STemWin/App/generated/Background.c		Background picture
+    - STemWin/STemWin_Animation/STemWin/App/generated/Balloon.c			Balloon picture
+    - STemWin/STemWin_Animation/STemWin/App/generated/dog1_walk1.c	        Dog first picture going right
+    - STemWin/STemWin_Animation/STemWin/App/generated/dog1_walk1_r.c	        Dog first picture going left
+    - STemWin/STemWin_Animation/STemWin/App/generated/dog1_walk2.c	        Dog second picture going right
+    - STemWin/STemWin_Animation/STemWin/App/generated/dog1_walk2_r.c	        Dog second picture going left
+    - STemWin/STemWin_Animation/STemWin/App/generated/cloud.c			cloud picture
+    - STemWin/STemWin_Animation/STemWin/Target/GUIConf.c			Display controller initialization
+    - STemWin/STemWin_Animation/STemWin/Target/GUIConf.h			Header for GUIConf.c
+    - STemWin/STemWin_Animation/STemWin/Target/LCDConf.c			Configuration file for the GUI library
+    - STemWin/STemWin_Animation/STemWin/Target/LCDConf.h			Header for LCDConf.c
   
 @par Hardware and Software environment  
 

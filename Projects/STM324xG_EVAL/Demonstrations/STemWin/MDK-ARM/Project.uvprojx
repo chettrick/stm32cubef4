@@ -655,9 +655,9 @@
           <GroupName>Middlewares/STemWin/Library</GroupName>
           <Files>
             <File>
-              <FileName>STemWin540_CM4_OS_Keil.lib</FileName>
+              <FileName>STemWin_CM4_OS_wc16.a</FileName>
               <FileType>4</FileType>
-              <FilePath>../../../../../Middlewares/ST/STemWin/Lib/STemWin540_CM4_OS_Keil.lib</FilePath>
+              <FilePath>../../../../../Middlewares/ST/STemWin/Lib/STemWin_CM4_OS_wc16.a</FilePath>
             </File>
           </Files>
         </Group>

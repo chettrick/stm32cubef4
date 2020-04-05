@@ -364,7 +364,7 @@
     <Library Include="..\..\..\Middlewares\ST\STemWin\Simulation\GUISim.lib">
       <Filter>Simulation</Filter>
     </Library>
-    <Library Include="..\..\..\Middlewares\ST\STemWin\Lib\STemWin540_WIN32.lib">
+    <Library Include="..\..\..\Middlewares\ST\STemWin\Lib\STemWin_WIN32.lib">
       <Filter>STemWin\Library</Filter>
     </Library>
   </ItemGroup>

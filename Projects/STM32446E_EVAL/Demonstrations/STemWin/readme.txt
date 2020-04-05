@@ -150,7 +150,7 @@ In order to make the program work, you must do the following :
  3 - Open STM32 ST-Link Utility V4.1.0 or later , click on "External Loader" from the bar menu then check "N25Q256A_STM32446E-EVAL" box 
  4 - Connect the STM32446E-EVAL board to PC with USB cable through CN16
  5 - Set BOOT0 pin (SW1) to 1 to select RAM Boot
- 6 - Use "STM32CubeDemo_STM32446E-EVAL_1.3.0.hex" file with STM32 ST-Link Utility to program both internal Flash and external QSPI memory
+ 6 - Use "STM32CubeDemo_STM32446E-EVAL_X.Y.Z.hex" file with STM32 ST-Link Utility to program both internal Flash and external QSPI memory
  7 - Change BOOT0 pin (SW1) to 0, and reset the Board 
  8 - copy the pictures and audio files provided under "Utilities/Media/" in the USB key
  9 - Plug a USB micro A-Male to A-Female cable on CN9 connector

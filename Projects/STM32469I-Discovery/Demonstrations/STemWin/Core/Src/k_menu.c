@@ -89,7 +89,7 @@ static void _cbBk(WM_MESSAGE * pMsg) {
   uint32_t NCode, Id;
   static uint8_t sel;
   WM_HWIN   hItem;
-  char tmp[16];
+  char tmp[20];
   
   switch (pMsg->MsgId) 
   {

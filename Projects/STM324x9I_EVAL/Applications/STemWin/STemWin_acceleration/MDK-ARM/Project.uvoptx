@@ -75,7 +75,7 @@
       <OPTFL>
         <tvExp>1</tvExp>
         <tvExpOptDlg>0</tvExpOptDlg>
-        <IsCurrentTarget>0</IsCurrentTarget>
+        <IsCurrentTarget>1</IsCurrentTarget>
       </OPTFL>
       <CpuCode>18</CpuCode>
       <DebugOpt>
@@ -248,7 +248,7 @@
       <OPTFL>
         <tvExp>1</tvExp>
         <tvExpOptDlg>0</tvExpOptDlg>
-        <IsCurrentTarget>1</IsCurrentTarget>
+        <IsCurrentTarget>0</IsCurrentTarget>
       </OPTFL>
       <CpuCode>18</CpuCode>
       <DebugOpt>
@@ -541,7 +541,7 @@
 
   <Group>
     <GroupName>Middlewares/STemWin/Lib</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -552,8 +552,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../../../../../../Middlewares/ST/STemWin/Lib/STemWin540_CM4_IAR_ARGB.a</PathWithFileName>
-      <FilenameWithoutPath>STemWin540_CM4_IAR_ARGB.a</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\..\..\..\Middlewares\ST\STemWin\Lib\STemWin_CM4_wc16_ARGB.a</PathWithFileName>
+      <FilenameWithoutPath>STemWin_CM4_wc16_ARGB.a</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

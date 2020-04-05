@@ -1,9 +1,9 @@
 /**
-  @page STemWin_fonts  STemWin fonts Readme file
+  @page STemWin_Fonts  STemWin fonts Readme file
  
   @verbatim
   ******************** (C) COPYRIGHT 2017 STMicroelectronics *******************
-  * @file    STemWin/STemWin_fonts/readme.txt 
+  * @file    STemWin/STemWin_Fonts/readme.txt 
   * @author  MCD Application Team
   * @brief   Description of STemWin fonts application. 
   ******************************************************************************
@@ -105,34 +105,34 @@ Font generation
 
 @par Directory contents 
 
-  - STemWin/STemWin_fonts/Core/Inc/main.h                            Main program header file
-  - STemWin/STemWin_fonts/Core/Inc/stm32f4xx_hal_conf.h              Library Configuration file
-  - STemWin/STemWin_fonts/Core/Inc/stm32f4xx_it.h                    Interrupt handlers header file
-  - STemWin/STemWin_fonts/Core/Src/main.c                            Main program file
-  - STemWin/STemWin_fonts/Core/Src/stm32f4xx_it.c                    STM32F4xx Interrupt handlers
-  - STemWin/STemWin_fonts/Core/system_stm32f4xx.c                    STM32F4xx system file
-  - STemWin/STemWin_fonts/STemWin/App/font_app.c                     fonts application
-  - STemWin/STemWin_fonts/STemWin/Target/GUIConf.c                   Display controller initialization
-  - STemWin/STemWin_fonts/STemWin/Target/LCDConf_.c                  Configuration file for the GUI library  
-  - STemWin/STemWin_fonts/STemWin/Target/GUIConf.h                   Header for GUIConf.c
-  - STemWin/STemWin_fonts/STemWin/Target/LCDConf.h                   Header for LCDConf.c
-  - STemWin/STemWin_fonts/STemWin/App/generated/arabic.c   	     arabic flag picture     
-  - STemWin/STemWin_fonts/STemWin/App/generated/chinese.c  	     chinese flag picture
-  - STemWin/STemWin_fonts/STemWin/App/generated/english.c  	     english flag picture
-  - STemWin/STemWin_fonts/STemWin/App/generated/info.c     	     info logo picture
-  - STemWin/STemWin_fonts/STemWin/App/generated/italian.c  	     italian flag picture
-  - STemWin/STemWin_fonts/STemWin/App/generated/STLogo.c             STLogo logo picture
-  - STemWin/STemWin_fonts/STemWin/App/generated/world.c    	     world flag picture
-  - STemWin/STemWin_fonts/STemWin/App/generated/french.c   	     french flag picture
-  - STemWin/STemWin_fonts/STemWin/App/generated/fonts/arabic25.c     arabic font with 25 pixels as width
-  - STemWin/STemWin_fonts/STemWin/App/generated/fonts/arabic100.c    arabic font with 100 pixels as width
-  - STemWin/STemWin_fonts/STemWin/App/generated/fonts/arabic60.c     arabic font with 60 pixels as width
-  - STemWin/STemWin_fonts/STemWin/App/generated/fonts/chinese25B.c   chinese font with 25 pixels as width
-  - STemWin/STemWin_fonts/STemWin/App/generated/fonts/chinese100.c   chinese font with 100 pixels as width
-  - STemWin/STemWin_fonts/STemWin/App/generated/fonts/chineseI60.c   chinese font with 60 pixels as width
-  - STemWin/STemWin_fonts/STemWin/App/generated/fonts/eng25.c        new generated font with 25 pixels as width
-  - STemWin/STemWin_fonts/STemWin/App/generated/fonts/eng100.c       new generated font with 100 pixels as width
-  - STemWin/STemWin_fonts/STemWin/App/generated/fonts/eng60.c        new generated font with 60 pixels as width
+  - STemWin/STemWin_Fonts/Core/Inc/main.h                            Main program header file
+  - STemWin/STemWin_Fonts/Core/Inc/stm32f4xx_hal_conf.h              Library Configuration file
+  - STemWin/STemWin_Fonts/Core/Inc/stm32f4xx_it.h                    Interrupt handlers header file
+  - STemWin/STemWin_Fonts/Core/Src/main.c                            Main program file
+  - STemWin/STemWin_Fonts/Core/Src/stm32f4xx_it.c                    STM32F4xx Interrupt handlers
+  - STemWin/STemWin_Fonts/Core/system_stm32f4xx.c                    STM32F4xx system file
+  - STemWin/STemWin_Fonts/STemWin/App/font_app.c                     fonts application
+  - STemWin/STemWin_Fonts/STemWin/Target/GUIConf.c                   Display controller initialization
+  - STemWin/STemWin_Fonts/STemWin/Target/LCDConf_.c                  Configuration file for the GUI library  
+  - STemWin/STemWin_Fonts/STemWin/Target/GUIConf.h                   Header for GUIConf.c
+  - STemWin/STemWin_Fonts/STemWin/Target/LCDConf.h                   Header for LCDConf.c
+  - STemWin/STemWin_Fonts/STemWin/App/generated/arabic.c   	     arabic flag picture     
+  - STemWin/STemWin_Fonts/STemWin/App/generated/chinese.c  	     chinese flag picture
+  - STemWin/STemWin_Fonts/STemWin/App/generated/english.c  	     english flag picture
+  - STemWin/STemWin_Fonts/STemWin/App/generated/info.c     	     info logo picture
+  - STemWin/STemWin_Fonts/STemWin/App/generated/italian.c  	     italian flag picture
+  - STemWin/STemWin_Fonts/STemWin/App/generated/STLogo.c             STLogo logo picture
+  - STemWin/STemWin_Fonts/STemWin/App/generated/world.c    	     world flag picture
+  - STemWin/STemWin_Fonts/STemWin/App/generated/french.c   	     french flag picture
+  - STemWin/STemWin_Fonts/STemWin/App/generated/fonts/arabic25.c     arabic font with 25 pixels as width
+  - STemWin/STemWin_Fonts/STemWin/App/generated/fonts/arabic100.c    arabic font with 100 pixels as width
+  - STemWin/STemWin_Fonts/STemWin/App/generated/fonts/arabic60.c     arabic font with 60 pixels as width
+  - STemWin/STemWin_Fonts/STemWin/App/generated/fonts/chinese25B.c   chinese font with 25 pixels as width
+  - STemWin/STemWin_Fonts/STemWin/App/generated/fonts/chinese100.c   chinese font with 100 pixels as width
+  - STemWin/STemWin_Fonts/STemWin/App/generated/fonts/chineseI60.c   chinese font with 60 pixels as width
+  - STemWin/STemWin_Fonts/STemWin/App/generated/fonts/eng25.c        new generated font with 25 pixels as width
+  - STemWin/STemWin_Fonts/STemWin/App/generated/fonts/eng100.c       new generated font with 100 pixels as width
+  - STemWin/STemWin_Fonts/STemWin/App/generated/fonts/eng60.c        new generated font with 60 pixels as width
   
 @par Hardware and Software environment  
 

@@ -104,7 +104,7 @@ static const GUI_WIDGET_CREATE_INFO _aDialog[] =
   { TEXT_CreateIndirect, " STM32479I",  ID_TEXT_BOARD_2,  65,  320, 100, 20, 0, 0x0, 0 },
   { TEXT_CreateIndirect, " STM32F4", ID_TEXT_CORE_1,     260, 300, 100, 20, 0, 0x0, 0 },
   { TEXT_CreateIndirect, " 180MHz", ID_TEXT_CPU_1,       450, 300, 100, 20, 0, 0x0, 0 },
-  { TEXT_CreateIndirect, "V1.3.0", ID_TEXT_VERSION_1,    655, 300, 100, 20, 0, 0x0, 0 }, 
+  { TEXT_CreateIndirect, "V1.4.0", ID_TEXT_VERSION_1,    655, 300, 100, 20, 0, 0x0, 0 }, 
   
   { TEXT_CreateIndirect, "Copyright (c) STMicroelectronics 2016", ID_TEXT_COPYRIGHT, 550, 453, 240, 20, 0, 0x0, 0 },
 };

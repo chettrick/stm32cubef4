@@ -404,9 +404,9 @@
           <GroupName>Middlewares/PDM</GroupName>
           <Files>
             <File>
-              <FileName>libPDMFilter_CM4_Keil.lib</FileName>
+              <FileName>libPDMFilter_CM4_Keil_wc16.lib</FileName>
               <FileType>4</FileType>
-              <FilePath>../../../../../../Middlewares/ST/STM32_Audio/Addons/PDM/Lib/libPDMFilter_CM4_Keil.lib</FilePath>
+              <FilePath>../../../../../../Middlewares/ST/STM32_Audio/Addons/PDM/Lib/libPDMFilter_CM4_Keil_wc16.lib</FilePath>
             </File>
           </Files>
         </Group>

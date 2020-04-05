@@ -1039,38 +1039,6 @@
   </Group>
 
   <Group>
-    <GroupName>Application/User/Modules/Audio/Addons</GroupName>
-    <tvExp>0</tvExp>
-    <tvExpOptDlg>0</tvExpOptDlg>
-    <cbSel>0</cbSel>
-    <RteFlg>0</RteFlg>
-    <File>
-      <GroupNumber>4</GroupNumber>
-      <FileNumber>71</FileNumber>
-      <FileType>4</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>../Modules/audio_player/Addons/SpiritDSP_LoudnessControl/lib_loudness_cortex_m4.a</PathWithFileName>
-      <FilenameWithoutPath>lib_loudness_cortex_m4.a</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>4</GroupNumber>
-      <FileNumber>72</FileNumber>
-      <FileType>4</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>../Modules/audio_player/Addons/SpiritDSP_Equalizer/lib_equalizer_cortex_m4.a</PathWithFileName>
-      <FilenameWithoutPath>lib_equalizer_cortex_m4.a</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-  </Group>
-
-  <Group>
     <GroupName>Application/User/Utilities</GroupName>
     <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
@@ -1267,8 +1235,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\Middlewares\ST\STemWin\Lib\STemWin540_CM4_OS_Keil_ot.lib</PathWithFileName>
-      <FilenameWithoutPath>STemWin540_CM4_OS_Keil_ot.lib</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\..\..\Middlewares\ST\STemWin\Lib\STemWin_CM4_OS_wc16_ot.a</PathWithFileName>
+      <FilenameWithoutPath>STemWin_CM4_OS_wc16_ot.a</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1640,7 +1608,7 @@
 
   <Group>
     <GroupName>Middlewares/STemWin/ST_GUI_Addons</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1651,8 +1619,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../Gui/STemWin_Addons/STM32469I-Discovery_STemWin_Addons_KEIL.lib</PathWithFileName>
-      <FilenameWithoutPath>STM32469I-Discovery_STemWin_Addons_KEIL.lib</FilenameWithoutPath>
+      <PathWithFileName>..\Gui\STemWin_Addons\STemWin_Addons_CM4_wc16.a</PathWithFileName>
+      <FilenameWithoutPath>STemWin_Addons_CM4_wc16.a</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1700,7 +1668,7 @@
 
   <Group>
     <GroupName>Middlewares/PDM</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1711,8 +1679,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../../../../../Middlewares/ST/STM32_Audio/Addons/PDM/Lib/libPDMFilter_CM4_Keil.lib</PathWithFileName>
-      <FilenameWithoutPath>libPDMFilter_CM4_Keil.lib</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\..\..\Middlewares\ST\STM32_Audio\Addons\PDM\Lib\libPDMFilter_CM4_Keil_wc16.lib</PathWithFileName>
+      <FilenameWithoutPath>libPDMFilter_CM4_Keil_wc16.lib</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

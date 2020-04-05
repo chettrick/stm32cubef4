@@ -157,7 +157,10 @@ __ALIGN_BEGIN   uint8_t USBD_LangIDDesc[USB_LEN_LANGID_STR_DESC] __ALIGN_END = {
   HIBYTE(USBD_LANGID_STRING), 
 };
 
-uint8_t USBD_StringSerial[USB_SIZ_STRING_SERIAL] =
+#if defined ( __ICCARM__ ) /*!< IAR Compiler */
+  #pragma data_alignment=4   
+#endif
+__ALIGN_BEGIN uint8_t USBD_StringSerial[USB_SIZ_STRING_SERIAL] __ALIGN_END =
 {
   USB_SIZ_STRING_SERIAL,      
   USB_DESC_TYPE_STRING,    

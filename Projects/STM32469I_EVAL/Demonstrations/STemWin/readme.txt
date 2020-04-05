@@ -161,7 +161,7 @@ In order to program the demonstration you must do the following:
 1- Open STM32 ST-Link Utility V4.1.0, click on "External Loader" from the bar menu then check 
    "MT25QL512A_STM32469I-EVAL" box 
 2- Connect the STM32469I-EVAL board to PC with USB cable through CN22
-3- Use "STM32469I_EVAL_Demo_V1.2.0.hex" file provided under “Binary” with STM32 ST-Link Utility
+3- Use "STM32469I_EVAL_Demo_VX.Y.Z.hex" file provided under “Binary” with STM32 ST-Link Utility
    to program both internal Flash and external NOR memory
    The "STM32469I_EVAL_Demo_V1.2.0_FULL.hex" file provided under 'Binary', can also be used to take benefit
    from Touch-GFX third party demonstrations modules replacing Gardening control module.

@@ -85,10 +85,6 @@ Below you find an overview of the different offered module in the demonstration:
  be extended to support other compressed formats such as MP3 and WMA audio formats.
  The Module supports background mode feature.
  
-  + Audio recorder
- -----------------
- The audio recorder module allows recording audio and playing it back.
- 
  + Audio Recorder
  ----------------
  The Audio record module allows to record an audio file. The audio format supported is 
@@ -147,7 +143,7 @@ In order to program the demonstration you must do the following
 1- Open STM32 ST-Link Utility , click on "External Loader" from the bar menu then check 
    "N25Q128A_STM32469I-DISCO" box 
 2- Connect the STM32F469I-DISCO board to PC with USB cable through CN1
-3- Use "STM32469I-Disco_Demo_V1.2.0.hex" file provided under “Binary” with STM32 ST-Link Utility
+3- Use "STM32469I-Disco_Demo_VX.Y.Z.hex" file provided under “Binary” with STM32 ST-Link Utility
    to program both internal Flash and external NOR memory
    The "STM32469I-Disco_Demo_V1.2.0_FULL.hex" file provided under 'Binary', can also be used to take benefit
    from Touch-GFX third party demonstrations modules replacing Gardening control module.

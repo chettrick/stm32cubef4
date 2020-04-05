@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    STemWin/STemWin_animation/Core/Src/main.c
+  * @file    STemWin/STemWin_Animation/Core/Src/main.c
   * @author  MCD Application Team
   * @brief   This file provides main program functions
   ******************************************************************************

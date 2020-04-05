@@ -586,7 +586,7 @@ static void _cbAudioProcess(WM_MESSAGE * pMsg) {
   uint32_t Id;
   
   WM_HWIN hItem;
-  char tmp[] = "00:00";  
+  char tmp[12] = "00:00";
   long progress;
   uint32_t duration;
   

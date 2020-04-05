@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    STemWin/STemWin_fonts/Core/Src/stm32f4xx_it.c
+  * @file    STemWin/STemWin_Fonts/Core/Src/stm32f4xx_it.c
   * @author  MCD Application Team
   * @brief   Main Interrupt Service Routines.
   ******************************************************************************

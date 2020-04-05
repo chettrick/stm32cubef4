@@ -200,7 +200,7 @@ AUDIO_ErrorTypeDef AUDIO_REC_Process(void)
   AUDIO_ErrorTypeDef audio_error = AUDIO_ERROR_NONE;
   uint32_t elapsed_time; 
   static uint32_t prev_elapsed_time = 0xFFFFFFFF;
-  uint8_t str[10];
+  uint8_t str[16];
   static TS_StateTypeDef  TS_State={0};
   
   switch(AudioState)

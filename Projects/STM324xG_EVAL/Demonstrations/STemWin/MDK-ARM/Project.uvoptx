@@ -803,8 +803,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>../../../../../Middlewares/ST/STemWin/Lib/STemWin540_CM4_OS_Keil.lib</PathWithFileName>
-      <FilenameWithoutPath>STemWin540_CM4_OS_Keil.lib</FilenameWithoutPath>
+      <PathWithFileName>../../../../../Middlewares/ST/STemWin/Lib/STemWin_CM4_OS_wc16.a</PathWithFileName>
+      <FilenameWithoutPath>STemWin_CM4_OS_wc16.a</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

@@ -193,7 +193,7 @@ standard names. */
 
 /* Normal assert() semantics without relying on the provision of an assert.h
 header file. */
-#define configASSERT( x ) if( ( x ) == 0UL ) { taskDISABLE_INTERRUPTS(); for( ;; ); }
+#define configASSERT( x ) if((uint32_t)( x ) == 0UL ) { taskDISABLE_INTERRUPTS(); for( ;; ); }
 
 #ifdef __cplusplus
 }

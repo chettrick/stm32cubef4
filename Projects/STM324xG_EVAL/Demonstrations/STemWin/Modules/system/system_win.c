@@ -124,7 +124,7 @@ static const GUI_WIDGET_CREATE_INFO _aDialogSystemInformation[] = {
   { TEXT_CreateIndirect, "Board : STM324xG-EVAL", ID_TEXT_BOARD,                         15,  15,  200, 20,  0,   0x0, 0 },
   { TEXT_CreateIndirect, "Core: STM32F-4 Series", ID_TEXT_CORE,                      15,  35,  200, 20,  0,   0x0, 0 },
   { TEXT_CreateIndirect, "CPU Speed : 168MHz", ID_TEXT_CPU,                          15,  55,  200, 20,  0,   0x0, 0 },
-  { TEXT_CreateIndirect, "Firmware Version : 1.0", ID_TEXT_VERSION,                  15,  75,  280, 20,  0,   0x0, 0 },
+  { TEXT_CreateIndirect, "Firmware Version : 1.6.0", ID_TEXT_VERSION,                  15,  75,  280, 20,  0,   0x0, 0 },
   { IMAGE_CreateIndirect, "Image", ID_IMAGE_LOGO,                                    90,  95,  40,  20,  0,   0,   0 },
   { TEXT_CreateIndirect, "Copyright (c) STMicroelectronics 2017", ID_TEXT_COPYRIGHT, 15,  125, 200, 20,  0,   0x0, 0 },  
 };
@@ -284,7 +284,7 @@ static void _cbSystemInformation(WM_MESSAGE * pMsg)
     hItem = WM_GetDialogItem(pMsg->hWin, ID_TEXT_VERSION);
     TEXT_SetFont(hItem, GUI_FONT_13HB_ASCII);
     TEXT_SetTextColor(hItem, GUI_DARKGRAY);
-    strcpy(str, "Demo rev: 1.5.0");
+    strcpy(str, "Demo rev: 1.6.0");
     TEXT_SetText(hItem, str); 
 
     /* ST Copyright */

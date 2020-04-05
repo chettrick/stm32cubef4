@@ -133,7 +133,7 @@ AUDIO_ErrorTypeDef AUDIO_PLAYER_Process(void)
   uint32_t bytesread, elapsed_time;
   AUDIO_ErrorTypeDef audio_error = AUDIO_ERROR_NONE;
   static uint32_t prev_elapsed_time = 0xFFFFFFFF;
-  uint8_t str[10];  
+  uint8_t str[16];
   
   switch(AudioState)
   {

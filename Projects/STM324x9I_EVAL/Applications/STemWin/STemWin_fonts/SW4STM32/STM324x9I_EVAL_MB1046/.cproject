@@ -88,7 +88,7 @@
 							<tool id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.631915482" name="MCU GCC Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker">
 								<option id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script.1111322326" name="Linker Script (-T)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script" useByScannerDiscovery="false" value="../STM32F429NIHx_FLASH.ld" valueType="string"/>
 								<option id="gnu.c.link.option.libs.1276003673" name="Libraries (-l)" superClass="gnu.c.link.option.libs" useByScannerDiscovery="false" valueType="libs">
-									<listOptionValue builtIn="false" value=":STemWin540_CM4_GCC_ARGB.a"/>
+									<listOptionValue builtIn="false" value=":STemWin_CM4_wc32_ARGB.a"/>
 								</option>
 								<option id="gnu.c.link.option.paths.2035976274" name="Library search path (-L)" superClass="gnu.c.link.option.paths" useByScannerDiscovery="false" valueType="libPaths">
 									<listOptionValue builtIn="false" value="../../../../../../../../Middlewares/ST/STemWin/Lib"/>
@@ -102,7 +102,7 @@
 							<tool id="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker.1654719714" name="MCU G++ Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker">
 								<option id="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker.script.1204220214" name="Linker Script (-T)" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker.script" value="../STM32F429NIHx_FLASH.ld" valueType="string"/>
 								<option id="gnu.cpp.link.option.libs.1760659575" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
-									<listOptionValue builtIn="false" value=":STemWin540_CM4_IAR_ARGB.a"/>
+									<listOptionValue builtIn="false" value=":STemWin_CM4_wc32_ARGB.a"/>
 								</option>
 								<option id="gnu.cpp.link.option.paths.1649241521" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
 									<listOptionValue builtIn="false" value="../../../../../../../../Middlewares/ST/STemWin/Lib"/>

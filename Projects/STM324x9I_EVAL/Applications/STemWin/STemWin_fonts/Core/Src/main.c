@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    STemWin/STemWin_fonts/Core/Src/main.c
+  * @file    STemWin/STemWin_Fonts/Core/Src/main.c
   * @author  MCD Application Team
   * @brief   This file provides main program functions
   ******************************************************************************

@@ -90,7 +90,7 @@ static uint32_t TEMP_SENSOR_GetValue(void);
 int main(void)
 {
 #if defined (LCD_USE)
-  uint8_t modulestr[10] = {0};
+  uint8_t modulestr[20] = {0};
 #endif /* LCD_USE */ 
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
